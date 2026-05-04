@@ -1,7 +1,6 @@
 import { app, BrowserWindow, dialog, ipcMain, Menu, shell } from "electron";
 import fs from "node:fs";
 import path from "node:path";
-import dotenv from "dotenv";
 import { importFromIcs, importFromJson } from "./import";
 import type { PlanningResult } from "../shared/types";
 import { loadConfig, saveConfig } from "./config";
@@ -9,17 +8,6 @@ import { getPlannerDefaults, runPlanningPipeline } from "./planner";
 import { deleteCalendar, listCalendars, loadCalendar, saveCalendar } from "./storage";
 import type { AppConfig, PlanningRequest, ProgressEvent } from "../shared/types";
 
-// Load .env from dev path or executable directory
-const envPaths = [
-  path.join(__dirname, "../../.env"),
-  path.join(path.dirname(app.getPath("exe")), ".env")
-];
-for (const envPath of envPaths) {
-  if (fs.existsSync(envPath)) {
-    dotenv.config({ path: envPath });
-    break;
-  }
-}
 
 const isDev = Boolean(process.env.VITE_DEV_SERVER_URL);
 let activePlannerController: AbortController | null = null;

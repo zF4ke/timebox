@@ -210,6 +210,7 @@ export interface AppConfig {
   quorum: number;
   model: string;
   apiKey?: string;
+  maxIterations?: number;
 }
 
 export interface PlannerApi {

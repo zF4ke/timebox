@@ -5,10 +5,12 @@ export interface AppConfig {
   quorum: number;
   model: string;
   apiKey?: string;
+  maxIterations?: number;
 }
 
 const DEFAULT_MODEL = "nvidia/nemotron-3-super-120b-a12b:free";
 const DEFAULT_QUORUM = 5;
+const DEFAULT_MAX_ITERATIONS = 3;
 
 export function loadConfig(): AppConfig {
   try {
@@ -27,12 +29,15 @@ export function loadConfig(): AppConfig {
       if (typeof parsed.apiKey === "string" && parsed.apiKey.trim()) {
         config.apiKey = parsed.apiKey.trim();
       }
+      if (typeof parsed.maxIterations === "number") {
+        config.maxIterations = parsed.maxIterations;
+      }
       return config;
     }
   } catch {
     // fallthrough to defaults
   }
-  return { quorum: DEFAULT_QUORUM, model: DEFAULT_MODEL };
+  return { quorum: DEFAULT_QUORUM, model: DEFAULT_MODEL, maxIterations: DEFAULT_MAX_ITERATIONS };
 }
 
 export function saveConfig(config: AppConfig): void {

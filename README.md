@@ -6,17 +6,9 @@ Electron prototype for the AASMA multi-agent calendar planner.
 
 ```bash
 npm install
-cp .env.example .env
 ```
 
-Edit `.env`:
-
-```
-OPENROUTER_API_KEY=
-PLANNER_MAX_ITERATIONS=3
-```
-
-The model and quorum are managed via the in-app settings. The default model is `nvidia/nemotron-3-super-120b-a12b:free`.
+All configuration is managed in-app via **Settings** (model, quorum, API key). Settings are persisted to the OS user-data directory. The default model is `nvidia/nemotron-3-super-120b-a12b:free`.
 
 ## Run
 
@@ -43,11 +35,8 @@ Output goes to `release/`. On Windows this produces an installer (`.exe`). On ma
 ### Production setup
 
 1. Build the app: `npm run dist`
-2. Place a `.env` file next to the installed executable with your API key:
-   ```
-   OPENROUTER_API_KEY=sk-or-...
-   ```
-3. Run the app. Settings (model, quorum) and saved plans are stored in the OS user-data directory, not the project folder.
+2. Run the app and set your OpenRouter API key in **Settings**.
+3. Settings (model, quorum, API key) and saved plans are stored in the OS user-data directory, not the project folder.
 
 ## Behavior
 
@@ -67,7 +56,7 @@ Output goes to `release/`. On Windows this produces an installer (`.exe`). On ma
 - **Calendar view** — FullCalendar week grid with color-coded event types.
 - **Event details** — click any calendar block to see description, reasoning, and timing.
 - **Saved plans sidebar** — auto-saves plans, with load and delete.
-- **Settings** — configurable quorum (1–5) and model picker with pricing. Persisted to the OS user-data directory.
+- **Settings** — configurable quorum (1–5), model picker with pricing, and OpenRouter API key. Persisted to the OS user-data directory.
 - **Import** — drag-and-drop JSON/ICS files anywhere on the app, or use the Import button in the sidebar.
 - **Humanized task IDs** — raw IDs like "T1" are automatically replaced with task names in all UI text.
 
