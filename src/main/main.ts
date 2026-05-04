@@ -79,6 +79,7 @@ ipcMain.handle("planner:run", async (event, request: PlanningRequest) => {
 });
 
 ipcMain.handle("planner:cancel", async () => {
+  console.log("[main] cancel requested");
   activePlannerController?.abort();
 });
 

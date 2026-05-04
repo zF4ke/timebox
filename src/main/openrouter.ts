@@ -21,6 +21,15 @@ export async function callOpenRouterJson<T>(options: JsonCallOptions): Promise<T
   }
 }
 
+function buildCombinedSignal(cancelSignal?: AbortSignal, timeoutMs?: number): AbortSignal | undefined {
+  const signals: AbortSignal[] = [];
+  if (cancelSignal) signals.push(cancelSignal);
+  if (timeoutMs && timeoutMs > 0) signals.push(AbortSignal.timeout(timeoutMs));
+  if (signals.length === 0) return undefined;
+  if (signals.length === 1) return signals[0];
+  return AbortSignal.any(signals);
+}
+
 async function requestJson<T>(options: JsonCallOptions): Promise<T> {
   const start = Date.now();
   console.log(
@@ -32,6 +41,8 @@ async function requestJson<T>(options: JsonCallOptions): Promise<T> {
     httpReferer: "https://local.multi-agent-calendar-planner",
     appTitle: "Multi-Agent Student Calendar Planner"
   });
+
+  const fetchSignal = buildCombinedSignal(options.signal, options.timeoutMs ?? 75_000);
 
   const result = await openRouter.chat.send({
     httpReferer: "https://local.multi-agent-calendar-planner",
@@ -55,8 +66,7 @@ async function requestJson<T>(options: JsonCallOptions): Promise<T> {
       }
     }
   } as never, {
-    signal: options.signal,
-    timeoutMs: options.timeoutMs ?? 75_000
+    fetchOptions: { signal: fetchSignal }
   });
 
   const content = result.choices?.[0]?.message?.content;
