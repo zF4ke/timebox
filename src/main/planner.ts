@@ -56,7 +56,7 @@ export function getPlannerDefaults(): PlannerDefaults {
     maxIterations: clampInteger(parseNumber(process.env.PLANNER_MAX_ITERATIONS, 3), 1, 5),
     timezone: systemTimezone(),
     model: config.model,
-    hasApiKey: Boolean(process.env.OPENROUTER_API_KEY?.trim())
+    hasApiKey: Boolean(config.apiKey?.trim() || process.env.OPENROUTER_API_KEY?.trim())
   };
 }
 
@@ -72,9 +72,10 @@ export async function runPlanningPipeline(
   onProgress: ProgressCallback = noopProgress,
   signal?: AbortSignal
 ): Promise<PlanningResult> {
-  const apiKey = process.env.OPENROUTER_API_KEY;
+  const config = loadConfig();
+  const apiKey = config.apiKey || process.env.OPENROUTER_API_KEY;
   if (!apiKey) {
-    throw new Error("Missing OpenRouter API key. Set OPENROUTER_API_KEY in the .env file.");
+    throw new Error("Missing OpenRouter API key. Set it in Settings.");
   }
 
   const normalizedRequest = normalizeRequest(request);

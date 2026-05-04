@@ -4,6 +4,7 @@ import { configPath, dataDir } from "./paths";
 export interface AppConfig {
   quorum: number;
   model: string;
+  apiKey?: string;
 }
 
 const DEFAULT_MODEL = "nvidia/nemotron-3-super-120b-a12b:free";
@@ -15,7 +16,7 @@ export function loadConfig(): AppConfig {
     if (existsSync(cp)) {
       const raw = readFileSync(cp, "utf-8");
       const parsed = JSON.parse(raw);
-      return {
+      const config: AppConfig = {
         quorum:
           typeof parsed.quorum === "number" ? parsed.quorum : DEFAULT_QUORUM,
         model:
@@ -23,6 +24,10 @@ export function loadConfig(): AppConfig {
             ? parsed.model.trim()
             : DEFAULT_MODEL
       };
+      if (typeof parsed.apiKey === "string" && parsed.apiKey.trim()) {
+        config.apiKey = parsed.apiKey.trim();
+      }
+      return config;
     }
   } catch {
     // fallthrough to defaults

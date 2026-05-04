@@ -483,7 +483,7 @@ function ComposerView({
         </div>
 
         {defaults && !defaults.hasApiKey && (
-          <div className="warn">Set <code>OPENROUTER_API_KEY</code> in <code>.env</code> to run the planner.</div>
+          <div className="warn">Set your OpenRouter API key in Settings to run the planner.</div>
         )}
 
         {error && <div className="err">{error}</div>}
@@ -1176,6 +1176,20 @@ function SettingsModal({
               format={formatModel}
             />
             <div className="field-hint">OpenRouter model used for planning.</div>
+          </div>
+
+          <div className="field">
+            <label className="meta-label" htmlFor="settings-apikey">API Key</label>
+            <input
+              id="settings-apikey"
+              className="text-input"
+              type="password"
+              value={draft.apiKey ?? ""}
+              onChange={(e) => setDraft({ ...draft, apiKey: e.target.value })}
+              placeholder="sk-or-..."
+              spellCheck={false}
+            />
+            <div className="field-hint">Your OpenRouter API key. Stored locally in the config file.</div>
           </div>
         </div>
         <footer className="modal-footer">

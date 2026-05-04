@@ -209,6 +209,7 @@ export interface SavedCalendar {
 export interface AppConfig {
   quorum: number;
   model: string;
+  apiKey?: string;
 }
 
 export interface PlannerApi {
