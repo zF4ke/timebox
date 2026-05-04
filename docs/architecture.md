@@ -66,11 +66,13 @@ This keeps revision prompts under ~15k chars instead of 46k+.
 `src/main/validation.ts` checks structural issues and logs them:
 
 - Day outside planning window
-- Daily hours exceeding `assumed_available_hours`
 - Invalid block durations (end before start, negative hours)
 - Work blocks referencing unknown or missing task_ids
 - Blocks scheduled after task deadlines
 - Tasks with deadlines inside the window but no scheduled blocks
+- `buffer` / `break` blocks present (rest is implicit — unscheduled time IS rest)
+
+Workload judgments (e.g. "this day has too many hours") are **not** validated structurally — that's the Wellbeing Agent's job.
 
 These are **noted, not enforced**. The calendar can be accepted with violations if the agents approve it. This keeps the system flexible — if the user explicitly asks for an intense schedule, the agents can approve it even though validation flags it.
 

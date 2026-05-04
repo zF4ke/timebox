@@ -40,11 +40,19 @@ interface ResolvedRequest extends Required<Omit<PlanningRequest, "planningWindow
   planningWindowOverride?: PlanningRequest["planningWindowOverride"];
 }
 
+function systemTimezone(): string {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+  } catch {
+    return "UTC";
+  }
+}
+
 export function getPlannerDefaults(): PlannerDefaults {
   return {
     quorum: clampInteger(parseNumber(process.env.PLANNER_QUORUM, 5), 1, 5),
     maxIterations: clampInteger(parseNumber(process.env.PLANNER_MAX_ITERATIONS, 3), 1, 5),
-    timezone: process.env.PLANNER_TIMEZONE?.trim() || "Europe/Lisbon",
+    timezone: systemTimezone(),
     model: process.env.OPENROUTER_MODEL?.trim() || "openai/gpt-4o-mini",
     hasApiKey: Boolean(process.env.OPENROUTER_API_KEY?.trim())
   };
@@ -502,6 +510,7 @@ function buildInitialPlannerPrompt(
     `Timezone: ${request.timezone}`,
     "Each block must include id, task_id, task_name, type, ISO start, ISO end, duration_hours, description, and reasoning.",
     "Every work block MUST reference a real task_id from the interpreter output. Do not invent tasks.",
+    "USER-FACING TEXT (description, reasoning, overall_strategy, compromises, known_weaknesses, day_reasoning): NEVER use raw task IDs like T1, T2, T3 — the user does not know what those mean. Always use the task's human name (e.g. 'AASMA proposal', 'DB lab') instead.",
     "Do NOT create buffer, break, or rest blocks. Unscheduled time in the calendar IS rest time by default. Only create work blocks for actual tasks from the interpreter output.",
     "Do NOT create generic lifestyle blocks such as 'morning classes', 'dinner', 'decompression', 'commute', 'sleep', 'general buffer time', 'contingency buffer', or similar. Only create blocks for actual tasks from the interpreter output.",
     "For each day, set assumed_available_hours realistically based on the inferred availability. The sum of ALL block durations on that day MUST NOT exceed assumed_available_hours.",
@@ -532,6 +541,7 @@ function buildRevisionPlannerPrompt(
     `Timezone: ${request.timezone}`,
     "Each block must include id, task_id, task_name, type, ISO start, ISO end, duration_hours, description, and reasoning.",
     "Every work block MUST reference a real task_id from the interpreter output. Do not invent tasks.",
+    "USER-FACING TEXT (description, reasoning, overall_strategy, compromises, known_weaknesses, day_reasoning): NEVER use raw task IDs like T1, T2, T3 — the user does not know what those mean. Always use the task's human name (e.g. 'AASMA proposal', 'DB lab') instead.",
     "Do NOT create buffer, break, or rest blocks. Unscheduled time in the calendar IS rest time by default. Only create work blocks for actual tasks from the interpreter output.",
     "Do NOT create generic lifestyle blocks such as 'morning classes', 'dinner', 'decompression', 'commute', 'sleep', 'general buffer time', 'contingency buffer', or similar. Only create blocks for actual tasks from the interpreter output.",
     "For each day, set assumed_available_hours realistically. The sum of ALL block durations on that day MUST NOT exceed assumed_available_hours.",

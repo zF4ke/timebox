@@ -11,16 +11,34 @@ describe("constraint checker", () => {
     expect(validation.violations).toHaveLength(0);
   });
 
-  it("rejects blocks after task deadlines and days above availability", () => {
+  it("flags blocks scheduled after task deadlines", () => {
     const calendar = validCalendar();
-    calendar.days[0].assumed_available_hours = 1;
     calendar.days[0].blocks[0].end = "2026-05-05T18:00:00+01:00";
 
     const validation = validateCalendar(calendar, interpreter());
 
     expect(validation.valid).toBe(false);
-    expect(validation.violations.map((violation) => violation.code)).toContain("daily_availability_exceeded");
     expect(validation.violations.map((violation) => violation.code)).toContain("block_after_deadline");
+  });
+
+  it("flags buffer/break blocks (rest is implicit unscheduled time)", () => {
+    const calendar = validCalendar();
+    calendar.days[0].blocks.push({
+      id: "block-2",
+      task_id: null,
+      task_name: null,
+      type: "buffer",
+      start: "2026-05-04T17:00:00+01:00",
+      end: "2026-05-04T18:00:00+01:00",
+      duration_hours: 1,
+      description: "Rest",
+      reasoning: "Cool down."
+    });
+
+    const validation = validateCalendar(calendar, interpreter());
+
+    expect(validation.valid).toBe(false);
+    expect(validation.violations.map((violation) => violation.code)).toContain("rest_block_not_allowed");
   });
 });
 

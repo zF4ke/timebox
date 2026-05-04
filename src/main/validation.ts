@@ -35,15 +35,6 @@ export function validateCalendar(calendar: CalendarProposal, interpreterOutput: 
       });
     }
 
-    const dailyHours = day.blocks.reduce((sum, block) => sum + Number(block.duration_hours || 0), 0);
-    if (dailyHours > day.assumed_available_hours + 0.01) {
-      violations.push({
-        code: "daily_availability_exceeded",
-        message: `${day.date} schedules ${dailyHours.toFixed(1)}h total, above the stated ${day.assumed_available_hours.toFixed(1)}h available. Reduce blocks or increase assumed_available_hours.`,
-        severity: "error"
-      });
-    }
-
     for (const block of day.blocks) {
       const blockStart = parseDate(block.start);
       const blockEnd = parseDate(block.end);
@@ -74,7 +65,7 @@ export function validateCalendar(calendar: CalendarProposal, interpreterOutput: 
       if (block.type === "buffer" || block.type === "break") {
         violations.push({
           code: "rest_block_not_allowed",
-          message: `Block "${block.description || block.id}" is a ${block.type} block. Rest/buffer blocks are not allowed — unscheduled time is implicitly rest.`,
+          message: `Block "${block.description || block.id}" is a ${block.type} block. Rest/buffer/break blocks should not be scheduled — unscheduled time is implicitly rest.`,
           severity: "error"
         });
       }

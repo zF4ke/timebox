@@ -109,6 +109,10 @@ code {
   gap: 12px;
 }
 
+.row-end {
+  justify-content: flex-end;
+}
+
 .quorum {
   display: flex;
   align-items: center;
@@ -208,6 +212,12 @@ code {
   padding-right: 4px;
 }
 
+.steps-stack {
+  /* Newest is rendered first (top). Soft mask fades out the bottom edge. */
+  mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+}
+
 .step {
   display: grid;
   grid-template-columns: 22px minmax(0, 1fr);
@@ -215,8 +225,8 @@ code {
   align-items: flex-start;
   padding: 10px 4px;
   border-bottom: 1px solid transparent;
-  transition: opacity 200ms ease, transform 200ms ease;
-  animation: slide-in 220ms ease both;
+  transition: opacity 240ms ease, transform 240ms ease;
+  animation: slide-in-top 260ms ease both;
 }
 
 .step-pending { opacity: 0.5; }
@@ -307,6 +317,18 @@ code {
   }
 }
 
+/* New steps drop in from above (newest is at the top of the list) */
+@keyframes slide-in-top {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes fade-in {
   from { opacity: 0; }
   to   { opacity: 1; }
@@ -319,7 +341,7 @@ code {
   grid-template-rows: auto minmax(0, 1fr);
   flex: 1;
   min-height: 0;
-  padding: 12px 24px 16px 56px;
+  padding: 12px 56px 16px 56px;
   gap: 12px;
   overflow: hidden;
 }
@@ -522,8 +544,19 @@ code {
   font-size: 13px;
 }
 
-.fc .fc-button-active {
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active,
+.fc .fc-button-primary:not(:disabled):focus,
+.fc .fc-button-primary:not(:disabled).fc-button-active:focus {
+  background-color: var(--accent) !important;
+  border-color: var(--accent) !important;
   color: #ffffff !important;
+  box-shadow: none !important;
+}
+
+.fc .fc-button-primary:focus-visible {
+  outline: 2px solid rgba(10, 10, 10, 0.18);
+  outline-offset: 1px;
 }
 
 .fc .fc-toolbar.fc-header-toolbar {
@@ -554,6 +587,17 @@ code {
   border: none !important;
   border-radius: 4px !important;
   padding: 2px 4px !important;
+  transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+}
+
+.ev-clickable {
+  cursor: pointer;
+}
+
+.ev-clickable:hover {
+  filter: brightness(1.18);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  transform: translateY(-1px);
 }
 
 .ev {
@@ -753,6 +797,11 @@ code {
   pointer-events: none;
 }
 
+.floating-toggle-right {
+  left: auto;
+  right: 14px;
+}
+
 .icon-btn {
   width: 28px;
   height: 28px;
@@ -880,5 +929,251 @@ code {
   line-height: 1.55;
   color: var(--fg);
   white-space: pre-wrap;
+}
+
+/* ---------- Save / confirm modal extras ---------- */
+
+.modal-sm {
+  max-width: 380px;
+}
+
+.modal-md {
+  max-width: 460px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field-hint {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.field-hint code {
+  font-size: 11px;
+}
+
+.select-wrap {
+  position: relative;
+}
+
+.select-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 32px 0 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--fg);
+  font-size: 13px;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.select-input:hover {
+  border-color: var(--border-strong);
+}
+
+.select-input:focus {
+  border-color: var(--fg);
+  box-shadow: 0 0 0 2px rgba(10, 10, 10, 0.06);
+}
+
+.select-chev {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+}
+
+/* ---------- Custom dropdown (themed replacement for native <select>) ---------- */
+
+.dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.dropdown-trigger {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--fg);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+
+.dropdown-trigger:hover {
+  border-color: var(--border-strong);
+}
+
+.dropdown-trigger[aria-expanded="true"] {
+  border-color: var(--fg);
+  box-shadow: 0 0 0 2px rgba(10, 10, 10, 0.06);
+}
+
+.dropdown-trigger .chev {
+  color: var(--muted);
+}
+
+.dropdown-menu {
+  position: fixed;
+  z-index: 200;
+  max-height: 240px;
+  overflow-y: auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: fade-in 100ms ease;
+}
+
+.dropdown-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  height: 32px;
+  padding: 0 10px;
+  border: none;
+  background: transparent;
+  text-align: left;
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--fg);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+  transition: background 100ms ease;
+}
+
+.dropdown-option:hover {
+  background: var(--bg);
+}
+
+.dropdown-option.selected {
+  background: #f5f5f5;
+  font-weight: 500;
+}
+
+.dropdown-option svg {
+  color: var(--fg);
+  flex-shrink: 0;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 16px 16px;
+  border-top: 1px solid var(--border);
+}
+
+.text-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--fg);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.text-input:focus {
+  border-color: var(--fg);
+  box-shadow: 0 0 0 2px rgba(10, 10, 10, 0.06);
+}
+
+.confirm-message {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--fg);
+}
+
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  border: 1px solid var(--danger);
+  background: var(--danger);
+  color: #fff;
+  transition: opacity 120ms ease;
+}
+
+.btn-danger:hover {
+  opacity: 0.9;
+}
+
+/* ---------- Save button states ---------- */
+
+.save-btn {
+  position: relative;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease, opacity 160ms ease;
+}
+
+.save-btn span,
+.save-btn svg {
+  transition: transform 160ms ease, opacity 160ms ease;
+}
+
+.save-btn.save-saving {
+  cursor: progress;
+}
+
+.save-btn.save-saving svg {
+  animation: spin 700ms linear infinite;
+  opacity: 0.7;
+}
+
+.save-btn.save-saved {
+  background: #15803d !important;
+  border-color: #15803d !important;
+  color: #fff !important;
+}
+
+.save-btn.save-saved svg {
+  animation: pop 280ms ease;
+}
+
+.save-btn:disabled {
+  cursor: default;
+}
+
+@keyframes pop {
+  0%   { transform: scale(0.6); opacity: 0; }
+  60%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
 }
 

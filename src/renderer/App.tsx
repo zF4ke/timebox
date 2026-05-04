@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useMutation } from "@tanstack/react-query";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -14,7 +15,9 @@ import {
   FileJson,
   Calendar as CalendarIcon,
   Check,
-  X
+  X,
+  Trash2,
+  Settings
 } from "lucide-react";
 import type {
   CalendarBlock,
@@ -32,6 +35,34 @@ I usually have classes in the morning and can work in the afternoon.
 I slept badly yesterday.`;
 
 const QUORUM_OPTIONS = [1, 2, 3, 4, 5];
+const SETTINGS_KEY = "planner:settings";
+
+interface UserSettings {
+  quorum: number;
+  model: string; // empty string means "use env default"
+}
+
+function loadSettings(): UserSettings | null {
+  try {
+    const raw = localStorage.getItem(SETTINGS_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    return {
+      quorum: typeof parsed.quorum === "number" ? parsed.quorum : 5,
+      model: typeof parsed.model === "string" ? parsed.model : ""
+    };
+  } catch {
+    return null;
+  }
+}
+
+function persistSettings(s: UserSettings) {
+  try {
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+  } catch {
+    // ignore
+  }
+}
 
 interface StepItem {
   key: string;
@@ -44,17 +75,24 @@ interface StepItem {
 
 export default function App() {
   const [userInput, setUserInput] = useState(SAMPLE_INPUT);
-  const [quorum, setQuorum] = useState<number>(5);
+  const [settings, setSettings] = useState<UserSettings>(() => loadSettings() ?? { quorum: 5, model: "" });
   const [defaults, setDefaults] = useState<PlannerDefaults | null>(null);
   const [result, setResult] = useState<PlanningResult | null>(null);
   const [steps, setSteps] = useState<StepItem[]>([]);
   const [saved, setSaved] = useState<SavedCalendar[]>([]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const [savePromptOpen, setSavePromptOpen] = useState(false);
+  const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
+  const [pendingDelete, setPendingDelete] = useState<SavedCalendar | null>(null);
 
   useEffect(() => {
     window.plannerApi.getDefaults().then((d) => {
       setDefaults(d);
-      setQuorum(d.quorum);
+      // First-time init: if no stored settings, fall back to env defaults
+      if (!loadSettings()) {
+        setSettings({ quorum: d.quorum, model: "" });
+      }
     });
     refreshSaved();
   }, []);
@@ -76,19 +114,33 @@ export default function App() {
     }
   });
 
+  const taskNameMap = useMemo<Record<string, string>>(() => {
+    if (!result) return {};
+    const map: Record<string, string> = {};
+    for (const task of result.interpreterOutput.tasks) {
+      if (task.task_id && task.name) map[task.task_id] = task.name;
+    }
+    for (const day of result.finalCalendar.days) {
+      for (const block of day.blocks) {
+        if (block.task_id && block.task_name) map[block.task_id] = block.task_name;
+      }
+    }
+    return map;
+  }, [result]);
+
   const events = useMemo<EventInput[]>(() => {
     if (!result) return [];
     return result.finalCalendar.days.flatMap((day) =>
       day.blocks.map((block) => ({
         id: block.id,
-        title: block.task_name ?? block.description,
+        title: humanize(block.task_name ?? block.description, taskNameMap),
         start: block.start,
         end: block.end,
-        classNames: [`event-${block.type ?? "work"}`],
+        classNames: [`event-${block.type ?? "work"}`, "ev-clickable"],
         extendedProps: { block }
       }))
     );
-  }, [result]);
+  }, [result, taskNameMap]);
 
   const isRunning = plannerMutation.isPending;
   const error = plannerMutation.error instanceof Error ? plannerMutation.error.message : "";
@@ -97,7 +149,14 @@ export default function App() {
   function runPlanner() {
     setResult(null);
     setSteps([]);
-    plannerMutation.mutate({ userInput, quorum });
+    const request: PlanningRequest = { userInput, quorum: settings.quorum };
+    if (settings.model.trim()) request.model = settings.model.trim();
+    plannerMutation.mutate(request);
+  }
+
+  function handleSettingsChange(next: UserSettings) {
+    setSettings(next);
+    persistSettings(next);
   }
 
   async function cancelPlanner() {
@@ -128,18 +187,33 @@ export default function App() {
     }
   }
 
-  async function handleDelete(id: string) {
-    await window.plannerApi.deleteCalendar(id);
+  function handleRequestDelete(cal: SavedCalendar) {
+    setPendingDelete(cal);
+  }
+
+  async function handleConfirmDelete() {
+    if (!pendingDelete) return;
+    await window.plannerApi.deleteCalendar(pendingDelete.id);
+    setPendingDelete(null);
     refreshSaved();
   }
 
-  async function handleSave() {
+  function handleSave() {
     if (!result) return;
-    const defaultName = `Plan · ${new Date().toLocaleString()}`;
-    const name = window.prompt("Name this plan", defaultName);
-    if (name === null) return;
+    setSaveStatus("idle");
+    setSavePromptOpen(true);
+  }
+
+  async function handleConfirmSave(name: string) {
+    if (!result) return;
+    setSaveStatus("saving");
     await window.plannerApi.saveCalendar(name, result);
+    setSaveStatus("saved");
     refreshSaved();
+    setTimeout(() => {
+      setSavePromptOpen(false);
+      setSaveStatus("idle");
+    }, 700);
   }
 
   let content: React.ReactNode;
@@ -153,6 +227,8 @@ export default function App() {
         initialDate={initialDate}
         onReset={reset}
         onSave={handleSave}
+        saveStatus={saveStatus}
+        taskNameMap={taskNameMap}
       />
     );
   } else {
@@ -160,9 +236,8 @@ export default function App() {
       <ComposerView
         userInput={userInput}
         setUserInput={setUserInput}
-        quorum={quorum}
-        setQuorum={setQuorum}
         defaults={defaults}
+        settings={settings}
         error={error}
         onRun={runPlanner}
       />
@@ -170,16 +245,49 @@ export default function App() {
   }
 
   return (
-    <AppLayout
-      sidebarOpen={sidebarOpen}
-      setSidebarOpen={setSidebarOpen}
-      saved={saved}
-      onImport={handleImport}
-      onLoad={handleLoad}
-      onDelete={handleDelete}
-    >
-      {content}
-    </AppLayout>
+    <>
+      <AppLayout
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+        saved={saved}
+        onImport={handleImport}
+        onLoad={handleLoad}
+        onDelete={handleRequestDelete}
+        onOpenSettings={() => setSettingsOpen(true)}
+      >
+        {content}
+      </AppLayout>
+
+      {savePromptOpen && (
+        <SavePromptModal
+          status={saveStatus}
+          onConfirm={handleConfirmSave}
+          onClose={() => {
+            if (saveStatus !== "saving") setSavePromptOpen(false);
+          }}
+        />
+      )}
+
+      {pendingDelete && (
+        <ConfirmModal
+          title="Delete plan?"
+          message={`"${pendingDelete.name}" will be permanently removed. This can't be undone.`}
+          confirmLabel="Delete"
+          variant="danger"
+          onConfirm={handleConfirmDelete}
+          onCancel={() => setPendingDelete(null)}
+        />
+      )}
+
+      {settingsOpen && (
+        <SettingsModal
+          settings={settings}
+          defaults={defaults}
+          onChange={handleSettingsChange}
+          onClose={() => setSettingsOpen(false)}
+        />
+      )}
+    </>
   );
 }
 
@@ -190,7 +298,8 @@ function AppLayout({
   saved,
   onImport,
   onLoad,
-  onDelete
+  onDelete,
+  onOpenSettings
 }: {
   children: React.ReactNode;
   sidebarOpen: boolean;
@@ -198,7 +307,8 @@ function AppLayout({
   saved: SavedCalendar[];
   onImport: () => void;
   onLoad: (c: SavedCalendar) => void;
-  onDelete: (id: string) => void;
+  onDelete: (c: SavedCalendar) => void;
+  onOpenSettings: () => void;
 }) {
   return (
     <div className="app-layout">
@@ -231,11 +341,11 @@ function AppLayout({
               </button>
               <button
                 className="saved-delete"
-                onClick={() => onDelete(cal.id)}
+                onClick={() => onDelete(cal)}
                 title="Delete"
                 aria-label="Delete plan"
               >
-                <X size={14} />
+                <Trash2 size={14} />
               </button>
             </div>
           ))}
@@ -251,6 +361,14 @@ function AppLayout({
         >
           <PanelLeft size={16} />
         </button>
+        <button
+          className="floating-toggle floating-toggle-right"
+          onClick={onOpenSettings}
+          title="Settings"
+          aria-label="Open settings"
+        >
+          <Settings size={16} />
+        </button>
         {children}
       </div>
     </div>
@@ -260,20 +378,20 @@ function AppLayout({
 function ComposerView({
   userInput,
   setUserInput,
-  quorum,
-  setQuorum,
   defaults,
+  settings,
   error,
   onRun
 }: {
   userInput: string;
   setUserInput: (v: string) => void;
-  quorum: number;
-  setQuorum: (n: number) => void;
   defaults: PlannerDefaults | null;
+  settings: UserSettings;
   error: string;
   onRun: () => void;
 }) {
+  const activeModel = settings.model.trim() || defaults?.model || "";
+
   return (
     <main className="shell">
       <div className="composer">
@@ -288,16 +406,7 @@ function ComposerView({
           spellCheck={false}
         />
 
-        <div className="row">
-          <label className="quorum">
-            <span>Approvals required</span>
-            <select value={quorum} onChange={(e) => setQuorum(Number(e.target.value))}>
-              {QUORUM_OPTIONS.map((n) => (
-                <option key={n} value={n}>{n} of 5</option>
-              ))}
-            </select>
-          </label>
-
+        <div className="row row-end">
           <button
             className="run"
             onClick={onRun}
@@ -315,9 +424,9 @@ function ComposerView({
 
         {defaults && (
           <div className="meta">
-            <span>{defaults.model}</span>
+            <span>{activeModel}</span>
             <span>·</span>
-            <span>{defaults.timezone}</span>
+            <span>{settings.quorum}/5 approvals</span>
           </div>
         )}
       </div>
@@ -326,13 +435,8 @@ function ComposerView({
 }
 
 function RunningView({ steps, onCancel }: { steps: StepItem[]; onCancel: () => void }) {
-  const listRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    listRef.current?.lastElementChild?.scrollIntoView({ behavior: "smooth", block: "end" });
-  }, [steps]);
-
   const errorStep = steps.find((s) => s.status === "error");
+  const reversed = useMemo(() => [...steps].reverse(), [steps]);
 
   return (
     <main className="shell">
@@ -351,22 +455,24 @@ function RunningView({ steps, onCancel }: { steps: StepItem[]; onCancel: () => v
           )}
         </div>
 
-        <div className="steps" ref={listRef}>
-          {steps.map((step) => (
-            <StepRow key={step.key} step={step} />
-          ))}
+        <div className="steps steps-stack">
+          {reversed.map((step, i) => {
+            // Newest (i=0) is fully opaque; older steps fade gradually but stay readable.
+            const opacity = Math.max(0.3, 1 - i * 0.12);
+            return <StepRow key={step.key} step={step} opacity={opacity} />;
+          })}
         </div>
       </div>
     </main>
   );
 }
 
-function StepRow({ step }: { step: StepItem }) {
+function StepRow({ step, opacity }: { step: StepItem; opacity: number }) {
   const elapsed =
     step.startedAt && step.endedAt ? `${((step.endedAt - step.startedAt) / 1000).toFixed(1)}s` : "";
 
   return (
-    <div className={`step step-${step.status}`}>
+    <div className={`step step-${step.status}`} style={{ opacity }}>
       <div className="step-icon">
         {step.status === "active" && <span className="spinner" />}
         {step.status === "done" && <Check size={14} />}
@@ -485,13 +591,17 @@ function ResultView({
   events,
   initialDate,
   onReset,
-  onSave
+  onSave,
+  saveStatus,
+  taskNameMap
 }: {
   result: PlanningResult;
   events: EventInput[];
   initialDate: string;
   onReset: () => void;
   onSave: () => void;
+  saveStatus: "idle" | "saving" | "saved";
+  taskNameMap: Record<string, string>;
 }) {
   const [exportOpen, setExportOpen] = useState(false);
   const [activeBlock, setActiveBlock] = useState<CalendarBlock | null>(null);
@@ -531,9 +641,14 @@ function ResultView({
           </p>
         </div>
         <div className="actions">
-          <button className="btn-secondary" onClick={onSave} title="Save this plan">
-            <Save size={14} />
-            <span>Save</span>
+          <button
+            className={`btn-secondary save-btn save-${saveStatus}`}
+            onClick={onSave}
+            disabled={saveStatus === "saving"}
+            title="Save this plan"
+          >
+            {saveStatus === "saved" ? <Check size={14} /> : <Save size={14} />}
+            <span>{saveStatus === "saved" ? "Saved" : saveStatus === "saving" ? "Saving…" : "Save"}</span>
           </button>
 
           <div className="export-wrap" ref={exportRef}>
@@ -608,7 +723,7 @@ function ResultView({
             return (
               <div className="ev">
                 <strong>{arg.event.title}</strong>
-                {block?.description && <span>{block.description}</span>}
+                {block?.description && <span>{humanize(block.description, taskNameMap)}</span>}
               </div>
             );
           }}
@@ -616,13 +731,25 @@ function ResultView({
       </section>
 
       {activeBlock && (
-        <BlockModal block={activeBlock} onClose={() => setActiveBlock(null)} />
+        <BlockModal
+          block={activeBlock}
+          taskNameMap={taskNameMap}
+          onClose={() => setActiveBlock(null)}
+        />
       )}
     </main>
   );
 }
 
-function BlockModal({ block, onClose }: { block: CalendarBlock; onClose: () => void }) {
+function BlockModal({
+  block,
+  taskNameMap,
+  onClose
+}: {
+  block: CalendarBlock;
+  taskNameMap: Record<string, string>;
+  onClose: () => void;
+}) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -646,7 +773,7 @@ function BlockModal({ block, onClose }: { block: CalendarBlock; onClose: () => v
         <header className="modal-header">
           <div>
             <span className={`badge badge-${block.type}`}>{block.type}</span>
-            <h3>{block.task_name ?? block.description}</h3>
+            <h3>{humanize(block.task_name ?? block.description, taskNameMap)}</h3>
           </div>
           <button className="icon-btn" onClick={onClose} aria-label="Close">
             <X size={16} />
@@ -662,12 +789,12 @@ function BlockModal({ block, onClose }: { block: CalendarBlock; onClose: () => v
           </div>
           <div className="modal-section">
             <div className="meta-label">Description</div>
-            <p>{block.description}</p>
+            <p>{humanize(block.description, taskNameMap)}</p>
           </div>
           {block.reasoning && (
             <div className="modal-section">
               <div className="meta-label">Reasoning</div>
-              <p>{block.reasoning}</p>
+              <p>{humanize(block.reasoning, taskNameMap)}</p>
             </div>
           )}
         </div>
@@ -690,6 +817,15 @@ function formatWindow(start: string, end: string): string {
   return `${fmt(s, !sameYear)} → ${fmt(e, true)}`;
 }
 
+// Replace any leftover task IDs (T1, T12, etc.) with the task's human name.
+// Belt-and-braces: prompts already tell agents not to use IDs in user-facing text,
+// but free models occasionally slip up.
+function humanize(text: string | null | undefined, map: Record<string, string>): string {
+  if (!text) return text ?? "";
+  if (Object.keys(map).length === 0) return text;
+  return text.replace(/\bT\d+\b/g, (match) => map[match] ?? match);
+}
+
 function downloadFile(name: string, content: string, type: string) {
   const blob = new Blob([content], { type });
   const url = URL.createObjectURL(blob);
@@ -698,4 +834,369 @@ function downloadFile(name: string, content: string, type: string) {
   a.download = name;
   a.click();
   URL.revokeObjectURL(url);
+}
+
+function SavePromptModal({
+  status,
+  onConfirm,
+  onClose
+}: {
+  status: "idle" | "saving" | "saved";
+  onConfirm: (name: string) => void;
+  onClose: () => void;
+}) {
+  const defaultName = useMemo(
+    () =>
+      `Plan · ${new Date().toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      })}`,
+    []
+  );
+  const [name, setName] = useState(defaultName);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+    inputRef.current?.select();
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && status !== "saving") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onClose, status]);
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (status === "saving") return;
+    const trimmed = name.trim() || defaultName;
+    onConfirm(trimmed);
+  };
+
+  return (
+    <div className="modal-backdrop" onClick={status === "saving" ? undefined : onClose}>
+      <form
+        className="modal modal-sm"
+        onClick={(e) => e.stopPropagation()}
+        onSubmit={submit}
+        role="dialog"
+        aria-modal="true"
+      >
+        <header className="modal-header">
+          <div>
+            <h3>Save plan</h3>
+          </div>
+          <button
+            type="button"
+            className="icon-btn"
+            onClick={onClose}
+            disabled={status === "saving"}
+            aria-label="Close"
+          >
+            <X size={16} />
+          </button>
+        </header>
+        <div className="modal-body">
+          <div className="meta-label">Name</div>
+          <input
+            ref={inputRef}
+            className="text-input"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Plan name"
+            disabled={status === "saving"}
+          />
+        </div>
+        <footer className="modal-footer">
+          <button
+            type="button"
+            className="btn-secondary"
+            onClick={onClose}
+            disabled={status === "saving"}
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className={`btn-primary save-btn save-${status}`}
+            disabled={status === "saving" || status === "saved"}
+          >
+            {status === "saved" ? <Check size={14} /> : <Save size={14} />}
+            <span>{status === "saved" ? "Saved" : status === "saving" ? "Saving…" : "Save"}</span>
+          </button>
+        </footer>
+      </form>
+    </div>
+  );
+}
+
+function Dropdown<T extends string | number>({
+  value,
+  options,
+  onChange,
+  format
+}: {
+  value: T;
+  options: T[];
+  onChange: (v: T) => void;
+  format?: (v: T) => string;
+}) {
+  const [open, setOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const [pos, setPos] = useState<{ top: number; left: number; width: number } | null>(null);
+
+  useLayoutEffect(() => {
+    if (!open || !triggerRef.current) return;
+    const update = () => {
+      const r = triggerRef.current!.getBoundingClientRect();
+      setPos({ top: r.bottom + 4, left: r.left, width: r.width });
+    };
+    update();
+    window.addEventListener("resize", update);
+    window.addEventListener("scroll", update, true);
+    return () => {
+      window.removeEventListener("resize", update);
+      window.removeEventListener("scroll", update, true);
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const close = (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (
+        triggerRef.current?.contains(target) ||
+        menuRef.current?.contains(target)
+      ) return;
+      setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", close);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", close);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  const label = (v: T) => (format ? format(v) : String(v));
+
+  return (
+    <div className="dropdown">
+      <button
+        ref={triggerRef}
+        type="button"
+        className="dropdown-trigger"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+      >
+        <span>{label(value)}</span>
+        <ChevronDown size={14} className={`chev ${open ? "open" : ""}`} />
+      </button>
+      {open && pos &&
+        createPortal(
+          <div
+            ref={menuRef}
+            className="dropdown-menu"
+            role="listbox"
+            style={{ top: pos.top, left: pos.left, width: pos.width }}
+          >
+            {options.map((opt) => {
+              const selected = opt === value;
+              return (
+                <button
+                  key={String(opt)}
+                  type="button"
+                  role="option"
+                  aria-selected={selected}
+                  className={`dropdown-option ${selected ? "selected" : ""}`}
+                  onClick={() => {
+                    onChange(opt);
+                    setOpen(false);
+                  }}
+                >
+                  <span>{label(opt)}</span>
+                  {selected && <Check size={14} />}
+                </button>
+              );
+            })}
+          </div>,
+          document.body
+        )}
+    </div>
+  );
+}
+
+function SettingsModal({
+  settings,
+  defaults,
+  onChange,
+  onClose
+}: {
+  settings: UserSettings;
+  defaults: PlannerDefaults | null;
+  onChange: (s: UserSettings) => void;
+  onClose: () => void;
+}) {
+  const [draft, setDraft] = useState<UserSettings>(settings);
+  const [status, setStatus] = useState<"idle" | "saved">("idle");
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && status !== "saved") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onClose, status]);
+
+  const handleSave = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (status === "saved") return;
+    onChange(draft);
+    setStatus("saved");
+    setTimeout(() => {
+      setStatus("idle");
+      onClose();
+    }, 700);
+  };
+
+  const envModel = defaults?.model ?? "";
+
+  return (
+    <div className="modal-backdrop" onClick={onClose}>
+      <form
+        className="modal modal-md"
+        onClick={(e) => e.stopPropagation()}
+        onSubmit={handleSave}
+        role="dialog"
+        aria-modal="true"
+      >
+        <header className="modal-header">
+          <div>
+            <h3>Settings</h3>
+          </div>
+          <button type="button" className="icon-btn" onClick={onClose} aria-label="Close">
+            <X size={16} />
+          </button>
+        </header>
+        <div className="modal-body">
+          <div className="field">
+            <span className="meta-label">Approvals required</span>
+            <Dropdown
+              value={draft.quorum}
+              options={QUORUM_OPTIONS}
+              onChange={(n) => setDraft({ ...draft, quorum: n })}
+              format={(n) => `${n} of 5`}
+            />
+            <div className="field-hint">How many specialist agents must approve before a calendar is accepted.</div>
+          </div>
+
+          <div className="field">
+            <label className="meta-label" htmlFor="settings-model">Model</label>
+            <input
+              id="settings-model"
+              className="text-input"
+              value={draft.model}
+              onChange={(e) => setDraft({ ...draft, model: e.target.value })}
+              placeholder={envModel || "openai/gpt-4o-mini"}
+              spellCheck={false}
+            />
+            <div className="field-hint">
+              OpenRouter model id. Leave empty to use the env default
+              {envModel && <> (<code>{envModel}</code>)</>}.
+            </div>
+          </div>
+        </div>
+        <footer className="modal-footer">
+          <button
+            type="button"
+            className="btn-secondary"
+            onClick={onClose}
+            disabled={status === "saved"}
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className={`btn-primary save-btn save-${status}`}
+            disabled={status === "saved"}
+          >
+            {status === "saved" ? <Check size={14} /> : <Save size={14} />}
+            <span>{status === "saved" ? "Saved" : "Save"}</span>
+          </button>
+        </footer>
+      </form>
+    </div>
+  );
+}
+
+function ConfirmModal({
+  title,
+  message,
+  confirmLabel,
+  variant,
+  onConfirm,
+  onCancel
+}: {
+  title: string;
+  message: string;
+  confirmLabel: string;
+  variant?: "danger";
+  onConfirm: () => void;
+  onCancel: () => void;
+}) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onCancel();
+      if (e.key === "Enter") onConfirm();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onCancel, onConfirm]);
+
+  return (
+    <div className="modal-backdrop" onClick={onCancel}>
+      <div
+        className="modal modal-sm"
+        onClick={(e) => e.stopPropagation()}
+        role="alertdialog"
+        aria-modal="true"
+      >
+        <header className="modal-header">
+          <div>
+            <h3>{title}</h3>
+          </div>
+          <button type="button" className="icon-btn" onClick={onCancel} aria-label="Close">
+            <X size={16} />
+          </button>
+        </header>
+        <div className="modal-body">
+          <p className="confirm-message">{message}</p>
+        </div>
+        <footer className="modal-footer">
+          <button type="button" className="btn-secondary" onClick={onCancel}>
+            Cancel
+          </button>
+          <button
+            type="button"
+            className={variant === "danger" ? "btn-danger" : "btn-primary"}
+            onClick={onConfirm}
+            autoFocus
+          >
+            <Trash2 size={14} />
+            <span>{confirmLabel}</span>
+          </button>
+        </footer>
+      </div>
+    </div>
+  );
 }
