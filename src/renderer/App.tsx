@@ -1190,8 +1190,7 @@ function SettingsModal({
               spellCheck={false}
             />
             <div className="field-hint">
-              Your OpenRouter API key. Stored locally in the config file.{" "}
-              <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer">Get a key →</a>
+              Your <a href="https://openrouter.ai/keys" target="_blank" rel="noopener noreferrer">OpenRouter</a> API key. Stored locally in the config file.
             </div>
           </div>
         </div>

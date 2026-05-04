@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog, ipcMain, Menu } from "electron";
+import { app, BrowserWindow, dialog, ipcMain, Menu, shell } from "electron";
 import fs from "node:fs";
 import path from "node:path";
 import dotenv from "dotenv";
@@ -38,6 +38,13 @@ function createWindow(): void {
       contextIsolation: true,
       nodeIntegration: false
     }
+  });
+
+  win.webContents.setWindowOpenHandler(({ url }) => {
+    if (url.startsWith("https:") || url.startsWith("http:")) {
+      void shell.openExternal(url);
+    }
+    return { action: "deny" };
   });
 
   if (!isDev) {
