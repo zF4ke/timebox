@@ -958,6 +958,15 @@ code {
   font-size: 11px;
 }
 
+.field-hint a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.field-hint a:hover {
+  text-decoration: underline;
+}
+
 .select-wrap {
   position: relative;
 }
