@@ -24,6 +24,8 @@ async function requestJson<T>(
   options: JsonCallOptions,
   responseFormat: "json_schema" | "json_object"
 ): Promise<T> {
+  const start = Date.now();
+  console.log(`[openrouter] → ${options.schemaName} (${responseFormat})`);
   const { OpenRouter } = await importOpenRouterSdk();
   const openRouter = new OpenRouter({
     apiKey: options.apiKey,
@@ -61,7 +63,9 @@ async function requestJson<T>(
     throw new Error("OpenRouter returned an empty response.");
   }
 
-  return parseJsonContent<T>(typeof content === "string" ? content : JSON.stringify(content));
+  const parsed = parseJsonContent<T>(typeof content === "string" ? content : JSON.stringify(content));
+  console.log(`[openrouter] ← ${options.schemaName} (${Date.now() - start}ms)`);
+  return parsed;
 }
 
 async function importOpenRouterSdk(): Promise<typeof import("@openrouter/sdk")> {

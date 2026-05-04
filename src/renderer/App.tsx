@@ -1,11 +1,16 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import type { EventInput } from "@fullcalendar/core";
-import type { PlannerDefaults, PlanningRequest, PlanningResult } from "../shared/types";
+import type {
+  PlannerDefaults,
+  PlanningRequest,
+  PlanningResult,
+  ProgressEvent
+} from "../shared/types";
 
 const SAMPLE_INPUT = `I have a DB lab due Tuesday night. It should be easy but I haven't started.
 I have an AASMA proposal due Friday, worth 20%, and we still need to define the architecture.
@@ -15,16 +20,32 @@ I slept badly yesterday.`;
 
 const QUORUM_OPTIONS = [1, 2, 3, 4, 5];
 
+interface StepItem {
+  key: string;
+  label: string;
+  status: "pending" | "active" | "done" | "error";
+  summary?: string;
+  startedAt?: number;
+  endedAt?: number;
+}
+
 export default function App() {
   const [userInput, setUserInput] = useState(SAMPLE_INPUT);
   const [quorum, setQuorum] = useState<number>(3);
   const [defaults, setDefaults] = useState<PlannerDefaults | null>(null);
   const [result, setResult] = useState<PlanningResult | null>(null);
+  const [steps, setSteps] = useState<StepItem[]>([]);
 
   useEffect(() => {
     window.plannerApi.getDefaults().then((d) => {
       setDefaults(d);
       setQuorum(d.quorum);
+    });
+  }, []);
+
+  useEffect(() => {
+    return window.plannerApi.onProgress((ev) => {
+      setSteps((prev) => applyProgress(prev, ev));
     });
   }, []);
 
@@ -53,12 +74,18 @@ export default function App() {
 
   function runPlanner() {
     setResult(null);
+    setSteps([]);
     plannerMutation.mutate({ userInput, quorum });
   }
 
   function reset() {
     setResult(null);
+    setSteps([]);
     plannerMutation.reset();
+  }
+
+  if (isRunning || (steps.length > 0 && !result && error === "")) {
+    return <RunningView steps={steps} />;
   }
 
   if (result) {
@@ -99,9 +126,9 @@ export default function App() {
           <button
             className="run"
             onClick={runPlanner}
-            disabled={isRunning || !userInput.trim() || !defaults?.hasApiKey}
+            disabled={!userInput.trim() || !defaults?.hasApiKey}
           >
-            {isRunning ? "Planning..." : "Plan my week"}
+            Plan my week
           </button>
         </div>
 
@@ -121,6 +148,164 @@ export default function App() {
       </div>
     </main>
   );
+}
+
+function RunningView({ steps }: { steps: StepItem[] }) {
+  const listRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    listRef.current?.lastElementChild?.scrollIntoView({ behavior: "smooth", block: "end" });
+  }, [steps]);
+
+  const errorStep = steps.find((s) => s.status === "error");
+
+  return (
+    <main className="shell">
+      <div className="composer running">
+        <h1>{errorStep ? "Something went wrong" : "Planning your week"}</h1>
+        <p className="subtitle">
+          {errorStep ? errorStep.summary : "Agents are reasoning. Check the terminal for full logs."}
+        </p>
+
+        <div className="steps" ref={listRef}>
+          {steps.map((step) => (
+            <StepRow key={step.key} step={step} />
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
+
+function StepRow({ step }: { step: StepItem }) {
+  const elapsed =
+    step.startedAt && step.endedAt ? `${((step.endedAt - step.startedAt) / 1000).toFixed(1)}s` : "";
+
+  return (
+    <div className={`step step-${step.status}`}>
+      <div className="step-icon">
+        {step.status === "active" && <span className="spinner" />}
+        {step.status === "done" && <CheckIcon />}
+        {step.status === "pending" && <span className="dot-pending" />}
+        {step.status === "error" && <span className="x-icon">×</span>}
+      </div>
+      <div className="step-body">
+        <div className="step-title">
+          <span>{step.label}</span>
+          {elapsed && <span className="step-time">{elapsed}</span>}
+        </div>
+        {step.summary && <div className="step-summary">{step.summary}</div>}
+      </div>
+    </div>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden>
+      <path
+        d="M3 8.5l3 3 7-7"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function applyProgress(prev: StepItem[], ev: ProgressEvent): StepItem[] {
+  const now = Date.parse(ev.timestamp) || Date.now();
+
+  if (ev.phase === "error") {
+    const errorStep: StepItem = {
+      key: "error",
+      label: "Error",
+      status: "error",
+      summary: ev.summary,
+      endedAt: now
+    };
+    return [...prev.map((s) => (s.status === "active" ? { ...s, status: "error" as const, endedAt: now } : s)), errorStep];
+  }
+
+  if (ev.phase === "complete") {
+    return prev.map((s) =>
+      s.status === "active" ? { ...s, status: "done" as const, endedAt: now } : s
+    );
+  }
+
+  const key = stepKey(ev);
+  const label = stepLabel(ev);
+  const idx = prev.findIndex((s) => s.key === key);
+
+  if (ev.status === "start") {
+    const next: StepItem = {
+      key,
+      label,
+      status: "active",
+      summary: ev.summary,
+      startedAt: now
+    };
+    if (idx === -1) return [...prev, next];
+    const copy = [...prev];
+    copy[idx] = { ...copy[idx], ...next };
+    return copy;
+  }
+
+  // status === "done"
+  if (idx === -1) {
+    return [
+      ...prev,
+      {
+        key,
+        label,
+        status: "done",
+        summary: ev.summary,
+        startedAt: now,
+        endedAt: now
+      }
+    ];
+  }
+  const copy = [...prev];
+  copy[idx] = {
+    ...copy[idx],
+    status: "done",
+    summary: ev.summary ?? copy[idx].summary,
+    endedAt: now
+  };
+  return copy;
+}
+
+function stepKey(ev: ProgressEvent): string {
+  if (ev.phase === "specialist" && ev.agent) return `specialist:${ev.agent}`;
+  if (ev.phase === "specialist") return "specialist:overall";
+  if (ev.phase === "planner") return `planner:${ev.iteration ?? 0}`;
+  if (ev.phase === "critique") return `critique:${ev.iteration ?? 0}`;
+  if (ev.phase === "validate") return `validate:${ev.iteration ?? 0}`;
+  if (ev.phase === "decision") return `decision:${ev.iteration ?? 0}`;
+  return ev.phase;
+}
+
+function stepLabel(ev: ProgressEvent): string {
+  switch (ev.phase) {
+    case "interpreter":
+      return "Interpreting input";
+    case "specialist":
+      return ev.agent ? ev.agent : "Specialist agents";
+    case "planner":
+      return `Drafting calendar${ev.iteration ? ` v${ev.iteration}` : ""}`;
+    case "critique":
+      return `Critique round${ev.iteration ? ` v${ev.iteration}` : ""}`;
+    case "validate":
+      return `Constraint check${ev.iteration ? ` v${ev.iteration}` : ""}`;
+    case "decision":
+      return "Decision";
+    case "complete":
+      return "Complete";
+    case "error":
+      return "Error";
+  }
 }
 
 function ResultView({

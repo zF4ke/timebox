@@ -8,8 +8,25 @@ import type {
   PlannerDefaults,
   PlanningRequest,
   PlanningResult,
+  ProgressEvent,
   SpecialistAgentView
 } from "../shared/types";
+
+export type ProgressCallback = (event: Omit<ProgressEvent, "timestamp">) => void;
+
+function noopProgress(): void {
+  /* noop */
+}
+
+function logAndEmit(emit: ProgressCallback, ev: Omit<ProgressEvent, "timestamp">): void {
+  const tag = `[planner] ${ev.phase}${ev.iteration ? ` v${ev.iteration}` : ""}${ev.agent ? ` ${ev.agent}` : ""} ${ev.status}`;
+  if (ev.summary) {
+    console.log(`${tag} — ${ev.summary}`);
+  } else {
+    console.log(tag);
+  }
+  emit(ev);
+}
 import { createIcsExport, createJsonExport } from "./exports";
 import { countApprovals, chooseBestCalendarVersion, hasCriticalCritique } from "./logic";
 import { callOpenRouterJson } from "./openrouter";
@@ -51,7 +68,10 @@ const BASE_SYSTEM_PROMPT = [
   "Preserve uncertainty instead of inventing fake precision."
 ].join(" ");
 
-export async function runPlanningPipeline(request: PlanningRequest): Promise<PlanningResult> {
+export async function runPlanningPipeline(
+  request: PlanningRequest,
+  onProgress: ProgressCallback = noopProgress
+): Promise<PlanningResult> {
   const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) {
     throw new Error("Missing OpenRouter API key. Set OPENROUTER_API_KEY in the .env file.");
@@ -60,23 +80,52 @@ export async function runPlanningPipeline(request: PlanningRequest): Promise<Pla
   const normalizedRequest = normalizeRequest(request);
   const createdAt = new Date().toISOString();
   const runId = crypto.randomUUID();
+  console.log(`[planner] run ${runId} starting · model=${normalizedRequest.model} · quorum=${normalizedRequest.quorum} · maxIter=${normalizedRequest.maxIterations}`);
+
+  logAndEmit(onProgress, { phase: "interpreter", status: "start" });
   const interpreterOutput = await runInterpreter(apiKey, normalizedRequest);
-  const agentViews = await runSpecialists(apiKey, normalizedRequest, interpreterOutput);
+  logAndEmit(onProgress, {
+    phase: "interpreter",
+    status: "done",
+    summary: `${interpreterOutput.tasks.length} task(s), window ${interpreterOutput.planning_window.start_date} → ${interpreterOutput.planning_window.end_date}`
+  });
+
+  logAndEmit(onProgress, { phase: "specialist", status: "start", summary: `${AGENTS.length} agents in parallel` });
+  const agentViews = await runSpecialists(apiKey, normalizedRequest, interpreterOutput, onProgress);
+  logAndEmit(onProgress, { phase: "specialist", status: "done", summary: `${agentViews.length} perspectives gathered` });
+
   const calendarVersions: CalendarVersionRecord[] = [];
 
+  logAndEmit(onProgress, { phase: "planner", status: "start", iteration: 1 });
   let calendar = await runPlanner(apiKey, normalizedRequest, interpreterOutput, agentViews, 1);
+  logAndEmit(onProgress, { phase: "planner", status: "done", iteration: 1, summary: `${calendar.days?.length ?? 0} day(s) drafted` });
+
   let finalRecord: CalendarVersionRecord | null = null;
   let stopReason = "";
 
   for (let iteration = 0; iteration < normalizedRequest.maxIterations; iteration += 1) {
-    calendar = normalizeCalendar(calendar, iteration + 1, interpreterOutput, normalizedRequest);
-    const critiques = normalizeCritiques(
-      await runCritiques(apiKey, normalizedRequest, interpreterOutput, agentViews, calendar),
-      calendar.calendar_version
-    );
-    const validation = validateCalendar(calendar, interpreterOutput);
+    const version = iteration + 1;
+    calendar = normalizeCalendar(calendar, version, interpreterOutput, normalizedRequest);
+
+    logAndEmit(onProgress, { phase: "critique", status: "start", iteration: version });
+    const rawCritiques = await runCritiques(apiKey, normalizedRequest, interpreterOutput, agentViews, calendar);
+    const critiques = normalizeCritiques(rawCritiques, calendar.calendar_version);
     const approvals = countApprovals(critiques);
     const hasCritical = hasCriticalCritique(critiques);
+    logAndEmit(onProgress, {
+      phase: "critique",
+      status: "done",
+      iteration: version,
+      summary: `${approvals}/${AGENTS.length} approvals${hasCritical ? " · critical issues raised" : ""}`
+    });
+
+    const validation = validateCalendar(calendar, interpreterOutput);
+    logAndEmit(onProgress, {
+      phase: "validate",
+      status: "done",
+      iteration: version,
+      summary: validation.valid ? "constraints ok" : `${validation.violations.length} violation(s)`
+    });
 
     const record: CalendarVersionRecord = {
       calendar,
@@ -90,26 +139,30 @@ export async function runPlanningPipeline(request: PlanningRequest): Promise<Pla
     if (validation.valid && !hasCritical && approvals >= normalizedRequest.quorum) {
       finalRecord = record;
       stopReason = `Accepted by ${approvals}/${AGENTS.length} agents with no critical critiques.`;
+      logAndEmit(onProgress, { phase: "decision", status: "done", iteration: version, summary: stopReason });
       break;
     }
 
     if (iteration < normalizedRequest.maxIterations - 1) {
+      logAndEmit(onProgress, { phase: "planner", status: "start", iteration: version + 1, summary: "revising based on critiques" });
       calendar = await runPlanner(
         apiKey,
         normalizedRequest,
         interpreterOutput,
         agentViews,
-        iteration + 2,
+        version + 1,
         calendar,
         critiques,
         validation
       );
+      logAndEmit(onProgress, { phase: "planner", status: "done", iteration: version + 1, summary: `${calendar.days?.length ?? 0} day(s) drafted` });
     }
   }
 
   if (!finalRecord) {
     finalRecord = chooseBestCalendarVersion(calendarVersions);
     stopReason = "Maximum iterations reached. Selected best available calendar.";
+    logAndEmit(onProgress, { phase: "decision", status: "done", summary: stopReason });
   }
 
   const resultWithoutExports = {
@@ -125,13 +178,16 @@ export async function runPlanningPipeline(request: PlanningRequest): Promise<Pla
     validation: finalRecord.validation
   };
 
-  return {
+  const finalResult = {
     ...resultWithoutExports,
     exports: {
       json: createJsonExport(resultWithoutExports),
       ics: createIcsExport(finalRecord.calendar)
     }
   };
+
+  logAndEmit(onProgress, { phase: "complete", status: "done", summary: stopReason });
+  return finalResult;
 }
 
 async function runInterpreter(apiKey: string, request: ResolvedRequest): Promise<InterpreterOutput> {
@@ -165,10 +221,12 @@ async function runInterpreter(apiKey: string, request: ResolvedRequest): Promise
 async function runSpecialists(
   apiKey: string,
   request: ResolvedRequest,
-  interpreterOutput: InterpreterOutput
+  interpreterOutput: InterpreterOutput,
+  onProgress: ProgressCallback = noopProgress
 ): Promise<SpecialistAgentView[]> {
   return Promise.all(
     AGENTS.map(async (agent) => {
+      logAndEmit(onProgress, { phase: "specialist", status: "start", agent });
       const user = [
         `Agent: ${agent}`,
         `Quorum requirement: ${request.quorum}`,
@@ -189,7 +247,9 @@ async function runSpecialists(
         schema: specialistSchema
       });
 
-      return normalizeSpecialist(output, agent, interpreterOutput);
+      const view = normalizeSpecialist(output, agent, interpreterOutput);
+      logAndEmit(onProgress, { phase: "specialist", status: "done", agent });
+      return view;
     })
   );
 }

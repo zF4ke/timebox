@@ -180,9 +180,31 @@ export interface PlanningResult {
   };
 }
 
+export type ProgressPhase =
+  | "interpreter"
+  | "specialist"
+  | "planner"
+  | "critique"
+  | "validate"
+  | "decision"
+  | "complete"
+  | "error";
+
+export type ProgressStatus = "start" | "done";
+
+export interface ProgressEvent {
+  phase: ProgressPhase;
+  status: ProgressStatus;
+  iteration?: number;
+  agent?: string;
+  summary?: string;
+  timestamp: string;
+}
+
 export interface PlannerApi {
   runPlanner(request: PlanningRequest): Promise<PlanningResult>;
   getDefaults(): Promise<PlannerDefaults>;
+  onProgress(cb: (event: ProgressEvent) => void): () => void;
 }
 
 declare global {

@@ -174,6 +174,127 @@ code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
+/* ---------- Running view ---------- */
+
+.composer.running {
+  max-width: 540px;
+  animation: fade-in 240ms ease;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 4px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px 4px;
+  border-bottom: 1px solid transparent;
+  transition: opacity 200ms ease, transform 200ms ease;
+  animation: slide-in 220ms ease both;
+}
+
+.step-pending { opacity: 0.5; }
+.step-active  { opacity: 1; }
+.step-done    { opacity: 0.85; }
+.step-error   { opacity: 1; }
+
+.step-icon {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  color: var(--fg);
+}
+
+.step-done .step-icon { color: #15803d; }
+.step-error .step-icon { color: var(--err-fg); }
+
+.dot-pending {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border-strong);
+}
+
+.x-icon {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--border-strong);
+  border-top-color: var(--fg);
+  border-radius: 50%;
+  animation: spin 700ms linear infinite;
+}
+
+.step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.step-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.step-active .step-title {
+  color: var(--fg);
+}
+
+.step-time {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.step-summary {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.4;
+  animation: fade-in 200ms ease;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 /* ---------- Result view ---------- */
 
 .result-shell {

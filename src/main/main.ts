@@ -2,7 +2,7 @@ import { app, BrowserWindow, ipcMain } from "electron";
 import path from "node:path";
 import dotenv from "dotenv";
 import { getPlannerDefaults, runPlanningPipeline } from "./planner";
-import type { PlanningRequest } from "../shared/types";
+import type { PlanningRequest, ProgressEvent } from "../shared/types";
 
 dotenv.config({ path: path.join(__dirname, "../../.env") });
 
@@ -31,8 +31,28 @@ function createWindow(): void {
   }
 }
 
-ipcMain.handle("planner:run", async (_event, request: PlanningRequest) => {
-  return runPlanningPipeline(request);
+ipcMain.handle("planner:run", async (event, request: PlanningRequest) => {
+  try {
+    return await runPlanningPipeline(request, (ev) => {
+      const payload: ProgressEvent = { ...ev, timestamp: new Date().toISOString() };
+      if (!event.sender.isDestroyed()) {
+        event.sender.send("planner:progress", payload);
+      }
+    });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error(`[planner] error — ${message}`);
+    if (!event.sender.isDestroyed()) {
+      const payload: ProgressEvent = {
+        phase: "error",
+        status: "done",
+        summary: message,
+        timestamp: new Date().toISOString()
+      };
+      event.sender.send("planner:progress", payload);
+    }
+    throw err;
+  }
 });
 
 ipcMain.handle("planner:defaults", async () => {
