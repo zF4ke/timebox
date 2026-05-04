@@ -208,9 +208,11 @@ export default function App() {
     plannerMutation.mutate(request);
   }
 
-  function handleSettingsChange(next: AppConfig) {
+  async function handleSettingsChange(next: AppConfig) {
     setSettings(next);
-    void window.plannerApi.setConfig(next);
+    await window.plannerApi.setConfig(next);
+    const d = await window.plannerApi.getDefaults();
+    setDefaults(d);
   }
 
   async function cancelPlanner() {
