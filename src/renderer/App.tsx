@@ -90,8 +90,12 @@ export default function App() {
   const [savePromptOpen, setSavePromptOpen] = useState(false);
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
   const [pendingDelete, setPendingDelete] = useState<SavedCalendar | null>(null);
+  const [duplicateSavePending, setDuplicateSavePending] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const dragCount = useRef(0);
+  const activeRunGeneration = useRef(0);
+  const cancelledRunGeneration = useRef<number | null>(null);
+  const [cancelledGeneration, setCancelledGeneration] = useState<number | null>(null);
 
   useEffect(() => {
     window.plannerApi.getDefaults().then(setDefaults);
@@ -103,6 +107,8 @@ export default function App() {
 
   useEffect(() => {
     return window.plannerApi.onProgress((ev) => {
+      if (ev.clientRunId && ev.clientRunId !== String(activeRunGeneration.current)) return;
+      if (cancelledRunGeneration.current === activeRunGeneration.current) return;
       setSteps((prev) => applyProgress(prev, ev));
     });
   }, []);
@@ -158,14 +164,20 @@ export default function App() {
     };
   }, []);
 
-  function refreshSaved() {
-    window.plannerApi.listCalendars().then(setSaved);
+  async function refreshSaved() {
+    const calendars = await window.plannerApi.listCalendars();
+    setSaved(calendars);
+    return calendars;
   }
 
   const plannerMutation = useMutation({
-    mutationFn: (request: PlanningRequest) => window.plannerApi.runPlanner(request),
-    onSuccess: (res) => {
+    mutationFn: ({ request, generation }: { request: PlanningRequest; generation: number }) =>
+      window.plannerApi.runPlanner(request, String(generation)),
+    onSuccess: (res, variables) => {
+      if (variables.generation !== activeRunGeneration.current) return;
+      if (cancelledRunGeneration.current === variables.generation) return;
       setResult(res);
+      void refreshSaved();
     }
   });
 
@@ -197,15 +209,29 @@ export default function App() {
     );
   }, [result, taskNameMap]);
 
-  const isRunning = plannerMutation.isPending;
-  const error = plannerMutation.error instanceof Error ? plannerMutation.error.message : "";
+  const isRunning = plannerMutation.isPending && cancelledGeneration !== activeRunGeneration.current;
+  const error =
+    cancelledGeneration !== activeRunGeneration.current && plannerMutation.error instanceof Error
+      ? plannerMutation.error.message
+      : "";
   const initialDate = result?.finalCalendar.planning_window.start_date ?? new Date().toISOString().slice(0, 10);
+  const savedCurrentResult = useMemo(() => {
+    if (!result) return null;
+    return saved.find((calendar) => calendar.result.runId === result.runId) ?? null;
+  }, [result, saved]);
+  const displayedSaveStatus = saveStatus === "idle" && savedCurrentResult ? "saved" : saveStatus;
 
   function runPlanner() {
+    activeRunGeneration.current += 1;
+    cancelledRunGeneration.current = null;
+    setCancelledGeneration(null);
     setResult(null);
     setSteps([]);
+    setSaveStatus("idle");
+    setDuplicateSavePending(false);
+    plannerMutation.reset();
     const request: PlanningRequest = { userInput, quorum: settings.quorum, model: settings.model };
-    plannerMutation.mutate(request);
+    plannerMutation.mutate({ request, generation: activeRunGeneration.current });
   }
 
   async function handleSettingsChange(next: AppConfig) {
@@ -215,13 +241,22 @@ export default function App() {
     setDefaults(d);
   }
 
-  async function cancelPlanner() {
-    await window.plannerApi.cancelPlanner();
+  function cancelPlanner() {
+    const generation = activeRunGeneration.current;
+    cancelledRunGeneration.current = generation;
+    setCancelledGeneration(generation);
+    setSteps([]);
+    plannerMutation.reset();
+    void window.plannerApi.cancelPlanner().catch((err) => {
+      console.error("Cancel failed:", err);
+    });
   }
 
   function reset() {
     setResult(null);
     setSteps([]);
+    setSaveStatus("idle");
+    setDuplicateSavePending(false);
     plannerMutation.reset();
   }
 
@@ -238,6 +273,8 @@ export default function App() {
     if (loaded) {
       setResult(loaded.result);
       setSteps([]);
+      setSaveStatus("idle");
+      setDuplicateSavePending(false);
       plannerMutation.reset();
       setSidebarOpen(false);
     }
@@ -256,16 +293,30 @@ export default function App() {
 
   function handleSave() {
     if (!result) return;
+    if (savedCurrentResult) {
+      setDuplicateSavePending(true);
+      return;
+    }
+    openSavePrompt();
+  }
+
+  function openSavePrompt() {
     setSaveStatus("idle");
     setSavePromptOpen(true);
+  }
+
+  function handleConfirmDuplicateSave() {
+    setDuplicateSavePending(false);
+    openSavePrompt();
   }
 
   async function handleConfirmSave(name: string) {
     if (!result) return;
     setSaveStatus("saving");
-    await window.plannerApi.saveCalendar(name, result);
+    const savedCalendar = await window.plannerApi.saveCalendar(name, result);
+    setSaved((prev) => [savedCalendar, ...prev]);
     setSaveStatus("saved");
-    refreshSaved();
+    void refreshSaved();
     setTimeout(() => {
       setSavePromptOpen(false);
       setSaveStatus("idle");
@@ -283,7 +334,7 @@ export default function App() {
         initialDate={initialDate}
         onReset={reset}
         onSave={handleSave}
-        saveStatus={saveStatus}
+        saveStatus={displayedSaveStatus}
         taskNameMap={taskNameMap}
         onOpenSettings={() => setSettingsOpen(true)}
       />
@@ -294,7 +345,6 @@ export default function App() {
         userInput={userInput}
         setUserInput={setUserInput}
         defaults={defaults}
-        settings={settings}
         error={error}
         onRun={runPlanner}
       />
@@ -342,6 +392,16 @@ export default function App() {
           variant="danger"
           onConfirm={handleConfirmDelete}
           onCancel={() => setPendingDelete(null)}
+        />
+      )}
+
+      {duplicateSavePending && (
+        <ConfirmModal
+          title="Save another copy?"
+          message={`"${savedCurrentResult?.name ?? "This plan"}" is already saved. Saving again will create a duplicate copy.`}
+          confirmLabel="Save another copy"
+          onConfirm={handleConfirmDuplicateSave}
+          onCancel={() => setDuplicateSavePending(false)}
         />
       )}
 
@@ -449,17 +509,25 @@ function ComposerView({
   userInput,
   setUserInput,
   defaults,
-  settings,
   error,
   onRun
 }: {
   userInput: string;
   setUserInput: (v: string) => void;
   defaults: PlannerDefaults | null;
-  settings: AppConfig;
   error: string;
   onRun: () => void;
 }) {
+  const [isPlanning, setIsPlanning] = useState(false);
+
+  function handleRun() {
+    if (isPlanning) return;
+    setIsPlanning(true);
+    setTimeout(() => {
+      onRun();
+    }, 400);
+  }
+
   return (
     <main className="shell">
       <div className="composer">
@@ -472,15 +540,23 @@ function ComposerView({
           onChange={(e) => setUserInput(e.target.value)}
           placeholder="e.g. I have a DB lab due Tuesday..."
           spellCheck={false}
+          disabled={isPlanning}
         />
 
         <div className="row row-end">
           <button
-            className="run"
-            onClick={onRun}
-            disabled={!userInput.trim() || !defaults?.hasApiKey}
+            className={`run ${isPlanning ? "planning" : ""}`}
+            onClick={handleRun}
+            disabled={!userInput.trim() || !defaults?.hasApiKey || isPlanning}
           >
-            Plan my week
+            {isPlanning ? (
+              <>
+                <span className="btn-spinner" />
+                <span>Planning…</span>
+              </>
+            ) : (
+              "Plan my week"
+            )}
           </button>
         </div>
 
@@ -497,6 +573,15 @@ function ComposerView({
 function RunningView({ steps, onCancel }: { steps: StepItem[]; onCancel: () => void }) {
   const errorStep = steps.find((s) => s.status === "error");
   const reversed = useMemo(() => [...steps].reverse(), [steps]);
+  const [isStopping, setIsStopping] = useState(false);
+
+  function handleCancel() {
+    if (isStopping) return;
+    setIsStopping(true);
+    setTimeout(() => {
+      onCancel();
+    }, 400);
+  }
 
   return (
     <main className="shell">
@@ -509,8 +594,19 @@ function RunningView({ steps, onCancel }: { steps: StepItem[]; onCancel: () => v
             </p>
           </div>
           {!errorStep && (
-            <button className="cancel-btn" onClick={onCancel}>
-              Cancel run
+            <button
+              className={`cancel-btn ${isStopping ? "stopping" : ""}`}
+              onClick={handleCancel}
+              disabled={isStopping}
+            >
+              {isStopping ? (
+                <>
+                  <span className="btn-spinner" />
+                  <span>Stopping…</span>
+                </>
+              ) : (
+                "Cancel run"
+              )}
             </button>
           )}
         </div>

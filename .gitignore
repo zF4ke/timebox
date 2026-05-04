@@ -2,6 +2,7 @@ node_modules/
 dist-electron/
 dist-renderer/
 release/
+dist-release/
 .vite/
 *.log
 .env

@@ -47,13 +47,13 @@ function createWindow(): void {
   }
 }
 
-ipcMain.handle("planner:run", async (event, request: PlanningRequest) => {
+ipcMain.handle("planner:run", async (event, request: PlanningRequest, clientRunId?: string) => {
   activePlannerController?.abort();
   const controller = new AbortController();
   activePlannerController = controller;
   try {
     return await runPlanningPipeline(request, (ev) => {
-      const payload: ProgressEvent = { ...ev, timestamp: new Date().toISOString() };
+      const payload: ProgressEvent = { ...ev, clientRunId, timestamp: new Date().toISOString() };
       if (!event.sender.isDestroyed()) {
         event.sender.send("planner:progress", payload);
       }
@@ -63,6 +63,7 @@ ipcMain.handle("planner:run", async (event, request: PlanningRequest) => {
     console.error(`[planner] error — ${message}`);
     if (!event.sender.isDestroyed()) {
       const payload: ProgressEvent = {
+        clientRunId,
         phase: "error",
         status: "done",
         summary: message,

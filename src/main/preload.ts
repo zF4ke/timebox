@@ -11,8 +11,8 @@ import type {
 
 
 const api: PlannerApi = {
-  runPlanner(request: PlanningRequest): Promise<PlanningResult> {
-    return ipcRenderer.invoke("planner:run", request) as Promise<PlanningResult>;
+  runPlanner(request: PlanningRequest, clientRunId?: string): Promise<PlanningResult> {
+    return ipcRenderer.invoke("planner:run", request, clientRunId) as Promise<PlanningResult>;
   },
   cancelPlanner(): Promise<void> {
     return ipcRenderer.invoke("planner:cancel") as Promise<void>;

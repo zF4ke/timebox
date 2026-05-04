@@ -191,6 +191,7 @@ export type ProgressPhase =
 export type ProgressStatus = "start" | "done";
 
 export interface ProgressEvent {
+  clientRunId?: string;
   phase: ProgressPhase;
   status: ProgressStatus;
   iteration?: number;
@@ -214,7 +215,7 @@ export interface AppConfig {
 }
 
 export interface PlannerApi {
-  runPlanner(request: PlanningRequest): Promise<PlanningResult>;
+  runPlanner(request: PlanningRequest, clientRunId?: string): Promise<PlanningResult>;
   cancelPlanner(): Promise<void>;
   getDefaults(): Promise<PlannerDefaults>;
   onProgress(cb: (event: ProgressEvent) => void): () => void;
