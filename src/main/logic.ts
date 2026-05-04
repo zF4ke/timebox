@@ -27,9 +27,6 @@ function compareCalendarVersions(a: CalendarVersionRecord, b: CalendarVersionRec
   const aMajor = countSeverity(a, "major");
   const bMajor = countSeverity(b, "major");
 
-  if (a.validation.valid !== b.validation.valid) {
-    return a.validation.valid ? 1 : -1;
-  }
   if (aCritical !== bCritical) {
     return bCritical - aCritical;
   }

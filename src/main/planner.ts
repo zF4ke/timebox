@@ -27,19 +27,14 @@ function logAndEmit(emit: ProgressCallback, ev: Omit<ProgressEvent, "timestamp">
   }
   emit(ev);
 }
+import { saveRunLog } from "./debug";
 import { createIcsExport, createJsonExport } from "./exports";
+import { saveCalendar } from "./storage";
 import { countApprovals, chooseBestCalendarVersion, hasCriticalCritique } from "./logic";
 import { callOpenRouterJson } from "./openrouter";
-import { calendarSchema, critiqueBundleSchema, interpreterSchema, specialistSchema } from "./schemas";
+import { AGENT_NAMES, AGENT_PROMPTS, BASE_SYSTEM_PROMPT } from "./prompts";
+import { calendarSchema, critiqueSchema, interpreterSchema, specialistSchema } from "./schemas";
 import { validateCalendar } from "./validation";
-
-const AGENTS: AgentName[] = [
-  "Deadline Agent",
-  "Grade Agent",
-  "Effort Agent",
-  "Wellbeing Agent",
-  "Risk Agent"
-];
 
 interface ResolvedRequest extends Required<Omit<PlanningRequest, "planningWindowOverride">> {
   planningWindowOverride?: PlanningRequest["planningWindowOverride"];
@@ -47,30 +42,25 @@ interface ResolvedRequest extends Required<Omit<PlanningRequest, "planningWindow
 
 export function getPlannerDefaults(): PlannerDefaults {
   return {
-    quorum: clampInteger(parseNumber(process.env.PLANNER_QUORUM, 3), 1, 5),
+    quorum: clampInteger(parseNumber(process.env.PLANNER_QUORUM, 5), 1, 5),
     maxIterations: clampInteger(parseNumber(process.env.PLANNER_MAX_ITERATIONS, 3), 1, 5),
     timezone: process.env.PLANNER_TIMEZONE?.trim() || "Europe/Lisbon",
     model: process.env.OPENROUTER_MODEL?.trim() || "openai/gpt-4o-mini",
-    defaultDailyAvailabilityHours: Math.max(0.5, parseNumber(process.env.PLANNER_DAILY_HOURS, 4)),
     hasApiKey: Boolean(process.env.OPENROUTER_API_KEY?.trim())
   };
 }
 
-function parseNumber(value: string | undefined, fallback: number): number {
+function parseNumber(value: string | undefined, defaultValue: number): number {
   const parsed = Number(value);
-  return Number.isFinite(parsed) && parsed > 0 ? parsed : fallback;
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : defaultValue;
 }
 
-const BASE_SYSTEM_PROMPT = [
-  "You are part of a multi-agent student calendar planner prototype.",
-  "Return JSON only. Do not include markdown.",
-  "Use concrete ISO date strings. Calendar blocks must have absolute ISO start and end datetimes.",
-  "Preserve uncertainty instead of inventing fake precision."
-].join(" ");
+
 
 export async function runPlanningPipeline(
   request: PlanningRequest,
-  onProgress: ProgressCallback = noopProgress
+  onProgress: ProgressCallback = noopProgress,
+  signal?: AbortSignal
 ): Promise<PlanningResult> {
   const apiKey = process.env.OPENROUTER_API_KEY;
   if (!apiKey) {
@@ -83,21 +73,24 @@ export async function runPlanningPipeline(
   console.log(`[planner] run ${runId} starting · model=${normalizedRequest.model} · quorum=${normalizedRequest.quorum} · maxIter=${normalizedRequest.maxIterations}`);
 
   logAndEmit(onProgress, { phase: "interpreter", status: "start" });
-  const interpreterOutput = await runInterpreter(apiKey, normalizedRequest);
+  throwIfCancelled(signal);
+  const interpreterOutput = await runInterpreter(apiKey, normalizedRequest, signal);
   logAndEmit(onProgress, {
     phase: "interpreter",
     status: "done",
-    summary: `${interpreterOutput.tasks.length} task(s), window ${interpreterOutput.planning_window.start_date} → ${interpreterOutput.planning_window.end_date}`
+    summary: `${interpreterOutput.tasks.length} task(s), window ${formatWindow(interpreterOutput.planning_window.start_date, interpreterOutput.planning_window.end_date)}`
   });
 
-  logAndEmit(onProgress, { phase: "specialist", status: "start", summary: `${AGENTS.length} agents in parallel` });
-  const agentViews = await runSpecialists(apiKey, normalizedRequest, interpreterOutput, onProgress);
+  logAndEmit(onProgress, { phase: "specialist", status: "start", summary: `${AGENT_NAMES.length} agents in parallel` });
+  throwIfCancelled(signal);
+  const agentViews = await runSpecialists(apiKey, normalizedRequest, interpreterOutput, onProgress, signal);
   logAndEmit(onProgress, { phase: "specialist", status: "done", summary: `${agentViews.length} perspectives gathered` });
 
   const calendarVersions: CalendarVersionRecord[] = [];
 
   logAndEmit(onProgress, { phase: "planner", status: "start", iteration: 1 });
-  let calendar = await runPlanner(apiKey, normalizedRequest, interpreterOutput, agentViews, 1);
+  throwIfCancelled(signal);
+  let calendar = await runPlanner(apiKey, normalizedRequest, interpreterOutput, agentViews, 1, undefined, undefined, signal);
   logAndEmit(onProgress, { phase: "planner", status: "done", iteration: 1, summary: `${calendar.days?.length ?? 0} day(s) drafted` });
 
   let finalRecord: CalendarVersionRecord | null = null;
@@ -105,26 +98,29 @@ export async function runPlanningPipeline(
 
   for (let iteration = 0; iteration < normalizedRequest.maxIterations; iteration += 1) {
     const version = iteration + 1;
-    calendar = normalizeCalendar(calendar, version, interpreterOutput, normalizedRequest);
+    calendar = normalizeCalendar(calendar, version);
 
-    logAndEmit(onProgress, { phase: "critique", status: "start", iteration: version });
-    const rawCritiques = await runCritiques(apiKey, normalizedRequest, interpreterOutput, agentViews, calendar);
+    throwIfCancelled(signal);
+    const rawCritiques = await runCritiques(
+      apiKey,
+      normalizedRequest,
+      interpreterOutput,
+      agentViews,
+      calendar,
+      onProgress,
+      signal
+    );
     const critiques = normalizeCritiques(rawCritiques, calendar.calendar_version);
     const approvals = countApprovals(critiques);
     const hasCritical = hasCriticalCritique(critiques);
-    logAndEmit(onProgress, {
-      phase: "critique",
-      status: "done",
-      iteration: version,
-      summary: `${approvals}/${AGENTS.length} approvals${hasCritical ? " · critical issues raised" : ""}`
-    });
+    console.log(`[planner] critique v${version} summary — ${approvals}/${AGENT_NAMES.length} approvals${hasCritical ? " · critical issues raised" : ""}`);
 
     const validation = validateCalendar(calendar, interpreterOutput);
     logAndEmit(onProgress, {
       phase: "validate",
       status: "done",
       iteration: version,
-      summary: validation.valid ? "constraints ok" : `${validation.violations.length} violation(s)`
+      summary: validation.valid ? "constraints ok" : `${validation.violations.length} logged issue(s)`
     });
 
     const record: CalendarVersionRecord = {
@@ -136,15 +132,16 @@ export async function runPlanningPipeline(
     };
     calendarVersions.push(record);
 
-    if (validation.valid && !hasCritical && approvals >= normalizedRequest.quorum) {
+    if (!hasCritical && approvals >= normalizedRequest.quorum) {
       finalRecord = record;
-      stopReason = `Accepted by ${approvals}/${AGENTS.length} agents with no critical critiques.`;
+      stopReason = `Accepted by ${approvals}/${AGENT_NAMES.length} agents with no critical critiques.`;
       logAndEmit(onProgress, { phase: "decision", status: "done", iteration: version, summary: stopReason });
       break;
     }
 
     if (iteration < normalizedRequest.maxIterations - 1) {
       logAndEmit(onProgress, { phase: "planner", status: "start", iteration: version + 1, summary: "revising based on critiques" });
+      throwIfCancelled(signal);
       calendar = await runPlanner(
         apiKey,
         normalizedRequest,
@@ -153,7 +150,7 @@ export async function runPlanningPipeline(
         version + 1,
         calendar,
         critiques,
-        validation
+        signal
       );
       logAndEmit(onProgress, { phase: "planner", status: "done", iteration: version + 1, summary: `${calendar.days?.length ?? 0} day(s) drafted` });
     }
@@ -187,15 +184,25 @@ export async function runPlanningPipeline(
   };
 
   logAndEmit(onProgress, { phase: "complete", status: "done", summary: stopReason });
+
+  try {
+    saveRunLog(finalResult);
+    saveCalendar(
+      `Plan ${formatWindow(finalResult.finalCalendar.planning_window.start_date, finalResult.finalCalendar.planning_window.end_date)}`,
+      finalResult
+    );
+  } catch (err) {
+    console.error("[debug] failed to save run log or calendar:", err);
+  }
+
   return finalResult;
 }
 
-async function runInterpreter(apiKey: string, request: ResolvedRequest): Promise<InterpreterOutput> {
+async function runInterpreter(apiKey: string, request: ResolvedRequest, signal?: AbortSignal): Promise<InterpreterOutput> {
   const current = new Date();
   const user = [
     `Current datetime: ${current.toISOString()}`,
     `Timezone: ${request.timezone}`,
-    `Default daily availability: ${request.defaultDailyAvailabilityHours} hours`,
     request.planningWindowOverride?.startDate || request.planningWindowOverride?.endDate
       ? `Planning window override: ${JSON.stringify(request.planningWindowOverride)}`
       : "Planning window override: none",
@@ -203,7 +210,10 @@ async function runInterpreter(apiKey: string, request: ResolvedRequest): Promise
     "Student input:",
     request.userInput,
     "",
-    "Infer tasks, deadlines, planning window, availability, fixed commitments, student state, and assumptions."
+    "Infer tasks, deadlines, planning window, availability, fixed commitments, student state, and assumptions.",
+    "Infer daily availability from context (classes, work, energy levels, sleep). Do not assume a generic default.",
+    schemaInstruction("interpreter_output", interpreterSchema),
+    "If the input contains named assignments, quizzes, exams, labs, proposals, presentations, chores, or study work, create at least one task per named item."
   ].join("\n");
 
   const output = await callOpenRouterJson<InterpreterOutput>({
@@ -212,39 +222,50 @@ async function runInterpreter(apiKey: string, request: ResolvedRequest): Promise
     system: BASE_SYSTEM_PROMPT,
     user,
     schemaName: "interpreter_output",
-    schema: interpreterSchema
+    schema: interpreterSchema,
+    signal,
+    maxCompletionTokens: 2500,
+    timeoutMs: 65_000
   });
 
-  return normalizeInterpreter(output, request, current);
+  return normalizeInterpreter(output, request);
 }
 
 async function runSpecialists(
   apiKey: string,
   request: ResolvedRequest,
   interpreterOutput: InterpreterOutput,
-  onProgress: ProgressCallback = noopProgress
+  onProgress: ProgressCallback = noopProgress,
+  signal?: AbortSignal
 ): Promise<SpecialistAgentView[]> {
   return Promise.all(
-    AGENTS.map(async (agent) => {
+    AGENT_NAMES.map(async (agent) => {
+      throwIfCancelled(signal);
       logAndEmit(onProgress, { phase: "specialist", status: "start", agent });
       const user = [
         `Agent: ${agent}`,
+        `Specialist responsibility: ${AGENT_PROMPTS[agent]}`,
         `Quorum requirement: ${request.quorum}`,
         "Create your own independent interpretation of every task from your perspective.",
         "Do not flatten your perspective into a single score.",
+        "Return one task_view for every task_id from the interpreter output.",
+        schemaInstruction("specialist_agent_view", specialistSchema),
         "",
         `Student input:\n${request.userInput}`,
         "",
-        `Interpreter output:\n${JSON.stringify(interpreterOutput, null, 2)}`
+        `Interpreter output:\n${JSON.stringify(compactInterpreter(interpreterOutput), null, 2)}`
       ].join("\n");
 
       const output = await callOpenRouterJson<SpecialistAgentView>({
         apiKey,
         model: request.model,
-        system: `${BASE_SYSTEM_PROMPT} You are the ${agent}.`,
+        system: `${BASE_SYSTEM_PROMPT} You are the ${agent}. ${AGENT_PROMPTS[agent]}`,
         user,
         schemaName: "specialist_agent_view",
-        schema: specialistSchema
+        schema: specialistSchema,
+        signal,
+        maxCompletionTokens: 2000,
+        timeoutMs: 70_000
       });
 
       const view = normalizeSpecialist(output, agent, interpreterOutput);
@@ -262,27 +283,11 @@ async function runPlanner(
   version: number,
   previousCalendar?: CalendarProposal,
   critiques?: AgentCritique[],
-  validation?: ReturnType<typeof validateCalendar>
+  signal?: AbortSignal
 ): Promise<CalendarProposal> {
-  const user = [
-    `Create calendar version ${version}.`,
-    `Required quorum: ${request.quorum}`,
-    `Timezone: ${request.timezone}`,
-    "Each block must include id, task_id when applicable, task_name when applicable, type, ISO start, ISO end, duration_hours, description, and reasoning.",
-    "Respect the planning window, deadlines, daily available hours, and fixed commitments.",
-    "Include compromise reasoning so specialist agents can critique the actual tradeoffs.",
-    previousCalendar
-      ? `Previous calendar:\n${JSON.stringify(previousCalendar, null, 2)}`
-      : "No previous calendar.",
-    critiques ? `Previous critiques:\n${JSON.stringify(critiques, null, 2)}` : "No previous critiques.",
-    validation ? `Previous constraint validation:\n${JSON.stringify(validation, null, 2)}` : "No previous validation.",
-    "",
-    `Student input:\n${request.userInput}`,
-    "",
-    `Interpreter output:\n${JSON.stringify(interpreterOutput, null, 2)}`,
-    "",
-    `Specialist views:\n${JSON.stringify(agentViews, null, 2)}`
-  ].join("\n");
+  const user = version === 1
+    ? buildInitialPlannerPrompt(request, interpreterOutput, agentViews)
+    : buildRevisionPlannerPrompt(request, interpreterOutput, previousCalendar!, critiques!);
 
   return callOpenRouterJson<CalendarProposal>({
     apiKey,
@@ -290,7 +295,10 @@ async function runPlanner(
     system: `${BASE_SYSTEM_PROMPT} You are the Planner-Arbiter Agent.`,
     user,
     schemaName: "calendar_proposal",
-    schema: calendarSchema
+    schema: calendarSchema,
+    signal,
+    maxCompletionTokens: 5000,
+    timeoutMs: 90_000
   });
 }
 
@@ -299,94 +307,101 @@ async function runCritiques(
   request: ResolvedRequest,
   interpreterOutput: InterpreterOutput,
   agentViews: SpecialistAgentView[],
-  calendar: CalendarProposal
+  calendar: CalendarProposal,
+  onProgress: ProgressCallback = noopProgress,
+  signal?: AbortSignal
 ): Promise<AgentCritique[]> {
-  const user = [
-    "Every specialist agent must critique the calendar from its own perspective.",
-    "Return exactly one critique for each of: Deadline Agent, Grade Agent, Effort Agent, Wellbeing Agent, Risk Agent.",
-    "Approval values: approve, approve_with_minor_concerns, reject.",
-    "Severity values: none, minor, major, critical.",
-    "A critical critique blocks acceptance. approve and approve_with_minor_concerns count toward quorum.",
-    `Required quorum: ${request.quorum}`,
-    "",
-    `Interpreter output:\n${JSON.stringify(interpreterOutput, null, 2)}`,
-    "",
-    `Specialist views:\n${JSON.stringify(agentViews, null, 2)}`,
-    "",
-    `Calendar to critique:\n${JSON.stringify(calendar, null, 2)}`
-  ].join("\n");
+  return Promise.all(
+    AGENT_NAMES.map(async (agent) => {
+      throwIfCancelled(signal);
+      logAndEmit(onProgress, {
+        phase: "critique",
+        status: "start",
+        iteration: calendar.calendar_version,
+        agent
+      });
 
-  const bundle = await callOpenRouterJson<{ critiques: AgentCritique[] }>({
-    apiKey,
-    model: request.model,
-    system: `${BASE_SYSTEM_PROMPT} You are running the specialist critique round.`,
-    user,
-    schemaName: "critique_bundle",
-    schema: critiqueBundleSchema
-  });
+      const ownView = agentViews.find((v) => v.agent === agent);
+      const user = [
+        `You are the ${agent}. Critique the calendar from your own perspective only.`,
+        `Specialist responsibility: ${AGENT_PROMPTS[agent]}`,
+        "Approval values: approve, approve_with_minor_concerns, reject.",
+        "Severity values: none, minor, major, critical.",
+        "A critical critique blocks acceptance. approve and approve_with_minor_concerns count toward quorum.",
+        "If you reject, include concrete affected_tasks, affected_days, and suggested_fix.",
+        "If the planner addressed your earlier concerns, acknowledge that compromise instead of repeating the same objection.",
+        schemaInstruction("agent_critique", critiqueSchema),
+        `Required quorum: ${request.quorum}`,
+        "",
+        `Interpreter output:\n${JSON.stringify(compactInterpreter(interpreterOutput), null, 2)}`,
+        "",
+        `Your earlier view:\n${JSON.stringify(ownView ?? {}, null, 2)}`,
+        "",
+        `Calendar to critique:\n${JSON.stringify(compactCalendar(calendar), null, 2)}`
+      ].join("\n");
 
-  return bundle.critiques ?? [];
+      const critique = await callOpenRouterJson<AgentCritique>({
+        apiKey,
+        model: request.model,
+        system: `${BASE_SYSTEM_PROMPT} You are the ${agent} performing a critique round. ${AGENT_PROMPTS[agent]}`,
+        user,
+        schemaName: "agent_critique",
+        schema: critiqueSchema,
+        signal,
+        maxCompletionTokens: 1800,
+        timeoutMs: 65_000
+      });
+
+      const normalized: AgentCritique = { ...critique, agent };
+      logAndEmit(onProgress, {
+        phase: "critique",
+        status: "done",
+        iteration: calendar.calendar_version,
+        agent,
+        summary: critique.approval ?? "no approval returned"
+      });
+      return normalized;
+    })
+  );
 }
 
 function normalizeRequest(request: PlanningRequest): ResolvedRequest {
   const defaults = getPlannerDefaults();
   return {
     userInput: request.userInput.trim(),
-    quorum: clampInteger(request.quorum ?? defaults.quorum, 1, AGENTS.length),
+    quorum: clampInteger(request.quorum ?? defaults.quorum, 1, AGENT_NAMES.length),
     maxIterations: clampInteger(request.maxIterations ?? defaults.maxIterations, 1, 5),
     timezone: request.timezone?.trim() || defaults.timezone,
     model: request.model?.trim() || defaults.model,
-    defaultDailyAvailabilityHours: Math.max(
-      0.5,
-      request.defaultDailyAvailabilityHours || defaults.defaultDailyAvailabilityHours
-    ),
     planningWindowOverride: request.planningWindowOverride
   };
 }
 
 function normalizeInterpreter(
   output: InterpreterOutput,
-  request: ResolvedRequest,
-  current: Date
+  request: ResolvedRequest
 ): InterpreterOutput {
-  const currentDate = output.current_date || toIsoDate(current);
-  const startDate = request.planningWindowOverride?.startDate || output.planning_window?.start_date || toIsoDate(current);
-  const endDate =
-    request.planningWindowOverride?.endDate ||
-    output.planning_window?.end_date ||
-    addDaysIso(startDate, 7);
+  const startDate = request.planningWindowOverride?.startDate ?? output.planning_window.start_date;
+  const endDate = request.planningWindowOverride?.endDate ?? output.planning_window.end_date;
 
   return {
-    current_date: currentDate,
+    current_date: output.current_date,
     planning_window: {
       start_date: startDate,
       end_date: endDate,
-      reason: output.planning_window?.reason || "Inferred by the Interpreter Agent."
+      reason: output.planning_window.reason
     },
-    inferred_availability: ensureArray(output.inferred_availability).length
-      ? output.inferred_availability
-      : [
-          {
-            date_range: `${startDate} to ${endDate}`,
-            assumption: "Default daily availability was used because no explicit availability was inferred.",
-            estimated_available_hours_per_day: request.defaultDailyAvailabilityHours,
-            confidence: "low"
-          }
-        ],
-    fixed_commitments: ensureArray(output.fixed_commitments),
-    student_state: {
-      sleep: output.student_state?.sleep || "not specified",
-      energy: output.student_state?.energy || "not specified",
-      confidence: output.student_state?.confidence || "low"
-    },
-    tasks: ensureArray(output.tasks).map((task, index) => ({
-      task_id: task.task_id || `T${index + 1}`,
-      name: task.name || `Task ${index + 1}`,
-      raw_mentions: ensureArray(task.raw_mentions),
+    inferred_availability: output.inferred_availability,
+    fixed_commitments: output.fixed_commitments,
+    student_state: output.student_state,
+    tasks: output.tasks.map((task) => ({
+      task_id: task.task_id,
+      name: task.name,
+      raw_mentions: task.raw_mentions,
       inferred_deadline: task.inferred_deadline,
-      uncertainties: ensureArray(task.uncertainties)
+      uncertainties: task.uncertainties
     })),
-    assumptions: ensureArray(output.assumptions)
+    assumptions: output.assumptions
   };
 }
 
@@ -395,109 +410,244 @@ function normalizeSpecialist(
   agent: AgentName,
   interpreterOutput: InterpreterOutput
 ): SpecialistAgentView {
-  const views = ensureArray(output.task_views);
+  if (output.agent !== agent) {
+    throw new Error(`Specialist schema violation: expected ${agent}, received ${output.agent}.`);
+  }
+
   return {
     agent,
     task_views: interpreterOutput.tasks.map((task) => {
-      const view = views.find((candidate) => candidate.task_id === task.task_id);
+      const view = output.task_views.find((candidate) => candidate.task_id === task.task_id);
+      if (!view) {
+        throw new Error(`Specialist schema violation: ${agent} omitted task view for ${task.task_id}.`);
+      }
       return {
         task_id: task.task_id,
         task_name: task.name,
-        assessment: view?.assessment || "No detailed assessment returned.",
-        concerns: ensureArray(view?.concerns),
-        recommendations: ensureArray(view?.recommendations),
-        estimated_duration_hours: view?.estimated_duration_hours,
-        confidence: view?.confidence,
-        suggested_subtasks: ensureArray(view?.suggested_subtasks)
+        assessment: view.assessment,
+        concerns: view.concerns,
+        recommendations: view.recommendations,
+        estimated_duration_hours: view.estimated_duration_hours,
+        confidence: view.confidence,
+        suggested_subtasks: view.suggested_subtasks
       };
     }),
-    overall_comment: output.overall_comment || `${agent} completed its interpretation.`
+    overall_comment: output.overall_comment
   };
 }
 
-function normalizeCalendar(
-  calendar: CalendarProposal,
-  version: number,
-  interpreterOutput: InterpreterOutput,
-  request: ResolvedRequest
-): CalendarProposal {
+function normalizeCalendar(calendar: CalendarProposal, version: number): CalendarProposal {
   return {
     calendar_version: version,
-    planning_window: calendar.planning_window || interpreterOutput.planning_window,
-    overall_strategy: ensureArray(calendar.overall_strategy),
-    days: ensureArray(calendar.days).map((day) => ({
+    planning_window: calendar.planning_window,
+    overall_strategy: calendar.overall_strategy,
+    days: calendar.days.map((day) => ({
       date: day.date,
-      day_name: day.day_name || day.date,
-      assumed_available_hours: day.assumed_available_hours || request.defaultDailyAvailabilityHours,
-      day_reasoning: day.day_reasoning || "No day reasoning returned.",
-      blocks: ensureArray(day.blocks).map((block, index) => ({
-        ...block,
-        id: block.id || `v${version}-${day.date}-${index + 1}`,
-        type: block.type || (block.task_id ? "work" : "buffer"),
-        duration_hours: block.duration_hours || durationHours(block.start, block.end),
-        description: block.description || block.task_name || "Planned block",
-        reasoning: block.reasoning || "No block reasoning returned."
-      }))
+      day_name: day.day_name,
+      assumed_available_hours: day.assumed_available_hours,
+      day_reasoning: day.day_reasoning,
+      blocks: day.blocks
     })),
-    compromises: ensureArray(calendar.compromises),
-    known_weaknesses: ensureArray(calendar.known_weaknesses),
-    changes_from_previous: ensureArray(calendar.changes_from_previous),
-    unresolved_critiques: ensureArray(calendar.unresolved_critiques)
+    compromises: calendar.compromises,
+    known_weaknesses: calendar.known_weaknesses,
+    changes_from_previous: calendar.changes_from_previous,
+    unresolved_critiques: calendar.unresolved_critiques
   };
 }
 
 function normalizeCritiques(critiques: AgentCritique[], version: number): AgentCritique[] {
-  return AGENTS.map((agent) => {
+  return AGENT_NAMES.map((agent) => {
     const critique = critiques.find((candidate) => candidate.agent === agent);
+    if (!critique) {
+      throw new Error(`Critique schema violation: missing critique for ${agent}.`);
+    }
     return {
       agent,
       calendar_version: version,
-      approval: normalizeApproval(critique?.approval),
-      severity: normalizeSeverity(critique?.severity),
-      critiques: ensureArray(critique?.critiques).map((issue) => ({
-        issue: issue.issue || "No issue text returned.",
-        severity: normalizeSeverity(issue.severity),
-        affected_tasks: ensureArray(issue.affected_tasks),
-        affected_days: ensureArray(issue.affected_days),
-        suggested_fix: issue.suggested_fix || "No suggested fix returned."
-      })),
-      acknowledged_compromises: ensureArray(critique?.acknowledged_compromises),
-      overall_comment: critique?.overall_comment || `${agent} did not return a detailed critique.`
+      approval: critique.approval,
+      severity: critique.severity,
+      critiques: critique.critiques,
+      acknowledged_compromises: critique.acknowledged_compromises,
+      overall_comment: critique.overall_comment
     };
   });
-}
-
-function normalizeApproval(value: unknown): AgentCritique["approval"] {
-  return value === "approve" || value === "approve_with_minor_concerns" || value === "reject" ? value : "reject";
-}
-
-function normalizeSeverity(value: unknown): AgentCritique["severity"] {
-  return value === "none" || value === "minor" || value === "major" || value === "critical" ? value : "major";
-}
-
-function ensureArray<T>(value: T[] | undefined | null): T[] {
-  return Array.isArray(value) ? value : [];
 }
 
 function clampInteger(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, Math.round(Number(value) || min)));
 }
 
-function durationHours(start: string, end: string): number {
-  const startDate = new Date(start);
-  const endDate = new Date(end);
-  if (Number.isNaN(startDate.getTime()) || Number.isNaN(endDate.getTime())) {
-    return 1;
+function throwIfCancelled(signal?: AbortSignal): void {
+  if (signal?.aborted) {
+    throw new Error("Planner run cancelled.");
   }
-  return Math.max(0.25, (endDate.getTime() - startDate.getTime()) / 3_600_000);
 }
 
-function toIsoDate(date: Date): string {
-  return date.toISOString().slice(0, 10);
+function schemaInstruction(name: string, schema: Record<string, unknown>): string {
+  return [
+    `Output contract for ${name}:`,
+    JSON.stringify(schema),
+    "Do not omit required-looking top-level keys. Use empty arrays instead of missing arrays. Use null only if the schema allows null."
+  ].join("\n");
 }
 
-function addDaysIso(start: string, days: number): string {
-  const date = new Date(start);
-  date.setDate(date.getDate() + days);
-  return toIsoDate(date);
+function buildInitialPlannerPrompt(
+  request: ResolvedRequest,
+  interpreterOutput: InterpreterOutput,
+  agentViews: SpecialistAgentView[]
+): string {
+  return [
+    `Create calendar version 1.`,
+    `Required quorum: ${request.quorum}`,
+    `Timezone: ${request.timezone}`,
+    "Each block must include id, task_id, task_name, type, ISO start, ISO end, duration_hours, description, and reasoning.",
+    "Every work block MUST reference a real task_id from the interpreter output. Do not invent tasks.",
+    "Do NOT create buffer, break, or rest blocks. Unscheduled time in the calendar IS rest time by default. Only create work blocks for actual tasks from the interpreter output.",
+    "Do NOT create generic lifestyle blocks such as 'morning classes', 'dinner', 'decompression', 'commute', 'sleep', 'general buffer time', 'contingency buffer', or similar. Only create blocks for actual tasks from the interpreter output.",
+    "For each day, set assumed_available_hours realistically based on the inferred availability. The sum of ALL block durations on that day MUST NOT exceed assumed_available_hours.",
+    "Respect the planning window, deadlines, and fixed commitments.",
+    "Include compromise reasoning so specialist agents can critique the actual tradeoffs.",
+    "Create a usable calendar. If tasks exist, days must not be empty.",
+    "Prefer afternoon blocks when availability says morning classes. Keep blocks between 07:00 and 23:00 local time unless the user explicitly says otherwise.",
+    "Initial draft priority: schedule all inferred tasks before deadlines, and balance daily workload. Do NOT add buffer or break blocks — unscheduled time is implicitly rest.",
+    schemaInstruction("calendar_proposal", calendarSchema),
+    "",
+    `Student input:\n${request.userInput}`,
+    "",
+    `Interpreter output:\n${JSON.stringify(compactInterpreter(interpreterOutput), null, 2)}`,
+    "",
+    `Specialist views:\n${JSON.stringify(compactAgentViews(agentViews), null, 2)}`
+  ].join("\n");
+}
+
+function buildRevisionPlannerPrompt(
+  request: ResolvedRequest,
+  interpreterOutput: InterpreterOutput,
+  previousCalendar: CalendarProposal,
+  critiques: AgentCritique[]
+): string {
+  return [
+    `Create revised calendar version ${previousCalendar.calendar_version + 1}.`,
+    `Required quorum: ${request.quorum}`,
+    `Timezone: ${request.timezone}`,
+    "Each block must include id, task_id, task_name, type, ISO start, ISO end, duration_hours, description, and reasoning.",
+    "Every work block MUST reference a real task_id from the interpreter output. Do not invent tasks.",
+    "Do NOT create buffer, break, or rest blocks. Unscheduled time in the calendar IS rest time by default. Only create work blocks for actual tasks from the interpreter output.",
+    "Do NOT create generic lifestyle blocks such as 'morning classes', 'dinner', 'decompression', 'commute', 'sleep', 'general buffer time', 'contingency buffer', or similar. Only create blocks for actual tasks from the interpreter output.",
+    "For each day, set assumed_available_hours realistically. The sum of ALL block durations on that day MUST NOT exceed assumed_available_hours.",
+    "Respect the planning window, deadlines, and fixed commitments.",
+    "Include compromise reasoning so specialist agents can critique the actual tradeoffs.",
+    "Revision priority: address critical critiques first, then rejected/major critiques, while preserving approved parts. Do NOT add buffer or break blocks — unscheduled time is implicitly rest.",
+    schemaInstruction("calendar_proposal", calendarSchema),
+    "",
+    `Previous calendar:\n${JSON.stringify(compactCalendarForRevision(previousCalendar), null, 2)}`,
+    "",
+    `Critiques to address:\n${JSON.stringify(compactCritiquesForRevision(critiques), null, 2)}`,
+    "",
+    `Task list:\n${JSON.stringify(interpreterOutput.tasks.map((t) => ({ task_id: t.task_id, name: t.name, deadline: t.inferred_deadline })), null, 2)}`
+  ].join("\n");
+}
+
+function compactInterpreter(output: InterpreterOutput) {
+  return {
+    current_date: output.current_date,
+    planning_window: output.planning_window,
+    availability: output.inferred_availability,
+    fixed_commitments: output.fixed_commitments,
+    student_state: output.student_state,
+    tasks: output.tasks,
+    assumptions: output.assumptions
+  };
+}
+
+function compactAgentViews(agentViews: SpecialistAgentView[]) {
+  return agentViews.map((view) => ({
+    agent: view.agent,
+    overall_comment: view.overall_comment,
+    task_views: view.task_views.map((taskView) => ({
+      task_id: taskView.task_id,
+      task_name: taskView.task_name,
+      assessment: taskView.assessment,
+      estimated_duration_hours: taskView.estimated_duration_hours,
+      concerns: taskView.concerns.slice(0, 3),
+      recommendations: taskView.recommendations.slice(0, 3),
+      suggested_subtasks: taskView.suggested_subtasks?.slice(0, 5)
+    }))
+  }));
+}
+
+function compactCalendar(calendar: CalendarProposal) {
+  return {
+    calendar_version: calendar.calendar_version,
+    planning_window: calendar.planning_window,
+    overall_strategy: calendar.overall_strategy,
+    days: calendar.days.map((day) => ({
+      date: day.date,
+      assumed_available_hours: day.assumed_available_hours,
+      blocks: day.blocks.map((block) => ({
+        id: block.id,
+        task_id: block.task_id,
+        task_name: block.task_name,
+        type: block.type,
+        start: block.start,
+        end: block.end,
+        duration_hours: block.duration_hours,
+        description: block.description,
+        reasoning: block.reasoning
+      }))
+    })),
+    compromises: calendar.compromises,
+    known_weaknesses: calendar.known_weaknesses,
+    changes_from_previous: calendar.changes_from_previous,
+    unresolved_critiques: calendar.unresolved_critiques
+  };
+}
+
+function compactCalendarForRevision(calendar: CalendarProposal) {
+  return {
+    version: calendar.calendar_version,
+    days: calendar.days.map((day) => ({
+      date: day.date,
+      available_hours: day.assumed_available_hours,
+      total_scheduled: day.blocks.reduce((s, b) => s + (b.duration_hours || 0), 0),
+      blocks: day.blocks.map((b) => `${b.type}|${b.task_id ?? "-"}|${b.duration_hours}h|${b.description}`)
+    })),
+    strategy: calendar.overall_strategy,
+    compromises: calendar.compromises.map((c) => `${c.conflict} → ${c.resolution}`)
+  };
+}
+
+function compactCritiquesForRevision(critiques: AgentCritique[]) {
+  return critiques
+    .filter(
+      (c) =>
+        c.approval === "reject" ||
+        c.severity === "critical" ||
+        c.severity === "major" ||
+        c.critiques.some((i) => i.severity === "critical" || i.severity === "major")
+    )
+    .map((c) => ({
+      agent: c.agent,
+      approval: c.approval,
+      severity: c.severity,
+      top_issues: c.critiques
+        .filter((i) => i.severity === "critical" || i.severity === "major")
+        .map((i) => i.issue)
+        .slice(0, 3),
+      overall: c.overall_comment
+    }));
+}
+
+function formatWindow(start: string, end: string): string {
+  const s = new Date(start);
+  const e = new Date(end);
+  const sameYear = s.getFullYear() === e.getFullYear();
+  const fmt = (d: Date, includeYear: boolean) =>
+    d.toLocaleDateString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      ...(includeYear ? { year: "numeric" } : {})
+    });
+  return `${fmt(s, !sameYear)} → ${fmt(e, true)}`;
 }

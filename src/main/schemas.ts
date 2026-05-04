@@ -1,9 +1,21 @@
 export const interpreterSchema = {
   type: "object",
+  additionalProperties: false,
+  required: [
+    "current_date",
+    "planning_window",
+    "inferred_availability",
+    "fixed_commitments",
+    "student_state",
+    "tasks",
+    "assumptions"
+  ],
   properties: {
     current_date: { type: "string" },
     planning_window: {
       type: "object",
+      additionalProperties: false,
+      required: ["start_date", "end_date", "reason"],
       properties: {
         start_date: { type: "string" },
         end_date: { type: "string" },
@@ -14,6 +26,8 @@ export const interpreterSchema = {
       type: "array",
       items: {
         type: "object",
+        additionalProperties: false,
+        required: ["date_range", "assumption", "estimated_available_hours_per_day", "confidence"],
         properties: {
           date_range: { type: "string" },
           assumption: { type: "string" },
@@ -25,6 +39,8 @@ export const interpreterSchema = {
     fixed_commitments: { type: "array", items: { type: "string" } },
     student_state: {
       type: "object",
+      additionalProperties: false,
+      required: ["sleep", "energy", "confidence"],
       properties: {
         sleep: { type: "string" },
         energy: { type: "string" },
@@ -35,11 +51,13 @@ export const interpreterSchema = {
       type: "array",
       items: {
         type: "object",
+        additionalProperties: false,
+        required: ["task_id", "name", "raw_mentions", "inferred_deadline", "uncertainties"],
         properties: {
           task_id: { type: "string" },
           name: { type: "string" },
           raw_mentions: { type: "array", items: { type: "string" } },
-          inferred_deadline: { type: "string" },
+          inferred_deadline: { type: ["string", "null"] },
           uncertainties: { type: "array", items: { type: "string" } }
         }
       }
@@ -50,12 +68,25 @@ export const interpreterSchema = {
 
 export const specialistSchema = {
   type: "object",
+  additionalProperties: false,
+  required: ["agent", "task_views", "overall_comment"],
   properties: {
-    agent: { type: "string" },
+    agent: { type: "string", enum: ["Deadline Agent", "Grade Agent", "Effort Agent", "Wellbeing Agent", "Risk Agent"] },
     task_views: {
       type: "array",
       items: {
         type: "object",
+        additionalProperties: false,
+        required: [
+          "task_id",
+          "task_name",
+          "assessment",
+          "concerns",
+          "recommendations",
+          "estimated_duration_hours",
+          "confidence",
+          "suggested_subtasks"
+        ],
         properties: {
           task_id: { type: "string" },
           task_name: { type: "string" },
@@ -74,6 +105,17 @@ export const specialistSchema = {
 
 export const calendarSchema = {
   type: "object",
+  additionalProperties: false,
+  required: [
+    "calendar_version",
+    "planning_window",
+    "overall_strategy",
+    "days",
+    "compromises",
+    "known_weaknesses",
+    "changes_from_previous",
+    "unresolved_critiques"
+  ],
   properties: {
     calendar_version: { type: "number" },
     planning_window: interpreterSchema.properties.planning_window,
@@ -82,6 +124,8 @@ export const calendarSchema = {
       type: "array",
       items: {
         type: "object",
+        additionalProperties: false,
+        required: ["date", "day_name", "assumed_available_hours", "day_reasoning", "blocks"],
         properties: {
           date: { type: "string" },
           day_name: { type: "string" },
@@ -91,11 +135,23 @@ export const calendarSchema = {
             type: "array",
             items: {
               type: "object",
+              additionalProperties: false,
+              required: [
+                "id",
+                "task_id",
+                "task_name",
+                "type",
+                "start",
+                "end",
+                "duration_hours",
+                "description",
+                "reasoning"
+              ],
               properties: {
                 id: { type: "string" },
-                task_id: { type: "string" },
-                task_name: { type: "string" },
-                type: { type: "string" },
+                task_id: { type: ["string", "null"] },
+                task_name: { type: ["string", "null"] },
+                type: { type: "string", enum: ["work", "buffer", "fixed", "break"] },
                 start: { type: "string" },
                 end: { type: "string" },
                 duration_hours: { type: "number" },
@@ -111,6 +167,8 @@ export const calendarSchema = {
       type: "array",
       items: {
         type: "object",
+        additionalProperties: false,
+        required: ["conflict", "resolution"],
         properties: {
           conflict: { type: "string" },
           resolution: { type: "string" }
@@ -122,6 +180,8 @@ export const calendarSchema = {
       type: "array",
       items: {
         type: "object",
+        additionalProperties: false,
+        required: ["change", "reason"],
         properties: {
           change: { type: "string" },
           reason: { type: "string" }
@@ -132,9 +192,11 @@ export const calendarSchema = {
       type: "array",
       items: {
         type: "object",
+        additionalProperties: false,
+        required: ["agent", "severity", "issue", "planner_response"],
         properties: {
-          agent: { type: "string" },
-          severity: { type: "string" },
+          agent: { type: "string", enum: ["Deadline Agent", "Grade Agent", "Effort Agent", "Wellbeing Agent", "Risk Agent"] },
+          severity: { type: "string", enum: ["none", "minor", "major", "critical"] },
           issue: { type: "string" },
           planner_response: { type: "string" }
         }
@@ -143,35 +205,39 @@ export const calendarSchema = {
   }
 };
 
-export const critiqueBundleSchema = {
+export const critiqueSchema = {
   type: "object",
+  additionalProperties: false,
+  required: [
+    "agent",
+    "calendar_version",
+    "approval",
+    "severity",
+    "critiques",
+    "acknowledged_compromises",
+    "overall_comment"
+  ],
   properties: {
+    agent: { type: "string", enum: ["Deadline Agent", "Grade Agent", "Effort Agent", "Wellbeing Agent", "Risk Agent"] },
+    calendar_version: { type: "number" },
+    approval: { type: "string", enum: ["approve", "approve_with_minor_concerns", "reject"] },
+    severity: { type: "string", enum: ["none", "minor", "major", "critical"] },
     critiques: {
       type: "array",
       items: {
         type: "object",
+        additionalProperties: false,
+        required: ["issue", "severity", "affected_tasks", "affected_days", "suggested_fix"],
         properties: {
-          agent: { type: "string" },
-          calendar_version: { type: "number" },
-          approval: { type: "string" },
-          severity: { type: "string" },
-          critiques: {
-            type: "array",
-            items: {
-              type: "object",
-              properties: {
-                issue: { type: "string" },
-                severity: { type: "string" },
-                affected_tasks: { type: "array", items: { type: "string" } },
-                affected_days: { type: "array", items: { type: "string" } },
-                suggested_fix: { type: "string" }
-              }
-            }
-          },
-          acknowledged_compromises: { type: "array", items: { type: "string" } },
-          overall_comment: { type: "string" }
+          issue: { type: "string" },
+          severity: { type: "string", enum: ["none", "minor", "major", "critical"] },
+          affected_tasks: { type: "array", items: { type: "string" } },
+          affected_days: { type: "array", items: { type: "string" } },
+          suggested_fix: { type: "string" }
         }
       }
-    }
+    },
+    acknowledged_compromises: { type: "array", items: { type: "string" } },
+    overall_comment: { type: "string" }
   }
 };

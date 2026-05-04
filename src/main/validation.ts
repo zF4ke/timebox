@@ -4,7 +4,7 @@ export function validateCalendar(calendar: CalendarProposal, interpreterOutput: 
   const violations: ConstraintValidation["violations"] = [];
   const startWindow = parseDate(calendar.planning_window.start_date);
   const endWindow = parseEndWindow(calendar.planning_window.end_date);
-  const availability = new Map(calendar.days.map((day) => [day.date, day.assumed_available_hours]));
+  const taskIds = new Set(interpreterOutput.tasks.map((t) => t.task_id));
   const taskDeadlines = new Map<string, Date>();
   for (const task of interpreterOutput.tasks) {
     if (!task.inferred_deadline) {
@@ -30,17 +30,16 @@ export function validateCalendar(calendar: CalendarProposal, interpreterOutput: 
     if (!dayDate || (startWindow && dayDate < stripTime(startWindow)) || (endWindow && dayDate > stripTime(endWindow))) {
       violations.push({
         code: "day_outside_window",
-        message: `${day.date} is outside the planning window.`,
+        message: `${day.date} is outside the planning window ${calendar.planning_window.start_date} → ${calendar.planning_window.end_date}.`,
         severity: "error"
       });
     }
 
     const dailyHours = day.blocks.reduce((sum, block) => sum + Number(block.duration_hours || 0), 0);
-    const maxHours = availability.get(day.date) ?? day.assumed_available_hours;
-    if (dailyHours > maxHours + 0.01) {
+    if (dailyHours > day.assumed_available_hours + 0.01) {
       violations.push({
         code: "daily_availability_exceeded",
-        message: `${day.date} schedules ${dailyHours.toFixed(1)}h, above the assumed ${maxHours.toFixed(1)}h.`,
+        message: `${day.date} schedules ${dailyHours.toFixed(1)}h total, above the stated ${day.assumed_available_hours.toFixed(1)}h available. Reduce blocks or increase assumed_available_hours.`,
         severity: "error"
       });
     }
@@ -51,7 +50,7 @@ export function validateCalendar(calendar: CalendarProposal, interpreterOutput: 
       if (!blockStart || !blockEnd || blockEnd <= blockStart || block.duration_hours <= 0) {
         violations.push({
           code: "invalid_block_duration",
-          message: `${block.description || block.id} has an invalid time range or duration.`,
+          message: `${block.description || block.id} has an invalid time range or non-positive duration (${block.duration_hours}h).`,
           severity: "error"
         });
       }
@@ -72,13 +71,37 @@ export function validateCalendar(calendar: CalendarProposal, interpreterOutput: 
         });
       }
 
+      if (block.type === "buffer" || block.type === "break") {
+        violations.push({
+          code: "rest_block_not_allowed",
+          message: `Block "${block.description || block.id}" is a ${block.type} block. Rest/buffer blocks are not allowed — unscheduled time is implicitly rest.`,
+          severity: "error"
+        });
+      }
+
+      if (block.type === "work") {
+        if (!block.task_id) {
+          violations.push({
+            code: "work_block_missing_task",
+            message: `Work block "${block.description || block.id}" must have a task_id.`,
+            severity: "error"
+          });
+        } else if (!taskIds.has(block.task_id)) {
+          violations.push({
+            code: "unknown_task_id",
+            message: `Block references unknown task_id "${block.task_id}". Valid tasks: ${Array.from(taskIds).join(", ")}.`,
+            severity: "error"
+          });
+        }
+      }
+
       if (block.task_id) {
         blocksByTask.set(block.task_id, (blocksByTask.get(block.task_id) ?? 0) + 1);
         const deadline = taskDeadlines.get(block.task_id);
         if (deadline && blockEnd && blockEnd > deadline) {
           violations.push({
             code: "block_after_deadline",
-            message: `${block.task_name ?? block.task_id} has work scheduled after its deadline.`,
+            message: `${block.task_name ?? block.task_id} has work scheduled after its deadline (${deadline.toISOString()}).`,
             severity: "error"
           });
         }
@@ -93,6 +116,13 @@ export function validateCalendar(calendar: CalendarProposal, interpreterOutput: 
         message: `${taskId} has a deadline inside the planning window but no scheduled work block.`,
         severity: "error"
       });
+    }
+  }
+
+  if (violations.length > 0) {
+    console.log(`[validate] ${violations.length} violation(s):`);
+    for (const v of violations) {
+      console.log(`[validate]  - ${v.code}: ${v.message}`);
     }
   }
 

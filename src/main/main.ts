@@ -1,12 +1,16 @@
-import { app, BrowserWindow, ipcMain } from "electron";
+import { app, BrowserWindow, dialog, ipcMain } from "electron";
+import fs from "node:fs";
 import path from "node:path";
 import dotenv from "dotenv";
+import { importFromIcs, importFromJson } from "./import";
 import { getPlannerDefaults, runPlanningPipeline } from "./planner";
+import { deleteCalendar, listCalendars, loadCalendar, saveCalendar } from "./storage";
 import type { PlanningRequest, ProgressEvent } from "../shared/types";
 
 dotenv.config({ path: path.join(__dirname, "../../.env") });
 
 const isDev = Boolean(process.env.VITE_DEV_SERVER_URL);
+let activePlannerController: AbortController | null = null;
 
 function createWindow(): void {
   const win = new BrowserWindow({
@@ -32,13 +36,16 @@ function createWindow(): void {
 }
 
 ipcMain.handle("planner:run", async (event, request: PlanningRequest) => {
+  activePlannerController?.abort();
+  const controller = new AbortController();
+  activePlannerController = controller;
   try {
     return await runPlanningPipeline(request, (ev) => {
       const payload: ProgressEvent = { ...ev, timestamp: new Date().toISOString() };
       if (!event.sender.isDestroyed()) {
         event.sender.send("planner:progress", payload);
       }
-    });
+    }, controller.signal);
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     console.error(`[planner] error — ${message}`);
@@ -52,11 +59,55 @@ ipcMain.handle("planner:run", async (event, request: PlanningRequest) => {
       event.sender.send("planner:progress", payload);
     }
     throw err;
+  } finally {
+    if (activePlannerController === controller) {
+      activePlannerController = null;
+    }
   }
+});
+
+ipcMain.handle("planner:cancel", async () => {
+  activePlannerController?.abort();
 });
 
 ipcMain.handle("planner:defaults", async () => {
   return getPlannerDefaults();
+});
+
+ipcMain.handle("storage:list", async () => {
+  return listCalendars();
+});
+
+ipcMain.handle("storage:save", async (_event, name: string, result: unknown) => {
+  return saveCalendar(name, result as ReturnType<typeof runPlanningPipeline> extends Promise<infer R> ? R : never);
+});
+
+ipcMain.handle("storage:load", async (_event, id: string) => {
+  return loadCalendar(id);
+});
+
+ipcMain.handle("storage:delete", async (_event, id: string) => {
+  return deleteCalendar(id);
+});
+
+ipcMain.handle("storage:import", async () => {
+  const win = BrowserWindow.getFocusedWindow();
+  if (!win) return null;
+  const { filePaths } = await dialog.showOpenDialog(win, {
+    properties: ["openFile"],
+    filters: [
+      { name: "Calendar files", extensions: ["json", "ics"] },
+      { name: "JSON", extensions: ["json"] },
+      { name: "ICS", extensions: ["ics"] }
+    ]
+  });
+  if (!filePaths || filePaths.length === 0) return null;
+  const content = fs.readFileSync(filePaths[0], "utf-8");
+  const ext = path.extname(filePaths[0]).toLowerCase();
+  if (ext === ".ics") {
+    return importFromIcs(content);
+  }
+  return importFromJson(content);
 });
 
 app.whenReady().then(createWindow);

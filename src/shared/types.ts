@@ -19,7 +19,6 @@ export interface PlanningRequest {
   maxIterations?: number;
   timezone?: string;
   model?: string;
-  defaultDailyAvailabilityHours?: number;
   planningWindowOverride?: PlanningWindowOverride;
 }
 
@@ -28,7 +27,6 @@ export interface PlannerDefaults {
   maxIterations: number;
   timezone: string;
   model: string;
-  defaultDailyAvailabilityHours: number;
   hasApiKey: boolean;
 }
 
@@ -49,7 +47,7 @@ export interface TaskInfo {
   task_id: string;
   name: string;
   raw_mentions: string[];
-  inferred_deadline?: string;
+  inferred_deadline: string | null;
   uncertainties: string[];
 }
 
@@ -86,9 +84,9 @@ export interface SpecialistAgentView {
 
 export interface CalendarBlock {
   id: string;
-  task_id?: string;
-  task_name?: string;
-  type?: "work" | "buffer" | "fixed" | "break";
+  task_id: string | null;
+  task_name: string | null;
+  type: "work" | "buffer" | "fixed" | "break";
   start: string;
   end: string;
   duration_hours: number;
@@ -201,10 +199,23 @@ export interface ProgressEvent {
   timestamp: string;
 }
 
+export interface SavedCalendar {
+  id: string;
+  name: string;
+  createdAt: string;
+  result: PlanningResult;
+}
+
 export interface PlannerApi {
   runPlanner(request: PlanningRequest): Promise<PlanningResult>;
+  cancelPlanner(): Promise<void>;
   getDefaults(): Promise<PlannerDefaults>;
   onProgress(cb: (event: ProgressEvent) => void): () => void;
+  listCalendars(): Promise<SavedCalendar[]>;
+  saveCalendar(name: string, result: PlanningResult): Promise<SavedCalendar>;
+  loadCalendar(id: string): Promise<SavedCalendar | null>;
+  deleteCalendar(id: string): Promise<boolean>;
+  importFile(): Promise<PlanningResult | null>;
 }
 
 declare global {

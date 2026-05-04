@@ -1,5 +1,3 @@
-Great. Here is the revised, cleaner version.
-
 # Multi-Agent Student Calendar Planner
 
 ## Core idea

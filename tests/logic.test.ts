@@ -38,7 +38,7 @@ describe("planner decision logic", () => {
     expect(hasCriticalCritique(critiques)).toBe(true);
   });
 
-  it("chooses the best fallback by validity, severity, approvals, then later version", () => {
+  it("chooses the best max-iteration calendar by plan rules", () => {
     const records: CalendarVersionRecord[] = [
       record(1, true, 1, 2, 2),
       record(2, true, 0, 2, 2),

@@ -4,3 +4,5 @@ dist-renderer/
 .vite/
 *.log
 .env
+debug/
+data/
