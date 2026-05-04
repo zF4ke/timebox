@@ -1,5 +1,6 @@
 import { contextBridge, ipcRenderer } from "electron";
 import type {
+  AppConfig,
   PlannerApi,
   PlannerDefaults,
   PlanningRequest,
@@ -7,6 +8,7 @@ import type {
   ProgressEvent,
   SavedCalendar
 } from "../shared/types";
+
 
 const api: PlannerApi = {
   runPlanner(request: PlanningRequest): Promise<PlanningResult> {
@@ -37,6 +39,15 @@ const api: PlannerApi = {
   },
   importFile(): Promise<PlanningResult | null> {
     return ipcRenderer.invoke("storage:import") as Promise<PlanningResult | null>;
+  },
+  getConfig(): Promise<AppConfig> {
+    return ipcRenderer.invoke("config:get") as Promise<AppConfig>;
+  },
+  setConfig(config: AppConfig): Promise<void> {
+    return ipcRenderer.invoke("config:set", config) as Promise<void>;
+  },
+  parseImport(content: string, filename: string): Promise<PlanningResult> {
+    return ipcRenderer.invoke("import:parse", content, filename) as Promise<PlanningResult>;
   }
 };
 

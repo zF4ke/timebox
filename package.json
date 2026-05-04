@@ -2,6 +2,7 @@
   "name": "multi-agent-student-calendar-planner",
   "version": "0.1.0",
   "private": true,
+  "author": "AASMA Team",
   "description": "Electron prototype for a multi-agent student calendar planner.",
   "main": "dist-electron/main/main.js",
   "scripts": {
@@ -12,7 +13,28 @@
     "build:electron": "tsc -p tsconfig.electron.json && node -e \"require('fs').cpSync('src/main/prompts', 'dist-electron/main/prompts', {recursive:true, force:true})\"",
     "preview": "vite preview --host 127.0.0.1",
     "test": "vitest run",
-    "typecheck": "tsc -p tsconfig.renderer.json --noEmit && tsc -p tsconfig.electron.json --noEmit"
+    "typecheck": "tsc -p tsconfig.renderer.json --noEmit && tsc -p tsconfig.electron.json --noEmit",
+    "dist": "npm run build && electron-builder"
+  },
+  "build": {
+    "appId": "com.aasma.calendar-planner",
+    "productName": "Student Calendar Planner",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist-electron",
+      "dist-renderer"
+    ],
+    "win": {
+      "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
+    }
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.17",
@@ -29,7 +51,6 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dotenv": "^17.4.2",
-    "electron": "^39.2.4",
     "lucide-react": "^1.14.0",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
@@ -42,6 +63,8 @@
     "@vitejs/plugin-react": "^5.1.1",
     "concurrently": "^9.2.1",
     "cross-env": "^10.1.0",
+    "electron": "^39.2.4",
+    "electron-builder": "^26.8.1",
     "typescript": "^5.9.3",
     "vite": "^7.2.4",
     "vitest": "^4.0.13",

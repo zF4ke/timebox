@@ -2,27 +2,26 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import type { PlanningResult, SavedCalendar } from "../shared/types";
-
-const DATA_DIR = path.join(process.cwd(), "data");
-const CALENDARS_DIR = path.join(DATA_DIR, "calendars");
+import { calendarsDir } from "./paths";
 
 function ensureDir(): void {
-  if (!fs.existsSync(CALENDARS_DIR)) {
-    fs.mkdirSync(CALENDARS_DIR, { recursive: true });
+  const dir = calendarsDir();
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
   }
 }
 
 function filePath(id: string): string {
-  return path.join(CALENDARS_DIR, `${id}.json`);
+  return path.join(calendarsDir(), `${id}.json`);
 }
 
 export function listCalendars(): SavedCalendar[] {
   ensureDir();
-  const files = fs.readdirSync(CALENDARS_DIR).filter((f) => f.endsWith(".json"));
+  const files = fs.readdirSync(calendarsDir()).filter((f) => f.endsWith(".json"));
   const entries: SavedCalendar[] = [];
   for (const file of files) {
     try {
-      const raw = fs.readFileSync(path.join(CALENDARS_DIR, file), "utf-8");
+      const raw = fs.readFileSync(path.join(calendarsDir(), file), "utf-8");
       const parsed = JSON.parse(raw) as SavedCalendar;
       entries.push(parsed);
     } catch {

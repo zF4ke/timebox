@@ -1,13 +1,25 @@
-import { app, BrowserWindow, dialog, ipcMain } from "electron";
+import { app, BrowserWindow, dialog, ipcMain, Menu } from "electron";
 import fs from "node:fs";
 import path from "node:path";
 import dotenv from "dotenv";
 import { importFromIcs, importFromJson } from "./import";
+import type { PlanningResult } from "../shared/types";
+import { loadConfig, saveConfig } from "./config";
 import { getPlannerDefaults, runPlanningPipeline } from "./planner";
 import { deleteCalendar, listCalendars, loadCalendar, saveCalendar } from "./storage";
-import type { PlanningRequest, ProgressEvent } from "../shared/types";
+import type { AppConfig, PlanningRequest, ProgressEvent } from "../shared/types";
 
-dotenv.config({ path: path.join(__dirname, "../../.env") });
+// Load .env from dev path or executable directory
+const envPaths = [
+  path.join(__dirname, "../../.env"),
+  path.join(path.dirname(app.getPath("exe")), ".env")
+];
+for (const envPath of envPaths) {
+  if (fs.existsSync(envPath)) {
+    dotenv.config({ path: envPath });
+    break;
+  }
+}
 
 const isDev = Boolean(process.env.VITE_DEV_SERVER_URL);
 let activePlannerController: AbortController | null = null;
@@ -20,12 +32,17 @@ function createWindow(): void {
     minHeight: 520,
     backgroundColor: "#fafafa",
     title: "Student Calendar Planner",
+    autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
       nodeIntegration: false
     }
   });
+
+  if (!isDev) {
+    Menu.setApplicationMenu(null);
+  }
 
   if (isDev) {
     void win.loadURL(process.env.VITE_DEV_SERVER_URL!);
@@ -88,6 +105,22 @@ ipcMain.handle("storage:load", async (_event, id: string) => {
 
 ipcMain.handle("storage:delete", async (_event, id: string) => {
   return deleteCalendar(id);
+});
+
+ipcMain.handle("config:get", async () => {
+  return loadConfig();
+});
+
+ipcMain.handle("config:set", async (_event, config: AppConfig) => {
+  saveConfig(config);
+});
+
+ipcMain.handle("import:parse", async (_event, content: string, filename: string): Promise<PlanningResult> => {
+  const ext = path.extname(filename).toLowerCase();
+  if (ext === ".ics") {
+    return importFromIcs(content);
+  }
+  return importFromJson(content);
 });
 
 ipcMain.handle("storage:import", async () => {

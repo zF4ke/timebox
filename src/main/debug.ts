@@ -1,12 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
 import type { PlanningResult } from "../shared/types";
-
-const DEBUG_DIR = path.join(process.cwd(), "debug");
+import { debugDir } from "./paths";
 
 function ensureDir(): void {
-  if (!fs.existsSync(DEBUG_DIR)) {
-    fs.mkdirSync(DEBUG_DIR, { recursive: true });
+  const dir = debugDir();
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
   }
 }
 
@@ -18,7 +18,7 @@ function timestamp(): string {
 export function saveRunLog(result: PlanningResult): void {
   ensureDir();
   const fileName = `${timestamp()}_run_${result.runId}.json`;
-  const filePath = path.join(DEBUG_DIR, fileName);
+  const filePath = path.join(debugDir(), fileName);
 
   const payload = {
     runId: result.runId,
@@ -55,6 +55,6 @@ export function saveRunLog(result: PlanningResult): void {
 export function saveRawResponse(schemaName: string, content: string): void {
   ensureDir();
   const fileName = `${timestamp()}_raw_${schemaName}.json`;
-  const filePath = path.join(DEBUG_DIR, fileName);
+  const filePath = path.join(debugDir(), fileName);
   fs.writeFileSync(filePath, content, "utf-8");
 }

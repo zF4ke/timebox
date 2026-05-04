@@ -27,6 +27,7 @@ function logAndEmit(emit: ProgressCallback, ev: Omit<ProgressEvent, "timestamp">
   }
   emit(ev);
 }
+import { loadConfig } from "./config";
 import { saveRunLog } from "./debug";
 import { createIcsExport, createJsonExport } from "./exports";
 import { saveCalendar } from "./storage";
@@ -49,11 +50,12 @@ function systemTimezone(): string {
 }
 
 export function getPlannerDefaults(): PlannerDefaults {
+  const config = loadConfig();
   return {
-    quorum: clampInteger(parseNumber(process.env.PLANNER_QUORUM, 5), 1, 5),
+    quorum: clampInteger(config.quorum, 1, 5),
     maxIterations: clampInteger(parseNumber(process.env.PLANNER_MAX_ITERATIONS, 3), 1, 5),
     timezone: systemTimezone(),
-    model: process.env.OPENROUTER_MODEL?.trim() || "openai/gpt-4o-mini",
+    model: config.model,
     hasApiKey: Boolean(process.env.OPENROUTER_API_KEY?.trim())
   };
 }

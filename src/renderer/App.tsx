@@ -20,6 +20,7 @@ import {
   Settings
 } from "lucide-react";
 import type {
+  AppConfig,
   CalendarBlock,
   PlannerDefaults,
   PlanningRequest,
@@ -35,34 +36,38 @@ I usually have classes in the morning and can work in the afternoon.
 I slept badly yesterday.`;
 
 const QUORUM_OPTIONS = [1, 2, 3, 4, 5];
-const SETTINGS_KEY = "planner:settings";
 
-interface UserSettings {
-  quorum: number;
-  model: string; // empty string means "use env default"
+const MODEL_OPTIONS = [
+  "nvidia/nemotron-3-super-120b-a12b:free",
+  "google/gemini-2.5-flash-lite-preview-09-2025",
+  "google/gemini-3.1-flash-lite-preview",
+  "minimax/minimax-m2.7",
+  "deepseek/deepseek-v3.2",
+  "openai/gpt-5-nano",
+];
+
+const MODEL_INFO: Record<string, { name: string; price: string }> = {
+  "google/gemini-2.5-flash-lite-preview-09-2025": { name: "Gemini 2.5 Flash Lite Preview 09-2025", price: "$0.10 / $0.40" },
+  "google/gemini-3.1-flash-lite-preview": { name: "Gemini 3.1 Flash Lite", price: "$0.25 / $1.50" },
+  "minimax/minimax-m2.7": { name: "MiniMax M2.7", price: "$0.30 / $1.20" },
+  "deepseek/deepseek-v3.2": { name: "DeepSeek V3.2", price: "$0.26 / $0.38" },
+  "openai/gpt-5-nano": { name: "GPT-5 Nano", price: "$0.05 / $0.40" },
+  "nvidia/nemotron-3-super-120b-a12b:free": { name: "Nemotron 3 Super", price: "free" },
+};
+
+function formatModel(model: string): React.ReactNode {
+  const info = MODEL_INFO[model];
+  if (!info) return model;
+  if (!info.price) return info.name;
+  return (
+    <>
+      <span>{info.name}</span>
+      <span className="model-price">{info.price}</span>
+    </>
+  );
 }
 
-function loadSettings(): UserSettings | null {
-  try {
-    const raw = localStorage.getItem(SETTINGS_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw);
-    return {
-      quorum: typeof parsed.quorum === "number" ? parsed.quorum : 5,
-      model: typeof parsed.model === "string" ? parsed.model : ""
-    };
-  } catch {
-    return null;
-  }
-}
 
-function persistSettings(s: UserSettings) {
-  try {
-    localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
-  } catch {
-    // ignore
-  }
-}
 
 interface StepItem {
   key: string;
@@ -75,7 +80,7 @@ interface StepItem {
 
 export default function App() {
   const [userInput, setUserInput] = useState(SAMPLE_INPUT);
-  const [settings, setSettings] = useState<UserSettings>(() => loadSettings() ?? { quorum: 5, model: "" });
+  const [settings, setSettings] = useState<AppConfig>({ quorum: 5, model: MODEL_OPTIONS[0] });
   const [defaults, setDefaults] = useState<PlannerDefaults | null>(null);
   const [result, setResult] = useState<PlanningResult | null>(null);
   const [steps, setSteps] = useState<StepItem[]>([]);
@@ -85,14 +90,13 @@ export default function App() {
   const [savePromptOpen, setSavePromptOpen] = useState(false);
   const [saveStatus, setSaveStatus] = useState<"idle" | "saving" | "saved">("idle");
   const [pendingDelete, setPendingDelete] = useState<SavedCalendar | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragCount = useRef(0);
 
   useEffect(() => {
-    window.plannerApi.getDefaults().then((d) => {
-      setDefaults(d);
-      // First-time init: if no stored settings, fall back to env defaults
-      if (!loadSettings()) {
-        setSettings({ quorum: d.quorum, model: "" });
-      }
+    window.plannerApi.getDefaults().then(setDefaults);
+    window.plannerApi.getConfig().then((c) => {
+      setSettings(c);
     });
     refreshSaved();
   }, []);
@@ -101,6 +105,57 @@ export default function App() {
     return window.plannerApi.onProgress((ev) => {
       setSteps((prev) => applyProgress(prev, ev));
     });
+  }, []);
+
+  useEffect(() => {
+    const onDragEnter = (e: DragEvent) => {
+      e.preventDefault();
+      dragCount.current++;
+      if (e.dataTransfer?.types.includes("Files")) {
+        setIsDragging(true);
+      }
+    };
+    const onDragOver = (e: DragEvent) => {
+      e.preventDefault();
+    };
+    const onDragLeave = (e: DragEvent) => {
+      e.preventDefault();
+      dragCount.current--;
+      if (dragCount.current <= 0) {
+        setIsDragging(false);
+        dragCount.current = 0;
+      }
+    };
+    const onDrop = async (e: DragEvent) => {
+      e.preventDefault();
+      dragCount.current = 0;
+      setIsDragging(false);
+      const files = Array.from(e.dataTransfer?.files ?? []);
+      for (const file of files) {
+        const ext = file.name.split(".").pop()?.toLowerCase();
+        if (ext === "json" || ext === "ics") {
+          const text = await file.text();
+          try {
+            const imported = await window.plannerApi.parseImport(text, file.name);
+            setResult(imported);
+            refreshSaved();
+          } catch (err) {
+            console.error("Import failed:", err);
+          }
+          break;
+        }
+      }
+    };
+    window.addEventListener("dragenter", onDragEnter);
+    window.addEventListener("dragover", onDragOver);
+    window.addEventListener("dragleave", onDragLeave);
+    window.addEventListener("drop", onDrop);
+    return () => {
+      window.removeEventListener("dragenter", onDragEnter);
+      window.removeEventListener("dragover", onDragOver);
+      window.removeEventListener("dragleave", onDragLeave);
+      window.removeEventListener("drop", onDrop);
+    };
   }, []);
 
   function refreshSaved() {
@@ -149,14 +204,13 @@ export default function App() {
   function runPlanner() {
     setResult(null);
     setSteps([]);
-    const request: PlanningRequest = { userInput, quorum: settings.quorum };
-    if (settings.model.trim()) request.model = settings.model.trim();
+    const request: PlanningRequest = { userInput, quorum: settings.quorum, model: settings.model };
     plannerMutation.mutate(request);
   }
 
-  function handleSettingsChange(next: UserSettings) {
+  function handleSettingsChange(next: AppConfig) {
     setSettings(next);
-    persistSettings(next);
+    void window.plannerApi.setConfig(next);
   }
 
   async function cancelPlanner() {
@@ -229,6 +283,7 @@ export default function App() {
         onSave={handleSave}
         saveStatus={saveStatus}
         taskNameMap={taskNameMap}
+        onOpenSettings={() => setSettingsOpen(true)}
       />
     );
   } else {
@@ -246,6 +301,14 @@ export default function App() {
 
   return (
     <>
+      {isDragging && (
+        <div className="drop-overlay">
+          <div className="drop-zone">
+            <Download size={32} />
+            <span>Drop JSON or ICS file here</span>
+          </div>
+        </div>
+      )}
       <AppLayout
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
@@ -254,6 +317,7 @@ export default function App() {
         onLoad={handleLoad}
         onDelete={handleRequestDelete}
         onOpenSettings={() => setSettingsOpen(true)}
+        showSettings={!result}
       >
         {content}
       </AppLayout>
@@ -299,7 +363,8 @@ function AppLayout({
   onImport,
   onLoad,
   onDelete,
-  onOpenSettings
+  onOpenSettings,
+  showSettings = true
 }: {
   children: React.ReactNode;
   sidebarOpen: boolean;
@@ -309,6 +374,7 @@ function AppLayout({
   onLoad: (c: SavedCalendar) => void;
   onDelete: (c: SavedCalendar) => void;
   onOpenSettings: () => void;
+  showSettings?: boolean;
 }) {
   return (
     <div className="app-layout">
@@ -361,14 +427,16 @@ function AppLayout({
         >
           <PanelLeft size={16} />
         </button>
-        <button
-          className="floating-toggle floating-toggle-right"
-          onClick={onOpenSettings}
-          title="Settings"
-          aria-label="Open settings"
-        >
-          <Settings size={16} />
-        </button>
+        {showSettings && (
+          <button
+            className="floating-toggle floating-toggle-right"
+            onClick={onOpenSettings}
+            title="Settings"
+            aria-label="Open settings"
+          >
+            <Settings size={16} />
+          </button>
+        )}
         {children}
       </div>
     </div>
@@ -386,12 +454,10 @@ function ComposerView({
   userInput: string;
   setUserInput: (v: string) => void;
   defaults: PlannerDefaults | null;
-  settings: UserSettings;
+  settings: AppConfig;
   error: string;
   onRun: () => void;
 }) {
-  const activeModel = settings.model.trim() || defaults?.model || "";
-
   return (
     <main className="shell">
       <div className="composer">
@@ -421,14 +487,6 @@ function ComposerView({
         )}
 
         {error && <div className="err">{error}</div>}
-
-        {defaults && (
-          <div className="meta">
-            <span>{activeModel}</span>
-            <span>·</span>
-            <span>{settings.quorum}/5 approvals</span>
-          </div>
-        )}
       </div>
     </main>
   );
@@ -593,7 +651,8 @@ function ResultView({
   onReset,
   onSave,
   saveStatus,
-  taskNameMap
+  taskNameMap,
+  onOpenSettings
 }: {
   result: PlanningResult;
   events: EventInput[];
@@ -602,6 +661,7 @@ function ResultView({
   onSave: () => void;
   saveStatus: "idle" | "saving" | "saved";
   taskNameMap: Record<string, string>;
+  onOpenSettings: () => void;
 }) {
   const [exportOpen, setExportOpen] = useState(false);
   const [activeBlock, setActiveBlock] = useState<CalendarBlock | null>(null);
@@ -697,6 +757,15 @@ function ResultView({
           <button className="btn-primary" onClick={onReset} title="Start a new plan">
             <Plus size={14} />
             <span>New</span>
+          </button>
+
+          <button
+            className="icon-btn"
+            onClick={onOpenSettings}
+            title="Settings"
+            aria-label="Open settings"
+          >
+            <Settings size={16} />
           </button>
         </div>
       </header>
@@ -944,7 +1013,7 @@ function Dropdown<T extends string | number>({
   value: T;
   options: T[];
   onChange: (v: T) => void;
-  format?: (v: T) => string;
+  format?: (v: T) => React.ReactNode;
 }) {
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -999,7 +1068,7 @@ function Dropdown<T extends string | number>({
         aria-haspopup="listbox"
         aria-expanded={open}
       >
-        <span>{label(value)}</span>
+        <span className="dropdown-label">{label(value)}</span>
         <ChevronDown size={14} className={`chev ${open ? "open" : ""}`} />
       </button>
       {open && pos &&
@@ -1024,7 +1093,7 @@ function Dropdown<T extends string | number>({
                     setOpen(false);
                   }}
                 >
-                  <span>{label(opt)}</span>
+                  <span className="dropdown-label">{label(opt)}</span>
                   {selected && <Check size={14} />}
                 </button>
               );
@@ -1042,12 +1111,12 @@ function SettingsModal({
   onChange,
   onClose
 }: {
-  settings: UserSettings;
+  settings: AppConfig;
   defaults: PlannerDefaults | null;
-  onChange: (s: UserSettings) => void;
+  onChange: (s: AppConfig) => void;
   onClose: () => void;
 }) {
-  const [draft, setDraft] = useState<UserSettings>(settings);
+  const [draft, setDraft] = useState<AppConfig>(settings);
   const [status, setStatus] = useState<"idle" | "saved">("idle");
 
   useEffect(() => {
@@ -1068,8 +1137,6 @@ function SettingsModal({
       onClose();
     }, 700);
   };
-
-  const envModel = defaults?.model ?? "";
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -1101,19 +1168,14 @@ function SettingsModal({
           </div>
 
           <div className="field">
-            <label className="meta-label" htmlFor="settings-model">Model</label>
-            <input
-              id="settings-model"
-              className="text-input"
+            <span className="meta-label">Model</span>
+            <Dropdown
               value={draft.model}
-              onChange={(e) => setDraft({ ...draft, model: e.target.value })}
-              placeholder={envModel || "openai/gpt-4o-mini"}
-              spellCheck={false}
+              options={MODEL_OPTIONS}
+              onChange={(m) => setDraft({ ...draft, model: m })}
+              format={formatModel}
             />
-            <div className="field-hint">
-              OpenRouter model id. Leave empty to use the env default
-              {envModel && <> (<code>{envModel}</code>)</>}.
-            </div>
+            <div className="field-hint">OpenRouter model used for planning.</div>
           </div>
         </div>
         <footer className="modal-footer">

@@ -12,13 +12,11 @@ cp .env.example .env
 Edit `.env`:
 
 ```
-OPENROUTER_API_KEY=sk-or-...
-OPENROUTER_MODEL=openai/gpt-4o-mini
-PLANNER_TIMEZONE=Europe/Lisbon
-PLANNER_QUORUM=3
+OPENROUTER_API_KEY=
 PLANNER_MAX_ITERATIONS=3
-PLANNER_DAILY_HOURS=4
 ```
+
+The model and quorum are managed via the in-app settings. The default model is `nvidia/nemotron-3-super-120b-a12b:free`.
 
 ## Run
 
@@ -34,12 +32,67 @@ npm test
 npm run build
 ```
 
+## Package for distribution
+
+```bash
+npm run dist
+```
+
+Output goes to `release/`. On Windows this produces an installer (`.exe`). On macOS a `.dmg`. On Linux an `AppImage`.
+
+### Production setup
+
+1. Build the app: `npm run dist`
+2. Place a `.env` file next to the installed executable with your API key:
+   ```
+   OPENROUTER_API_KEY=sk-or-...
+   ```
+3. Run the app. Settings (model, quorum) and saved plans are stored in the OS user-data directory, not the project folder.
+
 ## Behavior
 
-- Interpreter Agent infers tasks, deadlines, availability, planning window, student state, assumptions.
-- Deadline, Grade, Effort, Wellbeing, Risk agents produce separate task views.
-- Planner-Arbiter creates and revises calendar versions.
-- Specialist agents critique each calendar.
-- Deterministic code checks hard constraints.
-- Stop condition: valid calendar, no critical critique, approvals ≥ quorum.
-- JSON export = full audit trail. ICS export = importable calendar events.
+- **Interpreter Agent** infers tasks, deadlines, availability, planning window, student state, and assumptions.
+- **Specialist Agents** (Deadline, Grade, Effort, Wellbeing, Risk) produce separate task views in parallel.
+- **Planner-Arbiter** creates and revises calendar versions based on agent critiques.
+- **Specialist agents critique** each calendar version. Approval requires no critical critiques and at least `quorum` approvals (configurable, default 5).
+- **Validation** checks structural issues (deadline violations, unknown tasks, rest blocks) but is informational only — it does not block acceptance.
+- **Stop condition**: no critical critique + approvals ≥ quorum, or max iterations reached.
+- **JSON export** = full audit trail with reasoning. **ICS export** = importable into Google/Apple Calendar.
+
+## UI Features
+
+- **Composer** — natural language input for tasks and constraints.
+- **Live progress** — planning steps rendered newest-first with fade-by-age animation.
+- **Cancel run** — abort an in-progress planning run.
+- **Calendar view** — FullCalendar week grid with color-coded event types.
+- **Event details** — click any calendar block to see description, reasoning, and timing.
+- **Saved plans sidebar** — auto-saves plans, with load and delete.
+- **Settings** — configurable quorum (1–5) and model picker with pricing. Persisted to the OS user-data directory.
+- **Import** — drag-and-drop JSON/ICS files anywhere on the app, or use the Import button in the sidebar.
+- **Humanized task IDs** — raw IDs like "T1" are automatically replaced with task names in all UI text.
+
+## Model Options
+
+| Model | Input / Output (per 1M tokens) |
+|-------|-------------------------------|
+| Nemotron 3 Super | free |
+| Gemini 2.5 Flash Lite Preview 09-2025 | $0.10 / $0.40 |
+| Gemini 3.1 Flash Lite | $0.25 / $1.50 |
+| MiniMax M2.7 | $0.30 / $1.20 |
+| DeepSeek V3.2 | $0.26 / $0.38 |
+| GPT-5 Nano | $0.05 / $0.40 |
+
+## Architecture
+
+- **Main process** (`src/main/`) — planning pipeline, OpenRouter SDK wrapper, config/storage IPC, import parsers, debug logging.
+- **Renderer** (`src/renderer/`) — React + FullCalendar UI.
+- **Shared** (`src/shared/`) — TypeScript types.
+- **Prompts** (`src/main/prompts/`) — markdown prompt files loaded at runtime.
+- **Data** — saved plans, config, and debug logs stored in the OS user-data directory.
+
+## Prompt Strategy
+
+- **v1 (initial)** — full context: agent views, student input, calendar, strategy.
+- **v2+ (revision)** — compact: ultra-short calendar summary, critique tally, no agent views or raw input. Prevents truncation on long runs.
+- **No rest/buffer blocks** — Wellbeing Agent recommends fewer/shorter work blocks, not scheduled breaks. Empty space is implicit rest.
+- **No invented tasks** — Planner is forbidden from creating generic lifestyle blocks.

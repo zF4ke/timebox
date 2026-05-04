@@ -206,6 +206,11 @@ export interface SavedCalendar {
   result: PlanningResult;
 }
 
+export interface AppConfig {
+  quorum: number;
+  model: string;
+}
+
 export interface PlannerApi {
   runPlanner(request: PlanningRequest): Promise<PlanningResult>;
   cancelPlanner(): Promise<void>;
@@ -216,6 +221,9 @@ export interface PlannerApi {
   loadCalendar(id: string): Promise<SavedCalendar | null>;
   deleteCalendar(id: string): Promise<boolean>;
   importFile(): Promise<PlanningResult | null>;
+  getConfig(): Promise<AppConfig>;
+  setConfig(config: AppConfig): Promise<void>;
+  parseImport(content: string, filename: string): Promise<PlanningResult>;
 }
 
 declare global {
