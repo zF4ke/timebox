@@ -208,8 +208,8 @@ code {
   gap: 2px;
   margin-top: 4px;
   max-height: 60vh;
-  overflow-y: auto;
-  padding-right: 4px;
+  overflow: hidden;
+  padding-right: 0;
 }
 
 .steps-stack {
@@ -431,6 +431,119 @@ code {
 
 .chev.open {
   transform: rotate(180deg);
+}
+
+/* ---------- Agent notes dropdown ---------- */
+
+.agent-notes-wrap {
+  position: relative;
+}
+
+.agent-notes-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
+  padding: 0 6px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+  opacity: 0.42;
+  transition: opacity 120ms ease, border-color 120ms ease, background 120ms ease;
+}
+
+.agent-notes-trigger:hover,
+.agent-notes-trigger[aria-expanded="true"] {
+  opacity: 1;
+  border-color: var(--border);
+  background: var(--card);
+}
+
+.agent-notes-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: min(420px, calc(100vw - 32px));
+  max-height: min(520px, calc(100vh - 130px));
+  overflow-y: auto;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.10);
+  padding: 10px;
+  z-index: 35;
+  animation: fade-in 120ms ease;
+}
+
+.agent-notes-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 2px 2px 8px;
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.agent-note {
+  padding: 10px 2px;
+  border-top: 1px solid var(--border);
+}
+
+.agent-note-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.agent-note-top strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.agent-note-badge {
+  max-width: 190px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 999px;
+  padding: 2px 7px;
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.agent-note-badge.severity-critical,
+.agent-note-badge.severity-major {
+  color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.agent-note-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.agent-note-item p {
+  color: var(--fg);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.agent-note-item span {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.35;
 }
 
 /* ---------- Export dropdown ---------- */
@@ -1254,4 +1367,3 @@ code {
   60%  { transform: scale(1.15); opacity: 1; }
   100% { transform: scale(1); opacity: 1; }
 }
-

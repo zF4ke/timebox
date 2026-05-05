@@ -1,3 +1,5 @@
+import { saveRawResponse } from "./debug";
+
 interface JsonCallOptions {
   apiKey: string;
   model: string;
@@ -69,24 +71,41 @@ async function requestJson<T>(options: JsonCallOptions): Promise<T> {
     fetchOptions: { signal: fetchSignal }
   });
 
-  const content = result.choices?.[0]?.message?.content;
+  const choice = result.choices?.[0] as
+    | {
+        message?: { content?: unknown };
+        finishReason?: string;
+        finish_reason?: string;
+      }
+    | undefined;
+  const content = choice?.message?.content;
   if (!content) {
     throw new Error("OpenRouter returned an empty response.");
   }
 
   const raw = typeof content === "string" ? content : JSON.stringify(content);
+  const finishReason = choice?.finishReason ?? choice?.finish_reason;
+  if (finishReason === "length" || finishReason === "max_tokens") {
+    const filePath = saveRawResponse(options.schemaName, raw);
+    throw new Error(
+      `OpenRouter truncated ${options.schemaName} before valid JSON completed (finish_reason=${finishReason}, ${raw.length} chars). Raw response saved to ${filePath}.`
+    );
+  }
+
   try {
     const parsed = parseJsonContent<T>(raw);
     console.log(`[openrouter] <- ${options.schemaName} (${Date.now() - start}ms) · ${raw.length} chars`);
     return parsed;
   } catch (parseError) {
+    const filePath = saveRawResponse(options.schemaName, raw);
     const snippetStart = raw.slice(0, 400);
     const snippetEnd = raw.slice(-400);
     console.error(`[openrouter] JSON parse failed for ${options.schemaName}`);
     console.error(`[openrouter] content length: ${raw.length}`);
+    console.error(`[openrouter] raw response saved: ${filePath}`);
     console.error(`[openrouter] snippet start: ${snippetStart}`);
     console.error(`[openrouter] snippet end: ${snippetEnd}`);
-    throw parseError;
+    throw new Error(`${errorMessage(parseError)}. Raw response saved to ${filePath}.`);
   }
 }
 

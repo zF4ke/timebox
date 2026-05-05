@@ -762,19 +762,24 @@ function ResultView({
   onOpenSettings: () => void;
 }) {
   const [exportOpen, setExportOpen] = useState(false);
+  const [concernsOpen, setConcernsOpen] = useState(false);
   const [activeBlock, setActiveBlock] = useState<CalendarBlock | null>(null);
   const exportRef = useRef<HTMLDivElement>(null);
+  const concernsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!exportOpen) return;
+    if (!exportOpen && !concernsOpen) return;
     const close = (e: MouseEvent) => {
       if (exportRef.current && !exportRef.current.contains(e.target as Node)) {
         setExportOpen(false);
       }
+      if (concernsRef.current && !concernsRef.current.contains(e.target as Node)) {
+        setConcernsOpen(false);
+      }
     };
     document.addEventListener("mousedown", close);
     return () => document.removeEventListener("mousedown", close);
-  }, [exportOpen]);
+  }, [exportOpen, concernsOpen]);
 
   const approvals = result.critiques.filter(
     (c) => c.approval === "approve" || c.approval === "approve_with_minor_concerns"
@@ -799,6 +804,59 @@ function ResultView({
           </p>
         </div>
         <div className="actions">
+          <div className="agent-notes-wrap" ref={concernsRef}>
+            <button
+              className="agent-notes-trigger"
+              onClick={() => setConcernsOpen((v) => !v)}
+              aria-expanded={concernsOpen}
+              aria-haspopup="menu"
+              title="Agent concerns"
+            >
+              Agent notes
+              <ChevronDown size={11} className={`chev ${concernsOpen ? "open" : ""}`} />
+            </button>
+            {concernsOpen && (
+              <div className="agent-notes-menu" role="menu">
+                <div className="agent-notes-head">
+                  <span>Agent concerns</span>
+                  <span>{approvals}/5 approved</span>
+                </div>
+                {result.critiques.map((critique) => {
+                  const concerns = critique.critiques.length > 0
+                    ? critique.critiques.map((issue) => ({
+                        text: issue.issue,
+                        severity: issue.severity,
+                        fix: issue.suggested_fix
+                      }))
+                    : [{
+                        text: critique.overall_comment || "No specific concern logged.",
+                        severity: critique.severity,
+                        fix: ""
+                      }];
+
+                  return (
+                    <div className="agent-note" key={critique.agent}>
+                      <div className="agent-note-top">
+                        <strong>{critique.agent.replace(" Agent", "")}</strong>
+                        <span className={`agent-note-badge severity-${critique.severity}`}>
+                          {critique.approval.replaceAll("_", " ")}
+                        </span>
+                      </div>
+                      <div className="agent-note-list">
+                        {concerns.map((concern, index) => (
+                          <div className="agent-note-item" key={`${critique.agent}-${index}`}>
+                            <p>{humanize(concern.text, taskNameMap)}</p>
+                            {concern.fix && <span>{humanize(concern.fix, taskNameMap)}</span>}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
           <button
             className={`btn-secondary save-btn save-${saveStatus}`}
             onClick={onSave}

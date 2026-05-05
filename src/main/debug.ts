@@ -52,9 +52,10 @@ export function saveRunLog(result: PlanningResult): void {
   console.log(`[debug] saved run log → ${filePath}`);
 }
 
-export function saveRawResponse(schemaName: string, content: string): void {
+export function saveRawResponse(schemaName: string, content: string): string {
   ensureDir();
   const fileName = `${timestamp()}_raw_${schemaName}.json`;
   const filePath = path.join(debugDir(), fileName);
   fs.writeFileSync(filePath, content, "utf-8");
+  return filePath;
 }

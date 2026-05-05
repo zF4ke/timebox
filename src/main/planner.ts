@@ -308,8 +308,8 @@ async function runPlanner(
     schemaName: "calendar_proposal",
     schema: calendarSchema,
     signal,
-    maxCompletionTokens: 5000,
-    timeoutMs: 90_000
+    maxCompletionTokens: 9000,
+    timeoutMs: 120_000
   });
 }
 
@@ -359,7 +359,7 @@ async function runCritiques(
         schemaName: "agent_critique",
         schema: critiqueSchema,
         signal,
-        maxCompletionTokens: 1800,
+        maxCompletionTokens: 2400,
         timeoutMs: 65_000
       });
 
@@ -519,6 +519,7 @@ function buildInitialPlannerPrompt(
     "For each day, set assumed_available_hours realistically based on the inferred availability. The sum of ALL block durations on that day MUST NOT exceed assumed_available_hours.",
     "Respect the planning window, deadlines, and fixed commitments.",
     "Include compromise reasoning so specialist agents can critique the actual tradeoffs.",
+    "Keep all prose fields concise: one short sentence per description, reasoning, compromise, weakness, and strategy item.",
     "Create a usable calendar. If tasks exist, days must not be empty.",
     "Prefer afternoon blocks when availability says morning classes. Keep blocks between 07:00 and 23:00 local time unless the user explicitly says otherwise.",
     "Initial draft priority: schedule all inferred tasks before deadlines, and balance daily workload. Do NOT add buffer or break blocks — unscheduled time is implicitly rest.",
@@ -550,6 +551,7 @@ function buildRevisionPlannerPrompt(
     "For each day, set assumed_available_hours realistically. The sum of ALL block durations on that day MUST NOT exceed assumed_available_hours.",
     "Respect the planning window, deadlines, and fixed commitments.",
     "Include compromise reasoning so specialist agents can critique the actual tradeoffs.",
+    "Keep all prose fields concise: one short sentence per description, reasoning, compromise, weakness, change, and planner_response.",
     "Revision priority: address critical critiques first, then rejected/major critiques, while preserving approved parts. Do NOT add buffer or break blocks — unscheduled time is implicitly rest.",
     schemaInstruction("calendar_proposal", calendarSchema),
     "",
