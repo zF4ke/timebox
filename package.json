@@ -27,14 +27,15 @@
       "dist-renderer"
     ],
     "win": {
-      "target": "nsis"
+      "target": "portable"
     },
     "mac": {
       "target": "dmg"
     },
     "linux": {
       "target": "AppImage"
-    }
+    },
+    "icon": "assets/app_icon.png"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.17",
