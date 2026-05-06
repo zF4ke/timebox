@@ -19,7 +19,7 @@ function createWindow(): void {
     minWidth: 720,
     minHeight: 520,
     backgroundColor: "#fafafa",
-    title: "Student Calendar Planner",
+    title: "Timebox",
     autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),

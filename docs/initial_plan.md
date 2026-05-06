@@ -1,8 +1,8 @@
-# Multi-Agent Student Calendar Planner
+# Timebox
 
 ## Core idea
 
-The system takes a natural-language description of a student’s tasks and generates a multi-day calendar plan.
+Timebox takes a natural-language description of a student’s tasks and generates a multi-day calendar plan.
 
 The agents do **not** perform sequential subtasks. Instead, they represent different priorities and critique the same calendar from different perspectives.
 
@@ -968,6 +968,6 @@ The user sees the useful thing first: the calendar.
 
 A concise project description:
 
-> We propose a multi-agent calendar planner for students. The system receives a natural-language description of tasks, deadlines, availability, sleep, and constraints. An Interpreter Agent infers the planning window and task information using the computer’s current date. Specialist agents independently interpret each task from different perspectives: deadlines, grade impact, effort, wellbeing, and risk. A Planner-Arbiter creates a multi-day calendar and includes the reasoning behind its compromises. The specialist agents critique the calendar, assigning approval and critique severity. The system revises until a user-defined quorum approves the plan with no critical critiques, or until a maximum number of iterations is reached.
+> We propose Timebox, a multi-agent calendar planner for students. The system receives a natural-language description of tasks, deadlines, availability, sleep, and constraints. An Interpreter Agent infers the planning window and task information using the computer’s current date. Specialist agents independently interpret each task from different perspectives: deadlines, grade impact, effort, wellbeing, and risk. A Planner-Arbiter creates a multi-day calendar and includes the reasoning behind its compromises. The specialist agents critique the calendar, assigning approval and critique severity. The system revises until a user-defined quorum approves the plan with no critical critiques, or until a maximum number of iterations is reached.
 
 That is clean, controlled, and clearly multi-agent.

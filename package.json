@@ -1,9 +1,9 @@
 {
-  "name": "multi-agent-student-calendar-planner",
+  "name": "timebox",
   "version": "0.1.0",
   "private": true,
   "author": "AASMA Team",
-  "description": "Electron prototype for a multi-agent student calendar planner.",
+  "description": "Electron prototype for Timebox, a multi-agent student planning app.",
   "main": "dist-electron/main/main.js",
   "scripts": {
     "dev": "concurrently -k \"npm:dev:renderer\" \"npm:dev:electron\"",
@@ -17,8 +17,8 @@
     "dist": "npm run build && electron-builder"
   },
   "build": {
-    "appId": "com.aasma.calendar-planner",
-    "productName": "Student Calendar Planner",
+    "appId": "com.aasma.timebox",
+    "productName": "Timebox",
     "directories": {
       "output": "release"
     },

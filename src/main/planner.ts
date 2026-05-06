@@ -235,8 +235,8 @@ async function runInterpreter(apiKey: string, request: ResolvedRequest, signal?:
     schemaName: "interpreter_output",
     schema: interpreterSchema,
     signal,
-    maxCompletionTokens: 2500,
-    timeoutMs: 65_000
+    maxCompletionTokens: 12_000,
+    timeoutMs: 120_000
   });
 
   return normalizeInterpreter(output, request);
@@ -275,8 +275,8 @@ async function runSpecialists(
         schemaName: "specialist_agent_view",
         schema: specialistSchema,
         signal,
-        maxCompletionTokens: 2000,
-        timeoutMs: 70_000
+        maxCompletionTokens: 16_000,
+        timeoutMs: 150_000
       });
 
       const view = normalizeSpecialist(output, agent, interpreterOutput);
@@ -308,8 +308,8 @@ async function runPlanner(
     schemaName: "calendar_proposal",
     schema: calendarSchema,
     signal,
-    maxCompletionTokens: 9000,
-    timeoutMs: 120_000
+    maxCompletionTokens: 24_000,
+    timeoutMs: 180_000
   });
 }
 
@@ -359,8 +359,8 @@ async function runCritiques(
         schemaName: "agent_critique",
         schema: critiqueSchema,
         signal,
-        maxCompletionTokens: 2400,
-        timeoutMs: 65_000
+        maxCompletionTokens: 12_000,
+        timeoutMs: 120_000
       });
 
       const normalized: AgentCritique = { ...critique, agent };

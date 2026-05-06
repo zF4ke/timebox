@@ -8,7 +8,7 @@ export function createIcsExport(calendar: CalendarProposal): string {
   const lines = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//AASMA//Multi-Agent Student Calendar Planner//EN",
+    "PRODID:-//AASMA//Timebox//EN",
     "CALSCALE:GREGORIAN",
     "METHOD:PUBLISH"
   ];
@@ -26,7 +26,7 @@ function eventLines(block: CalendarBlock): string[] {
   const description = [block.description, block.reasoning].filter(Boolean).join("\\n\\nReasoning: ");
   return [
     "BEGIN:VEVENT",
-    `UID:${escapeIcs(block.id)}@multi-agent-calendar-planner.local`,
+    `UID:${escapeIcs(block.id)}@timebox.local`,
     `DTSTAMP:${formatIcsDate(new Date())}`,
     `DTSTART:${formatIcsDate(new Date(block.start))}`,
     `DTEND:${formatIcsDate(new Date(block.end))}`,

@@ -40,15 +40,15 @@ async function requestJson<T>(options: JsonCallOptions): Promise<T> {
   const { OpenRouter } = await importOpenRouterSdk();
   const openRouter = new OpenRouter({
     apiKey: options.apiKey,
-    httpReferer: "https://local.multi-agent-calendar-planner",
-    appTitle: "Multi-Agent Student Calendar Planner"
+    httpReferer: "https://local.timebox",
+    appTitle: "Timebox"
   });
 
   const fetchSignal = buildCombinedSignal(options.signal, options.timeoutMs ?? 75_000);
 
   const result = await openRouter.chat.send({
-    httpReferer: "https://local.multi-agent-calendar-planner",
-    appTitle: "Multi-Agent Student Calendar Planner",
+    httpReferer: "https://local.timebox",
+    appTitle: "Timebox",
     chatRequest: {
       model: options.model,
       stream: false,

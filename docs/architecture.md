@@ -2,7 +2,7 @@
 
 ## Philosophy
 
-This is a **multi-agent negotiation system**, not a constraint-satisfaction solver.
+Timebox is a **multi-agent negotiation system**, not a constraint-satisfaction solver.
 
 The calendar emerges from disagreement and compromise between independent agents. There are **no hard constraints that block acceptance**. The only gatekeepers are:
 

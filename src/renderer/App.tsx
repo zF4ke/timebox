@@ -230,7 +230,12 @@ export default function App() {
     setSaveStatus("idle");
     setDuplicateSavePending(false);
     plannerMutation.reset();
-    const request: PlanningRequest = { userInput, quorum: settings.quorum, model: settings.model };
+    const request: PlanningRequest = {
+      userInput,
+      quorum: settings.quorum,
+      maxIterations: settings.maxIterations,
+      model: settings.model
+    };
     plannerMutation.mutate({ request, generation: activeRunGeneration.current });
   }
 
@@ -1321,6 +1326,17 @@ function SettingsModal({
               format={(n) => `${n} of 5`}
             />
             <div className="field-hint">How many specialist agents must approve before a calendar is accepted.</div>
+          </div>
+
+          <div className="field">
+            <span className="meta-label">Max iterations</span>
+            <Dropdown
+              value={draft.maxIterations ?? defaults?.maxIterations ?? 3}
+              options={[1, 2, 3, 4, 5]}
+              onChange={(n) => setDraft({ ...draft, maxIterations: n })}
+              format={(n) => `${n} ${n === 1 ? "draft" : "drafts"}`}
+            />
+            <div className="field-hint">Maximum planner revision rounds before selecting the best available calendar.</div>
           </div>
 
           <div className="field">

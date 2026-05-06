@@ -1,6 +1,6 @@
-# Multi-Agent Student Calendar Planner
+# Timebox
 
-Electron prototype for the AASMA multi-agent calendar planner.
+Electron prototype for Timebox, the AASMA multi-agent student planning app.
 
 ## Setup
 
@@ -8,7 +8,7 @@ Electron prototype for the AASMA multi-agent calendar planner.
 npm install
 ```
 
-All configuration is managed in-app via **Settings** (model, quorum, API key). Settings are persisted to the OS user-data directory. The default model is `nvidia/nemotron-3-super-120b-a12b:free`.
+All configuration is managed in-app via **Settings** (model, quorum, max iterations, API key). Settings are persisted to the OS user-data directory. The default model is `nvidia/nemotron-3-super-120b-a12b:free`.
 
 ## Run
 
@@ -30,13 +30,13 @@ npm run build
 npm run dist
 ```
 
-Output goes to `release/`. On Windows this produces an installer (`.exe`). On macOS a `.dmg`. On Linux an `AppImage`.
+Output goes to `release/`. On Windows this produces a portable `.exe`. On macOS a `.dmg`. On Linux an `AppImage`.
 
 ### Production setup
 
 1. Build the app: `npm run dist`
 2. Run the app and set your OpenRouter API key in **Settings**.
-3. Settings (model, quorum, API key) and saved plans are stored in the OS user-data directory, not the project folder.
+3. Settings (model, quorum, max iterations, API key) and saved plans are stored in the OS user-data directory, not the project folder.
 
 ## Behavior
 
@@ -56,7 +56,7 @@ Output goes to `release/`. On Windows this produces an installer (`.exe`). On ma
 - **Calendar view** — FullCalendar week grid with color-coded event types.
 - **Event details** — click any calendar block to see description, reasoning, and timing.
 - **Saved plans sidebar** — auto-saves plans, with load and delete.
-- **Settings** — configurable quorum (1–5), model picker with pricing, and OpenRouter API key. Persisted to the OS user-data directory.
+- **Settings** — configurable quorum (1–5), max iterations (1–5), model picker with pricing, and OpenRouter API key. Persisted to the OS user-data directory.
 - **Import** — drag-and-drop JSON/ICS files anywhere on the app, or use the Import button in the sidebar.
 - **Humanized task IDs** — raw IDs like "T1" are automatically replaced with task names in all UI text.
 
