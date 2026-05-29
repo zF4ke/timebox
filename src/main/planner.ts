@@ -9,6 +9,7 @@ import type {
   PlanningRequest,
   PlanningResult,
   ProgressEvent,
+  ScheduleEvaluation,
   SpecialistAgentView
 } from "../shared/types";
 
@@ -32,9 +33,10 @@ import { saveRunLog } from "./debug";
 import { createIcsExport, createJsonExport } from "./exports";
 import { saveCalendar } from "./storage";
 import { countApprovals, chooseBestCalendarVersion, hasCriticalCritique } from "./logic";
+import { evaluateHardMetrics } from "./metrics";
 import { callOpenRouterJson } from "./openrouter";
-import { AGENT_NAMES, AGENT_PROMPTS, BASE_SYSTEM_PROMPT } from "./prompts";
-import { calendarSchema, critiqueSchema, interpreterSchema, specialistSchema } from "./schemas";
+import { AGENT_NAMES, AGENT_PROMPTS, BASE_SYSTEM_PROMPT, SCHEDULE_EVALUATOR_PROMPT } from "./prompts";
+import { calendarSchema, critiqueSchema, interpreterSchema, scheduleEvaluationSchema, specialistSchema } from "./schemas";
 import { validateCalendar } from "./validation";
 
 interface ResolvedRequest extends Required<Omit<PlanningRequest, "planningWindowOverride">> {
@@ -51,11 +53,13 @@ function systemTimezone(): string {
 
 export function getPlannerDefaults(): PlannerDefaults {
   const config = loadConfig();
+  const model = config.model;
   return {
     quorum: clampInteger(config.quorum, 1, 5),
     maxIterations: clampInteger(config.maxIterations ?? 3, 1, 5),
     timezone: systemTimezone(),
-    model: config.model,
+    model,
+    evaluatorModel: model,
     hasApiKey: Boolean(config.apiKey?.trim())
   };
 }
@@ -80,8 +84,11 @@ export async function runPlanningPipeline(
 
   const normalizedRequest = normalizeRequest(request);
   const createdAt = new Date().toISOString();
+  const runStartedAt = Date.now();
   const runId = crypto.randomUUID();
-  console.log(`[planner] run ${runId} starting · model=${normalizedRequest.model} · quorum=${normalizedRequest.quorum} · maxIter=${normalizedRequest.maxIterations}`);
+  console.log(
+    `[planner] run ${runId} starting · plannerModel=${normalizedRequest.model} · evaluatorModel=${normalizedRequest.evaluatorModel} · quorum=${normalizedRequest.quorum} · maxIter=${normalizedRequest.maxIterations}`
+  );
 
   logAndEmit(onProgress, { phase: "interpreter", status: "start" });
   throwIfCancelled(signal);
@@ -173,6 +180,39 @@ export async function runPlanningPipeline(
     logAndEmit(onProgress, { phase: "decision", status: "done", summary: stopReason });
   }
 
+  const generationTimeSeconds = (Date.now() - runStartedAt) / 1000;
+  const hardMetrics = evaluateHardMetrics({
+    calendar: finalRecord.calendar,
+    critiques: finalRecord.critiques,
+    validation: finalRecord.validation,
+    interpreterOutput,
+    generationTimeSeconds
+  });
+
+  logAndEmit(onProgress, {
+    phase: "evaluate",
+    status: "start",
+    iteration: finalRecord.calendar.calendar_version,
+    summary: `scoring final calendar with ${normalizedRequest.evaluatorModel}`
+  });
+  throwIfCancelled(signal);
+  const evaluation = await runScheduleEvaluator(
+    apiKey,
+    normalizedRequest,
+    interpreterOutput,
+    agentViews,
+    finalRecord,
+    hardMetrics,
+    stopReason,
+    signal
+  );
+  logAndEmit(onProgress, {
+    phase: "evaluate",
+    status: "done",
+    iteration: finalRecord.calendar.calendar_version,
+    summary: `overall ${evaluation.overall_score.toFixed(1)}/5`
+  });
+
   const resultWithoutExports = {
     runId,
     createdAt,
@@ -183,7 +223,8 @@ export async function runPlanningPipeline(
     calendarVersions,
     finalCalendar: finalRecord.calendar,
     critiques: finalRecord.critiques,
-    validation: finalRecord.validation
+    validation: finalRecord.validation,
+    evaluation
   };
 
   const finalResult = {
@@ -376,14 +417,70 @@ async function runCritiques(
   );
 }
 
+async function runScheduleEvaluator(
+  apiKey: string,
+  request: ResolvedRequest,
+  interpreterOutput: InterpreterOutput,
+  agentViews: SpecialistAgentView[],
+  finalRecord: CalendarVersionRecord,
+  hardMetrics: ScheduleEvaluation["hard_metrics"],
+  stopReason: string,
+  signal?: AbortSignal
+): Promise<ScheduleEvaluation> {
+  const user = [
+    "Evaluate the selected final schedule for comparison across planner models.",
+    "Return exactly one score for each required dimension.",
+    "Scores are numeric from 1 to 5. Use decimals only when the distinction matters.",
+    "Hard metrics are already computed separately. Do not re-score objective counts such as rejections, critical issues, deadline violations, task coverage, availability overrun, or generation speed.",
+    "Focus your model judgement on qualitative schedule quality: coherence, usefulness, prioritization, compromise reasoning, clarity, actionability, and handling of uncertainty.",
+    "This evaluation is diagnostic only and must not change calendar acceptance.",
+    schemaInstruction("schedule_evaluation", scheduleEvaluationSchema),
+    "",
+    `Planner model: ${request.model}`,
+    `Evaluator model: ${request.evaluatorModel}`,
+    `Quorum requirement: ${request.quorum}`,
+    `Stop reason: ${stopReason}`,
+    "",
+    `Student input:\n${request.userInput}`,
+    "",
+    `Interpreter output:\n${JSON.stringify(compactInterpreter(interpreterOutput), null, 2)}`,
+    "",
+    `Specialist views:\n${JSON.stringify(compactAgentViews(agentViews), null, 2)}`,
+    "",
+    `Final calendar:\n${JSON.stringify(compactCalendar(finalRecord.calendar), null, 2)}`,
+    "",
+    `Final critiques:\n${JSON.stringify(finalRecord.critiques, null, 2)}`,
+    "",
+    `Validation log:\n${JSON.stringify(finalRecord.validation, null, 2)}`,
+    "",
+    `Hard metrics for reference:\n${JSON.stringify(hardMetrics, null, 2)}`
+  ].join("\n");
+
+  const output = await callOpenRouterJson<ScheduleEvaluation>({
+    apiKey,
+    model: request.evaluatorModel,
+    system: `${BASE_SYSTEM_PROMPT} ${SCHEDULE_EVALUATOR_PROMPT}`,
+    user,
+    schemaName: "schedule_evaluation",
+    schema: scheduleEvaluationSchema,
+    signal,
+    maxCompletionTokens: 8_000,
+    timeoutMs: 120_000
+  });
+
+  return normalizeEvaluation(output, finalRecord.calendar.calendar_version, request, hardMetrics);
+}
+
 function normalizeRequest(request: PlanningRequest): ResolvedRequest {
   const defaults = getPlannerDefaults();
+  const model = request.model?.trim() || defaults.model;
   return {
     userInput: request.userInput.trim(),
     quorum: clampInteger(request.quorum ?? defaults.quorum, 1, AGENT_NAMES.length),
     maxIterations: clampInteger(request.maxIterations ?? defaults.maxIterations, 1, 5),
     timezone: request.timezone?.trim() || defaults.timezone,
-    model: request.model?.trim() || defaults.model,
+    model,
+    evaluatorModel: model,
     planningWindowOverride: request.planningWindowOverride
   };
 }
@@ -484,8 +581,64 @@ function normalizeCritiques(critiques: AgentCritique[], version: number): AgentC
   });
 }
 
+function normalizeEvaluation(
+  evaluation: ScheduleEvaluation,
+  version: number,
+  request: ResolvedRequest,
+  hardMetrics: ScheduleEvaluation["hard_metrics"]
+): ScheduleEvaluation {
+  const requiredDimensions: ScheduleEvaluation["dimension_scores"][number]["dimension"][] = [
+    "requirement_match",
+    "deadline_safety",
+    "workload_realism",
+    "academic_priority",
+    "wellbeing_balance",
+    "risk_resilience"
+  ];
+
+  const modelScore = clampScore(evaluation.overall_score);
+  const hardScoreAsFive = round1(1 + (hardMetrics.score / 100) * 4);
+  const combinedScore = round1(modelScore * 0.5 + hardScoreAsFive * 0.5);
+
+  return {
+    evaluator: "Schedule Evaluator",
+    calendar_version: version,
+    planner_model: request.model,
+    evaluator_model: request.evaluatorModel,
+    overall_score: combinedScore,
+    model_score: modelScore,
+    hard_score: hardScoreAsFive,
+    hard_metrics: hardMetrics,
+    dimension_scores: requiredDimensions.map((dimension) => {
+      const score = evaluation.dimension_scores.find((entry) => entry.dimension === dimension);
+      if (!score) {
+        throw new Error(`Schedule evaluator omitted dimension ${dimension}.`);
+      }
+      return {
+        dimension,
+        score: clampScore(score.score),
+        rationale: score.rationale
+      };
+    }),
+    strengths: evaluation.strengths,
+    weaknesses: evaluation.weaknesses,
+    comparison_notes: evaluation.comparison_notes,
+    recommendation: evaluation.recommendation
+  };
+}
+
 function clampInteger(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, Math.round(Number(value) || min)));
+}
+
+function clampScore(value: number): number {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed)) return 1;
+  return Math.min(5, Math.max(1, Math.round(parsed * 10) / 10));
+}
+
+function round1(value: number): number {
+  return Math.round(value * 10) / 10;
 }
 
 function throwIfCancelled(signal?: AbortSignal): void {

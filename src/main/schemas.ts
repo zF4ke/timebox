@@ -241,3 +241,54 @@ export const critiqueSchema = {
     overall_comment: { type: "string" }
   }
 };
+
+export const scheduleEvaluationSchema = {
+  type: "object",
+  additionalProperties: false,
+  required: [
+    "evaluator",
+    "calendar_version",
+    "planner_model",
+    "evaluator_model",
+    "overall_score",
+    "dimension_scores",
+    "strengths",
+    "weaknesses",
+    "comparison_notes",
+    "recommendation"
+  ],
+  properties: {
+    evaluator: { type: "string", enum: ["Schedule Evaluator"] },
+    calendar_version: { type: "number" },
+    planner_model: { type: "string" },
+    evaluator_model: { type: "string" },
+    overall_score: { type: "number", minimum: 1, maximum: 5 },
+    dimension_scores: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["dimension", "score", "rationale"],
+        properties: {
+          dimension: {
+            type: "string",
+            enum: [
+              "requirement_match",
+              "deadline_safety",
+              "workload_realism",
+              "academic_priority",
+              "wellbeing_balance",
+              "risk_resilience"
+            ]
+          },
+          score: { type: "number", minimum: 1, maximum: 5 },
+          rationale: { type: "string" }
+        }
+      }
+    },
+    strengths: { type: "array", items: { type: "string" } },
+    weaknesses: { type: "array", items: { type: "string" } },
+    comparison_notes: { type: "array", items: { type: "string" } },
+    recommendation: { type: "string" }
+  }
+};

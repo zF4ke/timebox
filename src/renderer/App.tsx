@@ -470,7 +470,12 @@ function AppLayout({
           {saved.map((cal) => (
             <div key={cal.id} className="saved-item">
               <button className="saved-name" onClick={() => onLoad(cal)} title={cal.name}>
-                {cal.name}
+                <span>{cal.name}</span>
+                <small>
+                  {cal.result.evaluation
+                    ? `${cal.result.evaluation.overall_score}/5 · ${formatCompactModel(cal.result.evaluation.planner_model)}`
+                    : formatCompactModel(cal.result.request.model ?? "unknown model")}
+                </small>
               </button>
               <button
                 className="saved-delete"
@@ -738,6 +743,8 @@ function stepLabel(ev: ProgressEvent): string {
         : `Critique round${ev.iteration ? ` v${ev.iteration}` : ""}`;
     case "validate":
       return `Review issues${ev.iteration ? ` v${ev.iteration}` : ""}`;
+    case "evaluate":
+      return `Evaluating schedule${ev.iteration ? ` v${ev.iteration}` : ""}`;
     case "decision":
       return "Decision";
     case "complete":
@@ -768,12 +775,14 @@ function ResultView({
 }) {
   const [exportOpen, setExportOpen] = useState(false);
   const [concernsOpen, setConcernsOpen] = useState(false);
+  const [evaluationOpen, setEvaluationOpen] = useState(false);
   const [activeBlock, setActiveBlock] = useState<CalendarBlock | null>(null);
   const exportRef = useRef<HTMLDivElement>(null);
   const concernsRef = useRef<HTMLDivElement>(null);
+  const evaluationRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!exportOpen && !concernsOpen) return;
+    if (!exportOpen && !concernsOpen && !evaluationOpen) return;
     const close = (e: MouseEvent) => {
       if (exportRef.current && !exportRef.current.contains(e.target as Node)) {
         setExportOpen(false);
@@ -781,14 +790,18 @@ function ResultView({
       if (concernsRef.current && !concernsRef.current.contains(e.target as Node)) {
         setConcernsOpen(false);
       }
+      if (evaluationRef.current && !evaluationRef.current.contains(e.target as Node)) {
+        setEvaluationOpen(false);
+      }
     };
     document.addEventListener("mousedown", close);
     return () => document.removeEventListener("mousedown", close);
-  }, [exportOpen, concernsOpen]);
+  }, [exportOpen, concernsOpen, evaluationOpen]);
 
   const approvals = result.critiques.filter(
     (c) => c.approval === "approve" || c.approval === "approve_with_minor_concerns"
   ).length;
+  const evaluation = result.evaluation;
 
   const handleEventClick = (arg: EventClickArg) => {
     const block = arg.event.extendedProps.block as CalendarBlock | undefined;
@@ -806,9 +819,119 @@ function ResultView({
             {approvals}/5 approvals
             <span className="dot">·</span>
             {result.validation.valid ? "clean" : `${result.validation.violations.length} issue(s) logged`}
+            {evaluation && (
+              <>
+                <span className="dot">·</span>
+                eval {evaluation.overall_score}/5
+              </>
+            )}
           </p>
         </div>
         <div className="actions">
+          {evaluation && (
+            <div className="agent-notes-wrap" ref={evaluationRef}>
+              <button
+                className="agent-notes-trigger"
+                onClick={() => setEvaluationOpen((v) => !v)}
+                aria-expanded={evaluationOpen}
+                aria-haspopup="menu"
+                title="Schedule evaluation"
+              >
+                Evaluation
+                <ChevronDown size={11} className={`chev ${evaluationOpen ? "open" : ""}`} />
+              </button>
+              {evaluationOpen && (
+                <div className="agent-notes-menu" role="menu">
+                  <div className="agent-notes-head">
+                    <span>Schedule evaluation</span>
+                    <span>{evaluation.overall_score}/5</span>
+                  </div>
+                  <div className="evaluation-composite">
+                    <div>
+                      <span>Final</span>
+                      <strong>{evaluation.overall_score}/5</strong>
+                    </div>
+                    <div>
+                      <span>Model</span>
+                      <strong>{evaluation.model_score ?? evaluation.overall_score}/5</strong>
+                    </div>
+                    <div>
+                      <span>Hard</span>
+                      <strong>{evaluation.hard_score ?? 0}/5</strong>
+                    </div>
+                  </div>
+                  <div className="evaluation-models">
+                    <span>Planner: {formatCompactModel(evaluation.planner_model)}</span>
+                    <span>Evaluator: {formatCompactModel(evaluation.evaluator_model)}</span>
+                  </div>
+                  {evaluation.hard_metrics && (
+                    <div className="evaluation-hard">
+                      <div className="evaluation-subhead">
+                        <span>Hard constraints</span>
+                        <span>{evaluation.hard_metrics.score}/100</span>
+                      </div>
+                      {evaluation.hard_metrics.metrics.map((metric) => (
+                        <div className="evaluation-score" key={metric.name}>
+                          <div>
+                            <strong>{formatMetricName(metric.name)}</strong>
+                            <span>{metric.explanation}</span>
+                          </div>
+                          <b>{formatMetricValue(metric.name, metric.value)}</b>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <div className="evaluation-scores">
+                    <div className="evaluation-subhead">
+                      <span>Model judgement</span>
+                      <span>{evaluation.model_score ?? evaluation.overall_score}/5</span>
+                    </div>
+                    {evaluation.dimension_scores.map((score) => (
+                      <div className="evaluation-score" key={score.dimension}>
+                        <div>
+                          <strong>{formatDimension(score.dimension)}</strong>
+                          <span>{humanize(score.rationale, taskNameMap)}</span>
+                        </div>
+                        <b>{score.score}/5</b>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="agent-note evaluation-section">
+                    <div className="agent-note-top">
+                      <strong>Strengths</strong>
+                    </div>
+                    <div className="agent-note-list">
+                      {evaluation.strengths.map((item, index) => (
+                        <div className="agent-note-item" key={`strength-${index}`}>
+                          <p>{humanize(item, taskNameMap)}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="agent-note evaluation-section">
+                    <div className="agent-note-top">
+                      <strong>Weaknesses</strong>
+                    </div>
+                    <div className="agent-note-list">
+                      {evaluation.weaknesses.map((item, index) => (
+                        <div className="agent-note-item" key={`weakness-${index}`}>
+                          <p>{humanize(item, taskNameMap)}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="agent-note evaluation-section">
+                    <div className="agent-note-top">
+                      <strong>Recommendation</strong>
+                    </div>
+                    <div className="agent-note-item">
+                      <p>{humanize(evaluation.recommendation, taskNameMap)}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
           <div className="agent-notes-wrap" ref={concernsRef}>
             <button
               className="agent-notes-trigger"
@@ -1045,6 +1168,37 @@ function formatWindow(start: string, end: string): string {
       ...(includeYear ? { year: "numeric" } : {})
     });
   return `${fmt(s, !sameYear)} → ${fmt(e, true)}`;
+}
+
+function formatDimension(dimension: string): string {
+  return dimension
+    .split("_")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+function formatMetricName(metric: string): string {
+  const names: Record<string, string> = {
+    generation_time_seconds: "Generation speed",
+    rejection_count: "Rejections",
+    critical_count: "Critical issues",
+    major_count: "Major issues",
+    deadline_violation_count: "Deadline violations",
+    task_coverage_ratio: "Task coverage",
+    availability_overrun_hours: "Availability overrun"
+  };
+  return names[metric] ?? formatDimension(metric);
+}
+
+function formatMetricValue(metric: string, value: number): string {
+  if (metric === "generation_time_seconds") return `${value}s`;
+  if (metric === "task_coverage_ratio") return `${Math.round(value * 100)}%`;
+  if (metric === "availability_overrun_hours") return `${value}h`;
+  return String(value);
+}
+
+function formatCompactModel(model: string): string {
+  return MODEL_INFO[model]?.name ?? model;
 }
 
 // Replace any leftover task IDs (T1, T12, etc.) with the task's human name.
@@ -1347,7 +1501,7 @@ function SettingsModal({
               onChange={(m) => setDraft({ ...draft, model: m })}
               format={formatModel}
             />
-            <div className="field-hint">OpenRouter model used for planning.</div>
+            <div className="field-hint">OpenRouter model used to create schedules and evaluate the final result.</div>
           </div>
 
           <div className="field">

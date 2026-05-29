@@ -19,6 +19,7 @@ export interface PlanningRequest {
   maxIterations?: number;
   timezone?: string;
   model?: string;
+  evaluatorModel?: string;
   planningWindowOverride?: PlanningWindowOverride;
 }
 
@@ -27,6 +28,7 @@ export interface PlannerDefaults {
   maxIterations: number;
   timezone: string;
   model: string;
+  evaluatorModel: string;
   hasApiKey: boolean;
 }
 
@@ -153,6 +155,57 @@ export interface ConstraintValidation {
   }>;
 }
 
+export type EvaluationDimension =
+  | "requirement_match"
+  | "deadline_safety"
+  | "workload_realism"
+  | "academic_priority"
+  | "wellbeing_balance"
+  | "risk_resilience";
+
+export interface ScheduleEvaluationScore {
+  dimension: EvaluationDimension;
+  score: number;
+  rationale: string;
+}
+
+export type HardMetricName =
+  | "generation_time_seconds"
+  | "rejection_count"
+  | "critical_count"
+  | "major_count"
+  | "deadline_violation_count"
+  | "task_coverage_ratio"
+  | "availability_overrun_hours";
+
+export interface HardMetricResult {
+  name: HardMetricName;
+  value: number;
+  score: number;
+  explanation: string;
+}
+
+export interface HardMetricsEvaluation {
+  score: number;
+  metrics: HardMetricResult[];
+}
+
+export interface ScheduleEvaluation {
+  evaluator: "Schedule Evaluator";
+  calendar_version: number;
+  planner_model: string;
+  evaluator_model: string;
+  overall_score: number;
+  model_score: number;
+  hard_score: number;
+  hard_metrics: HardMetricsEvaluation;
+  dimension_scores: ScheduleEvaluationScore[];
+  strengths: string[];
+  weaknesses: string[];
+  comparison_notes: string[];
+  recommendation: string;
+}
+
 export interface CalendarVersionRecord {
   calendar: CalendarProposal;
   critiques: AgentCritique[];
@@ -172,6 +225,7 @@ export interface PlanningResult {
   finalCalendar: CalendarProposal;
   critiques: AgentCritique[];
   validation: ConstraintValidation;
+  evaluation: ScheduleEvaluation;
   exports: {
     json: string;
     ics: string;
@@ -184,6 +238,7 @@ export type ProgressPhase =
   | "planner"
   | "critique"
   | "validate"
+  | "evaluate"
   | "decision"
   | "complete"
   | "error";
@@ -210,6 +265,7 @@ export interface SavedCalendar {
 export interface AppConfig {
   quorum: number;
   model: string;
+  evaluatorModel?: string;
   apiKey?: string;
   maxIterations?: number;
 }

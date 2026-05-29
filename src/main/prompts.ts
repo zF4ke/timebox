@@ -22,6 +22,8 @@ export const AGENT_PROMPTS: Record<AgentName, string> = {
   "Risk Agent": loadPrompt("risk-agent")
 };
 
+export const SCHEDULE_EVALUATOR_PROMPT = loadPrompt("schedule-evaluator");
+
 export const AGENT_NAMES: AgentName[] = [
   "Deadline Agent",
   "Grade Agent",

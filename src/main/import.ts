@@ -113,6 +113,98 @@ export function importFromIcs(content: string): PlanningResult {
     finalCalendar: calendar,
     critiques: [],
     validation: { valid: true, violations: [] },
+    evaluation: {
+      evaluator: "Schedule Evaluator",
+      calendar_version: 1,
+      planner_model: "imported",
+      evaluator_model: "imported",
+      overall_score: 3,
+      model_score: 3,
+      hard_score: 3,
+      hard_metrics: {
+        score: 60,
+        metrics: [
+          {
+            name: "generation_time_seconds",
+            value: 0,
+            score: 100,
+            explanation: "Imported calendars do not have model generation time."
+          },
+          {
+            name: "rejection_count",
+            value: 0,
+            score: 100,
+            explanation: "Imported calendars do not include specialist rejections."
+          },
+          {
+            name: "critical_count",
+            value: 0,
+            score: 100,
+            explanation: "Imported calendars do not include critical critique counts."
+          },
+          {
+            name: "major_count",
+            value: 0,
+            score: 100,
+            explanation: "Imported calendars do not include major critique counts."
+          },
+          {
+            name: "deadline_violation_count",
+            value: 0,
+            score: 100,
+            explanation: "Imported calendars do not include task deadline context."
+          },
+          {
+            name: "task_coverage_ratio",
+            value: 0,
+            score: 0,
+            explanation: "Imported calendars do not include inferred task coverage."
+          },
+          {
+            name: "availability_overrun_hours",
+            value: 0,
+            score: 100,
+            explanation: "Imported calendars do not include inferred availability context."
+          }
+        ]
+      },
+      dimension_scores: [
+        {
+          dimension: "requirement_match",
+          score: 3,
+          rationale: "Imported calendars do not include the original student request."
+        },
+        {
+          dimension: "deadline_safety",
+          score: 3,
+          rationale: "Imported calendars do not include deadline context."
+        },
+        {
+          dimension: "workload_realism",
+          score: 3,
+          rationale: "Imported calendars preserve event timing but lack availability context."
+        },
+        {
+          dimension: "academic_priority",
+          score: 3,
+          rationale: "Imported calendars do not include academic priority context."
+        },
+        {
+          dimension: "wellbeing_balance",
+          score: 3,
+          rationale: "Imported calendars do not include wellbeing context."
+        },
+        {
+          dimension: "risk_resilience",
+          score: 3,
+          rationale: "Imported calendars do not include uncertainty context."
+        }
+      ],
+      strengths: ["Events were imported successfully."],
+      weaknesses: ["No original request or agent critique is available for this imported calendar."],
+      comparison_notes: ["Do not compare this score directly with generated plans."],
+      recommendation: "Use this import as calendar data, not as a model-quality evaluation."
+    },
     exports: { json: JSON.stringify(calendar, null, 2), ics: content }
   };
 

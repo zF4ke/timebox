@@ -45,7 +45,8 @@ export function saveRunLog(result: PlanningResult): void {
       approval: c.approval,
       severity: c.severity
     })),
-    finalValidation: result.validation
+    finalValidation: result.validation,
+    evaluation: result.evaluation
   };
 
   fs.writeFileSync(filePath, JSON.stringify(payload, null, 2), "utf-8");

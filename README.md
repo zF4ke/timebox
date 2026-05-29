@@ -46,6 +46,7 @@ Output goes to `release/`. On Windows this produces a portable `.exe`. On macOS 
 - **Specialist agents critique** each calendar version. Approval requires no critical critiques and at least `quorum` approvals (configurable, default 5).
 - **Validation** checks structural issues (deadline violations, unknown tasks, rest blocks) but is informational only — it does not block acceptance.
 - **Stop condition**: no critical critique + approvals ≥ quorum, or max iterations reached.
+- **Schedule Evaluator** scores the selected final calendar after acceptance. It is diagnostic only. The final evaluation is 50% model judgement and 50% deterministic hard metrics.
 - **JSON export** = full audit trail with reasoning. **ICS export** = importable into Google/Apple Calendar.
 
 ## UI Features
@@ -57,6 +58,7 @@ Output goes to `release/`. On Windows this produces a portable `.exe`. On macOS 
 - **Event details** — click any calendar block to see description, reasoning, and timing.
 - **Saved plans sidebar** — auto-saves plans, with load and delete.
 - **Settings** — configurable quorum (1–5), max iterations (1–5), model picker with pricing, and OpenRouter API key. Persisted to the OS user-data directory.
+- **Evaluation panel** — shows final score, model score, hard-metric score, each hard metric, dimension scores, strengths, weaknesses, and the planner/evaluator models used.
 - **Import** — drag-and-drop JSON/ICS files anywhere on the app, or use the Import button in the sidebar.
 - **Humanized task IDs** — raw IDs like "T1" are automatically replaced with task names in all UI text.
 
@@ -78,6 +80,18 @@ Output goes to `release/`. On Windows this produces a portable `.exe`. On macOS 
 - **Shared** (`src/shared/`) — TypeScript types.
 - **Prompts** (`src/main/prompts/`) — markdown prompt files loaded at runtime.
 - **Data** — saved plans, config, and debug logs stored in the OS user-data directory.
+
+## Evaluation Strategy
+
+The evaluator is a separate post-run model call, not another acceptance gate. It receives the original student input, interpreter output, specialist views, selected final calendar, final critiques, validation log, and hard metrics. It writes a `ScheduleEvaluation` object into the JSON export.
+
+The final score is:
+
+```text
+final_score = 50% model_score + 50% hard_score
+```
+
+The model score focuses on qualitative aspects such as coherence, actionability, compromise quality, and handling uncertainty. The hard score uses generation speed, rejections, critical issues, major issues, deadline violations, task coverage, and availability overrun.
 
 ## Prompt Strategy
 

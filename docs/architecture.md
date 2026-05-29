@@ -29,6 +29,8 @@ If no critical critiques AND quorum reached → ACCEPT
 Else Planner revises → v2, v3 ... up to max iterations
     ↓
 If max iterations reached → choose best calendar by fewest critical/major issues
+    ↓
+Schedule Evaluator → score selected final calendar for model comparison
 ```
 
 ## Agents
@@ -95,3 +97,34 @@ If no version reaches acceptance after max iterations, we select the "best" vers
 4. Later version wins ties
 
 Note: validation validity is **not** part of the fallback ranking.
+
+## Schedule Evaluation (Diagnostic Only)
+
+After the final calendar is selected, a separate **Schedule Evaluator** model scores the result. This is used to compare runs from different planner models, not to accept or reject the schedule.
+
+The evaluator receives:
+
+- original student input
+- interpreter output
+- specialist agent views
+- selected final calendar
+- final critiques
+- validation log
+- planner model and evaluator model names
+
+It returns a qualitative model score:
+
+- scores for requirement match, deadline safety, workload realism, academic priority, wellbeing balance, and risk resilience
+- strengths, weaknesses, comparison notes, and a recommendation
+
+The app also computes deterministic hard metrics:
+
+- generation time in seconds
+- final rejection count
+- final critical issue count
+- final major issue count
+- deadline violation count
+- task coverage ratio
+- availability overrun hours, using each day's `assumed_available_hours`
+
+The final displayed score is 50% qualitative model score and 50% hard-metric score. This keeps objective failures visible while still measuring schedule qualities that cannot be counted reliably.

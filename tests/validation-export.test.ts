@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { CalendarProposal, InterpreterOutput } from "../src/shared/types";
 import { createIcsExport } from "../src/main/exports";
+import { importFromIcs } from "../src/main/import";
 import { validateCalendar } from "../src/main/validation";
 
 describe("constraint checker", () => {
@@ -50,6 +51,16 @@ describe("ICS export", () => {
     expect(ics).toContain("BEGIN:VEVENT");
     expect(ics).toContain("SUMMARY:DB lab");
     expect(ics).toContain("DTSTART:20260504T130000Z");
+  });
+});
+
+describe("ICS import", () => {
+  it("adds a neutral evaluation placeholder for imported calendars", () => {
+    const result = importFromIcs(createIcsExport(validCalendar()));
+
+    expect(result.evaluation.evaluator).toBe("Schedule Evaluator");
+    expect(result.evaluation.overall_score).toBe(3);
+    expect(result.evaluation.dimension_scores).toHaveLength(6);
   });
 });
 

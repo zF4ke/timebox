@@ -37,7 +37,11 @@ export function loadConfig(): AppConfig {
   } catch {
     // fallthrough to defaults
   }
-  return { quorum: DEFAULT_QUORUM, model: DEFAULT_MODEL, maxIterations: DEFAULT_MAX_ITERATIONS };
+  return {
+    quorum: DEFAULT_QUORUM,
+    model: DEFAULT_MODEL,
+    maxIterations: DEFAULT_MAX_ITERATIONS
+  };
 }
 
 export function saveConfig(config: AppConfig): void {
