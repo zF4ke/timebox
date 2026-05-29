@@ -1,0 +1,70 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:FR29_01@timebox.local
+DTSTAMP:20260529T122215Z
+DTSTART:20260529T080000Z
+DTEND:20260529T120000Z
+SUMMARY:AI Project: Clean Dataset
+DESCRIPTION:Begin initial data loading\, inspection\, and cleaning necessary for the AI project.\\n\\nReasoning: Start the AI project pipeline immediately with the foundational data cleaning step.
+END:VEVENT
+BEGIN:VEVENT
+UID:SA30_01@timebox.local
+DTSTAMP:20260529T122215Z
+DTSTART:20260530T080000Z
+DTEND:20260530T113000Z
+SUMMARY:AI Project: Clean Dataset
+DESCRIPTION:Continue and finalize the dataset cleaning process.\\n\\nReasoning: Finish the data preparation work started yesterday.
+END:VEVENT
+BEGIN:VEVENT
+UID:SA30_02@timebox.local
+DTSTAMP:20260529T122215Z
+DTSTART:20260530T120000Z
+DTEND:20260530T160000Z
+SUMMARY:AI Project: Train Baseline Model
+DESCRIPTION:Set up and run the initial training for the baseline AI model.\\n\\nReasoning: Begin the core modeling phase after data is clean.
+END:VEVENT
+BEGIN:VEVENT
+UID:SA30_03@timebox.local
+DTSTAMP:20260529T122215Z
+DTSTART:20260530T160000Z
+DTEND:20260530T173000Z
+SUMMARY:AI Project: Write Report
+DESCRIPTION:Draft the methodology and data description sections of the report while the baseline results are fresh.\\n\\nReasoning: Start report writing early to reduce Sunday crunch\, leveraging fresh context.
+END:VEVENT
+BEGIN:VEVENT
+UID:SU31_01@timebox.local
+DTSTAMP:20260529T122215Z
+DTSTART:20260531T080000Z
+DTEND:20260531T120000Z
+SUMMARY:AI Project: Compare Improved Model
+DESCRIPTION:Implement and train the single improved model and compare results against the baseline.\\n\\nReasoning: Focus on the core comparison task to finalize results for the report.
+END:VEVENT
+BEGIN:VEVENT
+UID:SU31_02@timebox.local
+DTSTAMP:20260529T122215Z
+DTSTART:20260531T123000Z
+DTEND:20260531T153000Z
+SUMMARY:AI Project: Write Report
+DESCRIPTION:Finalize the results section based on model comparison and write the conclusion.\\n\\nReasoning: Complete the main body of the report based on the morning's model comparison.
+END:VEVENT
+BEGIN:VEVENT
+UID:SU31_03@timebox.local
+DTSTAMP:20260529T122215Z
+DTSTART:20260531T153000Z
+DTEND:20260531T170000Z
+SUMMARY:AI Project: Write Report
+DESCRIPTION:Final proofread\, formatting\, and submission of the AI Project report.\\n\\nReasoning: Allocate buffer time to ensure submission before the midnight deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:MO01_01@timebox.local
+DTSTAMP:20260529T122215Z
+DTSTART:20260601T060000Z
+DTEND:20260601T080000Z
+SUMMARY:Networks Quiz Review
+DESCRIPTION:Complete the required 2 hours of review for the Networks Quiz.\\n\\nReasoning: Scheduled immediately before the quiz deadline to maximize alertness and address the Deadline Agent's critical feedback.
+END:VEVENT
+END:VCALENDAR

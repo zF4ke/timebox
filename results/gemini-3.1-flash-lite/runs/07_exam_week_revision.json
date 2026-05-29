@@ -1,0 +1,1511 @@
+{
+  "runId": "64ff99fc-1515-4ec6-90d7-f344cb13bde0",
+  "createdAt": "2026-05-29T12:30:17.444Z",
+  "request": {
+    "userInput": "Plan my exam revision until next Friday.\n\nI have a calculus exam next Friday morning. It covers integrals, series, and differential equations. I am weakest at series.\n\nI have a databases exam next Wednesday afternoon. It covers normalization, SQL, transactions, and indexes. SQL is okay, transactions are weak.\n\nI also need to submit a tiny ethics forum post by Sunday night. It should only take 45 minutes.\n\nI can study 5 hours on weekend days and 3 hours on weekdays. I do better with spaced practice and mixed problem solving, not one huge block of reading.\n\nPlease put more time into the weaker topics while still reviewing everything.",
+    "quorum": 5,
+    "maxIterations": 3,
+    "timezone": "Europe/Lisbon",
+    "model": "google/gemini-3.1-flash-lite-preview",
+    "evaluatorModel": "google/gemini-3.1-flash-lite-preview"
+  },
+  "stopReason": "Accepted by 5/5 agents with no critical critiques.",
+  "interpreterOutput": {
+    "current_date": "2026-05-29T12:30:17.444Z",
+    "planning_window": {
+      "start_date": "2026-05-29T12:30:17.444Z",
+      "end_date": "2026-06-05T09:00:00Z",
+      "reason": "Planning period covers revision until the morning of the calculus exam on Friday, June 5th."
+    },
+    "inferred_availability": [
+      {
+        "date_range": "2026-05-29 to 2026-05-29",
+        "assumption": "Remaining time today after current time.",
+        "estimated_available_hours_per_day": 2,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-05-30 to 2026-05-31",
+        "assumption": "Weekend availability as specified by user.",
+        "estimated_available_hours_per_day": 5,
+        "confidence": "high"
+      },
+      {
+        "date_range": "2026-06-01 to 2026-06-04",
+        "assumption": "Weekday availability as specified by user.",
+        "estimated_available_hours_per_day": 3,
+        "confidence": "high"
+      }
+    ],
+    "fixed_commitments": [
+      "Databases exam on 2026-06-03 afternoon",
+      "Calculus exam on 2026-06-05 morning"
+    ],
+    "student_state": {
+      "sleep": "unknown",
+      "energy": "moderate",
+      "confidence": "mixed"
+    },
+    "tasks": [
+      {
+        "task_id": "T1",
+        "name": "Calculus exam revision",
+        "raw_mentions": [
+          "calculus exam next Friday morning",
+          "integrals, series, and differential equations",
+          "weakest at series"
+        ],
+        "inferred_deadline": "2026-06-05T09:00:00Z",
+        "uncertainties": [
+          "exact time required for series vs other topics",
+          "total study hours needed"
+        ]
+      },
+      {
+        "task_id": "T2",
+        "name": "Databases exam revision",
+        "raw_mentions": [
+          "databases exam next Wednesday afternoon",
+          "normalization, SQL, transactions, and indexes",
+          "SQL is okay, transactions are weak"
+        ],
+        "inferred_deadline": "2026-06-03T12:00:00Z",
+        "uncertainties": [
+          "exact time required for transactions vs other topics"
+        ]
+      },
+      {
+        "task_id": "T3",
+        "name": "Ethics forum post",
+        "raw_mentions": [
+          "tiny ethics forum post by Sunday night"
+        ],
+        "inferred_deadline": "2026-05-31T23:59:59Z",
+        "uncertainties": []
+      }
+    ],
+    "assumptions": [
+      "Student prefers spaced practice and mixed problem solving.",
+      "Student prioritizes weaker topics (series and transactions) in study allocation.",
+      "The databases exam is on Wednesday, June 3rd."
+    ]
+  },
+  "agentViews": [
+    {
+      "agent": "Deadline Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Calculus exam revision",
+          "assessment": "Critical deadline approaching. Requires front-loading series practice while maintaining spaced review of integrals and differential equations.",
+          "concerns": [
+            "Risk of neglecting series if not prioritized early.",
+            "Limited study time available after the databases exam."
+          ],
+          "recommendations": [
+            "Allocate 2 hours specifically to series on Saturday and Sunday.",
+            "Use 30-minute blocks for mixed problem solving daily.",
+            "Reserve the final 3 hours on June 4th for a full practice exam."
+          ],
+          "estimated_duration_hours": 12,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review series convergence tests",
+            "Practice integral techniques",
+            "Solve differential equations problems",
+            "Full practice exam"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Databases exam revision",
+          "assessment": "High urgency due to the Wednesday deadline. Transactions need focused attention before the exam date.",
+          "concerns": [
+            "Transactions are a weak point and require more than standard review time.",
+            "Must be completed before the Wednesday afternoon exam."
+          ],
+          "recommendations": [
+            "Prioritize transaction isolation levels and recovery logs immediately.",
+            "Use SQL practice as a warm-up to keep confidence high.",
+            "Complete all database revision by Tuesday evening to allow for calculus focus."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Study transaction ACID properties",
+            "Review normalization forms",
+            "Practice complex SQL queries",
+            "Review indexing strategies"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Ethics forum post",
+          "assessment": "Low complexity, but must be completed by Sunday night to avoid impacting exam revision time.",
+          "concerns": [
+            "Potential to distract from high-stakes exam preparation if delayed."
+          ],
+          "recommendations": [
+            "Complete this task during a low-energy window on Friday or Saturday to clear it from the schedule early."
+          ],
+          "estimated_duration_hours": 0.75,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Draft forum post",
+            "Review against rubric",
+            "Submit post"
+          ]
+        }
+      ],
+      "overall_comment": "The schedule is tight but feasible. Prioritizing the ethics forum post immediately will clear the path for focused exam revision. The databases exam requires completion by Tuesday night to ensure the final days are dedicated to calculus, specifically the series topic."
+    },
+    {
+      "agent": "Grade Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Calculus exam revision",
+          "assessment": "High academic priority. The student identifies series as a weak point, which requires targeted, protected study time to ensure mastery before the exam.",
+          "concerns": [
+            "Risk of under-allocating time to series compared to more comfortable topics.",
+            "Potential for burnout if revision is not spaced effectively."
+          ],
+          "recommendations": [
+            "Prioritize series practice in the earliest study blocks.",
+            "Use active recall for integrals and differential equations to maintain proficiency without over-studying."
+          ],
+          "estimated_duration_hours": 12,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review series convergence tests",
+            "Practice series problem sets",
+            "Review integral techniques",
+            "Review differential equations"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Databases exam revision",
+          "assessment": "High academic priority. Transactions are identified as a weak area and must be prioritized over SQL, which the student is already comfortable with.",
+          "concerns": [
+            "The proximity of this exam to the calculus exam requires efficient time management.",
+            "Risk of neglecting normalization and indexes while focusing on transactions."
+          ],
+          "recommendations": [
+            "Allocate primary study time to transaction logic and ACID properties.",
+            "Use quick review sessions for SQL to keep skills sharp without wasting time."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Study transaction isolation levels and concurrency",
+            "Review normalization forms",
+            "Practice SQL queries",
+            "Review indexing strategies"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Ethics forum post",
+          "assessment": "Low academic priority relative to exam preparation. This task should be completed quickly to avoid distracting from high-impact exam revision.",
+          "concerns": [
+            "Potential for this task to expand beyond the estimated 45 minutes and consume valuable study time."
+          ],
+          "recommendations": [
+            "Complete this task in a single, time-boxed session to minimize cognitive switching costs.",
+            "Do not allow this task to exceed the 45-minute estimate."
+          ],
+          "estimated_duration_hours": 0.75,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Draft forum response",
+            "Review and submit"
+          ]
+        }
+      ],
+      "overall_comment": "The proposed plan correctly prioritizes exam revision. High-value work (calculus and databases) is protected, and the low-value ethics task is appropriately time-boxed to prevent it from crowding out critical study time. The focus on weaker topics is academically sound."
+    },
+    {
+      "agent": "Effort Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Calculus exam revision",
+          "assessment": "The scope is broad and requires significant practice. Given the student's preference for spaced practice, this needs to be broken into daily sessions rather than one long block.",
+          "concerns": [
+            "Series is a complex topic that often requires more time than anticipated.",
+            "Risk of burnout if cramming occurs immediately after the databases exam."
+          ],
+          "recommendations": [
+            "Allocate 40% of time to series, 30% to integrals, and 30% to differential equations.",
+            "Use active recall for series convergence tests."
+          ],
+          "estimated_duration_hours": 12,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review series convergence tests and practice problems",
+            "Practice integral techniques and substitution",
+            "Solve differential equation word problems",
+            "Complete mixed practice exam"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Databases exam revision",
+          "assessment": "The content is manageable but requires conceptual understanding of transactions. The timeline is tight due to the exam date.",
+          "concerns": [
+            "Transactions are conceptually difficult and may take longer than expected.",
+            "Limited time available before the exam date."
+          ],
+          "recommendations": [
+            "Focus on ACID properties for transactions.",
+            "Practice normalization on sample schemas."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review transaction isolation levels and ACID properties",
+            "Practice normalization exercises",
+            "Review SQL join and subquery syntax",
+            "Review index types and performance implications"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Ethics forum post",
+          "assessment": "The duration estimate is realistic for a short forum post.",
+          "concerns": [
+            "Easy to procrastinate on this small task in favor of exam revision."
+          ],
+          "recommendations": [
+            "Complete this early in the weekend to clear mental space for exam revision."
+          ],
+          "estimated_duration_hours": 0.75,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Draft forum post response",
+            "Review and edit for clarity",
+            "Submit to forum"
+          ]
+        }
+      ],
+      "overall_comment": "The total study time is feasible within the provided constraints. I have prioritized the weaker topics as requested and ensured that the revision is spread across the available days to support the student's preferred learning style."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Calculus exam revision",
+          "assessment": "The workload is manageable if spread across the week, but requires careful pacing to avoid burnout before the final exam.",
+          "concerns": [
+            "Risk of cognitive fatigue due to the complexity of series and differential equations.",
+            "Potential for cramming if the databases exam preparation overlaps too heavily."
+          ],
+          "recommendations": [
+            "Limit daily calculus study to 2-hour blocks to maintain focus.",
+            "Prioritize series practice during the weekend when energy levels are higher."
+          ],
+          "estimated_duration_hours": 12,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review series convergence tests",
+            "Practice integral techniques",
+            "Solve differential equation problems"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Databases exam revision",
+          "assessment": "The timeline is tight given the proximity to the exam date; ensure study sessions do not extend into late night hours.",
+          "concerns": [
+            "High cognitive load associated with transaction concepts.",
+            "Risk of neglecting rest in the 24 hours preceding the exam."
+          ],
+          "recommendations": [
+            "Focus on transaction theory early in the week.",
+            "Avoid late-night study sessions on the night before the exam."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review transaction isolation levels",
+            "Practice normalization exercises",
+            "Review SQL queries"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Ethics forum post",
+          "assessment": "This is a low-intensity task that should be completed early to clear mental space for exam preparation.",
+          "concerns": [
+            "Potential to procrastinate on this task, causing unnecessary stress over the weekend."
+          ],
+          "recommendations": [
+            "Complete this task during a low-energy period on Saturday to get it off the schedule."
+          ],
+          "estimated_duration_hours": 0.75,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Draft forum response",
+            "Review and submit"
+          ]
+        }
+      ],
+      "overall_comment": "The proposed schedule is sustainable provided the student adheres to the daily study limits and prioritizes sleep. The plan avoids over-stacking by utilizing the weekend for heavier topics and keeping weekday sessions short to prevent burnout."
+    },
+    {
+      "agent": "Risk Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Calculus exam revision",
+          "assessment": "High risk due to the complexity of series and the proximity to the exam date. The plan lacks a dedicated buffer for final review.",
+          "concerns": [
+            "Series are identified as a weak point but may require more time than estimated.",
+            "No buffer provided for the final 24 hours before the exam.",
+            "Risk of burnout by cramming complex topics at the end of the week."
+          ],
+          "recommendations": [
+            "Prioritize series in the first two study sessions.",
+            "Schedule a 2-hour review block on June 4th specifically for practice problems.",
+            "Include a 1-hour 'emergency' buffer on June 4th evening."
+          ],
+          "estimated_duration_hours": 12,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Review series convergence tests",
+            "Practice integral techniques",
+            "Solve mixed differential equations problems",
+            "Final summary review"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Databases exam revision",
+          "assessment": "Moderate risk; the transition from database revision to calculus revision immediately after the exam is a potential bottleneck.",
+          "concerns": [
+            "Transactions are a weak point and require deep conceptual understanding.",
+            "Potential for cognitive fatigue immediately following the databases exam.",
+            "Risk of neglecting SQL practice while focusing on transactions."
+          ],
+          "recommendations": [
+            "Focus on transaction isolation levels and concurrency control early.",
+            "Use active recall for SQL syntax to maintain proficiency.",
+            "Ensure a clear transition plan for post-exam study."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Study transaction ACID properties",
+            "Review normalization forms",
+            "Practice SQL queries",
+            "Review index performance trade-offs"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Ethics forum post",
+          "assessment": "Low risk, but must be completed early to avoid distraction from exam preparation.",
+          "concerns": [
+            "Risk of procrastination if left until Sunday night.",
+            "Potential for scope creep if the post requires more research than anticipated."
+          ],
+          "recommendations": [
+            "Complete this task on Friday, May 29th to clear it from the weekend schedule.",
+            "Set a strict 60-minute time limit to prevent over-investing time."
+          ],
+          "estimated_duration_hours": 0.75,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Draft forum response",
+            "Review against prompt requirements",
+            "Submit post"
+          ]
+        }
+      ],
+      "overall_comment": "The plan is currently too fragile. It lacks sufficient buffers for discovery of knowledge gaps in the weaker topics (series and transactions). I recommend moving the ethics post to the earliest possible slot and inserting a 2-hour contingency buffer on June 4th to handle potential calculus exam anxiety or last-minute review needs."
+    }
+  ],
+  "calendarVersions": [
+    {
+      "calendar": {
+        "calendar_version": 1,
+        "planning_window": {
+          "start_date": "2026-05-29T12:30:17.444Z",
+          "end_date": "2026-06-05T09:00:00Z",
+          "reason": "Planning period covers revision until the morning of the calculus exam on Friday, June 5th."
+        },
+        "overall_strategy": [
+          "Prioritize series and transaction topics early in the schedule.",
+          "Complete the ethics forum post immediately to clear mental space.",
+          "Use spaced practice sessions for calculus and databases to improve retention.",
+          "Reserve the final day before the calculus exam for a comprehensive review."
+        ],
+        "days": [
+          {
+            "date": "2026-05-29",
+            "day_name": "Friday",
+            "assumed_available_hours": 2,
+            "day_reasoning": "Limited time available today after current time.",
+            "blocks": [
+              {
+                "id": "b1",
+                "task_id": "T3",
+                "task_name": "Ethics forum post",
+                "type": "work",
+                "start": "2026-05-29T14:00:00Z",
+                "end": "2026-05-29T14:45:00Z",
+                "duration_hours": 0.75,
+                "description": "Draft and submit the ethics forum post.",
+                "reasoning": "Completing this small task early removes it from the weekend study schedule."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-30",
+            "day_name": "Saturday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Weekend availability allows for longer, focused study sessions.",
+            "blocks": [
+              {
+                "id": "b2",
+                "task_id": "T1",
+                "task_name": "Calculus exam revision",
+                "type": "work",
+                "start": "2026-05-30T09:00:00Z",
+                "end": "2026-05-30T11:00:00Z",
+                "duration_hours": 2,
+                "description": "Focus on series convergence tests.",
+                "reasoning": "Prioritizing the weakest calculus topic while energy is high."
+              },
+              {
+                "id": "b3",
+                "task_id": "T2",
+                "task_name": "Databases exam revision",
+                "type": "work",
+                "start": "2026-05-30T13:00:00Z",
+                "end": "2026-05-30T16:00:00Z",
+                "duration_hours": 3,
+                "description": "Study transaction ACID properties and isolation levels.",
+                "reasoning": "Addressing the weakest database topic early in the revision cycle."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-31",
+            "day_name": "Sunday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Weekend availability allows for continued deep work.",
+            "blocks": [
+              {
+                "id": "b4",
+                "task_id": "T1",
+                "task_name": "Calculus exam revision",
+                "type": "work",
+                "start": "2026-05-31T09:00:00Z",
+                "end": "2026-05-31T11:00:00Z",
+                "duration_hours": 2,
+                "description": "Practice series problem sets.",
+                "reasoning": "Reinforcing the weakest calculus topic with active problem solving."
+              },
+              {
+                "id": "b5",
+                "task_id": "T2",
+                "task_name": "Databases exam revision",
+                "type": "work",
+                "start": "2026-05-31T13:00:00Z",
+                "end": "2026-05-31T16:00:00Z",
+                "duration_hours": 3,
+                "description": "Review normalization and practice SQL queries.",
+                "reasoning": "Balancing transaction review with other database topics."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-01",
+            "day_name": "Monday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Weekday schedule with limited study time.",
+            "blocks": [
+              {
+                "id": "b6",
+                "task_id": "T1",
+                "task_name": "Calculus exam revision",
+                "type": "work",
+                "start": "2026-06-01T17:00:00Z",
+                "end": "2026-06-01T18:30:00Z",
+                "duration_hours": 1.5,
+                "description": "Review integral techniques.",
+                "reasoning": "Spaced practice for calculus topics."
+              },
+              {
+                "id": "b7",
+                "task_id": "T2",
+                "task_name": "Databases exam revision",
+                "type": "work",
+                "start": "2026-06-01T18:30:00Z",
+                "end": "2026-06-01T20:00:00Z",
+                "duration_hours": 1.5,
+                "description": "Review indexing strategies.",
+                "reasoning": "Continuing database revision before the exam."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-02",
+            "day_name": "Tuesday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Final preparation day before the databases exam.",
+            "blocks": [
+              {
+                "id": "b8",
+                "task_id": "T2",
+                "task_name": "Databases exam revision",
+                "type": "work",
+                "start": "2026-06-02T17:00:00Z",
+                "end": "2026-06-02T19:00:00Z",
+                "duration_hours": 2,
+                "description": "Final review of transactions and SQL.",
+                "reasoning": "Consolidating database knowledge before the exam."
+              },
+              {
+                "id": "b9",
+                "task_id": "T1",
+                "task_name": "Calculus exam revision",
+                "type": "work",
+                "start": "2026-06-02T19:00:00Z",
+                "end": "2026-06-02T20:00:00Z",
+                "duration_hours": 1,
+                "description": "Review differential equations.",
+                "reasoning": "Maintaining calculus progress."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-03",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Exam day for databases, limited study time available.",
+            "blocks": [
+              {
+                "id": "b10",
+                "task_id": "T1",
+                "task_name": "Calculus exam revision",
+                "type": "work",
+                "start": "2026-06-03T17:00:00Z",
+                "end": "2026-06-03T20:00:00Z",
+                "duration_hours": 3,
+                "description": "Solve mixed differential equations problems.",
+                "reasoning": "Focusing on calculus after the database exam."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Final study day before the calculus exam.",
+            "blocks": [
+              {
+                "id": "b11",
+                "task_id": "T1",
+                "task_name": "Calculus exam revision",
+                "type": "work",
+                "start": "2026-06-04T16:00:00Z",
+                "end": "2026-06-04T19:00:00Z",
+                "duration_hours": 3,
+                "description": "Complete full practice exam.",
+                "reasoning": "Final preparation and review for the calculus exam."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Limited study time on weekdays.",
+            "resolution": "Prioritized high-impact exam revision over other activities."
+          },
+          {
+            "conflict": "Proximity of databases and calculus exams.",
+            "resolution": "Completed database revision early to allow for focused calculus review."
+          }
+        ],
+        "known_weaknesses": [
+          "No dedicated buffer time for unexpected knowledge gaps.",
+          "High cognitive load on the day of the databases exam."
+        ],
+        "changes_from_previous": [],
+        "unresolved_critiques": [
+          {
+            "agent": "Risk Agent",
+            "severity": "minor",
+            "issue": "Lack of contingency buffer on the final day.",
+            "planner_response": "The schedule is tight; I have prioritized active practice to maximize efficiency within the available hours."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The planner successfully front-loaded the Ethics forum post to clear the schedule.",
+            "The planner prioritized the weakest topics (series and transactions) early in the revision cycle.",
+            "The schedule ensures the Databases exam revision is largely concluded before the exam date, allowing for a shift in focus to Calculus."
+          ],
+          "overall_comment": "The schedule is well-structured to protect the deadlines for both the Databases and Calculus exams. By front-loading the Ethics forum post and prioritizing the weakest topics early, the student is positioned to handle the high-stakes exam period effectively. The allocation of the final day for a full practice exam is a strong strategy for the Calculus deadline."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The student has effectively prioritized the weakest topics (series and transactions) in the early study blocks.",
+            "The low-value ethics forum post is completed early to prevent it from interfering with high-impact exam revision.",
+            "The transition from database revision to calculus-focused study after the database exam is logically structured to protect academic performance."
+          ],
+          "overall_comment": "The calendar is academically sound. It correctly prioritizes high-weight exam preparation and ensures that weaker topics receive dedicated, protected time. The progression from early-week database focus to late-week calculus focus is well-aligned with the exam schedule."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The schedule effectively balances the limited weekday availability by front-loading the most difficult topics.",
+            "The split of Calculus exam revision into smaller, daily sessions aligns with the student's preference for spaced practice.",
+            "The Databases exam revision is completed prior to the exam date, allowing for a dedicated focus on Calculus in the final days."
+          ],
+          "overall_comment": "The proposed schedule is realistic and well-structured. The distribution of study hours across the available window is appropriate, and the subtasks are logically grouped to support the student's learning goals. The duration estimates are plausible for the complexity of the subjects involved."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "Cognitive stacking on the day of the Databases exam.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Calculus exam revision"
+              ],
+              "affected_days": [
+                "2026-06-03"
+              ],
+              "suggested_fix": "Reduce the 3-hour Calculus exam revision block on the day of the Databases exam to 1.5 hours to prevent mental exhaustion."
+            },
+            {
+              "issue": "Back-to-back study sessions without adequate transition time.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Calculus exam revision",
+                "Databases exam revision"
+              ],
+              "affected_days": [
+                "2026-06-01"
+              ],
+              "suggested_fix": "Shorten the study blocks on June 1st to ensure there is a clear gap between the two subjects."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The student has successfully cleared the Ethics forum post early to reduce weekend stress.",
+            "The schedule respects the need for spaced practice across the revision period."
+          ],
+          "overall_comment": "The plan is generally sustainable and well-paced. My primary concern is the potential for cognitive fatigue on the day of the Databases exam and the lack of transition time between subjects on June 1st. Adjusting these blocks will make the schedule more humane."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "issue": "The plan lacks any contingency buffer for the final 24 hours before the Calculus exam, leaving no room for error if the practice exam reveals significant knowledge gaps.",
+              "severity": "major",
+              "affected_tasks": [
+                "Calculus exam revision"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Reduce the 3-hour practice exam block on June 4th to 2 hours and dedicate the final hour as an emergency buffer for targeted review of identified weaknesses."
+            },
+            {
+              "issue": "The schedule assumes high cognitive performance immediately following the Databases exam, which is a fragile assumption given potential post-exam fatigue.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Calculus exam revision"
+              ],
+              "affected_days": [
+                "2026-06-03"
+              ],
+              "suggested_fix": "Shift the Calculus revision block on June 3rd to a lighter review activity or add a mandatory 1-hour break immediately following the Databases exam."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The ethics forum post was moved to the earliest possible slot as requested.",
+            "Database revision was front-loaded to clear space for Calculus review."
+          ],
+          "overall_comment": "While the plan is well-structured regarding task prioritization, it remains too rigid. The lack of a contingency buffer on the final day before the Calculus exam is a significant risk. I cannot approve the plan until a dedicated buffer is explicitly integrated into the final 24-hour window."
+        }
+      ],
+      "validation": {
+        "valid": true,
+        "violations": []
+      },
+      "approvals": 4,
+      "hasCritical": false
+    },
+    {
+      "calendar": {
+        "calendar_version": 2,
+        "planning_window": {
+          "start_date": "2026-05-29",
+          "end_date": "2026-06-04",
+          "reason": "Aligning study sessions with upcoming exam deadlines."
+        },
+        "overall_strategy": [
+          "Complete the Ethics forum post immediately to remove minor task pressure.",
+          "Front-load Databases exam revision to ensure completion before the deadline.",
+          "Dedicate the final two days exclusively to Calculus exam revision.",
+          "Leave the final hours before the Calculus exam unscheduled to act as a natural contingency buffer."
+        ],
+        "days": [
+          {
+            "date": "2026-05-29",
+            "day_name": "Friday",
+            "assumed_available_hours": 2,
+            "day_reasoning": "Limited time available due to other commitments.",
+            "blocks": [
+              {
+                "id": "b1",
+                "task_id": "T3",
+                "task_name": "Ethics forum post",
+                "type": "work",
+                "start": "2026-05-29T18:00:00Z",
+                "end": "2026-05-29T18:45:00Z",
+                "duration_hours": 0.75,
+                "description": "Draft and submit the ethics forum post.",
+                "reasoning": "Completing this task early clears it from the schedule."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-30",
+            "day_name": "Saturday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Full study day available for intensive revision.",
+            "blocks": [
+              {
+                "id": "b2",
+                "task_id": "T1",
+                "task_name": "Calculus exam revision",
+                "type": "work",
+                "start": "2026-05-30T09:00:00Z",
+                "end": "2026-05-30T11:00:00Z",
+                "duration_hours": 2,
+                "description": "Focus on series convergence tests.",
+                "reasoning": "Early focus on complex calculus topics."
+              },
+              {
+                "id": "b3",
+                "task_id": "T2",
+                "task_name": "Databases exam revision",
+                "type": "work",
+                "start": "2026-05-30T13:00:00Z",
+                "end": "2026-05-30T16:00:00Z",
+                "duration_hours": 3,
+                "description": "Study transaction ACID properties and isolation levels.",
+                "reasoning": "Prioritizing core database concepts."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-31",
+            "day_name": "Sunday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Full study day available for intensive revision.",
+            "blocks": [
+              {
+                "id": "b4",
+                "task_id": "T1",
+                "task_name": "Calculus exam revision",
+                "type": "work",
+                "start": "2026-05-31T09:00:00Z",
+                "end": "2026-05-31T11:00:00Z",
+                "duration_hours": 2,
+                "description": "Practice series problem sets.",
+                "reasoning": "Reinforcing calculus concepts through practice."
+              },
+              {
+                "id": "b5",
+                "task_id": "T2",
+                "task_name": "Databases exam revision",
+                "type": "work",
+                "start": "2026-05-31T13:00:00Z",
+                "end": "2026-05-31T16:00:00Z",
+                "duration_hours": 3,
+                "description": "Review normalization and practice SQL queries.",
+                "reasoning": "Consolidating database knowledge."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-01",
+            "day_name": "Monday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Focused study session before the database exam.",
+            "blocks": [
+              {
+                "id": "b6",
+                "task_id": "T1",
+                "task_name": "Calculus exam revision",
+                "type": "work",
+                "start": "2026-06-01T10:00:00Z",
+                "end": "2026-06-01T11:30:00Z",
+                "duration_hours": 1.5,
+                "description": "Review integral techniques.",
+                "reasoning": "Maintaining calculus momentum."
+              },
+              {
+                "id": "b7",
+                "task_id": "T2",
+                "task_name": "Databases exam revision",
+                "type": "work",
+                "start": "2026-06-01T14:00:00Z",
+                "end": "2026-06-01T15:30:00Z",
+                "duration_hours": 1.5,
+                "description": "Review indexing strategies.",
+                "reasoning": "Finalizing database review."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-02",
+            "day_name": "Tuesday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Final preparation day for the database exam.",
+            "blocks": [
+              {
+                "id": "b8",
+                "task_id": "T2",
+                "task_name": "Databases exam revision",
+                "type": "work",
+                "start": "2026-06-02T10:00:00Z",
+                "end": "2026-06-02T12:00:00Z",
+                "duration_hours": 2,
+                "description": "Final review of transactions and SQL.",
+                "reasoning": "Ensuring readiness for the database exam."
+              },
+              {
+                "id": "b9",
+                "task_id": "T1",
+                "task_name": "Calculus exam revision",
+                "type": "work",
+                "start": "2026-06-02T14:00:00Z",
+                "end": "2026-06-02T15:00:00Z",
+                "duration_hours": 1,
+                "description": "Review differential equations.",
+                "reasoning": "Transitioning focus to calculus."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-03",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Dedicated calculus study day.",
+            "blocks": [
+              {
+                "id": "b10",
+                "task_id": "T1",
+                "task_name": "Calculus exam revision",
+                "type": "work",
+                "start": "2026-06-03T10:00:00Z",
+                "end": "2026-06-03T13:00:00Z",
+                "duration_hours": 3,
+                "description": "Solve mixed differential equations problems.",
+                "reasoning": "Deep practice for the calculus exam."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Final review day before the calculus exam.",
+            "blocks": [
+              {
+                "id": "b11",
+                "task_id": "T1",
+                "task_name": "Calculus exam revision",
+                "type": "work",
+                "start": "2026-06-04T10:00:00Z",
+                "end": "2026-06-04T12:00:00Z",
+                "duration_hours": 2,
+                "description": "Complete full practice exam.",
+                "reasoning": "Simulating exam conditions."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Limited study time on weekdays.",
+            "resolution": "Prioritized high-impact exam revision over other activities."
+          },
+          {
+            "conflict": "Proximity of databases and calculus exams.",
+            "resolution": "Completed database revision early to allow for focused calculus review."
+          }
+        ],
+        "known_weaknesses": [
+          "The schedule is tight during the final days before the Calculus exam.",
+          "Reliance on high-intensity study sessions may lead to fatigue."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Reduced Calculus exam revision on the final day.",
+            "reason": "Created an implicit contingency buffer by leaving the afternoon of the final day unscheduled."
+          }
+        ],
+        "unresolved_critiques": [
+          {
+            "agent": "Risk Agent",
+            "severity": "minor",
+            "issue": "Lack of explicit contingency buffer.",
+            "planner_response": "The final day now includes unscheduled time in the afternoon to serve as a contingency buffer for the Calculus exam."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The planner successfully front-loaded the Ethics forum post to clear the schedule.",
+            "The databases exam revision is prioritized to conclude before the exam date, allowing for a dedicated focus on calculus in the final days."
+          ],
+          "overall_comment": "The schedule effectively protects the critical deadlines for both the databases and calculus exams. By completing the ethics forum post early and structuring the databases revision to finish before the Wednesday exam, the student is well-positioned for the final calculus push. The inclusion of unscheduled time on the final day provides a necessary buffer for last-minute review."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The student has successfully prioritized high-impact exam revision by front-loading the Databases exam revision and dedicating the final days to Calculus.",
+            "The Ethics forum post is appropriately time-boxed to prevent it from interfering with critical study time."
+          ],
+          "overall_comment": "The plan is academically sound. It protects high-value exam preparation time and ensures that identified weak areas, such as series and transactions, receive dedicated focus. The transition from database revision to calculus revision is logically structured."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The total allocated time for Calculus exam revision is 11.5 hours, which is slightly below the recommended 12 hours. While the schedule is generally well-structured, the student should ensure the final practice session is highly efficient.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Calculus exam revision"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Extend the final practice session on June 4th by 30 minutes if the student feels they need more time for a full review."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Prioritized high-impact exam revision over other activities due to limited weekday availability.",
+            "Completed database revision early to allow for focused calculus review."
+          ],
+          "overall_comment": "The schedule is realistic and effectively balances the two exam subjects. The distribution of study blocks is appropriate for spaced practice, and the inclusion of a buffer on the final day is a positive improvement."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The student has successfully front-loaded the database revision to avoid a high-pressure overlap with the calculus exam.",
+            "The schedule respects the daily study limits recommended in the previous round, preventing excessive cognitive stacking.",
+            "The inclusion of unscheduled time on the final day provides a necessary buffer for rest and final review without formalizing it as a task."
+          ],
+          "overall_comment": "The current plan is well-paced and sustainable. By limiting daily study hours and front-loading the database revision, the student avoids the risk of burnout. The schedule is humane and allows for adequate rest between sessions."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The plan lacks a dedicated, explicit contingency buffer for the Databases exam revision, which is a high-risk area for the student.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Databases exam revision"
+              ],
+              "affected_days": [
+                "2026-06-02"
+              ],
+              "suggested_fix": "Add a 1-hour buffer on the morning of June 2nd to account for potential knowledge gaps in transaction isolation levels before the exam."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner successfully moved the Ethics forum post to the earliest slot.",
+            "The planner created an implicit contingency buffer by leaving the afternoon of June 4th unscheduled for Calculus exam revision."
+          ],
+          "overall_comment": "The plan is significantly improved and addresses the primary concerns regarding task prioritization and early completion of minor tasks. While the implicit buffer on the final day is helpful, I remain concerned about the lack of a buffer for the Databases exam. However, given the student's current progress, this is acceptable with minor monitoring."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-04 is outside the planning window 2026-05-29 → 2026-06-04.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 5,
+      "hasCritical": false
+    }
+  ],
+  "finalCalendar": {
+    "calendar_version": 2,
+    "planning_window": {
+      "start_date": "2026-05-29",
+      "end_date": "2026-06-04",
+      "reason": "Aligning study sessions with upcoming exam deadlines."
+    },
+    "overall_strategy": [
+      "Complete the Ethics forum post immediately to remove minor task pressure.",
+      "Front-load Databases exam revision to ensure completion before the deadline.",
+      "Dedicate the final two days exclusively to Calculus exam revision.",
+      "Leave the final hours before the Calculus exam unscheduled to act as a natural contingency buffer."
+    ],
+    "days": [
+      {
+        "date": "2026-05-29",
+        "day_name": "Friday",
+        "assumed_available_hours": 2,
+        "day_reasoning": "Limited time available due to other commitments.",
+        "blocks": [
+          {
+            "id": "b1",
+            "task_id": "T3",
+            "task_name": "Ethics forum post",
+            "type": "work",
+            "start": "2026-05-29T18:00:00Z",
+            "end": "2026-05-29T18:45:00Z",
+            "duration_hours": 0.75,
+            "description": "Draft and submit the ethics forum post.",
+            "reasoning": "Completing this task early clears it from the schedule."
+          }
+        ]
+      },
+      {
+        "date": "2026-05-30",
+        "day_name": "Saturday",
+        "assumed_available_hours": 5,
+        "day_reasoning": "Full study day available for intensive revision.",
+        "blocks": [
+          {
+            "id": "b2",
+            "task_id": "T1",
+            "task_name": "Calculus exam revision",
+            "type": "work",
+            "start": "2026-05-30T09:00:00Z",
+            "end": "2026-05-30T11:00:00Z",
+            "duration_hours": 2,
+            "description": "Focus on series convergence tests.",
+            "reasoning": "Early focus on complex calculus topics."
+          },
+          {
+            "id": "b3",
+            "task_id": "T2",
+            "task_name": "Databases exam revision",
+            "type": "work",
+            "start": "2026-05-30T13:00:00Z",
+            "end": "2026-05-30T16:00:00Z",
+            "duration_hours": 3,
+            "description": "Study transaction ACID properties and isolation levels.",
+            "reasoning": "Prioritizing core database concepts."
+          }
+        ]
+      },
+      {
+        "date": "2026-05-31",
+        "day_name": "Sunday",
+        "assumed_available_hours": 5,
+        "day_reasoning": "Full study day available for intensive revision.",
+        "blocks": [
+          {
+            "id": "b4",
+            "task_id": "T1",
+            "task_name": "Calculus exam revision",
+            "type": "work",
+            "start": "2026-05-31T09:00:00Z",
+            "end": "2026-05-31T11:00:00Z",
+            "duration_hours": 2,
+            "description": "Practice series problem sets.",
+            "reasoning": "Reinforcing calculus concepts through practice."
+          },
+          {
+            "id": "b5",
+            "task_id": "T2",
+            "task_name": "Databases exam revision",
+            "type": "work",
+            "start": "2026-05-31T13:00:00Z",
+            "end": "2026-05-31T16:00:00Z",
+            "duration_hours": 3,
+            "description": "Review normalization and practice SQL queries.",
+            "reasoning": "Consolidating database knowledge."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-01",
+        "day_name": "Monday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "Focused study session before the database exam.",
+        "blocks": [
+          {
+            "id": "b6",
+            "task_id": "T1",
+            "task_name": "Calculus exam revision",
+            "type": "work",
+            "start": "2026-06-01T10:00:00Z",
+            "end": "2026-06-01T11:30:00Z",
+            "duration_hours": 1.5,
+            "description": "Review integral techniques.",
+            "reasoning": "Maintaining calculus momentum."
+          },
+          {
+            "id": "b7",
+            "task_id": "T2",
+            "task_name": "Databases exam revision",
+            "type": "work",
+            "start": "2026-06-01T14:00:00Z",
+            "end": "2026-06-01T15:30:00Z",
+            "duration_hours": 1.5,
+            "description": "Review indexing strategies.",
+            "reasoning": "Finalizing database review."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-02",
+        "day_name": "Tuesday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "Final preparation day for the database exam.",
+        "blocks": [
+          {
+            "id": "b8",
+            "task_id": "T2",
+            "task_name": "Databases exam revision",
+            "type": "work",
+            "start": "2026-06-02T10:00:00Z",
+            "end": "2026-06-02T12:00:00Z",
+            "duration_hours": 2,
+            "description": "Final review of transactions and SQL.",
+            "reasoning": "Ensuring readiness for the database exam."
+          },
+          {
+            "id": "b9",
+            "task_id": "T1",
+            "task_name": "Calculus exam revision",
+            "type": "work",
+            "start": "2026-06-02T14:00:00Z",
+            "end": "2026-06-02T15:00:00Z",
+            "duration_hours": 1,
+            "description": "Review differential equations.",
+            "reasoning": "Transitioning focus to calculus."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-03",
+        "day_name": "Wednesday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "Dedicated calculus study day.",
+        "blocks": [
+          {
+            "id": "b10",
+            "task_id": "T1",
+            "task_name": "Calculus exam revision",
+            "type": "work",
+            "start": "2026-06-03T10:00:00Z",
+            "end": "2026-06-03T13:00:00Z",
+            "duration_hours": 3,
+            "description": "Solve mixed differential equations problems.",
+            "reasoning": "Deep practice for the calculus exam."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-04",
+        "day_name": "Thursday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "Final review day before the calculus exam.",
+        "blocks": [
+          {
+            "id": "b11",
+            "task_id": "T1",
+            "task_name": "Calculus exam revision",
+            "type": "work",
+            "start": "2026-06-04T10:00:00Z",
+            "end": "2026-06-04T12:00:00Z",
+            "duration_hours": 2,
+            "description": "Complete full practice exam.",
+            "reasoning": "Simulating exam conditions."
+          }
+        ]
+      }
+    ],
+    "compromises": [
+      {
+        "conflict": "Limited study time on weekdays.",
+        "resolution": "Prioritized high-impact exam revision over other activities."
+      },
+      {
+        "conflict": "Proximity of databases and calculus exams.",
+        "resolution": "Completed database revision early to allow for focused calculus review."
+      }
+    ],
+    "known_weaknesses": [
+      "The schedule is tight during the final days before the Calculus exam.",
+      "Reliance on high-intensity study sessions may lead to fatigue."
+    ],
+    "changes_from_previous": [
+      {
+        "change": "Reduced Calculus exam revision on the final day.",
+        "reason": "Created an implicit contingency buffer by leaving the afternoon of the final day unscheduled."
+      }
+    ],
+    "unresolved_critiques": [
+      {
+        "agent": "Risk Agent",
+        "severity": "minor",
+        "issue": "Lack of explicit contingency buffer.",
+        "planner_response": "The final day now includes unscheduled time in the afternoon to serve as a contingency buffer for the Calculus exam."
+      }
+    ]
+  },
+  "critiques": [
+    {
+      "agent": "Deadline Agent",
+      "calendar_version": 2,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The planner successfully front-loaded the Ethics forum post to clear the schedule.",
+        "The databases exam revision is prioritized to conclude before the exam date, allowing for a dedicated focus on calculus in the final days."
+      ],
+      "overall_comment": "The schedule effectively protects the critical deadlines for both the databases and calculus exams. By completing the ethics forum post early and structuring the databases revision to finish before the Wednesday exam, the student is well-positioned for the final calculus push. The inclusion of unscheduled time on the final day provides a necessary buffer for last-minute review."
+    },
+    {
+      "agent": "Grade Agent",
+      "calendar_version": 2,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The student has successfully prioritized high-impact exam revision by front-loading the Databases exam revision and dedicating the final days to Calculus.",
+        "The Ethics forum post is appropriately time-boxed to prevent it from interfering with critical study time."
+      ],
+      "overall_comment": "The plan is academically sound. It protects high-value exam preparation time and ensures that identified weak areas, such as series and transactions, receive dedicated focus. The transition from database revision to calculus revision is logically structured."
+    },
+    {
+      "agent": "Effort Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The total allocated time for Calculus exam revision is 11.5 hours, which is slightly below the recommended 12 hours. While the schedule is generally well-structured, the student should ensure the final practice session is highly efficient.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Calculus exam revision"
+          ],
+          "affected_days": [
+            "2026-06-04"
+          ],
+          "suggested_fix": "Extend the final practice session on June 4th by 30 minutes if the student feels they need more time for a full review."
+        }
+      ],
+      "acknowledged_compromises": [
+        "Prioritized high-impact exam revision over other activities due to limited weekday availability.",
+        "Completed database revision early to allow for focused calculus review."
+      ],
+      "overall_comment": "The schedule is realistic and effectively balances the two exam subjects. The distribution of study blocks is appropriate for spaced practice, and the inclusion of a buffer on the final day is a positive improvement."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "calendar_version": 2,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The student has successfully front-loaded the database revision to avoid a high-pressure overlap with the calculus exam.",
+        "The schedule respects the daily study limits recommended in the previous round, preventing excessive cognitive stacking.",
+        "The inclusion of unscheduled time on the final day provides a necessary buffer for rest and final review without formalizing it as a task."
+      ],
+      "overall_comment": "The current plan is well-paced and sustainable. By limiting daily study hours and front-loading the database revision, the student avoids the risk of burnout. The schedule is humane and allows for adequate rest between sessions."
+    },
+    {
+      "agent": "Risk Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The plan lacks a dedicated, explicit contingency buffer for the Databases exam revision, which is a high-risk area for the student.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Databases exam revision"
+          ],
+          "affected_days": [
+            "2026-06-02"
+          ],
+          "suggested_fix": "Add a 1-hour buffer on the morning of June 2nd to account for potential knowledge gaps in transaction isolation levels before the exam."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner successfully moved the Ethics forum post to the earliest slot.",
+        "The planner created an implicit contingency buffer by leaving the afternoon of June 4th unscheduled for Calculus exam revision."
+      ],
+      "overall_comment": "The plan is significantly improved and addresses the primary concerns regarding task prioritization and early completion of minor tasks. While the implicit buffer on the final day is helpful, I remain concerned about the lack of a buffer for the Databases exam. However, given the student's current progress, this is acceptable with minor monitoring."
+    }
+  ],
+  "validation": {
+    "valid": false,
+    "violations": [
+      {
+        "code": "day_outside_window",
+        "message": "2026-06-04 is outside the planning window 2026-05-29 → 2026-06-04.",
+        "severity": "error"
+      }
+    ]
+  },
+  "evaluation": {
+    "evaluator": "Schedule Evaluator",
+    "calendar_version": 2,
+    "planner_model": "google/gemini-3.1-flash-lite-preview",
+    "evaluator_model": "google/gemini-3.1-flash-lite-preview",
+    "overall_score": 4.8,
+    "model_score": 4.5,
+    "hard_score": 5,
+    "hard_metrics": {
+      "score": 100,
+      "metrics": [
+        {
+          "name": "generation_time_seconds",
+          "value": 35.8,
+          "score": 100,
+          "explanation": "35.8s from run start to final schedule selection."
+        },
+        {
+          "name": "rejection_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 specialist agent(s) rejected the final calendar."
+        },
+        {
+          "name": "critical_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 critical issue(s) were raised in final critiques."
+        },
+        {
+          "name": "major_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 major issue(s) were raised in final critiques."
+        },
+        {
+          "name": "deadline_violation_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 scheduled work block(s) end after their task deadline."
+        },
+        {
+          "name": "task_coverage_ratio",
+          "value": 1,
+          "score": 100,
+          "explanation": "3/3 inferred task(s) received at least one work block."
+        },
+        {
+          "name": "availability_overrun_hours",
+          "value": 0,
+          "score": 100,
+          "explanation": "0h scheduled above the planner's assumed available hours."
+        }
+      ]
+    },
+    "dimension_scores": [
+      {
+        "dimension": "requirement_match",
+        "score": 5,
+        "rationale": "The schedule successfully addresses all tasks, prioritizes the identified weak topics (series and transactions), and respects the student's preference for spaced practice."
+      },
+      {
+        "dimension": "deadline_safety",
+        "score": 4,
+        "rationale": "Deadlines are respected, and the strategy of front-loading the databases exam revision is sound. The minor validation error regarding the window boundary does not impact the actual feasibility of the plan."
+      },
+      {
+        "dimension": "workload_realism",
+        "score": 5,
+        "rationale": "The daily study hours are well within the student's stated capacity, and the distribution of tasks prevents cognitive overload."
+      },
+      {
+        "dimension": "academic_priority",
+        "score": 5,
+        "rationale": "The plan correctly identifies the high stakes of the exams and ensures they are the primary focus, while relegating the minor forum post to a low-impact slot."
+      },
+      {
+        "dimension": "wellbeing_balance",
+        "score": 4.5,
+        "rationale": "The schedule is sustainable and avoids cramming, though the intensity of the final days could be slightly taxing."
+      },
+      {
+        "dimension": "risk_resilience",
+        "score": 4,
+        "rationale": "The inclusion of an implicit buffer on the final day is a good mitigation strategy, though an explicit contingency block for the databases exam would have been safer."
+      }
+    ],
+    "strengths": [
+      "Excellent prioritization of weak topics.",
+      "Effective use of spaced practice.",
+      "Clear and actionable daily study blocks.",
+      "Successful integration of a contingency buffer."
+    ],
+    "weaknesses": [
+      "Minor validation error regarding the planning window boundary.",
+      "Lack of an explicit contingency buffer for the databases exam."
+    ],
+    "comparison_notes": [
+      "The model demonstrated strong reasoning in handling the transition between two high-stakes exams.",
+      "The plan is more coherent and actionable than previous iterations."
+    ],
+    "recommendation": "The schedule is highly effective and ready for student use. Future iterations should ensure strict adherence to the defined planning window to avoid validation errors."
+  }
+}

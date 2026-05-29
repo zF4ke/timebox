@@ -1,0 +1,78 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:F29_OS_CODE_1@timebox.local
+DTSTAMP:20260529T121524Z
+DTSTART:20260529T150000Z
+DTEND:20260529T210000Z
+SUMMARY:Operating Systems Lab Coding
+DESCRIPTION:Dedicate a large block to coding the Operating Systems Lab to ensure completion before tomorrow's deadline.\\n\\nReasoning: This addresses the critical deadline risk by tackling the 4-5 hour coding requirement immediately\, using 6 hours to account for setup and initial debugging.
+END:VEVENT
+BEGIN:VEVENT
+UID:F29_OS_CODE_2@timebox.local
+DTSTAMP:20260529T121524Z
+DTSTART:20260529T210000Z
+DTEND:20260529T220000Z
+SUMMARY:Operating Systems Lab Coding
+DESCRIPTION:Continue coding the Operating Systems Lab\, aiming to finish implementation tonight.\\n\\nReasoning: This final hour ensures the coding component is completed today\, respecting the preference to avoid very late work while meeting the immediate deadline pressure.
+END:VEVENT
+BEGIN:VEVENT
+UID:S30_OS_REPORT@timebox.local
+DTSTAMP:20260529T121524Z
+DTSTART:20260530T130000Z
+DTEND:20260530T143000Z
+SUMMARY:Operating Systems Lab Report Writing
+DESCRIPTION:Write and finalize the short report for the Operating Systems Lab.\\n\\nReasoning: This completes the critical lab submission immediately after classes\, ensuring the 23:59 deadline is met with time to spare.
+END:VEVENT
+BEGIN:VEVENT
+UID:S30_STAT_STUDY_1@timebox.local
+DTSTAMP:20260529T121524Z
+DTSTART:20260530T150000Z
+DTEND:20260530T170000Z
+SUMMARY:Statistics Quiz Study (Hypothesis Tests & CIs)
+DESCRIPTION:First focused study session for the Statistics Quiz\, concentrating on hypothesis test formulas.\\n\\nReasoning: Starting the Statistics study immediately after the critical lab is done helps retention\, addressing the student's weakness in formulas early.
+END:VEVENT
+BEGIN:VEVENT
+UID:S30_AASMA_BRAINSTORM@timebox.local
+DTSTAMP:20260529T121524Z
+DTSTART:20260530T170000Z
+DTEND:20260530T180000Z
+SUMMARY:AASMA Project Idea Submission
+DESCRIPTION:Brainstorm potential topics for the AASMA project idea.\\n\\nReasoning: A small block dedicated to topic selection prevents this low-urgency task from becoming a last-minute rush later in the week.
+END:VEVENT
+BEGIN:VEVENT
+UID:S31_STAT_STUDY_2@timebox.local
+DTSTAMP:20260529T121524Z
+DTSTART:20260531T100000Z
+DTEND:20260531T120000Z
+SUMMARY:Statistics Quiz Study (Hypothesis Tests & CIs)
+DESCRIPTION:Second focused study session for the Statistics Quiz\, concentrating on confidence interval formulas and practice problems.\\n\\nReasoning: This completes the required 4 hours of study before the Monday deadline\, focusing on the weak areas identified.
+END:VEVENT
+BEGIN:VEVENT
+UID:S31_AASMA_WRITE@timebox.local
+DTSTAMP:20260529T121524Z
+DTSTART:20260531T120000Z
+DTEND:20260531T130000Z
+SUMMARY:AASMA Project Idea Submission
+DESCRIPTION:Draft the one-page AASMA project idea based on the brainstormed topics.\\n\\nReasoning: Utilizing the remaining available time today to draft the low-urgency assignment.
+END:VEVENT
+BEGIN:VEVENT
+UID:M01_STAT_REVIEW@timebox.local
+DTSTAMP:20260529T121524Z
+DTSTART:20260601T090000Z
+DTEND:20260601T100000Z
+SUMMARY:Statistics Quiz Study (Hypothesis Tests & CIs)
+DESCRIPTION:Final quick review of Statistics formulas before the quiz deadline.\\n\\nReasoning: A short review block is scheduled in the morning to refresh memory before the quiz deadline\, utilizing the available time before general work starts.
+END:VEVENT
+BEGIN:VEVENT
+UID:M01_AASMA_FINALIZE@timebox.local
+DTSTAMP:20260529T121524Z
+DTSTART:20260601T150000Z
+DTEND:20260601T160000Z
+SUMMARY:AASMA Project Idea Submission
+DESCRIPTION:Finalize and proofread the one-page AASMA project idea submission.\\n\\nReasoning: Completing the writing phase for the AASMA idea\, leaving a buffer day before the Friday deadline.
+END:VEVENT
+END:VCALENDAR

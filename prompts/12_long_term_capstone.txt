@@ -1,0 +1,13 @@
+Create a plan for the next three weeks for my capstone preparation.
+
+The capstone checkpoint is in three weeks. By then I need:
+- a working prototype
+- a short technical report
+- an evaluation plan
+- a 5 minute progress presentation
+
+The prototype depends on choosing between two libraries. I have not tested either. The report depends on the prototype design being stable.
+
+There is also a smaller data mining assignment due next Tuesday worth 10%, likely 4 hours.
+
+I can work around 12 hours per week on capstone plus 4 hours this weekend for the data mining assignment. I want milestones, early risk reduction, and not just a giant final-week push.

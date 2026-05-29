@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:b1@timebox.local
+DTSTAMP:20260529T122817Z
+DTSTART:20260529T090000Z
+DTEND:20260529T130000Z
+SUMMARY:Machine learning assignment
+DESCRIPTION:Run core experiments and draft initial results for the Machine learning assignment.\\n\\nReasoning: This task is the highest priority and requires significant uninterrupted time to complete.
+END:VEVENT
+BEGIN:VEVENT
+UID:b2@timebox.local
+DTSTAMP:20260529T122817Z
+DTSTART:20260530T090000Z
+DTEND:20260530T103000Z
+SUMMARY:Machine learning assignment
+DESCRIPTION:Finalize the written analysis for the Machine learning assignment.\\n\\nReasoning: Completing the final components of the assignment is essential for submission.
+END:VEVENT
+BEGIN:VEVENT
+UID:b3@timebox.local
+DTSTAMP:20260529T122817Z
+DTSTART:20260530T103000Z
+DTEND:20260530T120000Z
+SUMMARY:Networks worksheet
+DESCRIPTION:Complete the overdue Networks worksheet.\\n\\nReasoning: This task is overdue and needs to be finished to clear the backlog.
+END:VEVENT
+END:VCALENDAR

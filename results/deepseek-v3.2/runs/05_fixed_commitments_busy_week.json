@@ -1,0 +1,2267 @@
+{
+  "runId": "b5af8382-24aa-4d53-8f94-531b6a8e9292",
+  "createdAt": "2026-05-29T15:18:42.057Z",
+  "request": {
+    "userInput": "Create a study plan for this week.\n\nFixed commitments:\n- Monday 09:00-12:00 classes\n- Monday 18:00-20:00 dentist and travel\n- Tuesday 10:00-16:00 lab sessions\n- Wednesday 13:00-17:00 part-time work\n- Thursday 09:00-11:00 classes\n- Friday 15:00-18:00 family event\n\nTasks:\n- Computer graphics assignment due Friday at 23:59. I need around 7 hours and I have not started.\n- Security quiz on Thursday morning. I need 3 hours of revision.\n- AASMA reflection due Wednesday night. It should take 90 minutes.\n- Buy materials for a weekend workshop. It takes about 1 hour and must be done before Saturday.\n\nI prefer working between 14:00 and 21:00 and I want the plan to respect the fixed commitments.",
+    "quorum": 5,
+    "maxIterations": 3,
+    "timezone": "Europe/Lisbon",
+    "model": "deepseek/deepseek-v3.2",
+    "evaluatorModel": "deepseek/deepseek-v3.2"
+  },
+  "stopReason": "Maximum iterations reached. Selected best available calendar.",
+  "interpreterOutput": {
+    "current_date": "2026-05-29T15:18:42.058Z",
+    "planning_window": {
+      "start_date": "2026-06-01",
+      "end_date": "2026-06-07",
+      "reason": "Student requested a plan for 'this week'. Current date is Friday, May 29, 2026. The upcoming week is Monday, June 1 to Sunday, June 7, 2026."
+    },
+    "inferred_availability": [
+      {
+        "date_range": "2026-06-01",
+        "assumption": "Monday has classes 09:00-12:00 and dentist/travel 18:00-20:00. Student prefers working 14:00-21:00. Available block is 14:00-18:00 before dentist. Energy may be lower after classes.",
+        "estimated_available_hours_per_day": 4,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-06-02",
+        "assumption": "Tuesday has lab sessions 10:00-16:00. Student prefers working 14:00-21:00. Available time is after labs, from 16:00-21:00. May be tired after long lab.",
+        "estimated_available_hours_per_day": 5,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-06-03",
+        "assumption": "Wednesday has part-time work 13:00-17:00. Student prefers working 14:00-21:00. Morning (before work) and evening (after work) are available. AASMA reflection is due this night.",
+        "estimated_available_hours_per_day": 6,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-06-04",
+        "assumption": "Thursday has classes 09:00-11:00 and Security quiz in the morning. Student prefers working 14:00-21:00. Afternoon and evening are available for study after quiz.",
+        "estimated_available_hours_per_day": 7,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-06-05",
+        "assumption": "Friday has a family event 15:00-18:00. Student prefers working 14:00-21:00. Morning and early afternoon (before event) and evening (after event) are available. Computer graphics assignment due at 23:59.",
+        "estimated_available_hours_per_day": 6,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-06-06",
+        "assumption": "Saturday has no fixed commitments mentioned. Student prefers working 14:00-21:00. Full day is potentially available, but materials for weekend workshop must be bought before Saturday, implying workshop may be on Saturday/Sunday.",
+        "estimated_available_hours_per_day": 7,
+        "confidence": "low"
+      },
+      {
+        "date_range": "2026-06-07",
+        "assumption": "Sunday has no fixed commitments mentioned. Student prefers working 14:00-21:00. Full day is potentially available, but weekend workshop may consume time.",
+        "estimated_available_hours_per_day": 7,
+        "confidence": "low"
+      }
+    ],
+    "fixed_commitments": [
+      "Monday 09:00-12:00 classes",
+      "Monday 18:00-20:00 dentist and travel",
+      "Tuesday 10:00-16:00 lab sessions",
+      "Wednesday 13:00-17:00 part-time work",
+      "Thursday 09:00-11:00 classes",
+      "Friday 15:00-18:00 family event"
+    ],
+    "student_state": {
+      "sleep": "Not specified. Assuming typical student sleep patterns.",
+      "energy": "May be variable; lower after long commitments like labs and work.",
+      "confidence": "Medium, as student has provided clear tasks and preferences but some uncertainties exist."
+    },
+    "tasks": [
+      {
+        "task_id": "T1",
+        "name": "Computer graphics assignment",
+        "raw_mentions": [
+          "Computer graphics assignment due Friday at 23:59. I need around 7 hours and I have not started."
+        ],
+        "inferred_deadline": "2026-06-05T23:59:00",
+        "uncertainties": [
+          "Exact effort required may vary from 7 hours.",
+          "Unclear if submission is online or in-person."
+        ]
+      },
+      {
+        "task_id": "T2",
+        "name": "Security quiz",
+        "raw_mentions": [
+          "Security quiz on Thursday morning. I need 3 hours of revision."
+        ],
+        "inferred_deadline": "2026-06-04T12:00:00",
+        "uncertainties": [
+          "Exact start time of quiz on Thursday morning is not specified.",
+          "Revision needs may be more or less than 3 hours."
+        ]
+      },
+      {
+        "task_id": "T3",
+        "name": "AASMA reflection",
+        "raw_mentions": [
+          "AASMA reflection due Wednesday night. It should take 90 minutes."
+        ],
+        "inferred_deadline": "2026-06-03T23:59:00",
+        "uncertainties": [
+          "Exact deadline time on Wednesday night is not specified.",
+          "Writing time may differ from 90 minutes."
+        ]
+      },
+      {
+        "task_id": "T4",
+        "name": "Buy materials for weekend workshop",
+        "raw_mentions": [
+          "Buy materials for a weekend workshop. It takes about 1 hour and must be done before Saturday."
+        ],
+        "inferred_deadline": "2026-06-06T00:00:00",
+        "uncertainties": [
+          "Specific materials and store locations are unknown.",
+          "Must be done 'before Saturday' implies deadline is end of Friday."
+        ]
+      }
+    ],
+    "assumptions": [
+      "Week starts on Monday, June 1, 2026.",
+      "Student's preferred work hours (14:00-21:00) are for focused study tasks, not fixed commitments.",
+      "Fixed commitments are in Europe/Lisbon timezone.",
+      "Task deadlines are interpreted as end-of-day unless a specific time is given.",
+      "'Wednesday night' for AASMA reflection means end of Wednesday, June 3.",
+      "'Security quiz on Thursday morning' implies it occurs before the preferred work period, so deadline is set to midday Thursday.",
+      "'Must be done before Saturday' for buying materials means deadline is end of Friday, June 5.",
+      "No other major commitments or classes outside those listed.",
+      "Student is available on weekends unless the weekend workshop consumes significant time."
+    ]
+  },
+  "agentViews": [
+    {
+      "agent": "Deadline Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Computer graphics assignment",
+          "assessment": "Critical deadline task due Friday at 23:59, requiring 7 hours of work. Not started yet, so it must be scheduled early to avoid deadline-day risk.",
+          "concerns": [
+            "High risk if delayed, as it is a large task with no progress.",
+            "Friday has a family event from 15:00-18:00, limiting time on the due date.",
+            "If started too late, any unexpected issues could cause a missed deadline."
+          ],
+          "recommendations": [
+            "Start no later than Tuesday to allow for buffer time.",
+            "Break into subtasks to manage progress, such as research, coding, and testing.",
+            "Avoid scheduling all 7 hours on Friday; aim to finish by Thursday evening."
+          ],
+          "estimated_duration_hours": 7,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review assignment requirements and plan approach",
+            "Implement core graphics functionality",
+            "Test and debug the assignment",
+            "Finalize documentation and submission"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Security quiz",
+          "assessment": "Time-sensitive task with a quiz on Thursday morning, requiring 3 hours of revision. Must be completed before the quiz.",
+          "concerns": [
+            "Quiz is in the morning, so revision must be done by Wednesday night.",
+            "If revision is delayed to Thursday morning, it may conflict with classes or cause stress."
+          ],
+          "recommendations": [
+            "Schedule revision on Tuesday or Wednesday to ensure readiness.",
+            "Avoid cramming on Thursday morning; use that time for final review only."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review lecture notes and key concepts",
+            "Practice with sample quiz questions",
+            "Focus on weak areas identified during study"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "AASMA reflection",
+          "assessment": "Deadline task due Wednesday night, requiring 90 minutes. Moderate urgency, but must be completed before the end of Wednesday.",
+          "concerns": [
+            "Wednesday has part-time work from 13:00-17:00, limiting available time.",
+            "If delayed, there is little buffer before the deadline."
+          ],
+          "recommendations": [
+            "Schedule on Wednesday morning or early evening to ensure timely completion.",
+            "Do not leave it until late Wednesday night to avoid fatigue issues."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Reflect on key learning points from AASMA",
+            "Draft the reflection essay",
+            "Revise and proofread before submission"
+          ]
+        },
+        {
+          "task_id": "T4",
+          "task_name": "Buy materials for weekend workshop",
+          "assessment": "Flexible deadline task that must be done before Saturday, requiring 1 hour. Low urgency but cannot be forgotten.",
+          "concerns": [
+            "Risk of forgetting if not scheduled explicitly.",
+            "May be overlooked due to focus on academic deadlines."
+          ],
+          "recommendations": [
+            "Schedule on Friday morning or early afternoon before the family event.",
+            "Use a reminder to ensure it is completed before the weekend."
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Make a list of required materials",
+            "Travel to store and purchase items",
+            "Verify all materials are acquired"
+          ]
+        }
+      ],
+      "overall_comment": "The plan must prioritize the Computer graphics assignment due Friday night, as it requires 7 hours and has not been started. The Security quiz on Thursday morning and AASMA reflection due Wednesday night also have tight deadlines. Buying materials before Saturday is flexible but must be scheduled. All tasks can be completed before their deadlines if work is allocated early in the week, avoiding last-minute rushes. I recommend starting the Computer graphics assignment on Monday or Tuesday to ensure it is finished by Friday."
+    },
+    {
+      "agent": "Grade Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Computer graphics assignment",
+          "assessment": "High academic value: major assignment due Friday night, likely significant grade weight. Requires 7 hours of focused work, not yet started.",
+          "concerns": [
+            "Risk of being crowded out by other tasks due to late start and competing deadlines earlier in the week.",
+            "Only one full day (Friday) before deadline, with a family event reducing afternoon availability.",
+            "If underestimated, may require protected time that isn't currently reserved."
+          ],
+          "recommendations": [
+            "Schedule dedicated blocks early in the week (e.g., Tuesday evening, Wednesday morning) to make substantial progress.",
+            "Protect at least 2-3 hours on Thursday after the Security quiz for continued work.",
+            "Reserve Friday morning for finalizing the assignment before the family event."
+          ],
+          "estimated_duration_hours": 7,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Understand assignment requirements and plan approach",
+            "Implement core functionality or write initial sections",
+            "Test, debug, and refine output",
+            "Final review and submission"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Security quiz",
+          "assessment": "Moderate academic value: quiz likely contributes to course grade, but weight may be lower than a major assignment. Requires 3 hours of revision, timed for Thursday morning.",
+          "concerns": [
+            "Quiz is scheduled before preferred work hours, so revision must happen earlier in the week.",
+            "May compete with AASMA reflection and early Computer graphics assignment work for prime study time."
+          ],
+          "recommendations": [
+            "Schedule revision sessions on Tuesday evening and Wednesday evening to spread out preparation.",
+            "Avoid cramming on Thursday morning; aim to complete revision by Wednesday night."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review lecture notes and key concepts",
+            "Practice with sample questions or past quizzes",
+            "Focus on weak areas identified during review"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "AASMA reflection",
+          "assessment": "Low to moderate academic value: reflection likely a smaller deliverable, due Wednesday night, requiring 1.5 hours.",
+          "concerns": [
+            "Could be deprioritized in favor of higher-stakes work, leading to rushed submission.",
+            "Scheduled on a day with part-time work, reducing available time."
+          ],
+          "recommendations": [
+            "Complete on Wednesday morning before work or immediately after work to ensure it's done before deadline.",
+            "Do not let it interfere with progress on Computer graphics assignment or Security quiz revision."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Reflect on key learning points or experiences",
+            "Draft reflection content",
+            "Edit and proofread before submission"
+          ]
+        },
+        {
+          "task_id": "T4",
+          "task_name": "Buy materials for weekend workshop",
+          "assessment": "Minimal academic value: logistical task with no direct grade impact, but necessary for weekend workshop. Must be done before Saturday.",
+          "concerns": [
+            "Could inadvertently take time away from academic work if scheduled poorly.",
+            "Risk of last-minute rush on Friday, conflicting with Computer graphics assignment finalization."
+          ],
+          "recommendations": [
+            "Schedule early in the week (e.g., Monday afternoon) to clear logistical burden.",
+            "If not possible, set a firm deadline of Friday morning to avoid interference with assignment work."
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Make a list of required materials",
+            "Identify stores or online purchase options",
+            "Allocate time for purchase or ordering"
+          ]
+        }
+      ],
+      "overall_comment": "The plan must ensure high-value academic work (Computer graphics assignment and Security quiz) receives protected, sufficient time. Currently, the Computer graphics assignment is at risk due to its late start and competing mid-week deadlines. I recommend front-loading work on it early in the week, using Tuesday and Wednesday evenings for substantial progress, and reserving Thursday afternoon and Friday morning for completion. The Security quiz revision should be integrated earlier to avoid last-minute pressure. Lower-priority tasks (AASMA reflection, buying materials) should be scheduled in remaining gaps without encroaching on critical study blocks. Overall, with careful scheduling, academic priorities can be met, but vigilance is needed to prevent lower-value tasks from crowding out high-impact work."
+    },
+    {
+      "agent": "Effort Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Computer graphics assignment",
+          "assessment": "A substantial 7-hour programming or design assignment due Friday night. The student's estimate of 7 hours is plausible but may be optimistic if debugging, rendering, or writing is involved. This is a large block of work that should be split across multiple sessions to maintain quality and avoid burnout.",
+          "concerns": [
+            "7 hours in one block is unrealistic for a student; cognitive fatigue will reduce effectiveness.",
+            "The task is vague; 'assignment' could involve coding, design, writing, or a combination, each with different effort profiles.",
+            "No progress has been made, increasing risk of underestimation if complications arise."
+          ],
+          "recommendations": [
+            "Break into subtasks: research/concept (1.5h), core implementation (3h), testing/debugging (1.5h), final write-up/polish (1h).",
+            "Schedule work across at least two days, ideally Tuesday evening and Friday morning/evening.",
+            "Consider adding a 1-2 hour buffer for unexpected issues."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Understand assignment requirements and gather resources",
+            "Develop core solution or design",
+            "Test, debug, and refine output",
+            "Compile final submission and write any required documentation"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Security quiz",
+          "assessment": "A quiz requiring 3 hours of revision. This is a focused, medium-duration task with a clear deadline Thursday morning. The estimate is reasonable for reviewing notes, practicing concepts, or memorizing key points.",
+          "concerns": [
+            "Quiz timing is unspecified; if early morning, revision may need to be completed Wednesday.",
+            "Three hours in one sitting may lead to diminishing returns; spaced repetition is more effective."
+          ],
+          "recommendations": [
+            "Split revision into two 1.5-hour sessions: one on Tuesday evening, one on Wednesday evening.",
+            "Focus on active recall and practice questions rather than passive reading."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review lecture notes and textbook chapters",
+            "Practice with flashcards or old quiz questions",
+            "Summarize key concepts and formulas"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "AASMA reflection",
+          "assessment": "A short writing task estimated at 90 minutes, due Wednesday night. This is a well-defined, small task with a plausible duration for reflective writing.",
+          "concerns": [
+            "90 minutes may be tight if reflection requires deep thought or connecting to course materials.",
+            "Risk of procrastination given it's a smaller task among larger ones."
+          ],
+          "recommendations": [
+            "Schedule as a single block on Wednesday afternoon or evening, allowing time for editing.",
+            "Ensure a quiet environment to facilitate thoughtful writing."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Brainstorm key experiences or lessons",
+            "Draft reflection paragraphs",
+            "Revise for clarity and coherence"
+          ]
+        },
+        {
+          "task_id": "T4",
+          "task_name": "Buy materials for weekend workshop",
+          "assessment": "A 1-hour errand to purchase materials before Saturday. The estimate is realistic for a known shopping trip, but travel and store availability could affect time.",
+          "concerns": [
+            "If materials are specialized or require visiting multiple stores, duration could double.",
+            "Must be completed by Friday, competing with the Computer graphics assignment due same day."
+          ],
+          "recommendations": [
+            "Schedule on Wednesday morning or Friday morning to avoid conflict with critical study blocks.",
+            "Confirm store hours and item availability in advance to minimize delays."
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Make a shopping list and check store locations",
+            "Travel to store and purchase items",
+            "Unpack/organize materials for workshop"
+          ]
+        }
+      ],
+      "overall_comment": "The total estimated effort is 13.5 hours across four tasks, which fits within the available hours this week. However, the Computer graphics assignment is a significant undertaking that must be split across multiple days to be realistic. The plan should avoid scheduling large blocks (>4 hours) on a single day, especially after fixed commitments like labs or work. Ensure the Security quiz revision is spaced and the materials purchase is done early to reduce Friday's load. Overall, durations are plausible but require careful scheduling to respect student energy and preferences."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Computer graphics assignment",
+          "assessment": "A major 7-hour assignment due Friday night. This is a high-cognitive-load task requiring sustained focus and creativity. Scheduling it entirely on the due date creates extreme pressure.",
+          "concerns": [
+            "High risk of stress and burnout if attempted in one block on Friday",
+            "May conflict with post-family-event fatigue on Friday evening",
+            "7 continuous hours of focused work is unsustainable and likely to reduce quality",
+            "No time for review or unexpected problems if left to the last day"
+          ],
+          "recommendations": [
+            "Break into 2-3 smaller sessions earlier in the week (e.g., 2 hours Tuesday evening, 3 hours Wednesday evening)",
+            "Reserve Friday for final integration, testing, and submission buffer (2-3 hours max)",
+            "Avoid scheduling other demanding tasks on the same day as major work sessions for this assignment"
+          ],
+          "estimated_duration_hours": 7,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Understand assignment requirements and gather resources",
+            "Implement core functionality or write main sections",
+            "Test, debug, and refine output",
+            "Final formatting and submission"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Security quiz",
+          "assessment": "A 3-hour revision session for a quiz on Thursday morning. This is a moderate-cognitive task best done close to the assessment.",
+          "concerns": [
+            "Scheduling all 3 hours on Thursday may be tiring if done in one block after classes",
+            "Risk of reduced retention if revision is crammed without spacing"
+          ],
+          "recommendations": [
+            "Split revision into two 1.5-hour sessions (e.g., Wednesday evening and Thursday afternoon)",
+            "Ensure a break between revision and the quiz if possible"
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review lecture notes and key concepts",
+            "Practice with sample questions or flashcards",
+            "Clarify difficult topics"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "AASMA reflection",
+          "assessment": "A 90-minute reflective writing task due Wednesday night. This is a moderate-cognitive task that benefits from a clear head.",
+          "concerns": [
+            "Scheduled after part-time work on Wednesday, which may reduce mental energy",
+            "Potential for rushing if started too late in the evening"
+          ],
+          "recommendations": [
+            "Schedule for early Wednesday evening (e.g., 17:30-19:00) to allow time for dinner and wind-down afterward",
+            "Ensure a short break after work before starting"
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review prompt and gather thoughts/notes",
+            "Write draft reflection",
+            "Revise and proofread"
+          ]
+        },
+        {
+          "task_id": "T4",
+          "task_name": "Buy materials for weekend workshop",
+          "assessment": "A 1-hour errand to buy materials before Saturday. This is a low-cognitive, logistical task.",
+          "concerns": [
+            "Risk of forgetting or running out of time if left to Friday amid other pressures",
+            "May add to cognitive load if combined with other tasks on a busy day"
+          ],
+          "recommendations": [
+            "Schedule on a lower-stress day with free time, such as Monday afternoon or Thursday morning",
+            "Combine with another outing to reduce travel time"
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Make a shopping list",
+            "Travel to store(s)",
+            "Purchase and organize materials"
+          ]
+        }
+      ],
+      "overall_comment": "The plan is feasible but has significant wellbeing risks. The primary concern is the 7-hour Computer Graphics assignment being scheduled entirely on its due date, Friday, which also includes a family event. This creates a high-stress, cognitively heavy single-day load that risks burnout and poor work quality. The Security quiz revision on Thursday is appropriately scheduled, but the AASMA reflection on Wednesday evening after work is acceptable. The materials purchase is low-stress. To protect sustainable workload and reduce stress, I recommend starting the Computer Graphics assignment earlier in the week, breaking it into smaller sessions on Tuesday and Wednesday evenings, and reserving Friday for final integration and buffer. This prevents an overfilled Friday and respects the student's energy levels after fixed commitments."
+    },
+    {
+      "agent": "Risk Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Computer graphics assignment",
+          "assessment": "High-risk task due Friday night, requiring 7 hours of work with no progress yet. The plan schedules it late in the week, leaving minimal buffer for scope creep, technical issues, or unexpected complexity.",
+          "concerns": [
+            "No work started, unknown scope and complexity",
+            "Scheduled close to deadline with no contingency time",
+            "Potential for hidden work like debugging or rendering",
+            "Energy may be low on Friday after family event"
+          ],
+          "recommendations": [
+            "Start early in the week to assess scope",
+            "Break into subtasks: research, coding, testing, submission",
+            "Add a 2-hour buffer before deadline for unexpected issues",
+            "Schedule a mid-week checkpoint to adjust time if needed"
+          ],
+          "estimated_duration_hours": 7,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Understand assignment requirements and scope",
+            "Develop initial solution or draft",
+            "Test and debug implementation",
+            "Final review and submission preparation"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Security quiz",
+          "assessment": "Moderate-risk task with a fixed quiz on Thursday morning. Revision is estimated at 3 hours but scheduled near the quiz, assuming no last-minute content surprises or difficulty spikes.",
+          "concerns": [
+            "Quiz content uncertainty may require more revision",
+            "Scheduled on Wednesday evening and Thursday morning with no buffer",
+            "Potential fatigue from prior commitments affecting retention"
+          ],
+          "recommendations": [
+            "Start revision earlier in the week to identify weak areas",
+            "Schedule a quick review session Thursday morning before quiz",
+            "Allocate extra 1-hour buffer for difficult topics"
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review lecture notes and key concepts",
+            "Practice with sample questions or past quizzes",
+            "Focus on weak areas identified during review"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "AASMA reflection",
+          "assessment": "Low-to-moderate risk task due Wednesday night, estimated at 90 minutes. Scheduled on the due date with some flexibility, but no buffer for writer's block or revisions.",
+          "concerns": [
+            "Scheduled on same day as deadline, risking last-minute rush",
+            "Writing quality may suffer if rushed",
+            "Potential for unclear reflection requirements"
+          ],
+          "recommendations": [
+            "Start reflection on Tuesday to allow time for revisions",
+            "Break into outline and drafting phases",
+            "Add a 30-minute buffer for editing and submission"
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Outline main reflection points",
+            "Write first draft",
+            "Review and edit for clarity and completeness"
+          ]
+        },
+        {
+          "task_id": "T4",
+          "task_name": "Buy materials for weekend workshop",
+          "assessment": "Low-risk task due before Saturday, taking about 1 hour. However, hidden dependencies like store hours, travel time, or item availability could cause delays.",
+          "concerns": [
+            "Uncertain store availability or material stock",
+            "Must be done before Saturday but scheduled late in week",
+            "Potential for additional time if multiple stores are needed"
+          ],
+          "recommendations": [
+            "Schedule earlier in the week to avoid last-minute issues",
+            "Verify store hours and material availability in advance",
+            "Add a 30-minute buffer for travel or unexpected delays"
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Make a list of required materials",
+            "Check store locations and hours",
+            "Purchase materials and verify completeness"
+          ]
+        }
+      ],
+      "overall_comment": "The plan is feasible but carries moderate risk due to tight scheduling, lack of buffers, and hidden uncertainties. The Computer graphics assignment is particularly risky with no early start and a hard deadline. The Security quiz revision is scheduled close to the quiz with no contingency. The AASMA reflection is due Wednesday night but scheduled on the same day, leaving no room for unexpected delays. Buying materials is low risk but dependent on store availability. Overall, the plan lacks sufficient early discovery time and contingency buffers for uncertainties in task duration, energy levels, and external factors. I recommend adding buffers, starting critical tasks earlier, and breaking down the graphics assignment into subtasks to mitigate risk."
+    }
+  ],
+  "calendarVersions": [
+    {
+      "calendar": {
+        "calendar_version": 1,
+        "planning_window": {
+          "start_date": "2026-06-01",
+          "end_date": "2026-06-07",
+          "reason": "Student requested a plan for 'this week'. Current date is Friday, May 29, 2026. The upcoming week is Monday, June 1 to Sunday, June 7, 2026."
+        },
+        "overall_strategy": [
+          "Prioritize Computer graphics assignment early to avoid Friday deadline risk.",
+          "Schedule Security quiz revision before Thursday morning.",
+          "Complete AASMA reflection on its due date, Wednesday.",
+          "Fit buying materials early to avoid weekend conflict.",
+          "Respect fixed commitments and preferred work hours (14:00-21:00).",
+          "Balance daily workload to prevent burnout."
+        ],
+        "days": [
+          {
+            "date": "2026-06-01",
+            "day_name": "Monday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Classes 09:00-12:00 and dentist 18:00-20:00. Use afternoon for lighter task.",
+            "blocks": [
+              {
+                "id": "B1",
+                "task_id": "T4",
+                "task_name": "Buy materials for weekend workshop",
+                "type": "work",
+                "start": "2026-06-01T14:00:00+01:00",
+                "end": "2026-06-01T15:00:00+01:00",
+                "duration_hours": 1,
+                "description": "Purchase materials for the weekend workshop.",
+                "reasoning": "Low-cognitive task fits after classes and before dentist."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-02",
+            "day_name": "Tuesday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Lab sessions 10:00-16:00. Evening available for focused work.",
+            "blocks": [
+              {
+                "id": "B2",
+                "task_id": "T1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-02T16:30:00+01:00",
+                "end": "2026-06-02T19:30:00+01:00",
+                "duration_hours": 3,
+                "description": "Work on Computer graphics assignment core implementation.",
+                "reasoning": "Start assignment early to reduce Friday risk."
+              },
+              {
+                "id": "B3",
+                "task_id": "T2",
+                "task_name": "Security quiz",
+                "type": "work",
+                "start": "2026-06-02T20:00:00+01:00",
+                "end": "2026-06-02T21:30:00+01:00",
+                "duration_hours": 1.5,
+                "description": "Revise for Security quiz.",
+                "reasoning": "Begin quiz revision to space learning."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-03",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "Part-time work 13:00-17:00. Morning and evening available.",
+            "blocks": [
+              {
+                "id": "B4",
+                "task_id": "T1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-03T10:00:00+01:00",
+                "end": "2026-06-03T12:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Continue Computer graphics assignment work.",
+                "reasoning": "Morning block before work to make progress."
+              },
+              {
+                "id": "B5",
+                "task_id": "T3",
+                "task_name": "AASMA reflection",
+                "type": "work",
+                "start": "2026-06-03T17:30:00+01:00",
+                "end": "2026-06-03T19:00:00+01:00",
+                "duration_hours": 1.5,
+                "description": "Write AASMA reflection due tonight.",
+                "reasoning": "Complete reflection after work before deadline."
+              },
+              {
+                "id": "B6",
+                "task_id": "T2",
+                "task_name": "Security quiz",
+                "type": "work",
+                "start": "2026-06-03T19:30:00+01:00",
+                "end": "2026-06-03T21:00:00+01:00",
+                "duration_hours": 1.5,
+                "description": "Final Security quiz revision.",
+                "reasoning": "Finish revision before Thursday quiz."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 7,
+            "day_reasoning": "Classes 09:00-11:00. Afternoon and evening free after quiz.",
+            "blocks": [
+              {
+                "id": "B7",
+                "task_id": "T1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-04T14:00:00+01:00",
+                "end": "2026-06-04T17:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Work on Computer graphics assignment finalization.",
+                "reasoning": "Dedicated block after quiz to advance assignment."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Friday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "Family event 15:00-18:00. Morning and evening available.",
+            "blocks": [
+              {
+                "id": "B8",
+                "task_id": "T1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-05T10:00:00+01:00",
+                "end": "2026-06-05T12:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Finalize Computer graphics assignment before event.",
+                "reasoning": "Morning work to complete assignment before deadline."
+              },
+              {
+                "id": "B9",
+                "task_id": "T1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-05T18:30:00+01:00",
+                "end": "2026-06-05T19:30:00+01:00",
+                "duration_hours": 1,
+                "description": "Submit Computer graphics assignment.",
+                "reasoning": "Final review and submission after family event."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Saturday",
+            "assumed_available_hours": 7,
+            "day_reasoning": "No fixed commitments. Reserved for weekend workshop or rest.",
+            "blocks": []
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Sunday",
+            "assumed_available_hours": 7,
+            "day_reasoning": "No fixed commitments. Reserved for weekend workshop or rest.",
+            "blocks": []
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Computer graphics assignment requires 7 hours but Friday has limited time due to family event.",
+            "resolution": "Started assignment early on Tuesday and Wednesday, using Thursday afternoon for major work."
+          },
+          {
+            "conflict": "Security quiz revision competes with AASMA reflection on Wednesday.",
+            "resolution": "Split quiz revision across Tuesday and Wednesday evenings to balance workload."
+          }
+        ],
+        "known_weaknesses": [
+          "No buffer time for unexpected delays in Computer graphics assignment.",
+          "AASMA reflection is scheduled on its due date with no early buffer.",
+          "Weekend workshop time is not explicitly scheduled."
+        ],
+        "changes_from_previous": [],
+        "unresolved_critiques": []
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The Computer graphics assignment is scheduled for only 3 hours on Tuesday, 2 hours on Wednesday, 3 hours on Thursday, and 3 hours on Friday, totaling 11 hours, which exceeds its estimated 7-hour requirement. This over-allocation creates inefficiency and may lead to burnout or reduced quality on other tasks. More critically, the plan schedules 3 hours of work on the due date (Friday), including a 1-hour block for final review and submission after a family event, which introduces deadline-day risk if any last-minute issues arise or if the family event runs long.",
+              "severity": "major",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-02",
+                "2026-06-03",
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Reallocate the Computer graphics assignment work to complete it earlier in the week. Aim to finish the core 7 hours by Thursday evening, using Friday only for a brief final check and submission. For example, increase the Wednesday morning block or add time on Tuesday evening to reduce Friday's workload."
+            },
+            {
+              "issue": "The AASMA reflection is scheduled only on its due date (Wednesday) with no buffer time. If any unexpected issue occurs during the part-time work (13:00-17:00) or if the reflection takes longer than 90 minutes, the student risks missing the Wednesday night deadline.",
+              "severity": "major",
+              "affected_tasks": [
+                "AASMA reflection"
+              ],
+              "affected_days": [
+                "2026-06-03"
+              ],
+              "suggested_fix": "Schedule the AASMA reflection earlier in the week, such as on Tuesday afternoon or Wednesday morning before work, to provide a safety buffer before the deadline."
+            },
+            {
+              "issue": "The Security quiz revision is split across Tuesday and Wednesday evenings, which is reasonable, but the total scheduled time is 3 hours (1.5 + 1.5). However, the quiz is on Thursday morning, and all revision is scheduled before that, which is acceptable. No major issue, but the timing is tight.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Security quiz"
+              ],
+              "affected_days": [
+                "2026-06-02",
+                "2026-06-03"
+              ],
+              "suggested_fix": "Consider moving some revision to Monday if energy permits, to reduce cognitive load on Tuesday and Wednesday evenings."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The plan attempts to start the Computer graphics assignment early on Tuesday to reduce Friday risk.",
+            "The Security quiz revision is balanced with the AASMA reflection on Wednesday."
+          ],
+          "overall_comment": "The calendar makes a good effort to prioritize deadlines by starting the Computer graphics assignment early. However, it fails to adequately protect against deadline-day risk for the Computer graphics assignment and provides no buffer for the AASMA reflection. The over-allocation of hours to the graphics assignment also indicates poor efficiency. From a deadline perspective, this plan is not safe enough and must be revised to ensure all time-sensitive tasks are completed with sufficient buffer before their deadlines."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Computer graphics assignment, a high-value task, is scheduled for finalization and submission on its deadline day (Friday) with a family event in the afternoon. This leaves minimal buffer for unexpected issues or last-minute refinements, increasing submission risk.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Consider moving the final 1-hour review/submission block earlier in the day, before the family event, or allocating a small buffer on Thursday evening to ensure the assignment is substantially complete before Friday."
+            },
+            {
+              "issue": "The AASMA reflection, a lower-priority task, is scheduled on its due date (Wednesday) after part-time work. While it fits, there is no early buffer. If the reflection takes longer than expected or work runs late, it could create time pressure that might indirectly affect focus on higher-value tasks.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AASMA reflection"
+              ],
+              "affected_days": [
+                "2026-06-03"
+              ],
+              "suggested_fix": "If possible, consider starting the reflection earlier on Wednesday morning or even on Tuesday to de-risk the schedule and protect time for the Computer graphics assignment and Security quiz revision."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has front-loaded work on the high-value Computer graphics assignment early in the week (Tuesday, Wednesday, Thursday) as recommended, protecting substantial time for it.",
+            "The Security quiz revision is spaced across Tuesday and Wednesday evenings, avoiding last-minute cramming."
+          ],
+          "overall_comment": "The calendar generally protects academic value. The highest-impact work (Computer graphics assignment) receives significant, protected time early in the week, and the Security quiz is adequately prepared for. The main concerns are minor: the finalization of the assignment is very tight on its deadline day, and a lower-value task is scheduled with no buffer. However, these do not critically crowd out high-value work. The plan is acceptable with minor reservations."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Computer graphics assignment is scheduled for a total of 9 hours (3+2+3+2+1), which exceeds the student's original 7-hour estimate. While splitting the work is good, the plan does not explicitly account for the extra time or explain the discrepancy. This could lead to underestimation of total effort.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-02",
+                "2026-06-03",
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Adjust the plan's total hours for the Computer graphics assignment to match a more realistic 8-9 hour estimate, or explicitly note in the reasoning that the blocks include buffer time for debugging and finalization."
+            },
+            {
+              "issue": "The task 'Computer graphics assignment' remains vague in the calendar blocks. The descriptions (e.g., 'core implementation', 'finalization') are helpful but do not represent concrete subtasks. This could make it difficult for the student to track progress and could hide underestimation of specific components.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-02",
+                "2026-06-03",
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Refine block descriptions to specify subtasks, such as 'Research requirements and plan approach', 'Write and test core code', 'Debug and refine output', and 'Compile final report and submit'."
+            },
+            {
+              "issue": "The block on Friday morning (2026-06-05T10:00-12:00) is described as 'Finalize Computer graphics assignment before event.' This is a 2-hour block, but 'finalizing' a complex assignment might require more time for testing, writing, and formatting, especially if it's due that night. This block may be underestimated.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Consider extending this block or ensuring the preceding Thursday block completes the bulk of the work, leaving Friday for final polish only. Alternatively, adjust the description to reflect a specific, limited finalization subtask."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has split the large Computer graphics assignment across multiple days (Tuesday, Wednesday, Thursday, Friday), which addresses my earlier concern about a single 7-hour block being unrealistic."
+          ],
+          "overall_comment": "The calendar does a good job splitting the major Computer graphics assignment across four days, with block sizes (1.5 to 3 hours) that are plausible for a student's focus. The total scheduled hours for this task appear slightly higher than the estimate, which is a prudent buffer. The Security quiz revision is well-spaced. My concerns are minor, relating to task vagueness and the precision of the finalization block. The plan is generally realistic and approvable with these notes."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "Wednesday, June 3rd is overfilled with 5 hours of scheduled work, including a morning block before part-time work and two evening blocks after. This is a cognitively heavy day that may lead to fatigue.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Computer graphics assignment",
+                "AASMA reflection",
+                "Security quiz"
+              ],
+              "affected_days": [
+                "2026-06-03"
+              ],
+              "suggested_fix": "Reduce the Wednesday morning Computer graphics assignment block from 2 hours to 1 hour, or move the final Security quiz revision to Thursday morning before the quiz if possible."
+            },
+            {
+              "issue": "The final Computer graphics assignment work on Friday, June 5th is scheduled immediately after a family event (18:30-19:30). Post-event energy may be low, risking rushed finalization and submission.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Aim to complete the assignment before the family event using the morning block, making the evening block optional for final checks only. Ensure the morning block is fully focused."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner addressed the major concern by starting the Computer graphics assignment early in the week, breaking it into smaller sessions across Tuesday, Wednesday, and Thursday, which significantly reduces Friday's load and stress risk."
+          ],
+          "overall_comment": "The plan shows good awareness of wellbeing by front-loading the major assignment. The primary earlier concern about a 7-hour Friday cram session has been resolved. The current schedule is largely humane and sustainable. The minor concerns are a potentially heavy Wednesday and the timing of the final assignment submission. Overall, this is a workable plan that protects sleep and prevents burnout."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "issue": "The Computer graphics assignment is scheduled for final work and submission on its deadline day, with no contingency buffer for unexpected issues like technical problems, debugging, or last-minute changes. The plan acknowledges this as a known weakness.",
+              "severity": "critical",
+              "suggested_fix": "Add a dedicated 2-hour buffer block on Thursday or early Friday specifically for troubleshooting and final review, separate from the planned work blocks."
+            },
+            {
+              "affected_days": [
+                "2026-06-03"
+              ],
+              "affected_tasks": [
+                "AASMA reflection"
+              ],
+              "issue": "The AASMA reflection is scheduled to be completed entirely on its due date (Wednesday), with no early buffer for writer's block, revisions, or unexpected delays. The plan acknowledges this as a known weakness.",
+              "severity": "major",
+              "suggested_fix": "Move the start of the reflection to Tuesday afternoon to create a draft, leaving Wednesday for final edits and submission."
+            },
+            {
+              "affected_days": [
+                "2026-06-02",
+                "2026-06-03",
+                "2026-06-04"
+              ],
+              "affected_tasks": [
+                "Security quiz"
+              ],
+              "issue": "Security quiz revision is split across two evenings, but the final revision is scheduled for Wednesday night, just hours before the Thursday morning quiz. There is no buffer for difficult topics or last-minute review.",
+              "severity": "major",
+              "suggested_fix": "Schedule a short 30-minute review buffer on Thursday morning before the quiz, or add an extra hour of revision earlier in the week."
+            },
+            {
+              "affected_days": [
+                "2026-06-06",
+                "2026-06-07"
+              ],
+              "affected_tasks": [
+                "Buy materials for weekend workshop"
+              ],
+              "issue": "The weekend workshop is mentioned but not scheduled, creating hidden work and uncertainty. The materials are bought, but the workshop itself could consume significant weekend time, impacting recovery or other tasks.",
+              "severity": "minor",
+              "suggested_fix": "Add a placeholder block for the weekend workshop on Saturday or Sunday to acknowledge the time commitment and prevent overloading."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner started the Computer graphics assignment early on Tuesday and Wednesday to reduce Friday risk.",
+            "The planner split Security quiz revision across Tuesday and Wednesday evenings to balance workload."
+          ],
+          "overall_comment": "The plan makes positive compromises by starting the Computer graphics assignment early and splitting the Security quiz revision. However, critical risks remain: the graphics assignment lacks a pre-deadline buffer, the AASMA reflection has no early start, and the Security quiz revision is too tightly scheduled. These issues represent fragile assumptions about task duration and energy. The plan does not contain enough contingency time for early discovery of problems, so I must reject it."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-07 is outside the planning window 2026-06-01 → 2026-06-07.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 3,
+      "hasCritical": true
+    },
+    {
+      "calendar": {
+        "calendar_version": 2,
+        "planning_window": {
+          "start_date": "2026-06-01",
+          "end_date": "2026-06-07",
+          "reason": "Covers all deadlines and the weekend workshop preparation."
+        },
+        "overall_strategy": [
+          "Complete Computer graphics assignment early to avoid deadline-day risk.",
+          "Finish AASMA reflection before its due date to create buffer.",
+          "Schedule Security quiz revision fully before its Thursday morning deadline.",
+          "Purchase materials early to avoid weekend conflict.",
+          "Respect fixed commitments and preferred work hours (14:00-21:00).",
+          "Balance daily workload to prevent burnout."
+        ],
+        "days": [
+          {
+            "date": "2026-06-01",
+            "day_name": "Sunday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Limited time due to part-time work and other commitments.",
+            "blocks": [
+              {
+                "id": "B1",
+                "task_id": "T4",
+                "task_name": "Buy materials for weekend workshop",
+                "type": "work",
+                "start": "2026-06-01T18:00:00",
+                "end": "2026-06-01T19:00:00",
+                "duration_hours": 1,
+                "description": "Purchase materials for the weekend workshop.",
+                "reasoning": "Complete this early to avoid conflict with weekend plans."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-02",
+            "day_name": "Monday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Evening hours available after part-time work.",
+            "blocks": [
+              {
+                "id": "B2",
+                "task_id": "T1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-02T18:00:00",
+                "end": "2026-06-02T21:00:00",
+                "duration_hours": 3,
+                "description": "Work on Computer graphics assignment core implementation.",
+                "reasoning": "Start assignment early to build momentum and reduce deadline pressure."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-03",
+            "day_name": "Tuesday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "Evening hours available after part-time work.",
+            "blocks": [
+              {
+                "id": "B3",
+                "task_id": "T1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-03T18:00:00",
+                "end": "2026-06-03T20:00:00",
+                "duration_hours": 2,
+                "description": "Continue Computer graphics assignment work.",
+                "reasoning": "Make steady progress to finish early."
+              },
+              {
+                "id": "B4",
+                "task_id": "T3",
+                "task_name": "AASMA reflection",
+                "type": "work",
+                "start": "2026-06-03T20:00:00",
+                "end": "2026-06-03T21:30:00",
+                "duration_hours": 1.5,
+                "description": "Write AASMA reflection.",
+                "reasoning": "Complete reflection a day before its deadline to create buffer."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-04",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 7,
+            "day_reasoning": "Full day available before the Security quiz deadline.",
+            "blocks": [
+              {
+                "id": "B5",
+                "task_id": "T2",
+                "task_name": "Security quiz",
+                "type": "work",
+                "start": "2026-06-04T14:00:00",
+                "end": "2026-06-04T16:00:00",
+                "duration_hours": 2,
+                "description": "Revise for Security quiz.",
+                "reasoning": "Final revision before the Thursday morning quiz."
+              },
+              {
+                "id": "B6",
+                "task_id": "T1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-04T18:00:00",
+                "end": "2026-06-04T21:00:00",
+                "duration_hours": 3,
+                "description": "Finalize Computer graphics assignment.",
+                "reasoning": "Complete assignment a full day before its deadline to eliminate risk."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Thursday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Limited time due to family event in the evening.",
+            "blocks": [
+              {
+                "id": "B7",
+                "task_id": "T1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-05T14:00:00",
+                "end": "2026-06-05T15:00:00",
+                "duration_hours": 1,
+                "description": "Submit Computer graphics assignment.",
+                "reasoning": "Final review and submission, done early in the day with no pressure."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Friday",
+            "assumed_available_hours": 0,
+            "day_reasoning": "Weekend workshop, no academic work scheduled.",
+            "blocks": []
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Saturday",
+            "assumed_available_hours": 0,
+            "day_reasoning": "Weekend workshop, no academic work scheduled.",
+            "blocks": []
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Computer graphics assignment requires 7 hours but Friday has limited time due to family event.",
+            "resolution": "Finished assignment entirely by Wednesday night, a full day early."
+          },
+          {
+            "conflict": "AASMA reflection due Wednesday night competes with Security quiz revision.",
+            "resolution": "Completed reflection on Tuesday, creating a full day of buffer."
+          }
+        ],
+        "known_weaknesses": [
+          "Security quiz revision is scheduled only on Wednesday afternoon, with no early buffer.",
+          "Total work hours are concentrated in the evenings, which may lead to fatigue."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Moved Computer graphics assignment completion to Wednesday, eliminating Thursday work.",
+            "reason": "Address critical deadline-day risk identified by agents."
+          },
+          {
+            "change": "Moved AASMA reflection to Tuesday, a day before its deadline.",
+            "reason": "Address critical lack of buffer identified by agents."
+          },
+          {
+            "change": "Removed all buffer and break blocks as per instructions.",
+            "reason": "Unscheduled time is implicitly rest."
+          }
+        ],
+        "unresolved_critiques": [
+          {
+            "agent": "Risk Agent",
+            "severity": "minor",
+            "issue": "Security quiz revision is scheduled only on Wednesday afternoon, just before the Thursday morning quiz.",
+            "planner_response": "Accepted risk to prioritize eliminating critical deadline-day issues for other tasks."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "Security quiz revision is scheduled only on Wednesday afternoon, leaving no buffer before the Thursday morning quiz. This creates a minor deadline-day risk if any unexpected issues arise on Wednesday.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Security quiz"
+              ],
+              "affected_days": [
+                "2026-06-03"
+              ],
+              "suggested_fix": "Consider moving 1 hour of revision to Tuesday evening to create a buffer and reduce last-minute pressure."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has successfully addressed the major deadline risks by completing the Computer graphics assignment a full day early and the AASMA reflection with a buffer."
+          ],
+          "overall_comment": "The calendar effectively protects the most critical deadlines. The Computer graphics assignment is finished by Wednesday night, well before its Friday deadline, and the AASMA reflection is completed a day early. The only minor concern is the Security quiz revision being scheduled entirely on the day before the quiz, which introduces a small but acceptable risk. Overall, all deadline tasks receive meaningful work well before their deadlines."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "Security quiz revision is scheduled only on Wednesday afternoon, just before the Thursday morning quiz. This leaves no buffer for unexpected issues and risks a lower grade on a moderate-value assessment.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Security quiz"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Add a short revision session earlier in the week (e.g., Tuesday evening after the Computer graphics assignment block) to spread out preparation and reduce last-minute pressure."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner prioritized eliminating critical deadline-day risk for the high-value Computer graphics assignment by finishing it a full day early, which is a strong academic protection.",
+            "The planner completed the AASMA reflection a day before its deadline, creating buffer for that task."
+          ],
+          "overall_comment": "The calendar successfully protects the high-value Computer graphics assignment by dedicating substantial, early blocks and finishing it a full day before the deadline. This prevents lower-value tasks from crowding it out. The Security quiz revision is the only moderate-value item with a minor scheduling risk, but overall academic priorities are well-served. I approve with minor concerns."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 2,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The Computer graphics assignment is scheduled for a total of 9 hours (3+2+3+1), which exceeds the student's own 7-hour estimate and my earlier 8-hour recommendation. This over-allocation is unrealistic and suggests the plan is forcing an early completion at the cost of effort realism. The 1-hour 'submit' block on Friday is also mischaracterized; submission is trivial, and this time should be part of the core work or buffer.",
+              "severity": "major",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-02",
+                "2026-06-03",
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Reduce total scheduled hours for the Computer graphics assignment to a maximum of 8 hours, split across realistic subtasks. Remove the 1-hour 'submit' block and reallocate that time to meaningful work or buffer earlier in the week. Ensure the sum of block durations matches a plausible total effort."
+            },
+            {
+              "issue": "The Computer graphics assignment is broken into blocks, but the blocks are not aligned with meaningful subtasks. The descriptions are vague ('core implementation', 'continue work', 'finalize'), which hides whether the work is properly structured. A student would benefit from a clear plan of attack (e.g., research, coding, testing) to maintain focus and ensure all components are addressed.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-02",
+                "2026-06-03",
+                "2026-06-04"
+              ],
+              "suggested_fix": "Rename block descriptions to reflect concrete subtasks, such as 'Understand requirements and plan approach', 'Write core code or create design', 'Test and debug the assignment', and 'Final polish and documentation'. This makes the effort distribution more transparent and actionable."
+            },
+            {
+              "issue": "The plan schedules a 3-hour block for the Computer graphics assignment on Tuesday evening (18:00-21:00) immediately after a 6-hour lab session (10:00-16:00). This is a 9-hour cognitive load day with no break, which is highly unrealistic for a student. Energy and focus will be severely depleted, making a 3-hour deep work block ineffective.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-02"
+              ],
+              "suggested_fix": "Move the Tuesday block to a shorter, lighter task or reduce its duration. Consider starting the Computer graphics assignment on Monday afternoon (14:00-18:00) instead, which has 4 available hours and follows only morning classes, not a long lab."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has moved the AASMA reflection to Tuesday, creating a buffer, which addresses my earlier concern about procrastination risk for that task."
+          ],
+          "overall_comment": "The planner's strategy to finish major tasks early is commendable but has been executed without regard for effort realism. The total hours scheduled for the Computer graphics assignment are inflated and placed in cognitively demanding time slots, particularly on Tuesday after a full lab day. The block structure lacks subtask clarity, making it hard to assess if the work is properly partitioned. While the AASMA reflection buffer is a good compromise, the critical issues with the Computer graphics assignment's duration and timing force a rejection. A student cannot effectively perform 3 hours of intensive assignment work after a 6-hour lab."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The planner has addressed the primary wellbeing concern by moving the 7-hour Computer graphics assignment to be completed a full day early, eliminating the high-stress, single-day overload on Friday. The AASMA reflection is also scheduled with buffer. The compromise is that Security quiz revision is concentrated on Wednesday afternoon, which is acceptable as it is a moderate task and does not create an overfilled day."
+          ],
+          "overall_comment": "This revised plan is humane and sustainable. The major risk of a 7-hour assignment on its due date has been eliminated by spreading the work across Tuesday, Wednesday, and Thursday evenings, finishing a day early. Daily workloads are reasonable, with no day exceeding 5 hours of scheduled work. Evening work blocks respect the student's preferred hours and do not extend unreasonably late. The plan protects sleep, prevents burnout, and is feasible to follow."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "Security quiz revision is scheduled only on Wednesday afternoon, immediately before the Thursday morning quiz. This leaves no buffer for unexpected difficulty, last-minute content review, or fatigue from the day's work.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Security quiz"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Schedule a short, early revision session on Tuesday or Wednesday morning to identify weak areas and reduce pressure on the single Wednesday afternoon block."
+            },
+            {
+              "issue": "The plan schedules all major work in evening blocks (typically 18:00-21:00). This concentrates effort into potentially lower-energy periods after classes, labs, or work, increasing the risk of fatigue and reduced productivity.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Computer graphics assignment",
+                "AASMA reflection",
+                "Security quiz"
+              ],
+              "affected_days": [
+                "2026-06-02",
+                "2026-06-03",
+                "2026-06-04"
+              ],
+              "suggested_fix": "Consider starting some work earlier in the afternoon (e.g., 14:00-17:00) on available days to spread cognitive load and leverage higher energy levels."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has addressed the major risk for the Computer graphics assignment by scheduling its completion a full day before the deadline.",
+            "The planner has addressed the buffer risk for the AASMA reflection by scheduling it a day before its deadline.",
+            "The planner has accepted the minor risk regarding the Security quiz revision schedule to prioritize resolving more critical deadline issues."
+          ],
+          "overall_comment": "The revised plan shows significant improvement by proactively addressing the highest-risk items: the Computer graphics assignment and AASMA reflection are now completed with substantial buffers before their deadlines. This demonstrates good risk mitigation for the most critical dependencies. The remaining concerns are minor: the Security quiz revision is still scheduled tightly before the event, and the workload is concentrated in evening hours. However, the overall plan now contains sufficient early discovery and contingency time for the major deadlines, so it is acceptable with minor concerns."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "block_after_deadline",
+            "message": "Security quiz has work scheduled after its deadline (2026-06-04T11:00:00.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-07 is outside the planning window 2026-06-01 → 2026-06-07.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 4,
+      "hasCritical": true
+    },
+    {
+      "calendar": {
+        "calendar_version": 3,
+        "planning_window": {
+          "start_date": "2026-06-01",
+          "end_date": "2026-06-07",
+          "reason": "Covers all task deadlines and fixed commitments."
+        },
+        "overall_strategy": [
+          "Complete Computer graphics assignment early while respecting realistic effort estimates.",
+          "Finish AASMA reflection before its deadline to create buffer.",
+          "Schedule Security quiz revision fully before its Thursday morning deadline.",
+          "Purchase materials early to avoid weekend conflict.",
+          "Balance daily workload to prevent cognitive overload, especially after long lab days."
+        ],
+        "days": [
+          {
+            "date": "2026-06-01",
+            "day_name": "Monday",
+            "assumed_available_hours": -1,
+            "day_reasoning": "Fixed commitments limit availability.",
+            "blocks": []
+          },
+          {
+            "date": "2026-06-02",
+            "day_name": "Tuesday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Available after morning lab, but cognitive energy is limited.",
+            "blocks": [
+              {
+                "id": "B1",
+                "task_id": "T1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-02T18:00:00+01:00",
+                "end": "2026-06-02T20:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Work on core implementation.",
+                "reasoning": "Limited to 2 hours after lab to maintain realistic effort."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-03",
+            "day_name": "Wednesday",
+            "assumed_available_hours": -1,
+            "day_reasoning": "Fixed commitments limit availability.",
+            "blocks": []
+          },
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Full day available before Security quiz deadline.",
+            "blocks": [
+              {
+                "id": "B2",
+                "task_id": "T2",
+                "task_name": "Security quiz",
+                "type": "work",
+                "start": "2026-06-04T09:00:00+01:00",
+                "end": "2026-06-04T11:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Revise for the quiz.",
+                "reasoning": "Completed before the 12:00 deadline."
+              },
+              {
+                "id": "B3",
+                "task_id": "T1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-04T14:00:00+01:00",
+                "end": "2026-06-04T17:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Finalize assignment work.",
+                "reasoning": "Dedicated block with fresh energy."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Friday",
+            "assumed_available_hours": 2,
+            "day_reasoning": "Limited time due to family event.",
+            "blocks": [
+              {
+                "id": "B4",
+                "task_id": "T1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-05T14:00:00+01:00",
+                "end": "2026-06-05T16:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Complete and submit assignment.",
+                "reasoning": "Final work and submission before deadline."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Saturday",
+            "assumed_available_hours": 1,
+            "day_reasoning": "Brief availability for errand.",
+            "blocks": [
+              {
+                "id": "B5",
+                "task_id": "T4",
+                "task_name": "Buy materials for weekend workshop",
+                "type": "work",
+                "start": "2026-06-06T10:00:00+01:00",
+                "end": "2026-06-06T11:00:00+01:00",
+                "duration_hours": 1,
+                "description": "Purchase required materials.",
+                "reasoning": "Completed before weekend workshop."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Sunday",
+            "assumed_available_hours": 0,
+            "day_reasoning": "No availability due to weekend workshop.",
+            "blocks": []
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Computer graphics assignment requires 7 hours but Tuesday has limited cognitive energy after a 6-hour lab.",
+            "resolution": "Reduced Tuesday block to 2 hours and shifted remaining work to Thursday and Friday."
+          },
+          {
+            "conflict": "AASMA reflection deadline conflicts with other tasks but was not scheduled due to fixed commitments.",
+            "resolution": "Assumed reflection was completed earlier or during unscheduled time."
+          }
+        ],
+        "known_weaknesses": [
+          "AASMA reflection is not explicitly scheduled, creating risk if not done.",
+          "Total scheduled hours for Computer graphics assignment may still be insufficient for 7-hour estimate.",
+          "Relies on student completing reflection during unscheduled time."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Reduced Computer graphics assignment total scheduled hours from 9 to 7.",
+            "reason": "Addresses Effort Agent's critique about over-allocation."
+          },
+          {
+            "change": "Removed 3-hour block on Tuesday after lab, replacing it with a 2-hour block.",
+            "reason": "Addresses cognitive overload concern from Effort Agent."
+          },
+          {
+            "change": "Removed explicit AASMA reflection block due to fixed commitments.",
+            "reason": "Reflects uncertainty in scheduling but creates risk."
+          },
+          {
+            "change": "Adjusted assumed_available_hours to reflect fixed commitments more accurately.",
+            "reason": "Ensures scheduled hours do not exceed available time."
+          }
+        ],
+        "unresolved_critiques": [
+          {
+            "agent": "Effort Agent",
+            "severity": "major",
+            "issue": "Computer graphics assignment may still be under-scheduled relative to the 7-hour estimate.",
+            "planner_response": "Accepted as a known weakness; student must use unscheduled time if needed."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 3,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The AASMA reflection is not scheduled at all before its Wednesday night deadline. This creates a high risk of missing the deadline.",
+              "severity": "critical",
+              "affected_tasks": [
+                "AASMA reflection"
+              ],
+              "affected_days": [
+                "2026-06-03"
+              ],
+              "suggested_fix": "Schedule a 90-minute block for the AASMA reflection on Wednesday, June 3rd, before 23:59. Use morning or evening time around the part-time work commitment."
+            },
+            {
+              "issue": "The Computer graphics assignment is scheduled for only 7 hours total, but the work is backloaded with 5 hours on Thursday and Friday, the day it is due. This creates deadline-day risk if any issues arise.",
+              "severity": "major",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Start the assignment earlier in the week (e.g., Monday) to create a buffer. Aim to finish the bulk of the work by Thursday, leaving Friday only for final touches and submission."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner attempted to address cognitive overload by reducing the Tuesday block for the Computer graphics assignment."
+          ],
+          "overall_comment": "This calendar fails to schedule the AASMA reflection before its deadline, which is a critical oversight. Furthermore, the scheduling of the major Computer graphics assignment leaves too much work for its due date, creating unnecessary risk. I cannot approve a plan where a deadline task receives no scheduled work."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 3,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The highest-value academic task, the Computer graphics assignment, is critically under-scheduled. It requires 7 hours but only 7 hours are scheduled, with the final 2 hours placed on the same day as the deadline and after a family event. This leaves no buffer for unexpected difficulties and risks a rushed, low-quality submission.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-02",
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Front-load the work. Schedule at least 3-4 hours of dedicated, protected time for the Computer graphics assignment earlier in the week (e.g., Wednesday morning or evening) to ensure substantial progress is made before the deadline day."
+            },
+            {
+              "issue": "The AASMA reflection, a deliverable with a hard deadline, is not scheduled at all, creating a high risk of a missed submission which would directly impact the grade.",
+              "severity": "major",
+              "affected_tasks": [
+                "AASMA reflection"
+              ],
+              "affected_days": [
+                "2026-06-03"
+              ],
+              "suggested_fix": "Explicitly schedule the 90-minute AASMA reflection block on Wednesday, June 3rd, either in the morning before part-time work or immediately after work concludes at 17:00."
+            },
+            {
+              "issue": "The Security quiz revision is scheduled for the same morning as the quiz, which is a high-risk strategy. This leaves no time for final review or addressing last-minute confusion, potentially impacting quiz performance.",
+              "severity": "major",
+              "affected_tasks": [
+                "Security quiz"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Move at least 1-2 hours of the Security quiz revision to an earlier day (e.g., Tuesday or Wednesday evening) to allow for spaced practice and reduce morning-of pressure."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner attempted to address cognitive load by reducing the Tuesday block for the Computer graphics assignment after the lab."
+          ],
+          "overall_comment": "This calendar fails to protect academic value. The most grade-impactful work (Computer graphics assignment) is scheduled with zero buffer on its deadline day, and another deliverable (AASMA reflection) is omitted entirely. High-value tasks are being crowded out by an ineffective schedule that does not allocate sufficient, protected time early in the week. I must reject this version."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 3,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The AASMA reflection task is not scheduled at all, creating a high risk of missing its Wednesday night deadline. The plan assumes it will be done in unscheduled time, which is unrealistic for a task requiring focused writing.",
+              "severity": "critical",
+              "affected_tasks": [
+                "AASMA reflection"
+              ],
+              "affected_days": [
+                "2026-06-03"
+              ],
+              "suggested_fix": "Schedule a 1.5-hour block for the AASMA reflection on Wednesday, June 3rd. This could be placed in the morning (before part-time work) or in the evening (after 17:00)."
+            },
+            {
+              "issue": "The total scheduled time for the Computer graphics assignment is only 7 hours (2+3+2), which matches the student's estimate but does not account for the need to split this large task into concrete subtasks. The blocks are vague ('core implementation', 'finalize', 'complete'), which can lead to poor time management and underestimation of effort for specific phases like debugging or writing.",
+              "severity": "major",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-02",
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Break the assignment into specific subtasks (e.g., research, coding, testing, write-up) and assign them to the scheduled blocks. Consider adding a small buffer to the final block on Friday to account for final checks and submission."
+            },
+            {
+              "issue": "The Security quiz revision is scheduled for a single 2-hour block on Thursday morning, just before the quiz. This does not allow for effective spaced repetition and increases the risk of last-minute cramming being less effective.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Security quiz"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Split the 3 hours of revision into two sessions. Schedule a 1.5-hour session earlier in the week (e.g., Tuesday evening) and a 1.5-hour session on Wednesday evening or Thursday morning."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner reduced the Tuesday block for the Computer graphics assignment to 2 hours to address cognitive overload after the lab, which is a good compromise for realism."
+          ],
+          "overall_comment": "The plan makes a critical error by not scheduling the AASMA reflection, risking a missed deadline. While the total hours for the Computer graphics assignment now match the estimate, the work is not broken down into specific, manageable subtasks, which is essential for a realistic student effort plan. The revision strategy for the Security quiz is suboptimal. Therefore, I must reject this calendar version."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 3,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The plan schedules a cognitively heavy 3-hour block for the Computer graphics assignment on Thursday afternoon immediately after a 2-hour Security quiz revision in the morning. This creates a high-cognitive-load day with 5 hours of demanding work, risking mental fatigue and reduced effectiveness.",
+              "severity": "major",
+              "affected_tasks": [
+                "Computer graphics assignment",
+                "Security quiz"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Reduce the Thursday Computer graphics assignment block to 2 hours or less. Move the remaining hour to an earlier day with lower cognitive load, such as Wednesday evening, to spread the effort."
+            },
+            {
+              "issue": "The Computer graphics assignment is still heavily concentrated late in the week (Thursday and Friday), with 5 of its 7 scheduled hours occurring just before the Friday deadline. This creates deadline pressure and reduces time for unexpected problems or review, increasing stress.",
+              "severity": "major",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Schedule an earlier start. Add a 1-2 hour work block for the assignment on Wednesday evening to reduce the late-week burden and create a more sustainable pace."
+            },
+            {
+              "issue": "The AASMA reflection, a 90-minute task due Wednesday night, is not scheduled at all. Relying on unscheduled time creates a high risk of last-minute rushing or missing the deadline, which would cause significant stress.",
+              "severity": "critical",
+              "affected_tasks": [
+                "AASMA reflection"
+              ],
+              "affected_days": [
+                "2026-06-03"
+              ],
+              "suggested_fix": "Explicitly schedule the AASMA reflection for Wednesday evening, for example from 17:30 to 19:00. To make room, reduce the duration of another planned work block earlier in the week."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner reduced the Tuesday Computer graphics assignment block to 2 hours after the lab, addressing the concern about post-lab cognitive overload."
+          ],
+          "overall_comment": "The plan has made a positive adjustment by shortening the Tuesday work session. However, it introduces new critical wellbeing issues: the AASMA reflection is completely unscheduled, creating a high risk of a missed deadline and acute stress. Furthermore, the workload is poorly distributed, with a cognitively heavy Thursday and excessive concentration of the major assignment just before its deadline. This schedule is not humane enough to follow sustainably. It must explicitly schedule the reflection and better distribute the Computer graphics work earlier in the week to reduce pressure."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 3,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "issue": "The Computer graphics assignment is critically under-scheduled and lacks a contingency buffer before its hard deadline. Only 7 hours are scheduled, matching the estimated effort, but there is no time allocated for unexpected scope, debugging, or submission issues. The final block ends at 16:00 on Friday, leaving a 7-hour gap until the 23:59 deadline, but this time is not reserved as a buffer.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Schedule a dedicated 2-hour contingency block on Friday evening (e.g., 19:00-21:00) explicitly labeled as a buffer for the Computer graphics assignment. Alternatively, start the assignment earlier in the week to create more slack."
+            },
+            {
+              "issue": "The AASMA reflection is not scheduled at all, creating a high risk of missing its Wednesday night deadline. The plan assumes it will be completed in unscheduled time, which is a fragile assumption given the student's fixed commitments and energy levels.",
+              "severity": "major",
+              "affected_tasks": [
+                "AASMA reflection"
+              ],
+              "affected_days": [
+                "2026-06-03"
+              ],
+              "suggested_fix": "Explicitly schedule the 90-minute AASMA reflection block. A suitable time is Tuesday evening after the lab (e.g., 16:00-17:30) or Wednesday morning before part-time work."
+            },
+            {
+              "issue": "The Security quiz revision is scheduled only for 2 hours on Thursday morning, which is less than the estimated 3 hours. This leaves no buffer for last-minute review or difficult topics, and the revision is compressed immediately before the quiz.",
+              "severity": "major",
+              "affected_tasks": [
+                "Security quiz"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Add the missing 1 hour of revision. Schedule it earlier, such as on Wednesday evening, to allow for spaced learning and to create a buffer before the quiz."
+            },
+            {
+              "issue": "The plan lacks early discovery time for the high-risk Computer graphics assignment. The first work is scheduled for Tuesday evening, leaving little time to assess scope and adjust the plan if the task is more complex than expected.",
+              "severity": "major",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-01",
+                "2026-06-02"
+              ],
+              "suggested_fix": "Schedule a short (1-hour) discovery or planning block for the Computer graphics assignment on Monday afternoon to review requirements and break down subtasks."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner acknowledged the risk of the AASMA reflection not being scheduled as a known weakness.",
+            "The planner reduced the Tuesday block for the Computer graphics assignment to address cognitive overload, accepting a tighter schedule."
+          ],
+          "overall_comment": "The plan remains high-risk. It fails to schedule a critical task (AASMA reflection), under-allocates time for the Security quiz, and provides no contingency buffer for the most demanding assignment. While the planner acknowledged some weaknesses, the current schedule is too fragile and relies on optimistic assumptions. It does not contain enough early discovery or contingency time to protect against uncertainties in task duration, energy, and hidden work. Therefore, I must reject this version."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "block_after_deadline",
+            "message": "Buy materials for weekend workshop has work scheduled after its deadline (2026-06-05T23:00:00.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-07 is outside the planning window 2026-06-01 → 2026-06-07.",
+            "severity": "error"
+          },
+          {
+            "code": "deadline_task_unscheduled",
+            "message": "T3 has a deadline inside the planning window but no scheduled work block.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 0,
+      "hasCritical": true
+    }
+  ],
+  "finalCalendar": {
+    "calendar_version": 2,
+    "planning_window": {
+      "start_date": "2026-06-01",
+      "end_date": "2026-06-07",
+      "reason": "Covers all deadlines and the weekend workshop preparation."
+    },
+    "overall_strategy": [
+      "Complete Computer graphics assignment early to avoid deadline-day risk.",
+      "Finish AASMA reflection before its due date to create buffer.",
+      "Schedule Security quiz revision fully before its Thursday morning deadline.",
+      "Purchase materials early to avoid weekend conflict.",
+      "Respect fixed commitments and preferred work hours (14:00-21:00).",
+      "Balance daily workload to prevent burnout."
+    ],
+    "days": [
+      {
+        "date": "2026-06-01",
+        "day_name": "Sunday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Limited time due to part-time work and other commitments.",
+        "blocks": [
+          {
+            "id": "B1",
+            "task_id": "T4",
+            "task_name": "Buy materials for weekend workshop",
+            "type": "work",
+            "start": "2026-06-01T18:00:00",
+            "end": "2026-06-01T19:00:00",
+            "duration_hours": 1,
+            "description": "Purchase materials for the weekend workshop.",
+            "reasoning": "Complete this early to avoid conflict with weekend plans."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-02",
+        "day_name": "Monday",
+        "assumed_available_hours": 5,
+        "day_reasoning": "Evening hours available after part-time work.",
+        "blocks": [
+          {
+            "id": "B2",
+            "task_id": "T1",
+            "task_name": "Computer graphics assignment",
+            "type": "work",
+            "start": "2026-06-02T18:00:00",
+            "end": "2026-06-02T21:00:00",
+            "duration_hours": 3,
+            "description": "Work on Computer graphics assignment core implementation.",
+            "reasoning": "Start assignment early to build momentum and reduce deadline pressure."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-03",
+        "day_name": "Tuesday",
+        "assumed_available_hours": 6,
+        "day_reasoning": "Evening hours available after part-time work.",
+        "blocks": [
+          {
+            "id": "B3",
+            "task_id": "T1",
+            "task_name": "Computer graphics assignment",
+            "type": "work",
+            "start": "2026-06-03T18:00:00",
+            "end": "2026-06-03T20:00:00",
+            "duration_hours": 2,
+            "description": "Continue Computer graphics assignment work.",
+            "reasoning": "Make steady progress to finish early."
+          },
+          {
+            "id": "B4",
+            "task_id": "T3",
+            "task_name": "AASMA reflection",
+            "type": "work",
+            "start": "2026-06-03T20:00:00",
+            "end": "2026-06-03T21:30:00",
+            "duration_hours": 1.5,
+            "description": "Write AASMA reflection.",
+            "reasoning": "Complete reflection a day before its deadline to create buffer."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-04",
+        "day_name": "Wednesday",
+        "assumed_available_hours": 7,
+        "day_reasoning": "Full day available before the Security quiz deadline.",
+        "blocks": [
+          {
+            "id": "B5",
+            "task_id": "T2",
+            "task_name": "Security quiz",
+            "type": "work",
+            "start": "2026-06-04T14:00:00",
+            "end": "2026-06-04T16:00:00",
+            "duration_hours": 2,
+            "description": "Revise for Security quiz.",
+            "reasoning": "Final revision before the Thursday morning quiz."
+          },
+          {
+            "id": "B6",
+            "task_id": "T1",
+            "task_name": "Computer graphics assignment",
+            "type": "work",
+            "start": "2026-06-04T18:00:00",
+            "end": "2026-06-04T21:00:00",
+            "duration_hours": 3,
+            "description": "Finalize Computer graphics assignment.",
+            "reasoning": "Complete assignment a full day before its deadline to eliminate risk."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-05",
+        "day_name": "Thursday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "Limited time due to family event in the evening.",
+        "blocks": [
+          {
+            "id": "B7",
+            "task_id": "T1",
+            "task_name": "Computer graphics assignment",
+            "type": "work",
+            "start": "2026-06-05T14:00:00",
+            "end": "2026-06-05T15:00:00",
+            "duration_hours": 1,
+            "description": "Submit Computer graphics assignment.",
+            "reasoning": "Final review and submission, done early in the day with no pressure."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-06",
+        "day_name": "Friday",
+        "assumed_available_hours": 0,
+        "day_reasoning": "Weekend workshop, no academic work scheduled.",
+        "blocks": []
+      },
+      {
+        "date": "2026-06-07",
+        "day_name": "Saturday",
+        "assumed_available_hours": 0,
+        "day_reasoning": "Weekend workshop, no academic work scheduled.",
+        "blocks": []
+      }
+    ],
+    "compromises": [
+      {
+        "conflict": "Computer graphics assignment requires 7 hours but Friday has limited time due to family event.",
+        "resolution": "Finished assignment entirely by Wednesday night, a full day early."
+      },
+      {
+        "conflict": "AASMA reflection due Wednesday night competes with Security quiz revision.",
+        "resolution": "Completed reflection on Tuesday, creating a full day of buffer."
+      }
+    ],
+    "known_weaknesses": [
+      "Security quiz revision is scheduled only on Wednesday afternoon, with no early buffer.",
+      "Total work hours are concentrated in the evenings, which may lead to fatigue."
+    ],
+    "changes_from_previous": [
+      {
+        "change": "Moved Computer graphics assignment completion to Wednesday, eliminating Thursday work.",
+        "reason": "Address critical deadline-day risk identified by agents."
+      },
+      {
+        "change": "Moved AASMA reflection to Tuesday, a day before its deadline.",
+        "reason": "Address critical lack of buffer identified by agents."
+      },
+      {
+        "change": "Removed all buffer and break blocks as per instructions.",
+        "reason": "Unscheduled time is implicitly rest."
+      }
+    ],
+    "unresolved_critiques": [
+      {
+        "agent": "Risk Agent",
+        "severity": "minor",
+        "issue": "Security quiz revision is scheduled only on Wednesday afternoon, just before the Thursday morning quiz.",
+        "planner_response": "Accepted risk to prioritize eliminating critical deadline-day issues for other tasks."
+      }
+    ]
+  },
+  "critiques": [
+    {
+      "agent": "Deadline Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "Security quiz revision is scheduled only on Wednesday afternoon, leaving no buffer before the Thursday morning quiz. This creates a minor deadline-day risk if any unexpected issues arise on Wednesday.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Security quiz"
+          ],
+          "affected_days": [
+            "2026-06-03"
+          ],
+          "suggested_fix": "Consider moving 1 hour of revision to Tuesday evening to create a buffer and reduce last-minute pressure."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner has successfully addressed the major deadline risks by completing the Computer graphics assignment a full day early and the AASMA reflection with a buffer."
+      ],
+      "overall_comment": "The calendar effectively protects the most critical deadlines. The Computer graphics assignment is finished by Wednesday night, well before its Friday deadline, and the AASMA reflection is completed a day early. The only minor concern is the Security quiz revision being scheduled entirely on the day before the quiz, which introduces a small but acceptable risk. Overall, all deadline tasks receive meaningful work well before their deadlines."
+    },
+    {
+      "agent": "Grade Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "Security quiz revision is scheduled only on Wednesday afternoon, just before the Thursday morning quiz. This leaves no buffer for unexpected issues and risks a lower grade on a moderate-value assessment.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Security quiz"
+          ],
+          "affected_days": [
+            "2026-06-04"
+          ],
+          "suggested_fix": "Add a short revision session earlier in the week (e.g., Tuesday evening after the Computer graphics assignment block) to spread out preparation and reduce last-minute pressure."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner prioritized eliminating critical deadline-day risk for the high-value Computer graphics assignment by finishing it a full day early, which is a strong academic protection.",
+        "The planner completed the AASMA reflection a day before its deadline, creating buffer for that task."
+      ],
+      "overall_comment": "The calendar successfully protects the high-value Computer graphics assignment by dedicating substantial, early blocks and finishing it a full day before the deadline. This prevents lower-value tasks from crowding it out. The Security quiz revision is the only moderate-value item with a minor scheduling risk, but overall academic priorities are well-served. I approve with minor concerns."
+    },
+    {
+      "agent": "Effort Agent",
+      "calendar_version": 2,
+      "approval": "reject",
+      "severity": "critical",
+      "critiques": [
+        {
+          "issue": "The Computer graphics assignment is scheduled for a total of 9 hours (3+2+3+1), which exceeds the student's own 7-hour estimate and my earlier 8-hour recommendation. This over-allocation is unrealistic and suggests the plan is forcing an early completion at the cost of effort realism. The 1-hour 'submit' block on Friday is also mischaracterized; submission is trivial, and this time should be part of the core work or buffer.",
+          "severity": "major",
+          "affected_tasks": [
+            "Computer graphics assignment"
+          ],
+          "affected_days": [
+            "2026-06-02",
+            "2026-06-03",
+            "2026-06-04",
+            "2026-06-05"
+          ],
+          "suggested_fix": "Reduce total scheduled hours for the Computer graphics assignment to a maximum of 8 hours, split across realistic subtasks. Remove the 1-hour 'submit' block and reallocate that time to meaningful work or buffer earlier in the week. Ensure the sum of block durations matches a plausible total effort."
+        },
+        {
+          "issue": "The Computer graphics assignment is broken into blocks, but the blocks are not aligned with meaningful subtasks. The descriptions are vague ('core implementation', 'continue work', 'finalize'), which hides whether the work is properly structured. A student would benefit from a clear plan of attack (e.g., research, coding, testing) to maintain focus and ensure all components are addressed.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Computer graphics assignment"
+          ],
+          "affected_days": [
+            "2026-06-02",
+            "2026-06-03",
+            "2026-06-04"
+          ],
+          "suggested_fix": "Rename block descriptions to reflect concrete subtasks, such as 'Understand requirements and plan approach', 'Write core code or create design', 'Test and debug the assignment', and 'Final polish and documentation'. This makes the effort distribution more transparent and actionable."
+        },
+        {
+          "issue": "The plan schedules a 3-hour block for the Computer graphics assignment on Tuesday evening (18:00-21:00) immediately after a 6-hour lab session (10:00-16:00). This is a 9-hour cognitive load day with no break, which is highly unrealistic for a student. Energy and focus will be severely depleted, making a 3-hour deep work block ineffective.",
+          "severity": "critical",
+          "affected_tasks": [
+            "Computer graphics assignment"
+          ],
+          "affected_days": [
+            "2026-06-02"
+          ],
+          "suggested_fix": "Move the Tuesday block to a shorter, lighter task or reduce its duration. Consider starting the Computer graphics assignment on Monday afternoon (14:00-18:00) instead, which has 4 available hours and follows only morning classes, not a long lab."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner has moved the AASMA reflection to Tuesday, creating a buffer, which addresses my earlier concern about procrastination risk for that task."
+      ],
+      "overall_comment": "The planner's strategy to finish major tasks early is commendable but has been executed without regard for effort realism. The total hours scheduled for the Computer graphics assignment are inflated and placed in cognitively demanding time slots, particularly on Tuesday after a full lab day. The block structure lacks subtask clarity, making it hard to assess if the work is properly partitioned. While the AASMA reflection buffer is a good compromise, the critical issues with the Computer graphics assignment's duration and timing force a rejection. A student cannot effectively perform 3 hours of intensive assignment work after a 6-hour lab."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "calendar_version": 2,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The planner has addressed the primary wellbeing concern by moving the 7-hour Computer graphics assignment to be completed a full day early, eliminating the high-stress, single-day overload on Friday. The AASMA reflection is also scheduled with buffer. The compromise is that Security quiz revision is concentrated on Wednesday afternoon, which is acceptable as it is a moderate task and does not create an overfilled day."
+      ],
+      "overall_comment": "This revised plan is humane and sustainable. The major risk of a 7-hour assignment on its due date has been eliminated by spreading the work across Tuesday, Wednesday, and Thursday evenings, finishing a day early. Daily workloads are reasonable, with no day exceeding 5 hours of scheduled work. Evening work blocks respect the student's preferred hours and do not extend unreasonably late. The plan protects sleep, prevents burnout, and is feasible to follow."
+    },
+    {
+      "agent": "Risk Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "Security quiz revision is scheduled only on Wednesday afternoon, immediately before the Thursday morning quiz. This leaves no buffer for unexpected difficulty, last-minute content review, or fatigue from the day's work.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Security quiz"
+          ],
+          "affected_days": [
+            "2026-06-04"
+          ],
+          "suggested_fix": "Schedule a short, early revision session on Tuesday or Wednesday morning to identify weak areas and reduce pressure on the single Wednesday afternoon block."
+        },
+        {
+          "issue": "The plan schedules all major work in evening blocks (typically 18:00-21:00). This concentrates effort into potentially lower-energy periods after classes, labs, or work, increasing the risk of fatigue and reduced productivity.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Computer graphics assignment",
+            "AASMA reflection",
+            "Security quiz"
+          ],
+          "affected_days": [
+            "2026-06-02",
+            "2026-06-03",
+            "2026-06-04"
+          ],
+          "suggested_fix": "Consider starting some work earlier in the afternoon (e.g., 14:00-17:00) on available days to spread cognitive load and leverage higher energy levels."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner has addressed the major risk for the Computer graphics assignment by scheduling its completion a full day before the deadline.",
+        "The planner has addressed the buffer risk for the AASMA reflection by scheduling it a day before its deadline.",
+        "The planner has accepted the minor risk regarding the Security quiz revision schedule to prioritize resolving more critical deadline issues."
+      ],
+      "overall_comment": "The revised plan shows significant improvement by proactively addressing the highest-risk items: the Computer graphics assignment and AASMA reflection are now completed with substantial buffers before their deadlines. This demonstrates good risk mitigation for the most critical dependencies. The remaining concerns are minor: the Security quiz revision is still scheduled tightly before the event, and the workload is concentrated in evening hours. However, the overall plan now contains sufficient early discovery and contingency time for the major deadlines, so it is acceptable with minor concerns."
+    }
+  ],
+  "validation": {
+    "valid": false,
+    "violations": [
+      {
+        "code": "block_after_deadline",
+        "message": "Security quiz has work scheduled after its deadline (2026-06-04T11:00:00.000Z).",
+        "severity": "error"
+      },
+      {
+        "code": "day_outside_window",
+        "message": "2026-06-07 is outside the planning window 2026-06-01 → 2026-06-07.",
+        "severity": "error"
+      }
+    ]
+  },
+  "evaluation": {
+    "evaluator": "Schedule Evaluator",
+    "calendar_version": 2,
+    "planner_model": "deepseek/deepseek-v3.2",
+    "evaluator_model": "deepseek/deepseek-v3.2",
+    "overall_score": 3.2,
+    "model_score": 2.8,
+    "hard_score": 3.6,
+    "hard_metrics": {
+      "score": 65.7,
+      "metrics": [
+        {
+          "name": "generation_time_seconds",
+          "value": 319.2,
+          "score": 0,
+          "explanation": "319.2s from run start to final schedule selection."
+        },
+        {
+          "name": "rejection_count",
+          "value": 1,
+          "score": 80,
+          "explanation": "1 specialist agent(s) rejected the final calendar."
+        },
+        {
+          "name": "critical_count",
+          "value": 2,
+          "score": 33.3,
+          "explanation": "2 critical issue(s) were raised in final critiques."
+        },
+        {
+          "name": "major_count",
+          "value": 1,
+          "score": 80,
+          "explanation": "1 major issue(s) were raised in final critiques."
+        },
+        {
+          "name": "deadline_violation_count",
+          "value": 1,
+          "score": 66.7,
+          "explanation": "1 scheduled work block(s) end after their task deadline."
+        },
+        {
+          "name": "task_coverage_ratio",
+          "value": 1,
+          "score": 100,
+          "explanation": "4/4 inferred task(s) received at least one work block."
+        },
+        {
+          "name": "availability_overrun_hours",
+          "value": 0,
+          "score": 100,
+          "explanation": "0h scheduled above the planner's assumed available hours."
+        }
+      ]
+    },
+    "dimension_scores": [
+      {
+        "dimension": "requirement_match",
+        "score": 2.5,
+        "rationale": "All tasks are scheduled and fixed commitments are respected, but a critical deadline violation for the Security quiz undermines core requirement fulfillment."
+      },
+      {
+        "dimension": "deadline_safety",
+        "score": 1.5,
+        "rationale": "Major assignment is finished early, but the Security quiz revision is scheduled after its inferred deadline, creating a fundamental safety failure."
+      },
+      {
+        "dimension": "workload_realism",
+        "score": 2,
+        "rationale": "Schedules a 3-hour intensive assignment block immediately after a 6-hour lab, which is cognitively unrealistic. Total hours for the assignment also exceed the student's estimate."
+      },
+      {
+        "dimension": "academic_priority",
+        "score": 4,
+        "rationale": "Correctly identifies and front-loads the high-stakes graphics assignment, showing good prioritization logic for the major task."
+      },
+      {
+        "dimension": "wellbeing_balance",
+        "score": 4,
+        "rationale": "Avoids cramming major work on due dates, spreads workload across evenings, and finishes tasks early to reduce stress."
+      },
+      {
+        "dimension": "risk_resilience",
+        "score": 2.5,
+        "rationale": "Proactively creates buffers for the assignment and reflection, but accepts a high-consequence risk by violating the quiz deadline and has no contingency for evening fatigue."
+      }
+    ],
+    "strengths": [
+      "Clear overall strategy to finish major assignment a full day early, eliminating deadline-day risk.",
+      "Protects wellbeing by avoiding overload on due dates and respecting preferred work hours.",
+      "Successfully schedules all tasks and acknowledges compromises."
+    ],
+    "weaknesses": [
+      "Contains a critical validation error: Security quiz revision is scheduled after its deadline.",
+      "Places a demanding 3-hour assignment block immediately after a 6-hour lab, ignoring energy and focus limits.",
+      "Known weaknesses in the plan (e.g., concentrated evening work, tight quiz schedule) are acknowledged but not mitigated."
+    ],
+    "comparison_notes": [
+      "Plan prioritizes major assignment early to mitigate deadline risk, but has a critical scheduling error for the quiz revision.",
+      "Wellbeing is well-protected by avoiding overload on due dates.",
+      "Actionability is reduced by the deadline violation and unrealistic effort blocks after long commitments."
+    ],
+    "recommendation": "Do not accept. The calendar contains a critical deadline violation (Security quiz work scheduled after its deadline) and includes an unrealistic workload block (3-hour assignment after a full lab day). The core strategy is sound, but these execution errors make the schedule unactionable."
+  }
+}

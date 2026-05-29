@@ -1,0 +1,11 @@
+I am working on a group project for distributed systems.
+
+The final presentation is next Thursday at 14:00. Our group still needs to finish the architecture diagram, divide speaking parts, prepare slides, and rehearse. Two teammates can only meet Monday after 18:00 and Wednesday after 17:00.
+
+My personal responsibility is the fault tolerance section and the demo explanation. I have rough notes but no slides.
+
+I also have an individual algorithms problem set due Tuesday night. It has 5 problems, and I have solved 2.
+
+I am free this weekend except Sunday dinner. During weekdays I have classes from 10:00 to 15:00.
+
+Please make sure the group work is ready before the presentation and leave time for coordination problems.

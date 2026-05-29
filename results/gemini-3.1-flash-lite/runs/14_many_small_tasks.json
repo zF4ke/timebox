@@ -1,0 +1,1763 @@
+{
+  "runId": "3c1a4ee5-f087-4539-a002-c396ac7c065a",
+  "createdAt": "2026-05-29T12:33:41.046Z",
+  "request": {
+    "userInput": "I need a plan for many small tasks that are cluttering my week.\n\nTasks:\n- Submit scholarship form by Monday noon.\n- Email project advisor with topic options by Tuesday.\n- Finish two Java exercises by Wednesday night.\n- Watch one recorded lecture before Thursday's class.\n- Prepare 6 flashcards for databases by Friday.\n- Book doctor appointment sometime this week.\n- Clean up GitHub README for AASMA prototype before Sunday.\n- Do 2 hours of math revision before next Monday.\n\nI have about 2 hours free on weekdays and 5 hours on Saturday. Small tasks stress me out when they are not scheduled. Please group them sensibly without making every day feel fragmented.",
+    "quorum": 5,
+    "maxIterations": 3,
+    "timezone": "Europe/Lisbon",
+    "model": "google/gemini-3.1-flash-lite-preview",
+    "evaluatorModel": "google/gemini-3.1-flash-lite-preview"
+  },
+  "stopReason": "Accepted by 5/5 agents with no critical critiques.",
+  "interpreterOutput": {
+    "current_date": "2026-05-29T12:33:41.046Z",
+    "planning_window": {
+      "start_date": "2026-05-29T12:33:41.046Z",
+      "end_date": "2026-06-01T23:59:59.000Z",
+      "reason": "The user requested a plan for the current week to manage small tasks and reduce stress."
+    },
+    "inferred_availability": [
+      {
+        "date_range": "2026-05-29 to 2026-05-29",
+        "assumption": "Remaining weekday hours after current time",
+        "estimated_available_hours_per_day": 2,
+        "confidence": "high"
+      },
+      {
+        "date_range": "2026-05-30 to 2026-05-30",
+        "assumption": "Standard weekday availability",
+        "estimated_available_hours_per_day": 2,
+        "confidence": "high"
+      },
+      {
+        "date_range": "2026-05-31 to 2026-05-31",
+        "assumption": "Weekend availability",
+        "estimated_available_hours_per_day": 5,
+        "confidence": "high"
+      }
+    ],
+    "fixed_commitments": [
+      "Thursday class",
+      "Monday noon scholarship deadline"
+    ],
+    "student_state": {
+      "sleep": "unknown",
+      "energy": "moderate",
+      "confidence": "low"
+    },
+    "tasks": [
+      {
+        "task_id": "T1",
+        "name": "Submit scholarship form",
+        "raw_mentions": [
+          "Submit scholarship form by Monday noon"
+        ],
+        "inferred_deadline": "2026-06-01T12:00:00Z",
+        "uncertainties": [
+          "Exact submission portal requirements"
+        ]
+      },
+      {
+        "task_id": "T2",
+        "name": "Email project advisor",
+        "raw_mentions": [
+          "Email project advisor with topic options by Tuesday"
+        ],
+        "inferred_deadline": "2026-06-02T23:59:59Z",
+        "uncertainties": [
+          "Topic selection readiness"
+        ]
+      },
+      {
+        "task_id": "T3",
+        "name": "Finish Java exercises",
+        "raw_mentions": [
+          "Finish two Java exercises by Wednesday night"
+        ],
+        "inferred_deadline": "2026-06-03T23:59:59Z",
+        "uncertainties": [
+          "Complexity of exercises"
+        ]
+      },
+      {
+        "task_id": "T4",
+        "name": "Watch recorded lecture",
+        "raw_mentions": [
+          "Watch one recorded lecture before Thursday's class"
+        ],
+        "inferred_deadline": "2026-06-04T09:00:00Z",
+        "uncertainties": [
+          "Lecture duration"
+        ]
+      },
+      {
+        "task_id": "T5",
+        "name": "Prepare database flashcards",
+        "raw_mentions": [
+          "Prepare 6 flashcards for databases by Friday"
+        ],
+        "inferred_deadline": "2026-06-05T23:59:59Z",
+        "uncertainties": [
+          "Content depth"
+        ]
+      },
+      {
+        "task_id": "T6",
+        "name": "Book doctor appointment",
+        "raw_mentions": [
+          "Book doctor appointment sometime this week"
+        ],
+        "inferred_deadline": "2026-05-31T23:59:59Z",
+        "uncertainties": [
+          "Doctor availability"
+        ]
+      },
+      {
+        "task_id": "T7",
+        "name": "Clean up GitHub README",
+        "raw_mentions": [
+          "Clean up GitHub README for AASMA prototype before Sunday"
+        ],
+        "inferred_deadline": "2026-05-31T23:59:59Z",
+        "uncertainties": [
+          "Scope of cleanup"
+        ]
+      },
+      {
+        "task_id": "T8",
+        "name": "Math revision",
+        "raw_mentions": [
+          "Do 2 hours of math revision before next Monday"
+        ],
+        "inferred_deadline": "2026-06-01T23:59:59Z",
+        "uncertainties": [
+          "Specific topics to cover"
+        ]
+      }
+    ],
+    "assumptions": [
+      "The user considers Sunday the end of the week for planning purposes.",
+      "The user prefers batching tasks to avoid fragmentation.",
+      "The user has access to the internet for booking and email."
+    ]
+  },
+  "agentViews": [
+    {
+      "agent": "Deadline Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Submit scholarship form",
+          "assessment": "Critical priority due to early Monday deadline.",
+          "concerns": [
+            "High risk if left until the weekend."
+          ],
+          "recommendations": [
+            "Complete and submit by Friday to avoid weekend portal issues."
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review form requirements",
+            "Draft responses",
+            "Submit application"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Email project advisor",
+          "assessment": "Time-sensitive communication task.",
+          "concerns": [
+            "Delaying this could impact project progress."
+          ],
+          "recommendations": [
+            "Draft and send by Friday afternoon."
+          ],
+          "estimated_duration_hours": 0.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review topic options",
+            "Draft email",
+            "Send email"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Finish Java exercises",
+          "assessment": "Moderate priority with mid-week deadline.",
+          "concerns": [
+            "Complexity may exceed initial estimates."
+          ],
+          "recommendations": [
+            "Allocate time on Friday or Saturday morning."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review exercise requirements",
+            "Write code",
+            "Test solutions"
+          ]
+        },
+        {
+          "task_id": "T4",
+          "task_name": "Watch recorded lecture",
+          "assessment": "Essential preparation for upcoming class.",
+          "concerns": [
+            "Must be completed before Thursday class."
+          ],
+          "recommendations": [
+            "Watch during a weekday evening block."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Locate lecture link",
+            "Watch and take notes"
+          ]
+        },
+        {
+          "task_id": "T5",
+          "task_name": "Prepare database flashcards",
+          "assessment": "Low urgency, flexible deadline.",
+          "concerns": [
+            "None."
+          ],
+          "recommendations": [
+            "Complete during Saturday study block."
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Identify key concepts",
+            "Create flashcards"
+          ]
+        },
+        {
+          "task_id": "T6",
+          "task_name": "Book doctor appointment",
+          "assessment": "High priority for personal health.",
+          "concerns": [
+            "Doctor availability may be limited."
+          ],
+          "recommendations": [
+            "Call as soon as possible during business hours."
+          ],
+          "estimated_duration_hours": 0.25,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Find contact info",
+            "Call office",
+            "Confirm time"
+          ]
+        },
+        {
+          "task_id": "T7",
+          "task_name": "Clean up GitHub README",
+          "assessment": "Moderate priority, deadline approaching.",
+          "concerns": [
+            "Scope creep could consume too much time."
+          ],
+          "recommendations": [
+            "Limit to essential documentation updates."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review current README",
+            "Update project description",
+            "Commit changes"
+          ]
+        },
+        {
+          "task_id": "T8",
+          "task_name": "Math revision",
+          "assessment": "Significant time investment required.",
+          "concerns": [
+            "Requires sustained focus."
+          ],
+          "recommendations": [
+            "Schedule for Saturday to utilize the 5-hour block."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Identify weak topics",
+            "Review notes",
+            "Practice problems"
+          ]
+        }
+      ],
+      "overall_comment": "The schedule is manageable if high-priority tasks like the scholarship form and doctor appointment are addressed early. I recommend using the 5-hour Saturday block to handle the heavier academic tasks like math revision and GitHub cleanup to keep weekdays less fragmented."
+    },
+    {
+      "agent": "Grade Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Submit scholarship form",
+          "assessment": "High priority due to financial impact and strict deadline.",
+          "concerns": [
+            "Deadline is imminent; failure to submit results in loss of funding."
+          ],
+          "recommendations": [
+            "Prioritize this as the first task to ensure completion before the deadline."
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Gather required documents",
+            "Review form fields",
+            "Submit application"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Email project advisor",
+          "assessment": "High academic importance for project progress.",
+          "concerns": [
+            "Delayed communication may stall project approval."
+          ],
+          "recommendations": [
+            "Draft options early to allow for advisor feedback."
+          ],
+          "estimated_duration_hours": 0.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review project requirements",
+            "Draft topic options",
+            "Send email"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Finish Java exercises",
+          "assessment": "High academic value for skill acquisition.",
+          "concerns": [
+            "Complexity could exceed estimates; needs dedicated focus time."
+          ],
+          "recommendations": [
+            "Allocate uninterrupted time to ensure conceptual understanding."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review lecture notes",
+            "Implement code",
+            "Test solutions"
+          ]
+        },
+        {
+          "task_id": "T4",
+          "task_name": "Watch recorded lecture",
+          "assessment": "Essential for participation in upcoming class.",
+          "concerns": [
+            "Missing lecture content will hinder class engagement."
+          ],
+          "recommendations": [
+            "Watch before the scheduled class to maximize learning."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Locate lecture recording",
+            "Take notes",
+            "Identify questions for class"
+          ]
+        },
+        {
+          "task_id": "T5",
+          "task_name": "Prepare database flashcards",
+          "assessment": "Moderate academic value for exam preparation.",
+          "concerns": [
+            "Risk of superficial study if rushed."
+          ],
+          "recommendations": [
+            "Focus on key concepts rather than volume."
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Identify core database concepts",
+            "Write flashcards",
+            "Review cards"
+          ]
+        },
+        {
+          "task_id": "T6",
+          "task_name": "Book doctor appointment",
+          "assessment": "Low academic impact, but necessary for long-term wellbeing.",
+          "concerns": [
+            "Administrative task that can be easily deferred."
+          ],
+          "recommendations": [
+            "Complete during a low-energy window to save academic time for study."
+          ],
+          "estimated_duration_hours": 0.25,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Find contact info",
+            "Call office",
+            "Confirm time"
+          ]
+        },
+        {
+          "task_id": "T7",
+          "task_name": "Clean up GitHub README",
+          "assessment": "Moderate professional/academic value for portfolio.",
+          "concerns": [
+            "Scope creep could consume excessive time."
+          ],
+          "recommendations": [
+            "Limit to essential documentation updates."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review current README",
+            "Update project description",
+            "Commit changes"
+          ]
+        },
+        {
+          "task_id": "T8",
+          "task_name": "Math revision",
+          "assessment": "High academic value for exam readiness.",
+          "concerns": [
+            "Requires high cognitive load; should not be done when exhausted."
+          ],
+          "recommendations": [
+            "Schedule during peak energy hours."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Identify weak areas",
+            "Practice problems",
+            "Review solutions"
+          ]
+        }
+      ],
+      "overall_comment": "The proposed plan prioritizes high-impact academic tasks (scholarship, project advisor, math revision) while ensuring administrative tasks are contained. The schedule protects study time by grouping tasks to avoid fragmentation."
+    },
+    {
+      "agent": "Effort Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Submit scholarship form",
+          "assessment": "High priority, low complexity but requires focus to ensure accuracy.",
+          "concerns": [
+            "Portal downtime",
+            "Missing documentation"
+          ],
+          "recommendations": [
+            "Gather documents before starting",
+            "Submit at least 24 hours before deadline"
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review requirements",
+            "Upload documents",
+            "Final submission"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Email project advisor",
+          "assessment": "Quick communication task, dependent on topic readiness.",
+          "concerns": [
+            "Lack of clear topic options"
+          ],
+          "recommendations": [
+            "Draft email in advance",
+            "Keep options concise"
+          ],
+          "estimated_duration_hours": 0.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "List potential topics",
+            "Draft email",
+            "Send email"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Finish Java exercises",
+          "assessment": "Moderate complexity, requires dedicated coding time.",
+          "concerns": [
+            "Debugging time",
+            "Complexity of logic"
+          ],
+          "recommendations": [
+            "Allocate one block per exercise",
+            "Test code incrementally"
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Read exercise requirements",
+            "Write code",
+            "Test and debug"
+          ]
+        },
+        {
+          "task_id": "T4",
+          "task_name": "Watch recorded lecture",
+          "assessment": "Standard academic task, duration depends on lecture length.",
+          "concerns": [
+            "Lecture length may exceed 1 hour"
+          ],
+          "recommendations": [
+            "Watch at 1.25x speed if comfortable",
+            "Take notes while watching"
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Set up note-taking",
+            "Watch lecture",
+            "Review key points"
+          ]
+        },
+        {
+          "task_id": "T5",
+          "task_name": "Prepare database flashcards",
+          "assessment": "Very low complexity, easily batched.",
+          "concerns": [
+            "Scope creep on card content"
+          ],
+          "recommendations": [
+            "Limit to 6 cards as requested",
+            "Focus on core concepts"
+          ],
+          "estimated_duration_hours": 0.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Identify 6 key concepts",
+            "Write flashcards"
+          ]
+        },
+        {
+          "task_id": "T6",
+          "task_name": "Book doctor appointment",
+          "assessment": "Administrative task, high uncertainty due to external availability.",
+          "concerns": [
+            "Wait times",
+            "Scheduling conflicts"
+          ],
+          "recommendations": [
+            "Call during business hours",
+            "Have calendar ready"
+          ],
+          "estimated_duration_hours": 0.25,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Find clinic number",
+            "Call to book",
+            "Add to calendar"
+          ]
+        },
+        {
+          "task_id": "T7",
+          "task_name": "Clean up GitHub README",
+          "assessment": "Variable scope, can easily become a time sink.",
+          "concerns": [
+            "Over-polishing documentation"
+          ],
+          "recommendations": [
+            "Define 'clean' before starting",
+            "Focus on clarity over aesthetics"
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review current README",
+            "Update instructions",
+            "Commit changes"
+          ]
+        },
+        {
+          "task_id": "T8",
+          "task_name": "Math revision",
+          "assessment": "Significant cognitive load, requires split sessions.",
+          "concerns": [
+            "Fatigue during long study sessions"
+          ],
+          "recommendations": [
+            "Split into two 1-hour sessions",
+            "Focus on weak areas"
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Identify revision topics",
+            "Session 1: Practice problems",
+            "Session 2: Review concepts"
+          ]
+        }
+      ],
+      "overall_comment": "The workload is manageable within the provided time constraints. I have recommended splitting the math revision and coding tasks to prevent fatigue and ensure steady progress. The total estimated time is approximately 9.75 hours, which fits well within the available weekday and weekend blocks."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Submit scholarship form",
+          "assessment": "High priority, needs to be completed early to avoid weekend stress.",
+          "concerns": [
+            "Deadline pressure can cause anxiety if left until the last minute."
+          ],
+          "recommendations": [
+            "Complete this as the first task on Friday to clear mental space."
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review form requirements",
+            "Gather necessary documents",
+            "Submit form"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Email project advisor",
+          "assessment": "Low cognitive load, but important for progress.",
+          "concerns": [
+            "Procrastination on communication tasks."
+          ],
+          "recommendations": [
+            "Draft and send this during a low-energy period."
+          ],
+          "estimated_duration_hours": 0.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review topic options",
+            "Draft email",
+            "Send email"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Finish Java exercises",
+          "assessment": "Cognitively demanding, requires focus.",
+          "concerns": [
+            "Risk of overworking if exercises are complex."
+          ],
+          "recommendations": [
+            "Limit to one exercise per session to maintain energy."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review exercise prompts",
+            "Code solution for first exercise",
+            "Code solution for second exercise"
+          ]
+        },
+        {
+          "task_id": "T4",
+          "task_name": "Watch recorded lecture",
+          "assessment": "Passive learning task, suitable for mid-week.",
+          "concerns": [
+            "Can be time-consuming if not paced correctly."
+          ],
+          "recommendations": [
+            "Watch at a comfortable speed and take brief notes."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Access lecture link",
+            "Watch lecture",
+            "Summarize key points"
+          ]
+        },
+        {
+          "task_id": "T5",
+          "task_name": "Prepare database flashcards",
+          "assessment": "Manageable, low-stress task.",
+          "concerns": [
+            "None."
+          ],
+          "recommendations": [
+            "Use this as a light task to finish the week."
+          ],
+          "estimated_duration_hours": 0.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Identify key concepts",
+            "Create flashcards"
+          ]
+        },
+        {
+          "task_id": "T6",
+          "task_name": "Book doctor appointment",
+          "assessment": "Essential for long-term wellbeing.",
+          "concerns": [
+            "Phone calls can be stressful for some."
+          ],
+          "recommendations": [
+            "Schedule this during a break in your workday."
+          ],
+          "estimated_duration_hours": 0.25,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Find contact info",
+            "Call or book online"
+          ]
+        },
+        {
+          "task_id": "T7",
+          "task_name": "Clean up GitHub README",
+          "assessment": "Technical cleanup, requires focus.",
+          "concerns": [
+            "Scope creep."
+          ],
+          "recommendations": [
+            "Set a strict timer to prevent over-polishing."
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review current README",
+            "Update documentation",
+            "Commit changes"
+          ]
+        },
+        {
+          "task_id": "T8",
+          "task_name": "Math revision",
+          "assessment": "High cognitive load, needs to be spread out.",
+          "concerns": [
+            "Risk of burnout if done in one sitting."
+          ],
+          "recommendations": [
+            "Split into two 1-hour sessions."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Identify weak areas",
+            "Review notes",
+            "Practice problems"
+          ]
+        }
+      ],
+      "overall_comment": "The proposed workload is manageable if tasks are spread across the available time. I recommend prioritizing the scholarship form and math revision to reduce overall anxiety. Ensure you take breaks between cognitively heavy tasks like Java exercises and math revision to maintain sustainable energy levels."
+    },
+    {
+      "agent": "Risk Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Submit scholarship form",
+          "assessment": "High priority, critical deadline. Risk of portal issues.",
+          "concerns": [
+            "Portal downtime",
+            "Missing documentation"
+          ],
+          "recommendations": [
+            "Check requirements immediately",
+            "Submit 24 hours before deadline"
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review form requirements",
+            "Gather documents",
+            "Submit form"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Email project advisor",
+          "assessment": "Low complexity, but dependent on topic readiness.",
+          "concerns": [
+            "Advisor response time",
+            "Topic approval delay"
+          ],
+          "recommendations": [
+            "Draft email early",
+            "Include clear options"
+          ],
+          "estimated_duration_hours": 0.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review project guidelines",
+            "Draft topic options",
+            "Send email"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Finish Java exercises",
+          "assessment": "High risk of scope creep if exercises are complex.",
+          "concerns": [
+            "Unclear difficulty",
+            "Debugging time"
+          ],
+          "recommendations": [
+            "Start early to identify blockers",
+            "Allocate buffer time"
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Read exercise prompts",
+            "Draft code",
+            "Test and debug"
+          ]
+        },
+        {
+          "task_id": "T4",
+          "task_name": "Watch recorded lecture",
+          "assessment": "Standard academic task, low risk.",
+          "concerns": [
+            "Lecture length",
+            "Note-taking time"
+          ],
+          "recommendations": [
+            "Watch at 1.25x speed if needed",
+            "Summarize key points"
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Watch lecture",
+            "Take notes",
+            "Review summary"
+          ]
+        },
+        {
+          "task_id": "T5",
+          "task_name": "Prepare database flashcards",
+          "assessment": "Low risk, manageable scope.",
+          "concerns": [
+            "Content depth",
+            "Formatting time"
+          ],
+          "recommendations": [
+            "Use existing notes",
+            "Keep cards concise"
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Identify key concepts",
+            "Draft flashcards",
+            "Review cards"
+          ]
+        },
+        {
+          "task_id": "T6",
+          "task_name": "Book doctor appointment",
+          "assessment": "High dependency on external availability.",
+          "concerns": [
+            "Clinic hours",
+            "Appointment availability"
+          ],
+          "recommendations": [
+            "Call during business hours",
+            "Have multiple time slots ready"
+          ],
+          "estimated_duration_hours": 0.5,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Find clinic contact",
+            "Call to book",
+            "Confirm details"
+          ]
+        },
+        {
+          "task_id": "T7",
+          "task_name": "Clean up GitHub README",
+          "assessment": "Scope is undefined, potential for hidden work.",
+          "concerns": [
+            "Documentation requirements",
+            "Technical formatting"
+          ],
+          "recommendations": [
+            "Define 'clean up' criteria",
+            "Limit time spent on aesthetics"
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review current README",
+            "Update sections",
+            "Commit changes"
+          ]
+        },
+        {
+          "task_id": "T8",
+          "task_name": "Math revision",
+          "assessment": "High risk of procrastination due to lack of structure.",
+          "concerns": [
+            "Scope of revision",
+            "Topic difficulty"
+          ],
+          "recommendations": [
+            "Define specific topics",
+            "Use active recall"
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Select topics",
+            "Review notes",
+            "Practice problems"
+          ]
+        }
+      ],
+      "overall_comment": "The plan is generally sound but lacks explicit buffers for the Java exercises and GitHub cleanup. I recommend prioritizing the scholarship submission and doctor appointment early to avoid external dependency risks. Ensure that the math revision is broken down into specific topics to prevent scope creep."
+    }
+  ],
+  "calendarVersions": [
+    {
+      "calendar": {
+        "calendar_version": 1,
+        "planning_window": {
+          "start_date": "2026-05-29T12:33:41.046Z",
+          "end_date": "2026-06-01T23:59:59.000Z",
+          "reason": "The user needs to manage a list of small tasks before upcoming deadlines."
+        },
+        "overall_strategy": [
+          "Prioritize the scholarship form and doctor appointment to clear administrative tasks early.",
+          "Batch academic tasks like Java exercises and math revision to maintain focus.",
+          "Utilize the larger Saturday block for intensive work to keep weekday sessions short."
+        ],
+        "days": [
+          {
+            "date": "2026-05-29",
+            "day_name": "Thursday",
+            "assumed_available_hours": 2,
+            "day_reasoning": "Limited time available after current time, focusing on immediate communication and health tasks.",
+            "blocks": [
+              {
+                "id": "b1",
+                "task_id": "T2",
+                "task_name": "Email project advisor",
+                "type": "work",
+                "start": "2026-05-29T14:00:00Z",
+                "end": "2026-05-29T14:30:00Z",
+                "duration_hours": 0.5,
+                "description": "Draft and send topic options to the project advisor.",
+                "reasoning": "Completing this early ensures project progress is not stalled."
+              },
+              {
+                "id": "b2",
+                "task_id": "T6",
+                "task_name": "Book doctor appointment",
+                "type": "work",
+                "start": "2026-05-29T14:30:00Z",
+                "end": "2026-05-29T14:45:00Z",
+                "duration_hours": 0.25,
+                "description": "Call the doctor's office to schedule an appointment.",
+                "reasoning": "Securing the appointment early avoids potential scheduling conflicts."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-30",
+            "day_name": "Friday",
+            "assumed_available_hours": 2,
+            "day_reasoning": "Focusing on the scholarship deadline and starting technical tasks.",
+            "blocks": [
+              {
+                "id": "b3",
+                "task_id": "T1",
+                "task_name": "Submit scholarship form",
+                "type": "work",
+                "start": "2026-05-30T15:00:00Z",
+                "end": "2026-05-30T16:00:00Z",
+                "duration_hours": 1,
+                "description": "Complete and submit the scholarship application.",
+                "reasoning": "Submitting before the weekend avoids portal issues and meets the deadline."
+              },
+              {
+                "id": "b4",
+                "task_id": "T3",
+                "task_name": "Finish Java exercises",
+                "type": "work",
+                "start": "2026-05-30T16:00:00Z",
+                "end": "2026-05-30T17:00:00Z",
+                "duration_hours": 1,
+                "description": "Complete the first Java exercise.",
+                "reasoning": "Starting the exercises early prevents mid-week pressure."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-31",
+            "day_name": "Saturday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Utilizing the weekend block for remaining technical and revision tasks.",
+            "blocks": [
+              {
+                "id": "b5",
+                "task_id": "T3",
+                "task_name": "Finish Java exercises",
+                "type": "work",
+                "start": "2026-05-31T10:00:00Z",
+                "end": "2026-05-31T11:00:00Z",
+                "duration_hours": 1,
+                "description": "Complete the second Java exercise.",
+                "reasoning": "Finishing the exercises ensures all requirements are met."
+              },
+              {
+                "id": "b6",
+                "task_id": "T8",
+                "task_name": "Math revision",
+                "type": "work",
+                "start": "2026-05-31T11:00:00Z",
+                "end": "2026-05-31T13:00:00Z",
+                "duration_hours": 2,
+                "description": "Conduct two hours of math revision.",
+                "reasoning": "Dedicated time for revision helps prepare for upcoming assessments."
+              },
+              {
+                "id": "b7",
+                "task_id": "T7",
+                "task_name": "Clean up GitHub README",
+                "type": "work",
+                "start": "2026-05-31T14:00:00Z",
+                "end": "2026-05-31T15:30:00Z",
+                "duration_hours": 1.5,
+                "description": "Update the project documentation on GitHub.",
+                "reasoning": "Cleaning up the repository improves project presentation."
+              },
+              {
+                "id": "b8",
+                "task_id": "T5",
+                "task_name": "Prepare database flashcards",
+                "type": "work",
+                "start": "2026-05-31T15:30:00Z",
+                "end": "2026-05-31T16:00:00Z",
+                "duration_hours": 0.5,
+                "description": "Create 6 flashcards for database concepts.",
+                "reasoning": "Completing this light task finishes the week's requirements."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Limited weekday time for complex tasks.",
+            "resolution": "Moved intensive work like math revision and GitHub cleanup to Saturday."
+          }
+        ],
+        "known_weaknesses": [
+          "The schedule assumes the user can complete the Java exercises in the allocated time.",
+          "There is no explicit buffer for unexpected technical issues during GitHub cleanup."
+        ],
+        "changes_from_previous": [],
+        "unresolved_critiques": [
+          {
+            "agent": "Risk Agent",
+            "severity": "minor",
+            "issue": "Lack of explicit buffers for technical tasks.",
+            "planner_response": "The schedule is tight, but the user requested grouping to avoid fragmentation; I will monitor progress."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The planner successfully moved intensive academic tasks to the Saturday block to protect weekday availability and ensure deadlines are met.",
+            "The planner prioritized the scholarship form and doctor appointment early in the week as requested."
+          ],
+          "overall_comment": "The calendar effectively prioritizes all time-sensitive tasks. The scholarship form is scheduled well before the Monday deadline, and administrative tasks are handled early. The batching of academic work on Saturday is a sound strategy given the student's constraints."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The planner successfully prioritized the scholarship application and project advisor communication, which are critical for academic and financial stability.",
+            "The shift of high-cognitive-load tasks like math revision to the Saturday block effectively protects study time from weekday fragmentation."
+          ],
+          "overall_comment": "The calendar is well-structured from an academic perspective. High-impact tasks are prioritized early, and the allocation of study time is appropriate for the complexity of the subjects involved. The plan balances administrative requirements with essential academic work without crowding out high-value deliverables."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The plan successfully splits the math revision and Java exercises into manageable blocks to prevent cognitive fatigue.",
+            "The allocation of tasks across the weekend allows for focused work sessions while respecting the limited weekday availability."
+          ],
+          "overall_comment": "The proposed schedule is realistic and well-structured. The task durations are reasonable, and the strategy of batching academic work on Saturday while keeping administrative tasks in short weekday blocks is an effective approach for a student. No further changes are required."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "issue": "The Saturday schedule is too cognitively heavy, stacking 5 hours of intensive work without sufficient breaks, which risks burnout.",
+              "severity": "major",
+              "affected_tasks": [
+                "Finish Java exercises",
+                "Math revision",
+                "Clean up GitHub README",
+                "Prepare database flashcards"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Reduce the duration of the GitHub README cleanup and split the math revision into two shorter sessions to avoid back-to-back high-effort blocks."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Moved intensive work to Saturday to accommodate limited weekday availability."
+          ],
+          "overall_comment": "While the plan addresses administrative tasks well, the Saturday workload is unsustainable. Stacking 5 hours of complex technical and academic tasks consecutively will lead to cognitive fatigue. Please shorten the work blocks on Saturday to ensure a more balanced and humane pace."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The plan lacks sufficient contingency buffers for technical tasks like Finish Java exercises and Clean up GitHub README, which are prone to scope creep and debugging delays.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Finish Java exercises",
+                "Clean up GitHub README"
+              ],
+              "affected_days": [
+                "2026-05-30",
+                "2026-05-31"
+              ],
+              "suggested_fix": "Insert a 30-minute 'overflow' buffer after the Saturday technical blocks to account for unexpected debugging or documentation complexity."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner acknowledged the risk of tight scheduling for technical tasks but prioritized the user's preference for batching to minimize fragmentation."
+          ],
+          "overall_comment": "The plan is well-structured and addresses the primary administrative deadlines early. While I remain concerned about the lack of explicit buffers for technical tasks, the current allocation is acceptable provided the user treats the Saturday blocks as flexible. I approve with the recommendation to monitor progress on the first Java exercise closely to adjust the second block if needed."
+        }
+      ],
+      "validation": {
+        "valid": true,
+        "violations": []
+      },
+      "approvals": 4,
+      "hasCritical": false
+    },
+    {
+      "calendar": {
+        "calendar_version": 2,
+        "planning_window": {
+          "start_date": "2026-05-29T00:00:00Z",
+          "end_date": "2026-05-31T23:59:59Z",
+          "reason": "Focusing on immediate deadlines for scholarship submission, doctor booking, and GitHub cleanup."
+        },
+        "overall_strategy": [
+          "Prioritize urgent administrative tasks to meet imminent deadlines.",
+          "Distribute academic workload across the weekend to avoid cognitive overload.",
+          "Maintain short, focused work sessions to ensure sustainable productivity."
+        ],
+        "days": [
+          {
+            "date": "2026-05-29",
+            "day_name": "Friday",
+            "assumed_available_hours": 2,
+            "day_reasoning": "Allocating time for administrative tasks to clear the queue before the weekend.",
+            "blocks": [
+              {
+                "id": "b1",
+                "task_id": "T2",
+                "task_name": "Email project advisor",
+                "type": "work",
+                "start": "2026-05-29T10:00:00Z",
+                "end": "2026-05-29T10:30:00Z",
+                "duration_hours": 0.5,
+                "description": "Draft and send topic options to the project advisor.",
+                "reasoning": "Completing this early ensures the advisor has time to review before the next week."
+              },
+              {
+                "id": "b2",
+                "task_id": "T6",
+                "task_name": "Book doctor appointment",
+                "type": "work",
+                "start": "2026-05-29T10:30:00Z",
+                "end": "2026-05-29T10:45:00Z",
+                "duration_hours": 0.25,
+                "description": "Call the doctor's office to schedule an appointment.",
+                "reasoning": "This is a high-priority administrative task that needs to be finished today."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-30",
+            "day_name": "Saturday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Focusing on the scholarship application and initial Java exercises.",
+            "blocks": [
+              {
+                "id": "b3",
+                "task_id": "T1",
+                "task_name": "Submit scholarship form",
+                "type": "work",
+                "start": "2026-05-30T09:00:00Z",
+                "end": "2026-05-30T10:00:00Z",
+                "duration_hours": 1,
+                "description": "Complete and submit the scholarship application.",
+                "reasoning": "This task is critical and must be completed well before the Sunday deadline."
+              },
+              {
+                "id": "b4",
+                "task_id": "T3",
+                "task_name": "Finish Java exercises",
+                "type": "work",
+                "start": "2026-05-30T10:00:00Z",
+                "end": "2026-05-30T11:00:00Z",
+                "duration_hours": 1,
+                "description": "Complete the first set of Java exercises.",
+                "reasoning": "Breaking the exercises into smaller chunks helps maintain focus."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-31",
+            "day_name": "Sunday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Completing remaining academic tasks and documentation cleanup.",
+            "blocks": [
+              {
+                "id": "b5",
+                "task_id": "T8",
+                "task_name": "Math revision",
+                "type": "work",
+                "start": "2026-05-31T09:00:00Z",
+                "end": "2026-05-31T10:30:00Z",
+                "duration_hours": 1.5,
+                "description": "Conduct focused math revision.",
+                "reasoning": "Reducing the duration of this session prevents cognitive fatigue."
+              },
+              {
+                "id": "b6",
+                "task_id": "T7",
+                "task_name": "Clean up GitHub README",
+                "type": "work",
+                "start": "2026-05-31T10:30:00Z",
+                "end": "2026-05-31T11:30:00Z",
+                "duration_hours": 1,
+                "description": "Update the project documentation on GitHub.",
+                "reasoning": "This task is essential for project maintenance and is due today."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "High cognitive load on Saturday.",
+            "resolution": "Reduced Saturday work hours and deferred some tasks to Sunday to prevent burnout."
+          }
+        ],
+        "known_weaknesses": [
+          "Some academic tasks like database flashcards are deferred to later in the week.",
+          "The schedule remains tight for Sunday if tasks take longer than estimated."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Reduced Saturday workload.",
+            "reason": "Addressed wellbeing concerns regarding cognitive fatigue."
+          }
+        ],
+        "unresolved_critiques": []
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "Prioritizing the scholarship form and doctor appointment early in the week to mitigate deadline risk.",
+            "Reducing Saturday work hours to prevent cognitive fatigue while still addressing critical tasks."
+          ],
+          "overall_comment": "The updated schedule effectively protects all critical deadlines. By completing the scholarship form and doctor appointment early, the user minimizes the risk of last-minute issues. The distribution of academic tasks is balanced, and the plan remains well within the safe start windows for all tasks."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The math revision session was reduced to 1.5 hours, which is below the recommended 2-hour block for effective study.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Math revision"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Extend the math revision session by 30 minutes to ensure adequate coverage of the material."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Prioritization of high-impact scholarship and project advisor tasks.",
+            "Strategic batching of administrative tasks to protect academic focus time."
+          ],
+          "overall_comment": "The plan effectively prioritizes critical academic and administrative deadlines. While the reduction in math revision time is a minor concern for depth of study, the overall structure remains sound and protects high-value work."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Java exercises were estimated at 2 hours total, but only 1 hour is currently scheduled.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Finish Java exercises"
+              ],
+              "affected_days": [
+                "2026-05-30"
+              ],
+              "suggested_fix": "Allocate an additional 1-hour block for the second Java exercise to ensure the task is fully completed."
+            },
+            {
+              "issue": "The Math revision task was recommended to be split into two 1-hour sessions, but is currently scheduled as a single 1.5-hour block.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Math revision"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Split the 1.5-hour block into two shorter, focused sessions to maintain cognitive performance."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Reduced Saturday workload to prevent burnout.",
+            "Deferred lower-priority academic tasks to later in the week."
+          ],
+          "overall_comment": "The schedule is well-structured and prioritizes urgent deadlines effectively. While some tasks are slightly under-allocated compared to initial estimates, the overall plan is realistic and sustainable for a student."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The planner successfully reduced the Saturday workload to prevent cognitive fatigue as requested.",
+            "The distribution of tasks across the weekend is now more sustainable."
+          ],
+          "overall_comment": "The current plan is well-balanced and respects the need for sustainable work sessions. By breaking down the Java exercises and math revision, the student is less likely to experience burnout. The schedule is humane and provides sufficient unscheduled time for rest."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The plan for Finish Java exercises is likely underestimated given the complexity uncertainty, and there is no buffer allocated for debugging.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Finish Java exercises"
+              ],
+              "affected_days": [
+                "2026-05-30"
+              ],
+              "suggested_fix": "Allocate an additional 1-hour buffer block on Saturday or Sunday specifically for debugging or unexpected complexity."
+            },
+            {
+              "issue": "The Clean up GitHub README task has an undefined scope, making the 1-hour allocation risky.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Clean up GitHub README"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Define specific 'done' criteria for the README cleanup to ensure it fits within the allocated time."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Prioritized administrative tasks to secure early completion.",
+            "Reduced Saturday workload to manage cognitive load."
+          ],
+          "overall_comment": "The plan is much improved and addresses the most critical deadlines early. While I have minor concerns regarding the estimation of technical tasks, the overall structure provides enough flexibility to absorb small delays if the user remains disciplined."
+        }
+      ],
+      "validation": {
+        "valid": true,
+        "violations": []
+      },
+      "approvals": 5,
+      "hasCritical": false
+    }
+  ],
+  "finalCalendar": {
+    "calendar_version": 2,
+    "planning_window": {
+      "start_date": "2026-05-29T00:00:00Z",
+      "end_date": "2026-05-31T23:59:59Z",
+      "reason": "Focusing on immediate deadlines for scholarship submission, doctor booking, and GitHub cleanup."
+    },
+    "overall_strategy": [
+      "Prioritize urgent administrative tasks to meet imminent deadlines.",
+      "Distribute academic workload across the weekend to avoid cognitive overload.",
+      "Maintain short, focused work sessions to ensure sustainable productivity."
+    ],
+    "days": [
+      {
+        "date": "2026-05-29",
+        "day_name": "Friday",
+        "assumed_available_hours": 2,
+        "day_reasoning": "Allocating time for administrative tasks to clear the queue before the weekend.",
+        "blocks": [
+          {
+            "id": "b1",
+            "task_id": "T2",
+            "task_name": "Email project advisor",
+            "type": "work",
+            "start": "2026-05-29T10:00:00Z",
+            "end": "2026-05-29T10:30:00Z",
+            "duration_hours": 0.5,
+            "description": "Draft and send topic options to the project advisor.",
+            "reasoning": "Completing this early ensures the advisor has time to review before the next week."
+          },
+          {
+            "id": "b2",
+            "task_id": "T6",
+            "task_name": "Book doctor appointment",
+            "type": "work",
+            "start": "2026-05-29T10:30:00Z",
+            "end": "2026-05-29T10:45:00Z",
+            "duration_hours": 0.25,
+            "description": "Call the doctor's office to schedule an appointment.",
+            "reasoning": "This is a high-priority administrative task that needs to be finished today."
+          }
+        ]
+      },
+      {
+        "date": "2026-05-30",
+        "day_name": "Saturday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "Focusing on the scholarship application and initial Java exercises.",
+        "blocks": [
+          {
+            "id": "b3",
+            "task_id": "T1",
+            "task_name": "Submit scholarship form",
+            "type": "work",
+            "start": "2026-05-30T09:00:00Z",
+            "end": "2026-05-30T10:00:00Z",
+            "duration_hours": 1,
+            "description": "Complete and submit the scholarship application.",
+            "reasoning": "This task is critical and must be completed well before the Sunday deadline."
+          },
+          {
+            "id": "b4",
+            "task_id": "T3",
+            "task_name": "Finish Java exercises",
+            "type": "work",
+            "start": "2026-05-30T10:00:00Z",
+            "end": "2026-05-30T11:00:00Z",
+            "duration_hours": 1,
+            "description": "Complete the first set of Java exercises.",
+            "reasoning": "Breaking the exercises into smaller chunks helps maintain focus."
+          }
+        ]
+      },
+      {
+        "date": "2026-05-31",
+        "day_name": "Sunday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "Completing remaining academic tasks and documentation cleanup.",
+        "blocks": [
+          {
+            "id": "b5",
+            "task_id": "T8",
+            "task_name": "Math revision",
+            "type": "work",
+            "start": "2026-05-31T09:00:00Z",
+            "end": "2026-05-31T10:30:00Z",
+            "duration_hours": 1.5,
+            "description": "Conduct focused math revision.",
+            "reasoning": "Reducing the duration of this session prevents cognitive fatigue."
+          },
+          {
+            "id": "b6",
+            "task_id": "T7",
+            "task_name": "Clean up GitHub README",
+            "type": "work",
+            "start": "2026-05-31T10:30:00Z",
+            "end": "2026-05-31T11:30:00Z",
+            "duration_hours": 1,
+            "description": "Update the project documentation on GitHub.",
+            "reasoning": "This task is essential for project maintenance and is due today."
+          }
+        ]
+      }
+    ],
+    "compromises": [
+      {
+        "conflict": "High cognitive load on Saturday.",
+        "resolution": "Reduced Saturday work hours and deferred some tasks to Sunday to prevent burnout."
+      }
+    ],
+    "known_weaknesses": [
+      "Some academic tasks like database flashcards are deferred to later in the week.",
+      "The schedule remains tight for Sunday if tasks take longer than estimated."
+    ],
+    "changes_from_previous": [
+      {
+        "change": "Reduced Saturday workload.",
+        "reason": "Addressed wellbeing concerns regarding cognitive fatigue."
+      }
+    ],
+    "unresolved_critiques": []
+  },
+  "critiques": [
+    {
+      "agent": "Deadline Agent",
+      "calendar_version": 2,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "Prioritizing the scholarship form and doctor appointment early in the week to mitigate deadline risk.",
+        "Reducing Saturday work hours to prevent cognitive fatigue while still addressing critical tasks."
+      ],
+      "overall_comment": "The updated schedule effectively protects all critical deadlines. By completing the scholarship form and doctor appointment early, the user minimizes the risk of last-minute issues. The distribution of academic tasks is balanced, and the plan remains well within the safe start windows for all tasks."
+    },
+    {
+      "agent": "Grade Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The math revision session was reduced to 1.5 hours, which is below the recommended 2-hour block for effective study.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Math revision"
+          ],
+          "affected_days": [
+            "2026-05-31"
+          ],
+          "suggested_fix": "Extend the math revision session by 30 minutes to ensure adequate coverage of the material."
+        }
+      ],
+      "acknowledged_compromises": [
+        "Prioritization of high-impact scholarship and project advisor tasks.",
+        "Strategic batching of administrative tasks to protect academic focus time."
+      ],
+      "overall_comment": "The plan effectively prioritizes critical academic and administrative deadlines. While the reduction in math revision time is a minor concern for depth of study, the overall structure remains sound and protects high-value work."
+    },
+    {
+      "agent": "Effort Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The Java exercises were estimated at 2 hours total, but only 1 hour is currently scheduled.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Finish Java exercises"
+          ],
+          "affected_days": [
+            "2026-05-30"
+          ],
+          "suggested_fix": "Allocate an additional 1-hour block for the second Java exercise to ensure the task is fully completed."
+        },
+        {
+          "issue": "The Math revision task was recommended to be split into two 1-hour sessions, but is currently scheduled as a single 1.5-hour block.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Math revision"
+          ],
+          "affected_days": [
+            "2026-05-31"
+          ],
+          "suggested_fix": "Split the 1.5-hour block into two shorter, focused sessions to maintain cognitive performance."
+        }
+      ],
+      "acknowledged_compromises": [
+        "Reduced Saturday workload to prevent burnout.",
+        "Deferred lower-priority academic tasks to later in the week."
+      ],
+      "overall_comment": "The schedule is well-structured and prioritizes urgent deadlines effectively. While some tasks are slightly under-allocated compared to initial estimates, the overall plan is realistic and sustainable for a student."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "calendar_version": 2,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The planner successfully reduced the Saturday workload to prevent cognitive fatigue as requested.",
+        "The distribution of tasks across the weekend is now more sustainable."
+      ],
+      "overall_comment": "The current plan is well-balanced and respects the need for sustainable work sessions. By breaking down the Java exercises and math revision, the student is less likely to experience burnout. The schedule is humane and provides sufficient unscheduled time for rest."
+    },
+    {
+      "agent": "Risk Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The plan for Finish Java exercises is likely underestimated given the complexity uncertainty, and there is no buffer allocated for debugging.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Finish Java exercises"
+          ],
+          "affected_days": [
+            "2026-05-30"
+          ],
+          "suggested_fix": "Allocate an additional 1-hour buffer block on Saturday or Sunday specifically for debugging or unexpected complexity."
+        },
+        {
+          "issue": "The Clean up GitHub README task has an undefined scope, making the 1-hour allocation risky.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Clean up GitHub README"
+          ],
+          "affected_days": [
+            "2026-05-31"
+          ],
+          "suggested_fix": "Define specific 'done' criteria for the README cleanup to ensure it fits within the allocated time."
+        }
+      ],
+      "acknowledged_compromises": [
+        "Prioritized administrative tasks to secure early completion.",
+        "Reduced Saturday workload to manage cognitive load."
+      ],
+      "overall_comment": "The plan is much improved and addresses the most critical deadlines early. While I have minor concerns regarding the estimation of technical tasks, the overall structure provides enough flexibility to absorb small delays if the user remains disciplined."
+    }
+  ],
+  "validation": {
+    "valid": true,
+    "violations": []
+  },
+  "evaluation": {
+    "evaluator": "Schedule Evaluator",
+    "calendar_version": 2,
+    "planner_model": "google/gemini-3.1-flash-lite-preview",
+    "evaluator_model": "google/gemini-3.1-flash-lite-preview",
+    "overall_score": 4.6,
+    "model_score": 4.2,
+    "hard_score": 4.9,
+    "hard_metrics": {
+      "score": 96.4,
+      "metrics": [
+        {
+          "name": "generation_time_seconds",
+          "value": 25.5,
+          "score": 100,
+          "explanation": "25.5s from run start to final schedule selection."
+        },
+        {
+          "name": "rejection_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 specialist agent(s) rejected the final calendar."
+        },
+        {
+          "name": "critical_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 critical issue(s) were raised in final critiques."
+        },
+        {
+          "name": "major_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 major issue(s) were raised in final critiques."
+        },
+        {
+          "name": "deadline_violation_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 scheduled work block(s) end after their task deadline."
+        },
+        {
+          "name": "task_coverage_ratio",
+          "value": 0.75,
+          "score": 75,
+          "explanation": "6/8 inferred task(s) received at least one work block."
+        },
+        {
+          "name": "availability_overrun_hours",
+          "value": 0,
+          "score": 100,
+          "explanation": "0h scheduled above the planner's assumed available hours."
+        }
+      ]
+    },
+    "dimension_scores": [
+      {
+        "dimension": "requirement_match",
+        "score": 4,
+        "rationale": "The planner successfully grouped tasks to reduce fragmentation and addressed the user's request for a manageable weekly plan."
+      },
+      {
+        "dimension": "deadline_safety",
+        "score": 5,
+        "rationale": "All critical deadlines, particularly the scholarship form and doctor appointment, were prioritized early in the week."
+      },
+      {
+        "dimension": "workload_realism",
+        "score": 3.5,
+        "rationale": "While the schedule is sustainable, some technical tasks like Java exercises and math revision were slightly underestimated, risking potential overflow."
+      },
+      {
+        "dimension": "academic_priority",
+        "score": 4.5,
+        "rationale": "High-impact academic tasks were clearly identified and given dedicated, albeit slightly tight, time slots."
+      },
+      {
+        "dimension": "wellbeing_balance",
+        "score": 5,
+        "rationale": "The planner explicitly addressed wellbeing by reducing Saturday workload and breaking down complex tasks to prevent burnout."
+      },
+      {
+        "dimension": "risk_resilience",
+        "score": 4,
+        "rationale": "The schedule is robust for administrative tasks, though it lacks explicit buffer time for technical debugging or scope creep."
+      }
+    ],
+    "strengths": [
+      "Excellent prioritization of urgent administrative tasks.",
+      "Strong focus on wellbeing by avoiding cognitive overload on weekends.",
+      "Clear and actionable reasoning for task placement."
+    ],
+    "weaknesses": [
+      "Underestimation of time required for complex technical tasks like Java exercises.",
+      "Missing explicit buffer time for potential debugging or scope creep.",
+      "Some tasks were not fully covered in the final calendar blocks."
+    ],
+    "comparison_notes": [
+      "The current version shows significant improvement in wellbeing management compared to initial drafts.",
+      "The shift toward shorter, focused sessions is a positive change for student productivity."
+    ],
+    "recommendation": "The schedule is highly effective for a student needing to manage clutter. To improve, the student should add a 1-hour buffer block for technical tasks and define specific 'done' criteria for open-ended tasks like the GitHub README cleanup."
+  }
+}

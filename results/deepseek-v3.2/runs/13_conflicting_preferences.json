@@ -1,0 +1,1767 @@
+{
+  "runId": "8f55147e-33e8-4e0c-a4c3-8267fb83e1d4",
+  "createdAt": "2026-05-29T16:13:22.481Z",
+  "request": {
+    "userInput": "I want an ambitious plan, but I am also exhausted.\n\nI have an AI project due Sunday night worth 35%. I still need to clean the dataset, train a baseline model, compare one improved model, and write the report.\n\nI have a networks quiz Monday morning worth 10%. I need around 2 hours review.\n\nI would like to finish everything early and maybe add extra experiments, but I have been sleeping 5 hours a night and I feel close to burning out.\n\nI can technically work 8 hours on Saturday and 8 hours on Sunday, but I doubt that is healthy. Please balance ambition with a plan I can actually follow.",
+    "quorum": 5,
+    "maxIterations": 3,
+    "timezone": "Europe/Lisbon",
+    "model": "deepseek/deepseek-v3.2",
+    "evaluatorModel": "deepseek/deepseek-v3.2"
+  },
+  "stopReason": "Maximum iterations reached. Selected best available calendar.",
+  "interpreterOutput": {
+    "current_date": "2026-05-29T16:13:22.481Z",
+    "planning_window": {
+      "start_date": "2026-05-29T16:13:22.481Z",
+      "end_date": "2026-06-01T12:00:00.000Z",
+      "reason": "Covers from current datetime through Monday morning quiz completion."
+    },
+    "inferred_availability": [
+      {
+        "assumption": "Student is exhausted, sleeping 5 hours/night; realistic focused work hours are limited to prevent burnout.",
+        "confidence": "high",
+        "date_range": "2026-05-29/2026-05-30",
+        "estimated_available_hours_per_day": 4
+      },
+      {
+        "assumption": "Weekend: student mentions 8 hours technically possible but unhealthy; aiming for sustainable pace.",
+        "confidence": "medium",
+        "date_range": "2026-05-30/2026-05-31",
+        "estimated_available_hours_per_day": 6
+      },
+      {
+        "assumption": "Sunday: deadline for AI project, but student wants to finish early; may work longer if energy allows.",
+        "confidence": "medium",
+        "date_range": "2026-05-31/2026-06-01",
+        "estimated_available_hours_per_day": 6
+      },
+      {
+        "assumption": "Monday morning: quiz, so limited availability before quiz.",
+        "confidence": "high",
+        "date_range": "2026-06-01/2026-06-02",
+        "estimated_available_hours_per_day": 2
+      }
+    ],
+    "fixed_commitments": [
+      "Networks quiz on Monday morning (2026-06-01)"
+    ],
+    "student_state": {
+      "confidence": "low",
+      "energy": "low",
+      "sleep": "5 hours/night"
+    },
+    "tasks": [
+      {
+        "task_id": "T1",
+        "name": "AI project",
+        "raw_mentions": [
+          "AI project due Sunday night worth 35%",
+          "clean the dataset",
+          "train a baseline model",
+          "compare one improved model",
+          "write the report",
+          "maybe add extra experiments"
+        ],
+        "inferred_deadline": "2026-05-31T23:59:59.000Z",
+        "uncertainties": [
+          "Exact time needed for each subtask (cleaning, training, comparing, writing)",
+          "Whether extra experiments will be added",
+          "How long training and comparison will take"
+        ]
+      },
+      {
+        "task_id": "T2",
+        "name": "Networks quiz",
+        "raw_mentions": [
+          "networks quiz Monday morning worth 10%",
+          "need around 2 hours review"
+        ],
+        "inferred_deadline": "2026-06-01T12:00:00.000Z",
+        "uncertainties": [
+          "Exact quiz start time",
+          "Precise review time needed"
+        ]
+      }
+    ],
+    "assumptions": [
+      "Student is in Europe/Lisbon timezone and deadlines are local to that timezone.",
+      "Sunday night means end of day Sunday (2026-05-31T23:59:59).",
+      "Monday morning quiz is on 2026-06-01, likely before noon.",
+      "Student has no other fixed commitments besides the quiz.",
+      "Student can work 8 hours on Saturday and Sunday if forced, but prefers a healthier balance.",
+      "Student wants to finish early and possibly add extra experiments, but exhaustion is a limiting factor.",
+      "Daily availability is inferred from context: student is exhausted, sleeping 5 hours/night, so realistic work hours are reduced.",
+      "Planning window covers from now until Monday morning quiz completion."
+    ]
+  },
+  "agentViews": [
+    {
+      "agent": "Deadline Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "AI project",
+          "assessment": "This is the highest priority deadline task, worth 35% and due Sunday night. It has multiple sequential subtasks (data cleaning, baseline training, improved model comparison, report writing) that require significant time. The latest safe start is Saturday morning to allow for completion and buffer before the Sunday night deadline.",
+          "concerns": [
+            "The deadline is absolute and cannot be moved. Missing it would result in a significant grade penalty.",
+            "The task is complex and has multiple dependent steps. Starting too late risks not finishing the report.",
+            "The student's exhaustion and limited weekend capacity (6 hours/day estimated) create a tight schedule with minimal buffer for errors or extended model training."
+          ],
+          "recommendations": [
+            "Start work on the AI project immediately, no later than Saturday morning (2026-05-30).",
+            "Allocate at least 10-12 hours of focused work across Saturday and Sunday specifically for this project.",
+            "Protect Sunday afternoon and evening as a non-negotiable block for finalizing the report and submission.",
+            "De-prioritize or schedule extra experiments only after core requirements are complete and if time and energy permit."
+          ],
+          "estimated_duration_hours": 12,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Clean and prepare the dataset (2-3 hours)",
+            "Train and evaluate the baseline model (3-4 hours)",
+            "Train, evaluate, and compare the improved model (3-4 hours)",
+            "Write and finalize the project report (3-4 hours)"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Networks quiz",
+          "assessment": "This is a fixed commitment with a hard deadline on Monday morning. It requires focused review time. The latest safe start for review is Sunday evening, but earlier is better to avoid conflict with the AI project deadline.",
+          "concerns": [
+            "The quiz is on Monday morning, leaving no room for delay. Forgetting to review or being too exhausted could hurt performance.",
+            "Scheduling review too close to the AI project deadline on Sunday night could lead to rushed preparation or last-minute conflict."
+          ],
+          "recommendations": [
+            "Schedule the 2-hour review block for Sunday afternoon, before final AI project work, or early Monday morning if well-rested.",
+            "Do not leave quiz review until the last possible moment on Monday morning; build in a buffer."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review key lecture notes and concepts (1 hour)",
+            "Practice with sample problems or past quizzes (1 hour)"
+          ]
+        }
+      ],
+      "overall_comment": "The plan is deadline-viable but high-risk due to student exhaustion and limited capacity. The AI project must start no later than Saturday to meet its Sunday night deadline. The networks quiz review must be carefully scheduled to not interfere. I approve the allocation of time, but with strong caution: the student must strictly adhere to starting the AI project early on Saturday and protect Sunday for final work. There is almost no buffer for unexpected delays. Ambition to add extra experiments should be shelved unless core work finishes significantly ahead of schedule."
+    },
+    {
+      "agent": "Grade Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "AI project",
+          "assessment": "This is the highest academic priority, worth 35% of the grade. The subtasks (data cleaning, baseline training, model comparison, report writing) are substantial and require focused, high-quality work. Optional experiments are a lower priority.",
+          "concerns": [
+            "The estimated available hours may not be sufficient for all subtasks without compromising quality.",
+            "If training or comparison runs encounter issues, time may run out, forcing a rushed report.",
+            "Attempting optional experiments could crowd out time needed for core deliverables."
+          ],
+          "recommendations": [
+            "Protect the largest blocks of available time for the AI project, especially for training and writing.",
+            "Sequence subtasks: clean data first, then train baseline, then compare model, then write report—do not intermix.",
+            "Postpone any extra experiments until the core project is complete and submitted."
+          ],
+          "estimated_duration_hours": 12,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Clean and prepare the dataset",
+            "Train the baseline model and document results",
+            "Train the improved model and perform comparison",
+            "Write the final report integrating all results"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Networks quiz",
+          "assessment": "This is a lower-weight academic commitment (10%), but still requires dedicated review time to secure the grade. It is fixed on Monday morning.",
+          "concerns": [
+            "If the AI project runs late on Sunday, quiz review may be squeezed or skipped.",
+            "Only 2 hours are estimated for review; if foundational knowledge is weak, more time may be needed."
+          ],
+          "recommendations": [
+            "Schedule quiz review in a distinct, protected block, ideally on Sunday afternoon or early Monday.",
+            "Do not allow last-minute AI project work to displace this review session."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review key lecture topics and formulas",
+            "Practice with sample problems or past quizzes"
+          ]
+        }
+      ],
+      "overall_comment": "The AI project (35%) is the highest academic priority and must receive protected, quality time. The Networks quiz (10%) is lower weight but still requires dedicated review. The current availability estimates appear realistic for an exhausted student, but I am concerned that the AI project's complex subtasks may be underestimated, risking rushed work on the high-value deliverable. The plan should prioritize completing the core AI project requirements before any optional experiments, and ensure the quiz review is not sacrificed due to last-minute AI work."
+    },
+    {
+      "agent": "Effort Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "AI project",
+          "assessment": "This is a major project with multiple complex components: data cleaning, baseline training, improved model comparison, and report writing. The mention of 'extra experiments' adds scope uncertainty. The total effort is likely significantly underestimated if considered as a single block.",
+          "concerns": [
+            "The task is too large and vague to estimate as a single unit; this leads to unrealistic planning.",
+            "Data cleaning and model training times are highly variable and often take longer than students anticipate.",
+            "The desire to 'finish early and maybe add extra experiments' conflicts with the student's stated exhaustion and risk of burnout.",
+            "A 35% project typically requires substantial, distributed work, not last-minute cramming."
+          ],
+          "recommendations": [
+            "Break the AI project into concrete subtasks with separate time estimates.",
+            "Schedule the data cleaning and baseline training early to identify potential problems.",
+            "Protect time for the report writing; it often takes longer than coding.",
+            "Explicitly decide against 'extra experiments' given the time constraints and low energy state. Focus on completing the core requirements well."
+          ],
+          "estimated_duration_hours": 14,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Data cleaning and exploratory analysis (check for missing values, format consistency).",
+            "Implement and train the baseline model (setup code, run initial training).",
+            "Implement the improved model and run comparative training.",
+            "Analyze results, create figures/tables for the comparison.",
+            "Write the project report (introduction, methodology, results, conclusion).",
+            "Final integration, proofreading, and submission."
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Networks quiz",
+          "assessment": "A 10% quiz requiring review. The student's estimate of 2 hours seems plausible for focused review, but effectiveness may be reduced due to exhaustion.",
+          "concerns": [
+            "Trying to review while exhausted will reduce information retention and efficiency.",
+            "Scheduling this review immediately before the quiz on Monday morning may not be optimal given low energy."
+          ],
+          "recommendations": [
+            "Schedule the 2-hour review in a single, focused block when energy is higher, ideally on Sunday.",
+            "Avoid scheduling demanding AI project work immediately before or after the quiz review."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review key lecture notes and textbook chapters.",
+            "Practice with sample problems or past quizzes if available.",
+            "Create a one-page summary sheet of key concepts."
+          ]
+        }
+      ],
+      "overall_comment": "The total estimated core work is 16 hours. Given the student's exhaustion and limited realistic daily capacity (4-6 hours of focused work), this workload is challenging but possible if distributed carefully across the available days. The major risk is the AI project's scope. Its estimated 14 hours must be split across multiple work blocks; attempting it in one or two large blocks is unrealistic and will lead to burnout or poor quality. The plan must prioritize completing the core project requirements over ambitious extras. I recommend scheduling the AI project subtasks across Friday, Saturday, and early Sunday, leaving Sunday afternoon/evening for final integration and the report, and scheduling the quiz review for a fresh period on Sunday."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "AI project",
+          "assessment": "This is a large, high-stakes project requiring multiple cognitively demanding steps. The student's current exhaustion and sleep deprivation make it a significant wellbeing risk if scheduled too aggressively.",
+          "concerns": [
+            "The project's multiple components (data cleaning, model training, comparison, report writing) represent a heavy cognitive load that could exacerbate burnout.",
+            "The student's desire to 'finish early and maybe add extra experiments' conflicts with their stated exhaustion and 5-hour sleep pattern.",
+            "Attempting to complete this in a short, intense burst over the weekend, as suggested by the technical 8-hour capacity, is unsustainable and likely to degrade work quality and mental health."
+          ],
+          "recommendations": [
+            "Strictly cap daily work on the AI project to 4-5 hours of focused time, even on weekend days.",
+            "Do not schedule extra experiments. Focus only on the core requirements: clean dataset, train baseline, compare one improved model, write report.",
+            "Schedule the most demanding subtasks (like model training and comparison) for times of day when the student typically has higher energy, and separate them with lighter tasks or rest.",
+            "Ensure the final report writing is completed by early Sunday afternoon to avoid a high-stress, late-night deadline rush."
+          ],
+          "estimated_duration_hours": 14,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Data cleaning and preprocessing (3 hours)",
+            "Training and validating the baseline model (3 hours, can run unattended)",
+            "Training, validating, and comparing the improved model (4 hours, can run unattended)",
+            "Writing the project report (4 hours)"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Networks quiz",
+          "assessment": "A moderate-stakes quiz requiring focused review. It is a good candidate for a shorter, focused block and should not be stacked with heavy AI project work on the same day.",
+          "concerns": [
+            "Scheduling quiz review on Monday morning after a weekend of intense project work could lead to poor retention and performance due to fatigue.",
+            "Reviewing for 2 hours in a single block might be inefficient if the student is tired."
+          ],
+          "recommendations": [
+            "Schedule the 2-hour review for Sunday evening, after the AI project report is complete, as a distinct mental shift. Avoid doing it on Monday morning.",
+            "If energy is very low Sunday evening, split the review into two 1-hour sessions: one on Saturday and one on Sunday."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review key concepts and lecture notes (1 hour)",
+            "Practice with sample problems or past quizzes (1 hour)"
+          ]
+        }
+      ],
+      "overall_comment": "The student is in a high-risk state for burnout, explicitly exhausted and sleeping only 5 hours per night. An 'ambitious' plan in this context must prioritize recovery and sustainability over cramming. The proposed availability (4-6 hours of focused work per day) is a reasonable ceiling. The plan must strictly avoid back-to-back 8-hour workdays. The AI project should be broken down and spread across all available days (Friday to Sunday) with clear daily limits. The Networks quiz review should be scheduled separately from heavy project work. The primary goal is to complete the required work without further degrading the student's health, which means accepting a more moderate pace and foregoing optional 'extra experiments'. I approve a plan that follows these wellbeing guardrails."
+    },
+    {
+      "agent": "Risk Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "AI project",
+          "assessment": "This is a high-stakes, complex project with multiple interdependent steps and significant hidden uncertainty. The scope is ambitious and includes optional extra experiments, which is a major risk given the student's exhaustion and tight timeline.",
+          "concerns": [
+            "Unknown scope for dataset cleaning and model training could expand dramatically.",
+            "No explicit buffer time is allocated before the Sunday night deadline for unexpected delays.",
+            "The plan assumes all subtasks (clean, train baseline, compare improved model, write report) will proceed smoothly without technical hiccups.",
+            "The desire to add 'extra experiments' is a classic scope-creep risk that could derail the entire schedule.",
+            "Task dependencies are fragile: if cleaning takes longer, it cascades into less time for training and writing."
+          ],
+          "recommendations": [
+            "Immediately start the AI project today to discover the true scope of dataset cleaning.",
+            "Define a strict minimum viable product (MVP): baseline model, one comparison, and report. Schedule extra experiments only if the MVP is completed early.",
+            "Add a contingency buffer of at least 4 hours on Sunday afternoon before the deadline.",
+            "Break down the 'write the report' task into specific sections (intro, methods, results, discussion) to better estimate effort."
+          ],
+          "estimated_duration_hours": 18,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Dataset inspection and cleaning plan (1-2 hours)",
+            "Execute data cleaning (2-4 hours)",
+            "Train and evaluate baseline model (3-5 hours)",
+            "Train and evaluate one improved model (3-5 hours)",
+            "Write project report (4-6 hours)",
+            "Contingency buffer for debugging and integration (4 hours)"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Networks quiz",
+          "assessment": "A lower-stakes but fixed-time commitment. The 2-hour review estimate seems reasonable, but the risk is that it gets squeezed out by the AI project, leading to last-minute cramming.",
+          "concerns": [
+            "The quiz review is scheduled for Monday morning with no buffer. If the AI project runs late on Sunday, there will be no recovery time.",
+            "The student's low energy and sleep deprivation will negatively impact retention and quiz performance."
+          ],
+          "recommendations": [
+            "Do not leave all quiz review for Monday morning. Complete at least 1 hour of review on Saturday or Sunday to reduce cognitive load.",
+            "Protect the 2 hours before the quiz as dedicated, uninterrupted review time."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review key lecture notes and concepts (1 hour)",
+            "Practice with sample problems or past quizzes (1 hour)"
+          ]
+        }
+      ],
+      "overall_comment": "This plan is high-risk and lacks sufficient contingency time. The ambitious AI project scope, combined with the student's exhaustion and a hard deadline Sunday night, creates a high probability of missed deadlines or burnout. The current availability estimates (4-6 hours/day) are optimistic given the stated low energy. There is no buffer for the AI project before its deadline, and the quiz review is vulnerable to spillover. I cannot approve this plan as-is. The student must start the AI project immediately to gauge true effort, commit to a strict MVP, and explicitly schedule contingency blocks. The wellbeing risks are severe; working 8-hour days in this state is not sustainable."
+    }
+  ],
+  "calendarVersions": [
+    {
+      "calendar": {
+        "calendar_version": 1,
+        "planning_window": {
+          "start_date": "2026-05-29T16:13:22.481Z",
+          "end_date": "2026-06-01T12:00:00.000Z",
+          "reason": "Covers from current datetime through Monday morning quiz completion."
+        },
+        "overall_strategy": [
+          "Start AI project early on Saturday to meet Sunday night deadline.",
+          "Cap daily work at sustainable 4-6 hours to prevent burnout.",
+          "Schedule quiz review Sunday evening to avoid Monday morning rush.",
+          "Focus on core AI project requirements; postpone extra experiments."
+        ],
+        "days": [
+          {
+            "date": "2026-05-29",
+            "day_name": "Friday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Student is exhausted; limited evening capacity after current time.",
+            "blocks": [
+              {
+                "id": "B1",
+                "task_id": "T1",
+                "task_name": "AI project",
+                "type": "work",
+                "start": "2026-05-29T18:00:00.000Z",
+                "end": "2026-05-29T20:00:00.000Z",
+                "duration_hours": 2,
+                "description": "Begin dataset inspection and cleaning plan.",
+                "reasoning": "Start AI project early to gauge true effort and scope."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-30",
+            "day_name": "Saturday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "Weekend with sustainable capacity; morning availability after rest.",
+            "blocks": [
+              {
+                "id": "B2",
+                "task_id": "T1",
+                "task_name": "AI project",
+                "type": "work",
+                "start": "2026-05-30T09:00:00.000Z",
+                "end": "2026-05-30T12:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Execute data cleaning and preprocessing.",
+                "reasoning": "Morning block for focused data work before fatigue sets in."
+              },
+              {
+                "id": "B3",
+                "task_id": "T1",
+                "task_name": "AI project",
+                "type": "work",
+                "start": "2026-05-30T14:00:00.000Z",
+                "end": "2026-05-30T17:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Train and evaluate the baseline model.",
+                "reasoning": "Afternoon block for model training; can run unattended."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-31",
+            "day_name": "Sunday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "Deadline day for AI project; protect time for final work.",
+            "blocks": [
+              {
+                "id": "B4",
+                "task_id": "T1",
+                "task_name": "AI project",
+                "type": "work",
+                "start": "2026-05-31T09:00:00.000Z",
+                "end": "2026-05-31T12:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Train, evaluate, and compare the improved model.",
+                "reasoning": "Morning block for comparative analysis before energy dips."
+              },
+              {
+                "id": "B5",
+                "task_id": "T2",
+                "task_name": "Networks quiz",
+                "type": "work",
+                "start": "2026-05-31T14:00:00.000Z",
+                "end": "2026-05-31T16:00:00.000Z",
+                "duration_hours": 2,
+                "description": "Review key concepts and practice sample problems.",
+                "reasoning": "Afternoon review to avoid Monday morning cramming."
+              },
+              {
+                "id": "B6",
+                "task_id": "T1",
+                "task_name": "AI project",
+                "type": "work",
+                "start": "2026-05-31T17:00:00.000Z",
+                "end": "2026-05-31T20:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Write and finalize the project report.",
+                "reasoning": "Evening block for report writing before deadline."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-01",
+            "day_name": "Monday",
+            "assumed_available_hours": 2,
+            "day_reasoning": "Morning quiz; limited availability before quiz.",
+            "blocks": []
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Student wants ambitious plan but is exhausted and risks burnout.",
+            "resolution": "Capped daily work at sustainable hours, sacrificing extra experiments."
+          },
+          {
+            "conflict": "AI project requires significant time; quiz review could be squeezed.",
+            "resolution": "Scheduled quiz review Sunday afternoon, protecting it from last-minute AI work."
+          }
+        ],
+        "known_weaknesses": [
+          "No explicit buffer for AI project delays before Sunday night deadline.",
+          "Model training times are uncertain and could overrun.",
+          "Student's low energy may reduce work efficiency."
+        ],
+        "changes_from_previous": [],
+        "unresolved_critiques": []
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The final work block for the AI project ends at 20:00 UTC on Sunday, leaving only 4 hours before the inferred deadline (23:59 UTC). This is a tight buffer for final edits, debugging, or submission issues.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Consider starting the final report writing block earlier on Sunday or extending it slightly to finish by 22:00 UTC, creating a clearer 2-hour submission buffer."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The plan correctly starts the AI project early on Saturday and protects Sunday for core work, addressing my primary concern about the latest safe start."
+          ],
+          "overall_comment": "The calendar is deadline-viable. It allocates meaningful work to both the AI project and the Networks quiz well before their deadlines. The AI project starts immediately and receives substantial blocks on Saturday and Sunday. The quiz review is scheduled for Sunday afternoon, avoiding a Monday morning rush. My minor concern is the limited final buffer before the Sunday night deadline, but the core work is appropriately prioritized and scheduled."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The AI project report writing is scheduled for a single 3-hour block on Sunday evening, just before the deadline. This leaves no buffer for potential delays in earlier tasks (e.g., model training overruns) or for report revision, which could compromise the quality of the highest-value deliverable (35%).",
+              "severity": "minor",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Consider starting the report writing earlier, perhaps on Saturday afternoon after the baseline model training, or allocate a smaller buffer block on Sunday morning before the improved model training to begin outlining the report."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The plan correctly prioritizes the core AI project requirements over optional experiments, protecting academic value.",
+            "The quiz review is scheduled in a protected block on Sunday, preventing it from being crowded out by last-minute AI work."
+          ],
+          "overall_comment": "The calendar effectively protects high-value academic work. The highest-weight task (AI project, 35%) receives the majority of scheduled time, starting early and sequenced logically. The lower-weight quiz (10%) is given a dedicated review slot. My primary concern is the lack of a time buffer for the final report, but the core deliverables are prioritized and the plan is sustainable, so I approve with minor concerns."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The AI project's 'Train and evaluate the baseline model' block is scheduled for a single 3-hour afternoon session. Model training and evaluation can be unpredictable and often requires iterative debugging, parameter tuning, and waiting for runs to complete. A single block may be insufficient if issues arise.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-30"
+              ],
+              "suggested_fix": "Consider splitting this into two focused blocks: one for initial setup and training launch, and a later block for evaluation and analysis. Alternatively, explicitly note this block may need to extend into evening unattended time if training runs long."
+            },
+            {
+              "issue": "The final 'Write and finalize the project report' is allocated only 3 hours on Sunday evening, immediately before the deadline. Report writing for a 35% project often involves synthesizing results, creating figures, and careful editing, which can easily take longer, especially under time pressure.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Start report drafting earlier, perhaps dedicating a small block on Saturday evening to outline and begin writing sections, reducing the burden on the final evening block."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has broken the AI project into multiple subtasks across days, addressing my earlier concern about treating it as a single vague block.",
+            "Daily work is capped at sustainable hours (4-6), respecting the student's exhaustion and preventing burnout, as I recommended.",
+            "The quiz review is scheduled for Sunday afternoon, avoiding Monday morning cramming, which aligns with my suggestion."
+          ],
+          "overall_comment": "The calendar generally reflects realistic effort estimation and distribution. The AI project is appropriately split across multiple days with concrete subtasks, and daily limits protect against burnout. My minor concerns are about potential underestimation of model training iteration time and report writing duration, but these are not critical given the overall prudent allocation. The plan is plausible for a student in this exhausted state."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "Sunday (2026-05-31) is overfilled with 8 hours of scheduled work (3+2+3), exceeding the assumed sustainable 6-hour cap and risking burnout.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AI project",
+                "Networks quiz"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Reduce the final AI project report block from 3 hours to 1 hour, finishing by 18:00 UTC, to keep Sunday within 6 hours total."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Capped daily work at sustainable hours, sacrificing extra experiments.",
+            "Scheduled quiz review Sunday afternoon, protecting it from last-minute AI work."
+          ],
+          "overall_comment": "The plan generally respects wellbeing by starting early, capping most days at sustainable hours, and avoiding Monday morning cramming. However, Sunday is slightly overfilled. With a minor reduction, this plan is humane enough to follow for an exhausted student."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "issue": "The plan lacks a contingency buffer before the AI project deadline on Sunday night. If any task (data cleaning, model training, report writing) takes longer than scheduled, there is no recovery time, risking a late submission.",
+              "severity": "critical",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Schedule an explicit contingency block of at least 3-4 hours on Sunday afternoon (e.g., 13:00-17:00) before the final report writing block. This block should be labeled as 'AI project buffer' and remain unscheduled to absorb overruns."
+            },
+            {
+              "issue": "The plan assumes all AI project subtasks will complete within their estimated times. The scope for dataset cleaning and model training is highly uncertain, and technical issues (e.g., code bugs, training failures) could cause significant delays not accounted for.",
+              "severity": "major",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-30",
+                "2026-05-31"
+              ],
+              "suggested_fix": "Break down the AI project into smaller, more specific subtasks with conservative time estimates. For example, allocate separate blocks for 'debug data cleaning script' and 'analyze baseline model results'. Also, explicitly define a Minimum Viable Product (MVP) scope to avoid scope creep from 'extra experiments'."
+            },
+            {
+              "issue": "The quiz review is scheduled for Sunday afternoon, but if the AI project morning block overruns, it could encroach on this time. There is no protective buffer between these tasks, and the student's low energy may reduce review effectiveness.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Networks quiz"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Move the quiz review block earlier in the day (e.g., morning) or to Saturday to decouple it from potential AI project delays. Alternatively, add a short buffer block between the AI project morning work and the quiz review."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has capped daily work hours to address burnout risk and postponed extra experiments to manage scope."
+          ],
+          "overall_comment": "The calendar shows good intent by starting the AI project early and capping hours, but it remains high-risk due to the lack of contingency time before the hard deadline. The uncertain scope of the AI project and the student's low energy create a high probability of schedule overrun. The plan does not contain enough early discovery time or buffer to handle unexpected delays. I must reject this version until explicit contingency blocks are added and task estimates are made more conservative."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-01 is outside the planning window 2026-05-29T16:13:22.481Z → 2026-06-01T12:00:00.000Z.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 4,
+      "hasCritical": true
+    },
+    {
+      "calendar": {
+        "calendar_version": 2,
+        "planning_window": {
+          "end_date": "2026-06-01",
+          "reason": "Covers the AI project and Networks quiz deadlines.",
+          "start_date": "2026-05-29"
+        },
+        "overall_strategy": [
+          "Start AI project early to discover scope issues.",
+          "Protect a contingency buffer before the AI project deadline.",
+          "Schedule quiz review close to its deadline for retention.",
+          "Cap daily work at sustainable hours to manage exhaustion."
+        ],
+        "days": [
+          {
+            "date": "2026-05-29",
+            "day_name": "Friday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Low-energy evening after week; start project with light planning.",
+            "blocks": [
+              {
+                "description": "Begin dataset inspection and cleaning plan.",
+                "duration_hours": 2,
+                "end": "2026-05-29T16:00:00+01:00",
+                "id": "B1",
+                "reasoning": "Start AI project early to identify potential scope issues.",
+                "start": "2026-05-29T14:00:00+01:00",
+                "task_id": "T1",
+                "task_name": "AI project",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-05-30",
+            "day_name": "Saturday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "Weekend day with good capacity for focused AI project work.",
+            "blocks": [
+              {
+                "description": "Execute data cleaning and preprocessing.",
+                "duration_hours": 3,
+                "end": "2026-05-30T13:00:00+01:00",
+                "id": "B2",
+                "reasoning": "Core project work while fresh in the morning.",
+                "start": "2026-05-30T10:00:00+01:00",
+                "task_id": "T1",
+                "task_name": "AI project",
+                "type": "work"
+              },
+              {
+                "description": "Train and evaluate the baseline model.",
+                "duration_hours": 3,
+                "end": "2026-05-30T17:00:00+01:00",
+                "id": "B3",
+                "reasoning": "Continue project momentum with a key milestone.",
+                "start": "2026-05-30T14:00:00+01:00",
+                "task_id": "T1",
+                "task_name": "AI project",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-05-31",
+            "day_name": "Sunday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "AI project deadline day; scheduled core work and a contingency buffer.",
+            "blocks": [
+              {
+                "description": "Train, evaluate, and compare the improved model.",
+                "duration_hours": 3,
+                "end": "2026-05-31T13:00:00+01:00",
+                "id": "B4",
+                "reasoning": "Finalize model work ahead of the evening deadline.",
+                "start": "2026-05-31T10:00:00+01:00",
+                "task_id": "T1",
+                "task_name": "AI project",
+                "type": "work"
+              },
+              {
+                "description": "Write and finalize the project report.",
+                "duration_hours": 2,
+                "end": "2026-05-31T16:00:00+01:00",
+                "id": "B5",
+                "reasoning": "Complete core report writing with time remaining for contingency.",
+                "start": "2026-05-31T14:00:00+01:00",
+                "task_id": "T1",
+                "task_name": "AI project",
+                "type": "work"
+              },
+              {
+                "description": "Contingency buffer for any AI project overrun.",
+                "duration_hours": 1,
+                "end": "2026-05-31T18:00:00+01:00",
+                "id": "B6",
+                "reasoning": "Explicit recovery time for unexpected delays before the hard deadline.",
+                "start": "2026-05-31T17:00:00+01:00",
+                "task_id": "T1",
+                "task_name": "AI project",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-06-01",
+            "day_name": "Monday",
+            "assumed_available_hours": 2,
+            "day_reasoning": "Morning only available before the Networks quiz noon deadline.",
+            "blocks": [
+              {
+                "description": "Review key concepts before the quiz.",
+                "duration_hours": 1,
+                "end": "2026-06-01T11:00:00+01:00",
+                "id": "B7",
+                "reasoning": "Focused review session immediately prior to the quiz deadline.",
+                "start": "2026-06-01T10:00:00+01:00",
+                "task_id": "T2",
+                "task_name": "Networks quiz",
+                "type": "work"
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "The AI project requires deep work, but the student is exhausted and the scope is uncertain.",
+            "resolution": "Prioritized core project tasks and added a contingency block, sacrificing thorough quiz review time."
+          },
+          {
+            "conflict": "Networks quiz review needs focused attention but is scheduled close to its deadline.",
+            "resolution": "Scheduled a shorter, focused review session immediately before the quiz to maximize retention."
+          }
+        ],
+        "known_weaknesses": [
+          "Networks quiz review is very brief and may be insufficient.",
+          "AI project contingency buffer is only one hour, which may not cover major delays.",
+          "Assumes no unexpected events or energy crashes over the weekend."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Reduced AI project work on May 31 to create a contingency buffer before its deadline.",
+            "reason": "Address Risk Agent's major critique about lack of recovery time."
+          },
+          {
+            "change": "Moved Networks quiz review to the morning of its deadline day.",
+            "reason": "Freed up evening time on May 31 for AI project contingency."
+          },
+          {
+            "change": "Adjusted daily available hours to be more realistic and prevent over-scheduling.",
+            "reason": "Ensures total scheduled work does not exceed assumed capacity."
+          }
+        ],
+        "unresolved_critiques": []
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The AI project's contingency buffer is only one hour, which is insufficient for a complex task with multiple dependent steps. A major delay in model training or report writing could still cause a deadline miss.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Extend the contingency buffer to at least two hours, possibly by starting the final report writing earlier on Sunday or reducing the duration of the improved model block if confidence is high."
+            },
+            {
+              "issue": "Networks quiz review is scheduled for only one hour immediately before the quiz, which is risky. If the student is fatigued or encounters a last-minute issue, there is no buffer for adequate preparation.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Networks quiz"
+              ],
+              "affected_days": [
+                "2026-06-01"
+              ],
+              "suggested_fix": "Add a second, shorter review block on the evening of 2026-05-31 after the AI project contingency, or allocate a full two-hour review session on Monday morning if energy permits."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has addressed the core deadline risk by starting the AI project early and protecting a contingency block before its deadline."
+          ],
+          "overall_comment": "The calendar is fundamentally deadline-viable. The AI project receives meaningful work starting immediately and has a clear path to completion before its Sunday night deadline. The inclusion of a contingency buffer is a positive step. My concerns are minor: the buffer size and quiz review timing could be optimized for greater safety, but the plan meets the minimum threshold for approval. The student must adhere strictly to the scheduled blocks."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Networks quiz review is allocated only one hour, which may be insufficient for a 10% grade component, especially if foundational knowledge is weak.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Networks quiz"
+              ],
+              "affected_days": [
+                "2026-06-01"
+              ],
+              "suggested_fix": "Consider extending the review block to the full estimated 2 hours, or add a short preparatory session on the evening of 2026-05-31 if energy permits."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The AI project (35%) receives the majority of protected, high-quality time across multiple days, which is appropriate for its high academic value.",
+            "The plan sequences core AI project subtasks (data cleaning, baseline training, model comparison, report writing) logically and protects a contingency buffer before its deadline.",
+            "The quiz review is scheduled close to its deadline for retention, acknowledging the trade-off made to prioritize the higher-weight project."
+          ],
+          "overall_comment": "The calendar correctly prioritizes the high-value AI project (35%) with substantial, protected work blocks. The core deliverables are sequenced well, and a contingency buffer is included. The compromise to allocate less time to the lower-weight Networks quiz (10%) is understandable, though the single review hour is a minor concern. Overall, high-value work is not crowded out, so I approve with minor concerns."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 2,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The AI project is broken into blocks but the total scheduled time is only 11 hours, which is significantly less than the estimated 14 hours needed. This underestimation risks incomplete work and last-minute panic.",
+              "severity": "critical",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-29",
+                "2026-05-30",
+                "2026-05-31"
+              ],
+              "suggested_fix": "Increase the duration of existing AI project blocks or add additional blocks to reach a total of at least 14 hours, ensuring each subtask (data cleaning, baseline training, improved model, report writing) has sufficient time."
+            },
+            {
+              "issue": "The report writing block is only 2 hours, which is insufficient for a comprehensive project report worth 35%. Writing, analysis, figure creation, and proofreading typically require more time.",
+              "severity": "major",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Extend the report writing block to at least 3-4 hours, or split it into two dedicated blocks (e.g., one for analysis/writing, another for final integration and proofreading)."
+            },
+            {
+              "issue": "The Networks quiz review is scheduled for only 1 hour, contradicting the student's own estimate of 2 hours needed. This is a major underestimation that could impact quiz performance.",
+              "severity": "major",
+              "affected_tasks": [
+                "Networks quiz"
+              ],
+              "affected_days": [
+                "2026-06-01"
+              ],
+              "suggested_fix": "Extend the quiz review block to 2 hours, or add a second review block on a previous day (e.g., Sunday) to meet the required review time."
+            }
+          ],
+          "acknowledged_compromises": [],
+          "overall_comment": "The calendar attempts to distribute work but critically underestimates the total effort required for both tasks. The AI project's scheduled 11 hours is unrealistic for a 35% project with multiple components, and the report writing is particularly short. The quiz review is also cut by half. These underestimations violate realism and put the student at high risk of incomplete work and poor outcomes. I cannot approve this plan."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 2,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "May 30 is overfilled with 6 hours of cognitively heavy AI project work, exceeding sustainable focus for an exhausted student and risking burnout.",
+              "severity": "major",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-30"
+              ],
+              "suggested_fix": "Reduce total AI project work on May 30 to 4-5 hours. For example, shorten the afternoon block (training baseline model) to 2 hours instead of 3."
+            },
+            {
+              "issue": "May 31 schedules 6 hours of AI project work, including a late-afternoon contingency block, which is too heavy for the day of a major deadline and likely to cause high stress and fatigue.",
+              "severity": "major",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Reduce total AI project work on May 31 to 4-5 hours. Consider finishing the report earlier and removing the contingency block, relying on unscheduled time for recovery."
+            },
+            {
+              "issue": "Networks quiz review is scheduled for Monday morning after a heavy weekend, when the student will be fatigued, likely reducing retention and performance.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Networks quiz"
+              ],
+              "affected_days": [
+                "2026-06-01"
+              ],
+              "suggested_fix": "Move at least 1 hour of quiz review to Saturday (May 30) or earlier Sunday to spread the cognitive load and improve effectiveness."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The plan caps daily work at assumed available hours and includes a contingency buffer for the AI project, which addresses some risk concerns."
+          ],
+          "overall_comment": "The student is exhausted and sleeping only 5 hours per night. The calendar schedules back-to-back 6-hour days of intense AI project work, which is unsustainable and likely to exacerbate burnout. While daily caps are respected, the cognitive load is too concentrated. The plan must reduce daily hours on May 30 and May 31 to protect wellbeing. I cannot approve this version."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 2,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The contingency buffer for the AI project is only one hour, which is grossly insufficient for a complex project with high uncertainty. Major delays in data cleaning, model training, or report writing could easily consume several hours, leading to a missed deadline.",
+              "severity": "critical",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Schedule a minimum of 4 hours of contingency time on Sunday, split into two blocks (e.g., one in the afternoon and one in the evening before the deadline). Reduce the scheduled work on the improved model or report writing if necessary to create this buffer."
+            },
+            {
+              "issue": "The plan assumes the AI project's 'write the report' task can be completed in just 2 hours. This is a fragile assumption given the project's complexity and the student's exhaustion. Writing a comprehensive report for a 35% project typically requires more time for drafting, editing, and formatting.",
+              "severity": "major",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Allocate at least 4 hours for report writing, broken into focused blocks. Consider starting the report outline earlier (e.g., Saturday) to spread the cognitive load."
+            },
+            {
+              "issue": "The Networks quiz review is allocated only one hour, which is below the student's own estimate of 2 hours. This creates a high risk of being underprepared, especially given the student's low energy. There is no buffer if the review takes longer than expected.",
+              "severity": "major",
+              "affected_tasks": [
+                "Networks quiz"
+              ],
+              "affected_days": [
+                "2026-06-01"
+              ],
+              "suggested_fix": "Schedule a second 1-hour review session on Saturday or Sunday to meet the 2-hour estimate and reduce last-minute pressure. Protect this time from being consumed by the AI project."
+            },
+            {
+              "issue": "The plan lacks explicit early discovery time for the AI project's most uncertain components. While work starts on Friday, the schedule immediately jumps into execution without a dedicated block for scoping and planning, which is critical for managing hidden work.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-29"
+              ],
+              "suggested_fix": "Ensure the initial 2-hour block on Friday is explicitly for 'dataset inspection and scoping' to assess the true effort required for cleaning and modeling before committing to the full weekend schedule."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner added a contingency buffer for the AI project, addressing the previous critique about missing recovery time.",
+            "The planner adjusted daily available hours to be more realistic, acknowledging the student's exhaustion."
+          ],
+          "overall_comment": "The revised plan shows awareness of the need for contingency but fails to allocate enough of it. A one-hour buffer for a high-stakes, uncertain project is a critical flaw. The assumptions about report writing duration and quiz review sufficiency are overly optimistic. The student's low energy state makes these tight schedules particularly fragile. I must reject this plan due to the high probability of deadline failure. The plan needs significantly more contingency time for the AI project and a more realistic allocation for the quiz review to be viable."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-01 is outside the planning window 2026-05-29 → 2026-06-01.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 2,
+      "hasCritical": true
+    },
+    {
+      "calendar": {
+        "calendar_version": 3,
+        "planning_window": {
+          "start_date": "2026-05-29",
+          "end_date": "2026-06-01",
+          "reason": "Covers the AI project deadline and the Networks quiz."
+        },
+        "overall_strategy": [
+          "Increase total time allocated to the AI project to match its estimated 14-hour effort.",
+          "Distribute AI project work more evenly to avoid overloading single days.",
+          "Allocate a full 2-hour block for the Networks quiz review as originally estimated.",
+          "Use unscheduled time as rest, respecting the student's exhaustion."
+        ],
+        "days": [
+          {
+            "date": "2026-05-29",
+            "day_name": "Friday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Start project early with a lighter session to manage exhaustion.",
+            "blocks": [
+              {
+                "id": "B1",
+                "task_id": "T1",
+                "task_name": "AI project",
+                "type": "work",
+                "start": "2026-05-29T10:00:00+01:00",
+                "end": "2026-05-29T12:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Begin dataset inspection and cleaning plan.",
+                "reasoning": "Initial project work to understand scope and start data cleaning."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-30",
+            "day_name": "Saturday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Moderate workday to continue project without overloading.",
+            "blocks": [
+              {
+                "id": "B2",
+                "task_id": "T1",
+                "task_name": "AI project",
+                "type": "work",
+                "start": "2026-05-30T10:00:00+01:00",
+                "end": "2026-05-30T13:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Execute data cleaning and preprocessing.",
+                "reasoning": "Core data preparation work for the AI project."
+              },
+              {
+                "id": "B3",
+                "task_id": "T1",
+                "task_name": "AI project",
+                "type": "work",
+                "start": "2026-05-30T14:00:00+01:00",
+                "end": "2026-05-30T16:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Train and evaluate the baseline model.",
+                "reasoning": "First model training and evaluation step."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-31",
+            "day_name": "Sunday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "Final day for AI project with extended time for report writing.",
+            "blocks": [
+              {
+                "id": "B4",
+                "task_id": "T1",
+                "task_name": "AI project",
+                "type": "work",
+                "start": "2026-05-31T09:00:00+01:00",
+                "end": "2026-05-31T12:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Train, evaluate, and compare the improved model.",
+                "reasoning": "Final model development and comparison work."
+              },
+              {
+                "id": "B5",
+                "task_id": "T1",
+                "task_name": "AI project",
+                "type": "work",
+                "start": "2026-05-31T13:00:00+01:00",
+                "end": "2026-05-31T17:00:00+01:00",
+                "duration_hours": 4,
+                "description": "Write and finalize the comprehensive project report.",
+                "reasoning": "Extended time for drafting, analysis, and finalizing the 35% project report."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-01",
+            "day_name": "Monday",
+            "assumed_available_hours": 2,
+            "day_reasoning": "Morning review before the Networks quiz deadline.",
+            "blocks": [
+              {
+                "id": "B6",
+                "task_id": "T2",
+                "task_name": "Networks quiz",
+                "type": "work",
+                "start": "2026-06-01T09:00:00+01:00",
+                "end": "2026-06-01T11:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Review key concepts before the quiz.",
+                "reasoning": "Full 2-hour review as estimated by the student for quiz preparation."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "The AI project needs 14 hours, but the student is exhausted and cannot work long consecutive days.",
+            "resolution": "Distributed the 14 hours over three days, reducing daily load while meeting the total effort."
+          },
+          {
+            "conflict": "The Networks quiz review needs focused time but is close to the AI project deadline.",
+            "resolution": "Scheduled the full 2-hour review on the quiz day, accepting it leaves less unscheduled rest time that morning."
+          }
+        ],
+        "known_weaknesses": [
+          "No explicit contingency buffer for unexpected AI project delays.",
+          "Assumes the student can sustain focus for a 4-hour report writing session."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Increased total AI project work from 11 to 14 hours.",
+            "reason": "To match the estimated effort and address critical underestimation critiques."
+          },
+          {
+            "change": "Extended AI project report writing from 2 to 4 hours.",
+            "reason": "To provide sufficient time for a comprehensive report as required for a 35% project."
+          },
+          {
+            "change": "Extended Networks quiz review from 1 to 2 hours.",
+            "reason": "To align with the student's own estimate and ensure adequate preparation."
+          },
+          {
+            "change": "Reduced scheduled hours on May 30 from 6 to 5.",
+            "reason": "To lower daily cognitive load and address wellbeing concerns for an exhausted student."
+          },
+          {
+            "change": "Removed the explicit 1-hour contingency buffer block.",
+            "reason": "Contingency is now implicit in the extended work durations and unscheduled time."
+          }
+        ],
+        "unresolved_critiques": [
+          {
+            "agent": "Risk Agent",
+            "severity": "major",
+            "issue": "The plan lacks an explicit contingency buffer for the high-uncertainty AI project.",
+            "planner_response": "Contingency is provided by the extended work blocks and unscheduled time, but this remains a risk."
+          },
+          {
+            "agent": "Wellbeing Agent",
+            "severity": "minor",
+            "issue": "A 4-hour report writing session on May 31 may be taxing for an exhausted student.",
+            "planner_response": "The session is necessary to complete the report; unscheduled time before and after provides rest."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 3,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The AI project's final work block ends at 17:00 on its deadline day (Sunday, May 31). While this provides a 7-hour buffer before the 23:59 deadline, it leaves no scheduled time for final integration, proofreading, or unexpected last-minute issues. This creates a deadline-day risk.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Consider scheduling a short, final 1-hour check-in block for the AI project later on Sunday evening (e.g., 20:00-21:00) for final review and submission, or explicitly note that the 4-hour report block must conclude with submission-ready work."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has increased the total AI project work to 14 hours, distributed it to start early, and allocated the full 2 hours for the Networks quiz review. This addresses the core deadline concerns about sufficient effort and timely start."
+          ],
+          "overall_comment": "The calendar now allocates meaningful work to both deadline tasks well before their deadlines. The AI project starts on Friday and has substantial blocks on Saturday and Sunday, totaling 14 hours. The Networks quiz review is fully scheduled for Monday morning. The primary risk is the lack of a final buffer block on the AI project's deadline day itself, but the current schedule is likely sufficient if the student adheres to it. Therefore, I approve with minor concerns."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 3,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The 4-hour report writing block for the AI project on May 31 is long and may lead to diminishing returns or rushed quality if the student is exhausted.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Consider splitting the 4-hour report writing block into two shorter sessions with a significant break in between to maintain focus and quality."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner increased the total AI project work to 14 hours, addressing the earlier concern about underestimation.",
+            "The Networks quiz review is allocated a full 2-hour block, protecting its dedicated time.",
+            "The AI project is prioritized across multiple days, ensuring the high-value work is not crowded out."
+          ],
+          "overall_comment": "The calendar adequately protects academic value. The high-impact AI project (35%) receives the majority of protected time (14 hours) distributed over three days, and the lower-weight Networks quiz (10%) has a dedicated review slot. The plan addresses my earlier concerns by increasing the total effort for the core project. The primary remaining minor concern is the sustainability of a single 4-hour writing block, but the overall allocation prioritizes high-value work correctly."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 3,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The AI project subtasks are still vague in the calendar blocks. 'Train and evaluate the baseline model' and 'Train, evaluate, and compare the improved model' are large, multi-step activities that could easily run longer than allocated.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-30",
+                "2026-05-31"
+              ],
+              "suggested_fix": "Consider breaking these blocks into more specific subtasks (e.g., 'Implement baseline model code', 'Run initial training', 'Evaluate baseline performance') to improve time estimation realism."
+            },
+            {
+              "issue": "The 4-hour report writing block assumes sustained focus and productivity from an exhausted student. Writing a comprehensive report often involves iterative drafting, figure creation, and proofreading, which may be slower under low energy.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Monitor progress during the session; if energy dips, split it into two shorter blocks with a break."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The AI project's 14-hour total effort is now distributed across three days, reducing daily overload.",
+            "The Networks quiz review is scheduled on the quiz day itself, accepting the trade-off for earlier AI project focus."
+          ],
+          "overall_comment": "The planner has addressed my major concern by increasing the total AI project time to 14 hours and distributing it. The durations per block are now plausible for a student. The remaining minor concerns are about task granularity and the sustainability of a long writing session, but these do not block approval. The plan is realistic from an effort perspective."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 3,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "A 4-hour continuous block for writing the AI project report on Sunday (May 31) is cognitively demanding for an exhausted student, risking reduced focus and increased stress.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Split the 4-hour report writing session into two shorter blocks, e.g., 2 hours in the morning and 2 hours in the afternoon, with a substantial unscheduled break in between."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner distributed the AI project's 14 hours over three days to reduce daily load, addressing concerns about overfilled days.",
+            "The planner reduced scheduled hours on May 30 from 6 to 5 to lower cognitive load for the exhausted student.",
+            "The planner avoided scheduling the Networks quiz review on the same day as heavy AI project work, placing it on Monday morning instead."
+          ],
+          "overall_comment": "The plan shows good awareness of the student's exhaustion, with daily scheduled hours kept within reasonable limits (4-6 hours) and no late-night work. The distribution of the AI project across multiple days prevents a single overloaded day. The primary remaining wellbeing concern is the long, uninterrupted 4-hour report writing session on Sunday, which could be taxing. However, the overall schedule is humane and sustainable, respecting the need for unscheduled rest time. I approve with minor concerns."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 3,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The plan lacks an explicit, protected contingency buffer before the AI project deadline. The 'implicit' buffer in unscheduled time is not reliable and could be consumed by task overruns or fatigue, leaving no recovery time for unexpected delays.",
+              "severity": "critical",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Schedule a dedicated 3-4 hour contingency block on Sunday afternoon (e.g., 2026-05-31T17:00:00+01:00 to 2026-05-31T20:00:00+01:00) before the final deadline. This block must be labeled as contingency and not pre-allocated to any specific work."
+            },
+            {
+              "issue": "The AI project schedule assumes all subtasks will finish exactly as planned. There is no time allocated for integration, debugging, or final submission steps, which are common hidden work items in technical projects.",
+              "severity": "major",
+              "affected_tasks": [
+                "AI project"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Add a specific 1-2 hour block on Sunday evening for 'integration, final checks, and submission' after the main report writing is complete."
+            },
+            {
+              "issue": "The Networks quiz review is scheduled immediately before the quiz with zero buffer. If the AI project runs late on Sunday, the student may be too tired or have no time for adequate review, risking the 10% grade.",
+              "severity": "major",
+              "affected_tasks": [
+                "Networks quiz"
+              ],
+              "affected_days": [
+                "2026-06-01"
+              ],
+              "suggested_fix": "Move at least 1 hour of quiz review to Saturday (2026-05-30) to create a buffer and reduce Monday morning cognitive load."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner increased the total AI project effort to 14 hours and distributed it over three days to reduce daily load, addressing the concern about underestimation."
+          ],
+          "overall_comment": "The revised plan increases effort allocation but fails to address the core risk of uncertainty. The removal of the explicit contingency buffer is a critical regression. The schedule is still a best-case scenario with no room for the inevitable technical hiccups, scope discovery, or integration work in a complex AI project. The student's exhaustion makes these risks more severe. I cannot approve a plan that schedules work up to the deadline without a protected safety margin."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-01 is outside the planning window 2026-05-29 → 2026-06-01.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 4,
+      "hasCritical": true
+    }
+  ],
+  "finalCalendar": {
+    "calendar_version": 1,
+    "planning_window": {
+      "start_date": "2026-05-29T16:13:22.481Z",
+      "end_date": "2026-06-01T12:00:00.000Z",
+      "reason": "Covers from current datetime through Monday morning quiz completion."
+    },
+    "overall_strategy": [
+      "Start AI project early on Saturday to meet Sunday night deadline.",
+      "Cap daily work at sustainable 4-6 hours to prevent burnout.",
+      "Schedule quiz review Sunday evening to avoid Monday morning rush.",
+      "Focus on core AI project requirements; postpone extra experiments."
+    ],
+    "days": [
+      {
+        "date": "2026-05-29",
+        "day_name": "Friday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Student is exhausted; limited evening capacity after current time.",
+        "blocks": [
+          {
+            "id": "B1",
+            "task_id": "T1",
+            "task_name": "AI project",
+            "type": "work",
+            "start": "2026-05-29T18:00:00.000Z",
+            "end": "2026-05-29T20:00:00.000Z",
+            "duration_hours": 2,
+            "description": "Begin dataset inspection and cleaning plan.",
+            "reasoning": "Start AI project early to gauge true effort and scope."
+          }
+        ]
+      },
+      {
+        "date": "2026-05-30",
+        "day_name": "Saturday",
+        "assumed_available_hours": 6,
+        "day_reasoning": "Weekend with sustainable capacity; morning availability after rest.",
+        "blocks": [
+          {
+            "id": "B2",
+            "task_id": "T1",
+            "task_name": "AI project",
+            "type": "work",
+            "start": "2026-05-30T09:00:00.000Z",
+            "end": "2026-05-30T12:00:00.000Z",
+            "duration_hours": 3,
+            "description": "Execute data cleaning and preprocessing.",
+            "reasoning": "Morning block for focused data work before fatigue sets in."
+          },
+          {
+            "id": "B3",
+            "task_id": "T1",
+            "task_name": "AI project",
+            "type": "work",
+            "start": "2026-05-30T14:00:00.000Z",
+            "end": "2026-05-30T17:00:00.000Z",
+            "duration_hours": 3,
+            "description": "Train and evaluate the baseline model.",
+            "reasoning": "Afternoon block for model training; can run unattended."
+          }
+        ]
+      },
+      {
+        "date": "2026-05-31",
+        "day_name": "Sunday",
+        "assumed_available_hours": 6,
+        "day_reasoning": "Deadline day for AI project; protect time for final work.",
+        "blocks": [
+          {
+            "id": "B4",
+            "task_id": "T1",
+            "task_name": "AI project",
+            "type": "work",
+            "start": "2026-05-31T09:00:00.000Z",
+            "end": "2026-05-31T12:00:00.000Z",
+            "duration_hours": 3,
+            "description": "Train, evaluate, and compare the improved model.",
+            "reasoning": "Morning block for comparative analysis before energy dips."
+          },
+          {
+            "id": "B5",
+            "task_id": "T2",
+            "task_name": "Networks quiz",
+            "type": "work",
+            "start": "2026-05-31T14:00:00.000Z",
+            "end": "2026-05-31T16:00:00.000Z",
+            "duration_hours": 2,
+            "description": "Review key concepts and practice sample problems.",
+            "reasoning": "Afternoon review to avoid Monday morning cramming."
+          },
+          {
+            "id": "B6",
+            "task_id": "T1",
+            "task_name": "AI project",
+            "type": "work",
+            "start": "2026-05-31T17:00:00.000Z",
+            "end": "2026-05-31T20:00:00.000Z",
+            "duration_hours": 3,
+            "description": "Write and finalize the project report.",
+            "reasoning": "Evening block for report writing before deadline."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-01",
+        "day_name": "Monday",
+        "assumed_available_hours": 2,
+        "day_reasoning": "Morning quiz; limited availability before quiz.",
+        "blocks": []
+      }
+    ],
+    "compromises": [
+      {
+        "conflict": "Student wants ambitious plan but is exhausted and risks burnout.",
+        "resolution": "Capped daily work at sustainable hours, sacrificing extra experiments."
+      },
+      {
+        "conflict": "AI project requires significant time; quiz review could be squeezed.",
+        "resolution": "Scheduled quiz review Sunday afternoon, protecting it from last-minute AI work."
+      }
+    ],
+    "known_weaknesses": [
+      "No explicit buffer for AI project delays before Sunday night deadline.",
+      "Model training times are uncertain and could overrun.",
+      "Student's low energy may reduce work efficiency."
+    ],
+    "changes_from_previous": [],
+    "unresolved_critiques": []
+  },
+  "critiques": [
+    {
+      "agent": "Deadline Agent",
+      "calendar_version": 1,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The final work block for the AI project ends at 20:00 UTC on Sunday, leaving only 4 hours before the inferred deadline (23:59 UTC). This is a tight buffer for final edits, debugging, or submission issues.",
+          "severity": "minor",
+          "affected_tasks": [
+            "AI project"
+          ],
+          "affected_days": [
+            "2026-05-31"
+          ],
+          "suggested_fix": "Consider starting the final report writing block earlier on Sunday or extending it slightly to finish by 22:00 UTC, creating a clearer 2-hour submission buffer."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The plan correctly starts the AI project early on Saturday and protects Sunday for core work, addressing my primary concern about the latest safe start."
+      ],
+      "overall_comment": "The calendar is deadline-viable. It allocates meaningful work to both the AI project and the Networks quiz well before their deadlines. The AI project starts immediately and receives substantial blocks on Saturday and Sunday. The quiz review is scheduled for Sunday afternoon, avoiding a Monday morning rush. My minor concern is the limited final buffer before the Sunday night deadline, but the core work is appropriately prioritized and scheduled."
+    },
+    {
+      "agent": "Grade Agent",
+      "calendar_version": 1,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The AI project report writing is scheduled for a single 3-hour block on Sunday evening, just before the deadline. This leaves no buffer for potential delays in earlier tasks (e.g., model training overruns) or for report revision, which could compromise the quality of the highest-value deliverable (35%).",
+          "severity": "minor",
+          "affected_tasks": [
+            "AI project"
+          ],
+          "affected_days": [
+            "2026-05-31"
+          ],
+          "suggested_fix": "Consider starting the report writing earlier, perhaps on Saturday afternoon after the baseline model training, or allocate a smaller buffer block on Sunday morning before the improved model training to begin outlining the report."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The plan correctly prioritizes the core AI project requirements over optional experiments, protecting academic value.",
+        "The quiz review is scheduled in a protected block on Sunday, preventing it from being crowded out by last-minute AI work."
+      ],
+      "overall_comment": "The calendar effectively protects high-value academic work. The highest-weight task (AI project, 35%) receives the majority of scheduled time, starting early and sequenced logically. The lower-weight quiz (10%) is given a dedicated review slot. My primary concern is the lack of a time buffer for the final report, but the core deliverables are prioritized and the plan is sustainable, so I approve with minor concerns."
+    },
+    {
+      "agent": "Effort Agent",
+      "calendar_version": 1,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The AI project's 'Train and evaluate the baseline model' block is scheduled for a single 3-hour afternoon session. Model training and evaluation can be unpredictable and often requires iterative debugging, parameter tuning, and waiting for runs to complete. A single block may be insufficient if issues arise.",
+          "severity": "minor",
+          "affected_tasks": [
+            "AI project"
+          ],
+          "affected_days": [
+            "2026-05-30"
+          ],
+          "suggested_fix": "Consider splitting this into two focused blocks: one for initial setup and training launch, and a later block for evaluation and analysis. Alternatively, explicitly note this block may need to extend into evening unattended time if training runs long."
+        },
+        {
+          "issue": "The final 'Write and finalize the project report' is allocated only 3 hours on Sunday evening, immediately before the deadline. Report writing for a 35% project often involves synthesizing results, creating figures, and careful editing, which can easily take longer, especially under time pressure.",
+          "severity": "minor",
+          "affected_tasks": [
+            "AI project"
+          ],
+          "affected_days": [
+            "2026-05-31"
+          ],
+          "suggested_fix": "Start report drafting earlier, perhaps dedicating a small block on Saturday evening to outline and begin writing sections, reducing the burden on the final evening block."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner has broken the AI project into multiple subtasks across days, addressing my earlier concern about treating it as a single vague block.",
+        "Daily work is capped at sustainable hours (4-6), respecting the student's exhaustion and preventing burnout, as I recommended.",
+        "The quiz review is scheduled for Sunday afternoon, avoiding Monday morning cramming, which aligns with my suggestion."
+      ],
+      "overall_comment": "The calendar generally reflects realistic effort estimation and distribution. The AI project is appropriately split across multiple days with concrete subtasks, and daily limits protect against burnout. My minor concerns are about potential underestimation of model training iteration time and report writing duration, but these are not critical given the overall prudent allocation. The plan is plausible for a student in this exhausted state."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "calendar_version": 1,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "Sunday (2026-05-31) is overfilled with 8 hours of scheduled work (3+2+3), exceeding the assumed sustainable 6-hour cap and risking burnout.",
+          "severity": "minor",
+          "affected_tasks": [
+            "AI project",
+            "Networks quiz"
+          ],
+          "affected_days": [
+            "2026-05-31"
+          ],
+          "suggested_fix": "Reduce the final AI project report block from 3 hours to 1 hour, finishing by 18:00 UTC, to keep Sunday within 6 hours total."
+        }
+      ],
+      "acknowledged_compromises": [
+        "Capped daily work at sustainable hours, sacrificing extra experiments.",
+        "Scheduled quiz review Sunday afternoon, protecting it from last-minute AI work."
+      ],
+      "overall_comment": "The plan generally respects wellbeing by starting early, capping most days at sustainable hours, and avoiding Monday morning cramming. However, Sunday is slightly overfilled. With a minor reduction, this plan is humane enough to follow for an exhausted student."
+    },
+    {
+      "agent": "Risk Agent",
+      "calendar_version": 1,
+      "approval": "reject",
+      "severity": "major",
+      "critiques": [
+        {
+          "issue": "The plan lacks a contingency buffer before the AI project deadline on Sunday night. If any task (data cleaning, model training, report writing) takes longer than scheduled, there is no recovery time, risking a late submission.",
+          "severity": "critical",
+          "affected_tasks": [
+            "AI project"
+          ],
+          "affected_days": [
+            "2026-05-31"
+          ],
+          "suggested_fix": "Schedule an explicit contingency block of at least 3-4 hours on Sunday afternoon (e.g., 13:00-17:00) before the final report writing block. This block should be labeled as 'AI project buffer' and remain unscheduled to absorb overruns."
+        },
+        {
+          "issue": "The plan assumes all AI project subtasks will complete within their estimated times. The scope for dataset cleaning and model training is highly uncertain, and technical issues (e.g., code bugs, training failures) could cause significant delays not accounted for.",
+          "severity": "major",
+          "affected_tasks": [
+            "AI project"
+          ],
+          "affected_days": [
+            "2026-05-30",
+            "2026-05-31"
+          ],
+          "suggested_fix": "Break down the AI project into smaller, more specific subtasks with conservative time estimates. For example, allocate separate blocks for 'debug data cleaning script' and 'analyze baseline model results'. Also, explicitly define a Minimum Viable Product (MVP) scope to avoid scope creep from 'extra experiments'."
+        },
+        {
+          "issue": "The quiz review is scheduled for Sunday afternoon, but if the AI project morning block overruns, it could encroach on this time. There is no protective buffer between these tasks, and the student's low energy may reduce review effectiveness.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Networks quiz"
+          ],
+          "affected_days": [
+            "2026-05-31"
+          ],
+          "suggested_fix": "Move the quiz review block earlier in the day (e.g., morning) or to Saturday to decouple it from potential AI project delays. Alternatively, add a short buffer block between the AI project morning work and the quiz review."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner has capped daily work hours to address burnout risk and postponed extra experiments to manage scope."
+      ],
+      "overall_comment": "The calendar shows good intent by starting the AI project early and capping hours, but it remains high-risk due to the lack of contingency time before the hard deadline. The uncertain scope of the AI project and the student's low energy create a high probability of schedule overrun. The plan does not contain enough early discovery time or buffer to handle unexpected delays. I must reject this version until explicit contingency blocks are added and task estimates are made more conservative."
+    }
+  ],
+  "validation": {
+    "valid": false,
+    "violations": [
+      {
+        "code": "day_outside_window",
+        "message": "2026-06-01 is outside the planning window 2026-05-29T16:13:22.481Z → 2026-06-01T12:00:00.000Z.",
+        "severity": "error"
+      }
+    ]
+  },
+  "evaluation": {
+    "evaluator": "Schedule Evaluator",
+    "calendar_version": 1,
+    "planner_model": "deepseek/deepseek-v3.2",
+    "evaluator_model": "deepseek/deepseek-v3.2",
+    "overall_score": 3.4,
+    "model_score": 3,
+    "hard_score": 3.8,
+    "hard_metrics": {
+      "score": 70.1,
+      "metrics": [
+        {
+          "name": "generation_time_seconds",
+          "value": 258.9,
+          "score": 17.1,
+          "explanation": "258.9s from run start to final schedule selection."
+        },
+        {
+          "name": "rejection_count",
+          "value": 1,
+          "score": 80,
+          "explanation": "1 specialist agent(s) rejected the final calendar."
+        },
+        {
+          "name": "critical_count",
+          "value": 1,
+          "score": 66.7,
+          "explanation": "1 critical issue(s) were raised in final critiques."
+        },
+        {
+          "name": "major_count",
+          "value": 2,
+          "score": 60,
+          "explanation": "2 major issue(s) were raised in final critiques."
+        },
+        {
+          "name": "deadline_violation_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 scheduled work block(s) end after their task deadline."
+        },
+        {
+          "name": "task_coverage_ratio",
+          "value": 1,
+          "score": 100,
+          "explanation": "2/2 inferred task(s) received at least one work block."
+        },
+        {
+          "name": "availability_overrun_hours",
+          "value": 2,
+          "score": 66.7,
+          "explanation": "2h scheduled above the planner's assumed available hours."
+        }
+      ]
+    },
+    "dimension_scores": [
+      {
+        "dimension": "requirement_match",
+        "score": 4,
+        "rationale": "Schedule addresses core AI project and quiz tasks, starts early, and caps hours to balance ambition with exhaustion."
+      },
+      {
+        "dimension": "deadline_safety",
+        "score": 2,
+        "rationale": "No explicit contingency buffer before AI project deadline; final report block ends with minimal submission buffer."
+      },
+      {
+        "dimension": "workload_realism",
+        "score": 3,
+        "rationale": "Daily caps are mostly sustainable, but Sunday exceeds assumed capacity and model training/report estimates may be optimistic."
+      },
+      {
+        "dimension": "academic_priority",
+        "score": 4,
+        "rationale": "AI project receives majority of time and is sequenced logically; quiz review is protected; extra experiments correctly postponed."
+      },
+      {
+        "dimension": "wellbeing_balance",
+        "score": 3,
+        "rationale": "Caps daily work and avoids Monday cramming, but Sunday overfill and tight deadline pressure still risk burnout."
+      },
+      {
+        "dimension": "risk_resilience",
+        "score": 2,
+        "rationale": "High uncertainty in AI project scope and duration; lacks contingency blocks and early discovery time to absorb delays."
+      }
+    ],
+    "strengths": [
+      "Starts AI project immediately to gauge scope",
+      "Sequences tasks logically across days",
+      "Protects quiz review from last-minute AI work",
+      "Explicitly postpones optional experiments to manage scope"
+    ],
+    "weaknesses": [
+      "No contingency buffer before AI project deadline",
+      "Sunday workload exceeds assumed sustainable cap",
+      "Model training and report writing times may be underestimated",
+      "Calendar includes a day outside the planning window (validation error)"
+    ],
+    "comparison_notes": [
+      "Balances ambition with exhaustion better than a pure cram schedule",
+      "Lacks the risk buffers and conservative estimates that a more cautious planner would include",
+      "Shows coherent reasoning but insufficient resilience for high-stakes, uncertain tasks"
+    ],
+    "recommendation": "Use with caution. Student must start AI project immediately as scheduled and be prepared to reduce report quality or skip quiz review if tasks overrun. Add an explicit 3-4 hour contingency block on Sunday afternoon."
+  }
+}

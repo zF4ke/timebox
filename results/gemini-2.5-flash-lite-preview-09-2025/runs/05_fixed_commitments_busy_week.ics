@@ -1,0 +1,190 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:FRIDAY_TASK_1@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260529T123000Z
+DTEND:20260529T140000Z
+SUMMARY:Buy materials for a weekend workshop
+DESCRIPTION:Purchase required materials for the weekend workshop\, including travel time.\\n\\nReasoning: This task has the most immediate deadline (before Saturday) and must be completed before the 15:00 family event.
+END:VEVENT
+BEGIN:VEVENT
+UID:FRIDAY_FIXED_1@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260529T150000Z
+DTEND:20260529T180000Z
+SUMMARY:Family event
+DESCRIPTION:Fixed commitment for a family event.\\n\\nReasoning: Respecting the fixed commitment time slot.
+END:VEVENT
+BEGIN:VEVENT
+UID:FRIDAY_FIXED_2@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260529T180000Z
+DTEND:20260529T200000Z
+SUMMARY:Dentist and travel
+DESCRIPTION:Fixed commitment for dentist appointment and associated travel.\\n\\nReasoning: Respecting the fixed commitment time slot.
+END:VEVENT
+BEGIN:VEVENT
+UID:FRIDAY_TASK_2@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260529T200000Z
+DTEND:20260529T213000Z
+SUMMARY:Computer graphics assignment
+DESCRIPTION:Start the Computer graphics assignment by setting up the environment and reviewing specifications.\\n\\nReasoning: Utilizing the available evening time after fixed commitments to begin the largest task early.
+END:VEVENT
+BEGIN:VEVENT
+UID:SATURDAY_TASK_1@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260530T140000Z
+DTEND:20260530T153000Z
+SUMMARY:AASMA reflection
+DESCRIPTION:Complete the AASMA reflection to get it done early.\\n\\nReasoning: Completing this short task early removes it from the pressure points mid-week.
+END:VEVENT
+BEGIN:VEVENT
+UID:SATURDAY_TASK_2@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260530T153000Z
+DTEND:20260530T183000Z
+SUMMARY:Computer graphics assignment
+DESCRIPTION:Continue core implementation for the Computer graphics assignment.\\n\\nReasoning: Allocating a significant block to the largest task while energy is high.
+END:VEVENT
+BEGIN:VEVENT
+UID:SATURDAY_TASK_3@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260530T190000Z
+DTEND:20260530T210000Z
+SUMMARY:Computer graphics assignment
+DESCRIPTION:Further work on the Computer graphics assignment\, focusing on feature integration.\\n\\nReasoning: Utilizing the evening window to complete 5 hours of the assignment today.
+END:VEVENT
+BEGIN:VEVENT
+UID:SUNDAY_TASK_1@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260531T140000Z
+DTEND:20260531T160000Z
+SUMMARY:Computer graphics assignment
+DESCRIPTION:Final dedicated block for the Computer graphics assignment to reach the 7-hour target.\\n\\nReasoning: Completing the required 7 hours for the assignment before Monday's fixed commitments begin.
+END:VEVENT
+BEGIN:VEVENT
+UID:SUNDAY_TASK_2@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260531T163000Z
+DTEND:20260531T183000Z
+SUMMARY:Security quiz revision
+DESCRIPTION:Begin revision for the Security quiz.\\n\\nReasoning: Starting the 3 hours of revision early on Sunday evening to reduce pressure on Monday/Tuesday.
+END:VEVENT
+BEGIN:VEVENT
+UID:SUNDAY_TASK_3@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260531T190000Z
+DTEND:20260531T200000Z
+SUMMARY:Security quiz revision
+DESCRIPTION:Complete the remaining Security quiz revision.\\n\\nReasoning: Finishing the required 3 hours of revision today.
+END:VEVENT
+BEGIN:VEVENT
+UID:MONDAY_FIXED_1@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260601T090000Z
+DTEND:20260601T120000Z
+SUMMARY:Classes
+DESCRIPTION:Fixed commitment for morning classes.\\n\\nReasoning: Respecting the fixed commitment time slot.
+END:VEVENT
+BEGIN:VEVENT
+UID:MONDAY_TASK_1@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260601T120000Z
+DTEND:20260601T140000Z
+SUMMARY:Buffer Time
+DESCRIPTION:Time for lunch\, transition\, and settling in after classes.\\n\\nReasoning: Necessary gap between classes ending at 12:00 and the preferred work start time of 14:00.
+END:VEVENT
+BEGIN:VEVENT
+UID:MONDAY_FIXED_2@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260601T180000Z
+DTEND:20260601T200000Z
+SUMMARY:Dentist and travel
+DESCRIPTION:Fixed commitment for dentist appointment and associated travel.\\n\\nReasoning: Respecting the fixed commitment time slot.
+END:VEVENT
+BEGIN:VEVENT
+UID:MONDAY_TASK_2@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260601T200000Z
+DTEND:20260601T210000Z
+SUMMARY:Unscheduled Time
+DESCRIPTION:Light work or transition time after fixed commitments.\\n\\nReasoning: Utilizing the remaining preferred window after the dentist appointment.
+END:VEVENT
+BEGIN:VEVENT
+UID:TUESDAY_FIXED_1@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260602T100000Z
+DTEND:20260602T160000Z
+SUMMARY:Lab sessions
+DESCRIPTION:Fixed commitment for lab sessions.\\n\\nReasoning: Respecting the fixed commitment time slot.
+END:VEVENT
+BEGIN:VEVENT
+UID:TUESDAY_TASK_1@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260602T160000Z
+DTEND:20260602T170000Z
+SUMMARY:Unscheduled Time
+DESCRIPTION:Transition time after labs.\\n\\nReasoning: Gap between labs ending and preferred work start time.
+END:VEVENT
+BEGIN:VEVENT
+UID:TUESDAY_TASK_2@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260602T170000Z
+DTEND:20260602T210000Z
+SUMMARY:Unscheduled Time
+DESCRIPTION:Buffer time allocated for potential overflow or rest before Wednesday.\\n\\nReasoning: Allocating the full available time slot (16:00-21:00) as buffer since all tasks are scheduled earlier\, respecting the 5 available hours.
+END:VEVENT
+BEGIN:VEVENT
+UID:WEDNESDAY_FIXED_1@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260603T130000Z
+DTEND:20260603T170000Z
+SUMMARY:Part-time work
+DESCRIPTION:Fixed commitment for part-time work.\\n\\nReasoning: Respecting the fixed commitment time slot.
+END:VEVENT
+BEGIN:VEVENT
+UID:WEDNESDAY_TASK_1@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260603T170000Z
+DTEND:20260603T180000Z
+SUMMARY:Unscheduled Time
+DESCRIPTION:Transition time after work.\\n\\nReasoning: Gap between work ending and preferred work start time.
+END:VEVENT
+BEGIN:VEVENT
+UID:WEDNESDAY_TASK_2@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260603T180000Z
+DTEND:20260603T210000Z
+SUMMARY:Unscheduled Time
+DESCRIPTION:Buffer time allocated for potential overflow or rest before Thursday.\\n\\nReasoning: Allocating the full available time slot (17:00-21:00) as buffer since all tasks were completed earlier\, respecting the 4 available hours.
+END:VEVENT
+BEGIN:VEVENT
+UID:THURSDAY_FIXED_1@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260604T090000Z
+DTEND:20260604T110000Z
+SUMMARY:Classes
+DESCRIPTION:Fixed commitment for morning classes.\\n\\nReasoning: Respecting the fixed commitment time slot.
+END:VEVENT
+BEGIN:VEVENT
+UID:THURSDAY_TASK_1@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260604T110000Z
+DTEND:20260604T140000Z
+SUMMARY:Unscheduled Time
+DESCRIPTION:Time for lunch and transition after classes.\\n\\nReasoning: Gap between classes ending at 11:00 and the preferred work start time of 14:00.
+END:VEVENT
+BEGIN:VEVENT
+UID:THURSDAY_TASK_2@timebox.local
+DTSTAMP:20260529T121732Z
+DTSTART:20260604T140000Z
+DTEND:20260604T210000Z
+SUMMARY:Unscheduled Time
+DESCRIPTION:Buffer time for any overflow or contingency planning for next week.\\n\\nReasoning: All tasks are complete\; the remaining available time is allocated as buffer/rest.
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,46 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:B1@timebox.local
+DTSTAMP:20260529T154420Z
+DTSTART:20260529T130000Z
+DTEND:20260529T160000Z
+SUMMARY:Web development project
+DESCRIPTION:Begin implementing authentication system for the web project.\\n\\nReasoning: Start web project early to spread effort before Sunday deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2@timebox.local
+DTSTAMP:20260529T154420Z
+DTSTART:20260530T080000Z
+DTEND:20260530T110000Z
+SUMMARY:Read paper and write discussion points for AASMA seminar
+DESCRIPTION:Read the seminar paper and draft five discussion points.\\n\\nReasoning: Complete AASMA seminar task before its morning deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3@timebox.local
+DTSTAMP:20260529T154420Z
+DTSTART:20260531T100000Z
+DTEND:20260531T140000Z
+SUMMARY:Web development project
+DESCRIPTION:Continue web project implementation and begin polishing CSS.\\n\\nReasoning: Make substantial progress on web project while energy is higher.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4@timebox.local
+DTSTAMP:20260529T154420Z
+DTSTART:20260601T130000Z
+DTEND:20260601T160000Z
+SUMMARY:Web development project
+DESCRIPTION:Finalize web project tasks\, conduct testing\, and review work.\\n\\nReasoning: Complete final integration and testing on the project deadline day.
+END:VEVENT
+BEGIN:VEVENT
+UID:B5@timebox.local
+DTSTAMP:20260529T154420Z
+DTSTART:20260602T090000Z
+DTEND:20260602T120000Z
+SUMMARY:Linear algebra homework
+DESCRIPTION:Complete the linear algebra homework problem set.\\n\\nReasoning: Schedule homework when fresh\, well before its evening deadline.
+END:VEVENT
+END:VCALENDAR

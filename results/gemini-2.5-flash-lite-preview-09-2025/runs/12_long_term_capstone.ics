@@ -1,0 +1,270 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:B1_DM_1@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260529T080000Z
+DTEND:20260529T120000Z
+SUMMARY:Data mining assignment
+DESCRIPTION:Begin significant work on the Data mining assignment due early next week.\\n\\nReasoning: Addressing the immediate deadline by dedicating focused time on Friday.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2_DM_2@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260530T090000Z
+DTEND:20260530T130000Z
+SUMMARY:Data mining assignment
+DESCRIPTION:Finalize and submit the Data mining assignment.\\n\\nReasoning: Ensuring the Data mining assignment is completed this weekend to free up Monday for capstone work.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3_CAP_LIB_1@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260531T130000Z
+DTEND:20260531T153000Z
+SUMMARY:Prototype library evaluation and selection
+DESCRIPTION:Begin evaluation of the first library option and set up initial testing environment.\\n\\nReasoning: Starting the high-risk evaluation early on Sunday to maximize time before the Monday deadline pressure.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4_CAP_LIB_2@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260601T080000Z
+DTEND:20260601T103000Z
+SUMMARY:Prototype library evaluation and selection
+DESCRIPTION:Execute core tests for the first library and begin setup/testing for the second library option.\\n\\nReasoning: Continuing the critical path task of library evaluation.
+END:VEVENT
+BEGIN:VEVENT
+UID:B5_CAP_LIB_BUF_1@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260601T103000Z
+DTEND:20260601T110000Z
+SUMMARY:Contingency time allocated for unexpected complexity during library evaluation setup.
+DESCRIPTION:Contingency time allocated for unexpected complexity during library evaluation setup.\\n\\nReasoning: Adding explicit buffer time to mitigate the Risk Agent's concern about zero contingency in high-uncertainty tasks.
+END:VEVENT
+BEGIN:VEVENT
+UID:B6_CAP_LIB_BUF_2@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260602T080000Z
+DTEND:20260602T083000Z
+SUMMARY:Contingency time for final library comparison or initial prototype environment setup.
+DESCRIPTION:Contingency time for final library comparison or initial prototype environment setup.\\n\\nReasoning: Second small buffer block placed before major development starts to absorb evaluation overrun.
+END:VEVENT
+BEGIN:VEVENT
+UID:B7_CAP_LIB_3@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260602T083000Z
+DTEND:20260602T103000Z
+SUMMARY:Prototype library evaluation and selection
+DESCRIPTION:Finalize library selection and begin initial implementation setup for the Working prototype.\\n\\nReasoning: Completing the evaluation phase and transitioning to development.
+END:VEVENT
+BEGIN:VEVENT
+UID:B8_CAP_PROT_1@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260602T103000Z
+DTEND:20260602T120000Z
+SUMMARY:Working prototype development
+DESCRIPTION:Start implementing the core functionality of the prototype based on the chosen library.\\n\\nReasoning: Starting development immediately after selection is finalized.
+END:VEVENT
+BEGIN:VEVENT
+UID:B9_CAP_PROT_2@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260603T080000Z
+DTEND:20260603T113000Z
+SUMMARY:Working prototype development
+DESCRIPTION:Continue building core prototype features and begin outlining the evaluation plan structure.\\n\\nReasoning: Maximizing development time while introducing the Evaluation plan task early.
+END:VEVENT
+BEGIN:VEVENT
+UID:B10_CAP_PROT_3@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260604T080000Z
+DTEND:20260604T103000Z
+SUMMARY:Working prototype development
+DESCRIPTION:Continue building core prototype features\, focusing on integration points.\\n\\nReasoning: Maintaining momentum on the main development task.
+END:VEVENT
+BEGIN:VEVENT
+UID:B11_CAP_REPORT_1@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260604T103000Z
+DTEND:20260604T113000Z
+SUMMARY:Short technical report drafting
+DESCRIPTION:Draft the Introduction and Methodology sections of the technical report.\\n\\nReasoning: Drafting report sections concurrently with development where context is fresh.
+END:VEVENT
+BEGIN:VEVENT
+UID:B12_CAP_EVAL_1@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260605T080000Z
+DTEND:20260605T093000Z
+SUMMARY:Evaluation plan creation
+DESCRIPTION:Outline the structure and key metrics for the evaluation plan.\\n\\nReasoning: Completing the Evaluation Plan task by its deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B13_CAP_PROT_4@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260605T093000Z
+DTEND:20260605T110000Z
+SUMMARY:Working prototype development
+DESCRIPTION:Continue prototype development\, focusing on integration of secondary features.\\n\\nReasoning: Ensuring prototype development continues steadily.
+END:VEVENT
+BEGIN:VEVENT
+UID:B14_CAP_PROT_5@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260606T090000Z
+DTEND:20260606T120000Z
+SUMMARY:Working prototype development
+DESCRIPTION:Significant block dedicated to continuing prototype development and integration.\\n\\nReasoning: Using weekend time to accelerate development ahead of the deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B15_CAP_PROT_6@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260607T090000Z
+DTEND:20260607T110000Z
+SUMMARY:Working prototype development
+DESCRIPTION:Continue prototype development\, focusing on stabilization.\\n\\nReasoning: Maintaining development pace.
+END:VEVENT
+BEGIN:VEVENT
+UID:B16_CAP_EVAL_2@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260607T110000Z
+DTEND:20260607T120000Z
+SUMMARY:Evaluation plan creation
+DESCRIPTION:Refine evaluation procedures based on current prototype scope.\\n\\nReasoning: Ensuring the evaluation plan accurately reflects the current state of the prototype.
+END:VEVENT
+BEGIN:VEVENT
+UID:B17_CAP_PROT_7@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260608T080000Z
+DTEND:20260608T100000Z
+SUMMARY:Working prototype development
+DESCRIPTION:Final feature implementation for the prototype.\\n\\nReasoning: Pushing towards feature completion before the deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B18_CAP_REPORT_2@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260608T100000Z
+DTEND:20260608T110000Z
+SUMMARY:Short technical report drafting
+DESCRIPTION:Draft the section describing the prototype design choices based on library selection.\\n\\nReasoning: Drafting the design section while the implementation details are fresh.
+END:VEVENT
+BEGIN:VEVENT
+UID:B19_CAP_PROT_8@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260609T080000Z
+DTEND:20260609T093000Z
+SUMMARY:Working prototype development
+DESCRIPTION:Prototype stabilization and initial bug fixing.\\n\\nReasoning: Shifting focus from new features to stability.
+END:VEVENT
+BEGIN:VEVENT
+UID:B20_CAP_EVAL_3@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260609T093000Z
+DTEND:20260609T110000Z
+SUMMARY:Evaluation plan creation
+DESCRIPTION:Finalize the Evaluation plan document based on stable prototype features.\\n\\nReasoning: Completing the Evaluation Plan task ahead of its deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B21_CAP_PROT_9@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260610T080000Z
+DTEND:20260610T100000Z
+SUMMARY:Working prototype development
+DESCRIPTION:Final prototype testing and stabilization before moving to documentation.\\n\\nReasoning: Ensuring the prototype is ready for formal evaluation.
+END:VEVENT
+BEGIN:VEVENT
+UID:B22_CAP_REPORT_3@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260610T100000Z
+DTEND:20260610T110000Z
+SUMMARY:Short technical report drafting
+DESCRIPTION:Draft the Results section of the report based on the evaluation plan execution.\\n\\nReasoning: Drafting results while the evaluation process is fresh.
+END:VEVENT
+BEGIN:VEVENT
+UID:B23_CAP_REPORT_4@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260611T080000Z
+DTEND:20260611T100000Z
+SUMMARY:Short technical report drafting
+DESCRIPTION:Continue drafting the technical report\, focusing on discussion points.\\n\\nReasoning: Leveraging the stable prototype to advance documentation.
+END:VEVENT
+BEGIN:VEVENT
+UID:B24_CAP_PRESENTATION_1@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260611T100000Z
+DTEND:20260611T110000Z
+SUMMARY:5 minute progress presentation preparation
+DESCRIPTION:Outline the 5-minute presentation structure based on the finalized report and evaluation plan.\\n\\nReasoning: Starting presentation preparation early to structure the narrative.
+END:VEVENT
+BEGIN:VEVENT
+UID:B25_CAP_REPORT_5@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260612T080000Z
+DTEND:20260612T093000Z
+SUMMARY:Short technical report drafting
+DESCRIPTION:Draft the Conclusion and Discussion sections of the report.\\n\\nReasoning: Completing the main body of the report draft.
+END:VEVENT
+BEGIN:VEVENT
+UID:B26_CAP_PROT_SMOKE@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260612T093000Z
+DTEND:20260612T103000Z
+SUMMARY:Working prototype development
+DESCRIPTION:Final check/smoke test of the prototype before presentation prep begins.\\n\\nReasoning: Verifying stability one last time before locking down the report content.
+END:VEVENT
+BEGIN:VEVENT
+UID:B27_CAP_REPORT_6@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260613T090000Z
+DTEND:20260613T103000Z
+SUMMARY:Short technical report drafting
+DESCRIPTION:Final proofread and formatting pass on the technical report.\\n\\nReasoning: Ensuring the report is polished before the final deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B28_CAP_PRESENTATION_2@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260613T103000Z
+DTEND:20260613T120000Z
+SUMMARY:5 minute progress presentation preparation
+DESCRIPTION:Create the presentation slides based on the outline and finalized report content.\\n\\nReasoning: Creating visual aids based on the completed written work.
+END:VEVENT
+BEGIN:VEVENT
+UID:B29_CAP_PRESENTATION_3@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260614T090000Z
+DTEND:20260614T113000Z
+SUMMARY:5 minute progress presentation preparation
+DESCRIPTION:First full practice run of the 5-minute presentation\, focusing on timing and flow.\\n\\nReasoning: Practicing early in the final week to allow time for refinement.
+END:VEVENT
+BEGIN:VEVENT
+UID:B30_CAP_PRESENTATION_4@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260615T080000Z
+DTEND:20260615T093000Z
+SUMMARY:5 minute progress presentation preparation
+DESCRIPTION:Refine slides and content based on the first practice run feedback.\\n\\nReasoning: Iterative improvement on the presentation.
+END:VEVENT
+BEGIN:VEVENT
+UID:B31_CAP_PRESENTATION_5@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260615T093000Z
+DTEND:20260615T110000Z
+SUMMARY:5 minute progress presentation preparation
+DESCRIPTION:Second timed practice run focusing on smooth transitions.\\n\\nReasoning: Ensuring the presentation meets the strict time limit.
+END:VEVENT
+BEGIN:VEVENT
+UID:B32_CAP_PRESENTATION_6@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260616T080000Z
+DTEND:20260616T090000Z
+SUMMARY:5 minute progress presentation preparation
+DESCRIPTION:Final polish and timed practice run for the progress presentation.\\n\\nReasoning: Final check before the submission window opens.
+END:VEVENT
+BEGIN:VEVENT
+UID:B33_CAP_FINAL_CHECK@timebox.local
+DTSTAMP:20260529T122135Z
+DTSTART:20260617T080000Z
+DTEND:20260617T090000Z
+SUMMARY:Final submission check and contingency time for unexpected issues.
+DESCRIPTION:Final submission check and contingency time for unexpected issues.\\n\\nReasoning: Providing a small\, dedicated buffer right before the final deadline to absorb any last-minute stress or technical glitches.
+END:VEVENT
+END:VCALENDAR

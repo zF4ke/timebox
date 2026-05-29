@@ -1,0 +1,9 @@
+Plan only the next two days.
+
+I have a mobile app demo in two days at 10:00. The app runs, but the login screen is ugly, the database sometimes fails, and I need a 3 minute explanation.
+
+I also have a short probability quiz tomorrow at 16:00. I need to review Bayes theorem and random variables.
+
+Today I am free from 13:00 to 22:00. Tomorrow I have class from 09:00 to 12:00 and the quiz at 16:00. I want to sleep before midnight.
+
+Please focus on making the demo acceptable, not perfect.

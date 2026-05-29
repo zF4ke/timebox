@@ -1,0 +1,1362 @@
+{
+  "runId": "e59dc3d0-bf86-4642-9cbb-bce8e5604291",
+  "createdAt": "2026-05-29T12:31:20.119Z",
+  "request": {
+    "userInput": "I do not have strict deadlines this week, but I want a useful study plan.\n\nGoals:\n- Learn the basics of reinforcement learning.\n- Review React hooks because I keep forgetting useEffect details.\n- Make progress on my personal portfolio website.\n- Keep up with Portuguese vocabulary practice.\n\nI have classes in the morning on Monday, Wednesday, and Friday. Other days are flexible.\n\nI want about 3 to 4 hours of planned work per day, with variety so I do not burn out. Since there are no deadlines, please decide a reasonable planning window and balance exploration with concrete progress.",
+    "quorum": 5,
+    "maxIterations": 3,
+    "timezone": "Europe/Lisbon",
+    "model": "google/gemini-3.1-flash-lite-preview",
+    "evaluatorModel": "google/gemini-3.1-flash-lite-preview"
+  },
+  "stopReason": "Accepted by 5/5 agents with no critical critiques.",
+  "interpreterOutput": {
+    "current_date": "2026-05-29T12:31:20.119Z",
+    "planning_window": {
+      "start_date": "2026-06-01T00:00:00Z",
+      "end_date": "2026-06-07T23:59:59Z",
+      "reason": "A one-week planning window is appropriate for balancing learning goals and project progress without immediate external deadlines."
+    },
+    "inferred_availability": [
+      {
+        "date_range": "2026-06-01 to 2026-06-07",
+        "assumption": "Morning classes on Monday, Wednesday, and Friday limit afternoon/evening study time; flexible availability on other days.",
+        "estimated_available_hours_per_day": 3.5,
+        "confidence": "high"
+      }
+    ],
+    "fixed_commitments": [
+      "Morning classes on Monday, June 1st",
+      "Morning classes on Wednesday, June 3rd",
+      "Morning classes on Friday, June 5th"
+    ],
+    "student_state": {
+      "sleep": "stable",
+      "energy": "moderate",
+      "confidence": "neutral"
+    },
+    "tasks": [
+      {
+        "task_id": "task_001",
+        "name": "Reinforcement learning basics",
+        "raw_mentions": [
+          "Learn the basics of reinforcement learning"
+        ],
+        "inferred_deadline": null,
+        "uncertainties": [
+          "Scope of 'basics' is undefined",
+          "Resource availability"
+        ]
+      },
+      {
+        "task_id": "task_002",
+        "name": "React hooks review",
+        "raw_mentions": [
+          "Review React hooks because I keep forgetting useEffect details"
+        ],
+        "inferred_deadline": null,
+        "uncertainties": [
+          "Depth of review required"
+        ]
+      },
+      {
+        "task_id": "task_003",
+        "name": "Personal portfolio website development",
+        "raw_mentions": [
+          "Make progress on my personal portfolio website"
+        ],
+        "inferred_deadline": null,
+        "uncertainties": [
+          "Current project status",
+          "Specific technical blockers"
+        ]
+      },
+      {
+        "task_id": "task_004",
+        "name": "Portuguese vocabulary practice",
+        "raw_mentions": [
+          "Keep up with Portuguese vocabulary practice"
+        ],
+        "inferred_deadline": null,
+        "uncertainties": [
+          "Daily time commitment"
+        ]
+      }
+    ],
+    "assumptions": [
+      "The student prefers a balanced workload to prevent burnout.",
+      "Morning classes occupy approximately 3-4 hours of the morning block.",
+      "The student has access to necessary study materials for reinforcement learning and React."
+    ]
+  },
+  "agentViews": [
+    {
+      "agent": "Deadline Agent",
+      "task_views": [
+        {
+          "task_id": "task_001",
+          "task_name": "Reinforcement learning basics",
+          "assessment": "No immediate deadline, but requires consistent cognitive effort. Recommend scheduling early in the week to allow for conceptual digestion.",
+          "concerns": [
+            "Scope creep due to lack of defined boundaries",
+            "Risk of procrastination since there is no external pressure"
+          ],
+          "recommendations": [
+            "Define a specific learning objective for the week",
+            "Allocate 4 hours total across two sessions"
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Define scope of reinforcement learning basics",
+            "Complete introductory reading or video course",
+            "Summarize key concepts"
+          ]
+        },
+        {
+          "task_id": "task_002",
+          "task_name": "React hooks review",
+          "assessment": "High priority for technical maintenance. Since useEffect is a frequent pain point, this should be prioritized before starting new development work.",
+          "concerns": [
+            "Tendency to skip deep review in favor of coding",
+            "Lack of practical application context"
+          ],
+          "recommendations": [
+            "Focus on useEffect dependency array mechanics",
+            "Create a small sandbox project to test understanding"
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review official React documentation on useEffect",
+            "Build a small test component using useEffect",
+            "Document common pitfalls"
+          ]
+        },
+        {
+          "task_id": "task_003",
+          "task_name": "Personal portfolio website development",
+          "assessment": "Ongoing project with no deadline. Best treated as a flexible task to fill remaining capacity after learning goals are met.",
+          "concerns": [
+            "Potential for scope expansion without clear milestones",
+            "Risk of abandonment if progress feels stagnant"
+          ],
+          "recommendations": [
+            "Set a concrete deliverable for the week",
+            "Use the React hooks review to inform code improvements"
+          ],
+          "estimated_duration_hours": 6,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review current project status",
+            "Implement one specific feature or fix",
+            "Commit code to repository"
+          ]
+        },
+        {
+          "task_id": "task_004",
+          "task_name": "Portuguese vocabulary practice",
+          "assessment": "Requires daily consistency rather than long sessions. This is a low-risk, high-frequency task.",
+          "concerns": [
+            "Easy to deprioritize during busy days",
+            "Risk of losing momentum if skipped"
+          ],
+          "recommendations": [
+            "Integrate into daily routine as a warm-up or cool-down",
+            "Keep sessions short (15-20 minutes)"
+          ],
+          "estimated_duration_hours": 2.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Daily vocabulary review",
+            "Practice new phrases"
+          ]
+        }
+      ],
+      "overall_comment": "Since there are no strict deadlines, the strategy is to prioritize the React hooks review early to support the portfolio development, while interleaving reinforcement learning sessions. Portuguese practice should be treated as a daily anchor to maintain routine."
+    },
+    {
+      "agent": "Grade Agent",
+      "task_views": [
+        {
+          "task_id": "task_001",
+          "task_name": "Reinforcement learning basics",
+          "assessment": "High academic value for technical skill development; requires focused, deep-work sessions to ensure conceptual mastery.",
+          "concerns": [
+            "Risk of superficial learning if not structured with active recall.",
+            "Potential to be deprioritized due to lack of immediate assessment."
+          ],
+          "recommendations": [
+            "Schedule during peak cognitive hours.",
+            "Use active problem-solving rather than passive reading."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Define core MDP components",
+            "Implement a simple Q-learning agent",
+            "Review Bellman equation derivations"
+          ]
+        },
+        {
+          "task_id": "task_002",
+          "task_name": "React hooks review",
+          "assessment": "High utility for technical proficiency; essential for preventing recurring bugs in project work.",
+          "concerns": [
+            "Often treated as a quick review but requires hands-on debugging to be effective."
+          ],
+          "recommendations": [
+            "Focus specifically on dependency array behavior in useEffect.",
+            "Create a small sandbox to test hook lifecycle scenarios."
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Document useEffect dependency rules",
+            "Refactor a component to use custom hooks",
+            "Review cleanup function execution timing"
+          ]
+        },
+        {
+          "task_id": "task_003",
+          "task_name": "Personal portfolio website development",
+          "assessment": "High-impact deliverable for professional growth; provides a tangible output for the skills being learned.",
+          "concerns": [
+            "Scope creep can lead to unproductive time sinks.",
+            "Risk of prioritizing aesthetics over functional code quality."
+          ],
+          "recommendations": [
+            "Define a clear MVP for this week to ensure measurable progress.",
+            "Integrate React hooks review into the development process."
+          ],
+          "estimated_duration_hours": 10,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Draft project roadmap for the week",
+            "Implement responsive navigation component",
+            "Deploy current progress to a staging environment"
+          ]
+        },
+        {
+          "task_id": "task_004",
+          "task_name": "Portuguese vocabulary practice",
+          "assessment": "Low-intensity maintenance task; important for consistency but should not displace high-value technical study.",
+          "concerns": [
+            "Can easily expand beyond allocated time if not strictly time-boxed."
+          ],
+          "recommendations": [
+            "Use as a warm-up or cool-down activity to maintain daily habit without interrupting deep work blocks."
+          ],
+          "estimated_duration_hours": 3.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Daily 30-minute flashcard session",
+            "Review vocabulary in context of a short article"
+          ]
+        }
+      ],
+      "overall_comment": "The proposed plan effectively balances high-value technical learning with project-based application. By prioritizing reinforcement learning and React review during peak hours, the student ensures academic growth is protected. The inclusion of language practice as a low-intensity habit is appropriate for maintaining consistency without sacrificing deep-work capacity."
+    },
+    {
+      "agent": "Effort Agent",
+      "task_views": [
+        {
+          "task_id": "task_001",
+          "task_name": "Reinforcement learning basics",
+          "assessment": "This is a broad theoretical topic that requires structured study to avoid cognitive overload.",
+          "concerns": [
+            "The scope is too vague for a single session.",
+            "Risk of passive reading without active implementation."
+          ],
+          "recommendations": [
+            "Focus on core concepts like MDPs and Q-learning first.",
+            "Limit study sessions to 90 minutes to maintain retention."
+          ],
+          "estimated_duration_hours": 6,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Watch introductory lecture on Markov Decision Processes",
+            "Read summary on Bellman equations",
+            "Implement a simple Q-learning agent in a grid world"
+          ]
+        },
+        {
+          "task_id": "task_002",
+          "task_name": "React hooks review",
+          "assessment": "Focused review of useEffect is highly manageable and high-impact for development skills.",
+          "concerns": [
+            "Reviewing hooks without practice leads to quick forgetting."
+          ],
+          "recommendations": [
+            "Create a sandbox environment to test dependency array behaviors.",
+            "Document common pitfalls for useEffect cleanup functions."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review official React documentation on useEffect",
+            "Build a small component demonstrating dependency array changes",
+            "Practice implementing a cleanup function"
+          ]
+        },
+        {
+          "task_id": "task_003",
+          "task_name": "Personal portfolio website development",
+          "assessment": "This is an open-ended project that needs specific milestones to ensure progress.",
+          "concerns": [
+            "Lack of defined scope can lead to scope creep.",
+            "Large tasks need to be broken down to fit into the 3-4 hour daily limit."
+          ],
+          "recommendations": [
+            "Define one specific feature to complete this week.",
+            "Use time-boxing for design vs. coding tasks."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Draft layout for the projects section",
+            "Implement responsive navigation bar",
+            "Write content for the about page"
+          ]
+        },
+        {
+          "task_id": "task_004",
+          "task_name": "Portuguese vocabulary practice",
+          "assessment": "This is a maintenance task that works best as a daily habit rather than a single block.",
+          "concerns": [
+            "Easily neglected if not integrated into a daily routine."
+          ],
+          "recommendations": [
+            "Use spaced repetition software for 20 minutes daily.",
+            "Incorporate into morning or evening downtime."
+          ],
+          "estimated_duration_hours": 2.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review flashcards for 20 minutes daily",
+            "Practice writing 5 sentences using new vocabulary"
+          ]
+        }
+      ],
+      "overall_comment": "The proposed workload is realistic for a 3-4 hour daily commitment. I have broken down the larger tasks into manageable subtasks to ensure the student can make concrete progress without burnout. The mix of theoretical learning and practical project work is well-balanced."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "task_views": [
+        {
+          "task_id": "task_001",
+          "task_name": "Reinforcement learning basics",
+          "assessment": "This is a cognitively demanding topic that requires focused attention; it should be scheduled on days with lower academic load.",
+          "concerns": [
+            "High cognitive load may lead to mental fatigue if paired with other complex technical tasks."
+          ],
+          "recommendations": [
+            "Limit study sessions to 90 minutes to maintain retention.",
+            "Avoid scheduling this immediately after morning classes."
+          ],
+          "estimated_duration_hours": 6,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Define scope of reinforcement learning basics",
+            "Complete introductory reading",
+            "Work through one practical example"
+          ]
+        },
+        {
+          "task_id": "task_002",
+          "task_name": "React hooks review",
+          "assessment": "Reviewing specific technical details is manageable but requires active coding to be effective.",
+          "concerns": [
+            "Risk of passive reading without implementation."
+          ],
+          "recommendations": [
+            "Focus on building small isolated components to test useEffect behavior.",
+            "Keep sessions short to prevent frustration."
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review official documentation for useEffect",
+            "Create a sandbox project for testing dependency arrays",
+            "Refactor one existing component"
+          ]
+        },
+        {
+          "task_id": "task_003",
+          "task_name": "Personal portfolio website development",
+          "assessment": "This is a creative and open-ended task that can easily lead to overwork if not time-boxed.",
+          "concerns": [
+            "Tendency to lose track of time during development sessions."
+          ],
+          "recommendations": [
+            "Strictly limit development blocks to 2 hours per session.",
+            "Prioritize small, achievable features to maintain motivation."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Define next feature to implement",
+            "Draft UI layout",
+            "Write code for one section"
+          ]
+        },
+        {
+          "task_id": "task_004",
+          "task_name": "Portuguese vocabulary practice",
+          "assessment": "This is a low-intensity task that serves as a good mental break from technical work.",
+          "concerns": [
+            "None, provided it remains a short daily habit."
+          ],
+          "recommendations": [
+            "Keep sessions to 20-30 minutes daily.",
+            "Use this as a transition activity between other tasks."
+          ],
+          "estimated_duration_hours": 2.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Daily flashcard review",
+            "Practice pronunciation of new terms"
+          ]
+        }
+      ],
+      "overall_comment": "The proposed workload is sustainable. By keeping daily study to 3-4 hours and mixing high-intensity technical learning with lower-intensity language practice, the student can avoid burnout while making steady progress."
+    },
+    {
+      "agent": "Risk Agent",
+      "task_views": [
+        {
+          "task_id": "task_001",
+          "task_name": "Reinforcement learning basics",
+          "assessment": "The scope is currently too broad and lacks a clear definition of 'basics', which risks time-wasting on irrelevant theory.",
+          "concerns": [
+            "Undefined learning objectives",
+            "Potential for rabbit-holing into advanced mathematics without practical application"
+          ],
+          "recommendations": [
+            "Define specific concepts to cover (e.g., Markov Decision Processes, Q-learning)",
+            "Limit initial exploration to a single reputable tutorial or course module"
+          ],
+          "estimated_duration_hours": 6,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Identify one introductory resource",
+            "Define three core concepts to master",
+            "Complete one hands-on coding example"
+          ]
+        },
+        {
+          "task_id": "task_002",
+          "task_name": "React hooks review",
+          "assessment": "Reviewing useEffect is a high-value task but prone to 'tutorial hell' if not applied to a specific problem.",
+          "concerns": [
+            "Passive reading without active implementation",
+            "Overlooking dependency array nuances"
+          ],
+          "recommendations": [
+            "Focus specifically on dependency array behavior and cleanup functions",
+            "Create a small sandbox project to test useEffect scenarios"
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review official documentation on useEffect",
+            "Write a test component demonstrating dependency array changes",
+            "Document common pitfalls encountered"
+          ]
+        },
+        {
+          "task_id": "task_003",
+          "task_name": "Personal portfolio website development",
+          "assessment": "This is an open-ended project task that often suffers from scope creep and hidden technical debt.",
+          "concerns": [
+            "Lack of defined milestones",
+            "Risk of getting stuck on design choices rather than functionality"
+          ],
+          "recommendations": [
+            "Define one specific feature to implement this week",
+            "Set a time-box for design-related tasks"
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Audit current project status",
+            "Select one feature for implementation",
+            "Commit code to version control"
+          ]
+        },
+        {
+          "task_id": "task_004",
+          "task_name": "Portuguese vocabulary practice",
+          "assessment": "This is a low-risk, high-consistency task that is easily neglected when other tasks become demanding.",
+          "concerns": [
+            "Risk of being deprioritized during busy days",
+            "Lack of structured progress tracking"
+          ],
+          "recommendations": [
+            "Integrate into a daily routine (e.g., during commute or morning coffee)",
+            "Use a spaced-repetition system to ensure retention"
+          ],
+          "estimated_duration_hours": 3.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Set daily time limit",
+            "Select vocabulary source material",
+            "Track daily completion"
+          ]
+        }
+      ],
+      "overall_comment": "The plan is generally sound but lacks concrete milestones for the open-ended projects. I recommend adding a 'discovery' phase at the start of the week to define specific deliverables for the reinforcement learning and portfolio tasks to prevent scope creep. Contingency time is implicitly available due to the flexible schedule, but should be explicitly blocked out to ensure it is not consumed by over-ambitious learning goals."
+    }
+  ],
+  "calendarVersions": [
+    {
+      "calendar": {
+        "calendar_version": 1,
+        "planning_window": {
+          "start_date": "2026-06-01T00:00:00Z",
+          "end_date": "2026-06-07T23:59:59Z",
+          "reason": "A one-week window allows for balanced progress on learning goals and project development without immediate deadlines."
+        },
+        "overall_strategy": [
+          "Prioritize React hooks review early to support portfolio development.",
+          "Interleave reinforcement learning sessions throughout the week for conceptual digestion.",
+          "Maintain daily consistency with Portuguese vocabulary practice.",
+          "Use flexible days for deeper project work on the portfolio website."
+        ],
+        "days": [
+          {
+            "date": "2026-06-01",
+            "day_name": "Monday",
+            "assumed_available_hours": 3.5,
+            "day_reasoning": "Morning classes limit study to afternoon hours.",
+            "blocks": [
+              {
+                "id": "b1",
+                "task_id": "task_002",
+                "task_name": "React hooks review",
+                "type": "work",
+                "start": "2026-06-01T14:00:00Z",
+                "end": "2026-06-01T16:00:00Z",
+                "duration_hours": 2,
+                "description": "Review useEffect dependency array mechanics.",
+                "reasoning": "Focusing on core React concepts early improves subsequent development efficiency."
+              },
+              {
+                "id": "b2",
+                "task_id": "task_004",
+                "task_name": "Portuguese vocabulary practice",
+                "type": "work",
+                "start": "2026-06-01T16:00:00Z",
+                "end": "2026-06-01T16:30:00Z",
+                "duration_hours": 0.5,
+                "description": "Daily vocabulary flashcard session.",
+                "reasoning": "Short daily sessions maintain language momentum."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-02",
+            "day_name": "Tuesday",
+            "assumed_available_hours": 3.5,
+            "day_reasoning": "Flexible schedule allows for focused deep work.",
+            "blocks": [
+              {
+                "id": "b3",
+                "task_id": "task_001",
+                "task_name": "Reinforcement learning basics",
+                "type": "work",
+                "start": "2026-06-02T10:00:00Z",
+                "end": "2026-06-02T12:00:00Z",
+                "duration_hours": 2,
+                "description": "Study Markov Decision Processes.",
+                "reasoning": "Early week scheduling ensures conceptual mastery of foundational topics."
+              },
+              {
+                "id": "b4",
+                "task_id": "task_003",
+                "task_name": "Personal portfolio website development",
+                "type": "work",
+                "start": "2026-06-02T14:00:00Z",
+                "end": "2026-06-02T15:00:00Z",
+                "duration_hours": 1,
+                "description": "Implement responsive navigation component.",
+                "reasoning": "Applying React knowledge immediately reinforces learning."
+              },
+              {
+                "id": "b5",
+                "task_id": "task_004",
+                "task_name": "Portuguese vocabulary practice",
+                "type": "work",
+                "start": "2026-06-02T15:00:00Z",
+                "end": "2026-06-02T15:30:00Z",
+                "duration_hours": 0.5,
+                "description": "Daily vocabulary flashcard session.",
+                "reasoning": "Consistency is key for language retention."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-03",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 3.5,
+            "day_reasoning": "Morning classes limit study to afternoon hours.",
+            "blocks": [
+              {
+                "id": "b6",
+                "task_id": "task_003",
+                "task_name": "Personal portfolio website development",
+                "type": "work",
+                "start": "2026-06-03T14:00:00Z",
+                "end": "2026-06-03T16:00:00Z",
+                "duration_hours": 2,
+                "description": "Draft content for the about page.",
+                "reasoning": "Steady progress on the portfolio maintains project momentum."
+              },
+              {
+                "id": "b7",
+                "task_id": "task_004",
+                "task_name": "Portuguese vocabulary practice",
+                "type": "work",
+                "start": "2026-06-03T16:00:00Z",
+                "end": "2026-06-03T16:30:00Z",
+                "duration_hours": 0.5,
+                "description": "Daily vocabulary flashcard session.",
+                "reasoning": "Maintains daily habit."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 3.5,
+            "day_reasoning": "Flexible schedule allows for focused deep work.",
+            "blocks": [
+              {
+                "id": "b8",
+                "task_id": "task_001",
+                "task_name": "Reinforcement learning basics",
+                "type": "work",
+                "start": "2026-06-04T10:00:00Z",
+                "end": "2026-06-04T12:00:00Z",
+                "duration_hours": 2,
+                "description": "Implement simple Q-learning agent.",
+                "reasoning": "Practical application solidifies theoretical understanding."
+              },
+              {
+                "id": "b9",
+                "task_id": "task_003",
+                "task_name": "Personal portfolio website development",
+                "type": "work",
+                "start": "2026-06-04T14:00:00Z",
+                "end": "2026-06-04T15:00:00Z",
+                "duration_hours": 1,
+                "description": "Commit code to repository.",
+                "reasoning": "Ensures version control and progress tracking."
+              },
+              {
+                "id": "b10",
+                "task_id": "task_004",
+                "task_name": "Portuguese vocabulary practice",
+                "type": "work",
+                "start": "2026-06-04T15:00:00Z",
+                "end": "2026-06-04T15:30:00Z",
+                "duration_hours": 0.5,
+                "description": "Daily vocabulary flashcard session.",
+                "reasoning": "Maintains daily habit."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Friday",
+            "assumed_available_hours": 3.5,
+            "day_reasoning": "Morning classes limit study to afternoon hours.",
+            "blocks": [
+              {
+                "id": "b11",
+                "task_id": "task_003",
+                "task_name": "Personal portfolio website development",
+                "type": "work",
+                "start": "2026-06-05T14:00:00Z",
+                "end": "2026-06-05T16:00:00Z",
+                "duration_hours": 2,
+                "description": "Deploy current progress to staging.",
+                "reasoning": "Finalizing weekly project goals."
+              },
+              {
+                "id": "b12",
+                "task_id": "task_004",
+                "task_name": "Portuguese vocabulary practice",
+                "type": "work",
+                "start": "2026-06-05T16:00:00Z",
+                "end": "2026-06-05T16:30:00Z",
+                "duration_hours": 0.5,
+                "description": "Daily vocabulary flashcard session.",
+                "reasoning": "Maintains daily habit."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Saturday",
+            "assumed_available_hours": 3.5,
+            "day_reasoning": "Flexible weekend schedule.",
+            "blocks": [
+              {
+                "id": "b13",
+                "task_id": "task_001",
+                "task_name": "Reinforcement learning basics",
+                "type": "work",
+                "start": "2026-06-06T10:00:00Z",
+                "end": "2026-06-06T12:00:00Z",
+                "duration_hours": 2,
+                "description": "Review Bellman equation derivations.",
+                "reasoning": "Consolidating learning from the week."
+              },
+              {
+                "id": "b14",
+                "task_id": "task_004",
+                "task_name": "Portuguese vocabulary practice",
+                "type": "work",
+                "start": "2026-06-06T12:00:00Z",
+                "end": "2026-06-06T12:30:00Z",
+                "duration_hours": 0.5,
+                "description": "Daily vocabulary flashcard session.",
+                "reasoning": "Maintains daily habit."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Sunday",
+            "assumed_available_hours": 3.5,
+            "day_reasoning": "Flexible weekend schedule.",
+            "blocks": [
+              {
+                "id": "b15",
+                "task_id": "task_003",
+                "task_name": "Personal portfolio website development",
+                "type": "work",
+                "start": "2026-06-07T10:00:00Z",
+                "end": "2026-06-07T12:00:00Z",
+                "duration_hours": 2,
+                "description": "Review project status and plan next week.",
+                "reasoning": "Reflecting on progress and setting future goals."
+              },
+              {
+                "id": "b16",
+                "task_id": "task_004",
+                "task_name": "Portuguese vocabulary practice",
+                "type": "work",
+                "start": "2026-06-07T12:00:00Z",
+                "end": "2026-06-07T12:30:00Z",
+                "duration_hours": 0.5,
+                "description": "Daily vocabulary flashcard session.",
+                "reasoning": "Maintains daily habit."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Limited study time on class days.",
+            "resolution": "Reduced daily study hours to 3.5 to ensure sustainability."
+          },
+          {
+            "conflict": "Open-ended nature of learning tasks.",
+            "resolution": "Time-boxed sessions to prevent scope creep and ensure variety."
+          }
+        ],
+        "known_weaknesses": [
+          "Lack of concrete milestones for the portfolio website.",
+          "Potential for reinforcement learning to become too theoretical without more practical application."
+        ],
+        "changes_from_previous": [],
+        "unresolved_critiques": [
+          {
+            "agent": "Risk Agent",
+            "severity": "minor",
+            "issue": "Lack of defined milestones for open-ended projects.",
+            "planner_response": "Added specific sub-tasks to each work block to provide clearer direction."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "Time-boxed sessions for open-ended learning tasks to prevent scope creep.",
+            "Reduced daily study hours to 3.5 to accommodate class schedules and ensure sustainability."
+          ],
+          "overall_comment": "The calendar effectively distributes the workload across the week. While there are no hard deadlines, the schedule provides consistent progress on all tasks, including the technical review and the portfolio development. The daily language practice is well-integrated, and the reinforcement learning sessions are appropriately spaced for conceptual digestion."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Reinforcement learning basics task is allocated only 6 hours total, which is insufficient for the 8 hours recommended to achieve conceptual mastery.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Reinforcement learning basics"
+              ],
+              "affected_days": [
+                "2026-06-02",
+                "2026-06-04",
+                "2026-06-06"
+              ],
+              "suggested_fix": "Increase the duration of each Reinforcement learning basics session by 40 minutes or add an additional session to reach the 8-hour target."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The student has successfully time-boxed sessions to prevent scope creep.",
+            "The student has integrated language practice as a low-intensity habit that does not interfere with high-value technical work."
+          ],
+          "overall_comment": "The plan is strong and prioritizes high-impact technical learning. My only concern is the slight under-allocation of time for the reinforcement learning topic, which is critical for academic depth. Otherwise, the structure is well-balanced."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The planner successfully integrated the suggested subtasks into the daily blocks to provide structure for open-ended work.",
+            "The daily time commitment of 3.5 hours is well-aligned with the student's availability and capacity for sustained focus."
+          ],
+          "overall_comment": "The calendar is well-structured and realistic. The breakdown of tasks into specific, time-boxed sessions effectively manages the risk of scope creep and ensures that both theoretical and practical work receive adequate attention. The daily habit of language practice is appropriately maintained."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The student has successfully limited daily study hours to 3.5 hours, which is well within a sustainable range.",
+            "The interleaving of cognitively demanding technical tasks with lower-intensity language practice is a healthy approach to managing mental fatigue.",
+            "The use of time-boxing for open-ended development tasks prevents the risk of overwork."
+          ],
+          "overall_comment": "This plan is well-structured and highly sustainable. By keeping daily work blocks short and consistent, the student avoids the risk of burnout while maintaining steady progress on both technical and language goals."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The schedule is fully saturated with tasks, leaving no explicit buffer for unexpected technical blockers or overruns in learning complexity.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Reinforcement learning basics",
+                "Personal portfolio website development"
+              ],
+              "affected_days": [
+                "2026-06-01",
+                "2026-06-02",
+                "2026-06-03",
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-06",
+                "2026-06-07"
+              ],
+              "suggested_fix": "Designate at least one 1-hour block as 'contingency' or 'overflow' time, particularly on Friday or Saturday, to handle spillover from the Reinforcement learning basics or Personal portfolio website development tasks."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner addressed the lack of milestones by adding specific sub-tasks to each work block.",
+            "The planner reduced daily study hours to 3.5 to ensure sustainability."
+          ],
+          "overall_comment": "The plan is much improved with the addition of specific sub-tasks. However, it remains fragile due to the lack of explicit contingency time. While the schedule is balanced, any technical issue in the portfolio development or conceptual difficulty in the reinforcement learning will cause a cascade of delays. I am approving with minor concerns, expecting the student to treat the final block on Sunday as a flexible buffer if earlier tasks are not completed."
+        }
+      ],
+      "validation": {
+        "valid": true,
+        "violations": []
+      },
+      "approvals": 5,
+      "hasCritical": false
+    }
+  ],
+  "finalCalendar": {
+    "calendar_version": 1,
+    "planning_window": {
+      "start_date": "2026-06-01T00:00:00Z",
+      "end_date": "2026-06-07T23:59:59Z",
+      "reason": "A one-week window allows for balanced progress on learning goals and project development without immediate deadlines."
+    },
+    "overall_strategy": [
+      "Prioritize React hooks review early to support portfolio development.",
+      "Interleave reinforcement learning sessions throughout the week for conceptual digestion.",
+      "Maintain daily consistency with Portuguese vocabulary practice.",
+      "Use flexible days for deeper project work on the portfolio website."
+    ],
+    "days": [
+      {
+        "date": "2026-06-01",
+        "day_name": "Monday",
+        "assumed_available_hours": 3.5,
+        "day_reasoning": "Morning classes limit study to afternoon hours.",
+        "blocks": [
+          {
+            "id": "b1",
+            "task_id": "task_002",
+            "task_name": "React hooks review",
+            "type": "work",
+            "start": "2026-06-01T14:00:00Z",
+            "end": "2026-06-01T16:00:00Z",
+            "duration_hours": 2,
+            "description": "Review useEffect dependency array mechanics.",
+            "reasoning": "Focusing on core React concepts early improves subsequent development efficiency."
+          },
+          {
+            "id": "b2",
+            "task_id": "task_004",
+            "task_name": "Portuguese vocabulary practice",
+            "type": "work",
+            "start": "2026-06-01T16:00:00Z",
+            "end": "2026-06-01T16:30:00Z",
+            "duration_hours": 0.5,
+            "description": "Daily vocabulary flashcard session.",
+            "reasoning": "Short daily sessions maintain language momentum."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-02",
+        "day_name": "Tuesday",
+        "assumed_available_hours": 3.5,
+        "day_reasoning": "Flexible schedule allows for focused deep work.",
+        "blocks": [
+          {
+            "id": "b3",
+            "task_id": "task_001",
+            "task_name": "Reinforcement learning basics",
+            "type": "work",
+            "start": "2026-06-02T10:00:00Z",
+            "end": "2026-06-02T12:00:00Z",
+            "duration_hours": 2,
+            "description": "Study Markov Decision Processes.",
+            "reasoning": "Early week scheduling ensures conceptual mastery of foundational topics."
+          },
+          {
+            "id": "b4",
+            "task_id": "task_003",
+            "task_name": "Personal portfolio website development",
+            "type": "work",
+            "start": "2026-06-02T14:00:00Z",
+            "end": "2026-06-02T15:00:00Z",
+            "duration_hours": 1,
+            "description": "Implement responsive navigation component.",
+            "reasoning": "Applying React knowledge immediately reinforces learning."
+          },
+          {
+            "id": "b5",
+            "task_id": "task_004",
+            "task_name": "Portuguese vocabulary practice",
+            "type": "work",
+            "start": "2026-06-02T15:00:00Z",
+            "end": "2026-06-02T15:30:00Z",
+            "duration_hours": 0.5,
+            "description": "Daily vocabulary flashcard session.",
+            "reasoning": "Consistency is key for language retention."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-03",
+        "day_name": "Wednesday",
+        "assumed_available_hours": 3.5,
+        "day_reasoning": "Morning classes limit study to afternoon hours.",
+        "blocks": [
+          {
+            "id": "b6",
+            "task_id": "task_003",
+            "task_name": "Personal portfolio website development",
+            "type": "work",
+            "start": "2026-06-03T14:00:00Z",
+            "end": "2026-06-03T16:00:00Z",
+            "duration_hours": 2,
+            "description": "Draft content for the about page.",
+            "reasoning": "Steady progress on the portfolio maintains project momentum."
+          },
+          {
+            "id": "b7",
+            "task_id": "task_004",
+            "task_name": "Portuguese vocabulary practice",
+            "type": "work",
+            "start": "2026-06-03T16:00:00Z",
+            "end": "2026-06-03T16:30:00Z",
+            "duration_hours": 0.5,
+            "description": "Daily vocabulary flashcard session.",
+            "reasoning": "Maintains daily habit."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-04",
+        "day_name": "Thursday",
+        "assumed_available_hours": 3.5,
+        "day_reasoning": "Flexible schedule allows for focused deep work.",
+        "blocks": [
+          {
+            "id": "b8",
+            "task_id": "task_001",
+            "task_name": "Reinforcement learning basics",
+            "type": "work",
+            "start": "2026-06-04T10:00:00Z",
+            "end": "2026-06-04T12:00:00Z",
+            "duration_hours": 2,
+            "description": "Implement simple Q-learning agent.",
+            "reasoning": "Practical application solidifies theoretical understanding."
+          },
+          {
+            "id": "b9",
+            "task_id": "task_003",
+            "task_name": "Personal portfolio website development",
+            "type": "work",
+            "start": "2026-06-04T14:00:00Z",
+            "end": "2026-06-04T15:00:00Z",
+            "duration_hours": 1,
+            "description": "Commit code to repository.",
+            "reasoning": "Ensures version control and progress tracking."
+          },
+          {
+            "id": "b10",
+            "task_id": "task_004",
+            "task_name": "Portuguese vocabulary practice",
+            "type": "work",
+            "start": "2026-06-04T15:00:00Z",
+            "end": "2026-06-04T15:30:00Z",
+            "duration_hours": 0.5,
+            "description": "Daily vocabulary flashcard session.",
+            "reasoning": "Maintains daily habit."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-05",
+        "day_name": "Friday",
+        "assumed_available_hours": 3.5,
+        "day_reasoning": "Morning classes limit study to afternoon hours.",
+        "blocks": [
+          {
+            "id": "b11",
+            "task_id": "task_003",
+            "task_name": "Personal portfolio website development",
+            "type": "work",
+            "start": "2026-06-05T14:00:00Z",
+            "end": "2026-06-05T16:00:00Z",
+            "duration_hours": 2,
+            "description": "Deploy current progress to staging.",
+            "reasoning": "Finalizing weekly project goals."
+          },
+          {
+            "id": "b12",
+            "task_id": "task_004",
+            "task_name": "Portuguese vocabulary practice",
+            "type": "work",
+            "start": "2026-06-05T16:00:00Z",
+            "end": "2026-06-05T16:30:00Z",
+            "duration_hours": 0.5,
+            "description": "Daily vocabulary flashcard session.",
+            "reasoning": "Maintains daily habit."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-06",
+        "day_name": "Saturday",
+        "assumed_available_hours": 3.5,
+        "day_reasoning": "Flexible weekend schedule.",
+        "blocks": [
+          {
+            "id": "b13",
+            "task_id": "task_001",
+            "task_name": "Reinforcement learning basics",
+            "type": "work",
+            "start": "2026-06-06T10:00:00Z",
+            "end": "2026-06-06T12:00:00Z",
+            "duration_hours": 2,
+            "description": "Review Bellman equation derivations.",
+            "reasoning": "Consolidating learning from the week."
+          },
+          {
+            "id": "b14",
+            "task_id": "task_004",
+            "task_name": "Portuguese vocabulary practice",
+            "type": "work",
+            "start": "2026-06-06T12:00:00Z",
+            "end": "2026-06-06T12:30:00Z",
+            "duration_hours": 0.5,
+            "description": "Daily vocabulary flashcard session.",
+            "reasoning": "Maintains daily habit."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-07",
+        "day_name": "Sunday",
+        "assumed_available_hours": 3.5,
+        "day_reasoning": "Flexible weekend schedule.",
+        "blocks": [
+          {
+            "id": "b15",
+            "task_id": "task_003",
+            "task_name": "Personal portfolio website development",
+            "type": "work",
+            "start": "2026-06-07T10:00:00Z",
+            "end": "2026-06-07T12:00:00Z",
+            "duration_hours": 2,
+            "description": "Review project status and plan next week.",
+            "reasoning": "Reflecting on progress and setting future goals."
+          },
+          {
+            "id": "b16",
+            "task_id": "task_004",
+            "task_name": "Portuguese vocabulary practice",
+            "type": "work",
+            "start": "2026-06-07T12:00:00Z",
+            "end": "2026-06-07T12:30:00Z",
+            "duration_hours": 0.5,
+            "description": "Daily vocabulary flashcard session.",
+            "reasoning": "Maintains daily habit."
+          }
+        ]
+      }
+    ],
+    "compromises": [
+      {
+        "conflict": "Limited study time on class days.",
+        "resolution": "Reduced daily study hours to 3.5 to ensure sustainability."
+      },
+      {
+        "conflict": "Open-ended nature of learning tasks.",
+        "resolution": "Time-boxed sessions to prevent scope creep and ensure variety."
+      }
+    ],
+    "known_weaknesses": [
+      "Lack of concrete milestones for the portfolio website.",
+      "Potential for reinforcement learning to become too theoretical without more practical application."
+    ],
+    "changes_from_previous": [],
+    "unresolved_critiques": [
+      {
+        "agent": "Risk Agent",
+        "severity": "minor",
+        "issue": "Lack of defined milestones for open-ended projects.",
+        "planner_response": "Added specific sub-tasks to each work block to provide clearer direction."
+      }
+    ]
+  },
+  "critiques": [
+    {
+      "agent": "Deadline Agent",
+      "calendar_version": 1,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "Time-boxed sessions for open-ended learning tasks to prevent scope creep.",
+        "Reduced daily study hours to 3.5 to accommodate class schedules and ensure sustainability."
+      ],
+      "overall_comment": "The calendar effectively distributes the workload across the week. While there are no hard deadlines, the schedule provides consistent progress on all tasks, including the technical review and the portfolio development. The daily language practice is well-integrated, and the reinforcement learning sessions are appropriately spaced for conceptual digestion."
+    },
+    {
+      "agent": "Grade Agent",
+      "calendar_version": 1,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The Reinforcement learning basics task is allocated only 6 hours total, which is insufficient for the 8 hours recommended to achieve conceptual mastery.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Reinforcement learning basics"
+          ],
+          "affected_days": [
+            "2026-06-02",
+            "2026-06-04",
+            "2026-06-06"
+          ],
+          "suggested_fix": "Increase the duration of each Reinforcement learning basics session by 40 minutes or add an additional session to reach the 8-hour target."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The student has successfully time-boxed sessions to prevent scope creep.",
+        "The student has integrated language practice as a low-intensity habit that does not interfere with high-value technical work."
+      ],
+      "overall_comment": "The plan is strong and prioritizes high-impact technical learning. My only concern is the slight under-allocation of time for the reinforcement learning topic, which is critical for academic depth. Otherwise, the structure is well-balanced."
+    },
+    {
+      "agent": "Effort Agent",
+      "calendar_version": 1,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The planner successfully integrated the suggested subtasks into the daily blocks to provide structure for open-ended work.",
+        "The daily time commitment of 3.5 hours is well-aligned with the student's availability and capacity for sustained focus."
+      ],
+      "overall_comment": "The calendar is well-structured and realistic. The breakdown of tasks into specific, time-boxed sessions effectively manages the risk of scope creep and ensures that both theoretical and practical work receive adequate attention. The daily habit of language practice is appropriately maintained."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "calendar_version": 1,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The student has successfully limited daily study hours to 3.5 hours, which is well within a sustainable range.",
+        "The interleaving of cognitively demanding technical tasks with lower-intensity language practice is a healthy approach to managing mental fatigue.",
+        "The use of time-boxing for open-ended development tasks prevents the risk of overwork."
+      ],
+      "overall_comment": "This plan is well-structured and highly sustainable. By keeping daily work blocks short and consistent, the student avoids the risk of burnout while maintaining steady progress on both technical and language goals."
+    },
+    {
+      "agent": "Risk Agent",
+      "calendar_version": 1,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The schedule is fully saturated with tasks, leaving no explicit buffer for unexpected technical blockers or overruns in learning complexity.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Reinforcement learning basics",
+            "Personal portfolio website development"
+          ],
+          "affected_days": [
+            "2026-06-01",
+            "2026-06-02",
+            "2026-06-03",
+            "2026-06-04",
+            "2026-06-05",
+            "2026-06-06",
+            "2026-06-07"
+          ],
+          "suggested_fix": "Designate at least one 1-hour block as 'contingency' or 'overflow' time, particularly on Friday or Saturday, to handle spillover from the Reinforcement learning basics or Personal portfolio website development tasks."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner addressed the lack of milestones by adding specific sub-tasks to each work block.",
+        "The planner reduced daily study hours to 3.5 to ensure sustainability."
+      ],
+      "overall_comment": "The plan is much improved with the addition of specific sub-tasks. However, it remains fragile due to the lack of explicit contingency time. While the schedule is balanced, any technical issue in the portfolio development or conceptual difficulty in the reinforcement learning will cause a cascade of delays. I am approving with minor concerns, expecting the student to treat the final block on Sunday as a flexible buffer if earlier tasks are not completed."
+    }
+  ],
+  "validation": {
+    "valid": true,
+    "violations": []
+  },
+  "evaluation": {
+    "evaluator": "Schedule Evaluator",
+    "calendar_version": 1,
+    "planner_model": "google/gemini-3.1-flash-lite-preview",
+    "evaluator_model": "google/gemini-3.1-flash-lite-preview",
+    "overall_score": 4.8,
+    "model_score": 4.5,
+    "hard_score": 5,
+    "hard_metrics": {
+      "score": 100,
+      "metrics": [
+        {
+          "name": "generation_time_seconds",
+          "value": 26.9,
+          "score": 100,
+          "explanation": "26.9s from run start to final schedule selection."
+        },
+        {
+          "name": "rejection_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 specialist agent(s) rejected the final calendar."
+        },
+        {
+          "name": "critical_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 critical issue(s) were raised in final critiques."
+        },
+        {
+          "name": "major_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 major issue(s) were raised in final critiques."
+        },
+        {
+          "name": "deadline_violation_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 scheduled work block(s) end after their task deadline."
+        },
+        {
+          "name": "task_coverage_ratio",
+          "value": 1,
+          "score": 100,
+          "explanation": "4/4 inferred task(s) received at least one work block."
+        },
+        {
+          "name": "availability_overrun_hours",
+          "value": 0,
+          "score": 100,
+          "explanation": "0h scheduled above the planner's assumed available hours."
+        }
+      ]
+    },
+    "dimension_scores": [
+      {
+        "dimension": "requirement_match",
+        "score": 5,
+        "rationale": "The plan perfectly aligns with the student's request for 3-4 hours of daily work and covers all four specified goals."
+      },
+      {
+        "dimension": "deadline_safety",
+        "score": 5,
+        "rationale": "No strict deadlines exist, and the schedule provides a logical, non-pressured flow for the week."
+      },
+      {
+        "dimension": "workload_realism",
+        "score": 4.5,
+        "rationale": "The daily 3.5-hour commitment is highly realistic, though it leaves little room for unexpected delays as noted by the Risk Agent."
+      },
+      {
+        "dimension": "academic_priority",
+        "score": 4,
+        "rationale": "Prioritization is clear, though the Grade Agent correctly identified that the reinforcement learning allocation is slightly light for deep mastery."
+      },
+      {
+        "dimension": "wellbeing_balance",
+        "score": 5,
+        "rationale": "Excellent balance between high-intensity technical study and low-intensity language practice, ensuring sustainability."
+      },
+      {
+        "dimension": "risk_resilience",
+        "score": 4,
+        "rationale": "The schedule is well-structured but lacks explicit buffer time, making it slightly vulnerable to task overruns."
+      }
+    ],
+    "strengths": [
+      "Strong integration of daily habits with deep-work tasks.",
+      "Clear, actionable sub-tasks for open-ended goals.",
+      "Sustainable daily workload that respects the student's energy levels.",
+      "Logical sequencing of React hooks review before portfolio implementation."
+    ],
+    "weaknesses": [
+      "Lack of explicit contingency or buffer time for unexpected blockers.",
+      "Reinforcement learning duration is slightly below the recommended depth for mastery."
+    ],
+    "comparison_notes": [
+      "The model successfully incorporated feedback from the Risk Agent by adding specific sub-tasks to the final calendar.",
+      "The plan is more actionable than typical 'to-do' lists due to the specific time-boxing of sub-tasks."
+    ],
+    "recommendation": "The student should treat the final Sunday block as a flexible overflow period to address any unfinished work from the week, effectively creating the missing contingency buffer."
+  }
+}

@@ -1,0 +1,62 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:B1@timebox.local
+DTSTAMP:20260529T145930Z
+DTSTART:20260529T133000Z
+DTEND:20260529T153000Z
+SUMMARY:machine learning assignment
+DESCRIPTION:Start the machine learning assignment by setting up experiments.\\n\\nReasoning: Begin early to account for potential experiment delays and reduce Thursday pressure.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2@timebox.local
+DTSTAMP:20260529T145930Z
+DTSTART:20260529T160000Z
+DTEND:20260529T170000Z
+SUMMARY:software engineering reading quiz
+DESCRIPTION:Review first chapter for the software engineering quiz.\\n\\nReasoning: Start low-stakes quiz review early to spread cognitive load.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3@timebox.local
+DTSTAMP:20260529T145930Z
+DTSTART:20260530T123000Z
+DTEND:20260530T143000Z
+SUMMARY:networks worksheet
+DESCRIPTION:Complete the networks worksheet before its Wednesday deadline.\\n\\nReasoning: Finish early to avoid Wednesday morning conflict with classes.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4@timebox.local
+DTSTAMP:20260529T145930Z
+DTSTART:20260530T150000Z
+DTEND:20260530T170000Z
+SUMMARY:machine learning assignment
+DESCRIPTION:Continue machine learning assignment with experiment runs.\\n\\nReasoning: Progress on high-value assignment while energy is higher earlier in week.
+END:VEVENT
+BEGIN:VEVENT
+UID:B5@timebox.local
+DTSTAMP:20260529T145930Z
+DTSTART:20260531T123000Z
+DTEND:20260531T150000Z
+SUMMARY:machine learning assignment
+DESCRIPTION:Analyze machine learning experiment results and draft explanations.\\n\\nReasoning: Advance analysis while experiments are fresh\, leaving Thursday for final write-up.
+END:VEVENT
+BEGIN:VEVENT
+UID:B6@timebox.local
+DTSTAMP:20260529T145930Z
+DTSTART:20260601T130000Z
+DTEND:20260601T160000Z
+SUMMARY:machine learning assignment
+DESCRIPTION:Finalize machine learning assignment write-up and submit.\\n\\nReasoning: Complete high-stakes assignment well before Thursday evening deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B7@timebox.local
+DTSTAMP:20260529T145930Z
+DTSTART:20260601T170000Z
+DTEND:20260601T190000Z
+SUMMARY:software engineering reading quiz
+DESCRIPTION:Review remaining chapters for the software engineering quiz.\\n\\nReasoning: Finish quiz preparation after the main assignment is submitted.
+END:VEVENT
+END:VCALENDAR

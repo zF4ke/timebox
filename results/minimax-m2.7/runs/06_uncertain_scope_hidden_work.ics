@@ -1,0 +1,102 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:b1@timebox.local
+DTSTAMP:20260529T125538Z
+DTSTART:20260529T130000Z
+DTEND:20260529T160000Z
+SUMMARY:Math exercise sheet
+DESCRIPTION:Begin math exercise sheet problems\, prioritizing easier questions to build momentum.\\n\\nReasoning: Starting Friday afternoon provides buffer before Monday deadline\; first session allocated 3 hours to assess actual difficulty.
+END:VEVENT
+BEGIN:VEVENT
+UID:b2@timebox.local
+DTSTAMP:20260529T125538Z
+DTSTART:20260530T090000Z
+DTEND:20260530T120000Z
+SUMMARY:Programming languages oral preparation
+DESCRIPTION:Read and annotate lecture slides to identify key topics and potential oral discussion areas.\\n\\nReasoning: Slides provide course-aligned framework for oral preparation and help identify which concepts the teacher emphasizes.
+END:VEVENT
+BEGIN:VEVENT
+UID:b3@timebox.local
+DTSTAMP:20260529T125538Z
+DTSTART:20260530T130000Z
+DTEND:20260530T140000Z
+SUMMARY:AASMA simulator improvement
+DESCRIPTION:Contact teacher via email requesting scope clarification: what specific improvements count toward assignment requirements.\\n\\nReasoning: Direct teacher contact addresses Risk Agent concern about passive code review\; clarifies expectations before implementation begins.
+END:VEVENT
+BEGIN:VEVENT
+UID:b4@timebox.local
+DTSTAMP:20260529T125538Z
+DTSTART:20260531T090000Z
+DTEND:20260531T130000Z
+SUMMARY:Math exercise sheet
+DESCRIPTION:Continue math exercises and finish remaining problems\; review solutions for completeness.\\n\\nReasoning: Allocated 4 hours on Sunday instead of 2 to create contingency buffer for difficult problems\; addresses Risk Agent concern about no math buffer.
+END:VEVENT
+BEGIN:VEVENT
+UID:b5@timebox.local
+DTSTAMP:20260529T125538Z
+DTSTART:20260531T140000Z
+DTEND:20260531T180000Z
+SUMMARY:Programming languages oral preparation
+DESCRIPTION:Read and summarize both papers\, extracting key concepts\, arguments\, and potential discussion questions.\\n\\nReasoning: Paper reading distributed across weekend to allow concepts to settle before oral practice.
+END:VEVENT
+BEGIN:VEVENT
+UID:b6@timebox.local
+DTSTAMP:20260529T125538Z
+DTSTART:20260601T130000Z
+DTEND:20260601T160000Z
+SUMMARY:Math exercise sheet
+DESCRIPTION:Submit math exercise sheet before end of day\; use afternoon for final problem solving or review if Sunday session left gaps.\\n\\nReasoning: Monday submission deadline with 3-hour block provides final buffer if exercises prove harder than Friday assessment indicated.
+END:VEVENT
+BEGIN:VEVENT
+UID:b7@timebox.local
+DTSTAMP:20260529T125538Z
+DTSTART:20260602T090000Z
+DTEND:20260602T130000Z
+SUMMARY:AASMA simulator improvement
+DESCRIPTION:Implement agreed improvements in simulator based on teacher scope clarification\; write result notes documenting setup and observations.\\n\\nReasoning: Teacher contact on Saturday should yield scope response by Tuesday\; 4-hour block allows meaningful implementation without scope creep.
+END:VEVENT
+BEGIN:VEVENT
+UID:b8@timebox.local
+DTSTAMP:20260529T125538Z
+DTSTART:20260602T140000Z
+DTEND:20260602T150000Z
+SUMMARY:Programming languages oral preparation
+DESCRIPTION:Contact study group or TA to identify likely oral exam topics and question patterns.\\n\\nReasoning: Addresses Risk Agent concern about lacking strategy for unknown question scope\; peer input helps prioritize preparation focus areas.
+END:VEVENT
+BEGIN:VEVENT
+UID:b9@timebox.local
+DTSTAMP:20260529T125538Z
+DTSTART:20260603T090000Z
+DTEND:20260603T120000Z
+SUMMARY:AASMA simulator improvement
+DESCRIPTION:Final testing and polish of simulator\; submit before deadline.\\n\\nReasoning: Wednesday submission gives one-day buffer before oral exam\; 3-hour block with strict timebox prevents over-polishing.
+END:VEVENT
+BEGIN:VEVENT
+UID:b10@timebox.local
+DTSTAMP:20260529T125538Z
+DTSTART:20260604T090000Z
+DTEND:20260604T130000Z
+SUMMARY:Programming languages oral preparation
+DESCRIPTION:Practice verbal explanations of key concepts out loud\; generate and answer probable questions using prioritized topics from study group.\\n\\nReasoning: Study group contact on Tuesday and teacher input provide framework for focusing practice on likely exam areas rather than blind coverage.
+END:VEVENT
+BEGIN:VEVENT
+UID:b11@timebox.local
+DTSTAMP:20260529T125538Z
+DTSTART:20260604T140000Z
+DTEND:20260604T150000Z
+SUMMARY:Programming languages oral preparation
+DESCRIPTION:Final contact with study group or TA for any last-minute topic hints before oral exam.\\n\\nReasoning: Direct communication reduces uncertainty about question scope\; even brief input helps prioritization.
+END:VEVENT
+BEGIN:VEVENT
+UID:b12@timebox.local
+DTSTAMP:20260529T125538Z
+DTSTART:20260605T080000Z
+DTEND:20260605T100000Z
+SUMMARY:Programming languages oral preparation
+DESCRIPTION:Brief final review of key talking points and prioritized concepts before oral discussion.\\n\\nReasoning: Final 2-hour review session with clear scope from previous days' preparation\; prevents over-preparation and anxiety.
+END:VEVENT
+END:VCALENDAR

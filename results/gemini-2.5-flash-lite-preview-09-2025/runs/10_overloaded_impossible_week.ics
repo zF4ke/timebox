@@ -1,0 +1,94 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:B1_20260529_1@timebox.local
+DTSTAMP:20260529T121954Z
+DTSTART:20260529T080000Z
+DTEND:20260529T120000Z
+SUMMARY:Compiler project
+DESCRIPTION:Start initial setup and core implementation for the Compiler project.\\n\\nReasoning: Allocate maximum available time Friday to tackle the unstarted\, high-risk Compiler project.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2_20260530_1@timebox.local
+DTSTAMP:20260529T121954Z
+DTSTART:20260530T080000Z
+DTEND:20260530T130000Z
+SUMMARY:Compiler project
+DESCRIPTION:Continue coding and debugging the Compiler project\, aiming to finish the bulk of the work.\\n\\nReasoning: Increased Saturday allocation to 5 hours to address the Effort Agent's concern about the 12-hour estimate.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3_20260601_1@timebox.local
+DTSTAMP:20260529T121954Z
+DTSTART:20260601T080000Z
+DTEND:20260601T130000Z
+SUMMARY:Compiler project
+DESCRIPTION:Final push to complete and submit the Compiler project before the 23:59 deadline.\\n\\nReasoning: Scheduled the remaining 5 hours for the Compiler project\, assuming 9 hours completed over the weekend (4+5).
+END:VEVENT
+BEGIN:VEVENT
+UID:B3_20260601_2@timebox.local
+DTSTAMP:20260529T121954Z
+DTSTART:20260601T130000Z
+DTEND:20260601T140000Z
+SUMMARY:Buffer time to ensure Compiler project submission is finalized and to decompress before starting the next task.
+DESCRIPTION:Buffer time to ensure Compiler project submission is finalized and to decompress before starting the next task.\\n\\nReasoning: Introduced 1 hour buffer requested by the Grade Agent to protect the start time of the ML report on Tuesday.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3_20260601_3@timebox.local
+DTSTAMP:20260529T121954Z
+DTSTART:20260601T140000Z
+DTEND:20260601T150000Z
+SUMMARY:Machine learning report
+DESCRIPTION:Begin outlining and drafting the Machine Learning report.\\n\\nReasoning: Schedule the initial hour for the ML report as planned\, but shifted later to allow for Monday's deadline pressure release.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4_20260602_1@timebox.local
+DTSTAMP:20260529T121954Z
+DTSTART:20260602T143000Z
+DTEND:20260602T173000Z
+SUMMARY:Machine learning report
+DESCRIPTION:Finalize writing and submit the Machine Learning report before the 18:00 deadline\, allowing 30 minutes buffer.\\n\\nReasoning: Allocate 3 hours for the ML report\, ensuring completion well before the 18:00 deadline\, addressing Grade Agent concerns.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4_20260602_2@timebox.local
+DTSTAMP:20260529T121954Z
+DTSTART:20260602T173000Z
+DTEND:20260602T193000Z
+SUMMARY:Cybersecurity lab
+DESCRIPTION:Begin work on the Cybersecurity lab\, focusing on the remaining half.\\n\\nReasoning: Start the Cybersecurity lab immediately after the ML report submission.
+END:VEVENT
+BEGIN:VEVENT
+UID:B5_20260603_1@timebox.local
+DTSTAMP:20260529T121954Z
+DTSTART:20260603T080000Z
+DTEND:20260603T100000Z
+SUMMARY:Cybersecurity lab
+DESCRIPTION:Complete the remaining work on the Cybersecurity lab.\\n\\nReasoning: Finish the 4 hours of Cyber Lab work today\, allowing Wednesday afternoon for Statistics study.
+END:VEVENT
+BEGIN:VEVENT
+UID:B5_20260603_2@timebox.local
+DTSTAMP:20260529T121954Z
+DTSTART:20260603T100000Z
+DTEND:20260603T120000Z
+SUMMARY:Statistics test study
+DESCRIPTION:Begin studying for the Statistics test\, focusing on core concepts.\\n\\nReasoning: Start Statistics study immediately after finishing the lab work.
+END:VEVENT
+BEGIN:VEVENT
+UID:B6_20260604_1@timebox.local
+DTSTAMP:20260529T121954Z
+DTSTART:20260604T080000Z
+DTEND:20260604T100000Z
+SUMMARY:Statistics test study
+DESCRIPTION:Final review session for the Statistics test before the morning exam.\\n\\nReasoning: Allocate final study time before the test\, completing the required 4 hours of study.
+END:VEVENT
+BEGIN:VEVENT
+UID:B6_20260604_2@timebox.local
+DTSTAMP:20260529T121954Z
+DTSTART:20260604T100000Z
+DTEND:20260604T120000Z
+SUMMARY:Group presentation preparation
+DESCRIPTION:Prepare slides and rehearse for the Group presentation due next Friday.\\n\\nReasoning: Use the remaining available time to start preparation for the presentation due next week.
+END:VEVENT
+END:VCALENDAR

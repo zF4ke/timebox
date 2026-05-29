@@ -1,0 +1,62 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:b1@timebox.local
+DTSTAMP:20260529T122926Z
+DTSTART:20260530T090000Z
+DTEND:20260530T120000Z
+SUMMARY:Algorithms problem set
+DESCRIPTION:Solve two of the remaining three algorithms problems.\\n\\nReasoning: Front-loading the algorithms work ensures progress before the group project demands increase.
+END:VEVENT
+BEGIN:VEVENT
+UID:b2@timebox.local
+DTSTAMP:20260529T122926Z
+DTSTART:20260530T140000Z
+DTEND:20260530T170000Z
+SUMMARY:Distributed systems group project
+DESCRIPTION:Draft slides for the fault tolerance section.\\n\\nReasoning: Completing individual content early reduces pressure for the upcoming group meetings.
+END:VEVENT
+BEGIN:VEVENT
+UID:b3@timebox.local
+DTSTAMP:20260529T122926Z
+DTSTART:20260531T090000Z
+DTEND:20260531T120000Z
+SUMMARY:Algorithms problem set
+DESCRIPTION:Solve the final algorithms problem and review all solutions.\\n\\nReasoning: Completing the algorithms set today prevents it from conflicting with group work next week.
+END:VEVENT
+BEGIN:VEVENT
+UID:b4@timebox.local
+DTSTAMP:20260529T122926Z
+DTSTART:20260531T140000Z
+DTEND:20260531T170000Z
+SUMMARY:Distributed systems group project
+DESCRIPTION:Prepare the demo explanation script and slides.\\n\\nReasoning: Having these materials ready allows for easier integration during the Monday group meeting.
+END:VEVENT
+BEGIN:VEVENT
+UID:b5@timebox.local
+DTSTAMP:20260529T122926Z
+DTSTART:20260601T180000Z
+DTEND:20260601T210000Z
+SUMMARY:Distributed systems group project
+DESCRIPTION:Participate in the group meeting to finalize the architecture diagram.\\n\\nReasoning: This is the first of two critical windows for group synchronization.
+END:VEVENT
+BEGIN:VEVENT
+UID:b6@timebox.local
+DTSTAMP:20260529T122926Z
+DTSTART:20260602T160000Z
+DTEND:20260602T180000Z
+SUMMARY:Algorithms problem set
+DESCRIPTION:Final check and submission of the algorithms problem set.\\n\\nReasoning: Ensuring the submission is complete before the Tuesday night deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:b7@timebox.local
+DTSTAMP:20260529T122926Z
+DTSTART:20260603T170000Z
+DTEND:20260603T210000Z
+SUMMARY:Distributed systems group project
+DESCRIPTION:Participate in the group meeting and conduct a full rehearsal.\\n\\nReasoning: This is the final opportunity to integrate all parts and rehearse the presentation.
+END:VEVENT
+END:VCALENDAR

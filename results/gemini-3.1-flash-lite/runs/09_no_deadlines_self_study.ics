@@ -1,0 +1,134 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:b1@timebox.local
+DTSTAMP:20260529T123150Z
+DTSTART:20260601T140000Z
+DTEND:20260601T160000Z
+SUMMARY:React hooks review
+DESCRIPTION:Review useEffect dependency array mechanics.\\n\\nReasoning: Focusing on core React concepts early improves subsequent development efficiency.
+END:VEVENT
+BEGIN:VEVENT
+UID:b2@timebox.local
+DTSTAMP:20260529T123150Z
+DTSTART:20260601T160000Z
+DTEND:20260601T163000Z
+SUMMARY:Portuguese vocabulary practice
+DESCRIPTION:Daily vocabulary flashcard session.\\n\\nReasoning: Short daily sessions maintain language momentum.
+END:VEVENT
+BEGIN:VEVENT
+UID:b3@timebox.local
+DTSTAMP:20260529T123150Z
+DTSTART:20260602T100000Z
+DTEND:20260602T120000Z
+SUMMARY:Reinforcement learning basics
+DESCRIPTION:Study Markov Decision Processes.\\n\\nReasoning: Early week scheduling ensures conceptual mastery of foundational topics.
+END:VEVENT
+BEGIN:VEVENT
+UID:b4@timebox.local
+DTSTAMP:20260529T123150Z
+DTSTART:20260602T140000Z
+DTEND:20260602T150000Z
+SUMMARY:Personal portfolio website development
+DESCRIPTION:Implement responsive navigation component.\\n\\nReasoning: Applying React knowledge immediately reinforces learning.
+END:VEVENT
+BEGIN:VEVENT
+UID:b5@timebox.local
+DTSTAMP:20260529T123150Z
+DTSTART:20260602T150000Z
+DTEND:20260602T153000Z
+SUMMARY:Portuguese vocabulary practice
+DESCRIPTION:Daily vocabulary flashcard session.\\n\\nReasoning: Consistency is key for language retention.
+END:VEVENT
+BEGIN:VEVENT
+UID:b6@timebox.local
+DTSTAMP:20260529T123150Z
+DTSTART:20260603T140000Z
+DTEND:20260603T160000Z
+SUMMARY:Personal portfolio website development
+DESCRIPTION:Draft content for the about page.\\n\\nReasoning: Steady progress on the portfolio maintains project momentum.
+END:VEVENT
+BEGIN:VEVENT
+UID:b7@timebox.local
+DTSTAMP:20260529T123150Z
+DTSTART:20260603T160000Z
+DTEND:20260603T163000Z
+SUMMARY:Portuguese vocabulary practice
+DESCRIPTION:Daily vocabulary flashcard session.\\n\\nReasoning: Maintains daily habit.
+END:VEVENT
+BEGIN:VEVENT
+UID:b8@timebox.local
+DTSTAMP:20260529T123150Z
+DTSTART:20260604T100000Z
+DTEND:20260604T120000Z
+SUMMARY:Reinforcement learning basics
+DESCRIPTION:Implement simple Q-learning agent.\\n\\nReasoning: Practical application solidifies theoretical understanding.
+END:VEVENT
+BEGIN:VEVENT
+UID:b9@timebox.local
+DTSTAMP:20260529T123150Z
+DTSTART:20260604T140000Z
+DTEND:20260604T150000Z
+SUMMARY:Personal portfolio website development
+DESCRIPTION:Commit code to repository.\\n\\nReasoning: Ensures version control and progress tracking.
+END:VEVENT
+BEGIN:VEVENT
+UID:b10@timebox.local
+DTSTAMP:20260529T123150Z
+DTSTART:20260604T150000Z
+DTEND:20260604T153000Z
+SUMMARY:Portuguese vocabulary practice
+DESCRIPTION:Daily vocabulary flashcard session.\\n\\nReasoning: Maintains daily habit.
+END:VEVENT
+BEGIN:VEVENT
+UID:b11@timebox.local
+DTSTAMP:20260529T123150Z
+DTSTART:20260605T140000Z
+DTEND:20260605T160000Z
+SUMMARY:Personal portfolio website development
+DESCRIPTION:Deploy current progress to staging.\\n\\nReasoning: Finalizing weekly project goals.
+END:VEVENT
+BEGIN:VEVENT
+UID:b12@timebox.local
+DTSTAMP:20260529T123150Z
+DTSTART:20260605T160000Z
+DTEND:20260605T163000Z
+SUMMARY:Portuguese vocabulary practice
+DESCRIPTION:Daily vocabulary flashcard session.\\n\\nReasoning: Maintains daily habit.
+END:VEVENT
+BEGIN:VEVENT
+UID:b13@timebox.local
+DTSTAMP:20260529T123150Z
+DTSTART:20260606T100000Z
+DTEND:20260606T120000Z
+SUMMARY:Reinforcement learning basics
+DESCRIPTION:Review Bellman equation derivations.\\n\\nReasoning: Consolidating learning from the week.
+END:VEVENT
+BEGIN:VEVENT
+UID:b14@timebox.local
+DTSTAMP:20260529T123150Z
+DTSTART:20260606T120000Z
+DTEND:20260606T123000Z
+SUMMARY:Portuguese vocabulary practice
+DESCRIPTION:Daily vocabulary flashcard session.\\n\\nReasoning: Maintains daily habit.
+END:VEVENT
+BEGIN:VEVENT
+UID:b15@timebox.local
+DTSTAMP:20260529T123150Z
+DTSTART:20260607T100000Z
+DTEND:20260607T120000Z
+SUMMARY:Personal portfolio website development
+DESCRIPTION:Review project status and plan next week.\\n\\nReasoning: Reflecting on progress and setting future goals.
+END:VEVENT
+BEGIN:VEVENT
+UID:b16@timebox.local
+DTSTAMP:20260529T123150Z
+DTSTART:20260607T120000Z
+DTEND:20260607T123000Z
+SUMMARY:Portuguese vocabulary practice
+DESCRIPTION:Daily vocabulary flashcard session.\\n\\nReasoning: Maintains daily habit.
+END:VEVENT
+END:VCALENDAR

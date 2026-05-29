@@ -1,0 +1,38 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:b1@timebox.local
+DTSTAMP:20260529T123341Z
+DTSTART:20260529T140000Z
+DTEND:20260529T180000Z
+SUMMARY:AI project
+DESCRIPTION:Clean the dataset and perform initial sanity checks.\\n\\nReasoning: Starting with data cleaning identifies potential blockers early.
+END:VEVENT
+BEGIN:VEVENT
+UID:b2@timebox.local
+DTSTAMP:20260529T123341Z
+DTSTART:20260530T100000Z
+DTEND:20260530T140000Z
+SUMMARY:AI project
+DESCRIPTION:Train baseline model and implement one improved model.\\n\\nReasoning: Focusing on core models ensures the project meets requirements.
+END:VEVENT
+BEGIN:VEVENT
+UID:b3@timebox.local
+DTSTAMP:20260529T123341Z
+DTSTART:20260530T150000Z
+DTEND:20260530T170000Z
+SUMMARY:Networks quiz review
+DESCRIPTION:Review lecture notes and practice quiz problems.\\n\\nReasoning: Completing review early prevents last-minute stress.
+END:VEVENT
+BEGIN:VEVENT
+UID:b4@timebox.local
+DTSTAMP:20260529T123341Z
+DTSTART:20260531T100000Z
+DTEND:20260531T160000Z
+SUMMARY:AI project
+DESCRIPTION:Write the project report and finalize submission.\\n\\nReasoning: Allocating the full day to writing ensures quality without rushing.
+END:VEVENT
+END:VCALENDAR

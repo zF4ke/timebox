@@ -1,0 +1,78 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:B1@timebox.local
+DTSTAMP:20260529T162408Z
+DTSTART:20260529T160000Z
+DTEND:20260529T163000Z
+SUMMARY:Submit scholarship form
+DESCRIPTION:Submit the scholarship form online.\\n\\nReasoning: Early scheduling before its June 1 deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2@timebox.local
+DTSTAMP:20260529T162408Z
+DTSTART:20260529T163000Z
+DTEND:20260529T170000Z
+SUMMARY:Book doctor appointment
+DESCRIPTION:Book a doctor appointment via phone or online.\\n\\nReasoning: Early scheduling before its June 5 deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3@timebox.local
+DTSTAMP:20260529T162408Z
+DTSTART:20260530T090000Z
+DTEND:20260530T110000Z
+SUMMARY:Finish two Java exercises
+DESCRIPTION:Work on the first Java exercise.\\n\\nReasoning: Weekend allows a 2-hour block for complex work before the June 3 deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4@timebox.local
+DTSTAMP:20260529T162408Z
+DTSTART:20260531T090000Z
+DTEND:20260531T100000Z
+SUMMARY:Finish two Java exercises
+DESCRIPTION:Work on the second Java exercise.\\n\\nReasoning: Final hour of Java work to complete the 3-hour total before deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B5@timebox.local
+DTSTAMP:20260529T162408Z
+DTSTART:20260531T100000Z
+DTEND:20260531T110000Z
+SUMMARY:Prepare 6 flashcards for databases
+DESCRIPTION:Create six database flashcards.\\n\\nReasoning: Schedule flashcards on weekend well before its June 5 deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B6@timebox.local
+DTSTAMP:20260529T162408Z
+DTSTART:20260601T160000Z
+DTEND:20260601T170000Z
+SUMMARY:Email project advisor with topic options
+DESCRIPTION:Draft and send email to project advisor with topic options.\\n\\nReasoning: Schedule before its June 2 deadline\, avoiding late evening.
+END:VEVENT
+BEGIN:VEVENT
+UID:B7@timebox.local
+DTSTAMP:20260529T162408Z
+DTSTART:20260602T160000Z
+DTEND:20260602T173000Z
+SUMMARY:Watch one recorded lecture
+DESCRIPTION:Watch the recorded lecture and take notes.\\n\\nReasoning: Schedule before its June 4 deadline\, avoiding late evening.
+END:VEVENT
+BEGIN:VEVENT
+UID:B8@timebox.local
+DTSTAMP:20260529T162408Z
+DTSTART:20260606T090000Z
+DTEND:20260606T103000Z
+SUMMARY:Clean up GitHub README for AASMA prototype
+DESCRIPTION:Clean up the GitHub README for the AASMA prototype.\\n\\nReasoning: Weekend block for focused work before its June 7 deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B9@timebox.local
+DTSTAMP:20260529T162408Z
+DTSTART:20260607T090000Z
+DTEND:20260607T110000Z
+SUMMARY:Do 2 hours of math revision
+DESCRIPTION:Two-hour math revision session.\\n\\nReasoning: Complete the 2-hour goal in one weekend session before its June 8 deadline.
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,54 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:day1-block1@timebox.local
+DTSTAMP:20260529T125306Z
+DTSTART:20260529T115000Z
+DTEND:20260529T140000Z
+SUMMARY:Computer Graphics Assignment
+DESCRIPTION:Pre-family-event work on Computer Graphics Assignment - 2h10m available before event starts.\\n\\nReasoning: Use every minute before family event starts at 15:00. Maximum possible work in this window is 2h10m. This reduces evening workload.
+END:VEVENT
+BEGIN:VEVENT
+UID:day1-block2@timebox.local
+DTSTAMP:20260529T125306Z
+DTSTART:20260529T170000Z
+DTEND:20260529T215000Z
+SUMMARY:Computer Graphics Assignment
+DESCRIPTION:Extended post-family-event work to complete remaining ~5h of Computer Graphics Assignment.\\n\\nReasoning: Family event ends at 18:00. Work until 22:50 to complete 7h total. Hard stop at 23:00 to allow 1h10m before midnight deadline for final checks/submission. This addresses Deadline Agent critical: all CG001 work must finish Friday to meet 23:59 deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:day2-block1@timebox.local
+DTSTAMP:20260529T125306Z
+DTSTART:20260530T080000Z
+DTEND:20260530T110000Z
+SUMMARY:Computer Graphics Assignment
+DESCRIPTION:Contingency work if Friday evening was insufficient - additional debugging\, refinement\, or polish on Computer Graphics Assignment.\\n\\nReasoning: Acknowledges possibility that Friday work had issues. This is no longer deadline protection (deadline passed) but could improve grade or reduce penalties if late submission is accepted. Student should verify whether late submission is possible.
+END:VEVENT
+BEGIN:VEVENT
+UID:day2-block2@timebox.local
+DTSTAMP:20260529T125306Z
+DTSTART:20260530T130000Z
+DTEND:20260530T150000Z
+SUMMARY:Buy Workshop Materials
+DESCRIPTION:Purchase materials for weekend workshop before Saturday 23:59 deadline.\\n\\nReasoning: Deadline is Saturday night. Schedule afternoon to allow morning for any CG001 overflow and ensure materials are acquired well before deadline. 2h assumes store visit with some shopping time.
+END:VEVENT
+BEGIN:VEVENT
+UID:day3-block1@timebox.local
+DTSTAMP:20260529T125306Z
+DTSTART:20260531T090000Z
+DTEND:20260531T130000Z
+SUMMARY:Computer Graphics Assignment
+DESCRIPTION:Additional refinement on Computer Graphics Assignment if student wants to improve quality or address late submission opportunities.\\n\\nReasoning: CG001 deadline passed Friday night - this is overflow/refinement only. No deadline protection value. Include only if student wants to pursue grade improvement or professor has accepted late work. Otherwise this time is implicit rest/available.
+END:VEVENT
+BEGIN:VEVENT
+UID:day3-block2@timebox.local
+DTSTAMP:20260529T125306Z
+DTSTART:20260531T133000Z
+DTEND:20260531T153000Z
+SUMMARY:Buy Workshop Materials
+DESCRIPTION:Contingency for material purchase if Saturday shopping was insufficient or materials need replacement.\\n\\nReasoning: Backup for MAT001 if Saturday purchase had issues. Deadline already passed but workshop may still need materials. Note: deadline is Saturday 23:59 so this is post-deadline but may still be needed for actual workshop.
+END:VEVENT
+END:VCALENDAR

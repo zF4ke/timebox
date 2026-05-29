@@ -1,0 +1,17 @@
+Create a study plan for this week.
+
+Fixed commitments:
+- Monday 09:00-12:00 classes
+- Monday 18:00-20:00 dentist and travel
+- Tuesday 10:00-16:00 lab sessions
+- Wednesday 13:00-17:00 part-time work
+- Thursday 09:00-11:00 classes
+- Friday 15:00-18:00 family event
+
+Tasks:
+- Computer graphics assignment due Friday at 23:59. I need around 7 hours and I have not started.
+- Security quiz on Thursday morning. I need 3 hours of revision.
+- AASMA reflection due Wednesday night. It should take 90 minutes.
+- Buy materials for a weekend workshop. It takes about 1 hour and must be done before Saturday.
+
+I prefer working between 14:00 and 21:00 and I want the plan to respect the fixed commitments.

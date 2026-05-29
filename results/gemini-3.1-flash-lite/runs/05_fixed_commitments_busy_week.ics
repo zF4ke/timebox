@@ -1,0 +1,46 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:b1@timebox.local
+DTSTAMP:20260529T122957Z
+DTSTART:20260529T090000Z
+DTEND:20260529T130000Z
+SUMMARY:Computer graphics assignment
+DESCRIPTION:Initial development phase for the Computer graphics assignment.\\n\\nReasoning: Splitting the task into smaller segments to maintain cognitive performance.
+END:VEVENT
+BEGIN:VEVENT
+UID:b2@timebox.local
+DTSTAMP:20260529T122957Z
+DTSTART:20260529T140000Z
+DTEND:20260529T180000Z
+SUMMARY:Computer graphics assignment
+DESCRIPTION:Finalizing and submitting the Computer graphics assignment.\\n\\nReasoning: Completing the remaining work to meet the deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:b3@timebox.local
+DTSTAMP:20260529T122957Z
+DTSTART:20260530T090000Z
+DTEND:20260530T110000Z
+SUMMARY:Security quiz revision
+DESCRIPTION:Reviewing materials for the Security quiz revision.\\n\\nReasoning: Starting recovery of overdue academic work.
+END:VEVENT
+BEGIN:VEVENT
+UID:b4@timebox.local
+DTSTAMP:20260529T122957Z
+DTSTART:20260530T110000Z
+DTEND:20260530T130000Z
+SUMMARY:AASMA reflection
+DESCRIPTION:Drafting the AASMA reflection.\\n\\nReasoning: Addressing the second overdue task.
+END:VEVENT
+BEGIN:VEVENT
+UID:b5@timebox.local
+DTSTAMP:20260529T122957Z
+DTSTART:20260530T140000Z
+DTEND:20260530T160000Z
+SUMMARY:Buy workshop materials
+DESCRIPTION:Purchasing items for the workshop.\\n\\nReasoning: Ensuring readiness for the upcoming workshop.
+END:VEVENT
+END:VCALENDAR

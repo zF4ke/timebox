@@ -1,0 +1,62 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:b1@timebox.local
+DTSTAMP:20260529T122753Z
+DTSTART:20260529T150000Z
+DTEND:20260529T200000Z
+SUMMARY:Operating systems lab
+DESCRIPTION:Complete core coding implementation.\\n\\nReasoning: Starting the coding phase early is critical to identify potential technical blockers.
+END:VEVENT
+BEGIN:VEVENT
+UID:b2@timebox.local
+DTSTAMP:20260529T122753Z
+DTSTART:20260530T140000Z
+DTEND:20260530T160000Z
+SUMMARY:Operating systems lab
+DESCRIPTION:Draft and finalize the lab report.\\n\\nReasoning: Allocating dedicated time for the report ensures it is not rushed before the deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:b3@timebox.local
+DTSTAMP:20260529T122753Z
+DTSTART:20260530T160000Z
+DTEND:20260530T180000Z
+SUMMARY:Statistics quiz study
+DESCRIPTION:Review hypothesis test formulas.\\n\\nReasoning: Beginning study early helps address the student's lack of confidence in formulas.
+END:VEVENT
+BEGIN:VEVENT
+UID:b4@timebox.local
+DTSTAMP:20260529T122753Z
+DTSTART:20260531T100000Z
+DTEND:20260531T120000Z
+SUMMARY:Statistics quiz study
+DESCRIPTION:Review confidence interval calculations.\\n\\nReasoning: Consistent practice is necessary to master the required statistical concepts.
+END:VEVENT
+BEGIN:VEVENT
+UID:b5@timebox.local
+DTSTAMP:20260529T122753Z
+DTSTART:20260531T140000Z
+DTEND:20260531T150000Z
+SUMMARY:AASMA project idea
+DESCRIPTION:Brainstorm project topics.\\n\\nReasoning: Early brainstorming prevents analysis paralysis later in the week.
+END:VEVENT
+BEGIN:VEVENT
+UID:b6@timebox.local
+DTSTAMP:20260529T122753Z
+DTSTART:20260601T100000Z
+DTEND:20260601T120000Z
+SUMMARY:Statistics quiz study
+DESCRIPTION:Complete practice problems.\\n\\nReasoning: Active problem solving is the best way to prepare for the quiz.
+END:VEVENT
+BEGIN:VEVENT
+UID:b7@timebox.local
+DTSTAMP:20260529T122753Z
+DTSTART:20260602T150000Z
+DTEND:20260602T170000Z
+SUMMARY:AASMA project idea
+DESCRIPTION:Draft the one-page proposal.\\n\\nReasoning: Completing the draft early ensures time for final review before the deadline.
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,118 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:B1@timebox.local
+DTSTAMP:20260529T153316Z
+DTSTART:20260529T090000Z
+DTEND:20260529T110000Z
+SUMMARY:improve the simulator for AASMA prototype
+DESCRIPTION:Review existing simulator code and define specific improvement goals.\\n\\nReasoning: Start the highest-value task early to allow time for discovery and iteration.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2@timebox.local
+DTSTAMP:20260529T153316Z
+DTSTART:20260529T120000Z
+DTEND:20260529T130000Z
+SUMMARY:prepare for programming languages oral discussion
+DESCRIPTION:Skim core papers to identify key topics and arguments.\\n\\nReasoning: Begin foundational reading for the oral discussion to build knowledge over time.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3@timebox.local
+DTSTAMP:20260529T153316Z
+DTSTART:20260529T140000Z
+DTEND:20260529T150000Z
+SUMMARY:math exercise sheet
+DESCRIPTION:Scan all math problems to gauge difficulty and categorize them.\\n\\nReasoning: Initial assessment of the math sheet to plan subsequent work efficiently.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4@timebox.local
+DTSTAMP:20260529T153316Z
+DTSTART:20260530T090000Z
+DTEND:20260530T110000Z
+SUMMARY:improve the simulator for AASMA prototype
+DESCRIPTION:Plan the UI improvements and experiment design in detail.\\n\\nReasoning: Continue focused design work for the simulator to solidify implementation approach.
+END:VEVENT
+BEGIN:VEVENT
+UID:B5@timebox.local
+DTSTAMP:20260529T153316Z
+DTSTART:20260530T130000Z
+DTEND:20260530T143000Z
+SUMMARY:math exercise sheet
+DESCRIPTION:Solve the categorized easier math problems to build confidence.\\n\\nReasoning: Make progress on the math sheet while preserving majority of day for higher-priority tasks.
+END:VEVENT
+BEGIN:VEVENT
+UID:B6@timebox.local
+DTSTAMP:20260529T153316Z
+DTSTART:20260531T090000Z
+DTEND:20260531T120000Z
+SUMMARY:improve the simulator for AASMA prototype
+DESCRIPTION:Begin coding the planned UI improvements.\\n\\nReasoning: Allocate a longer\, protected block for initial implementation of the simulator.
+END:VEVENT
+BEGIN:VEVENT
+UID:B7@timebox.local
+DTSTAMP:20260529T153316Z
+DTSTART:20260531T130000Z
+DTEND:20260531T140000Z
+SUMMARY:math exercise sheet
+DESCRIPTION:Tackle the remaining harder math problems.\\n\\nReasoning: Complete the bulk of the math sheet work before its deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B8@timebox.local
+DTSTAMP:20260529T153316Z
+DTSTART:20260601T090000Z
+DTEND:20260601T100000Z
+SUMMARY:math exercise sheet
+DESCRIPTION:Final review\, formatting\, and submission of the math sheet.\\n\\nReasoning: Finalize and submit the math sheet by its deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B9@timebox.local
+DTSTAMP:20260529T153316Z
+DTSTART:20260601T110000Z
+DTEND:20260601T140000Z
+SUMMARY:improve the simulator for AASMA prototype
+DESCRIPTION:Continue coding the simulator improvements.\\n\\nReasoning: Dedicate substantial time to simulator implementation after math submission.
+END:VEVENT
+BEGIN:VEVENT
+UID:B10@timebox.local
+DTSTAMP:20260529T153316Z
+DTSTART:20260602T090000Z
+DTEND:20260602T120000Z
+SUMMARY:improve the simulator for AASMA prototype
+DESCRIPTION:Testing\, debugging\, and fixing issues in the implemented code.\\n\\nReasoning: Complete all simulator work\, including testing\, one day before the deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B11@timebox.local
+DTSTAMP:20260529T153316Z
+DTSTART:20260602T140000Z
+DTEND:20260602T153000Z
+SUMMARY:prepare for programming languages oral discussion
+DESCRIPTION:Active reading and note-taking on one key paper.\\n\\nReasoning: Resume oral discussion preparation after simulator work is complete.
+END:VEVENT
+BEGIN:VEVENT
+UID:B12@timebox.local
+DTSTAMP:20260529T153316Z
+DTSTART:20260604T090000Z
+DTEND:20260604T110000Z
+SUMMARY:prepare for programming languages oral discussion
+DESCRIPTION:Practice explaining concepts and review notes.\\n\\nReasoning: Dedicated practice session for the oral discussion to build fluency.
+END:VEVENT
+BEGIN:VEVENT
+UID:B13@timebox.local
+DTSTAMP:20260529T153316Z
+DTSTART:20260604T130000Z
+DTEND:20260604T150000Z
+SUMMARY:prepare for programming languages oral discussion
+DESCRIPTION:Mock discussion and confidence review.\\n\\nReasoning: Final preparation and simulation of the oral discussion format.
+END:VEVENT
+BEGIN:VEVENT
+UID:B14@timebox.local
+DTSTAMP:20260529T153316Z
+DTSTART:20260605T090000Z
+DTEND:20260605T100000Z
+SUMMARY:prepare for programming languages oral discussion
+DESCRIPTION:Light final review and mental preparation.\\n\\nReasoning: Low-intensity review on the day of the oral discussion to stay fresh.
+END:VEVENT
+END:VCALENDAR

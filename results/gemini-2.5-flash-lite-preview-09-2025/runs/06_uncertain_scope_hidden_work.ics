@@ -1,0 +1,94 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:FRIDAY_MATH_1@timebox.local
+DTSTAMP:20260529T121757Z
+DTSTART:20260529T140000Z
+DTEND:20260529T180000Z
+SUMMARY:Math exercise sheet review and completion
+DESCRIPTION:Begin the initial pass and review of the math exercise sheet problems.\\n\\nReasoning: This addresses the earliest deadline (Monday) and utilizes the first available work slot to confirm the task's true time requirement.
+END:VEVENT
+BEGIN:VEVENT
+UID:SATURDAY_MATH_2@timebox.local
+DTSTAMP:20260529T121757Z
+DTSTART:20260530T090000Z
+DTEND:20260530T120000Z
+SUMMARY:Math exercise sheet review and completion
+DESCRIPTION:Complete the detailed solution work for the math exercise sheet.\\n\\nReasoning: Finishing this task early on Saturday ensures the Monday deadline is met with a buffer.
+END:VEVENT
+BEGIN:VEVENT
+UID:SATURDAY_AASMA_SCOPE@timebox.local
+DTSTAMP:20260529T121757Z
+DTSTART:20260530T130000Z
+DTEND:20260530T140000Z
+SUMMARY:AASMA prototype simulator improvement
+DESCRIPTION:Define the scope for UI cleaning and the required experiment for the AASMA prototype.\\n\\nReasoning: This fulfills the request for early discovery time on the vague AASMA task before the main implementation push.
+END:VEVENT
+BEGIN:VEVENT
+UID:SUNDAY_AASMA_DESIGN@timebox.local
+DTSTAMP:20260529T121757Z
+DTSTART:20260531T140000Z
+DTEND:20260531T170000Z
+SUMMARY:AASMA prototype simulator improvement
+DESCRIPTION:Design the new experiment and begin initial implementation/UI cleanup.\\n\\nReasoning: Pushing implementation forward early ensures the Wednesday deadline is manageable.
+END:VEVENT
+BEGIN:VEVENT
+UID:SUNDAY_PROG_LANG_REVIEW@timebox.local
+DTSTAMP:20260529T121757Z
+DTSTART:20260531T170000Z
+DTEND:20260531T180000Z
+SUMMARY:Programming languages oral discussion preparation
+DESCRIPTION:Conduct an initial broad review of the lecture slides to identify core concepts.\\n\\nReasoning: Spreading out preparation time for the vague oral exam task helps with retention and manages cognitive load.
+END:VEVENT
+BEGIN:VEVENT
+UID:MONDAY_AASMA_IMPL@timebox.local
+DTSTAMP:20260529T121757Z
+DTSTART:20260601T140000Z
+DTEND:20260601T170000Z
+SUMMARY:AASMA prototype simulator improvement
+DESCRIPTION:Continue implementing the new experiment and addressing identified UI cleanup items.\\n\\nReasoning: This block focuses on the core deliverable due mid-week.
+END:VEVENT
+BEGIN:VEVENT
+UID:MONDAY_PROG_LANG_PAPER1@timebox.local
+DTSTAMP:20260529T121757Z
+DTSTART:20260601T170000Z
+DTEND:20260601T180000Z
+SUMMARY:Programming languages oral discussion preparation
+DESCRIPTION:Begin deep dive reading and summarizing the first required paper.\\n\\nReasoning: Allocating time to the preparation task while the AASMA work is progressing well.
+END:VEVENT
+BEGIN:VEVENT
+UID:TUESDAY_AASMA_FINAL@timebox.local
+DTSTAMP:20260529T121757Z
+DTSTART:20260602T090000Z
+DTEND:20260602T120000Z
+SUMMARY:AASMA prototype simulator improvement
+DESCRIPTION:Finalize experiment testing\, clean remaining UI issues\, and write results notes.\\n\\nReasoning: This block aims to complete all implementation and documentation for the AASMA prototype before the deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:TUESDAY_PROG_LANG_PAPER2@timebox.local
+DTSTAMP:20260529T121757Z
+DTSTART:20260602T130000Z
+DTEND:20260602T140000Z
+SUMMARY:Programming languages oral discussion preparation
+DESCRIPTION:Deep dive reading and summarizing the second required paper.\\n\\nReasoning: Continuing the spaced review of materials for the final assessment.
+END:VEVENT
+BEGIN:VEVENT
+UID:WEDNESDAY_PROG_LANG_SYNTHESIS@timebox.local
+DTSTAMP:20260529T121757Z
+DTSTART:20260603T140000Z
+DTEND:20260603T180000Z
+SUMMARY:Programming languages oral discussion preparation
+DESCRIPTION:Synthesize concepts from both papers and lecture slides\, focusing on generating potential high-level questions.\\n\\nReasoning: With the AASMA deadline passed\, this day is dedicated to intensive preparation for the final deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:THURSDAY_PROG_LANG_PRACTICE@timebox.local
+DTSTAMP:20260529T121757Z
+DTSTART:20260604T140000Z
+DTEND:20260604T180000Z
+SUMMARY:Programming languages oral discussion preparation
+DESCRIPTION:Practice articulating answers to generated questions and conduct a final review of all materials.\\n\\nReasoning: This is the last major block before the Friday deadline to ensure readiness for the oral discussion.
+END:VEVENT
+END:VCALENDAR

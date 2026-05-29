@@ -1,0 +1,86 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:B1_1@timebox.local
+DTSTAMP:20260529T122316Z
+DTSTART:20260529T080000Z
+DTEND:20260529T093000Z
+SUMMARY:Database Worksheet
+DESCRIPTION:Complete the easy database worksheet due tomorrow night.\\n\\nReasoning: Prioritize this task to ensure it meets its deadline and provides immediate task completion momentum.
+END:VEVENT
+BEGIN:VEVENT
+UID:B1_2@timebox.local
+DTSTAMP:20260529T122316Z
+DTSTART:20260529T093000Z
+DTEND:20260529T130000Z
+SUMMARY:Software Architecture: Read Case Study
+DESCRIPTION:Begin deep reading and detailed annotation of the software architecture case study material.\\n\\nReasoning: Increased time allocation to address Grade Agent and Risk Agent concerns about insufficient foundational understanding.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2_1@timebox.local
+DTSTAMP:20260529T122316Z
+DTSTART:20260530T080000Z
+DTEND:20260530T100000Z
+SUMMARY:Software Architecture: Read Case Study
+DESCRIPTION:Complete the remaining deep reading and consolidate all notes from the case study analysis.\\n\\nReasoning: Ensuring the reading phase is fully completed before moving to diagramming\, addressing prior critiques.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2_2@timebox.local
+DTSTAMP:20260529T122316Z
+DTSTART:20260530T100000Z
+DTEND:20260530T133000Z
+SUMMARY:Software Architecture: Draw Component and Deployment Diagrams
+DESCRIPTION:Draft the component and deployment diagrams based on the thoroughly analyzed case study.\\n\\nReasoning: Starting the diagramming phase immediately after completing the foundational reading.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2_3@timebox.local
+DTSTAMP:20260529T122316Z
+DTSTART:20260530T133000Z
+DTEND:20260530T150000Z
+SUMMARY:Software Architecture: Write 1500-word Report
+DESCRIPTION:Create a detailed outline for the 1500-word report\, linking structure to the diagrams.\\n\\nReasoning: Beginning report structuring while diagram concepts are fresh.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3_1@timebox.local
+DTSTAMP:20260529T122316Z
+DTSTART:20260531T080000Z
+DTEND:20260531T093000Z
+SUMMARY:Software Architecture: Draw Component and Deployment Diagrams
+DESCRIPTION:Finalize the component and deployment diagrams\, ensuring they are ready for inclusion in the report.\\n\\nReasoning: Completing the visual deliverables for the major assignment.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3_2@timebox.local
+DTSTAMP:20260529T122316Z
+DTSTART:20260531T093000Z
+DTEND:20260531T123000Z
+SUMMARY:Software Architecture: Write 1500-word Report
+DESCRIPTION:Write the main analysis sections of the 1500-word report\, integrating diagram interpretations.\\n\\nReasoning: Allocating significant time to the writing phase now that analysis and diagrams are nearly complete.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4_1@timebox.local
+DTSTAMP:20260529T122316Z
+DTSTART:20260601T080000Z
+DTEND:20260601T093000Z
+SUMMARY:Software Architecture: Write 1500-word Report
+DESCRIPTION:Complete the final draft sections of the 1500-word report\, including introduction and conclusion review.\\n\\nReasoning: Ensuring the major assignment is complete ahead of the June 2nd deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4_2@timebox.local
+DTSTAMP:20260529T122316Z
+DTSTART:20260601T093000Z
+DTEND:20260601T113000Z
+SUMMARY:Operating Systems: Catch up on 2 missed lectures
+DESCRIPTION:Begin catching up on the first Operating Systems lecture material\, aiming for significant progress.\\n\\nReasoning: Addressing the deferred Operating Systems catch-up task.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4_3@timebox.local
+DTSTAMP:20260529T122316Z
+DTSTART:20260601T113000Z
+DTEND:20260601T120000Z
+SUMMARY:Contingency Buffer
+DESCRIPTION:Small buffer time to absorb minor overruns from the Architecture work or initial OS catch-up.\\n\\nReasoning: Added a small buffer to address the Risk Agent's concern about schedule tightness.
+END:VEVENT
+END:VCALENDAR

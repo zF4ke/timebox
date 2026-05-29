@@ -1,0 +1,15 @@
+I am a student with a part-time job and a long commute.
+
+Work shifts:
+- Tuesday 17:00-22:00
+- Thursday 17:00-22:00
+- Saturday 09:00-15:00
+
+Commute takes 45 minutes each way and I am usually tired after shifts.
+
+Academic tasks:
+- Web development project due Sunday night. I need to implement authentication, polish CSS, and write a README. Maybe 8 hours total.
+- Linear algebra homework due Wednesday at 20:00. It should take 3 hours.
+- Read one paper for AASMA seminar before Friday morning and write 5 discussion points.
+
+I can work in mornings if needed, but I focus better from 11:00 to 16:00. Avoid scheduling demanding study immediately after job shifts.

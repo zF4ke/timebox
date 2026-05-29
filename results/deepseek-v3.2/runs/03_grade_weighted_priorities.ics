@@ -1,0 +1,94 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:B1@timebox.local
+DTSTAMP:20260529T150838Z
+DTSTART:20260529T170000Z
+DTEND:20260529T190000Z
+SUMMARY:Database project milestone
+DESCRIPTION:Start writing and testing core queries for the database project.\\n\\nReasoning: Begin the highest-priority task immediately to make progress before the Monday deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2@timebox.local
+DTSTAMP:20260529T150838Z
+DTSTART:20260529T190000Z
+DTEND:20260529T200000Z
+SUMMARY:AI homework
+DESCRIPTION:Solve the second exercise of the AI homework.\\n\\nReasoning: Make early progress on the urgent AI homework to reduce Sunday's load.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3@timebox.local
+DTSTAMP:20260529T150838Z
+DTSTART:20260530T170000Z
+DTEND:20260530T190000Z
+SUMMARY:Database project milestone
+DESCRIPTION:Continue developing queries and begin creating unit tests for the database project.\\n\\nReasoning: Sustain momentum on the database project with the limited weekday time.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4@timebox.local
+DTSTAMP:20260529T150838Z
+DTSTART:20260531T100000Z
+DTEND:20260531T110000Z
+SUMMARY:Help friend review slides
+DESCRIPTION:Help friend review slides as promised.\\n\\nReasoning: Fulfill the fixed commitment early to free up the rest of the day.
+END:VEVENT
+BEGIN:VEVENT
+UID:B5@timebox.local
+DTSTAMP:20260529T150838Z
+DTSTART:20260531T120000Z
+DTEND:20260531T160000Z
+SUMMARY:Database project milestone
+DESCRIPTION:Work intensively on database project tests and start the demo script.\\n\\nReasoning: Use the long Saturday block for substantial progress on the highest-priority task.
+END:VEVENT
+BEGIN:VEVENT
+UID:B6@timebox.local
+DTSTAMP:20260529T150838Z
+DTSTART:20260601T120000Z
+DTEND:20260601T140000Z
+SUMMARY:Database project milestone
+DESCRIPTION:Finalize database project demo script and integration.\\n\\nReasoning: Complete the database project work before the AI homework deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B7@timebox.local
+DTSTAMP:20260529T150838Z
+DTSTART:20260601T140000Z
+DTEND:20260601T160000Z
+SUMMARY:AI homework
+DESCRIPTION:Solve the remaining AI homework exercises and submit.\\n\\nReasoning: Use the remaining time to finish and submit the AI homework before its Sunday night deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B8@timebox.local
+DTSTAMP:20260529T150838Z
+DTSTART:20260602T180000Z
+DTEND:20260602T190000Z
+SUMMARY:History essay
+DESCRIPTION:Conduct initial research for the history essay.\\n\\nReasoning: Start foundational work on the high-weight essay to avoid future risk.
+END:VEVENT
+BEGIN:VEVENT
+UID:B9@timebox.local
+DTSTAMP:20260529T150838Z
+DTSTART:20260602T190000Z
+DTEND:20260602T200000Z
+SUMMARY:Database project milestone
+DESCRIPTION:Final review and submission of the database project milestone.\\n\\nReasoning: Use the last available hour to submit the database project before its Monday night deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B10@timebox.local
+DTSTAMP:20260529T150838Z
+DTSTART:20260603T170000Z
+DTEND:20260603T190000Z
+SUMMARY:History essay
+DESCRIPTION:Continue research and start outlining the history essay.\\n\\nReasoning: Make steady progress on the essay while other deadlines are met.
+END:VEVENT
+BEGIN:VEVENT
+UID:B11@timebox.local
+DTSTAMP:20260529T150838Z
+DTSTART:20260604T170000Z
+DTEND:20260604T190000Z
+SUMMARY:History essay
+DESCRIPTION:Refine the history essay outline and draft the introduction.\\n\\nReasoning: Establish a solid foundation for the essay before the planning window ends.
+END:VEVENT
+END:VCALENDAR

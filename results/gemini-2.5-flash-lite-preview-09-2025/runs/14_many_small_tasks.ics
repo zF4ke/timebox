@@ -1,0 +1,78 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:F1_Block1@timebox.local
+DTSTAMP:20260529T122242Z
+DTSTART:20260529T140000Z
+DTEND:20260529T144500Z
+SUMMARY:Book doctor appointment
+DESCRIPTION:Schedule the doctor appointment\, allowing extra time for phone calls.\\n\\nReasoning: Front-loading this administrative task early on Friday ensures it is done during potential business hours and removes it from the weekend focus.
+END:VEVENT
+BEGIN:VEVENT
+UID:F1_Block2@timebox.local
+DTSTAMP:20260529T122242Z
+DTSTART:20260529T150000Z
+DTEND:20260529T163000Z
+SUMMARY:Watch one recorded lecture
+DESCRIPTION:Watch the required recorded lecture to prepare for Thursday's class.\\n\\nReasoning: Scheduling the lecture viewing on Friday afternoon uses the remaining time and ensures the prerequisite for Thursday is met early.
+END:VEVENT
+BEGIN:VEVENT
+UID:S1_Block1@timebox.local
+DTSTAMP:20260529T122242Z
+DTSTART:20260530T100000Z
+DTEND:20260530T120000Z
+SUMMARY:Do 2 hours of math revision
+DESCRIPTION:Complete the required 2 hours of math revision.\\n\\nReasoning: Completing this 2-hour block on Saturday removes pressure from Monday morning and ensures the deadline is met well in advance.
+END:VEVENT
+BEGIN:VEVENT
+UID:S1_Block2@timebox.local
+DTSTAMP:20260529T122242Z
+DTSTART:20260530T130000Z
+DTEND:20260530T150000Z
+SUMMARY:Finish two Java exercises
+DESCRIPTION:Work on the two required Java exercises.\\n\\nReasoning: Allocating 2 hours here tackles the largest academic assignment early in the weekend when focus is high.
+END:VEVENT
+BEGIN:VEVENT
+UID:S1_Block3@timebox.local
+DTSTAMP:20260529T122242Z
+DTSTART:20260530T151500Z
+DTEND:20260530T161500Z
+SUMMARY:Clean up GitHub README for AASMA prototype
+DESCRIPTION:Clean up the AASMA prototype README file.\\n\\nReasoning: Completing this task on Saturday ensures the Sunday deadline is met and clears project maintenance before the next week starts.
+END:VEVENT
+BEGIN:VEVENT
+UID:D1_Block1@timebox.local
+DTSTAMP:20260529T122242Z
+DTSTART:20260531T100000Z
+DTEND:20260531T110000Z
+SUMMARY:Prepare 6 flashcards for databases
+DESCRIPTION:Prepare 6 flashcards for the databases course.\\n\\nReasoning: This small study task is batched on Sunday to keep the cognitive load manageable.
+END:VEVENT
+BEGIN:VEVENT
+UID:D1_Block2@timebox.local
+DTSTAMP:20260529T122242Z
+DTSTART:20260531T111500Z
+DTEND:20260531T121500Z
+SUMMARY:Finish two Java exercises
+DESCRIPTION:Complete the remaining work on the two Java exercises.\\n\\nReasoning: This final hour ensures the Java exercises are completed well before the Wednesday deadline\, utilizing the remaining Sunday availability.
+END:VEVENT
+BEGIN:VEVENT
+UID:M1_Block1@timebox.local
+DTSTAMP:20260529T122242Z
+DTSTART:20260601T090000Z
+DTEND:20260601T100000Z
+SUMMARY:Submit scholarship form
+DESCRIPTION:Final review and submission of the scholarship form.\\n\\nReasoning: Scheduling this first thing Monday morning ensures the noon deadline is met with a 2-hour buffer built in from weekend work.
+END:VEVENT
+BEGIN:VEVENT
+UID:M1_Block2@timebox.local
+DTSTAMP:20260529T122242Z
+DTSTART:20260601T101500Z
+DTEND:20260601T104500Z
+SUMMARY:Email project advisor with topic options
+DESCRIPTION:Email the project advisor with finalized topic options.\\n\\nReasoning: This administrative task is batched immediately after the high-priority submission\, utilizing the remaining morning time.
+END:VEVENT
+END:VCALENDAR

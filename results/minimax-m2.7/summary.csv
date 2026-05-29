@@ -1,0 +1,16 @@
+prompt,model,status,overall_score,model_score,hard_score,approvals,iterations,critical_count,major_count,deadline_violations,task_coverage,availability_overrun,stop_reason,json_path,ics_path,error
+01_urgent_mixed_deadlines.txt,minimax/minimax-m2.7,error,,,,,,,,,,,,,,OpenRouter returned an empty response.
+02_wellbeing_low_energy.txt,minimax/minimax-m2.7,error,,,,,,,,,,,,,,Unterminated string in JSON at position 4733 (line 1 column 4734). Raw response saved to /home/dan1e1/.config/timebox/debug/2026-05-29T12-45-13-407Z_raw_schedule_evaluation.json.
+03_grade_weighted_priorities.txt,minimax/minimax-m2.7,ok,4.4,4,4.8,5,1,0,0,0,1,2,Accepted by 5/5 agents with no critical critiques.,/home/dan1e1/Desktop/AASMA/Projeto/results/minimax-m2.7/runs/03_grade_weighted_priorities.json,/home/dan1e1/Desktop/AASMA/Projeto/results/minimax-m2.7/runs/03_grade_weighted_priorities.ics,
+04_group_project_coordination.txt,minimax/minimax-m2.7,ok,4.5,4.2,4.7,5,2,0,0,0,1,0,Accepted by 5/5 agents with no critical critiques.,/home/dan1e1/Desktop/AASMA/Projeto/results/minimax-m2.7/runs/04_group_project_coordination.json,/home/dan1e1/Desktop/AASMA/Projeto/results/minimax-m2.7/runs/04_group_project_coordination.ics,
+05_fixed_commitments_busy_week.txt,minimax/minimax-m2.7,ok,3.6,3.2,4,5,2,0,0,3,0.5,0,Accepted by 5/5 agents with no critical critiques.,/home/dan1e1/Desktop/AASMA/Projeto/results/minimax-m2.7/runs/05_fixed_commitments_busy_week.json,/home/dan1e1/Desktop/AASMA/Projeto/results/minimax-m2.7/runs/05_fixed_commitments_busy_week.ics,
+06_uncertain_scope_hidden_work.txt,minimax/minimax-m2.7,ok,3.5,3.2,3.7,5,2,0,0,3,1,6,Accepted by 5/5 agents with no critical critiques.,/home/dan1e1/Desktop/AASMA/Projeto/results/minimax-m2.7/runs/06_uncertain_scope_hidden_work.json,/home/dan1e1/Desktop/AASMA/Projeto/results/minimax-m2.7/runs/06_uncertain_scope_hidden_work.ics,
+07_exam_week_revision.txt,minimax/minimax-m2.7,ok,4.6,4.3,4.9,5,1,0,0,0,1,0,Accepted by 5/5 agents with no critical critiques.,/home/dan1e1/Desktop/AASMA/Projeto/results/minimax-m2.7/runs/07_exam_week_revision.json,/home/dan1e1/Desktop/AASMA/Projeto/results/minimax-m2.7/runs/07_exam_week_revision.ics,
+08_part_time_job_commute.txt,minimax/minimax-m2.7,error,,,,,,,,,,,,,,OpenRouter returned an empty response.
+09_no_deadlines_self_study.txt,minimax/minimax-m2.7,error,,,,,,,,,,,,,,terminated
+10_overloaded_impossible_week.txt,minimax/minimax-m2.7,error,,,,,,,,,,,,,,"OpenRouter truncated specialist_agent_view before valid JSON completed (finish_reason=length, 34650 chars). Raw response saved to /home/dan1e1/.config/timebox/debug/2026-05-29T13-20-40-914Z_raw_specialist_agent_view.json."
+11_short_two_day_crunch.txt,minimax/minimax-m2.7,error,,,,,,,,,,,,,,OpenRouter returned an empty response.
+12_long_term_capstone.txt,minimax/minimax-m2.7,error,,,,,,,,,,,,,,"OpenRouter truncated interpreter_output before valid JSON completed (finish_reason=length, 2553 chars). Raw response saved to /home/dan1e1/.config/timebox/debug/2026-05-29T13-35-53-023Z_raw_interpreter_output.json."
+13_conflicting_preferences.txt,minimax/minimax-m2.7,error,,,,,,,,,,,,,,OpenRouter returned an empty response.
+14_many_small_tasks.txt,minimax/minimax-m2.7,error,,,,,,,,,,,,,,OpenRouter returned an empty response.
+15_missed_start_recovery.txt,minimax/minimax-m2.7,error,,,,,,,,,,,,,,OpenRouter returned an empty response.

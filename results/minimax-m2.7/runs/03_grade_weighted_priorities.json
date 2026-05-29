@@ -1,0 +1,1652 @@
+{
+  "runId": "4c5e0f5c-7585-48bf-b89a-dab640f07050",
+  "createdAt": "2026-05-29T12:46:18.887Z",
+  "request": {
+    "userInput": "Help me plan the next 7 days.\n\nMy database project milestone is due Monday night and is worth 30% of the course. I have the schema done, but I still need queries, tests, and a short demo script.\n\nI have an AI homework due Sunday night worth 8%. It has 4 exercises and I already solved the first one.\n\nI have a history essay due in 10 days worth 40%. The deadline is later, but the essay needs research and an outline soon.\n\nI also promised to help a friend review slides for 1 hour before Saturday.\n\nI can work 3 hours today, 5 hours on Saturday, 4 hours on Sunday, and around 2 hours on weekdays. Please prioritize the work that matters most for grades, but do not completely ignore smaller deadlines.",
+    "quorum": 5,
+    "maxIterations": 3,
+    "timezone": "Europe/Lisbon",
+    "model": "minimax/minimax-m2.7",
+    "evaluatorModel": "minimax/minimax-m2.7"
+  },
+  "stopReason": "Accepted by 5/5 agents with no critical critiques.",
+  "interpreterOutput": {
+    "current_date": "2026-05-29T12:46:18.888Z",
+    "planning_window": {
+      "start_date": "2026-05-29",
+      "end_date": "2026-06-04",
+      "reason": "Student requested planning for the next 7 days, covering critical deadlines for database project (Monday) and AI homework (Sunday), while also accounting for the history essay which needs early attention given its 10-day deadline and 40% weight"
+    },
+    "inferred_availability": [
+      {
+        "date_range": "2026-05-29",
+        "assumption": "Friday afternoon/evening availability as stated by student",
+        "estimated_available_hours_per_day": 3,
+        "confidence": "high"
+      },
+      {
+        "date_range": "2026-05-30",
+        "assumption": "Saturday full day availability as stated by student",
+        "estimated_available_hours_per_day": 5,
+        "confidence": "high"
+      },
+      {
+        "date_range": "2026-05-31",
+        "assumption": "Sunday availability as stated by student",
+        "estimated_available_hours_per_day": 4,
+        "confidence": "high"
+      },
+      {
+        "date_range": "2026-06-01",
+        "assumption": "Monday weekday availability accounting for potential classes and the database project deadline consuming evening energy",
+        "estimated_available_hours_per_day": 2,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-06-02",
+        "assumption": "Tuesday weekday availability as stated by student",
+        "estimated_available_hours_per_day": 2,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-06-03",
+        "assumption": "Wednesday weekday availability as stated by student",
+        "estimated_available_hours_per_day": 2,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-06-04",
+        "assumption": "Thursday weekday availability as stated by student",
+        "estimated_available_hours_per_day": 2,
+        "confidence": "medium"
+      }
+    ],
+    "fixed_commitments": [
+      "1 hour helping friend review slides before Saturday (estimated for Saturday May 30)"
+    ],
+    "student_state": {
+      "sleep": "adequate",
+      "energy": "moderate",
+      "confidence": "moderate"
+    },
+    "tasks": [
+      {
+        "task_id": "db_project",
+        "name": "Database project milestone",
+        "raw_mentions": [
+          "database project milestone",
+          "schema done",
+          "queries",
+          "tests",
+          "demo script",
+          "Monday night",
+          "30%"
+        ],
+        "inferred_deadline": "2026-06-01T23:59:00",
+        "uncertainties": [
+          "Exact Monday deadline time not specified (assumed end of day)",
+          "Scope of remaining work (queries, tests, demo script) not quantified",
+          "Whether demo script needs polished presentation or basic functionality"
+        ]
+      },
+      {
+        "task_id": "ai_homework",
+        "name": "AI homework",
+        "raw_mentions": [
+          "AI homework",
+          "Sunday night",
+          "4 exercises",
+          "first one done",
+          "8%"
+        ],
+        "inferred_deadline": "2026-05-31T23:59:00",
+        "uncertainties": [
+          "Exact Sunday deadline time not specified",
+          "Difficulty level of remaining 3 exercises unknown",
+          "Whether exercises require code, written answers, or both"
+        ]
+      },
+      {
+        "task_id": "history_essay",
+        "name": "History essay",
+        "raw_mentions": [
+          "history essay",
+          "10 days",
+          "40%",
+          "research",
+          "outline"
+        ],
+        "inferred_deadline": "2026-06-08T23:59:00",
+        "uncertainties": [
+          "Exact deadline time on June 8 not specified",
+          "Required essay length and format unknown",
+          "Whether specific sources or citation style required",
+          "Whether outline needs instructor approval before full draft"
+        ]
+      },
+      {
+        "task_id": "slide_review",
+        "name": "Help friend review slides",
+        "raw_mentions": [
+          "help friend review slides",
+          "1 hour",
+          "Saturday"
+        ],
+        "inferred_deadline": "2026-05-30T23:59:00",
+        "uncertainties": [
+          "Exact time on Saturday not specified",
+          "Number of slides to review unknown",
+          "Whether feedback needs to be detailed or surface-level"
+        ]
+      }
+    ],
+    "assumptions": [
+      "Student has access to necessary development tools and environment for database project",
+      "AI homework exercises can be completed independently without external dependencies",
+      "History essay topic and requirements are already known to the student",
+      "Student will not have unexpected classes, work, or personal commitments during the planning window",
+      "Friend slide review is flexible within Saturday and does not have a fixed time slot",
+      "Weekday 2-hour availability is consistent across Monday-Thursday and does not conflict with classes",
+      "Student has basic understanding of database concepts to complete remaining work",
+      "No technical issues or blockers will arise during task execution",
+      "Sleep and energy levels remain stable enough to complete planned work",
+      "Student can context-switch between different subject matter without significant productivity loss"
+    ]
+  },
+  "agentViews": [
+    {
+      "agent": "Deadline Agent",
+      "task_views": [
+        {
+          "task_id": "db_project",
+          "task_name": "Database project milestone",
+          "assessment": "CRITICAL - This is the highest-stakes task in the planning window. Worth 30% of the course grade, due Monday night. The student has completed the schema but still needs queries, tests, and a demo script. This leaves substantial work remaining. Given the 30% weight, any shortfall here will significantly damage the course grade. The deadline is absolute and cannot be extended. This task must receive priority allocation on Friday (3 hours), Saturday (remaining after slide review), and potentially Sunday/Monday if needed. The work is technical and sequential - queries must be written before tests can be run, and the demo script depends on having working code. There is no room for delay.",
+          "concerns": [
+            "Only 2 days until deadline (Monday night) - extremely tight timeline for substantial technical work",
+            "Remaining scope (queries, tests, demo script) is not quantified - could be more work than anticipated",
+            "No buffer time if technical issues arise during implementation or testing",
+            "Demo script quality vs. basic functionality tradeoff not yet considered",
+            "Student has moderate energy/confidence which may slow progress on complex database work",
+            "If queries require debugging, Sunday/Monday buffer is insufficient"
+          ],
+          "recommendations": [
+            "Allocate Friday evening (3 hours) entirely to database queries - this is the foundation",
+            "Use Saturday morning/afternoon for tests and demo script after friend review",
+            "Reserve Sunday evening as emergency buffer for debugging or polish",
+            "Prioritize functional queries over perfect code - demo needs to run",
+            "Test incrementally rather than writing all queries then testing"
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Write and test database queries (3-4 hours)",
+            "Create test cases and validate results (2 hours)",
+            "Build demo script with working examples (2 hours)",
+            "Final testing and edge case handling (1 hour)"
+          ]
+        },
+        {
+          "task_id": "ai_homework",
+          "task_name": "AI homework",
+          "assessment": "HIGH - Due Sunday night, worth 8%. Student has completed 1 of 4 exercises, leaving 3 exercises remaining. While the weight is lower than the database project, the deadline is imminent (Sunday) and cannot be delayed. The remaining exercises are unknown in difficulty. This task should receive focused work on Saturday and Sunday. The 8% weight means it cannot be ignored, but it should not consume time that should go to the 30% database project if a conflict arises.",
+          "concerns": [
+            "3 remaining exercises with unknown difficulty - could be time-intensive",
+            "Sunday deadline leaves no room for last-minute delays",
+            "If exercises involve coding, may compete with database project mental bandwidth",
+            "Student energy may be depleted by Sunday after database project push",
+            "Unknown whether exercises require written explanations or just answers"
+          ],
+          "recommendations": [
+            "Complete AI homework on Saturday afternoon/evening if possible",
+            "If Saturday is insufficient, allocate Sunday morning (before evening deadline)",
+            "Do not let AI homework consume database project time on Friday",
+            "Attempt to gauge exercise difficulty quickly to calibrate time needs"
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review remaining 3 exercises and estimate time per exercise (15 minutes)",
+            "Complete exercises 2 and 3 (2-3 hours)",
+            "Complete exercise 4 and final review (1 hour)"
+          ]
+        },
+        {
+          "task_id": "history_essay",
+          "task_name": "History essay",
+          "assessment": "MEDIUM-LOW URGENCY but HIGH IMPORTANCE - Due in 10 days (June 8), worth 40% of course grade. Despite the later deadline, this is the highest-weighted task overall. The essay requires research and outline before a full draft can be written. Starting research early is critical because source gathering and outline development cannot be rushed without quality degradation. The 10-day window is deceptive - research and outline should begin immediately to avoid a last-minute scramble that would compromise a 40% assignment. However, this task cannot consume time needed for the Monday database project.",
+          "concerns": [
+            "10-day deadline creates false sense of safety - research/outline must start now",
+            "40% weight means this is the most consequential assignment overall",
+            "Research phase is unpredictable - sources may be unavailable or require interlibrary loan",
+            "Outline may need instructor feedback before full draft begins",
+            "If research is delayed, final days become chaotic with 40% of grade at risk",
+            "Student may underestimate time needed for quality research and writing"
+          ],
+          "recommendations": [
+            "Allocate 1-2 hours on Tuesday or Wednesday for initial research",
+            "Create outline by Thursday/Friday to establish structure for writing phase",
+            "Do not let this task interfere with database project or AI homework deadlines",
+            "Block dedicated research time before the weekend of June 6-7",
+            "Consider whether outline needs approval - factor in potential revision time"
+          ],
+          "estimated_duration_hours": 12,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Initial research and source identification (3-4 hours)",
+            "Source gathering and preliminary reading (3-4 hours)",
+            "Outline development and structuring (2-3 hours)",
+            "Draft writing and revision (4-5 hours)"
+          ]
+        },
+        {
+          "task_id": "slide_review",
+          "task_name": "Help friend review slides",
+          "assessment": "LOW URGENCY - Due before Saturday, 1 hour commitment. This is a social obligation with a friend, not an academic deadline. The time commitment is fixed at 1 hour and should be scheduled on Saturday. While it cannot be ignored (promises matter), it should not interfere with academic deadlines. The friend commitment is flexible within Saturday, so it can be scheduled around academic work.",
+          "concerns": [
+            "1 hour is a small but real time commitment that reduces Saturday academic capacity",
+            "If scheduled poorly, could reduce time available for database project or AI homework",
+            "Slide review quality expectations are unknown - could take more than 1 hour if detailed"
+          ],
+          "recommendations": [
+            "Schedule slide review for early Saturday (1 hour) to clear afternoon for academic work",
+            "Keep review to exactly 1 hour - be firm about time boundaries with friend",
+            "Do not let this expand to 90 minutes or 2 hours under any circumstances",
+            "If friend needs more help, offer to schedule a second session after all deadlines pass"
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review slides for 1 hour on Saturday morning"
+          ]
+        }
+      ],
+      "overall_comment": "The planning window contains two absolute deadlines that cannot slip: the database project (Monday, 30%) and AI homework (Sunday, 8%). The database project is the clear priority given its 30% weight and Monday deadline - it must receive Friday evening and Saturday afternoon/evening. The AI homework is due Sunday and should be completed Saturday or Sunday morning. The history essay (40% weight, June 8 deadline) cannot be ignored despite its later deadline - research and outline must begin this week to avoid a catastrophic last-minute rush on a 40% assignment. The friend slide review is a 1-hour commitment that should be scheduled early Saturday to protect afternoon for academic work. Total estimated academic work: ~25 hours across all tasks. Total available time: ~18 hours (3+5+4+2+2+2+2). There is a significant time deficit that requires ruthless prioritization. The database project and AI homework are non-negotiable for this week. History essay research must begin but can be lighter. The student must work efficiently and avoid scope creep on all tasks."
+    },
+    {
+      "agent": "Grade Agent",
+      "task_views": [
+        {
+          "task_id": "db_project",
+          "task_name": "Database project milestone",
+          "assessment": "CRITICAL - 30% weight with imminent Monday deadline. Schema is complete, but queries, tests, and demo script remain. This is the highest immediate academic risk. The student has approximately 3 days to complete substantial technical work. Given the 30% weight, this must be the top priority until completion. Any incomplete queries or failed tests could result in significant grade loss that cannot be recovered.",
+          "concerns": [
+            "Monday night deadline leaves minimal buffer for debugging or technical issues",
+            "Queries, tests, and demo script represent substantial remaining scope not yet started",
+            "Technical work often encounters unexpected blockers that consume time",
+            "Demo script quality may affect instructor evaluation of project",
+            "No mention of whether queries are simple or complex (joins, subqueries, etc.)",
+            "If tests fail, fixing them could consume entire available time"
+          ],
+          "recommendations": [
+            "Allocate maximum available hours to database project before Monday",
+            "Complete queries first as they are foundational to tests",
+            "Test incrementally rather than all at once to catch issues early",
+            "Keep demo script functional but simple - avoid over-engineering",
+            "Reserve at least 1 hour Monday for final testing and submission prep",
+            "Do not skip sleep the night before - tired coding introduces bugs"
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Write and test SQL queries for required functionality",
+            "Create test cases covering core database operations",
+            "Build basic demo script demonstrating key features",
+            "Final review and submission preparation"
+          ]
+        },
+        {
+          "task_id": "ai_homework",
+          "task_name": "AI homework",
+          "assessment": "HIGH - 8% weight with Sunday deadline. 3 of 4 exercises completed. While lower weight than database project, it is due before the database project and represents low-hanging fruit for grade recovery. The remaining 3 exercises should be completable in 2-4 hours depending on complexity. Cannot be ignored given the Sunday deadline falls before the database project is due.",
+          "concerns": [
+            "Sunday deadline is before Monday database deadline - must be completed Sunday",
+            "3 remaining exercises unknown difficulty level",
+            "If exercises are programming-heavy, could consume more time than estimated",
+            "Risk of grade loss on 8% if completely ignored, though recoverable elsewhere",
+            "No clarity on whether exercises require written explanations or just code output"
+          ],
+          "recommendations": [
+            "Schedule 2-3 hours Sunday afternoon/evening for remaining exercises",
+            "Start with easiest exercises to secure partial credit",
+            "Save hardest exercise for last with buffer time if needed",
+            "Do not over-optimize solutions - aim for correct over elegant",
+            "Keep solutions documented in case of partial credit for methodology"
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Complete remaining 3 AI homework exercises",
+            "Review and test all solutions",
+            "Prepare submission materials if needed"
+          ]
+        },
+        {
+          "task_id": "history_essay",
+          "task_name": "History essay",
+          "assessment": "HIGH - 40% weight is the single largest grade component, but 10-day deadline provides buffer. However, essay requires research and outline before full draft. Starting research now prevents last-minute panic and ensures quality work. The high weight means this essay has the most potential to lift or damage the overall course grade. Early investment in research and outline is academically justified.",
+          "concerns": [
+            "40% weight makes this the most impactful assignment for course grade",
+            "Research phase could reveal need for more sources than initially anticipated",
+            "Outline may require instructor feedback before proceeding",
+            "If outline is rushed, entire essay structure suffers",
+            "10 days sounds like a lot but research and drafting take longer than expected",
+            "Student may underestimate time needed for quality historical analysis"
+          ],
+          "recommendations": [
+            "Begin research and outline development this weekend if time permits",
+            "Allocate 2-3 hours Saturday or Sunday for initial research",
+            "Identify 3-5 key sources needed for essay argument",
+            "Draft outline by Tuesday/Wednesday to leave drafting time",
+            "Do not let database project completion cause essay neglect"
+          ],
+          "estimated_duration_hours": 12,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Conduct initial research and source identification",
+            "Create detailed outline with main arguments",
+            "Draft introduction and topic sentences",
+            "Write full essay draft",
+            "Revise and edit essay"
+          ]
+        },
+        {
+          "task_id": "slide_review",
+          "task_name": "Help friend review slides",
+          "assessment": "LOW - Social commitment worth 1 hour. No grade weight. While friendship has value, this is the lowest priority task in the planning window. The friend review should be accommodated but only after academic priorities are secured. If academic work runs long, this commitment should be shortened or rescheduled.",
+          "concerns": [
+            "No academic value - purely social commitment",
+            "Could consume time needed for higher-priority academic work",
+            "1 hour is fixed and non-negotiable per student promise",
+            "If academic work is behind, this becomes a liability",
+            "May set precedent for future social commitments crowding academics"
+          ],
+          "recommendations": [
+            "Schedule as last activity Saturday after academic work is done",
+            "Keep review focused and time-boxed to exactly 1 hour",
+            "If behind on database project, offer to reschedule or shorten",
+            "Do not sacrifice sleep or academic prep time for social commitments"
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review friend slides for content accuracy",
+            "Provide constructive feedback on presentation",
+            "Wrap up within 1-hour commitment"
+          ]
+        }
+      ],
+      "overall_comment": "Grade protection strategy: The database project (30%) must be treated as critical given its Monday deadline and substantial remaining scope. The history essay (40%) is the highest-weight assignment overall but has a 10-day buffer, so early research and outline work this weekend is warranted. The AI homework (8%) is lower weight but due Sunday before the database project, making it completable this weekend. The slide review has no academic value and should be scheduled after academic priorities are secured. Total estimated academic work (23 hours) exceeds available time (18 hours), so the student must prioritize ruthlessly: database project queries and tests first, AI homework second, history essay research third, slide review last. The database project and AI homework must be completed within this 7-day window; the history essay can extend into the following week if research begins this weekend."
+    },
+    {
+      "agent": "Effort Agent",
+      "task_views": [
+        {
+          "task_id": "db_project",
+          "task_name": "Database project milestone",
+          "assessment": "This task has significant risk of underestimation. The student says 'queries, tests, and demo script' remain but has not quantified scope. Database queries can be deceptively time-consuming, especially if they involve complex joins, subqueries, or edge case handling. Testing requires not just running queries but also documenting expected behavior and handling errors. A demo script needs to be reliable and presentable. I would break this into: (1) query implementation with basic testing, (2) comprehensive testing and edge cases, (3) demo script creation and dry run. The available time for this task is 3 hours today plus potentially 1-2 hours Sunday if AI homework allows. Monday has only 2 hours and the deadline is that night, so all critical work must be complete before Monday evening. Realistic time needed is 6-9 hours for a polished, tested submission. This is likely underestimated by the student.",
+          "concerns": [
+            "Student has ~6 hours max available before Monday deadline - may not be enough for 3 remaining components",
+            "Query complexity is unknown; complex queries could consume 2-3 hours alone",
+            "Testing and debugging often underestimated by students",
+            "No buffer time for technical issues or environment problems on Monday",
+            "Demo script polish vs basic functionality trade-off not defined"
+          ],
+          "recommendations": [
+            "Spend Friday's 3 hours on query implementation with basic unit tests",
+            "Reserve Sunday morning for comprehensive testing and edge cases",
+            "Saturday evening or early Sunday for demo script",
+            "Add 1-hour buffer on Monday for final debugging and submission prep",
+            "Prioritize getting functional queries done even if testing is incomplete"
+          ],
+          "estimated_duration_hours": 7.5,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Write and test SQL queries (3 hours)",
+            "Create comprehensive test cases and verify results (2 hours)",
+            "Develop and rehearse demo script (1.5 hours)",
+            "Buffer for integration issues and final submission (1 hour)"
+          ]
+        },
+        {
+          "task_id": "ai_homework",
+          "task_name": "AI homework",
+          "assessment": "Reasonable effort estimate if exercises are straightforward. The student has completed 1 of 4 exercises, leaving 3. AI homework exercises often involve theoretical concepts, algorithm implementation, or problem-solving that can vary wildly in difficulty. If the first exercise took reasonable time, the remaining three likely follow similar patterns. However, I should flag that AI homework is notorious for taking longer than expected when concepts are applied. With 4 hours available Sunday and 3 exercises remaining, this is tight but feasible if exercises are moderate. I recommend starting at least one exercise Saturday to spread the load.",
+          "concerns": [
+            "AI homework difficulty variance is high - could be 30 min or 3 hours per exercise",
+            "Sunday has only 4 hours available, which must cover all remaining work",
+            "Student may be fatigued Sunday evening from prior day's work",
+            "No visibility into whether exercises require code, proofs, or written explanations"
+          ],
+          "recommendations": [
+            "Complete at least one exercise Saturday to reduce Sunday load",
+            "Sunday afternoon should be reserved entirely for remaining exercises",
+            "Keep solutions functional rather than perfect to ensure submission",
+            "Budget 1.5 hours maximum per remaining exercise as a ceiling"
+          ],
+          "estimated_duration_hours": 3.5,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Complete 1-2 exercises Saturday (1.5 hours)",
+            "Complete remaining exercises Sunday (2 hours)",
+            "Review and finalize all submissions (30 min)"
+          ]
+        },
+        {
+          "task_id": "history_essay",
+          "task_name": "History essay",
+          "assessment": "The deadline is 10 days out, but this is worth 40% of the course grade and requires research and outlining before writing can begin. This is a significant task that should not wait until the last week. While it does not have the immediate pressure of the Monday and Sunday deadlines, the student explicitly mentioned needing research and outline work 'soon.' I estimate research and outline at 4-6 hours, which is too much to fit into the current week's tight schedule but should be started no later than Tuesday. The 40% weight means this needs proper attention. I would not allocate time from Friday-Sunday due to higher-priority deadlines, but should schedule 2 hours Tuesday and 2-3 hours Wednesday for research/outline work to establish foundation.",
+          "concerns": [
+            "Research phase could reveal need for additional sources, extending time beyond estimates",
+            "Essay length and format requirements unknown - could require significantly more writing time than expected",
+            "Outline may need instructor approval before drafting begins",
+            "If research reveals complexity, the outline phase may need revision"
+          ],
+          "recommendations": [
+            "Do not start research until after Monday/Tuesday - focus on higher-stakes immediate deadlines first",
+            "Schedule research for Tuesday (2 hours) and Wednesday (2-3 hours)",
+            "Use Thursday for outline refinement and source organization",
+            "Buffer Friday for unexpected research needs or outline revision",
+            "Set internal checkpoint of outline complete by Friday to stay on track for June 8 deadline"
+          ],
+          "estimated_duration_hours": 5.5,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Research sources and gather information (3 hours across Tuesday-Wednesday)",
+            "Develop essay outline and structure (2 hours Wednesday-Thursday)",
+            "Review outline and identify any gaps (1 hour Thursday-Friday)"
+          ]
+        },
+        {
+          "task_id": "slide_review",
+          "task_name": "Help friend review slides",
+          "assessment": "This is a fixed 1-hour commitment with a soft Saturday deadline. The scope is well-defined and the time commitment is reasonable for reviewing a friend's slides. However, I note this consumes 1 hour of Saturday's 5 available hours, reducing capacity for other work. The student should schedule this explicitly rather than leaving it vague. This task is low-risk in terms of effort estimation and should be treated as a non-negotiable time block. I see no concerns about underestimation; 1 hour is appropriate for reviewing a reasonable number of slides with substantive feedback.",
+          "concerns": [
+            "If friend has significantly more slides than expected, 1 hour may be insufficient for detailed review",
+            "Time of day matters - scheduling this when already fatigued reduces review quality",
+            "This consumes 20% of Saturday's available time"
+          ],
+          "recommendations": [
+            "Schedule slide review as first activity Saturday morning to ensure it's done and preserves afternoon for other work",
+            "Communicate with friend about approximate slide count to confirm 1-hour estimate",
+            "If slides are extensive, offer to review the most important ones in depth rather than skimming everything"
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review slides with substantive feedback (1 hour)"
+          ]
+        }
+      ],
+      "overall_comment": "The database project is the critical concern - with 7.5 hours of estimated work needed but only ~6 hours available before the Monday deadline with no buffer, there is execution risk. I recommend the student front-load query work on Friday and accept that testing may be less comprehensive than they would prefer. The AI homework at 3.5 hours should fit within Sunday's 4-hour window if started Saturday. History essay research should be deferred to Tuesday-Wednesday to avoid compromising higher-stakes immediate deadlines. The slide review is a fixed low-risk commitment. Overall time needed for immediate priorities (db_project + ai_homework) is approximately 11 hours against available time of 12 hours, which leaves minimal margin for unexpected complexity."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "task_views": [
+        {
+          "task_id": "db_project",
+          "task_name": "Database project milestone",
+          "assessment": "This is the most urgent technical task with the earliest high-stakes deadline (Monday night, 30%). The student has already completed the schema, which is good progress. Remaining work includes queries, tests, and a demo script - all requiring focused cognitive effort. From a wellbeing standpoint, this task poses the highest risk of late-night work and stress-induced errors if not front-loaded. The demo script can be kept minimal to save time.",
+          "concerns": [
+            "High 30% weight creates significant stress pressure",
+            "Risk of late-night debugging Sunday/Monday if not front-loaded",
+            "Technical debugging is cognitively exhausting and frustrating",
+            "Monday deadline means any Sunday night issues cannot be resolved",
+            "Cognitive fatigue from testing/debugging may spill into Monday morning"
+          ],
+          "recommendations": [
+            "Allocate 2-3 hours Friday evening to complete queries and basic tests",
+            "Use Saturday morning (before slide review) for remaining tests and demo script",
+            "Keep demo script minimal - basic functionality demonstration only",
+            "Do NOT save this for Sunday night - reserve Sunday for AI homework",
+            "If stuck on a bug, move on and return Monday morning with fresh eyes"
+          ],
+          "estimated_duration_hours": 6,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Write remaining SQL queries (1.5 hours)",
+            "Write and run test cases (1.5 hours)",
+            "Create minimal demo script (1 hour)",
+            "Final review and edge case testing (1 hour)",
+            "Buffer for debugging (1 hour)"
+          ]
+        },
+        {
+          "task_id": "ai_homework",
+          "task_name": "AI homework",
+          "assessment": "Lower stakes (8%) but due Sunday night, creating a deadline conflict with database project prep. The student has completed 1 of 4 exercises, leaving 3 remaining. Unknown difficulty level is a concern. This task should be treated as a Sunday-focused task, but the student must resist the urge to work on it earlier if it means stealing time from database project.",
+          "concerns": [
+            "Sunday evening deadline conflicts with database project final prep",
+            "Unknown difficulty of remaining 3 exercises",
+            "Risk of rushing through exercises due to time pressure",
+            "Context-switching from database work to AI concepts may be mentally taxing",
+            "Could push into late night if exercises are harder than expected"
+          ],
+          "recommendations": [
+            "Dedicate Sunday afternoon/evening specifically to this task",
+            "Start with the hardest remaining exercise while fresh",
+            "Leave 30-minute buffer before deadline for submission issues",
+            "Do NOT start this Saturday if it delays database project completion",
+            "If exercises are code-heavy, batch similar tasks together"
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Review completed exercise to ensure approach is correct (15 min)",
+            "Complete remaining exercise 2 (1 hour estimate)",
+            "Complete remaining exercise 3 (1 hour estimate)",
+            "Complete remaining exercise 4 (1 hour estimate)",
+            "Final review and submission prep (30 min)"
+          ]
+        },
+        {
+          "task_id": "history_essay",
+          "task_name": "History essay",
+          "assessment": "Highest weight (40%) but furthest deadline (10 days). This is a classic trap - the essay feels distant but requires significant research and writing. From a wellbeing perspective, starting research too late creates panic and poor-quality work. The student should begin research by Tuesday at the latest, but should NOT sacrifice database project completion to start this early. The essay is worth 40% and deserves sustained attention, not last-minute rushing.",
+          "concerns": [
+            "40% weight means this cannot be ignored despite distant deadline",
+            "Research phase is time-intensive and cannot be rushed",
+            "Risk of panic-starting if left too late in the week",
+            "Essay writing under pressure often produces lower quality work",
+            "Student may underestimate research time needed"
+          ],
+          "recommendations": [
+            "Begin research Tuesday evening (2 hours) after database project is submitted",
+            "Use Wednesday and Thursday evenings for additional research",
+            "Draft outline by end of week to reduce weekend pressure",
+            "Do NOT start research Friday-Saturday - protect database project time",
+            "Spread research across multiple shorter sessions to avoid fatigue"
+          ],
+          "estimated_duration_hours": 6,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Identify key research questions and sources (30 min)",
+            "Initial research session - gather sources (1.5 hours)",
+            "Second research session - detailed notes (1.5 hours)",
+            "Create detailed outline with main arguments (1.5 hours)",
+            "Review outline and identify gaps (1 hour)"
+          ]
+        },
+        {
+          "task_id": "slide_review",
+          "task_name": "Help friend review slides",
+          "assessment": "Low stakes social commitment (1 hour Saturday). This is the most wellbeing-friendly task - it's a fixed, short commitment with no academic pressure. The student should treat this as a mental break from intensive studying. However, it does consume Saturday time, reducing effective study hours that day.",
+          "concerns": [
+            "Uses 1 hour of Saturday availability (already limited day)",
+            "May feel like an obligation rather than rest",
+            "Could run over if friend has many slides",
+            "Time of day not specified - could conflict with study schedule"
+          ],
+          "recommendations": [
+            "Schedule this for Saturday afternoon as a mental break",
+            "Set a firm 1-hour limit and stick to it",
+            "Use this as a low-stress cognitive break between study blocks",
+            "Do not feel guilty - social commitments matter for wellbeing",
+            "Suggest doing this after completing database project work"
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review slides for content accuracy (30 min)",
+            "Provide feedback on presentation clarity (20 min)",
+            "Discuss any questions friend has (10 min)"
+          ]
+        }
+      ],
+      "overall_comment": "This is a high-pressure week with two major deadlines (database project Monday, AI homework Sunday) plus a social commitment. The student has moderate energy and adequate sleep baseline, which is good. The main wellbeing risks are: (1) Sunday evening stacking - both AI homework deadline and last-minute database project prep could push into late night; (2) Cognitive fatigue from context-switching between technical database work and AI exercises; (3) History essay research getting deprioritized despite 40% weight. The plan should front-load database project work on Friday and Saturday to reduce Sunday/Monday stress. The student should resist the urge to work late Sunday night - the database project is worth 30% and needs a clear head Monday. History essay research should begin Tuesday at latest to avoid last-minute panic on a 40% assignment."
+    },
+    {
+      "agent": "Risk Agent",
+      "task_views": [
+        {
+          "task_id": "db_project",
+          "task_name": "Database project milestone",
+          "assessment": "CRITICAL - Due Monday night (2026-06-01). Schema is complete, but queries, tests, and demo script remain. This is 30% of the course grade. The remaining scope is not quantified - we don't know how many queries are needed, how complex the tests should be, or how polished the demo script needs to be. This creates significant hidden work risk. The student has 3 hours Friday, 2 hours Monday available, totaling 5 hours before the deadline. If queries require debugging or tests reveal issues, there is no buffer time.",
+          "concerns": [
+            "Remaining scope unquantified - number of queries, test complexity, demo polish level unknown",
+            "No buffer time if queries need debugging or tests fail",
+            "Demo script requirements unclear - could be simple print statements or require polished presentation",
+            "Monday has only 2 hours available but is the deadline day - risky if any work runs late",
+            "If any technical issues arise (database errors, environment problems), there is zero contingency",
+            "Student energy described as 'moderate' - may impact Monday evening productivity",
+            "Confidence in weekday availability is 'medium' - could be overestimated"
+          ],
+          "recommendations": [
+            "Break down remaining work immediately: count exact queries needed, define test coverage, clarify demo expectations",
+            "Add 1-2 hour buffer for debugging - assume first versions will have issues",
+            "Consider completing core queries and tests by Saturday to leave Sunday for polish and contingency",
+            "Request clarification on demo script requirements before starting",
+            "Do not plan to use Monday evening for new work - reserve for emergencies only",
+            "Identify potential technical blockers early (environment setup, data availability)"
+          ],
+          "estimated_duration_hours": 6,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Count and list all required queries",
+            "Define test coverage requirements",
+            "Clarify demo script expectations with instructor",
+            "Write core queries (with test cases)",
+            "Debug and fix query issues",
+            "Create demo script",
+            "Test demo script end-to-end",
+            "Buffer for unexpected issues"
+          ]
+        },
+        {
+          "task_id": "ai_homework",
+          "task_name": "AI homework",
+          "assessment": "HIGH - Due Sunday night (2026-05-31). 4 exercises total, 1 complete, 3 remaining. Worth 8% of course grade. The difficulty of remaining exercises is completely unknown - they could be trivial or extremely challenging. This creates hidden work risk. Student has 4 hours Sunday available, which may or may not be sufficient.",
+          "concerns": [
+            "Difficulty of remaining 3 exercises completely unknown - could require significant time",
+            "Exercise type unknown - could be coding, written analysis, or both",
+            "No buffer time if exercises are harder than expected",
+            "Sunday evening deadline means student is working at end of day - energy may be low",
+            "If exercises require debugging or research, 4 hours may be insufficient",
+            "Confidence in Sunday availability is 'high' but energy at end of weekend is unknown"
+          ],
+          "recommendations": [
+            "Attempt to identify or estimate difficulty of remaining exercises before Sunday",
+            "If exercises are coding-based, assume 1-2 hours per exercise as rough buffer",
+            "If any exercise seems complex, start earlier than Sunday",
+            "Consider doing at least one more exercise on Saturday if time permits",
+            "Do not wait until Sunday evening to start - risk of running out of time",
+            "Have contingency plan if one exercise takes much longer than expected"
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Identify remaining exercise topics and estimate difficulty",
+            "Attempt exercise 2",
+            "Attempt exercise 3",
+            "Attempt exercise 4",
+            "Test and verify all solutions",
+            "Buffer for difficult exercises"
+          ]
+        },
+        {
+          "task_id": "history_essay",
+          "task_name": "History essay",
+          "assessment": "MEDIUM - Due in 10 days (2026-06-08). Worth 40% of course grade - highest weight item. Student mentioned needing research and outline soon, but the planning window only covers 7 days. This task has significant hidden scope risk: essay length, required sources, citation format, and whether outline needs approval are all unknown.",
+          "concerns": [
+            "Essay requirements completely unknown - length, format, citation style unspecified",
+            "Research phase could require library visits or specific source access",
+            "Whether outline needs instructor approval before proceeding is unclear",
+            "10-day deadline seems far but research and drafting will take significant time",
+            "If student focuses only on near-term deadlines, this task may get neglected",
+            "No weekend availability after Saturday to work on this task",
+            "Outline and research should ideally start this week but competing priorities may prevent this",
+            "Unknown whether essay topic is assigned or student-chosen - if chosen, adds decision time"
+          ],
+          "recommendations": [
+            "Allocate at least 2-3 hours this week for research and outline despite competing deadlines",
+            "Research and outline can be done in parallel with other tasks (reading time, background work)",
+            "Clarify essay requirements: length, format, citation style, whether outline is required",
+            "If topic is student-chosen, make that decision early to enable research",
+            "Do not let this slide - 40% weight means it deserves early attention",
+            "Consider using weekday evenings for research reading if Saturday is fully booked",
+            "Identify 2-3 potential sources this week to avoid last-minute research stress"
+          ],
+          "estimated_duration_hours": 12,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Clarify essay requirements (length, format, citation style)",
+            "Choose/finalize essay topic if student-chosen",
+            "Identify required sources",
+            "Conduct initial research",
+            "Create detailed outline",
+            "Draft introduction and body sections",
+            "Revise and edit",
+            "Final review and formatting"
+          ]
+        },
+        {
+          "task_id": "slide_review",
+          "task_name": "Help friend review slides",
+          "assessment": "LOW - Flexible commitment on Saturday. 1 hour estimated. Worth no grade but creates social obligation. Low risk but worth noting as it consumes Saturday availability.",
+          "concerns": [
+            "Exact time on Saturday not specified - could conflict with other work",
+            "Number of slides unknown - could take longer than 1 hour",
+            "Student may feel obligated to provide detailed feedback",
+            "If friend needs extensive help, could consume more than 1 hour",
+            "Low priority but still consumes time from limited Saturday window (5 hours total)"
+          ],
+          "recommendations": [
+            "Schedule this early Saturday to contain it to 1 hour",
+            "Set clear time boundary - offer to review for 1 hour max",
+            "If detailed review needed, suggest friend prioritize most important slides",
+            "Can be done while energy is fresh or as a break between focused work"
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review assigned slides",
+            "Provide feedback",
+            "Set time boundary if needed"
+          ]
+        }
+      ],
+      "overall_comment": "The plan has significant hidden work and buffer risks. The database project (30%) has unquantified scope and zero contingency time before Monday deadline - if queries need debugging or the demo has issues, there is no safety margin. The AI homework (8%) has unknown exercise difficulty - 4 hours Sunday may be insufficient if exercises are complex. The history essay (40%) needs early research and outline but competing urgent deadlines may crowd it out. The student has approximately 18 hours available over 7 days, but the database project alone could consume 6+ hours with no buffer. Recommendation: Prioritize database project queries and tests by Saturday evening to create Sunday buffer for contingency and AI homework. Allocate at least 2 hours this week for history essay research/outline to prevent last-minute rush. The low confidence scores on db_project and ai_homework reflect the high uncertainty in remaining scope - the student should clarify requirements before assuming time estimates are accurate."
+    }
+  ],
+  "calendarVersions": [
+    {
+      "calendar": {
+        "calendar_version": 1,
+        "planning_window": {
+          "start_date": "2026-05-29",
+          "end_date": "2026-06-04",
+          "reason": "Student requested planning for the next 7 days, covering critical deadlines for database project (Monday) and AI homework (Sunday), while also accounting for the history essay which needs early attention given its 10-day deadline and 40% weight"
+        },
+        "overall_strategy": [
+          "Prioritize database project (30%, Monday deadline) with all available Friday and Saturday time",
+          "Complete AI homework (8%, Sunday deadline) Saturday evening and Sunday afternoon",
+          "Begin history essay research (40%, June 8 deadline) Tuesday-Wednesday to avoid last-minute rush on highest-weighted assignment",
+          "Schedule friend slide review (1 hour) early Saturday morning to preserve afternoon for academic work",
+          "Front-load technical work to reduce Sunday/Monday stress and cognitive load",
+          "Reserve Sunday evening buffer for database project contingency and AI homework final review",
+          "Allocate 2 hours each on Tuesday and Wednesday for history essay research and outline development"
+        ],
+        "days": [
+          {
+            "date": "2026-05-29",
+            "day_name": "Friday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Friday has 3 hours available. Allocate all to database project queries to establish foundation before tests and demo script.",
+            "blocks": [
+              {
+                "id": "b1",
+                "task_id": "db_project",
+                "task_name": "Database project milestone",
+                "type": "work",
+                "start": "2026-05-29T17:00:00",
+                "end": "2026-05-29T20:00:00",
+                "duration_hours": 3,
+                "description": "Write and test SQL queries for the database project. Focus on core query functionality with basic unit tests.",
+                "reasoning": "Database project is 30% weight with Monday deadline. Friday evening is the only large block before deadline, so all 3 hours go to queries."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-30",
+            "day_name": "Saturday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Saturday has 5 hours available. Schedule friend review first to clear afternoon for academic work, then focus on database project tests and demo script.",
+            "blocks": [
+              {
+                "id": "b2",
+                "task_id": "slide_review",
+                "task_name": "Help friend review slides",
+                "type": "work",
+                "start": "2026-05-30T09:00:00",
+                "end": "2026-05-30T10:00:00",
+                "duration_hours": 1,
+                "description": "Review friend's presentation slides and provide constructive feedback for 1 hour.",
+                "reasoning": "Social commitment promised before Saturday. Schedule early to preserve afternoon for academic priorities and keep it time-boxed to 1 hour."
+              },
+              {
+                "id": "b3",
+                "task_id": "db_project",
+                "task_name": "Database project milestone",
+                "type": "work",
+                "start": "2026-05-30T10:00:00",
+                "end": "2026-05-30T13:00:00",
+                "duration_hours": 3,
+                "description": "Create test cases for database queries and build the demo script demonstrating key functionality.",
+                "reasoning": "Database project needs tests and demo script before Monday deadline. Saturday afternoon provides focused time for this technical work."
+              },
+              {
+                "id": "b4",
+                "task_id": "ai_homework",
+                "task_name": "AI homework",
+                "type": "work",
+                "start": "2026-05-30T14:00:00",
+                "end": "2026-05-30T16:00:00",
+                "duration_hours": 2,
+                "description": "Complete remaining 3 AI homework exercises. Start with exercises 2 and 3 to reduce Sunday workload.",
+                "reasoning": "AI homework due Sunday night worth 8%. Completing 2 exercises Saturday reduces Sunday load from 4 hours to approximately 2 hours."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-31",
+            "day_name": "Sunday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Sunday has 4 hours available. Complete AI homework (due tonight) and reserve evening for database project contingency.",
+            "blocks": [
+              {
+                "id": "b5",
+                "task_id": "ai_homework",
+                "task_name": "AI homework",
+                "type": "work",
+                "start": "2026-05-31T14:00:00",
+                "end": "2026-05-31T16:00:00",
+                "duration_hours": 2,
+                "description": "Complete AI homework exercise 4 and final review. Verify all solutions before submission.",
+                "reasoning": "AI homework due Sunday night. Sunday afternoon is optimal for completing remaining exercise and reviewing all submissions."
+              },
+              {
+                "id": "b6",
+                "task_id": "db_project",
+                "task_name": "Database project milestone",
+                "type": "work",
+                "start": "2026-05-31T18:00:00",
+                "end": "2026-05-31T21:00:00",
+                "duration_hours": 3,
+                "description": "Final testing, edge case handling, and polish for database project. Prepare submission materials.",
+                "reasoning": "Database project due Monday night. Sunday evening provides final buffer for debugging, polish, and contingency if Friday/Saturday work revealed issues."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-01",
+            "day_name": "Monday",
+            "assumed_available_hours": 2,
+            "day_reasoning": "Monday has 2 hours available with database project due tonight. Use morning for final review and submission preparation.",
+            "blocks": [
+              {
+                "id": "b7",
+                "task_id": "db_project",
+                "task_name": "Database project milestone",
+                "type": "work",
+                "start": "2026-06-01T09:00:00",
+                "end": "2026-06-01T11:00:00",
+                "duration_hours": 2,
+                "description": "Final review, submission preparation, and last-minute fixes for database project before Monday night deadline.",
+                "reasoning": "Database project due Monday night. Monday morning is final opportunity for any last-minute fixes or submission preparation."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-02",
+            "day_name": "Tuesday",
+            "assumed_available_hours": 2,
+            "day_reasoning": "Tuesday has 2 hours available. Begin history essay research to establish foundation for 40% weighted assignment.",
+            "blocks": [
+              {
+                "id": "b8",
+                "task_id": "history_essay",
+                "task_name": "History essay",
+                "type": "work",
+                "start": "2026-06-02T18:00:00",
+                "end": "2026-06-02T20:00:00",
+                "duration_hours": 2,
+                "description": "Initial research for history essay. Identify key sources and research questions. Begin gathering preliminary information.",
+                "reasoning": "History essay is 40% weight with June 8 deadline. Starting research Tuesday prevents last-minute rush on highest-weighted assignment."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-03",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 2,
+            "day_reasoning": "Wednesday has 2 hours available. Continue history essay research and begin outline development.",
+            "blocks": [
+              {
+                "id": "b9",
+                "task_id": "history_essay",
+                "task_name": "History essay",
+                "type": "work",
+                "start": "2026-06-03T18:00:00",
+                "end": "2026-06-03T20:00:00",
+                "duration_hours": 2,
+                "description": "Continue research and develop detailed outline with main arguments and supporting evidence structure.",
+                "reasoning": "History essay needs research and outline before drafting. Wednesday session builds on Tuesday research to create structured outline."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 2,
+            "day_reasoning": "Thursday has 2 hours available. Refine history essay outline and identify any gaps before the weekend.",
+            "blocks": [
+              {
+                "id": "b10",
+                "task_id": "history_essay",
+                "task_name": "History essay",
+                "type": "work",
+                "start": "2026-06-04T18:00:00",
+                "end": "2026-06-04T20:00:00",
+                "duration_hours": 2,
+                "description": "Refine essay outline, review structure, and identify any gaps in research or argumentation.",
+                "reasoning": "Thursday allows outline refinement and gap identification before weekend drafting begins. Establishes solid foundation for essay completion."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Database project scope is unquantified and may require more than 6 hours of available time before Monday deadline",
+            "resolution": "Front-load all Friday and Saturday time to database project. Keep demo script minimal. Reserve Sunday evening as contingency buffer."
+          },
+          {
+            "conflict": "AI homework difficulty of remaining 3 exercises is unknown - could require significantly more than estimated 4 hours",
+            "resolution": "Complete 2 exercises Saturday to reduce Sunday load. Sunday afternoon dedicated entirely to AI homework with 30-minute buffer before deadline."
+          },
+          {
+            "conflict": "History essay research and outline compete with urgent database and AI deadlines",
+            "resolution": "Defer history essay research until Tuesday after database project is submitted. Allocate 2 hours Tuesday, Wednesday, and Thursday for research/outline."
+          },
+          {
+            "conflict": "Total estimated academic work (~23 hours) exceeds available time (~18 hours)",
+            "resolution": "Prioritize ruthlessly: database project and AI homework are non-negotiable. History essay research begins this week but can extend into following week. No buffer blocks added."
+          }
+        ],
+        "known_weaknesses": [
+          "Database project remaining scope (queries, tests, demo script) is unquantified - actual work may exceed estimates",
+          "AI homework exercise difficulty is completely unknown - remaining 3 exercises could be trivial or extremely time-consuming",
+          "History essay requirements (length, format, citation style) are unspecified - research time may be underestimated",
+          "No contingency time if technical issues arise during database project implementation",
+          "Sunday evening stacks both AI homework final review and database project contingency work",
+          "Student may experience cognitive fatigue from context-switching between technical database work and AI exercises"
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Initial calendar version - no previous version exists",
+            "reason": "This is the first calendar proposal for the planning window"
+          }
+        ],
+        "unresolved_critiques": [
+          {
+            "agent": "Deadline Agent",
+            "severity": "major",
+            "issue": "Time deficit of approximately 5 hours between estimated work (23 hours) and available time (18 hours) creates significant execution risk",
+            "planner_response": "Prioritize ruthlessly by front-loading database project on Friday/Saturday. History essay research can extend into following week. No buffer blocks added - unscheduled time is implicitly rest."
+          },
+          {
+            "agent": "Effort Agent",
+            "severity": "major",
+            "issue": "Database project may require 6-9 hours for polished submission but only ~6 hours available before Monday deadline with no buffer",
+            "planner_response": "Allocate all Friday (3 hours) and Saturday afternoon (3 hours) to database project. Keep demo script minimal. Sunday evening reserved for contingency. Accept that comprehensive testing may be limited."
+          },
+          {
+            "agent": "Risk Agent",
+            "severity": "major",
+            "issue": "Database project has zero contingency time - if queries need debugging or demo has issues, there is no safety margin before Monday deadline",
+            "planner_response": "Front-load query work Friday evening. Create test cases and demo script Saturday. Sunday evening provides 3-hour buffer for debugging and polish. Monday morning is final review opportunity."
+          },
+          {
+            "agent": "Wellbeing Agent",
+            "severity": "minor",
+            "issue": "Sunday evening stacks both AI homework deadline and database project contingency work, creating late-night work risk",
+            "planner_response": "Schedule AI homework Sunday afternoon (14:00-16:00) to complete before evening. Database project contingency scheduled 18:00-21:00. Set firm deadline for AI homework submission before starting database work."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "Wellbeing Agent raised concern about Sunday evening stacking AI homework and database project contingency work, creating late-night risk. Planner addressed this by scheduling AI homework Sunday afternoon (14:00-16:00) and database contingency Sunday evening (18:00-21:00) sequentially rather than simultaneously, with a firm boundary between them. This mitigates the risk effectively.",
+            "Risk Agent flagged zero contingency time for database project. Planner addressed this by allocating 3-hour Sunday evening buffer (18:00-21:00) specifically for debugging and polish, plus Monday morning (09:00-11:00) for final review and last-minute fixes. This provides meaningful safety margin.",
+            "Effort Agent noted database project may need 6-9 hours but only 6 hours available. Planner's response front-loaded all Friday (3 hours) and Saturday (3 hours) to database project, with Sunday evening as contingency. The total 11 hours before Monday deadline adequately covers the estimated 8-hour workload."
+          ],
+          "overall_comment": "This calendar protects all deadline tasks with appropriate time allocation. The database project (Monday, 30%) receives 11 total hours: 3 hours Friday for queries, 3 hours Saturday for tests/demo, 3 hours Sunday evening for contingency/polish, and 2 hours Monday morning for final review. The Sunday evening buffer directly addresses my earlier concern about insufficient contingency time. The AI homework (Sunday, 8%) receives 4 hours across Saturday afternoon and Sunday afternoon, with completion expected before the Sunday evening deadline. The history essay (June 8, 40%) begins research Tuesday through Thursday (6 hours total), establishing solid foundation for later drafting. The overall strategy correctly prioritizes database project above all else, completes AI homework Saturday to reduce Sunday load, and starts essay research early to avoid last-minute rush on the highest-weighted assignment. All deadlines are adequately protected. Approve."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "Database project front-loaded on Friday (3h) and Saturday (3h) with Sunday evening contingency buffer - addresses my concern about Monday deadline risk",
+            "AI homework split across Saturday afternoon (2h) and Sunday afternoon (2h) - reduces Sunday evening load and ensures completion before database project contingency",
+            "History essay research deferred to Tuesday-Wednesday-Thursday (2h each) - protects database project priority while still establishing early foundation for 40% assignment",
+            "History essay research/outline work can extend into following week - acknowledges time deficit without compromising critical deadlines",
+            "Sunday evening buffer (3h) reserved for database project contingency - partially addresses zero-contingency concern",
+            "AI homework scheduled Sunday afternoon before database contingency - separates the two deadlines to reduce late-night stacking risk"
+          ],
+          "overall_comment": "Grade protection strategy is sound. The calendar correctly prioritizes the database project (30%, Monday deadline) with all available Friday and Saturday time, treating it as the critical path item. AI homework (8%, Sunday deadline) is appropriately split across Saturday and Sunday to ensure completion without crowding database work. The history essay (40%, June 8 deadline) receives protected research time starting Tuesday, which is the right balance between not neglecting the highest-weight assignment and not sacrificing critical deadlines. The slide review is correctly scheduled early Saturday as a time-boxed social commitment. The time deficit acknowledged by the Deadline Agent is addressed by deferring history essay work to the following week - this is an acceptable compromise given the deadline structure. The Sunday evening buffer for database contingency and the Monday morning final review slot provide reasonable protection against technical issues. From a grade protection perspective, this calendar maximizes the probability of strong performance on the two imminent deadlines while establishing early momentum on the highest-weight assignment."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "Database project Sunday evening contingency block (b6) is optimistic - 3 hours for 'final testing, edge case handling, and polish' after already working 6 hours on queries/tests/demo may not be enough if issues are discovered. If queries have bugs or demo fails, the student loses the buffer.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Database project milestone"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Consider moving some database contingency work to Saturday evening instead of Sunday evening, or accept that comprehensive edge case testing may be sacrificed for functional submission. The Sunday evening block should focus on critical fixes only, not comprehensive polish."
+            },
+            {
+              "issue": "History essay research allocation of 2 hours per day (6 hours total) may be insufficient if sources are difficult to find or topic requires extensive reading. The essay is 40% weight and worth significant attention.",
+              "severity": "minor",
+              "affected_tasks": [
+                "History essay"
+              ],
+              "affected_days": [
+                "2026-06-02",
+                "2026-06-03",
+                "2026-06-04"
+              ],
+              "suggested_fix": "If research reveals the need for more time, consider extending research into Friday (2026-06-05) or weekend. The outline refinement on Thursday should include a checkpoint to assess whether additional research time is needed before drafting begins."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner addressed my earlier concern about database project scope by front-loading Friday and Saturday time, keeping demo script minimal, and reserving Sunday evening as contingency. This is a reasonable compromise given the tight timeline.",
+            "The planner addressed the AI homework uncertainty by having the student complete 2 exercises Saturday to reduce Sunday load. This spreads the risk appropriately.",
+            "The planner acknowledged the time deficit issue and made hard prioritization decisions: database project and AI homework are non-negotiable, history essay research can extend into following week. This is pragmatic.",
+            "The planner addressed the zero-contingency risk by front-loading query work Friday, creating test cases and demo script Saturday, and reserving Sunday evening for debugging. Monday morning provides final review opportunity."
+          ],
+          "overall_comment": "The calendar is a reasonable first attempt at balancing competing priorities. The database project strategy (front-loading Friday/Saturday, minimal demo, Sunday contingency) addresses my core concern about scope underestimation. The AI homework Saturday start is good risk mitigation. History essay research starting Tuesday is appropriate given the June 8 deadline. My minor concerns are that Sunday evening database contingency may be optimistic if issues arise, and that 6 hours for history essay research/outline may be tight for a 40% weighted assignment. These are manageable risks that the student can adjust if needed. Overall the effort estimates are realistic for a student working at moderate energy levels."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "Sunday evening (June 1) has 3 hours of database project contingency work scheduled from 18:00-21:00, which is late-night work that could push past 21:00 if debugging issues arise. This conflicts with the need for adequate sleep before the Monday morning submission window.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Database project milestone"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Consider moving the database project contingency buffer to earlier Sunday (12:00-15:00) to complete all database work before evening. This would allow the student to submit early Monday without late-night stress. Alternatively, accept that Sunday evening work may be minimal if Friday/Saturday work is solid."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner correctly front-loaded database project work on Friday (3 hours) and Saturday (3 hours), which addresses my earlier concern about late-night work risk. This is a good compromise that reduces Sunday/Monday stress.",
+            "The planner scheduled AI homework for Sunday afternoon (14:00-16:00) instead of evening, which separates it from database project work and reduces stacking risk. This addresses my concern about Sunday evening stacking.",
+            "History essay research begins Tuesday as I recommended, protecting database project time on Friday/Saturday. This is the correct priority order.",
+            "The planner kept the demo script minimal and did not add unnecessary buffer blocks, which is appropriate. Unscheduled time serves as implicit rest."
+          ],
+          "overall_comment": "The calendar is humane and follows my core recommendations. The main remaining concern is Sunday evening database project contingency work (18:00-21:00) which could extend into late night if debugging issues arise. However, this is a minor concern because: (1) Friday and Saturday provide 6 hours of front-loaded database work; (2) AI homework is scheduled earlier Sunday afternoon; (3) Monday morning has a 2-hour final review block. The student should aim to finish database project work by 20:00 Sunday to preserve sleep before Monday deadline. The plan protects sleep adequately overall and front-loads urgent work correctly."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "Database project contingency buffer is front-loaded rather than true reserve - Sunday evening block (b6) is labeled 'contingency' but is actually essential work (final testing, edge cases, polish). If Friday/Saturday work completes successfully, this block becomes optional buffer. If it doesn't, the 3 hours may be insufficient for catching up.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Database project milestone"
+              ],
+              "affected_days": [
+                "2026-05-31",
+                "2026-06-01"
+              ],
+              "suggested_fix": "Rename Sunday evening block as 'contingency/buffer' and explicitly note that it should only be used if Friday/Saturday work revealed issues. Alternatively, add explicit note that if queries/tests are complete by Saturday, Sunday evening becomes free time rather than assumed busy time."
+            },
+            {
+              "issue": "History essay research blocks (b8, b9, b10) are scheduled Tuesday-Thursday evenings but the task has unquantified scope - research could require library visits, specific source access, or topic clarification that may not fit in 2-hour evening windows.",
+              "severity": "minor",
+              "affected_tasks": [
+                "History essay"
+              ],
+              "affected_days": [
+                "2026-06-02",
+                "2026-06-03",
+                "2026-06-04"
+              ],
+              "suggested_fix": "Add note that history essay research may require flexibility - if sources are unavailable or topic needs clarification, research time may need to extend beyond scheduled 2-hour blocks. Consider identifying potential library or online resource access needs before Tuesday."
+            },
+            {
+              "issue": "AI homework Sunday afternoon block (b5) assumes 2 hours for exercise 4 and final review, but exercise difficulty is completely unknown. If exercise 4 is complex, 2 hours may be insufficient and would encroach on database project contingency time.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AI homework"
+              ],
+              "affected_days": [
+                "2026-05-31"
+              ],
+              "suggested_fix": "Add explicit buffer note: if exercise 4 takes longer than expected, extend into early evening before database project contingency. Database project contingency should not be reduced to accommodate AI homework overruns."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner addressed my earlier concern about zero contingency time by front-loading Friday/Saturday to database project and reserving Sunday evening as buffer. While the contingency is front-loaded (contingency only exists if Friday/Saturday work succeeds), this is a reasonable compromise given the time deficit.",
+            "The planner acknowledged the history essay research conflict and deferred it to Tuesday-Thursday, which is appropriate given the 30% database project and 8% AI homework deadlines. The 2-hour daily allocation is modest but realistic given competing priorities.",
+            "The planner addressed the AI homework difficulty uncertainty by completing 2 exercises Saturday to reduce Sunday load from 4 hours to approximately 2 hours. This reduces but does not eliminate the risk of unknown exercise difficulty.",
+            "The planner acknowledged the time deficit (~5 hours) and made explicit that history essay research can extend into the following week. This prevents overcommitment this week."
+          ],
+          "overall_comment": "The calendar addresses my core risk concerns adequately through front-loading database project work and creating Sunday evening buffer. The acknowledged_compromises section correctly identifies that contingency is conditional on Friday/Saturday success - this is a reasonable approach given constraints. Remaining critiques are minor: the contingency buffer is front-loaded (acceptable), history essay research scope is unquantified (noted but acceptable given 10-day deadline), and AI homework exercise difficulty remains unknown (mitigated by Saturday pre-work). The plan has no critical risks - all major concerns have been addressed through explicit compromises. Approval with minor concerns reflects that these are watchpoints rather than blockers."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-04 is outside the planning window 2026-05-29 → 2026-06-04.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 5,
+      "hasCritical": false
+    }
+  ],
+  "finalCalendar": {
+    "calendar_version": 1,
+    "planning_window": {
+      "start_date": "2026-05-29",
+      "end_date": "2026-06-04",
+      "reason": "Student requested planning for the next 7 days, covering critical deadlines for database project (Monday) and AI homework (Sunday), while also accounting for the history essay which needs early attention given its 10-day deadline and 40% weight"
+    },
+    "overall_strategy": [
+      "Prioritize database project (30%, Monday deadline) with all available Friday and Saturday time",
+      "Complete AI homework (8%, Sunday deadline) Saturday evening and Sunday afternoon",
+      "Begin history essay research (40%, June 8 deadline) Tuesday-Wednesday to avoid last-minute rush on highest-weighted assignment",
+      "Schedule friend slide review (1 hour) early Saturday morning to preserve afternoon for academic work",
+      "Front-load technical work to reduce Sunday/Monday stress and cognitive load",
+      "Reserve Sunday evening buffer for database project contingency and AI homework final review",
+      "Allocate 2 hours each on Tuesday and Wednesday for history essay research and outline development"
+    ],
+    "days": [
+      {
+        "date": "2026-05-29",
+        "day_name": "Friday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "Friday has 3 hours available. Allocate all to database project queries to establish foundation before tests and demo script.",
+        "blocks": [
+          {
+            "id": "b1",
+            "task_id": "db_project",
+            "task_name": "Database project milestone",
+            "type": "work",
+            "start": "2026-05-29T17:00:00",
+            "end": "2026-05-29T20:00:00",
+            "duration_hours": 3,
+            "description": "Write and test SQL queries for the database project. Focus on core query functionality with basic unit tests.",
+            "reasoning": "Database project is 30% weight with Monday deadline. Friday evening is the only large block before deadline, so all 3 hours go to queries."
+          }
+        ]
+      },
+      {
+        "date": "2026-05-30",
+        "day_name": "Saturday",
+        "assumed_available_hours": 5,
+        "day_reasoning": "Saturday has 5 hours available. Schedule friend review first to clear afternoon for academic work, then focus on database project tests and demo script.",
+        "blocks": [
+          {
+            "id": "b2",
+            "task_id": "slide_review",
+            "task_name": "Help friend review slides",
+            "type": "work",
+            "start": "2026-05-30T09:00:00",
+            "end": "2026-05-30T10:00:00",
+            "duration_hours": 1,
+            "description": "Review friend's presentation slides and provide constructive feedback for 1 hour.",
+            "reasoning": "Social commitment promised before Saturday. Schedule early to preserve afternoon for academic priorities and keep it time-boxed to 1 hour."
+          },
+          {
+            "id": "b3",
+            "task_id": "db_project",
+            "task_name": "Database project milestone",
+            "type": "work",
+            "start": "2026-05-30T10:00:00",
+            "end": "2026-05-30T13:00:00",
+            "duration_hours": 3,
+            "description": "Create test cases for database queries and build the demo script demonstrating key functionality.",
+            "reasoning": "Database project needs tests and demo script before Monday deadline. Saturday afternoon provides focused time for this technical work."
+          },
+          {
+            "id": "b4",
+            "task_id": "ai_homework",
+            "task_name": "AI homework",
+            "type": "work",
+            "start": "2026-05-30T14:00:00",
+            "end": "2026-05-30T16:00:00",
+            "duration_hours": 2,
+            "description": "Complete remaining 3 AI homework exercises. Start with exercises 2 and 3 to reduce Sunday workload.",
+            "reasoning": "AI homework due Sunday night worth 8%. Completing 2 exercises Saturday reduces Sunday load from 4 hours to approximately 2 hours."
+          }
+        ]
+      },
+      {
+        "date": "2026-05-31",
+        "day_name": "Sunday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Sunday has 4 hours available. Complete AI homework (due tonight) and reserve evening for database project contingency.",
+        "blocks": [
+          {
+            "id": "b5",
+            "task_id": "ai_homework",
+            "task_name": "AI homework",
+            "type": "work",
+            "start": "2026-05-31T14:00:00",
+            "end": "2026-05-31T16:00:00",
+            "duration_hours": 2,
+            "description": "Complete AI homework exercise 4 and final review. Verify all solutions before submission.",
+            "reasoning": "AI homework due Sunday night. Sunday afternoon is optimal for completing remaining exercise and reviewing all submissions."
+          },
+          {
+            "id": "b6",
+            "task_id": "db_project",
+            "task_name": "Database project milestone",
+            "type": "work",
+            "start": "2026-05-31T18:00:00",
+            "end": "2026-05-31T21:00:00",
+            "duration_hours": 3,
+            "description": "Final testing, edge case handling, and polish for database project. Prepare submission materials.",
+            "reasoning": "Database project due Monday night. Sunday evening provides final buffer for debugging, polish, and contingency if Friday/Saturday work revealed issues."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-01",
+        "day_name": "Monday",
+        "assumed_available_hours": 2,
+        "day_reasoning": "Monday has 2 hours available with database project due tonight. Use morning for final review and submission preparation.",
+        "blocks": [
+          {
+            "id": "b7",
+            "task_id": "db_project",
+            "task_name": "Database project milestone",
+            "type": "work",
+            "start": "2026-06-01T09:00:00",
+            "end": "2026-06-01T11:00:00",
+            "duration_hours": 2,
+            "description": "Final review, submission preparation, and last-minute fixes for database project before Monday night deadline.",
+            "reasoning": "Database project due Monday night. Monday morning is final opportunity for any last-minute fixes or submission preparation."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-02",
+        "day_name": "Tuesday",
+        "assumed_available_hours": 2,
+        "day_reasoning": "Tuesday has 2 hours available. Begin history essay research to establish foundation for 40% weighted assignment.",
+        "blocks": [
+          {
+            "id": "b8",
+            "task_id": "history_essay",
+            "task_name": "History essay",
+            "type": "work",
+            "start": "2026-06-02T18:00:00",
+            "end": "2026-06-02T20:00:00",
+            "duration_hours": 2,
+            "description": "Initial research for history essay. Identify key sources and research questions. Begin gathering preliminary information.",
+            "reasoning": "History essay is 40% weight with June 8 deadline. Starting research Tuesday prevents last-minute rush on highest-weighted assignment."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-03",
+        "day_name": "Wednesday",
+        "assumed_available_hours": 2,
+        "day_reasoning": "Wednesday has 2 hours available. Continue history essay research and begin outline development.",
+        "blocks": [
+          {
+            "id": "b9",
+            "task_id": "history_essay",
+            "task_name": "History essay",
+            "type": "work",
+            "start": "2026-06-03T18:00:00",
+            "end": "2026-06-03T20:00:00",
+            "duration_hours": 2,
+            "description": "Continue research and develop detailed outline with main arguments and supporting evidence structure.",
+            "reasoning": "History essay needs research and outline before drafting. Wednesday session builds on Tuesday research to create structured outline."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-04",
+        "day_name": "Thursday",
+        "assumed_available_hours": 2,
+        "day_reasoning": "Thursday has 2 hours available. Refine history essay outline and identify any gaps before the weekend.",
+        "blocks": [
+          {
+            "id": "b10",
+            "task_id": "history_essay",
+            "task_name": "History essay",
+            "type": "work",
+            "start": "2026-06-04T18:00:00",
+            "end": "2026-06-04T20:00:00",
+            "duration_hours": 2,
+            "description": "Refine essay outline, review structure, and identify any gaps in research or argumentation.",
+            "reasoning": "Thursday allows outline refinement and gap identification before weekend drafting begins. Establishes solid foundation for essay completion."
+          }
+        ]
+      }
+    ],
+    "compromises": [
+      {
+        "conflict": "Database project scope is unquantified and may require more than 6 hours of available time before Monday deadline",
+        "resolution": "Front-load all Friday and Saturday time to database project. Keep demo script minimal. Reserve Sunday evening as contingency buffer."
+      },
+      {
+        "conflict": "AI homework difficulty of remaining 3 exercises is unknown - could require significantly more than estimated 4 hours",
+        "resolution": "Complete 2 exercises Saturday to reduce Sunday load. Sunday afternoon dedicated entirely to AI homework with 30-minute buffer before deadline."
+      },
+      {
+        "conflict": "History essay research and outline compete with urgent database and AI deadlines",
+        "resolution": "Defer history essay research until Tuesday after database project is submitted. Allocate 2 hours Tuesday, Wednesday, and Thursday for research/outline."
+      },
+      {
+        "conflict": "Total estimated academic work (~23 hours) exceeds available time (~18 hours)",
+        "resolution": "Prioritize ruthlessly: database project and AI homework are non-negotiable. History essay research begins this week but can extend into following week. No buffer blocks added."
+      }
+    ],
+    "known_weaknesses": [
+      "Database project remaining scope (queries, tests, demo script) is unquantified - actual work may exceed estimates",
+      "AI homework exercise difficulty is completely unknown - remaining 3 exercises could be trivial or extremely time-consuming",
+      "History essay requirements (length, format, citation style) are unspecified - research time may be underestimated",
+      "No contingency time if technical issues arise during database project implementation",
+      "Sunday evening stacks both AI homework final review and database project contingency work",
+      "Student may experience cognitive fatigue from context-switching between technical database work and AI exercises"
+    ],
+    "changes_from_previous": [
+      {
+        "change": "Initial calendar version - no previous version exists",
+        "reason": "This is the first calendar proposal for the planning window"
+      }
+    ],
+    "unresolved_critiques": [
+      {
+        "agent": "Deadline Agent",
+        "severity": "major",
+        "issue": "Time deficit of approximately 5 hours between estimated work (23 hours) and available time (18 hours) creates significant execution risk",
+        "planner_response": "Prioritize ruthlessly by front-loading database project on Friday/Saturday. History essay research can extend into following week. No buffer blocks added - unscheduled time is implicitly rest."
+      },
+      {
+        "agent": "Effort Agent",
+        "severity": "major",
+        "issue": "Database project may require 6-9 hours for polished submission but only ~6 hours available before Monday deadline with no buffer",
+        "planner_response": "Allocate all Friday (3 hours) and Saturday afternoon (3 hours) to database project. Keep demo script minimal. Sunday evening reserved for contingency. Accept that comprehensive testing may be limited."
+      },
+      {
+        "agent": "Risk Agent",
+        "severity": "major",
+        "issue": "Database project has zero contingency time - if queries need debugging or demo has issues, there is no safety margin before Monday deadline",
+        "planner_response": "Front-load query work Friday evening. Create test cases and demo script Saturday. Sunday evening provides 3-hour buffer for debugging and polish. Monday morning is final review opportunity."
+      },
+      {
+        "agent": "Wellbeing Agent",
+        "severity": "minor",
+        "issue": "Sunday evening stacks both AI homework deadline and database project contingency work, creating late-night work risk",
+        "planner_response": "Schedule AI homework Sunday afternoon (14:00-16:00) to complete before evening. Database project contingency scheduled 18:00-21:00. Set firm deadline for AI homework submission before starting database work."
+      }
+    ]
+  },
+  "critiques": [
+    {
+      "agent": "Deadline Agent",
+      "calendar_version": 1,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "Wellbeing Agent raised concern about Sunday evening stacking AI homework and database project contingency work, creating late-night risk. Planner addressed this by scheduling AI homework Sunday afternoon (14:00-16:00) and database contingency Sunday evening (18:00-21:00) sequentially rather than simultaneously, with a firm boundary between them. This mitigates the risk effectively.",
+        "Risk Agent flagged zero contingency time for database project. Planner addressed this by allocating 3-hour Sunday evening buffer (18:00-21:00) specifically for debugging and polish, plus Monday morning (09:00-11:00) for final review and last-minute fixes. This provides meaningful safety margin.",
+        "Effort Agent noted database project may need 6-9 hours but only 6 hours available. Planner's response front-loaded all Friday (3 hours) and Saturday (3 hours) to database project, with Sunday evening as contingency. The total 11 hours before Monday deadline adequately covers the estimated 8-hour workload."
+      ],
+      "overall_comment": "This calendar protects all deadline tasks with appropriate time allocation. The database project (Monday, 30%) receives 11 total hours: 3 hours Friday for queries, 3 hours Saturday for tests/demo, 3 hours Sunday evening for contingency/polish, and 2 hours Monday morning for final review. The Sunday evening buffer directly addresses my earlier concern about insufficient contingency time. The AI homework (Sunday, 8%) receives 4 hours across Saturday afternoon and Sunday afternoon, with completion expected before the Sunday evening deadline. The history essay (June 8, 40%) begins research Tuesday through Thursday (6 hours total), establishing solid foundation for later drafting. The overall strategy correctly prioritizes database project above all else, completes AI homework Saturday to reduce Sunday load, and starts essay research early to avoid last-minute rush on the highest-weighted assignment. All deadlines are adequately protected. Approve."
+    },
+    {
+      "agent": "Grade Agent",
+      "calendar_version": 1,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "Database project front-loaded on Friday (3h) and Saturday (3h) with Sunday evening contingency buffer - addresses my concern about Monday deadline risk",
+        "AI homework split across Saturday afternoon (2h) and Sunday afternoon (2h) - reduces Sunday evening load and ensures completion before database project contingency",
+        "History essay research deferred to Tuesday-Wednesday-Thursday (2h each) - protects database project priority while still establishing early foundation for 40% assignment",
+        "History essay research/outline work can extend into following week - acknowledges time deficit without compromising critical deadlines",
+        "Sunday evening buffer (3h) reserved for database project contingency - partially addresses zero-contingency concern",
+        "AI homework scheduled Sunday afternoon before database contingency - separates the two deadlines to reduce late-night stacking risk"
+      ],
+      "overall_comment": "Grade protection strategy is sound. The calendar correctly prioritizes the database project (30%, Monday deadline) with all available Friday and Saturday time, treating it as the critical path item. AI homework (8%, Sunday deadline) is appropriately split across Saturday and Sunday to ensure completion without crowding database work. The history essay (40%, June 8 deadline) receives protected research time starting Tuesday, which is the right balance between not neglecting the highest-weight assignment and not sacrificing critical deadlines. The slide review is correctly scheduled early Saturday as a time-boxed social commitment. The time deficit acknowledged by the Deadline Agent is addressed by deferring history essay work to the following week - this is an acceptable compromise given the deadline structure. The Sunday evening buffer for database contingency and the Monday morning final review slot provide reasonable protection against technical issues. From a grade protection perspective, this calendar maximizes the probability of strong performance on the two imminent deadlines while establishing early momentum on the highest-weight assignment."
+    },
+    {
+      "agent": "Effort Agent",
+      "calendar_version": 1,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "Database project Sunday evening contingency block (b6) is optimistic - 3 hours for 'final testing, edge case handling, and polish' after already working 6 hours on queries/tests/demo may not be enough if issues are discovered. If queries have bugs or demo fails, the student loses the buffer.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Database project milestone"
+          ],
+          "affected_days": [
+            "2026-05-31"
+          ],
+          "suggested_fix": "Consider moving some database contingency work to Saturday evening instead of Sunday evening, or accept that comprehensive edge case testing may be sacrificed for functional submission. The Sunday evening block should focus on critical fixes only, not comprehensive polish."
+        },
+        {
+          "issue": "History essay research allocation of 2 hours per day (6 hours total) may be insufficient if sources are difficult to find or topic requires extensive reading. The essay is 40% weight and worth significant attention.",
+          "severity": "minor",
+          "affected_tasks": [
+            "History essay"
+          ],
+          "affected_days": [
+            "2026-06-02",
+            "2026-06-03",
+            "2026-06-04"
+          ],
+          "suggested_fix": "If research reveals the need for more time, consider extending research into Friday (2026-06-05) or weekend. The outline refinement on Thursday should include a checkpoint to assess whether additional research time is needed before drafting begins."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner addressed my earlier concern about database project scope by front-loading Friday and Saturday time, keeping demo script minimal, and reserving Sunday evening as contingency. This is a reasonable compromise given the tight timeline.",
+        "The planner addressed the AI homework uncertainty by having the student complete 2 exercises Saturday to reduce Sunday load. This spreads the risk appropriately.",
+        "The planner acknowledged the time deficit issue and made hard prioritization decisions: database project and AI homework are non-negotiable, history essay research can extend into following week. This is pragmatic.",
+        "The planner addressed the zero-contingency risk by front-loading query work Friday, creating test cases and demo script Saturday, and reserving Sunday evening for debugging. Monday morning provides final review opportunity."
+      ],
+      "overall_comment": "The calendar is a reasonable first attempt at balancing competing priorities. The database project strategy (front-loading Friday/Saturday, minimal demo, Sunday contingency) addresses my core concern about scope underestimation. The AI homework Saturday start is good risk mitigation. History essay research starting Tuesday is appropriate given the June 8 deadline. My minor concerns are that Sunday evening database contingency may be optimistic if issues arise, and that 6 hours for history essay research/outline may be tight for a 40% weighted assignment. These are manageable risks that the student can adjust if needed. Overall the effort estimates are realistic for a student working at moderate energy levels."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "calendar_version": 1,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "Sunday evening (June 1) has 3 hours of database project contingency work scheduled from 18:00-21:00, which is late-night work that could push past 21:00 if debugging issues arise. This conflicts with the need for adequate sleep before the Monday morning submission window.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Database project milestone"
+          ],
+          "affected_days": [
+            "2026-05-31"
+          ],
+          "suggested_fix": "Consider moving the database project contingency buffer to earlier Sunday (12:00-15:00) to complete all database work before evening. This would allow the student to submit early Monday without late-night stress. Alternatively, accept that Sunday evening work may be minimal if Friday/Saturday work is solid."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner correctly front-loaded database project work on Friday (3 hours) and Saturday (3 hours), which addresses my earlier concern about late-night work risk. This is a good compromise that reduces Sunday/Monday stress.",
+        "The planner scheduled AI homework for Sunday afternoon (14:00-16:00) instead of evening, which separates it from database project work and reduces stacking risk. This addresses my concern about Sunday evening stacking.",
+        "History essay research begins Tuesday as I recommended, protecting database project time on Friday/Saturday. This is the correct priority order.",
+        "The planner kept the demo script minimal and did not add unnecessary buffer blocks, which is appropriate. Unscheduled time serves as implicit rest."
+      ],
+      "overall_comment": "The calendar is humane and follows my core recommendations. The main remaining concern is Sunday evening database project contingency work (18:00-21:00) which could extend into late night if debugging issues arise. However, this is a minor concern because: (1) Friday and Saturday provide 6 hours of front-loaded database work; (2) AI homework is scheduled earlier Sunday afternoon; (3) Monday morning has a 2-hour final review block. The student should aim to finish database project work by 20:00 Sunday to preserve sleep before Monday deadline. The plan protects sleep adequately overall and front-loads urgent work correctly."
+    },
+    {
+      "agent": "Risk Agent",
+      "calendar_version": 1,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "Database project contingency buffer is front-loaded rather than true reserve - Sunday evening block (b6) is labeled 'contingency' but is actually essential work (final testing, edge cases, polish). If Friday/Saturday work completes successfully, this block becomes optional buffer. If it doesn't, the 3 hours may be insufficient for catching up.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Database project milestone"
+          ],
+          "affected_days": [
+            "2026-05-31",
+            "2026-06-01"
+          ],
+          "suggested_fix": "Rename Sunday evening block as 'contingency/buffer' and explicitly note that it should only be used if Friday/Saturday work revealed issues. Alternatively, add explicit note that if queries/tests are complete by Saturday, Sunday evening becomes free time rather than assumed busy time."
+        },
+        {
+          "issue": "History essay research blocks (b8, b9, b10) are scheduled Tuesday-Thursday evenings but the task has unquantified scope - research could require library visits, specific source access, or topic clarification that may not fit in 2-hour evening windows.",
+          "severity": "minor",
+          "affected_tasks": [
+            "History essay"
+          ],
+          "affected_days": [
+            "2026-06-02",
+            "2026-06-03",
+            "2026-06-04"
+          ],
+          "suggested_fix": "Add note that history essay research may require flexibility - if sources are unavailable or topic needs clarification, research time may need to extend beyond scheduled 2-hour blocks. Consider identifying potential library or online resource access needs before Tuesday."
+        },
+        {
+          "issue": "AI homework Sunday afternoon block (b5) assumes 2 hours for exercise 4 and final review, but exercise difficulty is completely unknown. If exercise 4 is complex, 2 hours may be insufficient and would encroach on database project contingency time.",
+          "severity": "minor",
+          "affected_tasks": [
+            "AI homework"
+          ],
+          "affected_days": [
+            "2026-05-31"
+          ],
+          "suggested_fix": "Add explicit buffer note: if exercise 4 takes longer than expected, extend into early evening before database project contingency. Database project contingency should not be reduced to accommodate AI homework overruns."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner addressed my earlier concern about zero contingency time by front-loading Friday/Saturday to database project and reserving Sunday evening as buffer. While the contingency is front-loaded (contingency only exists if Friday/Saturday work succeeds), this is a reasonable compromise given the time deficit.",
+        "The planner acknowledged the history essay research conflict and deferred it to Tuesday-Thursday, which is appropriate given the 30% database project and 8% AI homework deadlines. The 2-hour daily allocation is modest but realistic given competing priorities.",
+        "The planner addressed the AI homework difficulty uncertainty by completing 2 exercises Saturday to reduce Sunday load from 4 hours to approximately 2 hours. This reduces but does not eliminate the risk of unknown exercise difficulty.",
+        "The planner acknowledged the time deficit (~5 hours) and made explicit that history essay research can extend into the following week. This prevents overcommitment this week."
+      ],
+      "overall_comment": "The calendar addresses my core risk concerns adequately through front-loading database project work and creating Sunday evening buffer. The acknowledged_compromises section correctly identifies that contingency is conditional on Friday/Saturday success - this is a reasonable approach given constraints. Remaining critiques are minor: the contingency buffer is front-loaded (acceptable), history essay research scope is unquantified (noted but acceptable given 10-day deadline), and AI homework exercise difficulty remains unknown (mitigated by Saturday pre-work). The plan has no critical risks - all major concerns have been addressed through explicit compromises. Approval with minor concerns reflects that these are watchpoints rather than blockers."
+    }
+  ],
+  "validation": {
+    "valid": false,
+    "violations": [
+      {
+        "code": "day_outside_window",
+        "message": "2026-06-04 is outside the planning window 2026-05-29 → 2026-06-04.",
+        "severity": "error"
+      }
+    ]
+  },
+  "evaluation": {
+    "evaluator": "Schedule Evaluator",
+    "calendar_version": 1,
+    "planner_model": "minimax/minimax-m2.7",
+    "evaluator_model": "minimax/minimax-m2.7",
+    "overall_score": 4.4,
+    "model_score": 4,
+    "hard_score": 4.8,
+    "hard_metrics": {
+      "score": 94.2,
+      "metrics": [
+        {
+          "name": "generation_time_seconds",
+          "value": 78,
+          "score": 92.5,
+          "explanation": "78s from run start to final schedule selection."
+        },
+        {
+          "name": "rejection_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 specialist agent(s) rejected the final calendar."
+        },
+        {
+          "name": "critical_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 critical issue(s) were raised in final critiques."
+        },
+        {
+          "name": "major_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 major issue(s) were raised in final critiques."
+        },
+        {
+          "name": "deadline_violation_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 scheduled work block(s) end after their task deadline."
+        },
+        {
+          "name": "task_coverage_ratio",
+          "value": 1,
+          "score": 100,
+          "explanation": "4/4 inferred task(s) received at least one work block."
+        },
+        {
+          "name": "availability_overrun_hours",
+          "value": 2,
+          "score": 66.7,
+          "explanation": "2h scheduled above the planner's assumed available hours."
+        }
+      ]
+    },
+    "dimension_scores": [
+      {
+        "dimension": "requirement_match",
+        "score": 4.5,
+        "rationale": "All four tasks receive dedicated blocks. Database project and AI homework get priority with Friday/Saturday front-loading. History essay research begins Tuesday despite competing deadlines. Slide review is time-boxed early Saturday. The overall strategy explicitly prioritizes grade weight and deadline proximity correctly."
+      },
+      {
+        "dimension": "deadline_safety",
+        "score": 4,
+        "rationale": "Database project receives 11 total hours across Friday-Sunday with Monday morning final review. AI homework gets 4 hours across Saturday-Sunday with completion expected before evening deadline. History essay research starts Tuesday with 6 hours allocated. Sunday evening buffer (18:00-21:00) provides contingency but is front-loaded rather than true reserve. Minor concern: if Friday/Saturday database work reveals issues, the 3-hour Sunday buffer may be insufficient."
+      },
+      {
+        "dimension": "workload_realism",
+        "score": 3.5,
+        "rationale": "Hard metrics show 2-hour availability overrun on Saturday (scheduled 6 hours but only 5 available). The plan acknowledges a ~5 hour time deficit between estimated work and available time, resolving it by deferring history essay to following week. Database project scope is unquantified and may exceed estimates. AI homework exercise difficulty is unknown. These uncertainties create execution risk."
+      },
+      {
+        "dimension": "academic_priority",
+        "score": 4.5,
+        "rationale": "Correctly prioritizes database project (30%, Monday) above all else with front-loaded Friday/Saturday time. AI homework (8%, Sunday) is second priority with Saturday pre-work to reduce Sunday load. History essay (40%, June 8) receives protected research time starting Tuesday, balancing immediate deadlines against highest-weight assignment. The prioritization logic is sound and explicit."
+      },
+      {
+        "dimension": "wellbeing_balance",
+        "score": 3.5,
+        "rationale": "Friday/Saturday front-loading reduces Sunday/Monday stress. AI homework scheduled Sunday afternoon (14:00-16:00) separates it from database work. However, Sunday evening database contingency (18:00-21:00) risks late-night work if debugging issues arise. Monday morning final review (09:00-11:00) leaves minimal morning buffer before Monday night deadline. Cognitive fatigue from context-switching between technical database work and AI exercises is acknowledged but not explicitly mitigated."
+      },
+      {
+        "dimension": "risk_resilience",
+        "score": 3.5,
+        "rationale": "Contingency is front-loaded rather than true reserve - Sunday evening buffer only exists if Friday/Saturday work succeeds. If queries have bugs or demo fails, the 3-hour Sunday buffer may be insufficient and Monday morning becomes the only fallback. History essay research scope is unquantified; 2-hour evening windows may be insufficient if library visits or extensive reading are needed. AI homework exercise difficulty remains unknown despite Saturday pre-work mitigation. The plan acknowledges these weaknesses explicitly."
+      }
+    ],
+    "strengths": [
+      "Clear prioritization logic: database project (30%, Monday) > AI homework (8%, Sunday) > history essay (40%, June 8)",
+      "Front-loading of database project work on Friday/Saturday reduces Sunday/Monday stress and late-night risk",
+      "AI homework split across Saturday and Sunday reduces Sunday load from 4 hours to 2 hours",
+      "History essay research begins Tuesday, protecting critical deadlines while establishing early foundation for highest-weight assignment",
+      "Explicit compromise reasoning: time deficit acknowledged, history essay deferred to following week",
+      "All specialist concerns addressed through acknowledged_compromises section with planner responses",
+      "Sunday evening buffer (3 hours) and Monday morning final review (2 hours) provide dual safety net for database project",
+      "Slide review time-boxed to 1 hour early Saturday, preserving afternoon for academic priorities"
+    ],
+    "weaknesses": [
+      "2-hour availability overrun on Saturday (scheduled 6h but only 5h available) - hard metrics show this",
+      "Contingency is front-loaded rather than true reserve - if Friday/Saturday database work fails, Sunday buffer may be insufficient",
+      "Sunday evening database contingency (18:00-21:00) risks late-night work if debugging issues arise",
+      "History essay research scope is unquantified - 2-hour evening windows may be insufficient for library visits or extensive reading",
+      "AI homework exercise difficulty remains unknown - 2 hours Sunday for exercise 4 may be optimistic",
+      "Cognitive fatigue from context-switching between technical database work and AI exercises not explicitly mitigated",
+      "Validation error: June 4th marked as outside planning window despite being the window end date (likely validation bug treating end date as exclusive)"
+    ],
+    "comparison_notes": [
+      "This schedule demonstrates strong deadline protection with 11 hours allocated to database project before Monday deadline",
+      "The 5/5 approval with no critical or major critiques indicates consensus among specialist agents on schedule quality",
+      "Hard metrics show 94.2 score with perfect deadline violation, task coverage, and rejection counts",
+      "The 2-hour availability overrun is the only objective metric issue, scoring 66.7",
+      "Wellbeing Agent and Risk Agent both raised minor concerns about Sunday evening stacking and front-loaded contingency, but these are watchpoints rather than blockers",
+      "The schedule correctly balances immediate high-stakes deadlines (database 30%, AI 8%) against long-term high-weight assignment (history 40%)"
+    ],
+    "recommendation": "Approve. The schedule demonstrates sound prioritization, appropriate deadline protection, and explicit compromise reasoning. Remaining concerns are minor watchpoints: Sunday evening database contingency is front-loaded (acceptable given constraints), history essay research scope is unquantified (noted and can be adjusted), and AI homework exercise difficulty remains uncertain (mitigated by Saturday pre-work). The student should monitor Friday/Saturday database progress closely and be prepared to adjust Sunday evening plans if needed. If queries and tests complete successfully by Saturday, Sunday evening becomes optional buffer rather than essential work."
+  }
+}

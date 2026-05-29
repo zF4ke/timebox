@@ -1,0 +1,11 @@
+I do not have strict deadlines this week, but I want a useful study plan.
+
+Goals:
+- Learn the basics of reinforcement learning.
+- Review React hooks because I keep forgetting useEffect details.
+- Make progress on my personal portfolio website.
+- Keep up with Portuguese vocabulary practice.
+
+I have classes in the morning on Monday, Wednesday, and Friday. Other days are flexible.
+
+I want about 3 to 4 hours of planned work per day, with variety so I do not burn out. Since there are no deadlines, please decide a reasonable planning window and balance exploration with concrete progress.

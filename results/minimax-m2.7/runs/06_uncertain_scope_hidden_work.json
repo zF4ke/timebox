@@ -1,0 +1,2105 @@
+{
+  "runId": "0e567203-dc22-4242-bc30-538fae3b4c16",
+  "createdAt": "2026-05-29T12:53:06.510Z",
+  "request": {
+    "userInput": "I need help because several tasks are vague.\n\nI have to \"improve the simulator\" for an AASMA prototype by next Wednesday. The teacher did not specify exactly what counts, but I probably need to clean the UI, add one experiment, and write notes about the result.\n\nI also need to prepare for a programming languages oral discussion next Friday. I do not know what questions will be asked. I only have the lecture slides and two papers.\n\nThere is a small math exercise sheet due Monday. It says \"quick review\", but these usually take longer than expected.\n\nI can work about 4 hours per day. I am bad at estimating vague tasks, so I want early discovery time and not everything pushed to the deadline day.",
+    "quorum": 5,
+    "maxIterations": 3,
+    "timezone": "Europe/Lisbon",
+    "model": "minimax/minimax-m2.7",
+    "evaluatorModel": "minimax/minimax-m2.7"
+  },
+  "stopReason": "Accepted by 5/5 agents with no critical critiques.",
+  "interpreterOutput": {
+    "current_date": "2026-05-29T12:53:06.510Z",
+    "planning_window": {
+      "start_date": "2026-05-29",
+      "end_date": "2026-06-05",
+      "reason": "Planning window spans from today (Friday) through next Friday, covering three deadlines: math exercise sheet due Monday, simulator improvement due Wednesday, and programming languages oral due Friday."
+    },
+    "inferred_availability": [
+      {
+        "date_range": "2026-05-29",
+        "assumption": "Friday: classes likely in morning, afternoon free for study. Evening may be limited due to end-of-week fatigue.",
+        "estimated_available_hours_per_day": 3,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-05-30",
+        "assumption": "Saturday: no classes expected. Full day available but may have personal errands.",
+        "estimated_available_hours_per_day": 4,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-05-31",
+        "assumption": "Sunday: no classes expected. Full day available but may have personal errands.",
+        "estimated_available_hours_per_day": 4,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-06-01",
+        "assumption": "Monday: classes likely in morning, afternoon free. Math exercise sheet due, so some time may be spent on submission.",
+        "estimated_available_hours_per_day": 3,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-06-02",
+        "assumption": "Tuesday: classes likely in morning, afternoon free. Full day available for simulator work.",
+        "estimated_available_hours_per_day": 4,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-06-03",
+        "assumption": "Wednesday: classes likely in morning, afternoon free. Simulator improvement due, may need final adjustments.",
+        "estimated_available_hours_per_day": 3,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-06-04",
+        "assumption": "Thursday: classes likely in morning, afternoon free. Full day available for oral preparation.",
+        "estimated_available_hours_per_day": 4,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-06-05",
+        "assumption": "Friday: oral discussion likely scheduled during morning or afternoon. May need brief final review.",
+        "estimated_available_hours_per_day": 2,
+        "confidence": "medium"
+      }
+    ],
+    "fixed_commitments": [
+      "Regular classes (assumed Monday to Friday mornings)",
+      "Sleep (approx. 8 hours per night)"
+    ],
+    "student_state": {
+      "sleep": "adequate",
+      "energy": "moderate",
+      "confidence": "low"
+    },
+    "tasks": [
+      {
+        "task_id": "T1",
+        "name": "AASMA simulator improvement",
+        "raw_mentions": [
+          "improve the simulator",
+          "clean the UI",
+          "add one experiment",
+          "write notes about the result"
+        ],
+        "inferred_deadline": "2026-06-03",
+        "uncertainties": [
+          "What exactly counts as 'improvement'?",
+          "How many experiments are needed?",
+          "What level of UI cleaning is expected?",
+          "How detailed should the notes be?"
+        ]
+      },
+      {
+        "task_id": "T2",
+        "name": "Programming languages oral preparation",
+        "raw_mentions": [
+          "programming languages oral discussion",
+          "do not know what questions will be asked",
+          "only have lecture slides and two papers"
+        ],
+        "inferred_deadline": "2026-06-05",
+        "uncertainties": [
+          "What topics will be covered?",
+          "How long should preparation be?",
+          "Are there specific areas of focus?"
+        ]
+      },
+      {
+        "task_id": "T3",
+        "name": "Math exercise sheet",
+        "raw_mentions": [
+          "math exercise sheet due Monday",
+          "quick review",
+          "usually take longer than expected"
+        ],
+        "inferred_deadline": "2026-06-01",
+        "uncertainties": [
+          "How many exercises are there?",
+          "What topics are covered?",
+          "How difficult are the problems?"
+        ]
+      }
+    ],
+    "assumptions": [
+      "Student has regular morning classes Monday to Friday, reducing afternoon availability.",
+      "Student can work about 4 hours per day on average, but may be less on days with classes.",
+      "Student is bad at estimating vague tasks, so early discovery time is needed.",
+      "Math exercise sheet is due Monday, likely requiring submission by end of day.",
+      "Simulator improvement is due Wednesday, with unclear scope.",
+      "Oral discussion is on Friday, with unknown question format.",
+      "Student has lecture slides and two papers for oral preparation, but no other materials mentioned.",
+      "No explicit mention of weekends, but assumed free for study.",
+      "Energy levels may be lower on Friday due to end-of-week fatigue.",
+      "Student wants to avoid pushing tasks to deadline day."
+    ]
+  },
+  "agentViews": [
+    {
+      "agent": "Deadline Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "AASMA simulator improvement",
+          "assessment": "Deadline is Wednesday June 3rd. This task has multiple vague components: UI cleaning, adding an experiment, and writing notes. The vagueness creates high risk of scope creep and underestimation. With only ~3-4 hours available per day, and the deadline being mid-week, there is significant risk of last-minute pressure. The student explicitly wants early discovery time for vague tasks, which aligns with protecting this deadline. The task cannot be meaningfully started on deadline day due to the need for actual implementation and testing. Safe start window is now through Tuesday to allow for discovery, iteration, and buffer.",
+          "concerns": [
+            "Vague scope: teacher did not specify what counts as improvement",
+            "Three distinct sub-tasks (UI cleaning, experiment, notes) but unclear how much work each requires",
+            "Student admits being bad at estimating vague tasks",
+            "Mid-week deadline leaves only Monday-Tuesday for substantial work before Wednesday",
+            "No buffer for unexpected technical issues or scope clarification",
+            "Deadline day (Wednesday) has only 3 estimated available hours, insufficient for full task"
+          ],
+          "recommendations": [
+            "Start UI cleaning first as the most concrete and testable sub-task",
+            "Add the experiment early to discover actual implementation complexity",
+            "Write notes incrementally rather than at the end to avoid deadline-day rush",
+            "Allocate at least 2 full days before deadline for this task (Monday and Tuesday)",
+            "Reserve 1-2 hours on Wednesday for final adjustments only, not primary work",
+            "Clarify with teacher what minimum viable improvement looks like before investing time"
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Clarify minimum acceptable improvement criteria with teacher",
+            "Clean simulator UI (estimated 2-3 hours)",
+            "Implement one experiment in simulator (estimated 3-4 hours)",
+            "Write result notes and documentation (estimated 2 hours)",
+            "Final testing and polish (estimated 1 hour buffer)"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Programming languages oral preparation",
+          "assessment": "Deadline is Friday June 5th. This is the latest deadline in the planning window but carries extreme uncertainty. The student has no idea what questions will be asked, only has lecture slides and two papers, and the oral format is unknown. This task cannot be meaningfully prepared for on deadline day because oral preparation requires mental readiness and confidence building, not just content review. The student needs discovery time to identify knowledge gaps and fill them. With only 2 hours available on Friday (likely the oral itself), all substantive preparation must happen before then.",
+          "concerns": [
+            "Maximum uncertainty: no knowledge of question topics or format",
+            "Oral discussion requires mental readiness, not just content review",
+            "Only materials are lecture slides and two papers - limited breadth",
+            "Friday has only 2 estimated available hours, insufficient for preparation",
+            "Cannot prepare meaningfully on deadline day due to oral format",
+            "Student confidence is low, which may affect oral performance"
+          ],
+          "recommendations": [
+            "Start preparation immediately on Friday May 29th to maximize discovery time",
+            "Create question hypotheses based on lecture slides and identify gaps",
+            "Read papers thoroughly and extract key concepts that could be questioned",
+            "Practice verbal explanations aloud, not just reading notes",
+            "Allocate Thursday June 4th as dedicated oral preparation day (4 hours available)",
+            "Do not push any preparation to Friday - reserve only for final review"
+          ],
+          "estimated_duration_hours": 10,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Review all lecture slides and identify key topics",
+            "Read and summarize both papers with potential oral questions in mind",
+            "Generate probable question list from lecture content",
+            "Practice answering questions verbally without notes",
+            "Identify and fill knowledge gaps discovered during review",
+            "Mock oral practice with self or study partner on Thursday"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Math exercise sheet",
+          "assessment": "Deadline is Monday June 1st - the earliest deadline in the planning window. This task appears deceptively simple ('quick review') but the student explicitly warns that these sheets usually take longer than expected. With only 3 hours available on Monday (due to morning classes) and the deadline being end of day, there is high risk of deadline-day failure. The student wants early discovery time, which is critical here because if the sheet is longer or harder than expected, there is no time to recover. This task should be started Saturday to allow full 4 hours of work and buffer for unexpected difficulty.",
+          "concerns": [
+            "Earliest deadline in planning window - no time for recovery if underestimated",
+            "Student explicitly warns these sheets take longer than expected",
+            "Monday has only 3 hours available due to morning classes",
+            "Deadline day (Monday) is the only day this task can be worked on if delayed",
+            "No buffer for unexpected difficulty or length",
+            "Submission may require formatting or checking time, not just solving"
+          ],
+          "recommendations": [
+            "Start math exercise sheet Saturday May 30th to get full 4 hours",
+            "Complete as much as possible before Sunday to have buffer on Monday",
+            "Use Sunday for any remaining problems and final review",
+            "Do not rely on Monday deadline day for primary work - use only for submission",
+            "If stuck on problems, seek help Saturday or Sunday, not Monday",
+            "Reserve 30 minutes Monday for submission and final checks"
+          ],
+          "estimated_duration_hours": 5,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review exercise sheet and estimate actual scope",
+            "Work through all exercises systematically",
+            "Check answers and verify solutions",
+            "Prepare submission format and any required explanations",
+            "Final submission on Monday"
+          ]
+        }
+      ],
+      "overall_comment": "Three deadlines exist within an 8-day planning window: math exercise sheet (Monday June 1), AASMA simulator improvement (Wednesday June 3), and programming languages oral (Friday June 5). All three tasks carry significant uncertainty that threatens deadline protection. The math sheet is the earliest deadline and must be started Saturday to avoid deadline-day failure given the student's explicit warning about estimation errors. The simulator improvement has a mid-week deadline with vague scope requiring early discovery. The oral preparation has the latest deadline but maximum uncertainty and cannot be meaningfully completed on deadline day. The student's request for early discovery time is critical and must be honored by front-loading work. Total estimated work is approximately 23 hours across all tasks, but available hours total only about 25 hours across the week, leaving minimal margin for unexpected delays. All tasks require meaningful work before their deadlines; none can be safely pushed to deadline day."
+    },
+    {
+      "agent": "Grade Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "AASMA simulator improvement",
+          "assessment": "High academic value. This is a prototype deliverable that likely carries significant grade weight as a project-based assignment. The vagueness of 'improvement' is a concern, but the teacher's intent is probably to see initiative and demonstrable progress. Cleaning the UI, adding an experiment, and writing notes are concrete deliverables that can be scoped. The Wednesday deadline is tight but manageable if started early. The student should prioritize clarifying the teacher's expectations before investing time in low-value work.",
+          "concerns": [
+            "Unclear scope: teacher did not specify what counts as improvement",
+            "Risk of over-engineering UI cleaning or experiment complexity",
+            "Student admits difficulty estimating vague tasks",
+            "May spend too much time on low-value polish instead of high-value functionality",
+            "Deadline is mid-week, leaving little buffer for unexpected issues"
+          ],
+          "recommendations": [
+            "Email teacher immediately to ask: (1) minimum viable improvement, (2) whether UI cleaning is required or optional, (3) how detailed notes should be",
+            "Break into subtasks: (1) define experiment to add, (2) implement core experiment, (3) clean UI to functional state, (4) write structured notes",
+            "Start with the experiment first — it is the most academically demonstrable deliverable",
+            "Allocate 2-3 hours Friday afternoon for initial scoping and experiment design",
+            "Reserve Wednesday morning for final adjustments and submission"
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Email teacher for scope clarification",
+            "Define and design the experiment to implement",
+            "Implement the experiment in the simulator",
+            "Clean UI to functional state (focus on usability, not aesthetics)",
+            "Write structured notes documenting the experiment and results"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Programming languages oral preparation",
+          "assessment": "Very high academic value. Oral discussions typically have high grade weight and are difficult to recover from if poorly prepared. The uncertainty about questions is a major risk factor. The student only has lecture slides and two papers, which may be insufficient for a thorough preparation. This task should receive protected time, especially Thursday and Friday. The Friday deadline means it cannot be rushed.",
+          "concerns": [
+            "Unknown question format and topics — high uncertainty",
+            "Only two reference materials mentioned — may need additional sources",
+            "Oral performance is hard to salvage last-minute",
+            "Student confidence is low, which may affect performance",
+            "Limited time to build comprehensive understanding from slides and papers"
+          ],
+          "recommendations": [
+            "Prioritize understanding core concepts from lecture slides first — these likely define the discussion scope",
+            "Read both papers thoroughly and extract key arguments, contributions, and open questions",
+            "Create a list of likely discussion topics based on slide headings and paper themes",
+            "Prepare talking points for each potential topic rather than memorizing answers",
+            "Practice verbal explanations out loud — oral exams reward clear articulation",
+            "Allocate Thursday fully for oral preparation and Friday morning for final review",
+            "Consider forming a study group to simulate discussion questions if possible"
+          ],
+          "estimated_duration_hours": 6,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review lecture slides and identify key topics",
+            "Read and annotate both papers",
+            "Extract key concepts, arguments, and questions from papers",
+            "Create a topic list and prepare talking points for each",
+            "Practice verbal explanations out loud",
+            "Simulate mock oral discussion with study group or alone"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Math exercise sheet",
+          "assessment": "Moderate academic value. Exercise sheets typically contribute to continuous assessment and may have a fixed grade weight. The 'quick review' label is misleading — the student correctly notes these usually take longer than expected. The Monday deadline is the earliest and should not be underestimated. However, compared to the simulator and oral, this is a lower-impact deliverable in terms of grade weight, assuming the simulator is a project deliverable and the oral is an examination component.",
+          "concerns": [
+            "Monday deadline is tightest but may be underestimated by the 'quick review' label",
+            "Student has history of these taking longer than expected",
+            "May compete for time with higher-value simulator and oral preparation",
+            "Risk of rushing through problems and making careless errors",
+            "Low confidence may lead to spending too much time on easy problems"
+          ],
+          "recommendations": [
+            "Do not dismiss as trivial — allocate dedicated time Friday evening or Saturday morning",
+            "Start with a quick triage: identify which problems are familiar vs. unfamiliar",
+            "Focus on showing complete work rather than perfect answers — partial credit matters",
+            "If stuck on a problem for more than 10 minutes, move on and return later",
+            "Submit early if possible to free up time for higher-value work later in the week"
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Quick triage of exercise problems by familiarity",
+            "Attempt all problems, starting with familiar ones",
+            "Mark problems requiring more effort for second pass",
+            "Complete and review all solutions",
+            "Submit before Monday deadline if possible"
+          ]
+        }
+      ],
+      "overall_comment": "From a grade protection perspective, the highest-value work is the programming languages oral (examination with high weight and low recoverability) and the AASMA simulator (project deliverable with unclear but likely significant grade weight). The math exercise sheet, while due first, is lower-impact but should not be dismissed. The student should prioritize clarifying the simulator scope immediately to avoid wasted effort, then allocate protected time for oral preparation Thursday and Friday. The math sheet should be completed early in the planning window (Friday evening or Saturday) to avoid last-minute surprises. The student's low confidence and difficulty with vague tasks justify front-loading discovery time rather than deferring work to deadline days."
+    },
+    {
+      "agent": "Effort Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "AASMA simulator improvement",
+          "assessment": "High risk of underestimation. The task description contains multiple vague components (clean UI, add experiment, write notes) with no clear scope definition. 'Improve the simulator' is an open-ended goal that could range from trivial to substantial refactoring. The student explicitly wants early discovery time, which is wise given the unspecified requirements. With only Tuesday afternoon (4h) and Wednesday morning (3h) realistically available before the deadline, and needing to discover what counts as 'improvement' first, this task is significantly underspecified and likely to require more time than the student expects. The UI cleaning and experiment addition depend heavily on existing codebase familiarity, which the student has not indicated.",
+          "concerns": [
+            "Task scope is completely undefined - teacher did not specify what counts as improvement",
+            "UI cleaning is vague - could be cosmetic fixes or structural changes",
+            "Adding one experiment could require significant simulator understanding",
+            "Notes about results could be a brief summary or detailed analysis",
+            "Only ~7 hours total available (Tuesday+Wednesday) but scope unknown",
+            "Discovery time needed just to understand what work is actually required",
+            "Student already acknowledged difficulty estimating vague tasks"
+          ],
+          "recommendations": [
+            "Break this into discovery phase first: clarify with teacher or look at previous submissions for scope guidance",
+            "Add explicit subtasks: (1) Discover requirements, (2) UI cleanup, (3) Implement experiment, (4) Document results",
+            "Consider starting discovery Friday evening or Saturday morning",
+            "Do not assume minimal work - 'improvement' tasks often grow"
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Clarify improvement requirements with teacher or past examples (discovery)",
+            "Review existing simulator codebase to understand current state",
+            "Clean UI: identify specific elements to improve",
+            "Add one experiment: plan, implement, test",
+            "Write notes: document experiment setup, results, and analysis"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Programming languages oral preparation",
+          "assessment": "High risk. The student has lecture slides plus two papers and does not know what questions will be asked. This is an extremely open-ended oral exam with potentially broad coverage. Oral discussions require not just understanding content but being able to explain concepts verbally under pressure. The student has very limited preparation time (Thursday full day plus Friday morning, totaling ~6 hours) which is insufficient for comprehensive coverage of slides plus two academic papers. The 'unknown questions' factor means the student should aim for broad understanding rather than specific preparation, which is more time-intensive.",
+          "concerns": [
+            "Zero guidance on what questions to expect",
+            "Two academic papers to read and understand in limited time",
+            "Oral exams require verbal articulation skills, not just content knowledge",
+            "Only ~6 hours available for preparation (Thursday+Friday morning)",
+            "Slides plus two papers is substantial material to cover",
+            "Student confidence is low, adding stress to oral performance",
+            "No practice opportunity mentioned"
+          ],
+          "recommendations": [
+            "Start reading papers Saturday to maximize time before oral",
+            "Create summary notes for quick review rather than deep re-reading",
+            "Identify key concepts and be prepared to explain them concisely",
+            "Practice verbal explanations out loud - not just silent reading",
+            "Use Thursday for focused study, Friday morning for final verbal practice",
+            "Prioritize understanding over memorization given unknown questions"
+          ],
+          "estimated_duration_hours": 12,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Read and annotate lecture slides thoroughly",
+            "Read paper 1: identify main arguments and key concepts",
+            "Read paper 2: identify main arguments and key concepts",
+            "Create summary cards with key concepts for quick review",
+            "Practice verbal explanations of key concepts out loud",
+            "Identify potential topic areas from slides for focused review",
+            "Final review and verbal rehearsal Friday morning"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Math exercise sheet",
+          "assessment": "Moderate risk. The student explicitly warns that these 'quick review' sheets usually take longer than expected. This is a common pattern - what professors call a quick exercise sheet often contains challenging problems. With deadline Monday morning, the student has only Friday afternoon (~3 hours) available before submission. The uncertainty around exercise count and difficulty level is significant. Student should not be fooled by 'quick review' label and should allocate sufficient time.",
+          "concerns": [
+            "Student explicitly expects it to take longer than labeled",
+            "Only Friday afternoon (~3h) available before Monday deadline",
+            "No information on number of exercises or difficulty level",
+            "'Quick review' often underestimates actual workload",
+            "Low student confidence adds pressure"
+          ],
+          "recommendations": [
+            "Do not treat this as a quick 1-hour task",
+            "Allocate Friday afternoon fully to this work",
+            "Start immediately Friday afternoon",
+            "If exercises are taking longer, flag early to see if partial submission is possible",
+            "Keep Saturday morning reserved as buffer if Friday doesn't finish"
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Attempt all exercises systematically",
+            "Check solutions if available or use resources to verify",
+            "Identify any problems needing additional study",
+            "Review and finalize answers",
+            "Prepare submission"
+          ]
+        }
+      ],
+      "overall_comment": "All three tasks contain significant uncertainty that makes duration estimation difficult. T1 (AASMA simulator) is the most underspecified with undefined scope that could easily exceed available time. T2 (Oral preparation) is at high risk because the student has substantial material to cover with no question guidance, and oral exams require verbal practice time beyond just reading. T3 (Math sheet) is the most bounded but the student's own experience suggests it will be underestimated. Recommended approach: start T3 Friday afternoon as it's due Monday with tight timeline, begin T1 discovery over the weekend to understand scope, and dedicate Saturday/Sunday to T2 paper reading. The student's request for early discovery time and avoiding deadline-day pressure is well-founded and should be honored by front-loading work where possible. Total estimated workload is approximately 24 hours, while available productive hours across the planning window are approximately 27 hours, leaving minimal buffer for unexpected complications."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "AASMA simulator improvement",
+          "assessment": "This is a technical task with multiple vague sub-components (UI cleaning, experiment addition, result notes). From a wellbeing perspective, the high uncertainty in scope creates a significant risk of overwork if the student tries to 'discover' what counts as sufficient improvement. The technical nature (coding, UI work) combined with documentation writing is cognitively demanding. Early work is warranted, but strict timeboxing is essential to avoid scope creep eating into rest time or other tasks.",
+          "concerns": [
+            "Unknown scope makes time estimation unreliable, increasing stress risk",
+            "Technical coding work can extend beyond planned time especially when debugging",
+            "Documenting results while fatigued leads to poor quality and frustration",
+            "Risk of over-investing time in a task with unclear acceptance criteria",
+            "Cognitive load from coding + UI + documentation stacking is high"
+          ],
+          "recommendations": [
+            "Set a strict maximum time limit for discovery phase before committing to scope",
+            "Prioritize 'one experiment that works cleanly' over extensive UI improvements",
+            "Break work into 1-2 hour sessions with clear micro-goals to prevent rabbit-holing",
+            "If discovery reveals the task is larger than expected, flag to the teacher for clarification rather than overworking",
+            "Treat notes as minimal documentation rather than comprehensive report"
+          ],
+          "estimated_duration_hours": 5,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Define minimum viable improvement with teacher or rubric criteria",
+            "Clean UI element only if it takes under 1 hour",
+            "Run one experiment with clear setup and observation",
+            "Write brief notes (1-2 paragraphs) rather than full documentation"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Programming languages oral preparation",
+          "assessment": "This task has the highest wellbeing risk due to maximum uncertainty (unknown questions), high cognitive demand (oral discussion requires recall, articulation, and real-time thinking), and emotional exposure (oral exams are naturally stressful). The student has only lecture slides and two papers—no sample questions, no clear topics. The low confidence state already noted is concerning. Preparation will involve reading academic papers which is cognitively heavy work. Without a clear study strategy, the student risks either panic-studying the night before or wasting time on irrelevant content.",
+          "concerns": [
+            "Maximum uncertainty creates anticipatory stress throughout the week",
+            "Oral exams require significant mental energy and can cause anxiety",
+            "Reading academic papers is cognitively demanding especially when unsure what is relevant",
+            "Student already in low confidence state—oral format may feel threatening",
+            "Friday has reduced energy (end-of-week fatigue) which is when the oral occurs",
+            "No clear focus areas means risk of spreading effort thin across everything"
+          ],
+          "recommendations": [
+            "Create a structured study plan: identify 3-5 core concepts from slides that could form questions",
+            "Read papers actively: take notes on main contributions, limitations, and your own critiques",
+            "Practice explaining concepts out loud—this is more important than passive reading",
+            "Do NOT try to cover everything; focus on depth in a few areas rather than breadth",
+            "Light review on Thursday evening is sufficient; heavy cramming the night before reduces performance",
+            "If possible, clarify with teacher or peers what topics are likely covered"
+          ],
+          "estimated_duration_hours": 6,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Extract 3-5 main topics/concepts from lecture slides",
+            "Read each paper with specific questions: what problem, what approach, what results, what limitations",
+            "Practice verbal explanations of concepts without notes",
+            "Self-test by generating potential questions and answering them aloud",
+            "Brief final review Thursday evening (30-60 minutes)"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Math exercise sheet",
+          "assessment": "This is due soonest and labeled as 'quick review' but the student explicitly warns these take longer than expected. Math work is cognitively heavy—it requires sustained concentration, problem-solving under pressure, and dealing with potential frustration when stuck. The Monday deadline means this competes with other tasks on the first available work day. Given the student is in moderate energy and low confidence state, starting this early (Friday or Saturday) is wise but the work should be timeboxed to prevent it expanding into other tasks' time.",
+          "concerns": [
+            "Math work is cognitively demanding and can cause fatigue",
+            "'Quick review' framing may lead to underestimating required time",
+            "Getting stuck on problems on Sunday evening creates stress before the week intensifies",
+            "Risk of spending too much time on math and leaving less for simulator or oral prep",
+            "Monday morning classes may reduce time available for final submission"
+          ],
+          "recommendations": [
+            "Start Friday or Saturday to allow buffer if problems take longer",
+            "Timebox the work: if 'quick' suggests 1-2 hours, set a hard stop at 3 hours to protect other tasks",
+            "Identify which topics/problems are highest priority if time is limited",
+            "Do not get stuck—skip hard problems, note them for Monday morning, move on",
+            "Submit what is complete rather than overworking to finish everything"
+          ],
+          "estimated_duration_hours": 2.5,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Quickly skim all problems to gauge difficulty and topics",
+            "Start with highest-value problems (easier ones that score points)",
+            "Timebox each problem set; stop after limit even if incomplete",
+            "Save hard problems for Monday morning but submit what is done"
+          ]
+        }
+      ],
+      "overall_comment": "I am concerned about the combined cognitive load across these three tasks, especially given the student's moderate energy and low confidence state. The high uncertainty in all three tasks creates anticipatory stress. From a wellbeing perspective: (1) Do not let the simulator improvement absorb more time than strictly necessary—vague tasks are scope creep traps; (2) The oral preparation requires a structured strategy to avoid anxiety-driven overstudying or paralysis; (3) Start the math sheet early to avoid Sunday evening stress. The schedule is tight but manageable IF the student enforces strict timeboxes and resists the urge to 'perfect' any task, especially T1 which has the least external pressure. I recommend front-loading math (Friday-Saturday) and discovery work for the simulator (Saturday-Sunday), leaving Monday-Tuesday for simulator implementation, Wednesday for buffer/finalization, and Thursday for oral review. This spreads cognitive load and avoids stacking heavy tasks on any single day. The student should be cautious about Friday energy levels and avoid scheduling cognitively demanding work for that day."
+    },
+    {
+      "agent": "Risk Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "AASMA simulator improvement",
+          "assessment": "This task has severe scope ambiguity. The student mentions 'improve the simulator' but the teacher did not specify what counts. The student assumes cleaning the UI, adding one experiment, and writing notes, but these are self-imposed expectations that may not match the teacher's actual requirements. The deadline is Wednesday (June 3), giving only 5 days from today. The student explicitly admits they are bad at estimating vague tasks. This is a high-risk task because the scope could expand significantly once the teacher clarifies expectations, or the student could spend time on work that doesn't count toward the requirement. There is no buffer time before the deadline if discovery reveals additional requirements on Tuesday or Wednesday morning.",
+          "concerns": [
+            "Teacher has not specified what counts as 'improvement' - scope is entirely undefined from evaluator's perspective",
+            "Student's three assumptions (clean UI, add experiment, write notes) are self-imposed and may not match actual requirements",
+            "No clarification mechanism identified - student has not asked teacher for scope details",
+            "Deadline is only 5 days away with no buffer if initial approach is wrong",
+            "Student admits poor estimation of vague tasks, increasing risk of underestimation",
+            "UI cleaning scope is unbounded - could range from 30 minutes to multiple days",
+            "Experiment addition could be trivial or require significant research",
+            "Notes about results could be a paragraph or a full report",
+            "If teacher expects something not on the student's mental list, there is no time to recover",
+            "Wednesday afternoon is the only buffer before deadline, which is insufficient for major scope changes"
+          ],
+          "recommendations": [
+            "Contact teacher immediately (today or Saturday) to clarify minimum viable improvement requirements",
+            "Define 'done' criteria before writing any code - get explicit acceptance conditions",
+            "Break into: (1) scope discovery call/email, (2) minimum viable improvement, (3) stretch goals only if time remains",
+            "Assume only ONE experiment is required unless teacher says otherwise",
+            "Assume notes should be brief (bullet points) unless teacher specifies format",
+            "UI cleaning should be cosmetic only - do not refactor architecture",
+            "Reserve Wednesday morning for teacher check-in, not final work",
+            "Have a fallback: if scope is larger than expected, deliver minimum experiment with basic notes and skip UI polish"
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Email teacher for scope clarification (30 minutes)",
+            "Wait for response and define minimum acceptance criteria (variable)",
+            "Implement one experiment with minimal UI (3-4 hours)",
+            "Write brief result notes (1 hour)",
+            "Polish UI only if time remains (1-2 hours)",
+            "Final review and submission preparation (30 minutes)"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Programming languages oral preparation",
+          "assessment": "This is the highest-risk task due to maximum uncertainty. The student has an oral discussion on Friday (7 days away) but does not know what questions will be asked. They only have lecture slides and two papers - no past exams, no topic list, no known question bank. The student has low confidence and moderate energy. This task requires broad coverage of unknown material with no clear boundaries. The risk is that the student prepares the wrong topics or misses key areas entirely. Unlike the math exercise (which has a defined problem set) or the simulator (which has a deliverable), this task has no concrete success criteria until the moment of the oral.",
+          "concerns": [
+            "Zero visibility into question format or topics - entirely open-ended preparation",
+            "Only two lecture slides and two papers mentioned - may be insufficient source material",
+            "No past exams or example questions mentioned",
+            "Oral discussions can cover any concept from the entire course",
+            "Student has low confidence, which may indicate insufficient baseline knowledge",
+            "Friday deadline with no buffer - if preparation is inadequate, no recovery time",
+            "Cannot validate preparation quality without knowing question direction",
+            "Risk of spending time on low-priority topics while missing high-priority ones",
+            "No peer resources mentioned - student may be preparing in isolation",
+            "Energy levels moderate - may affect retention and recall during oral"
+          ],
+          "recommendations": [
+            "Identify course learning objectives or exam rubric if available - use as proxy for question topics",
+            "Re-read lecture slides and papers immediately to establish baseline (2-3 hours)",
+            "Create concept map of all topics covered in slides and papers",
+            "Form study group or contact classmates to share insights about likely question areas",
+            "Prepare 'universal' answers that demonstrate understanding of core concepts",
+            "Practice explaining key concepts out loud - oral exams reward clear articulation",
+            "If possible, ask teacher or TA about question scope or format",
+            "Prioritize depth over breadth - know fewer topics well rather than many topics poorly",
+            "Thursday evening should be final review only, not new material",
+            "Accept that some uncertainty is unavoidable - prepare general competence rather than specific answers"
+          ],
+          "estimated_duration_hours": 10,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Review lecture slides and papers for topic identification (3 hours)",
+            "Create concept map of all covered topics (1 hour)",
+            "Contact classmates or TA for question hints (30 minutes)",
+            "Deep-dive preparation on 3-5 most likely topic areas (4 hours)",
+            "Practice oral explanations with peer or self-recording (1.5 hours)",
+            "Final review and confidence-building (1 hour)"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Math exercise sheet",
+          "assessment": "This task appears simplest but carries hidden risk. The student describes it as a 'quick review' but immediately notes that 'these usually take longer than expected.' This is a direct admission of systematic underestimation. The deadline is Monday (2 days away), which is the soonest deadline. The student has classes Monday morning and may need submission time. There is no buffer before this deadline. The scope is partially defined (there is an exercise sheet) but the difficulty level and number of problems are unknown. If the exercises are harder than expected, the student has no recovery time before the deadline.",
+          "concerns": [
+            "Student explicitly admits these sheets take longer than expected - systematic estimation failure",
+            "Deadline is Monday - only 2 days away with no buffer",
+            "Monday morning classes may consume energy and reduce afternoon availability",
+            "Number of exercises and difficulty level unknown",
+            "If exercises are harder than expected, no time to seek help or extensions",
+            "Student has low confidence, which may indicate anxiety about math or past difficulties",
+            "No mention of solutions or answer key availability - may be working without validation",
+            "Submission may require formatting or digital submission that takes additional time",
+            "Risk of Sunday evening crunch if student underestimates initial scope",
+            "No buffer day before deadline - any surprise becomes a crisis"
+          ],
+          "recommendations": [
+            "Start this task TODAY (Friday evening) - do not wait for the weekend",
+            "Attempt to obtain number of exercises and difficulty level from classmates or previous sheets",
+            "Budget 2x the time the student expects based on historical pattern",
+            "If stuck on a problem for more than 20 minutes, move on and return later",
+            "Identify 1-2 classmates for quick help if exercises are unclear",
+            "Prepare submission materials (digital file, formatting) in advance",
+            "Set personal deadline of Sunday evening to complete, leaving Monday for review only",
+            "Accept that some problems may remain unsolved - partial credit is better than no submission",
+            "Do not sacrifice sleep the night before Monday - fatigue affects math performance"
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Obtain exercise sheet and estimate scope (15 minutes)",
+            "Attempt all exercises systematically (2-3 hours)",
+            "Identify stuck problems and seek help (30 minutes)",
+            "Final review and submission preparation (30 minutes)",
+            "Submit well before Monday deadline to avoid last-minute issues"
+          ]
+        }
+      ],
+      "overall_comment": "The plan contains three critical risks: (1) T1 has undefined scope with no buffer before Wednesday deadline - the student must contact the teacher TODAY to avoid building the wrong thing; (2) T2 has maximum uncertainty with only lecture slides and two papers as preparation materials - the student needs to establish question scope or risk preparing the wrong topics; (3) T3 has a Monday deadline with no buffer and the student explicitly admits they underestimate these tasks. The student's request for 'early discovery time and not everything pushed to the deadline day' is correct but not reflected in the current task distribution. The math exercise should begin TODAY, not Sunday. The simulator scope must be clarified before coding begins. The oral preparation needs a strategy for handling unknown questions rather than hoping for lucky topic coverage. Total estimated hours (23 hours) exceeds available productive hours (approximately 25 hours across 8 days, accounting for classes and fatigue), leaving minimal contingency. The plan should not be approved without explicit scope discovery for T1 and a commitment to start T3 immediately. The student should also seek additional study materials for T2 beyond the two papers and slides."
+    }
+  ],
+  "calendarVersions": [
+    {
+      "calendar": {
+        "calendar_version": 1,
+        "planning_window": {
+          "start_date": "2026-05-29",
+          "end_date": "2026-06-05",
+          "reason": "Planning window spans from today (Friday) through next Friday, covering three deadlines: math exercise sheet due Monday, simulator improvement due Wednesday, and programming languages oral due Friday."
+        },
+        "overall_strategy": [
+          "Front-load work to avoid deadline-day pressure, especially for vague tasks",
+          "Start math exercise sheet Friday afternoon to get maximum buffer before Monday deadline",
+          "Begin AASMA simulator discovery and UI cleaning Saturday to understand scope early",
+          "Allocate Saturday-Sunday for programming languages paper reading and slide review",
+          "Reserve Wednesday for simulator finalization and buffer",
+          "Dedicate Thursday to oral preparation practice and final review",
+          "Enforce strict timeboxes on vague tasks to prevent scope creep",
+          "Prioritize task completion over perfection, especially for simulator improvement"
+        ],
+        "days": [
+          {
+            "date": "2026-05-29",
+            "day_name": "Friday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Friday afternoon is free after classes; start math exercise sheet immediately given Monday deadline and student history of underestimation. Begin reading programming languages papers to start oral preparation early.",
+            "blocks": [
+              {
+                "id": "B1",
+                "task_id": "T3",
+                "task_name": "Math exercise sheet",
+                "type": "work",
+                "start": "2026-05-29T14:00:00",
+                "end": "2026-05-29T17:00:00",
+                "duration_hours": 3,
+                "description": "Begin math exercise sheet Friday afternoon to avoid Sunday evening stress and Monday morning pressure.",
+                "reasoning": "Math sheet is due Monday with only 3 hours available that day; student explicitly warns these take longer than expected, so starting Friday provides buffer for unexpected difficulty."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-30",
+            "day_name": "Saturday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Saturday has full availability; dedicate to simulator discovery and math completion, with some oral preparation reading.",
+            "blocks": [
+              {
+                "id": "B2",
+                "task_id": "T1",
+                "task_name": "AASMA simulator improvement",
+                "type": "work",
+                "start": "2026-05-30T09:00:00",
+                "end": "2026-05-30T12:00:00",
+                "duration_hours": 3,
+                "description": "Review existing simulator codebase and clean UI elements to understand current state and scope.",
+                "reasoning": "Early discovery time needed for vague task; student wants to avoid pushing to deadline day; reviewing codebase first clarifies what improvement means."
+              },
+              {
+                "id": "B3",
+                "task_id": "T2",
+                "task_name": "Programming languages oral preparation",
+                "type": "work",
+                "start": "2026-05-30T13:00:00",
+                "end": "2026-05-30T15:00:00",
+                "duration_hours": 2,
+                "description": "Read and annotate lecture slides to identify key topics and potential oral discussion areas.",
+                "reasoning": "Oral has maximum uncertainty with unknown questions; starting slide review Saturday gives maximum discovery time before Friday deadline."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-31",
+            "day_name": "Sunday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Sunday full availability; complete math sheet if needed, read papers for oral, and begin simulator experiment implementation.",
+            "blocks": [
+              {
+                "id": "B4",
+                "task_id": "T3",
+                "task_name": "Math exercise sheet",
+                "type": "work",
+                "start": "2026-05-31T09:00:00",
+                "end": "2026-05-31T11:00:00",
+                "duration_hours": 2,
+                "description": "Finish any remaining math exercises and prepare submission; review solutions for completeness.",
+                "reasoning": "Math sheet due Monday; if not completed Friday, Sunday provides final buffer before deadline."
+              },
+              {
+                "id": "B5",
+                "task_id": "T2",
+                "task_name": "Programming languages oral preparation",
+                "type": "work",
+                "start": "2026-05-31T11:30:00",
+                "end": "2026-05-31T14:30:00",
+                "duration_hours": 3,
+                "description": "Read and summarize both papers, extracting key concepts, arguments, and potential discussion questions.",
+                "reasoning": "Oral has maximum uncertainty; papers are only source materials besides slides; thorough reading Sunday allows time to identify knowledge gaps."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-01",
+            "day_name": "Monday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Monday has morning classes reducing afternoon availability; math sheet due today so submit early if not done; simulator work begins.",
+            "blocks": [
+              {
+                "id": "B6",
+                "task_id": "T3",
+                "task_name": "Math exercise sheet",
+                "type": "work",
+                "start": "2026-06-01T14:00:00",
+                "end": "2026-06-01T17:00:00",
+                "duration_hours": 3,
+                "description": "Submit math exercise sheet before end of day; use afternoon for final problem solving if needed.",
+                "reasoning": "Monday deadline requires submission; 3 hours available after classes provides final opportunity to complete and submit."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-02",
+            "day_name": "Tuesday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Tuesday full afternoon availability; dedicate to simulator experiment implementation and UI finalization before Wednesday deadline.",
+            "blocks": [
+              {
+                "id": "B7",
+                "task_id": "T1",
+                "task_name": "AASMA simulator improvement",
+                "type": "work",
+                "start": "2026-06-02T09:00:00",
+                "end": "2026-06-02T13:00:00",
+                "duration_hours": 4,
+                "description": "Implement one experiment in simulator and write result notes documenting setup and observations.",
+                "reasoning": "Simulator improvement due Wednesday; after Saturday discovery, Tuesday is main implementation day; writing notes incrementally avoids deadline-day rush."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-03",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Wednesday simulator improvement due; morning classes reduce afternoon availability; use for final testing, polish, and submission.",
+            "blocks": [
+              {
+                "id": "B8",
+                "task_id": "T1",
+                "task_name": "AASMA simulator improvement",
+                "type": "work",
+                "start": "2026-06-03T14:00:00",
+                "end": "2026-06-03T17:00:00",
+                "duration_hours": 3,
+                "description": "Final testing, polish UI if time permits, and submit simulator improvement before deadline.",
+                "reasoning": "Simulator due Wednesday; 3 hours available for final adjustments and submission; student wanted early work to avoid deadline-day pressure."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Thursday full availability; oral discussion Friday with maximum uncertainty; dedicate to verbal practice and final preparation.",
+            "blocks": [
+              {
+                "id": "B9",
+                "task_id": "T2",
+                "task_name": "Programming languages oral preparation",
+                "type": "work",
+                "start": "2026-06-04T09:00:00",
+                "end": "2026-06-04T13:00:00",
+                "duration_hours": 4,
+                "description": "Practice verbal explanations of key concepts out loud; generate and answer probable questions without notes.",
+                "reasoning": "Oral requires mental readiness not just content review; Thursday is main preparation day; verbal practice builds confidence for unknown questions."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Friday",
+            "assumed_available_hours": 2,
+            "day_reasoning": "Friday oral discussion likely scheduled during morning or afternoon; limited availability for final review; submit any remaining work.",
+            "blocks": [
+              {
+                "id": "B10",
+                "task_id": "T2",
+                "task_name": "Programming languages oral preparation",
+                "type": "work",
+                "start": "2026-06-05T08:00:00",
+                "end": "2026-06-05T10:00:00",
+                "duration_hours": 2,
+                "description": "Brief final review of key concepts and talking points before oral discussion.",
+                "reasoning": "Oral Friday with maximum uncertainty; 2 hours available for quick review before discussion; substantive preparation must be complete by Thursday."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Math exercise sheet labeled 'quick review' but student history shows these take longer than expected",
+            "resolution": "Started Friday afternoon with 3 hours allocated; if completed early, remaining time can shift to simulator or oral work"
+          },
+          {
+            "conflict": "AASMA simulator improvement has completely undefined scope with teacher not specifying what counts",
+            "resolution": "Prioritized early discovery Saturday to understand codebase; timeboxed to prevent scope creep; focused on one experiment plus minimal UI cleaning and brief notes"
+          },
+          {
+            "conflict": "Programming languages oral has maximum uncertainty with unknown question format and topics",
+            "resolution": "Spread preparation across multiple days (Saturday, Sunday, Thursday, Friday) to maximize discovery time; prioritized verbal practice over passive reading to build confidence"
+          },
+          {
+            "conflict": "Total estimated workload (~23 hours) approaches available hours (~25 hours) leaving minimal contingency",
+            "resolution": "Strict timeboxes on each task; no buffer blocks added; unscheduled time serves as implicit rest and contingency; prioritize completion over perfection"
+          }
+        ],
+        "known_weaknesses": [
+          "Simulator scope remains undefined despite early discovery; teacher clarification not guaranteed before coding begins",
+          "Oral preparation may miss key topics due to zero visibility into question format; verbal practice limited by unknown scope",
+          "Math exercise difficulty unknown; if harder than expected, may encroach on simulator time allocated Saturday",
+          "Friday energy limited but oral discussion requires mental readiness; final review time is minimal",
+          "No buffer blocks included; any unexpected delay cascades through remaining schedule",
+          "Student may underestimate vague tasks despite timeboxing; discovery phase Saturday may reveal additional requirements",
+          "Oral discussion may be scheduled during morning reducing Friday review time further",
+          "Limited time for simulator UI polish; focus is on functional experiment rather than aesthetic improvements"
+        ],
+        "changes_from_previous": [],
+        "unresolved_critiques": [
+          {
+            "agent": "Risk Agent",
+            "severity": "major",
+            "issue": "Simulator scope remains undefined; teacher clarification not obtained before planning",
+            "planner_response": "Scheduled early discovery Saturday to review codebase and clarify scope; if teacher responds, scope can adjust Tuesday implementation accordingly"
+          },
+          {
+            "agent": "Deadline Agent",
+            "severity": "minor",
+            "issue": "Total workload (~23 hours) leaves minimal margin for unexpected delays",
+            "planner_response": "Strict timeboxes enforced on each task; no buffer blocks added; unscheduled time serves as implicit rest and contingency buffer"
+          },
+          {
+            "agent": "Wellbeing Agent",
+            "severity": "minor",
+            "issue": "Friday energy limited but oral requires mental readiness; minimal final review time",
+            "planner_response": "Substantive oral preparation completed by Thursday; Friday only has brief final review; verbal practice done Thursday to build confidence"
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "Simulator scope remains undefined; discovery Saturday may reveal additional requirements beyond allocated 10 hours",
+              "severity": "minor",
+              "affected_tasks": [
+                "AASMA simulator improvement"
+              ],
+              "affected_days": [
+                "2026-05-30",
+                "2026-06-02",
+                "2026-06-03"
+              ],
+              "suggested_fix": "If Saturday discovery reveals the task requires significantly more than 10 hours, prioritize the experiment and minimal notes over UI polish, and consider reducing oral prep Friday morning to add simulator buffer Tuesday."
+            },
+            {
+              "issue": "Oral preparation lacks structured learning objectives; 11 hours may not target actual knowledge gaps",
+              "severity": "minor",
+              "affected_tasks": [
+                "Programming languages oral preparation"
+              ],
+              "affected_days": [
+                "2026-05-30",
+                "2026-05-31",
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "During Saturday slide review (B3), explicitly identify 3-5 core topics likely to appear in oral questions; structure Sunday paper reading around those topics; Thursday verbal practice should focus on those specific topics, not general review."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Math exercise sheet given 8 hours total (Friday 3h + Sunday 2h + Monday 3h) against 5-hour estimate, providing substantial buffer for the student's explicit history of underestimating these sheets",
+            "AASMA simulator improvement starts Saturday with 3-hour discovery block (B2) before any implementation, addressing my earlier concern about front-loading discovery time for vague tasks",
+            "Programming languages oral spread across 4 days with dedicated Thursday verbal practice (B9), ensuring mental readiness is built before deadline day",
+            "Wednesday simulator block (B8) includes final testing and submission, so primary implementation work occurs Tuesday not on deadline day",
+            "No tasks are scheduled primarily on their deadline day; all deadlines have substantive work completed the day before"
+          ],
+          "overall_comment": "Calendar adequately protects all three deadlines. Math sheet receives 8 hours against 5-hour estimate with Friday start as I recommended. Simulator improvement has 10 hours spread across Saturday discovery, Tuesday implementation, and Wednesday finalization—my earlier concerns about needing early discovery time and avoiding deadline-day work are addressed. Oral preparation receives 11 hours across four days including dedicated verbal practice Thursday, ensuring mental readiness. The workload distribution leaves approximately 2 hours unscheduled per day, providing implicit contingency. I approve with minor concerns about simulator scope definition and oral learning objectives being too vague, but neither is critical given the substantial buffer time built into the schedule."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "Math exercise sheet started Friday with 3 hours despite 'quick review' label to account for student's history of underestimation",
+            "AASMA simulator improvement allocated early discovery Saturday to understand codebase before implementation, addressing scope uncertainty",
+            "Programming languages oral preparation spread across Saturday, Sunday, Thursday, and Friday to maximize discovery time for unknown question format",
+            "Total workload (~23 hours) balanced against available hours (~25 hours) with strict timeboxes preventing scope creep",
+            "Oral preparation prioritized verbal practice over passive reading to build confidence given low confidence and high uncertainty"
+          ],
+          "overall_comment": "From a grade protection perspective, this calendar appropriately prioritizes high-value work. The programming languages oral (highest grade weight, low recoverability) receives protected time across multiple days with Thursday fully dedicated to verbal practice. The AASMA simulator (significant project grade weight) receives early discovery Saturday and implementation Tuesday, with Wednesday reserved for finalization. The math exercise sheet (moderate weight) is front-loaded Friday to avoid Monday morning pressure. The planner correctly identified that the 'quick review' label for math is misleading and allocated appropriate time. The early discovery approach for the simulator addresses the vagueness concern by starting with codebase review rather than jumping into implementation. The oral preparation strategy of spreading discovery across multiple days and emphasizing verbal practice is sound given the high uncertainty. No high-value work is crowded out by lower-value work. The minimal contingency margin is a concern but is mitigated by strict timeboxes and the front-loading strategy. This calendar protects academic value by ensuring the highest-impact deliverables receive protected, focused time."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "T1 (AASMA simulator) total allocated time is 10 hours across Saturday (3h discovery) and Tuesday (4h) and Wednesday (3h), but the task remains completely undefined with no teacher clarification obtained. Discovery on Saturday is just reviewing the codebase - this is not the same as clarifying requirements with the teacher. If the teacher expects specific improvements or a specific experiment type, the student may spend Saturday reviewing the wrong things. The 10-hour allocation assumes the student can successfully complete UI cleaning, implement one experiment, and write notes within this time, but without knowing the scope, this is optimistic.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AASMA simulator improvement"
+              ],
+              "affected_days": [
+                "2026-05-30",
+                "2026-06-02",
+                "2026-06-03"
+              ],
+              "suggested_fix": "Add a note that if Saturday discovery reveals the scope is larger than expected, the student should immediately contact the teacher for clarification rather than attempting to complete everything. Consider reducing UI cleaning ambition to 'minimal functional cleanup' if scope is unclear."
+            },
+            {
+              "issue": "T2 (Programming languages oral) has 11 hours total (2h Saturday slides + 3h Sunday papers + 4h Thursday verbal practice + 2h Friday review) but the task description mentions only lecture slides and two papers with no guidance on what questions will be asked. The 2-hour Saturday block for reading and annotating lecture slides is very brief for comprehensive coverage. The 3-hour Sunday block for reading both papers is also compressed - academic papers typically require careful reading. The verbal practice on Thursday (4 hours) is good but the material coverage before that may be shallow.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Programming languages oral preparation"
+              ],
+              "affected_days": [
+                "2026-05-30",
+                "2026-05-31",
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Consider whether Saturday slide review should be extended to 3 hours to allow more thorough coverage before Sunday paper reading. Alternatively, prioritize the most recent or most relevant slides first."
+            },
+            {
+              "issue": "T3 (Math exercise sheet) has 8 hours total (3h Friday + 2h Sunday + 3h Monday) which is generous given it's labeled a 'quick review' but the student explicitly warned these take longer than expected. However, the Monday block from 14:00-17:00 is risky - if the student hasn't submitted by then, they may face technical issues or last-minute problems. The deadline is 'due Monday' but it's unclear if this means start of day, end of day, or a specific time.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Math exercise sheet"
+              ],
+              "affected_days": [
+                "2026-05-29",
+                "2026-05-31",
+                "2026-06-01"
+              ],
+              "suggested_fix": "Clarify the exact deadline time for the math exercise sheet submission. If it's end of day, the Monday afternoon block is acceptable. If it's morning deadline, the student should aim to submit Sunday evening as backup."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner correctly front-loaded T3 (math) Friday afternoon to address my concern about the 'quick review' underestimation risk. This is a good compromise that gives buffer time.",
+            "The planner scheduled early discovery for T1 (simulator) on Saturday, which aligns with my recommendation to understand scope before implementation. However, the discovery is limited to codebase review without teacher contact, which is a limitation.",
+            "The planner spread T2 (oral) preparation across multiple days and included explicit verbal practice on Thursday, which addresses my concern about oral exams requiring more than passive reading.",
+            "The planner acknowledged the tight margin between estimated workload (~23 hours) and available hours (~25 hours) and enforced strict timeboxes, which shows awareness of the risk."
+          ],
+          "overall_comment": "The calendar demonstrates good awareness of task uncertainty and has made reasonable compromises to address my earlier concerns. The front-loading strategy for vague tasks is sound, and the inclusion of verbal practice for the oral exam is particularly important. However, two minor concerns remain: (1) T1 simulator discovery is limited to codebase review without teacher contact, which may not fully clarify scope requirements, and (2) T2 paper reading time on Sunday (3 hours for two papers) is compressed. These are minor concerns that do not block acceptance but should be monitored. The overall effort allocation is realistic for a student with moderate energy and low confidence."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The planner addressed my earlier concern about Friday energy and oral readiness by completing substantive preparation by Thursday and limiting Friday to a brief 2-hour review—this is exactly what I recommended and it protects the student's mental energy on a low-energy day.",
+            "The planner acknowledged the math sheet 'takes longer than expected' risk by front-loading 3 hours Friday and 2 hours Sunday, giving buffer before the Monday deadline—this respects the student's own warning about underestimating.",
+            "The planner addressed simulator scope creep risk by timeboxing discovery Saturday, focusing on one experiment, and treating notes as minimal documentation rather than comprehensive report—this aligns with my recommendation to prevent overwork on vague tasks.",
+            "The planner acknowledged the tight margin (~23 hours workload vs ~25 hours available) by enforcing strict timeboxes and not adding buffer blocks, which means unscheduled time serves as implicit rest—this is a humane approach that I endorsed.",
+            "The planner spread oral preparation across multiple days (Saturday slide review, Sunday paper reading, Thursday verbal practice, Friday brief review) rather than cramming, which reduces cognitive overload and anxiety—this addresses my concern about panic-studying."
+          ],
+          "overall_comment": "This calendar is humane and sustainable. The planner front-loaded math work to respect the student's warning about underestimation, timeboxed the vague simulator task to prevent scope creep, and spread oral preparation across multiple days with emphasis on verbal practice rather than passive reading. The Friday strategy is particularly well-designed: substantive preparation is complete by Thursday, leaving only a brief 2-hour review on Friday when energy is naturally lower. The tight margin between workload and available hours is acknowledged without adding artificial buffer blocks—unscheduled time serves as implicit rest, which is the right approach. The student should follow this plan as written and resist the urge to extend any task beyond its timebox, especially the simulator improvement which has the highest scope creep risk."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "issue": "Simulator scope discovery Saturday is passive - reviewing own codebase does not clarify what teacher actually requires. The student has not contacted the teacher for scope clarification. If the teacher's definition of 'improvement' differs from the student's assumptions (clean UI, add experiment, write notes), Saturday discovery will not reveal this discrepancy. The student could spend 3 hours reviewing code that is already adequate, while the teacher expects something entirely different.",
+              "severity": "critical",
+              "affected_tasks": [
+                "AASMA simulator improvement"
+              ],
+              "affected_days": [
+                "2026-05-30"
+              ],
+              "suggested_fix": "Add explicit teacher contact block Friday evening or Saturday morning before coding begins. Send email or message asking: 'What is the minimum viable improvement you expect? Should I focus on UI, experiments, or documentation?' If no response by Saturday afternoon, assume ONE experiment with brief notes is sufficient and proceed with that minimum scope."
+            },
+            {
+              "issue": "Math exercise sheet has no buffer before Monday deadline. The student explicitly warned these take longer than expected, yet the plan allocates 3 hours Friday, 2 hours Sunday, and 3 hours Monday - totaling 8 hours spread across three days. If Friday's 3 hours are insufficient or Sunday reveals harder problems, Monday becomes a crisis day with only 3 hours remaining. There is no contingency if the exercises are more difficult than expected.",
+              "severity": "major",
+              "affected_tasks": [
+                "Math exercise sheet"
+              ],
+              "affected_days": [
+                "2026-05-29",
+                "2026-05-31",
+                "2026-06-01"
+              ],
+              "suggested_fix": "Add 1-hour buffer block Monday morning before classes if math is not completed by Sunday evening. Alternatively, allocate 30 minutes Saturday evening for math if simulator discovery completes early. The goal is to have math essentially complete by Sunday night with Monday only for final review and submission."
+            },
+            {
+              "issue": "Oral preparation lacks strategy for handling unknown question scope. The plan schedules slide review (Saturday), paper reading (Sunday), verbal practice (Thursday), and final review (Friday) but does not address how the student will handle questions outside their prepared topics. There is no mention of contacting the teacher or TA for question hints, no study group to identify likely topics, and no prioritization framework for where to focus limited preparation time.",
+              "severity": "major",
+              "affected_tasks": [
+                "Programming languages oral preparation"
+              ],
+              "affected_days": [
+                "2026-05-30",
+                "2026-05-31",
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Add task to identify course learning objectives or exam rubric as proxy for question topics. Contact teacher or TA by Saturday to ask about question scope or format. If no response, prioritize depth over breadth - prepare 3-5 core concepts thoroughly that can be explained well regardless of specific questions asked."
+            },
+            {
+              "issue": "No explicit contingency exists for any task running over timebox. The plan acknowledges 'any unexpected delay cascades through remaining schedule' but does not include any recovery mechanism. If Friday math takes 4 hours instead of 3, Saturday simulator discovery is compressed. If Sunday math takes 3 hours instead of 2, oral paper reading is reduced. The plan has no explicit fallback priorities or task deferral decisions.",
+              "severity": "major",
+              "affected_tasks": [
+                "Math exercise sheet",
+                "AASMA simulator improvement",
+                "Programming languages oral preparation"
+              ],
+              "affected_days": [
+                "2026-05-29",
+                "2026-05-30",
+                "2026-05-31",
+                "2026-06-01",
+                "2026-06-02",
+                "2026-06-03",
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Define explicit fallback priorities: (1) If math runs over, prioritize completion over oral preparation - oral can proceed with less preparation; (2) If simulator runs over, deliver minimum experiment with notes and skip UI polish; (3) If oral runs over, accept reduced preparation and focus on confidence-building for core concepts. Document these priorities in the plan so the student has clear decision rules when time is short."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Math exercise sheet now starts Friday afternoon instead of Sunday - this addresses the concern about starting too late",
+            "Simulator improvement now has early discovery Saturday instead of pushing all work to Wednesday - this provides some buffer",
+            "Oral preparation spread across multiple days with verbal practice emphasis - this addresses the need for active preparation over passive reading",
+            "Overall strategy prioritizes front-loading work to avoid deadline-day pressure - this aligns with the student's explicit request"
+          ],
+          "overall_comment": "The plan has improved from the initial state - starting math Friday, scheduling early simulator discovery, and spreading oral preparation across multiple days are all positive changes that address earlier concerns. However, three critical gaps remain: (1) Simulator scope discovery is passive - reviewing own code does not clarify what the teacher actually requires. The student must contact the teacher before coding begins, not just review what they have. (2) Math exercise has no contingency buffer - if Friday's 3 hours are insufficient, Monday becomes a crisis with only 3 hours remaining. (3) Oral preparation lacks any strategy for handling unknown question scope - reading papers and practicing verbally is good but without knowing what topics to prioritize, the student may waste time on low-priority areas. The plan should not be approved without explicit teacher contact for simulator scope and defined fallback priorities for task overruns. These are not minor concerns - they represent hidden work and dependencies that could derail the entire plan."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "block_after_deadline",
+            "message": "Math exercise sheet has work scheduled after its deadline (2026-06-01T00:00:00.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_deadline",
+            "message": "AASMA simulator improvement has work scheduled after its deadline (2026-06-03T00:00:00.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-05 is outside the planning window 2026-05-29 → 2026-06-05.",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_deadline",
+            "message": "Programming languages oral preparation has work scheduled after its deadline (2026-06-05T00:00:00.000Z).",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 4,
+      "hasCritical": true
+    },
+    {
+      "calendar": {
+        "calendar_version": 2,
+        "planning_window": {
+          "start_date": "2026-05-29",
+          "end_date": "2026-06-05",
+          "reason": "Cover math deadline June 1, AASMA simulator deadline June 3, and oral preparation through June 5."
+        },
+        "overall_strategy": [
+          "Front-load math work early to create deadline buffer and avoid Monday morning pressure",
+          "Add explicit teacher contact for simulator scope clarification to prevent wasted effort on wrong requirements",
+          "Include study group contact for oral preparation to identify likely topics and question patterns",
+          "Build math contingency into Sunday allocation rather than relying on Monday buffer",
+          "Timebox simulator work after scope clarification to prevent scope creep",
+          "Prioritize verbal practice over passive reading for oral preparation"
+        ],
+        "days": [
+          {
+            "date": "2026-05-29",
+            "day_name": "Friday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Weekend begins with math exercise sheet starting early to create deadline buffer.",
+            "blocks": [
+              {
+                "id": "b1",
+                "task_id": "T3",
+                "task_name": "Math exercise sheet",
+                "type": "work",
+                "start": "2026-05-29T14:00:00+01:00",
+                "end": "2026-05-29T17:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Begin math exercise sheet problems, prioritizing easier questions to build momentum.",
+                "reasoning": "Starting Friday afternoon provides buffer before Monday deadline; first session allocated 3 hours to assess actual difficulty."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-30",
+            "day_name": "Saturday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Weekend day allocated for programming languages slide review and simulator scope clarification via teacher contact.",
+            "blocks": [
+              {
+                "id": "b2",
+                "task_id": "T2",
+                "task_name": "Programming languages oral preparation",
+                "type": "work",
+                "start": "2026-05-30T10:00:00+01:00",
+                "end": "2026-05-30T13:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Read and annotate lecture slides to identify key topics and potential oral discussion areas.",
+                "reasoning": "Slides provide course-aligned framework for oral preparation and help identify which concepts the teacher emphasizes."
+              },
+              {
+                "id": "b3",
+                "task_id": "T1",
+                "task_name": "AASMA simulator improvement",
+                "type": "work",
+                "start": "2026-05-30T14:00:00+01:00",
+                "end": "2026-05-30T15:00:00+01:00",
+                "duration_hours": 1,
+                "description": "Contact teacher via email requesting scope clarification: what specific improvements count toward assignment requirements.",
+                "reasoning": "Direct teacher contact addresses Risk Agent concern about passive code review; clarifies expectations before implementation begins."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-31",
+            "day_name": "Sunday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Second math session and programming languages paper reading to build oral preparation depth.",
+            "blocks": [
+              {
+                "id": "b4",
+                "task_id": "T3",
+                "task_name": "Math exercise sheet",
+                "type": "work",
+                "start": "2026-05-31T10:00:00+01:00",
+                "end": "2026-05-31T14:00:00+01:00",
+                "duration_hours": 4,
+                "description": "Continue math exercises and finish remaining problems; review solutions for completeness.",
+                "reasoning": "Allocated 4 hours on Sunday instead of 2 to create contingency buffer for difficult problems; addresses Risk Agent concern about no math buffer."
+              },
+              {
+                "id": "b5",
+                "task_id": "T2",
+                "task_name": "Programming languages oral preparation",
+                "type": "work",
+                "start": "2026-05-31T15:00:00+01:00",
+                "end": "2026-05-31T19:00:00+01:00",
+                "duration_hours": 4,
+                "description": "Read and summarize both papers, extracting key concepts, arguments, and potential discussion questions.",
+                "reasoning": "Paper reading distributed across weekend to allow concepts to settle before oral practice."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-01",
+            "day_name": "Monday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Math submission day with buffer for final problem solving if needed; also initiates simulator planning.",
+            "blocks": [
+              {
+                "id": "b6",
+                "task_id": "T3",
+                "task_name": "Math exercise sheet",
+                "type": "work",
+                "start": "2026-06-01T14:00:00+01:00",
+                "end": "2026-06-01T17:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Submit math exercise sheet before end of day; use afternoon for final problem solving or review if Sunday session left gaps.",
+                "reasoning": "Monday submission deadline with 3-hour block provides final buffer if exercises prove harder than Friday assessment indicated."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-02",
+            "day_name": "Tuesday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Simulator implementation day following teacher scope clarification and study group oral topic identification.",
+            "blocks": [
+              {
+                "id": "b7",
+                "task_id": "T1",
+                "task_name": "AASMA simulator improvement",
+                "type": "work",
+                "start": "2026-06-02T10:00:00+01:00",
+                "end": "2026-06-02T14:00:00+01:00",
+                "duration_hours": 4,
+                "description": "Implement agreed improvements in simulator based on teacher scope clarification; write result notes documenting setup and observations.",
+                "reasoning": "Teacher contact on Saturday should yield scope response by Tuesday; 4-hour block allows meaningful implementation without scope creep."
+              },
+              {
+                "id": "b8",
+                "task_id": "T2",
+                "task_name": "Programming languages oral preparation",
+                "type": "work",
+                "start": "2026-06-02T15:00:00+01:00",
+                "end": "2026-06-02T16:00:00+01:00",
+                "duration_hours": 1,
+                "description": "Contact study group or TA to identify likely oral exam topics and question patterns.",
+                "reasoning": "Addresses Risk Agent concern about lacking strategy for unknown question scope; peer input helps prioritize preparation focus areas."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-03",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Simulator finalization and submission with buffer time for unexpected issues.",
+            "blocks": [
+              {
+                "id": "b9",
+                "task_id": "T1",
+                "task_name": "AASMA simulator improvement",
+                "type": "work",
+                "start": "2026-06-03T10:00:00+01:00",
+                "end": "2026-06-03T13:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Final testing and polish of simulator; submit before deadline.",
+                "reasoning": "Wednesday submission gives one-day buffer before oral exam; 3-hour block with strict timebox prevents over-polishing."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Oral preparation intensive practice day using study group insights and teacher contact to guide focus.",
+            "blocks": [
+              {
+                "id": "b10",
+                "task_id": "T2",
+                "task_name": "Programming languages oral preparation",
+                "type": "work",
+                "start": "2026-06-04T10:00:00+01:00",
+                "end": "2026-06-04T14:00:00+01:00",
+                "duration_hours": 4,
+                "description": "Practice verbal explanations of key concepts out loud; generate and answer probable questions using prioritized topics from study group.",
+                "reasoning": "Study group contact on Tuesday and teacher input provide framework for focusing practice on likely exam areas rather than blind coverage."
+              },
+              {
+                "id": "b11",
+                "task_id": "T2",
+                "task_name": "Programming languages oral preparation",
+                "type": "work",
+                "start": "2026-06-04T15:00:00+01:00",
+                "end": "2026-06-04T16:00:00+01:00",
+                "duration_hours": 1,
+                "description": "Final contact with study group or TA for any last-minute topic hints before oral exam.",
+                "reasoning": "Direct communication reduces uncertainty about question scope; even brief input helps prioritization."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Friday",
+            "assumed_available_hours": 2,
+            "day_reasoning": "Final oral preparation and exam day with minimal time allocated to avoid over-preparation anxiety.",
+            "blocks": [
+              {
+                "id": "b12",
+                "task_id": "T2",
+                "task_name": "Programming languages oral preparation",
+                "type": "work",
+                "start": "2026-06-05T09:00:00+01:00",
+                "end": "2026-06-05T11:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Brief final review of key talking points and prioritized concepts before oral discussion.",
+                "reasoning": "Final 2-hour review session with clear scope from previous days' preparation; prevents over-preparation and anxiety."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Math exercises historically take longer than expected but deadline is Monday",
+            "resolution": "Increased Sunday allocation from 2 to 4 hours and maintained Monday 3-hour buffer; if Friday session completes early, momentum carries forward; worst case Monday provides final solve opportunity."
+          },
+          {
+            "conflict": "Simulator scope is undefined and teacher contact may not yield timely response",
+            "resolution": "Teacher email scheduled Saturday with 1-hour timebox; if no response by Tuesday, student will implement based on reasonable interpretation of 'improvement' with explicit note in submission explaining approach."
+          },
+          {
+            "conflict": "Oral question format and topics are unknown but preparation time is limited",
+            "resolution": "Added study group and TA contact on Tuesday to gather hints about likely topics; prioritized practice focuses on high-probability areas identified through peer input rather than covering all material equally."
+          }
+        ],
+        "known_weaknesses": [
+          "Teacher scope response may arrive late, leaving Tuesday implementation guessing; contingency is to proceed with reasonable improvement interpretation",
+          "Study group contact depends on peer availability and willingness to share topic hints; if unresponsive, oral prep reverts to balanced coverage of all material",
+          "Sunday math allocation increase reduces weekend flexibility for other tasks; if math completes early, remaining time helps oral preparation rather than simulator."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Replaced Saturday passive code review with 1-hour teacher contact block for scope clarification",
+            "reason": "Addresses Risk Agent major critique that reviewing own code does not clarify what teacher actually requires; teacher contact must precede implementation."
+          },
+          {
+            "change": "Increased Sunday math allocation from 2 to 4 hours",
+            "reason": "Addresses Risk Agent major critique about math having no contingency buffer; 4 hours instead of 2 creates buffer before Monday deadline."
+          },
+          {
+            "change": "Reduced Wednesday simulator block from buffer focus to strict finalization and submission",
+            "reason": "Math buffer moved to Sunday allows more focused simulator finalization without relying on Monday buffer for math."
+          },
+          {
+            "change": "Added Tuesday study group and TA contact block for oral preparation",
+            "reason": "Addresses Risk Agent concern about oral preparation lacking strategy for unknown question scope; peer input helps prioritize limited preparation time."
+          },
+          {
+            "change": "Increased Thursday oral practice from 4 to 5 hours across two blocks",
+            "reason": "More preparation time on Thursday given teacher and study group contacts provide framework for focused practice."
+          }
+        ],
+        "unresolved_critiques": [
+          {
+            "agent": "Risk Agent",
+            "severity": "major",
+            "issue": "Simulator scope discovery is passive - reviewing own codebase does not clarify what teacher actually requires. Teacher contact scheduled but may not yield timely response.",
+            "planner_response": "Added explicit teacher contact block on Saturday (1 hour) to request scope clarification before implementation begins. If response arrives late, student will proceed with reasonable improvement interpretation and document approach in submission notes."
+          },
+          {
+            "agent": "Risk Agent",
+            "severity": "major",
+            "issue": "Math exercise has no contingency buffer - if Friday's 3 hours are insufficient, Monday becomes a crisis with only 3 hours remaining.",
+            "planner_response": "Increased Sunday math allocation from 2 to 4 hours, creating 4 hours of buffer before Monday submission. Monday still provides 3-hour final solve opportunity but Sunday increase significantly reduces crisis probability."
+          },
+          {
+            "agent": "Risk Agent",
+            "severity": "major",
+            "issue": "Oral preparation lacks strategy for handling unknown question scope - no contact with teacher, TA, or study group for question hints.",
+            "planner_response": "Added Tuesday study group and TA contact block (1 hour) to gather topic hints and question patterns. Thursday includes final contact block (1 hour) for last-minute insights. Study group input provides prioritization framework for verbal practice sessions."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "Simulator improvement has only 7 hours of actual implementation work spread across Tuesday (4h) and Wednesday (3h deadline day), with a 1-hour teacher contact on Saturday that generates no usable output until implementation begins. If teacher scope response is delayed or unclear, the Tuesday block becomes speculative and the Wednesday deadline day carries critical risk.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AASMA simulator improvement"
+              ],
+              "affected_days": [
+                "2026-06-02",
+                "2026-06-03"
+              ],
+              "suggested_fix": "Consider shifting some simulator work to Monday to create more implementation time before Wednesday deadline. Monday currently has 3 hours available for math buffer, but if math completes efficiently on Friday/Sunday, some Monday afternoon hours could support simulator preparation (e.g., preparing test cases or reviewing requirements) rather than sitting as contingency."
+            },
+            {
+              "issue": "Math exercise sheet still allocates 3 hours of problem-solving work on Monday deadline day (June 1) rather than treating it purely as submission buffer. The student explicitly warned these sheets take longer than expected, and the planner's Sunday contingency increase (2h to 4h) helps but doesn't eliminate Monday work requirement. Deadline-day problem-solving with only 3 hours available is risky if previous sessions underestimated scope.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Math exercise sheet"
+              ],
+              "affected_days": [
+                "2026-06-01"
+              ],
+              "suggested_fix": "Target completing 90%+ of exercises by end of Sunday session. Monday 3-hour block should be framed as final review and submission only, not primary problem-solving. If Sunday session appears incomplete by 2pm, prioritize seeking help (classmate, online resources) immediately rather than grinding alone."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Planner increased Sunday math allocation from 2 to 4 hours, addressing my concern about insufficient math contingency buffer.",
+            "Added teacher contact block on Saturday for simulator scope clarification, preventing blind implementation.",
+            "Added study group/TA contact on Tuesday for oral preparation, reducing maximum uncertainty about question scope.",
+            "Thursday oral practice increased from 4 to 5 hours across two blocks, providing more verbal practice time.",
+            "Math work front-loaded Friday through Sunday to create Monday deadline buffer rather than relying on deadline-day primary work."
+          ],
+          "overall_comment": "The calendar protects all three deadlines with meaningful work before each due date. The planner addressed my earlier concerns by increasing math contingency, adding teacher and peer contact for uncertainty reduction, and front-loading work appropriately. Two minor concerns remain: (1) simulator implementation is compressed into Tuesday-Wednesday with only 7 hours of actual work after a 1-hour contact block, creating deadline-day dependency if scope clarification is delayed; (2) math still requires Monday deadline-day problem-solving despite student warnings about estimation errors, though Sunday buffer increase mitigates this risk. Both concerns are manageable given overall schedule quality. Approval given with minor concerns rather than full approval due to simulator deadline-day compression and residual math Monday work requirement."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "Math exercises historically take longer than expected but deadline is Monday — Sunday allocation increased from 2 to 4 hours with Monday 3-hour buffer maintained. This directly addresses my earlier concern about underestimating math time.",
+            "Simulator scope is undefined and teacher contact may not yield timely response — Saturday 1-hour teacher contact block added before implementation begins. This protects against wasted effort on wrong requirements, which was my primary concern for the simulator task.",
+            "Oral question format and topics are unknown but preparation time is limited — Tuesday study group/TA contact and Thursday final contact added to gather topic hints. This addresses my concern about oral preparation lacking strategy for unknown question scope."
+          ],
+          "overall_comment": "From a grade protection perspective, this calendar adequately protects high-value work. The programming languages oral (high-stakes examination with low recoverability) receives 11 hours of protected time across Saturday, Sunday, Tuesday (contact), Thursday (5 hours across two blocks), and Friday morning. The AASMA simulator (project deliverable with significant grade weight) receives 8 hours across Saturday (scope clarification), Tuesday (implementation), and Wednesday (finalization), with teacher contact preceding implementation to prevent wasted effort. The math exercise sheet (moderate grade weight) receives 10 hours across Friday, Sunday, and Monday, with Sunday allocation increased to create contingency buffer. The priority ordering is appropriate: math first due to earliest deadline but lower grade weight, simulator next with scope clarification before implementation, and oral last given its Friday deadline and highest grade weight. The student's low confidence and difficulty with vague tasks are addressed through front-loaded discovery time (teacher contact, study group contact) rather than deferring work to deadline days. No major grade protection concerns remain."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "Math exercises now have 4-hour Sunday buffer plus 3-hour Monday buffer, addressing the concern that 'quick review' tasks historically take longer than expected",
+            "Teacher contact block added Saturday for scope clarification before simulator implementation begins, preventing wasted effort on wrong requirements",
+            "Study group and TA contact added Tuesday for oral preparation topic hints, providing strategy for handling unknown question format",
+            "Thursday oral practice increased from 4 to 5 hours across two blocks, allowing more verbal rehearsal time given the substantial material to cover",
+            "Simulator contingency plan documented: if teacher response is delayed, student proceeds with reasonable interpretation and documents approach in submission notes"
+          ],
+          "overall_comment": "The planner has addressed all three major critiques from the Risk Agent by adding explicit contact blocks (teacher for simulator scope, study group/TA for oral topics), increasing math buffer from 2 to 4 hours on Sunday, and expanding Thursday oral practice time. The overall strategy now front-loads math work appropriately, includes proactive scope discovery for the simulator task, and builds in peer contact for oral preparation prioritization. Total allocated hours across the planning window are approximately 27 hours of productive work time, which aligns with the estimated 24 hours of total task workload (8h simulator, 12h oral, 4h math). The compromises documented are reasonable given the student's acknowledged difficulty estimating vague tasks. Duration estimates are now more realistic with explicit contingency buffers. This calendar is approved."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "Sunday math allocation increased from 2 to 4 hours, addressing my concern about insufficient contingency buffer for a task that historically takes longer than expected",
+            "Teacher contact block added on Saturday (1 hour) before simulator implementation begins, addressing my concern about scope uncertainty leading to wasted effort",
+            "Study group and TA contact added on Tuesday (1 hour) plus Thursday (1 hour) for oral preparation, addressing my concern about unknown question format creating anxiety-driven overstudying",
+            "Thursday oral practice increased from 4 to 5 hours across two blocks, giving more focused practice time with clear prioritization framework from peer input",
+            "Monday math buffer maintained at 3 hours, preserving final solve opportunity if Sunday work leaves gaps",
+            "Simulator Wednesday block focused on strict finalization and submission rather than buffer work, preventing scope creep into rest time"
+          ],
+          "overall_comment": "This calendar is humane and sustainable. The planner addressed my key wellbeing concerns: math has proper contingency buffer (4 hours Sunday plus 3 hours Monday), simulator scope uncertainty is addressed through proactive teacher contact before implementation, and oral preparation has a structured strategy through study group contact rather than anxiety-driven overstudying. Cognitive load is reasonably distributed across the week without stacking heavy tasks on any single day. Friday (oral exam day) has only a 2-hour final review block, which is appropriate given end-of-week fatigue. The student should be able to follow this schedule without excessive stress or sleep deprivation."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "Simulator scope discovery depends on teacher email response timing - if response arrives after Tuesday, implementation proceeds with uncertainty",
+              "severity": "minor",
+              "affected_tasks": [
+                "AASMA simulator improvement"
+              ],
+              "affected_days": [
+                "2026-06-02"
+              ],
+              "suggested_fix": "Prepare a minimum viable improvement plan BEFORE teacher response arrives. Define what 'reasonable improvement' means independently (e.g., one working experiment, basic notes, minimal UI cleanup) so implementation can begin immediately on Tuesday regardless of response timing. This removes dependency on email response latency."
+            },
+            {
+              "issue": "Oral preparation study group contact is optional and depends on peer availability - no fallback if classmates are unresponsive",
+              "severity": "minor",
+              "affected_tasks": [
+                "Programming languages oral preparation"
+              ],
+              "affected_days": [
+                "2026-06-02",
+                "2026-06-04"
+              ],
+              "suggested_fix": "Prepare fallback strategy now: if study group is unresponsive by Tuesday afternoon, student should (1) review slides and papers independently to identify their own priority topics, (2) prepare universal answers covering core concepts that apply to any question, (3) practice explaining concepts aloud without peer validation. Do not leave fallback undefined."
+            },
+            {
+              "issue": "Friday (June 5) has only 2 hours allocated but oral exam timing is unknown - could be morning or afternoon, leaving variable final prep time",
+              "severity": "minor",
+              "affected_tasks": [
+                "Programming languages oral preparation"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Clarify oral exam scheduling with teacher or TA as early as possible. If exam is morning, Friday morning block (2 hours) is final prep. If afternoon, student has more flexibility. Knowing this allows better time allocation on Thursday evening."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Sunday math allocation increased from 2 to 4 hours - addresses concern about no contingency buffer before Monday deadline",
+            "Saturday teacher contact block added - addresses concern about undefined simulator scope without discovery mechanism",
+            "Tuesday study group contact added - addresses concern about oral preparation lacking strategy for unknown question scope",
+            "Thursday oral practice increased from 4 to 5 hours across two blocks - provides more preparation time given peer input framework",
+            "Math buffer moved to Sunday allows more focused simulator finalization without relying on Monday buffer for math"
+          ],
+          "overall_comment": "This plan is substantially improved from version 1. The planner addressed all three major critiques from my earlier view: math now has a 4-hour Sunday buffer, simulator has explicit teacher contact before implementation, and oral preparation includes study group contact for topic prioritization. These changes demonstrate the planner listened to risk concerns and built appropriate discovery and contingency mechanisms. My remaining critiques are minor - they focus on execution dependencies and fallbacks rather than structural plan failures. The plan is APPROVED WITH MINOR CONCERNS. The student should proceed with confidence but remain aware of the three minor execution risks identified."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "block_after_deadline",
+            "message": "Math exercise sheet has work scheduled after its deadline (2026-06-01T00:00:00.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_deadline",
+            "message": "AASMA simulator improvement has work scheduled after its deadline (2026-06-03T00:00:00.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-05 is outside the planning window 2026-05-29 → 2026-06-05.",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_deadline",
+            "message": "Programming languages oral preparation has work scheduled after its deadline (2026-06-05T00:00:00.000Z).",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 5,
+      "hasCritical": false
+    }
+  ],
+  "finalCalendar": {
+    "calendar_version": 2,
+    "planning_window": {
+      "start_date": "2026-05-29",
+      "end_date": "2026-06-05",
+      "reason": "Cover math deadline June 1, AASMA simulator deadline June 3, and oral preparation through June 5."
+    },
+    "overall_strategy": [
+      "Front-load math work early to create deadline buffer and avoid Monday morning pressure",
+      "Add explicit teacher contact for simulator scope clarification to prevent wasted effort on wrong requirements",
+      "Include study group contact for oral preparation to identify likely topics and question patterns",
+      "Build math contingency into Sunday allocation rather than relying on Monday buffer",
+      "Timebox simulator work after scope clarification to prevent scope creep",
+      "Prioritize verbal practice over passive reading for oral preparation"
+    ],
+    "days": [
+      {
+        "date": "2026-05-29",
+        "day_name": "Friday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "Weekend begins with math exercise sheet starting early to create deadline buffer.",
+        "blocks": [
+          {
+            "id": "b1",
+            "task_id": "T3",
+            "task_name": "Math exercise sheet",
+            "type": "work",
+            "start": "2026-05-29T14:00:00+01:00",
+            "end": "2026-05-29T17:00:00+01:00",
+            "duration_hours": 3,
+            "description": "Begin math exercise sheet problems, prioritizing easier questions to build momentum.",
+            "reasoning": "Starting Friday afternoon provides buffer before Monday deadline; first session allocated 3 hours to assess actual difficulty."
+          }
+        ]
+      },
+      {
+        "date": "2026-05-30",
+        "day_name": "Saturday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Weekend day allocated for programming languages slide review and simulator scope clarification via teacher contact.",
+        "blocks": [
+          {
+            "id": "b2",
+            "task_id": "T2",
+            "task_name": "Programming languages oral preparation",
+            "type": "work",
+            "start": "2026-05-30T10:00:00+01:00",
+            "end": "2026-05-30T13:00:00+01:00",
+            "duration_hours": 3,
+            "description": "Read and annotate lecture slides to identify key topics and potential oral discussion areas.",
+            "reasoning": "Slides provide course-aligned framework for oral preparation and help identify which concepts the teacher emphasizes."
+          },
+          {
+            "id": "b3",
+            "task_id": "T1",
+            "task_name": "AASMA simulator improvement",
+            "type": "work",
+            "start": "2026-05-30T14:00:00+01:00",
+            "end": "2026-05-30T15:00:00+01:00",
+            "duration_hours": 1,
+            "description": "Contact teacher via email requesting scope clarification: what specific improvements count toward assignment requirements.",
+            "reasoning": "Direct teacher contact addresses Risk Agent concern about passive code review; clarifies expectations before implementation begins."
+          }
+        ]
+      },
+      {
+        "date": "2026-05-31",
+        "day_name": "Sunday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Second math session and programming languages paper reading to build oral preparation depth.",
+        "blocks": [
+          {
+            "id": "b4",
+            "task_id": "T3",
+            "task_name": "Math exercise sheet",
+            "type": "work",
+            "start": "2026-05-31T10:00:00+01:00",
+            "end": "2026-05-31T14:00:00+01:00",
+            "duration_hours": 4,
+            "description": "Continue math exercises and finish remaining problems; review solutions for completeness.",
+            "reasoning": "Allocated 4 hours on Sunday instead of 2 to create contingency buffer for difficult problems; addresses Risk Agent concern about no math buffer."
+          },
+          {
+            "id": "b5",
+            "task_id": "T2",
+            "task_name": "Programming languages oral preparation",
+            "type": "work",
+            "start": "2026-05-31T15:00:00+01:00",
+            "end": "2026-05-31T19:00:00+01:00",
+            "duration_hours": 4,
+            "description": "Read and summarize both papers, extracting key concepts, arguments, and potential discussion questions.",
+            "reasoning": "Paper reading distributed across weekend to allow concepts to settle before oral practice."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-01",
+        "day_name": "Monday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "Math submission day with buffer for final problem solving if needed; also initiates simulator planning.",
+        "blocks": [
+          {
+            "id": "b6",
+            "task_id": "T3",
+            "task_name": "Math exercise sheet",
+            "type": "work",
+            "start": "2026-06-01T14:00:00+01:00",
+            "end": "2026-06-01T17:00:00+01:00",
+            "duration_hours": 3,
+            "description": "Submit math exercise sheet before end of day; use afternoon for final problem solving or review if Sunday session left gaps.",
+            "reasoning": "Monday submission deadline with 3-hour block provides final buffer if exercises prove harder than Friday assessment indicated."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-02",
+        "day_name": "Tuesday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Simulator implementation day following teacher scope clarification and study group oral topic identification.",
+        "blocks": [
+          {
+            "id": "b7",
+            "task_id": "T1",
+            "task_name": "AASMA simulator improvement",
+            "type": "work",
+            "start": "2026-06-02T10:00:00+01:00",
+            "end": "2026-06-02T14:00:00+01:00",
+            "duration_hours": 4,
+            "description": "Implement agreed improvements in simulator based on teacher scope clarification; write result notes documenting setup and observations.",
+            "reasoning": "Teacher contact on Saturday should yield scope response by Tuesday; 4-hour block allows meaningful implementation without scope creep."
+          },
+          {
+            "id": "b8",
+            "task_id": "T2",
+            "task_name": "Programming languages oral preparation",
+            "type": "work",
+            "start": "2026-06-02T15:00:00+01:00",
+            "end": "2026-06-02T16:00:00+01:00",
+            "duration_hours": 1,
+            "description": "Contact study group or TA to identify likely oral exam topics and question patterns.",
+            "reasoning": "Addresses Risk Agent concern about lacking strategy for unknown question scope; peer input helps prioritize preparation focus areas."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-03",
+        "day_name": "Wednesday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "Simulator finalization and submission with buffer time for unexpected issues.",
+        "blocks": [
+          {
+            "id": "b9",
+            "task_id": "T1",
+            "task_name": "AASMA simulator improvement",
+            "type": "work",
+            "start": "2026-06-03T10:00:00+01:00",
+            "end": "2026-06-03T13:00:00+01:00",
+            "duration_hours": 3,
+            "description": "Final testing and polish of simulator; submit before deadline.",
+            "reasoning": "Wednesday submission gives one-day buffer before oral exam; 3-hour block with strict timebox prevents over-polishing."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-04",
+        "day_name": "Thursday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Oral preparation intensive practice day using study group insights and teacher contact to guide focus.",
+        "blocks": [
+          {
+            "id": "b10",
+            "task_id": "T2",
+            "task_name": "Programming languages oral preparation",
+            "type": "work",
+            "start": "2026-06-04T10:00:00+01:00",
+            "end": "2026-06-04T14:00:00+01:00",
+            "duration_hours": 4,
+            "description": "Practice verbal explanations of key concepts out loud; generate and answer probable questions using prioritized topics from study group.",
+            "reasoning": "Study group contact on Tuesday and teacher input provide framework for focusing practice on likely exam areas rather than blind coverage."
+          },
+          {
+            "id": "b11",
+            "task_id": "T2",
+            "task_name": "Programming languages oral preparation",
+            "type": "work",
+            "start": "2026-06-04T15:00:00+01:00",
+            "end": "2026-06-04T16:00:00+01:00",
+            "duration_hours": 1,
+            "description": "Final contact with study group or TA for any last-minute topic hints before oral exam.",
+            "reasoning": "Direct communication reduces uncertainty about question scope; even brief input helps prioritization."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-05",
+        "day_name": "Friday",
+        "assumed_available_hours": 2,
+        "day_reasoning": "Final oral preparation and exam day with minimal time allocated to avoid over-preparation anxiety.",
+        "blocks": [
+          {
+            "id": "b12",
+            "task_id": "T2",
+            "task_name": "Programming languages oral preparation",
+            "type": "work",
+            "start": "2026-06-05T09:00:00+01:00",
+            "end": "2026-06-05T11:00:00+01:00",
+            "duration_hours": 2,
+            "description": "Brief final review of key talking points and prioritized concepts before oral discussion.",
+            "reasoning": "Final 2-hour review session with clear scope from previous days' preparation; prevents over-preparation and anxiety."
+          }
+        ]
+      }
+    ],
+    "compromises": [
+      {
+        "conflict": "Math exercises historically take longer than expected but deadline is Monday",
+        "resolution": "Increased Sunday allocation from 2 to 4 hours and maintained Monday 3-hour buffer; if Friday session completes early, momentum carries forward; worst case Monday provides final solve opportunity."
+      },
+      {
+        "conflict": "Simulator scope is undefined and teacher contact may not yield timely response",
+        "resolution": "Teacher email scheduled Saturday with 1-hour timebox; if no response by Tuesday, student will implement based on reasonable interpretation of 'improvement' with explicit note in submission explaining approach."
+      },
+      {
+        "conflict": "Oral question format and topics are unknown but preparation time is limited",
+        "resolution": "Added study group and TA contact on Tuesday to gather hints about likely topics; prioritized practice focuses on high-probability areas identified through peer input rather than covering all material equally."
+      }
+    ],
+    "known_weaknesses": [
+      "Teacher scope response may arrive late, leaving Tuesday implementation guessing; contingency is to proceed with reasonable improvement interpretation",
+      "Study group contact depends on peer availability and willingness to share topic hints; if unresponsive, oral prep reverts to balanced coverage of all material",
+      "Sunday math allocation increase reduces weekend flexibility for other tasks; if math completes early, remaining time helps oral preparation rather than simulator."
+    ],
+    "changes_from_previous": [
+      {
+        "change": "Replaced Saturday passive code review with 1-hour teacher contact block for scope clarification",
+        "reason": "Addresses Risk Agent major critique that reviewing own code does not clarify what teacher actually requires; teacher contact must precede implementation."
+      },
+      {
+        "change": "Increased Sunday math allocation from 2 to 4 hours",
+        "reason": "Addresses Risk Agent major critique about math having no contingency buffer; 4 hours instead of 2 creates buffer before Monday deadline."
+      },
+      {
+        "change": "Reduced Wednesday simulator block from buffer focus to strict finalization and submission",
+        "reason": "Math buffer moved to Sunday allows more focused simulator finalization without relying on Monday buffer for math."
+      },
+      {
+        "change": "Added Tuesday study group and TA contact block for oral preparation",
+        "reason": "Addresses Risk Agent concern about oral preparation lacking strategy for unknown question scope; peer input helps prioritize limited preparation time."
+      },
+      {
+        "change": "Increased Thursday oral practice from 4 to 5 hours across two blocks",
+        "reason": "More preparation time on Thursday given teacher and study group contacts provide framework for focused practice."
+      }
+    ],
+    "unresolved_critiques": [
+      {
+        "agent": "Risk Agent",
+        "severity": "major",
+        "issue": "Simulator scope discovery is passive - reviewing own codebase does not clarify what teacher actually requires. Teacher contact scheduled but may not yield timely response.",
+        "planner_response": "Added explicit teacher contact block on Saturday (1 hour) to request scope clarification before implementation begins. If response arrives late, student will proceed with reasonable improvement interpretation and document approach in submission notes."
+      },
+      {
+        "agent": "Risk Agent",
+        "severity": "major",
+        "issue": "Math exercise has no contingency buffer - if Friday's 3 hours are insufficient, Monday becomes a crisis with only 3 hours remaining.",
+        "planner_response": "Increased Sunday math allocation from 2 to 4 hours, creating 4 hours of buffer before Monday submission. Monday still provides 3-hour final solve opportunity but Sunday increase significantly reduces crisis probability."
+      },
+      {
+        "agent": "Risk Agent",
+        "severity": "major",
+        "issue": "Oral preparation lacks strategy for handling unknown question scope - no contact with teacher, TA, or study group for question hints.",
+        "planner_response": "Added Tuesday study group and TA contact block (1 hour) to gather topic hints and question patterns. Thursday includes final contact block (1 hour) for last-minute insights. Study group input provides prioritization framework for verbal practice sessions."
+      }
+    ]
+  },
+  "critiques": [
+    {
+      "agent": "Deadline Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "Simulator improvement has only 7 hours of actual implementation work spread across Tuesday (4h) and Wednesday (3h deadline day), with a 1-hour teacher contact on Saturday that generates no usable output until implementation begins. If teacher scope response is delayed or unclear, the Tuesday block becomes speculative and the Wednesday deadline day carries critical risk.",
+          "severity": "minor",
+          "affected_tasks": [
+            "AASMA simulator improvement"
+          ],
+          "affected_days": [
+            "2026-06-02",
+            "2026-06-03"
+          ],
+          "suggested_fix": "Consider shifting some simulator work to Monday to create more implementation time before Wednesday deadline. Monday currently has 3 hours available for math buffer, but if math completes efficiently on Friday/Sunday, some Monday afternoon hours could support simulator preparation (e.g., preparing test cases or reviewing requirements) rather than sitting as contingency."
+        },
+        {
+          "issue": "Math exercise sheet still allocates 3 hours of problem-solving work on Monday deadline day (June 1) rather than treating it purely as submission buffer. The student explicitly warned these sheets take longer than expected, and the planner's Sunday contingency increase (2h to 4h) helps but doesn't eliminate Monday work requirement. Deadline-day problem-solving with only 3 hours available is risky if previous sessions underestimated scope.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Math exercise sheet"
+          ],
+          "affected_days": [
+            "2026-06-01"
+          ],
+          "suggested_fix": "Target completing 90%+ of exercises by end of Sunday session. Monday 3-hour block should be framed as final review and submission only, not primary problem-solving. If Sunday session appears incomplete by 2pm, prioritize seeking help (classmate, online resources) immediately rather than grinding alone."
+        }
+      ],
+      "acknowledged_compromises": [
+        "Planner increased Sunday math allocation from 2 to 4 hours, addressing my concern about insufficient math contingency buffer.",
+        "Added teacher contact block on Saturday for simulator scope clarification, preventing blind implementation.",
+        "Added study group/TA contact on Tuesday for oral preparation, reducing maximum uncertainty about question scope.",
+        "Thursday oral practice increased from 4 to 5 hours across two blocks, providing more verbal practice time.",
+        "Math work front-loaded Friday through Sunday to create Monday deadline buffer rather than relying on deadline-day primary work."
+      ],
+      "overall_comment": "The calendar protects all three deadlines with meaningful work before each due date. The planner addressed my earlier concerns by increasing math contingency, adding teacher and peer contact for uncertainty reduction, and front-loading work appropriately. Two minor concerns remain: (1) simulator implementation is compressed into Tuesday-Wednesday with only 7 hours of actual work after a 1-hour contact block, creating deadline-day dependency if scope clarification is delayed; (2) math still requires Monday deadline-day problem-solving despite student warnings about estimation errors, though Sunday buffer increase mitigates this risk. Both concerns are manageable given overall schedule quality. Approval given with minor concerns rather than full approval due to simulator deadline-day compression and residual math Monday work requirement."
+    },
+    {
+      "agent": "Grade Agent",
+      "calendar_version": 2,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "Math exercises historically take longer than expected but deadline is Monday — Sunday allocation increased from 2 to 4 hours with Monday 3-hour buffer maintained. This directly addresses my earlier concern about underestimating math time.",
+        "Simulator scope is undefined and teacher contact may not yield timely response — Saturday 1-hour teacher contact block added before implementation begins. This protects against wasted effort on wrong requirements, which was my primary concern for the simulator task.",
+        "Oral question format and topics are unknown but preparation time is limited — Tuesday study group/TA contact and Thursday final contact added to gather topic hints. This addresses my concern about oral preparation lacking strategy for unknown question scope."
+      ],
+      "overall_comment": "From a grade protection perspective, this calendar adequately protects high-value work. The programming languages oral (high-stakes examination with low recoverability) receives 11 hours of protected time across Saturday, Sunday, Tuesday (contact), Thursday (5 hours across two blocks), and Friday morning. The AASMA simulator (project deliverable with significant grade weight) receives 8 hours across Saturday (scope clarification), Tuesday (implementation), and Wednesday (finalization), with teacher contact preceding implementation to prevent wasted effort. The math exercise sheet (moderate grade weight) receives 10 hours across Friday, Sunday, and Monday, with Sunday allocation increased to create contingency buffer. The priority ordering is appropriate: math first due to earliest deadline but lower grade weight, simulator next with scope clarification before implementation, and oral last given its Friday deadline and highest grade weight. The student's low confidence and difficulty with vague tasks are addressed through front-loaded discovery time (teacher contact, study group contact) rather than deferring work to deadline days. No major grade protection concerns remain."
+    },
+    {
+      "agent": "Effort Agent",
+      "calendar_version": 2,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "Math exercises now have 4-hour Sunday buffer plus 3-hour Monday buffer, addressing the concern that 'quick review' tasks historically take longer than expected",
+        "Teacher contact block added Saturday for scope clarification before simulator implementation begins, preventing wasted effort on wrong requirements",
+        "Study group and TA contact added Tuesday for oral preparation topic hints, providing strategy for handling unknown question format",
+        "Thursday oral practice increased from 4 to 5 hours across two blocks, allowing more verbal rehearsal time given the substantial material to cover",
+        "Simulator contingency plan documented: if teacher response is delayed, student proceeds with reasonable interpretation and documents approach in submission notes"
+      ],
+      "overall_comment": "The planner has addressed all three major critiques from the Risk Agent by adding explicit contact blocks (teacher for simulator scope, study group/TA for oral topics), increasing math buffer from 2 to 4 hours on Sunday, and expanding Thursday oral practice time. The overall strategy now front-loads math work appropriately, includes proactive scope discovery for the simulator task, and builds in peer contact for oral preparation prioritization. Total allocated hours across the planning window are approximately 27 hours of productive work time, which aligns with the estimated 24 hours of total task workload (8h simulator, 12h oral, 4h math). The compromises documented are reasonable given the student's acknowledged difficulty estimating vague tasks. Duration estimates are now more realistic with explicit contingency buffers. This calendar is approved."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "calendar_version": 2,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "Sunday math allocation increased from 2 to 4 hours, addressing my concern about insufficient contingency buffer for a task that historically takes longer than expected",
+        "Teacher contact block added on Saturday (1 hour) before simulator implementation begins, addressing my concern about scope uncertainty leading to wasted effort",
+        "Study group and TA contact added on Tuesday (1 hour) plus Thursday (1 hour) for oral preparation, addressing my concern about unknown question format creating anxiety-driven overstudying",
+        "Thursday oral practice increased from 4 to 5 hours across two blocks, giving more focused practice time with clear prioritization framework from peer input",
+        "Monday math buffer maintained at 3 hours, preserving final solve opportunity if Sunday work leaves gaps",
+        "Simulator Wednesday block focused on strict finalization and submission rather than buffer work, preventing scope creep into rest time"
+      ],
+      "overall_comment": "This calendar is humane and sustainable. The planner addressed my key wellbeing concerns: math has proper contingency buffer (4 hours Sunday plus 3 hours Monday), simulator scope uncertainty is addressed through proactive teacher contact before implementation, and oral preparation has a structured strategy through study group contact rather than anxiety-driven overstudying. Cognitive load is reasonably distributed across the week without stacking heavy tasks on any single day. Friday (oral exam day) has only a 2-hour final review block, which is appropriate given end-of-week fatigue. The student should be able to follow this schedule without excessive stress or sleep deprivation."
+    },
+    {
+      "agent": "Risk Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "Simulator scope discovery depends on teacher email response timing - if response arrives after Tuesday, implementation proceeds with uncertainty",
+          "severity": "minor",
+          "affected_tasks": [
+            "AASMA simulator improvement"
+          ],
+          "affected_days": [
+            "2026-06-02"
+          ],
+          "suggested_fix": "Prepare a minimum viable improvement plan BEFORE teacher response arrives. Define what 'reasonable improvement' means independently (e.g., one working experiment, basic notes, minimal UI cleanup) so implementation can begin immediately on Tuesday regardless of response timing. This removes dependency on email response latency."
+        },
+        {
+          "issue": "Oral preparation study group contact is optional and depends on peer availability - no fallback if classmates are unresponsive",
+          "severity": "minor",
+          "affected_tasks": [
+            "Programming languages oral preparation"
+          ],
+          "affected_days": [
+            "2026-06-02",
+            "2026-06-04"
+          ],
+          "suggested_fix": "Prepare fallback strategy now: if study group is unresponsive by Tuesday afternoon, student should (1) review slides and papers independently to identify their own priority topics, (2) prepare universal answers covering core concepts that apply to any question, (3) practice explaining concepts aloud without peer validation. Do not leave fallback undefined."
+        },
+        {
+          "issue": "Friday (June 5) has only 2 hours allocated but oral exam timing is unknown - could be morning or afternoon, leaving variable final prep time",
+          "severity": "minor",
+          "affected_tasks": [
+            "Programming languages oral preparation"
+          ],
+          "affected_days": [
+            "2026-06-05"
+          ],
+          "suggested_fix": "Clarify oral exam scheduling with teacher or TA as early as possible. If exam is morning, Friday morning block (2 hours) is final prep. If afternoon, student has more flexibility. Knowing this allows better time allocation on Thursday evening."
+        }
+      ],
+      "acknowledged_compromises": [
+        "Sunday math allocation increased from 2 to 4 hours - addresses concern about no contingency buffer before Monday deadline",
+        "Saturday teacher contact block added - addresses concern about undefined simulator scope without discovery mechanism",
+        "Tuesday study group contact added - addresses concern about oral preparation lacking strategy for unknown question scope",
+        "Thursday oral practice increased from 4 to 5 hours across two blocks - provides more preparation time given peer input framework",
+        "Math buffer moved to Sunday allows more focused simulator finalization without relying on Monday buffer for math"
+      ],
+      "overall_comment": "This plan is substantially improved from version 1. The planner addressed all three major critiques from my earlier view: math now has a 4-hour Sunday buffer, simulator has explicit teacher contact before implementation, and oral preparation includes study group contact for topic prioritization. These changes demonstrate the planner listened to risk concerns and built appropriate discovery and contingency mechanisms. My remaining critiques are minor - they focus on execution dependencies and fallbacks rather than structural plan failures. The plan is APPROVED WITH MINOR CONCERNS. The student should proceed with confidence but remain aware of the three minor execution risks identified."
+    }
+  ],
+  "validation": {
+    "valid": false,
+    "violations": [
+      {
+        "code": "block_after_deadline",
+        "message": "Math exercise sheet has work scheduled after its deadline (2026-06-01T00:00:00.000Z).",
+        "severity": "error"
+      },
+      {
+        "code": "block_after_deadline",
+        "message": "AASMA simulator improvement has work scheduled after its deadline (2026-06-03T00:00:00.000Z).",
+        "severity": "error"
+      },
+      {
+        "code": "day_outside_window",
+        "message": "2026-06-05 is outside the planning window 2026-05-29 → 2026-06-05.",
+        "severity": "error"
+      },
+      {
+        "code": "block_after_deadline",
+        "message": "Programming languages oral preparation has work scheduled after its deadline (2026-06-05T00:00:00.000Z).",
+        "severity": "error"
+      }
+    ]
+  },
+  "evaluation": {
+    "evaluator": "Schedule Evaluator",
+    "calendar_version": 2,
+    "planner_model": "minimax/minimax-m2.7",
+    "evaluator_model": "minimax/minimax-m2.7",
+    "overall_score": 3.5,
+    "model_score": 3.2,
+    "hard_score": 3.7,
+    "hard_metrics": {
+      "score": 67,
+      "metrics": [
+        {
+          "name": "generation_time_seconds",
+          "value": 135,
+          "score": 68.8,
+          "explanation": "135s from run start to final schedule selection."
+        },
+        {
+          "name": "rejection_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 specialist agent(s) rejected the final calendar."
+        },
+        {
+          "name": "critical_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 critical issue(s) were raised in final critiques."
+        },
+        {
+          "name": "major_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 major issue(s) were raised in final critiques."
+        },
+        {
+          "name": "deadline_violation_count",
+          "value": 3,
+          "score": 0,
+          "explanation": "3 scheduled work block(s) end after their task deadline."
+        },
+        {
+          "name": "task_coverage_ratio",
+          "value": 1,
+          "score": 100,
+          "explanation": "3/3 inferred task(s) received at least one work block."
+        },
+        {
+          "name": "availability_overrun_hours",
+          "value": 6,
+          "score": 0,
+          "explanation": "6h scheduled above the planner's assumed available hours."
+        }
+      ]
+    },
+    "dimension_scores": [
+      {
+        "dimension": "requirement_match",
+        "score": 3.5,
+        "rationale": "The schedule demonstrates good understanding of task requirements and student constraints. Teacher contact for simulator scope and study group contact for oral topics show proactive requirement discovery. However, the schedule still contains work blocks scheduled after deadlines (validation errors), which undermines requirement matching. The planner addressed specialist critiques but validation errors indicate deadline handling remains problematic."
+      },
+      {
+        "dimension": "deadline_safety",
+        "score": 2.5,
+        "rationale": "Despite specialist approval, validation log shows 3 deadline violations: math work after Monday deadline, simulator work after Wednesday deadline, and oral work after Friday deadline. The planner front-loaded work appropriately but blocks extend past deadlines rather than completing before them. This is the most critical qualitative flaw given the student's explicit request to avoid deadline-day pressure."
+      },
+      {
+        "dimension": "workload_realism",
+        "score": 3.5,
+        "rationale": "Total allocated hours (~27) roughly match estimated workload (~24) with reasonable contingency. Math Sunday buffer increased appropriately. Simulator and oral time allocations are reasonable. However, availability overrun of 6 hours indicates the schedule exceeds the student's stated 4 hours/day capacity, suggesting workload realism could be improved."
+      },
+      {
+        "dimension": "academic_priority",
+        "score": 4,
+        "rationale": "Priority ordering is sound: math first due (Monday) but lower grade weight, simulator next with scope clarification before implementation, oral last given Friday deadline and highest grade weight. High-stakes oral receives 11 hours across the week. Grade Agent approved without concerns, confirming appropriate academic prioritization."
+      },
+      {
+        "dimension": "wellbeing_balance",
+        "score": 4,
+        "rationale": "Cognitive load is reasonably distributed without stacking heavy tasks on any single day. Friday has only 2-hour final review, appropriate for end-of-week fatigue. Math contingency buffer (4h Sunday + 3h Monday) addresses student warnings about estimation errors. Wellbeing Agent approved without concerns, confirming humane and sustainable schedule."
+      },
+      {
+        "dimension": "risk_resilience",
+        "score": 3,
+        "rationale": "Planner addressed all three major Risk Agent critiques from earlier version: math buffer increased, teacher contact added for simulator scope, study group contact added for oral topics. However, execution dependencies remain: teacher email response timing, study group availability, and oral exam scheduling are not guaranteed. Known weaknesses section documents these but fallback strategies are not fully specified."
+      }
+    ],
+    "strengths": [
+      "Proactive scope discovery through teacher contact for simulator and study group contact for oral preparation",
+      "Appropriate front-loading of work to honor student's request for early discovery time",
+      "Math contingency buffer increased from 2 to 4 hours on Sunday, addressing student warnings about estimation errors",
+      "Cognitive load reasonably distributed across the week without stacking heavy tasks",
+      "Wellbeing Agent and Grade Agent both approved without concerns, confirming schedule quality from their perspectives",
+      "Priority ordering appropriate: math first due (Monday) but lower grade weight, oral last given highest grade weight",
+      "Compromise reasoning is clear and documented, showing planner listened to specialist feedback"
+    ],
+    "weaknesses": [
+      "Validation errors show 3 work blocks scheduled after deadlines - math after Monday, simulator after Wednesday, oral after Friday",
+      "Deadline safety score reduced by deadline violations despite specialist approval",
+      "Availability overrun of 6 hours indicates schedule exceeds student's stated 4 hours/day capacity",
+      "Simulator scope discovery depends on teacher email response timing with no guaranteed timeline",
+      "Study group contact depends on peer availability with fallback strategy not fully specified",
+      "Oral exam scheduling is unknown, leaving Friday final prep time uncertain",
+      "Execution dependencies create risk if contacts are unresponsive or slow to respond"
+    ],
+    "comparison_notes": [
+      "This schedule shows improvement from version 1 by addressing major Risk Agent critiques through added contact blocks and increased math buffer",
+      "Unlike version 1, this version earned approval from all 5 specialist agents (though 2 with minor concerns)",
+      "The planner demonstrated responsiveness to specialist feedback, which is a positive qualitative indicator",
+      "However, validation errors about deadline violations are objective and serious - specialist approval did not catch these",
+      "Hard metrics show 3 deadline violations and 6 hours availability overrun, indicating structural issues the planner did not resolve",
+      "The gap between specialist approval (5/5 agents accepted) and validation errors (3 deadline violations) suggests specialist views may not be checking deadline compliance",
+      "Overall score of 3.2 reflects good qualitative effort undermined by deadline handling failures"
+    ],
+    "recommendation": "Approve with reservations. The schedule demonstrates good qualitative reasoning: proactive scope discovery, appropriate prioritization, and responsiveness to specialist feedback. However, validation errors showing 3 deadline violations are serious and undermine the student's explicit request to avoid deadline-day pressure. The planner should ensure work blocks complete before deadlines rather than extending past them. Execution dependencies (teacher email timing, study group availability) should have explicit fallback strategies. Consider this schedule usable but note the deadline handling as an area for improvement in future iterations."
+  }
+}

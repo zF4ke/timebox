@@ -1,0 +1,102 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:B1@timebox.local
+DTSTAMP:20260529T153820Z
+DTSTART:20260530T170000Z
+DTEND:20260530T183000Z
+SUMMARY:Calculus exam revision
+DESCRIPTION:Review integrals concepts and solve practice problems.\\n\\nReasoning: Start Calculus revision early with foundational integrals topic.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2@timebox.local
+DTSTAMP:20260529T153820Z
+DTSTART:20260530T183000Z
+DTEND:20260530T200000Z
+SUMMARY:Databases exam revision
+DESCRIPTION:Study normalization rules and practice normalizing schemas.\\n\\nReasoning: Begin Databases revision with core normalization concepts.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3@timebox.local
+DTSTAMP:20260529T153820Z
+DTSTART:20260531T100000Z
+DTEND:20260531T123000Z
+SUMMARY:Calculus exam revision
+DESCRIPTION:Focus on series convergence tests and solve practice problems.\\n\\nReasoning: Dedicate weekend time to the weaker Calculus series topic.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4@timebox.local
+DTSTAMP:20260529T153820Z
+DTSTART:20260531T130000Z
+DTEND:20260531T150000Z
+SUMMARY:Databases exam revision
+DESCRIPTION:Deep dive into transaction properties (ACID) and concurrency control.\\n\\nReasoning: Focus on the weaker Databases transactions topic.
+END:VEVENT
+BEGIN:VEVENT
+UID:B5@timebox.local
+DTSTAMP:20260529T153820Z
+DTSTART:20260531T153000Z
+DTEND:20260531T161500Z
+SUMMARY:Ethics forum post submission
+DESCRIPTION:Complete and submit the ethics forum post.\\n\\nReasoning: Meet the deadline for the Ethics forum post early to clear it.
+END:VEVENT
+BEGIN:VEVENT
+UID:B6@timebox.local
+DTSTAMP:20260529T153820Z
+DTSTART:20260601T170000Z
+DTEND:20260601T183000Z
+SUMMARY:Calculus exam revision
+DESCRIPTION:Practice solving differential equations with mixed examples.\\n\\nReasoning: Continue spaced Calculus practice with differential equations.
+END:VEVENT
+BEGIN:VEVENT
+UID:B7@timebox.local
+DTSTAMP:20260529T153820Z
+DTSTART:20260601T183000Z
+DTEND:20260601T200000Z
+SUMMARY:Databases exam revision
+DESCRIPTION:Review SQL syntax and practice complex queries.\\n\\nReasoning: Practice core Databases SQL skills.
+END:VEVENT
+BEGIN:VEVENT
+UID:B8@timebox.local
+DTSTAMP:20260529T153820Z
+DTSTART:20260602T170000Z
+DTEND:20260602T183000Z
+SUMMARY:Calculus exam revision
+DESCRIPTION:Solve series practice problems and review applications.\\n\\nReasoning: Reinforce the weak Calculus series topic before the exam.
+END:VEVENT
+BEGIN:VEVENT
+UID:B9@timebox.local
+DTSTAMP:20260529T153820Z
+DTSTART:20260602T183000Z
+DTEND:20260602T200000Z
+SUMMARY:Databases exam revision
+DESCRIPTION:Practice transaction scheduling and serializability problems.\\n\\nReasoning: Final focused practice on weak Databases transactions before the exam.
+END:VEVENT
+BEGIN:VEVENT
+UID:B10@timebox.local
+DTSTAMP:20260529T153820Z
+DTSTART:20260603T080000Z
+DTEND:20260603T093000Z
+SUMMARY:Databases exam revision
+DESCRIPTION:Final review of databases topics before the afternoon exam.\\n\\nReasoning: Condensed final review\, leaving morning buffer for last-minute questions.
+END:VEVENT
+BEGIN:VEVENT
+UID:B11@timebox.local
+DTSTAMP:20260529T153820Z
+DTSTART:20260604T170000Z
+DTEND:20260604T190000Z
+SUMMARY:Calculus exam revision
+DESCRIPTION:Mixed-topic calculus practice integrating integrals\, series\, and differential equations.\\n\\nReasoning: Final integrated review of all Calculus topics.
+END:VEVENT
+BEGIN:VEVENT
+UID:B12@timebox.local
+DTSTAMP:20260529T153820Z
+DTSTART:20260605T070000Z
+DTEND:20260605T080000Z
+SUMMARY:Calculus exam revision
+DESCRIPTION:Final review and problem spot-check before the Calculus exam.\\n\\nReasoning: Morning contingency buffer for last-minute review and clarification.
+END:VEVENT
+END:VCALENDAR

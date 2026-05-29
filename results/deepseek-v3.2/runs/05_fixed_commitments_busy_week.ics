@@ -1,0 +1,62 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:B1@timebox.local
+DTSTAMP:20260529T152439Z
+DTSTART:20260601T170000Z
+DTEND:20260601T180000Z
+SUMMARY:Buy materials for weekend workshop
+DESCRIPTION:Purchase materials for the weekend workshop.\\n\\nReasoning: Complete this early to avoid conflict with weekend plans.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2@timebox.local
+DTSTAMP:20260529T152439Z
+DTSTART:20260602T170000Z
+DTEND:20260602T200000Z
+SUMMARY:Computer graphics assignment
+DESCRIPTION:Work on Computer graphics assignment core implementation.\\n\\nReasoning: Start assignment early to build momentum and reduce deadline pressure.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3@timebox.local
+DTSTAMP:20260529T152439Z
+DTSTART:20260603T170000Z
+DTEND:20260603T190000Z
+SUMMARY:Computer graphics assignment
+DESCRIPTION:Continue Computer graphics assignment work.\\n\\nReasoning: Make steady progress to finish early.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4@timebox.local
+DTSTAMP:20260529T152439Z
+DTSTART:20260603T190000Z
+DTEND:20260603T203000Z
+SUMMARY:AASMA reflection
+DESCRIPTION:Write AASMA reflection.\\n\\nReasoning: Complete reflection a day before its deadline to create buffer.
+END:VEVENT
+BEGIN:VEVENT
+UID:B5@timebox.local
+DTSTAMP:20260529T152439Z
+DTSTART:20260604T130000Z
+DTEND:20260604T150000Z
+SUMMARY:Security quiz
+DESCRIPTION:Revise for Security quiz.\\n\\nReasoning: Final revision before the Thursday morning quiz.
+END:VEVENT
+BEGIN:VEVENT
+UID:B6@timebox.local
+DTSTAMP:20260529T152439Z
+DTSTART:20260604T170000Z
+DTEND:20260604T200000Z
+SUMMARY:Computer graphics assignment
+DESCRIPTION:Finalize Computer graphics assignment.\\n\\nReasoning: Complete assignment a full day before its deadline to eliminate risk.
+END:VEVENT
+BEGIN:VEVENT
+UID:B7@timebox.local
+DTSTAMP:20260529T152439Z
+DTSTART:20260605T130000Z
+DTEND:20260605T140000Z
+SUMMARY:Computer graphics assignment
+DESCRIPTION:Submit Computer graphics assignment.\\n\\nReasoning: Final review and submission\, done early in the day with no pressure.
+END:VEVENT
+END:VCALENDAR

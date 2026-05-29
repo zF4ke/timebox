@@ -1,0 +1,86 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:b1@timebox.local
+DTSTAMP:20260529T124743Z
+DTSTART:20260529T160000Z
+DTEND:20260529T190000Z
+SUMMARY:Database project milestone
+DESCRIPTION:Write and test SQL queries for the database project. Focus on core query functionality with basic unit tests.\\n\\nReasoning: Database project is 30% weight with Monday deadline. Friday evening is the only large block before deadline\, so all 3 hours go to queries.
+END:VEVENT
+BEGIN:VEVENT
+UID:b2@timebox.local
+DTSTAMP:20260529T124743Z
+DTSTART:20260530T080000Z
+DTEND:20260530T090000Z
+SUMMARY:Help friend review slides
+DESCRIPTION:Review friend's presentation slides and provide constructive feedback for 1 hour.\\n\\nReasoning: Social commitment promised before Saturday. Schedule early to preserve afternoon for academic priorities and keep it time-boxed to 1 hour.
+END:VEVENT
+BEGIN:VEVENT
+UID:b3@timebox.local
+DTSTAMP:20260529T124743Z
+DTSTART:20260530T090000Z
+DTEND:20260530T120000Z
+SUMMARY:Database project milestone
+DESCRIPTION:Create test cases for database queries and build the demo script demonstrating key functionality.\\n\\nReasoning: Database project needs tests and demo script before Monday deadline. Saturday afternoon provides focused time for this technical work.
+END:VEVENT
+BEGIN:VEVENT
+UID:b4@timebox.local
+DTSTAMP:20260529T124743Z
+DTSTART:20260530T130000Z
+DTEND:20260530T150000Z
+SUMMARY:AI homework
+DESCRIPTION:Complete remaining 3 AI homework exercises. Start with exercises 2 and 3 to reduce Sunday workload.\\n\\nReasoning: AI homework due Sunday night worth 8%. Completing 2 exercises Saturday reduces Sunday load from 4 hours to approximately 2 hours.
+END:VEVENT
+BEGIN:VEVENT
+UID:b5@timebox.local
+DTSTAMP:20260529T124743Z
+DTSTART:20260531T130000Z
+DTEND:20260531T150000Z
+SUMMARY:AI homework
+DESCRIPTION:Complete AI homework exercise 4 and final review. Verify all solutions before submission.\\n\\nReasoning: AI homework due Sunday night. Sunday afternoon is optimal for completing remaining exercise and reviewing all submissions.
+END:VEVENT
+BEGIN:VEVENT
+UID:b6@timebox.local
+DTSTAMP:20260529T124743Z
+DTSTART:20260531T170000Z
+DTEND:20260531T200000Z
+SUMMARY:Database project milestone
+DESCRIPTION:Final testing\, edge case handling\, and polish for database project. Prepare submission materials.\\n\\nReasoning: Database project due Monday night. Sunday evening provides final buffer for debugging\, polish\, and contingency if Friday/Saturday work revealed issues.
+END:VEVENT
+BEGIN:VEVENT
+UID:b7@timebox.local
+DTSTAMP:20260529T124743Z
+DTSTART:20260601T080000Z
+DTEND:20260601T100000Z
+SUMMARY:Database project milestone
+DESCRIPTION:Final review\, submission preparation\, and last-minute fixes for database project before Monday night deadline.\\n\\nReasoning: Database project due Monday night. Monday morning is final opportunity for any last-minute fixes or submission preparation.
+END:VEVENT
+BEGIN:VEVENT
+UID:b8@timebox.local
+DTSTAMP:20260529T124743Z
+DTSTART:20260602T170000Z
+DTEND:20260602T190000Z
+SUMMARY:History essay
+DESCRIPTION:Initial research for history essay. Identify key sources and research questions. Begin gathering preliminary information.\\n\\nReasoning: History essay is 40% weight with June 8 deadline. Starting research Tuesday prevents last-minute rush on highest-weighted assignment.
+END:VEVENT
+BEGIN:VEVENT
+UID:b9@timebox.local
+DTSTAMP:20260529T124743Z
+DTSTART:20260603T170000Z
+DTEND:20260603T190000Z
+SUMMARY:History essay
+DESCRIPTION:Continue research and develop detailed outline with main arguments and supporting evidence structure.\\n\\nReasoning: History essay needs research and outline before drafting. Wednesday session builds on Tuesday research to create structured outline.
+END:VEVENT
+BEGIN:VEVENT
+UID:b10@timebox.local
+DTSTAMP:20260529T124743Z
+DTSTART:20260604T170000Z
+DTEND:20260604T190000Z
+SUMMARY:History essay
+DESCRIPTION:Refine essay outline\, review structure\, and identify any gaps in research or argumentation.\\n\\nReasoning: Thursday allows outline refinement and gap identification before weekend drafting begins. Establishes solid foundation for essay completion.
+END:VEVENT
+END:VCALENDAR

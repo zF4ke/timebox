@@ -1,0 +1,94 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:B1@timebox.local
+DTSTAMP:20260529T145156Z
+DTSTART:20260529T080000Z
+DTEND:20260529T120000Z
+SUMMARY:Operating systems lab
+DESCRIPTION:Core coding work for the operating systems lab.\\n\\nReasoning: Start lab early to allow maximum time for completion before deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2@timebox.local
+DTSTAMP:20260529T145156Z
+DTSTART:20260529T130000Z
+DTEND:20260529T160000Z
+SUMMARY:Operating systems lab
+DESCRIPTION:Continue coding and begin initial report drafting.\\n\\nReasoning: Additional block to ensure coding is near completion\, reducing tomorrow's burden.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3@timebox.local
+DTSTAMP:20260529T145156Z
+DTSTART:20260530T090000Z
+DTEND:20260530T120000Z
+SUMMARY:Operating systems lab
+DESCRIPTION:Finalize coding\, debugging\, and complete the lab report.\\n\\nReasoning: Dedicate morning to finishing the lab well before the evening deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4@timebox.local
+DTSTAMP:20260529T145156Z
+DTSTART:20260530T130000Z
+DTEND:20260530T150000Z
+SUMMARY:Operating systems lab
+DESCRIPTION:Final review\, testing\, and submission of the operating systems lab.\\n\\nReasoning: Buffer time for final checks and secure submission hours before deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B5@timebox.local
+DTSTAMP:20260529T145156Z
+DTSTART:20260531T090000Z
+DTEND:20260531T120000Z
+SUMMARY:Statistics quiz
+DESCRIPTION:Review core statistics topics and practice confidence interval problems.\\n\\nReasoning: Start quiz prep early with a substantial block to address weakness.
+END:VEVENT
+BEGIN:VEVENT
+UID:B6@timebox.local
+DTSTAMP:20260529T145156Z
+DTSTART:20260531T140000Z
+DTEND:20260531T160000Z
+SUMMARY:Statistics quiz
+DESCRIPTION:Practice additional statistics problems on hypothesis testing.\\n\\nReasoning: Reinforce learning with a second study session on the same day.
+END:VEVENT
+BEGIN:VEVENT
+UID:B7@timebox.local
+DTSTAMP:20260529T145156Z
+DTSTART:20260601T160000Z
+DTEND:20260601T190000Z
+SUMMARY:Statistics quiz
+DESCRIPTION:Comprehensive final review and practice for the statistics quiz.\\n\\nReasoning: Dedicated block before the deadline to solidify understanding and complete the quiz.
+END:VEVENT
+BEGIN:VEVENT
+UID:B8@timebox.local
+DTSTAMP:20260529T145156Z
+DTSTART:20260602T090000Z
+DTEND:20260602T110000Z
+SUMMARY:AASMA project idea
+DESCRIPTION:Brainstorm and outline topics for the AASMA project idea.\\n\\nReasoning: Begin project work early while the deadline is still days away.
+END:VEVENT
+BEGIN:VEVENT
+UID:B9@timebox.local
+DTSTAMP:20260529T145156Z
+DTSTART:20260603T090000Z
+DTEND:20260603T110000Z
+SUMMARY:AASMA project idea
+DESCRIPTION:Write the first draft of the AASMA project idea.\\n\\nReasoning: Maintain momentum on the project to avoid last-minute work.
+END:VEVENT
+BEGIN:VEVENT
+UID:B10@timebox.local
+DTSTAMP:20260529T145156Z
+DTSTART:20260604T090000Z
+DTEND:20260604T110000Z
+SUMMARY:AASMA project idea
+DESCRIPTION:Revise and polish the AASMA project idea draft.\\n\\nReasoning: Allow time for improvements before the final deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B11@timebox.local
+DTSTAMP:20260529T145156Z
+DTSTART:20260605T090000Z
+DTEND:20260605T110000Z
+SUMMARY:AASMA project idea
+DESCRIPTION:Final review and submission of the AASMA project idea.\\n\\nReasoning: Complete the project well before the deadline to ensure timely submission.
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,54 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:b1@timebox.local
+DTSTAMP:20260529T123409Z
+DTSTART:20260529T100000Z
+DTEND:20260529T103000Z
+SUMMARY:Email project advisor
+DESCRIPTION:Draft and send topic options to the project advisor.\\n\\nReasoning: Completing this early ensures the advisor has time to review before the next week.
+END:VEVENT
+BEGIN:VEVENT
+UID:b2@timebox.local
+DTSTAMP:20260529T123409Z
+DTSTART:20260529T103000Z
+DTEND:20260529T104500Z
+SUMMARY:Book doctor appointment
+DESCRIPTION:Call the doctor's office to schedule an appointment.\\n\\nReasoning: This is a high-priority administrative task that needs to be finished today.
+END:VEVENT
+BEGIN:VEVENT
+UID:b3@timebox.local
+DTSTAMP:20260529T123409Z
+DTSTART:20260530T090000Z
+DTEND:20260530T100000Z
+SUMMARY:Submit scholarship form
+DESCRIPTION:Complete and submit the scholarship application.\\n\\nReasoning: This task is critical and must be completed well before the Sunday deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:b4@timebox.local
+DTSTAMP:20260529T123409Z
+DTSTART:20260530T100000Z
+DTEND:20260530T110000Z
+SUMMARY:Finish Java exercises
+DESCRIPTION:Complete the first set of Java exercises.\\n\\nReasoning: Breaking the exercises into smaller chunks helps maintain focus.
+END:VEVENT
+BEGIN:VEVENT
+UID:b5@timebox.local
+DTSTAMP:20260529T123409Z
+DTSTART:20260531T090000Z
+DTEND:20260531T103000Z
+SUMMARY:Math revision
+DESCRIPTION:Conduct focused math revision.\\n\\nReasoning: Reducing the duration of this session prevents cognitive fatigue.
+END:VEVENT
+BEGIN:VEVENT
+UID:b6@timebox.local
+DTSTAMP:20260529T123409Z
+DTSTART:20260531T103000Z
+DTEND:20260531T113000Z
+SUMMARY:Clean up GitHub README
+DESCRIPTION:Update the project documentation on GitHub.\\n\\nReasoning: This task is essential for project maintenance and is due today.
+END:VEVENT
+END:VCALENDAR

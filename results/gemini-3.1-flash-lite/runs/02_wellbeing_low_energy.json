@@ -1,0 +1,1271 @@
+{
+  "runId": "a6b4ecd1-952d-4573-90cf-357c51d69220",
+  "createdAt": "2026-05-29T12:27:53.611Z",
+  "request": {
+    "userInput": "I slept badly for the last two nights and I am feeling slow.\n\nThis week I still need to finish a machine learning assignment due Thursday evening. It is worth 25% and I estimate 6 to 8 hours because I need to run experiments and explain the results.\n\nI also have a short networks worksheet due Wednesday at noon. It should take around 2 hours.\n\nThere is a software engineering reading quiz on Friday morning. I have 3 chapters to review, but it is only worth 5%.\n\nI have classes every morning until 12:30. I can work in the afternoon, but I do not want more than two focused work blocks per day. I need the plan to be realistic because I am tired.",
+    "quorum": 5,
+    "maxIterations": 3,
+    "timezone": "Europe/Lisbon",
+    "model": "google/gemini-3.1-flash-lite-preview",
+    "evaluatorModel": "google/gemini-3.1-flash-lite-preview"
+  },
+  "stopReason": "Accepted by 5/5 agents with no critical critiques.",
+  "interpreterOutput": {
+    "current_date": "2026-05-29T12:27:53.611Z",
+    "planning_window": {
+      "start_date": "2026-05-29T12:27:53.611Z",
+      "end_date": "2026-05-30T12:00:00Z",
+      "reason": "Focusing on immediate deadlines for the machine learning assignment and software engineering quiz."
+    },
+    "inferred_availability": [
+      {
+        "date_range": "2026-05-29",
+        "assumption": "Classes until 12:30, limited energy due to poor sleep, maximum two focused work blocks.",
+        "estimated_available_hours_per_day": 4,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-05-30",
+        "assumption": "Classes until 12:30, recovery from fatigue, limited capacity for heavy cognitive load.",
+        "estimated_available_hours_per_day": 3,
+        "confidence": "medium"
+      }
+    ],
+    "fixed_commitments": [
+      "Daily classes until 12:30"
+    ],
+    "student_state": {
+      "sleep": "poor",
+      "energy": "low",
+      "confidence": "low"
+    },
+    "tasks": [
+      {
+        "task_id": "task_ml_assignment",
+        "name": "Machine learning assignment",
+        "raw_mentions": [
+          "machine learning assignment due Thursday evening"
+        ],
+        "inferred_deadline": "2026-05-28T23:59:59Z",
+        "uncertainties": [
+          "Time required for experiments",
+          "Complexity of explaining results"
+        ]
+      },
+      {
+        "task_id": "task_networks_worksheet",
+        "name": "Networks worksheet",
+        "raw_mentions": [
+          "networks worksheet due Wednesday at noon"
+        ],
+        "inferred_deadline": "2026-05-27T12:00:00Z",
+        "uncertainties": [
+          "Actual time required vs estimate"
+        ]
+      },
+      {
+        "task_id": "task_se_quiz",
+        "name": "Software engineering reading quiz",
+        "raw_mentions": [
+          "software engineering reading quiz on Friday morning"
+        ],
+        "inferred_deadline": "2026-05-29T09:00:00Z",
+        "uncertainties": [
+          "Depth of reading required for 3 chapters"
+        ]
+      }
+    ],
+    "assumptions": [
+      "The student is prioritizing tasks based on weight and urgency.",
+      "The student will strictly limit work to two blocks per day to manage fatigue.",
+      "The machine learning assignment and networks worksheet deadlines have passed or are imminent, requiring immediate attention."
+    ]
+  },
+  "agentViews": [
+    {
+      "agent": "Deadline Agent",
+      "task_views": [
+        {
+          "task_id": "task_ml_assignment",
+          "task_name": "Machine learning assignment",
+          "assessment": "Critical deadline risk; the deadline has already passed, making this the highest priority for immediate submission.",
+          "concerns": [
+            "Deadline has already passed",
+            "High weight of 25% makes this a significant risk to the final grade",
+            "Student fatigue may impact the quality of experiment analysis"
+          ],
+          "recommendations": [
+            "Prioritize this task immediately to minimize late penalties",
+            "Focus on core experiment results first to ensure a baseline submission"
+          ],
+          "estimated_duration_hours": 7,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Run core experiments",
+            "Draft results explanation",
+            "Finalize and submit"
+          ]
+        },
+        {
+          "task_id": "task_networks_worksheet",
+          "task_name": "Networks worksheet",
+          "assessment": "Deadline has passed; this task is overdue and requires immediate completion to prevent further grade erosion.",
+          "concerns": [
+            "Deadline has already passed",
+            "Low effort but high urgency due to lateness"
+          ],
+          "recommendations": [
+            "Complete this task immediately after the machine learning assignment",
+            "Keep work focused to avoid over-exertion"
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review worksheet requirements",
+            "Complete problems",
+            "Submit"
+          ]
+        },
+        {
+          "task_id": "task_se_quiz",
+          "task_name": "Software engineering reading quiz",
+          "assessment": "Deadline has passed; this task is overdue and should be addressed once the higher-weighted assignments are submitted.",
+          "concerns": [
+            "Deadline has already passed",
+            "Requires reading 3 chapters which may be difficult given current fatigue"
+          ],
+          "recommendations": [
+            "Review only essential chapter summaries if time is extremely limited",
+            "Complete after higher-weighted tasks are addressed"
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Skim chapter summaries",
+            "Review key concepts",
+            "Take quiz"
+          ]
+        }
+      ],
+      "overall_comment": "All tasks are currently past their deadlines. The student must prioritize the machine learning assignment due to its high weight, followed immediately by the networks worksheet and the software engineering quiz. Given the student's reported fatigue, I recommend focusing on completion rather than perfection to ensure all items are submitted as soon as possible."
+    },
+    {
+      "agent": "Grade Agent",
+      "task_views": [
+        {
+          "task_id": "task_ml_assignment",
+          "task_name": "Machine learning assignment",
+          "assessment": "High priority due to 25% grade weight. This is the most critical academic deliverable and requires protected, high-quality cognitive time.",
+          "concerns": [
+            "The student is experiencing fatigue which may impact the quality of experimental analysis.",
+            "The complexity of explaining results requires high mental clarity."
+          ],
+          "recommendations": [
+            "Prioritize this task in the first work block of the day when energy is highest.",
+            "Break down the experiment run and the write-up into separate sessions to avoid burnout."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Run experiments",
+            "Draft results explanation",
+            "Final review and formatting"
+          ]
+        },
+        {
+          "task_id": "task_networks_worksheet",
+          "task_name": "Networks worksheet",
+          "assessment": "Moderate priority. While important, it carries less weight than the machine learning assignment.",
+          "concerns": [
+            "The deadline has passed or is imminent, creating unnecessary pressure.",
+            "May distract from the higher-value machine learning assignment if not managed efficiently."
+          ],
+          "recommendations": [
+            "Complete this in a single focused block to minimize context switching.",
+            "Keep the scope strictly to the requirements to save energy for the machine learning assignment."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review worksheet requirements",
+            "Complete problems",
+            "Final check"
+          ]
+        },
+        {
+          "task_id": "task_se_quiz",
+          "task_name": "Software engineering reading quiz",
+          "assessment": "Low priority. At 5% of the grade, this should not be allowed to crowd out the machine learning assignment.",
+          "concerns": [
+            "Risk of over-investing time in low-weight material while exhausted.",
+            "The reading load for three chapters could be time-consuming if not approached strategically."
+          ],
+          "recommendations": [
+            "Use skimming techniques to identify key concepts rather than deep reading.",
+            "Limit study time to ensure the machine learning assignment remains the primary focus."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Skim chapter summaries",
+            "Review key terms",
+            "Self-test on core concepts"
+          ]
+        }
+      ],
+      "overall_comment": "The student's academic success depends on prioritizing the machine learning assignment. Given the low energy state, I recommend focusing exclusively on the machine learning assignment and the networks worksheet, while treating the software engineering quiz as a low-effort review task to protect the student's limited capacity."
+    },
+    {
+      "agent": "Effort Agent",
+      "task_views": [
+        {
+          "task_id": "task_ml_assignment",
+          "task_name": "Machine learning assignment",
+          "assessment": "The estimate of 6-8 hours is realistic for a 25% weight assignment, but given the student's current fatigue, it is highly likely to take the upper bound if not broken down.",
+          "concerns": [
+            "High cognitive load task during a period of low energy",
+            "Risk of experiment failure or long run times causing frustration",
+            "Writing explanations requires significant mental clarity"
+          ],
+          "recommendations": [
+            "Split into three 2.5-hour sessions to avoid burnout",
+            "Prioritize running experiments early so they can process while resting",
+            "Draft explanations in bullet points first to reduce writing pressure"
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Setup and run initial experiments",
+            "Analyze experiment outputs and generate plots",
+            "Draft written explanations for results"
+          ]
+        },
+        {
+          "task_id": "task_networks_worksheet",
+          "task_name": "Networks worksheet",
+          "assessment": "The 2-hour estimate is reasonable for a short worksheet, but it is already past due, which may cause anxiety-induced inefficiency.",
+          "concerns": [
+            "Deadline has already passed",
+            "Potential for rushing and making careless errors due to fatigue"
+          ],
+          "recommendations": [
+            "Complete in one focused 2-hour block to clear the backlog",
+            "Focus on core concepts rather than perfection to ensure submission"
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review lecture notes for relevant topics",
+            "Solve worksheet problems",
+            "Format and submit answers"
+          ]
+        },
+        {
+          "task_id": "task_se_quiz",
+          "task_name": "Software engineering reading quiz",
+          "assessment": "Reviewing 3 chapters in a single session is ambitious for a tired student; the 5% weight suggests it should be treated as a low-intensity task.",
+          "concerns": [
+            "Reading 3 chapters while fatigued may lead to poor retention",
+            "Risk of over-preparing for a low-weight assessment"
+          ],
+          "recommendations": [
+            "Use active skimming techniques instead of deep reading",
+            "Limit study time to 90 minutes total",
+            "Focus on chapter summaries and key terms"
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Skim chapter summaries and headings",
+            "Review key terms and definitions",
+            "Take brief notes on core concepts"
+          ]
+        }
+      ],
+      "overall_comment": "The student's plan is currently over-extended given their reported fatigue. I have recommended breaking the machine learning assignment into smaller, manageable chunks and prioritizing the most critical tasks to ensure they do not exceed their two-block-per-day limit."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "task_views": [
+        {
+          "task_id": "task_ml_assignment",
+          "task_name": "Machine learning assignment",
+          "assessment": "High cognitive load task that is currently overdue; attempting this while sleep-deprived poses a significant risk to both quality and health.",
+          "concerns": [
+            "High complexity experiments require sustained focus which is difficult with current fatigue levels",
+            "Risk of burnout due to the weight of the assignment"
+          ],
+          "recommendations": [
+            "Break the assignment into smaller, manageable chunks to avoid long, exhausting sessions",
+            "Prioritize the core requirements over perfection to reduce stress"
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Set up experiment environment",
+            "Run initial data tests",
+            "Draft results explanation"
+          ]
+        },
+        {
+          "task_id": "task_networks_worksheet",
+          "task_name": "Networks worksheet",
+          "assessment": "This task is past its deadline; given the student's low energy, it should be treated as a low-intensity recovery task if possible.",
+          "concerns": [
+            "Deadline has already passed, potentially causing unnecessary anxiety",
+            "Adding this to an already heavy workload may exacerbate fatigue"
+          ],
+          "recommendations": [
+            "Complete only the essential sections to minimize time spent",
+            "Do not attempt this immediately after a long machine learning session"
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review core concepts",
+            "Complete worksheet problems"
+          ]
+        },
+        {
+          "task_id": "task_se_quiz",
+          "task_name": "Software engineering reading quiz",
+          "assessment": "Low-weight task that is manageable if approached with a light reading strategy rather than deep study.",
+          "concerns": [
+            "Reading three chapters while tired may lead to poor retention",
+            "Risk of over-preparing for a low-weight assessment"
+          ],
+          "recommendations": [
+            "Skim the chapters for key themes rather than reading in depth",
+            "Limit study time to one short session to protect sleep"
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Skim chapter summaries",
+            "Review key definitions"
+          ]
+        }
+      ],
+      "overall_comment": "The student is currently in a state of physical and cognitive exhaustion. The proposed workload is too heavy for someone who has not slept well. I recommend reducing the total daily work hours significantly and prioritizing rest to allow for recovery. The current plan must be strictly limited to two short work blocks per day to ensure the student can function."
+    },
+    {
+      "agent": "Risk Agent",
+      "task_views": [
+        {
+          "task_id": "task_ml_assignment",
+          "task_name": "Machine learning assignment",
+          "assessment": "High risk due to past deadline and significant cognitive load required for experiments.",
+          "concerns": [
+            "Deadline has already passed, creating immediate pressure.",
+            "Experimental runtimes are unpredictable and often lead to hidden debugging time.",
+            "Low student energy levels increase the risk of errors in result interpretation."
+          ],
+          "recommendations": [
+            "Prioritize core experimental results over perfection.",
+            "Use a buffer for unexpected code failures.",
+            "Communicate with the instructor regarding the late submission."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Review existing experiment logs",
+            "Run core experiments",
+            "Draft result explanations",
+            "Finalize submission"
+          ]
+        },
+        {
+          "task_id": "task_networks_worksheet",
+          "task_name": "Networks worksheet",
+          "assessment": "Critical risk as the deadline has passed.",
+          "concerns": [
+            "The task is already overdue.",
+            "Potential for cascading delays if this task is not completed immediately."
+          ],
+          "recommendations": [
+            "Complete this task immediately to clear the backlog.",
+            "Limit time spent to avoid further fatigue."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review worksheet requirements",
+            "Complete problems",
+            "Submit"
+          ]
+        },
+        {
+          "task_id": "task_se_quiz",
+          "task_name": "Software engineering reading quiz",
+          "assessment": "Moderate risk due to fatigue affecting reading comprehension.",
+          "concerns": [
+            "Reading three chapters while exhausted is inefficient.",
+            "Risk of underestimating the time needed for effective review."
+          ],
+          "recommendations": [
+            "Focus on summaries and key concepts rather than deep reading.",
+            "Schedule review during the highest energy period of the day."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Skim chapter summaries",
+            "Review lecture slides",
+            "Self-test on key terms"
+          ]
+        }
+      ],
+      "overall_comment": "The current plan is highly fragile because the student is attempting to recover from sleep deprivation while managing multiple overdue or imminent tasks. The lack of contingency time is a major concern. I recommend prioritizing the machine learning assignment and networks worksheet immediately, while accepting that the software engineering quiz may need to be approached with a 'good enough' strategy to protect the student's health."
+    }
+  ],
+  "calendarVersions": [
+    {
+      "calendar": {
+        "calendar_version": 1,
+        "planning_window": {
+          "start_date": "2026-05-29T12:27:53.611Z",
+          "end_date": "2026-05-30T12:00:00Z",
+          "reason": "Prioritizing overdue machine learning and networks tasks while managing student fatigue."
+        },
+        "overall_strategy": [
+          "Prioritize the machine learning assignment due to its high grade weight.",
+          "Complete the overdue networks worksheet immediately after to clear the backlog.",
+          "Limit daily work to two focused blocks to accommodate low energy levels.",
+          "Treat the software engineering quiz as a low-intensity review task."
+        ],
+        "days": [
+          {
+            "date": "2026-05-29",
+            "day_name": "Thursday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Student has classes until 12:30 and needs to manage fatigue by limiting work to two sessions.",
+            "blocks": [
+              {
+                "id": "b1",
+                "task_id": "task_ml_assignment",
+                "task_name": "Machine learning assignment",
+                "type": "work",
+                "start": "2026-05-29T14:00:00Z",
+                "end": "2026-05-29T16:00:00Z",
+                "duration_hours": 2,
+                "description": "Run core experiments for the machine learning assignment.",
+                "reasoning": "Starting with the highest weight task while energy is relatively higher in the afternoon."
+              },
+              {
+                "id": "b2",
+                "task_id": "task_networks_worksheet",
+                "task_name": "Networks worksheet",
+                "type": "work",
+                "start": "2026-05-29T16:30:00Z",
+                "end": "2026-05-29T18:30:00Z",
+                "duration_hours": 2,
+                "description": "Complete the overdue networks worksheet.",
+                "reasoning": "Clearing the overdue worksheet immediately to reduce anxiety and prevent further delays."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-30",
+            "day_name": "Friday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Limited capacity for heavy cognitive load due to ongoing recovery from sleep deprivation.",
+            "blocks": [
+              {
+                "id": "b3",
+                "task_id": "task_ml_assignment",
+                "task_name": "Machine learning assignment",
+                "type": "work",
+                "start": "2026-05-30T14:00:00Z",
+                "end": "2026-05-30T15:30:00Z",
+                "duration_hours": 1.5,
+                "description": "Draft results explanation for the machine learning assignment.",
+                "reasoning": "Continuing the high-weight assignment with a focused session after morning classes."
+              },
+              {
+                "id": "b4",
+                "task_id": "task_se_quiz",
+                "task_name": "Software engineering reading quiz",
+                "type": "work",
+                "start": "2026-05-30T16:00:00Z",
+                "end": "2026-05-30T17:30:00Z",
+                "duration_hours": 1.5,
+                "description": "Skim chapter summaries for the software engineering quiz.",
+                "reasoning": "Using a low-intensity review strategy to prepare for the quiz without over-exertion."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "High workload versus low energy and sleep deprivation.",
+            "resolution": "Reduced total work hours and limited daily blocks to prioritize recovery."
+          },
+          {
+            "conflict": "Multiple overdue deadlines.",
+            "resolution": "Prioritized the machine learning assignment and networks worksheet over the lower-weight software engineering quiz."
+          }
+        ],
+        "known_weaknesses": [
+          "The machine learning assignment may require more than the allocated time if experiments fail.",
+          "The student's fatigue may still impact the quality of work despite the reduced schedule."
+        ],
+        "changes_from_previous": [],
+        "unresolved_critiques": [
+          {
+            "agent": "Wellbeing Agent",
+            "severity": "minor",
+            "issue": "The student is exhausted and the schedule remains demanding.",
+            "planner_response": "Work blocks are strictly limited to two per day to ensure rest periods are preserved."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The machine learning assignment is significantly overdue and the current allocation of 3.5 hours total is likely insufficient for a 7-hour task, risking further late penalties.",
+              "severity": "major",
+              "affected_tasks": [
+                "Machine learning assignment"
+              ],
+              "affected_days": [
+                "2026-05-29",
+                "2026-05-30"
+              ],
+              "suggested_fix": "Increase the duration of work blocks for the machine learning assignment or identify additional time on May 31st to ensure completion."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Prioritizing the machine learning assignment and networks worksheet over the software engineering quiz due to grade weight.",
+            "Limiting daily work hours to accommodate low energy levels."
+          ],
+          "overall_comment": "The schedule correctly prioritizes the most critical overdue tasks. While I am concerned that the time allocated for the machine learning assignment is insufficient to complete the work, the strategy of focusing on core components first is appropriate given the student's current fatigue. I approve with the caveat that the student must monitor progress closely and adjust if the machine learning assignment requires more time than currently planned."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "Prioritization of the machine learning assignment as the primary academic focus.",
+            "Strategic use of low-intensity review for the software engineering reading quiz to protect capacity for higher-weight tasks.",
+            "Acceptance of the reduced work schedule to balance fatigue with the necessity of completing overdue work."
+          ],
+          "overall_comment": "The current plan effectively protects the high-impact machine learning assignment by allocating the most focused time slots to it. The decision to treat the software engineering reading quiz as a low-intensity review task is appropriate given its lower grade weight and the student's current energy constraints. The schedule is well-aligned with academic priorities."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The machine learning assignment is significantly underestimated; 3.5 total hours is insufficient for a 25% weight assignment that requires both experiments and written analysis.",
+              "severity": "major",
+              "affected_tasks": [
+                "Machine learning assignment"
+              ],
+              "affected_days": [
+                "2026-05-29",
+                "2026-05-30"
+              ],
+              "suggested_fix": "Allocate at least 2 additional hours for the machine learning assignment, potentially by extending the Friday session or adding a third block if energy permits, and acknowledge that the current allocation is a minimum viable effort."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Prioritizing the machine learning assignment and networks worksheet over the software engineering quiz.",
+            "Limiting daily work to two blocks to manage fatigue."
+          ],
+          "overall_comment": "The plan is realistic regarding the student's energy constraints, but the machine learning assignment is likely to remain incomplete with only 3.5 hours allocated. I have approved with concerns, noting that the student must prioritize the most critical sections of the assignment to ensure submission."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The student is currently experiencing significant fatigue; even with reduced hours, four hours of focused work on May 29th may be too taxing.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Machine learning assignment",
+                "Networks worksheet"
+              ],
+              "affected_days": [
+                "2026-05-29"
+              ],
+              "suggested_fix": "If energy levels are critically low, reduce the duration of the Networks worksheet block or postpone it entirely to prioritize sleep."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Strictly limiting work to two blocks per day to protect rest.",
+            "Prioritizing high-weight tasks while treating the quiz as a low-intensity review."
+          ],
+          "overall_comment": "The plan is significantly more humane than previous iterations. By capping daily sessions to two blocks, the student has protected necessary recovery time. I approve with the caveat that the student must listen to their body on May 29th and stop if they feel their cognitive capacity is exhausted before the second block is complete."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The plan assumes the machine learning assignment can be completed in 3.5 hours total, which is highly unrealistic given the complexity of experiments and the fact that the deadline has already passed.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Machine learning assignment"
+              ],
+              "affected_days": [
+                "2026-05-29",
+                "2026-05-30"
+              ],
+              "suggested_fix": "Allocate at least 6-8 hours for the machine learning assignment and include a buffer for debugging. If this is not possible, prioritize communication with the instructor for an extension."
+            },
+            {
+              "issue": "There is no contingency time for unexpected technical failures or cognitive fatigue, which is a major risk given the student's current low energy state.",
+              "severity": "major",
+              "affected_tasks": [
+                "Machine learning assignment",
+                "Networks worksheet"
+              ],
+              "affected_days": [
+                "2026-05-29",
+                "2026-05-30"
+              ],
+              "suggested_fix": "Add a 30-minute buffer block between work sessions to allow for recovery and unexpected overruns."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Reduced total work hours and limited daily blocks to prioritize recovery.",
+            "Prioritized the machine learning assignment and networks worksheet over the lower-weight software engineering quiz."
+          ],
+          "overall_comment": "The plan is critically flawed due to an extreme underestimation of the time required for the machine learning assignment. It fails to account for the high probability of experimental failure or the impact of the student's current fatigue on productivity. Without a realistic time allocation and contingency buffers, the student is at high risk of failing to meet the most important deadline."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "block_after_deadline",
+            "message": "Machine learning assignment has work scheduled after its deadline (2026-05-28T23:59:59.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_deadline",
+            "message": "Networks worksheet has work scheduled after its deadline (2026-05-27T12:00:00.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "day_outside_window",
+            "message": "2026-05-30 is outside the planning window 2026-05-29T12:27:53.611Z → 2026-05-30T12:00:00Z.",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_window",
+            "message": "Draft results explanation for the machine learning assignment. ends after the planning window.",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_deadline",
+            "message": "Machine learning assignment has work scheduled after its deadline (2026-05-28T23:59:59.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_window",
+            "message": "Skim chapter summaries for the software engineering quiz. ends after the planning window.",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_deadline",
+            "message": "Software engineering reading quiz has work scheduled after its deadline (2026-05-29T09:00:00.000Z).",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 4,
+      "hasCritical": true
+    },
+    {
+      "calendar": {
+        "calendar_version": 2,
+        "planning_window": {
+          "start_date": "2026-05-29T00:00:00Z",
+          "end_date": "2026-05-30T23:59:59Z",
+          "reason": "Focusing on completing the most critical overdue assignments within the next two days."
+        },
+        "overall_strategy": [
+          "Prioritize the Machine learning assignment by allocating significantly more time to ensure completion.",
+          "Complete the Networks worksheet as a secondary priority to clear the backlog.",
+          "Postpone the Software engineering reading quiz to focus on higher-weight tasks.",
+          "Maximize available hours for the Machine learning assignment to mitigate the risk of further late penalties."
+        ],
+        "days": [
+          {
+            "date": "2026-05-29",
+            "day_name": "Friday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Allocating full capacity to the Machine learning assignment to address the critical backlog.",
+            "blocks": [
+              {
+                "id": "b1",
+                "task_id": "task_ml_assignment",
+                "task_name": "Machine learning assignment",
+                "type": "work",
+                "start": "2026-05-29T09:00:00Z",
+                "end": "2026-05-29T13:00:00Z",
+                "duration_hours": 4,
+                "description": "Run core experiments and draft initial results for the Machine learning assignment.",
+                "reasoning": "This task is the highest priority and requires significant uninterrupted time to complete."
+              }
+            ]
+          },
+          {
+            "date": "2026-05-30",
+            "day_name": "Saturday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Splitting time between finishing the Machine learning assignment and completing the Networks worksheet.",
+            "blocks": [
+              {
+                "id": "b2",
+                "task_id": "task_ml_assignment",
+                "task_name": "Machine learning assignment",
+                "type": "work",
+                "start": "2026-05-30T09:00:00Z",
+                "end": "2026-05-30T10:30:00Z",
+                "duration_hours": 1.5,
+                "description": "Finalize the written analysis for the Machine learning assignment.",
+                "reasoning": "Completing the final components of the assignment is essential for submission."
+              },
+              {
+                "id": "b3",
+                "task_id": "task_networks_worksheet",
+                "task_name": "Networks worksheet",
+                "type": "work",
+                "start": "2026-05-30T10:30:00Z",
+                "end": "2026-05-30T12:00:00Z",
+                "duration_hours": 1.5,
+                "description": "Complete the overdue Networks worksheet.",
+                "reasoning": "This task is overdue and needs to be finished to clear the backlog."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "High workload for Machine learning assignment versus limited student energy.",
+            "resolution": "Prioritized the Machine learning assignment over all other tasks to ensure it is completed."
+          },
+          {
+            "conflict": "Multiple overdue deadlines.",
+            "resolution": "Postponed the Software engineering reading quiz to focus exclusively on the higher-weight Machine learning assignment and Networks worksheet."
+          }
+        ],
+        "known_weaknesses": [
+          "The plan does not include explicit contingency time for technical issues.",
+          "The student's current fatigue levels may impact the quality of the work produced."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Increased time allocation for the Machine learning assignment.",
+            "reason": "Addressed critical feedback regarding the underestimation of the time required for this task."
+          },
+          {
+            "change": "Removed the Software engineering reading quiz from the schedule.",
+            "reason": "Focused resources on higher-weight overdue tasks to maximize grade impact."
+          }
+        ],
+        "unresolved_critiques": [
+          {
+            "agent": "Risk Agent",
+            "severity": "minor",
+            "issue": "Lack of contingency time for technical failures.",
+            "planner_response": "Given the severity of the overdue status, all available time must be dedicated to core tasks, leaving no room for formal buffers."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Software engineering reading quiz remains unaddressed despite being overdue, which risks further grade erosion.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Software engineering reading quiz"
+              ],
+              "affected_days": [
+                "2026-05-29",
+                "2026-05-30"
+              ],
+              "suggested_fix": "Once the Machine learning assignment and Networks worksheet are submitted, allocate a short block to complete the Software engineering reading quiz, even if only by reviewing essential summaries."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Prioritizing the Machine learning assignment due to its high weight.",
+            "Postponing the Software engineering reading quiz to focus on higher-priority overdue items."
+          ],
+          "overall_comment": "The plan correctly prioritizes the most critical and high-weight overdue tasks. While I am concerned about the total omission of the Software engineering reading quiz, I acknowledge the necessity of focusing on the highest-impact assignments given the student's current fatigue and limited capacity."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "Prioritization of the Machine learning assignment over all other tasks to ensure completion.",
+            "Postponement of the Software engineering reading quiz to focus on higher-weight deliverables."
+          ],
+          "overall_comment": "The planner has successfully aligned the schedule with my previous recommendations by prioritizing the high-weight Machine learning assignment and clearing the backlog of the Networks worksheet. By deprioritizing the low-weight Software engineering reading quiz, the student is now focusing their limited energy on the most academically significant tasks. This approach is optimal for protecting the student's grade."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Machine learning assignment block on May 29th is 4 hours long, which exceeds the student's capacity for focused work given their current fatigue and low energy state.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Machine learning assignment"
+              ],
+              "affected_days": [
+                "2026-05-29"
+              ],
+              "suggested_fix": "Split the 4-hour block into two 2-hour sessions with a mandatory break to prevent burnout and maintain cognitive performance."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Prioritized the Machine learning assignment over the Software engineering reading quiz to manage workload.",
+            "Accepted the removal of contingency buffers due to the critical nature of the overdue deadlines."
+          ],
+          "overall_comment": "The plan is significantly more realistic than the previous version. While I still have concerns about the length of the single 4-hour block on the first day, the strategy of focusing on high-weight tasks is sound given the student's current state."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The four-hour continuous block on May 29th for the Machine learning assignment exceeds the recommended capacity for a student experiencing low energy and poor sleep.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Machine learning assignment"
+              ],
+              "affected_days": [
+                "2026-05-29"
+              ],
+              "suggested_fix": "Split the four-hour block into two shorter sessions with a significant gap to prevent cognitive overload."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Postponing the Software engineering reading quiz to prioritize higher-weight tasks is a responsible move to reduce overall cognitive load.",
+            "Focusing exclusively on the most critical overdue assignments is a sustainable strategy given the current low-energy state."
+          ],
+          "overall_comment": "The plan is much improved by removing the quiz, which helps protect the student's limited capacity. While the four-hour block on May 29th is concerning for someone with low energy, the overall reduction in total tasks makes this plan significantly more humane than the previous iteration."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The plan lacks any buffer for technical issues or cognitive fatigue, which is highly risky given the student's stated low energy and poor sleep.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Machine learning assignment",
+                "Networks worksheet"
+              ],
+              "affected_days": [
+                "2026-05-29",
+                "2026-05-30"
+              ],
+              "suggested_fix": "Incorporate a 30-minute 'buffer' block at the end of each day to account for unexpected delays or fatigue-induced slowdowns."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Prioritizing the Machine learning assignment over the Software engineering reading quiz to maximize grade impact.",
+            "Accepting the lack of formal contingency time due to the critical nature of the overdue deadlines."
+          ],
+          "overall_comment": "While the plan is aggressive and lacks safety buffers, it is a realistic response to the current backlog. The prioritization of the Machine learning assignment is correct. I have approved with minor concerns, noting that the student must remain flexible if technical issues arise."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "block_after_deadline",
+            "message": "Machine learning assignment has work scheduled after its deadline (2026-05-28T23:59:59.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_deadline",
+            "message": "Machine learning assignment has work scheduled after its deadline (2026-05-28T23:59:59.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_deadline",
+            "message": "Networks worksheet has work scheduled after its deadline (2026-05-27T12:00:00.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "deadline_task_unscheduled",
+            "message": "task_se_quiz has a deadline inside the planning window but no scheduled work block.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 5,
+      "hasCritical": false
+    }
+  ],
+  "finalCalendar": {
+    "calendar_version": 2,
+    "planning_window": {
+      "start_date": "2026-05-29T00:00:00Z",
+      "end_date": "2026-05-30T23:59:59Z",
+      "reason": "Focusing on completing the most critical overdue assignments within the next two days."
+    },
+    "overall_strategy": [
+      "Prioritize the Machine learning assignment by allocating significantly more time to ensure completion.",
+      "Complete the Networks worksheet as a secondary priority to clear the backlog.",
+      "Postpone the Software engineering reading quiz to focus on higher-weight tasks.",
+      "Maximize available hours for the Machine learning assignment to mitigate the risk of further late penalties."
+    ],
+    "days": [
+      {
+        "date": "2026-05-29",
+        "day_name": "Friday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Allocating full capacity to the Machine learning assignment to address the critical backlog.",
+        "blocks": [
+          {
+            "id": "b1",
+            "task_id": "task_ml_assignment",
+            "task_name": "Machine learning assignment",
+            "type": "work",
+            "start": "2026-05-29T09:00:00Z",
+            "end": "2026-05-29T13:00:00Z",
+            "duration_hours": 4,
+            "description": "Run core experiments and draft initial results for the Machine learning assignment.",
+            "reasoning": "This task is the highest priority and requires significant uninterrupted time to complete."
+          }
+        ]
+      },
+      {
+        "date": "2026-05-30",
+        "day_name": "Saturday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "Splitting time between finishing the Machine learning assignment and completing the Networks worksheet.",
+        "blocks": [
+          {
+            "id": "b2",
+            "task_id": "task_ml_assignment",
+            "task_name": "Machine learning assignment",
+            "type": "work",
+            "start": "2026-05-30T09:00:00Z",
+            "end": "2026-05-30T10:30:00Z",
+            "duration_hours": 1.5,
+            "description": "Finalize the written analysis for the Machine learning assignment.",
+            "reasoning": "Completing the final components of the assignment is essential for submission."
+          },
+          {
+            "id": "b3",
+            "task_id": "task_networks_worksheet",
+            "task_name": "Networks worksheet",
+            "type": "work",
+            "start": "2026-05-30T10:30:00Z",
+            "end": "2026-05-30T12:00:00Z",
+            "duration_hours": 1.5,
+            "description": "Complete the overdue Networks worksheet.",
+            "reasoning": "This task is overdue and needs to be finished to clear the backlog."
+          }
+        ]
+      }
+    ],
+    "compromises": [
+      {
+        "conflict": "High workload for Machine learning assignment versus limited student energy.",
+        "resolution": "Prioritized the Machine learning assignment over all other tasks to ensure it is completed."
+      },
+      {
+        "conflict": "Multiple overdue deadlines.",
+        "resolution": "Postponed the Software engineering reading quiz to focus exclusively on the higher-weight Machine learning assignment and Networks worksheet."
+      }
+    ],
+    "known_weaknesses": [
+      "The plan does not include explicit contingency time for technical issues.",
+      "The student's current fatigue levels may impact the quality of the work produced."
+    ],
+    "changes_from_previous": [
+      {
+        "change": "Increased time allocation for the Machine learning assignment.",
+        "reason": "Addressed critical feedback regarding the underestimation of the time required for this task."
+      },
+      {
+        "change": "Removed the Software engineering reading quiz from the schedule.",
+        "reason": "Focused resources on higher-weight overdue tasks to maximize grade impact."
+      }
+    ],
+    "unresolved_critiques": [
+      {
+        "agent": "Risk Agent",
+        "severity": "minor",
+        "issue": "Lack of contingency time for technical failures.",
+        "planner_response": "Given the severity of the overdue status, all available time must be dedicated to core tasks, leaving no room for formal buffers."
+      }
+    ]
+  },
+  "critiques": [
+    {
+      "agent": "Deadline Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The Software engineering reading quiz remains unaddressed despite being overdue, which risks further grade erosion.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Software engineering reading quiz"
+          ],
+          "affected_days": [
+            "2026-05-29",
+            "2026-05-30"
+          ],
+          "suggested_fix": "Once the Machine learning assignment and Networks worksheet are submitted, allocate a short block to complete the Software engineering reading quiz, even if only by reviewing essential summaries."
+        }
+      ],
+      "acknowledged_compromises": [
+        "Prioritizing the Machine learning assignment due to its high weight.",
+        "Postponing the Software engineering reading quiz to focus on higher-priority overdue items."
+      ],
+      "overall_comment": "The plan correctly prioritizes the most critical and high-weight overdue tasks. While I am concerned about the total omission of the Software engineering reading quiz, I acknowledge the necessity of focusing on the highest-impact assignments given the student's current fatigue and limited capacity."
+    },
+    {
+      "agent": "Grade Agent",
+      "calendar_version": 2,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "Prioritization of the Machine learning assignment over all other tasks to ensure completion.",
+        "Postponement of the Software engineering reading quiz to focus on higher-weight deliverables."
+      ],
+      "overall_comment": "The planner has successfully aligned the schedule with my previous recommendations by prioritizing the high-weight Machine learning assignment and clearing the backlog of the Networks worksheet. By deprioritizing the low-weight Software engineering reading quiz, the student is now focusing their limited energy on the most academically significant tasks. This approach is optimal for protecting the student's grade."
+    },
+    {
+      "agent": "Effort Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The Machine learning assignment block on May 29th is 4 hours long, which exceeds the student's capacity for focused work given their current fatigue and low energy state.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Machine learning assignment"
+          ],
+          "affected_days": [
+            "2026-05-29"
+          ],
+          "suggested_fix": "Split the 4-hour block into two 2-hour sessions with a mandatory break to prevent burnout and maintain cognitive performance."
+        }
+      ],
+      "acknowledged_compromises": [
+        "Prioritized the Machine learning assignment over the Software engineering reading quiz to manage workload.",
+        "Accepted the removal of contingency buffers due to the critical nature of the overdue deadlines."
+      ],
+      "overall_comment": "The plan is significantly more realistic than the previous version. While I still have concerns about the length of the single 4-hour block on the first day, the strategy of focusing on high-weight tasks is sound given the student's current state."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The four-hour continuous block on May 29th for the Machine learning assignment exceeds the recommended capacity for a student experiencing low energy and poor sleep.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Machine learning assignment"
+          ],
+          "affected_days": [
+            "2026-05-29"
+          ],
+          "suggested_fix": "Split the four-hour block into two shorter sessions with a significant gap to prevent cognitive overload."
+        }
+      ],
+      "acknowledged_compromises": [
+        "Postponing the Software engineering reading quiz to prioritize higher-weight tasks is a responsible move to reduce overall cognitive load.",
+        "Focusing exclusively on the most critical overdue assignments is a sustainable strategy given the current low-energy state."
+      ],
+      "overall_comment": "The plan is much improved by removing the quiz, which helps protect the student's limited capacity. While the four-hour block on May 29th is concerning for someone with low energy, the overall reduction in total tasks makes this plan significantly more humane than the previous iteration."
+    },
+    {
+      "agent": "Risk Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The plan lacks any buffer for technical issues or cognitive fatigue, which is highly risky given the student's stated low energy and poor sleep.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Machine learning assignment",
+            "Networks worksheet"
+          ],
+          "affected_days": [
+            "2026-05-29",
+            "2026-05-30"
+          ],
+          "suggested_fix": "Incorporate a 30-minute 'buffer' block at the end of each day to account for unexpected delays or fatigue-induced slowdowns."
+        }
+      ],
+      "acknowledged_compromises": [
+        "Prioritizing the Machine learning assignment over the Software engineering reading quiz to maximize grade impact.",
+        "Accepting the lack of formal contingency time due to the critical nature of the overdue deadlines."
+      ],
+      "overall_comment": "While the plan is aggressive and lacks safety buffers, it is a realistic response to the current backlog. The prioritization of the Machine learning assignment is correct. I have approved with minor concerns, noting that the student must remain flexible if technical issues arise."
+    }
+  ],
+  "validation": {
+    "valid": false,
+    "violations": [
+      {
+        "code": "block_after_deadline",
+        "message": "Machine learning assignment has work scheduled after its deadline (2026-05-28T23:59:59.000Z).",
+        "severity": "error"
+      },
+      {
+        "code": "block_after_deadline",
+        "message": "Machine learning assignment has work scheduled after its deadline (2026-05-28T23:59:59.000Z).",
+        "severity": "error"
+      },
+      {
+        "code": "block_after_deadline",
+        "message": "Networks worksheet has work scheduled after its deadline (2026-05-27T12:00:00.000Z).",
+        "severity": "error"
+      },
+      {
+        "code": "deadline_task_unscheduled",
+        "message": "task_se_quiz has a deadline inside the planning window but no scheduled work block.",
+        "severity": "error"
+      }
+    ]
+  },
+  "evaluation": {
+    "evaluator": "Schedule Evaluator",
+    "calendar_version": 2,
+    "planner_model": "google/gemini-3.1-flash-lite-preview",
+    "evaluator_model": "google/gemini-3.1-flash-lite-preview",
+    "overall_score": 3.9,
+    "model_score": 3.5,
+    "hard_score": 4.2,
+    "hard_metrics": {
+      "score": 81,
+      "metrics": [
+        {
+          "name": "generation_time_seconds",
+          "value": 20.7,
+          "score": 100,
+          "explanation": "20.7s from run start to final schedule selection."
+        },
+        {
+          "name": "rejection_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 specialist agent(s) rejected the final calendar."
+        },
+        {
+          "name": "critical_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 critical issue(s) were raised in final critiques."
+        },
+        {
+          "name": "major_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 major issue(s) were raised in final critiques."
+        },
+        {
+          "name": "deadline_violation_count",
+          "value": 3,
+          "score": 0,
+          "explanation": "3 scheduled work block(s) end after their task deadline."
+        },
+        {
+          "name": "task_coverage_ratio",
+          "value": 0.67,
+          "score": 67,
+          "explanation": "2/3 inferred task(s) received at least one work block."
+        },
+        {
+          "name": "availability_overrun_hours",
+          "value": 0,
+          "score": 100,
+          "explanation": "0h scheduled above the planner's assumed available hours."
+        }
+      ]
+    },
+    "dimension_scores": [
+      {
+        "dimension": "requirement_match",
+        "score": 4,
+        "rationale": "The planner correctly identified the need to prioritize high-weight tasks and respected the student's request to limit work blocks, though it failed to schedule the reading quiz."
+      },
+      {
+        "dimension": "deadline_safety",
+        "score": 2,
+        "rationale": "The schedule is inherently unsafe because all tasks are already overdue; the planner correctly prioritized the most critical items but could not resolve the deadline violations."
+      },
+      {
+        "dimension": "workload_realism",
+        "score": 3,
+        "rationale": "The total volume is manageable, but the 4-hour continuous block on the first day is unrealistic for a student struggling with fatigue and poor sleep."
+      },
+      {
+        "dimension": "academic_priority",
+        "score": 5,
+        "rationale": "Excellent prioritization; the planner correctly focused on the 25% weight assignment and the overdue worksheet while deprioritizing the 5% quiz."
+      },
+      {
+        "dimension": "wellbeing_balance",
+        "score": 3,
+        "rationale": "The plan is more humane than the previous version, but the lack of breaks within the long work blocks ignores the student's stated need for recovery."
+      },
+      {
+        "dimension": "risk_resilience",
+        "score": 2,
+        "rationale": "The plan is fragile; it lacks any contingency buffers for technical issues or further energy dips, which is risky given the student's current state."
+      }
+    ],
+    "strengths": [
+      "Strong academic prioritization of high-weight tasks.",
+      "Clear and actionable strategy for clearing the most critical backlog.",
+      "Successfully reduced the total number of tasks to match the student's limited capacity."
+    ],
+    "weaknesses": [
+      "The 4-hour continuous work block is too long for a fatigued student.",
+      "Lack of contingency buffers for technical issues or unexpected fatigue.",
+      "The reading quiz was completely omitted rather than being scheduled as a low-effort task."
+    ],
+    "comparison_notes": [
+      "This version is significantly more realistic than the previous iteration by removing the low-weight quiz.",
+      "The planner successfully incorporated feedback regarding the underestimation of the machine learning assignment duration."
+    ],
+    "recommendation": "The student should manually split the 4-hour block into two 2-hour sessions with a break to ensure they can maintain focus and manage their energy levels effectively."
+  }
+}
