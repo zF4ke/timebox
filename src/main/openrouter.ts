@@ -1,4 +1,7 @@
+import crypto from "node:crypto";
 import { saveRawResponse } from "./debug";
+import type { LlmCallTrace } from "../shared/types";
+import { estimateModelCostUsd, estimateTokensFromChars } from "./modelCosts";
 
 interface JsonCallOptions {
   apiKey: string;
@@ -10,6 +13,7 @@ interface JsonCallOptions {
   signal?: AbortSignal;
   maxCompletionTokens?: number;
   timeoutMs?: number;
+  onTrace?: (trace: LlmCallTrace) => void;
 }
 
 export async function callOpenRouterJson<T>(options: JsonCallOptions): Promise<T> {
@@ -34,8 +38,10 @@ function buildCombinedSignal(cancelSignal?: AbortSignal, timeoutMs?: number): Ab
 
 async function requestJson<T>(options: JsonCallOptions): Promise<T> {
   const start = Date.now();
+  const startedAt = new Date(start).toISOString();
+  const promptChars = options.system.length + options.user.length;
   console.log(
-    `[openrouter] -> ${options.schemaName} (json_schema) · prompt=${options.system.length + options.user.length} chars · maxTokens=${options.maxCompletionTokens ?? 2500}`
+    `[openrouter] -> ${options.schemaName} (json_schema) · prompt=${promptChars} chars · maxTokens=${options.maxCompletionTokens ?? 2500}`
   );
   const { OpenRouter } = await importOpenRouterSdk();
   const openRouter = new OpenRouter({
@@ -84,6 +90,7 @@ async function requestJson<T>(options: JsonCallOptions): Promise<T> {
   }
 
   const raw = typeof content === "string" ? content : JSON.stringify(content);
+  emitTrace(options, result, raw, start, startedAt, promptChars);
   const finishReason = choice?.finishReason ?? choice?.finish_reason;
   if (finishReason === "length" || finishReason === "max_tokens") {
     const filePath = saveRawResponse(options.schemaName, raw);
@@ -107,6 +114,63 @@ async function requestJson<T>(options: JsonCallOptions): Promise<T> {
     console.error(`[openrouter] snippet end: ${snippetEnd}`);
     throw new Error(`${errorMessage(parseError)}. Raw response saved to ${filePath}.`);
   }
+}
+
+function emitTrace(
+  options: JsonCallOptions,
+  result: unknown,
+  raw: string,
+  start: number,
+  startedAt: string,
+  promptChars: number
+): void {
+  if (!options.onTrace) {
+    return;
+  }
+
+  const usage = (result as {
+    usage?: {
+      prompt_tokens?: number;
+      completion_tokens?: number;
+      total_tokens?: number;
+      promptTokens?: number;
+      completionTokens?: number;
+      totalTokens?: number;
+    };
+  }).usage;
+
+  const completionChars = raw.length;
+  const promptTokens = numberOrNull(usage?.prompt_tokens ?? usage?.promptTokens) ?? estimateTokensFromChars(promptChars);
+  const completionTokens =
+    numberOrNull(usage?.completion_tokens ?? usage?.completionTokens) ?? estimateTokensFromChars(completionChars);
+  const totalTokens = numberOrNull(usage?.total_tokens ?? usage?.totalTokens) ?? promptTokens + completionTokens;
+  const completedAtMs = Date.now();
+
+  options.onTrace({
+    id: cryptoRandomId(),
+    schemaName: options.schemaName,
+    model: options.model,
+    startedAt,
+    completedAt: new Date(completedAtMs).toISOString(),
+    durationMs: completedAtMs - start,
+    promptChars,
+    completionChars,
+    maxCompletionTokens: options.maxCompletionTokens ?? 2500,
+    promptTokens,
+    completionTokens,
+    totalTokens,
+    usageSource: usage ? "provider" : "estimated",
+    estimatedCostUsd: estimateModelCostUsd(options.model, promptTokens, completionTokens)
+  });
+}
+
+function cryptoRandomId(): string {
+  return crypto.randomUUID();
+}
+
+function numberOrNull(value: unknown): number | null {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed >= 0 ? parsed : null;
 }
 
 async function importOpenRouterSdk(): Promise<typeof import("@openrouter/sdk")> {

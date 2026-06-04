@@ -1,6 +1,10 @@
 import { contextBridge, ipcRenderer } from "electron";
 import type {
   AppConfig,
+  BenchmarkExperiment,
+  BenchmarkProgressEvent,
+  BenchmarkRequest,
+  BenchmarkScenarioSummary,
   PlannerApi,
   PlannerDefaults,
   PlanningRequest,
@@ -48,6 +52,23 @@ const api: PlannerApi = {
   },
   parseImport(content: string, filename: string): Promise<PlanningResult> {
     return ipcRenderer.invoke("import:parse", content, filename) as Promise<PlanningResult>;
+  },
+  listBenchmarkExperiments(): Promise<BenchmarkExperiment[]> {
+    return ipcRenderer.invoke("benchmark:list") as Promise<BenchmarkExperiment[]>;
+  },
+  listBenchmarkScenarios(): Promise<BenchmarkScenarioSummary[]> {
+    return ipcRenderer.invoke("benchmark:scenarios") as Promise<BenchmarkScenarioSummary[]>;
+  },
+  runBenchmark(request: BenchmarkRequest, clientRunId?: string): Promise<BenchmarkExperiment> {
+    return ipcRenderer.invoke("benchmark:run", request, clientRunId) as Promise<BenchmarkExperiment>;
+  },
+  cancelBenchmark(): Promise<void> {
+    return ipcRenderer.invoke("benchmark:cancel") as Promise<void>;
+  },
+  onBenchmarkProgress(cb: (event: BenchmarkProgressEvent) => void): () => void {
+    const listener = (_e: unknown, payload: BenchmarkProgressEvent) => cb(payload);
+    ipcRenderer.on("benchmark:progress", listener);
+    return () => ipcRenderer.off("benchmark:progress", listener);
   }
 };
 

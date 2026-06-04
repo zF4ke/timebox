@@ -24,13 +24,44 @@ npm test
 npm run build
 ```
 
+## Benchmark Models
+
+The final-delivery benchmark is separate from the normal planner UI. It runs fixed student inputs across a model/quorum/iteration matrix and stores every artifact needed for later plots and prompt-debugging.
+
+The current baseline interpretation of the pulled result sets is in [`docs/benchmark_summary.md`](docs/benchmark_summary.md).
+
+In the app, open **Analytics** and click **Run benchmark**. The launcher uses non-free models only, shows the number of planned runs before starting, streams progress, and can be cancelled.
+
+```bash
+npm run benchmark -- --models google/gemini-3.1-flash-lite-preview,deepseek/deepseek-v3.2 --quorums 3,5 --max-iterations 2,3
+```
+
+Useful options:
+
+```bash
+npm run benchmark -- --scenarios 01_urgent_mixed_deadlines,13_conflicting_preferences
+npm run benchmark -- --out benchmark-results/my-run --delay-ms 1000 --retries 2
+```
+
+Benchmark outputs go to `benchmark-results/<timestamp>/`:
+
+- `manifest.json` — models, quorum values, iteration values, scenario ids, and free-model policy.
+- `experiment.json` — all run summaries plus aggregate rankings.
+- `summary.json` / `summary.csv` — flat run table for plotting.
+- `runs/*.json` — full planning result with interpreter output, agent views, all calendar versions, critiques, validation, evaluation, and per-call usage/cost traces.
+- `runs/*.ics` — calendar export for each run.
+- `runs/*.mistakes.json` — deterministic score breakdown and labeled mistakes.
+- `errors/*.txt` — provider/runtime failures.
+
+Free OpenRouter models containing `:free` are skipped by default because they are too slow for benchmarking. Use `--force-free` only for a deliberate one-off comparison.
+
 ## Package for distribution
 
 ```bash
 npm run dist
 ```
 
-Output goes to `release/`. On Windows this produces a portable `.exe`. On macOS a `.dmg`. On Linux an `AppImage`.
+Output goes to `release-current/`. On Windows this produces a portable `.exe`. On macOS a `.dmg`. On Linux an `AppImage`.
 
 ### Production setup
 
@@ -58,7 +89,9 @@ Output goes to `release/`. On Windows this produces a portable `.exe`. On macOS 
 - **Event details** — click any calendar block to see description, reasoning, and timing.
 - **Saved plans sidebar** — auto-saves plans, with load and delete.
 - **Settings** — configurable quorum (1–5), max iterations (1–5), model picker with pricing, and OpenRouter API key. Persisted to the OS user-data directory.
-- **Evaluation panel** — shows final score, model score, hard-metric score, each hard metric, dimension scores, strengths, weaknesses, and the planner/evaluator models used.
+- **Quality panel** — shows final score, model score, hard-metric score, each hard metric, dimension scores, strengths, weaknesses, and the planner/evaluator models used.
+- **Run cost** — calendar results show traced schedule cost in green when available.
+- **Analytics view** — separate benchmark dashboard for model/quorum/iteration comparisons, deterministic scores, cost-benefit ranking, token/cost estimates, mistake counts, and in-app benchmark execution.
 - **Import** — drag-and-drop JSON/ICS files anywhere on the app, or use the Import button in the sidebar.
 - **Humanized task IDs** — raw IDs like "T1" are automatically replaced with task names in all UI text.
 
@@ -92,6 +125,23 @@ final_score = 50% model_score + 50% hard_score
 ```
 
 The model score focuses on qualitative aspects such as coherence, actionability, compromise quality, and handling uncertainty. The hard score uses generation speed, rejections, critical issues, major issues, deadline violations, task coverage, and availability overrun.
+
+For benchmarking, an additional deterministic scenario score is computed from `benchmarks/scenarios.json`. It checks:
+
+- expected task/topic coverage;
+- deadline discipline;
+- availability discipline;
+- fixed-commitment explanation;
+- wellbeing/late-night respect;
+- revision efficiency and quorum convergence.
+
+The deterministic scorer emits labeled mistakes such as `missing_expected_task`, `block_after_deadline`, `availability_overrun`, `late_work_when_avoided`, `wellbeing_agent_rejected`, `max_iterations_fallback`, and `quorum_not_reached`. This makes prompt improvement iterative: inspect mistake labels, change prompts, rerun the same benchmark matrix, and compare the new `experiment.json`.
+
+Each OpenRouter call is traced in the JSON export with schema name, model, prompt/completion tokens, latency, and estimated USD cost where pricing is known. When provider token usage is missing, token counts are conservatively estimated from character counts and marked as `usageSource: "estimated"`.
+
+Older pulled benchmark results do not contain per-call token traces. The analytics view still gives them a cost estimate using model pricing and stored JSON artifact size, and marks those rows as `legacy_estimate`. Fresh `npm run benchmark` outputs use traced per-call usage when available.
+
+The old one-model `batch` command was removed because the benchmark runner supersedes it: same purpose, but with matrices, deterministic mistakes, cost tracking, app integration, and richer artifacts.
 
 ## Prompt Strategy
 

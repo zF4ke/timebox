@@ -23,6 +23,32 @@ export interface PlanningRequest {
   planningWindowOverride?: PlanningWindowOverride;
 }
 
+export interface LlmCallTrace {
+  id: string;
+  schemaName: string;
+  model: string;
+  startedAt: string;
+  completedAt: string;
+  durationMs: number;
+  promptChars: number;
+  completionChars: number;
+  maxCompletionTokens: number;
+  promptTokens: number;
+  completionTokens: number;
+  totalTokens: number;
+  usageSource: "provider" | "estimated";
+  estimatedCostUsd: number | null;
+}
+
+export interface PlanningUsageSummary {
+  callCount: number;
+  promptTokens: number;
+  completionTokens: number;
+  totalTokens: number;
+  estimatedCostUsd: number | null;
+  calls: LlmCallTrace[];
+}
+
 export interface PlannerDefaults {
   quorum: number;
   maxIterations: number;
@@ -226,10 +252,115 @@ export interface PlanningResult {
   critiques: AgentCritique[];
   validation: ConstraintValidation;
   evaluation: ScheduleEvaluation;
+  usage: PlanningUsageSummary;
   exports: {
     json: string;
     ics: string;
   };
+}
+
+export interface BenchmarkScenarioSummary {
+  id: string;
+  promptFile: string;
+  difficulty: "easy" | "medium" | "challenging";
+  title: string;
+}
+
+export interface BenchmarkMistake {
+  code: string;
+  severity: "minor" | "major" | "critical";
+  message: string;
+  evidence: string;
+}
+
+export interface BenchmarkScore {
+  score: number;
+  expectedTaskCoverage: number;
+  deadlineDiscipline: number;
+  availabilityDiscipline: number;
+  fixedCommitmentRespect: number;
+  wellbeingRespect: number;
+  revisionEfficiency: number;
+  mistakeCount: number;
+  mistakes: BenchmarkMistake[];
+}
+
+export interface BenchmarkRunSummary {
+  scenarioId: string;
+  scenarioTitle: string;
+  difficulty: "easy" | "medium" | "challenging";
+  model: string;
+  quorum: number;
+  maxIterations: number;
+  status: "ok" | "error";
+  overallScore: number | null;
+  deterministicScore: number | null;
+  modelScore: number | null;
+  hardScore: number | null;
+  approvals: number | null;
+  iterations: number | null;
+  generationTimeSeconds: number | null;
+  estimatedCostUsd: number | null;
+  costSource: "traced" | "legacy_estimate" | null;
+  totalTokens: number | null;
+  mistakeCount: number;
+  criticalMistakeCount: number;
+  jsonPath: string;
+  icsPath: string;
+  error: string;
+}
+
+export interface BenchmarkAggregate {
+  model: string;
+  quorum: number;
+  maxIterations: number;
+  runCount: number;
+  okCount: number;
+  averageOverallScore: number | null;
+  averageDeterministicScore: number | null;
+  averageCostUsd: number | null;
+  averageTokens: number | null;
+  averageIterations: number | null;
+  costBenefitScore: number | null;
+  criticalMistakes: number;
+  totalMistakes: number;
+}
+
+export interface BenchmarkExperiment {
+  id: string;
+  createdAt: string;
+  resultsDir: string;
+  runs: BenchmarkRunSummary[];
+  aggregates: BenchmarkAggregate[];
+}
+
+export interface BenchmarkRequest {
+  models: string[];
+  quorums: number[];
+  maxIterations: number[];
+  scenarios: string[];
+  outDir?: string;
+  delayMs?: number;
+  retries?: number;
+  forceFree?: boolean;
+}
+
+export type BenchmarkProgressPhase =
+  | "start"
+  | "run_start"
+  | "run_done"
+  | "run_error"
+  | "complete"
+  | "error";
+
+export interface BenchmarkProgressEvent {
+  clientRunId?: string;
+  phase: BenchmarkProgressPhase;
+  current: number;
+  total: number;
+  summary: string;
+  run?: BenchmarkRunSummary;
+  timestamp: string;
 }
 
 export type ProgressPhase =
@@ -283,6 +414,11 @@ export interface PlannerApi {
   getConfig(): Promise<AppConfig>;
   setConfig(config: AppConfig): Promise<void>;
   parseImport(content: string, filename: string): Promise<PlanningResult>;
+  listBenchmarkExperiments(): Promise<BenchmarkExperiment[]>;
+  listBenchmarkScenarios(): Promise<BenchmarkScenarioSummary[]>;
+  runBenchmark(request: BenchmarkRequest, clientRunId?: string): Promise<BenchmarkExperiment>;
+  cancelBenchmark(): Promise<void>;
+  onBenchmarkProgress(cb: (event: BenchmarkProgressEvent) => void): () => void;
 }
 
 declare global {

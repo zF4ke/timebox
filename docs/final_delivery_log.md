@@ -1,0 +1,134 @@
+# Final Delivery Work Log
+
+Chronological log for the final delivery benchmark and evaluation work.
+
+## 2026-06-04
+
+- Started from the project root `C:\Users\yFake\OneDrive\Ambiente de Trabalho\www\ist\P4\AASMA\project`.
+- Read the local `AGENTS.md` instructions and confirmed the project structure: Electron main process in `src/main`, React renderer in `src/renderer`, shared types in `src/shared`, prompt markdown files in `src/main/prompts`, and project documents in `docs`.
+- Checked the initial git state: clean `master` tracking `origin/master`.
+- Pulled colleague changes with `git pull --ff-only`, updating from `41188f4` to `e69e0c8`.
+- Inspected the pulled benchmark attempt:
+  - `prompts/*.txt` adds 15 fixed student inputs.
+  - `results/*` stores existing model outputs and summary files.
+  - `src/main/batch.ts` runs one model over prompt files and writes JSON/ICS plus simple summaries.
+  - `src/main/metrics.ts` computes basic hard metrics for a final calendar.
+  - `src/main/prompts/schedule-evaluator.md` adds an LLM schedule evaluator.
+  - `tests/metrics.test.ts` covers the current hard metric calculation.
+- Extracted the project requirement PDF and group presentation PDF using bundled Python and `pypdf`.
+- Requirement takeaways:
+  - Final delivery needs full source code, executable, README/run instructions, report, and a 7 minute presentation.
+  - The report should include problem description, limitations, critical comparison between implementation alternatives, limitations of solutions/results/simulations, and possible improvements.
+  - The course values MAS analysis, orchestration, cost/privacy/safety/ethical awareness, and the ability to justify every design choice.
+- Presentation takeaways:
+  - The project is framed as agent orchestration for student calendar planning.
+  - The selected pattern is MACI-like: Planner creates a candidate calendar, specialist agents critique it, Planner revises it.
+  - Evaluation should analyze quorum strictness, convergence, number of critique/revision rounds, and LLM call/cost efficiency.
+- Current assessment:
+  - The pulled benchmark code is useful baseline work, especially the input fixtures and stored run artifacts.
+  - It is not yet strong enough for final delivery because it lacks an experiment matrix, deterministic scenario expectations, repeatability metadata, mistake classification, explicit free-model exclusion for benchmarking, and proper cost/usage tracking.
+- Implementation plan:
+  - Keep the existing prompt fixtures and results.
+  - Add structured benchmark scenarios with difficulty, expected task names, behavioral expectations, and optional expected constraints.
+  - Add deterministic scenario scoring and mistake labels independent of the LLM schedule evaluator.
+  - Add an experiment runner over model/quorum/max-iteration matrices with manifest, raw artifacts, summaries, and aggregate analytics.
+  - Track token usage and estimated cost per OpenRouter call where available; keep complete call traces in run JSON.
+  - Add a separate analytics interface in the Electron app to inspect benchmark output without mixing it with the main planner workflow.
+  - Exclude `:free` models from benchmark runs unless a CLI force flag is used.
+- Added `benchmarks/scenarios.json` with 15 structured scenarios mapped to the existing prompt fixtures. Each scenario records difficulty, expected task/topic coverage, minimum work-block count, and whether late-night work should be avoided.
+- Added `src/main/modelCosts.ts` for benchmark pricing metadata, free-model detection, conservative token estimation, and USD cost estimation.
+- Updated `src/main/openrouter.ts` so every successful JSON call can emit a call trace with schema name, model, latency, prompt/completion size, token usage source, and estimated cost.
+- Updated `src/main/planner.ts` so every planning result includes a `usage` summary with all LLM call traces.
+- Added `src/main/benchmarkScoring.ts` for deterministic scenario scoring and labeled mistake extraction:
+  - `missing_expected_task`
+  - `block_after_deadline`
+  - `deadline_task_unscheduled`
+  - `availability_overrun`
+  - `rest_block_not_allowed`
+  - `fixed_commitments_not_explained`
+  - `late_work_when_avoided`
+  - `wellbeing_agent_rejected`
+  - `max_iterations_fallback`
+  - `quorum_not_reached`
+  - `too_few_work_blocks`
+- Added `src/main/benchmarkAnalytics.ts` to scan both legacy pulled `results/*` and new `benchmark-results/*` experiments, repair non-local artifact paths where possible, compute deterministic scores from stored JSON, and aggregate model/quorum/iteration performance.
+- Added `src/main/benchmark.ts` as the new matrix benchmark CLI. It writes `manifest.json`, `experiment.json`, `summary.json`, `summary.csv`, raw run JSON, ICS files, deterministic mistake JSON, and error files.
+- Added `npm run benchmark` to `package.json`.
+- Added Electron IPC/preload support through `benchmark:list` and `window.plannerApi.listBenchmarkExperiments()`.
+- Added shared benchmark and usage types in `src/shared/types.ts`.
+- Added a separate renderer analytics mode with a Planner/Analytics switch, cost-benefit ranking table, latest-run table, token/cost display, deterministic score display, and mistake counts.
+- Updated `README.md` with benchmark commands, output artifacts, free-model policy, analytics view, deterministic scoring methodology, and call-trace/cost behavior.
+- Added `tests/benchmark-scoring.test.ts` covering successful deterministic scoring and labeled mistake extraction.
+- Verification:
+  - `npm test` passed: 4 test files, 11 tests.
+  - `npm run typecheck` passed.
+  - `npm run build` passed; Vite emitted only the existing large-chunk warning.
+  - `node dist-electron\main\benchmark.js --help` passed without API use.
+  - `node -e "...listBenchmarkExperiments..."` found 4 existing pulled result sets and confirmed analytics data is available without running new API calls.
+- Frontend verification:
+  - Started the Vite renderer on `http://127.0.0.1:5173`.
+  - The first browser check exposed that the renderer crashed outside Electron because `window.plannerApi` is only injected by preload.
+  - Added a browser-only fallback planner API so the UI can render in a normal browser for visual verification while Electron keeps using the real preload API.
+  - Rechecked the browser DOM: Planner and Analytics modes render, and the Analytics empty state displays the benchmark command.
+  - Captured a browser screenshot of the Analytics view for visual QA.
+  - Reran `npm test` and `npm run build`; both passed.
+- Executable packaging:
+  - First `npm run dist` attempt reached electron-builder packaging but failed while extracting the Windows code-signing helper because the Windows account does not have symlink creation privilege.
+  - Updated `package.json` Windows build config with `signAndEditExecutable: false`.
+  - Reran `npm run dist`; it passed and produced the portable executable at `release\Timebox 0.1.0.exe`.
+- Deliberately did not run a live benchmark matrix because that would spend OpenRouter credits. The benchmark runner is ready for controlled runs after choosing model/quorum/iteration values.
+- Continuation audit improvement:
+  - Found that legacy pulled runs could be quality-ranked but had blank cost-benefit fields because they predate usage tracing.
+  - Added a clearly marked `legacy_estimate` cost source using stored JSON artifact size and known model pricing.
+  - Fresh benchmark runs continue to use `traced` per-call cost when available.
+  - Updated Analytics latest-run table, README, and architecture notes to distinguish traced costs from legacy estimates.
+- Final packaging after continuation:
+  - Reran `npm run dist` after the cost-source changes.
+  - The stale `release\win-unpacked\resources\app.asar` file remained locked by Windows after a previous portable-app launch, so electron-builder could not reuse that directory.
+  - Moved the configured electron-builder output directory to `release-current/` and updated the README.
+  - Reran `npm run dist`; it passed and produced `release-current\Timebox 0.1.0.exe`.
+  - Added `release-current/` to `.gitignore` so generated executable artifacts are not committed.
+- Added `docs/benchmark_summary.md` with report-ready interpretation of the pulled baseline results:
+  - Gemini 2.5 Flash Lite currently has the best deterministic/cost-benefit baseline.
+  - Gemini 3.1 Flash Lite has the strongest average LLM evaluator score.
+  - MiniMax has too many failed scenarios for a fair current comparison.
+  - DeepSeek often fails quorum/convergence and leaves critical issues unresolved.
+  - The summary lists common mistake labels and prompt improvement targets.
+- Final verification after all continuation changes:
+  - `npm test` passed: 4 test files, 11 tests.
+  - `npm run build` passed, including renderer and Electron compilation.
+  - Analytics scanner found 4 pulled result sets and ranked Gemini 2.5 Flash Lite as the top current cost-benefit baseline.
+  - Verified executable exists at `release-current\Timebox 0.1.0.exe`.
+
+## 2026-06-04 Follow-up UX and Cleanup
+
+- Reviewed the colleague-added "evaluation" UI in the calendar view.
+  - Kept the underlying Schedule Evaluator because it is useful for the project report and single-run quality inspection.
+  - Renamed the visible calendar control from "Evaluation" / "eval" to "Quality" / "quality" to avoid internal wording in the user-facing app.
+- Removed the old `src/main/batch.ts` script and the `npm run batch` package script.
+  - Reason: it was redundant with the new benchmark runner and weaker than it. The new runner supports model/quorum/iteration matrices, deterministic mistake labels, cost tracing, app integration, and richer stored artifacts.
+- Hid the Planner/Analytics tab switcher when the calendar result view is active.
+- Added a green traced cost label to the calendar result header when `result.usage.estimatedCostUsd` is available.
+- Refactored `src/main/benchmark.ts` so it can be used both as a CLI and as an Electron IPC runner.
+- Added Electron benchmark IPC:
+  - `benchmark:scenarios`
+  - `benchmark:run`
+  - `benchmark:cancel`
+  - `benchmark:progress`
+- Added preload/browser-fallback API methods for benchmark execution and progress.
+- Added an in-app Analytics benchmark launcher:
+  - non-free models only
+  - quick/all scenario scope
+  - quorum and max-iteration toggles
+  - planned run count before start
+  - progress stream and cancel button
+- Updated packaging inputs so `benchmarks/`, `prompts/`, and `results/` are bundled with the executable.
+- Updated benchmark fixture discovery so packaged builds can find benchmark scenarios and prompt fixtures.
+- Final follow-up verification:
+  - `npm run typecheck` passed.
+  - `npm test` passed: 4 test files, 11 tests.
+  - `npm run build` passed; Vite emitted only the existing large-chunk warning.
+  - Browser visual QA confirmed the Analytics benchmark modal opens, excludes the free model, shows run count, and exposes start/cancel flow.
+  - `node dist-electron\main\benchmark.js --help` passed without API use.
+  - Scenario fixture discovery found all 15 benchmark scenarios from the compiled Electron output.
+  - `npm run dist` passed and produced `release-current\Timebox 0.1.0.exe`.

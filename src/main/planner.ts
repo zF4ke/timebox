@@ -5,7 +5,9 @@ import type {
   CalendarProposal,
   CalendarVersionRecord,
   InterpreterOutput,
+  LlmCallTrace,
   PlannerDefaults,
+  PlanningUsageSummary,
   PlanningRequest,
   PlanningResult,
   ProgressEvent,
@@ -16,6 +18,10 @@ import type {
 export type ProgressCallback = (event: Omit<ProgressEvent, "timestamp">) => void;
 
 function noopProgress(): void {
+  /* noop */
+}
+
+function noopTrace(): void {
   /* noop */
 }
 
@@ -86,13 +92,15 @@ export async function runPlanningPipeline(
   const createdAt = new Date().toISOString();
   const runStartedAt = Date.now();
   const runId = crypto.randomUUID();
+  const llmCalls: LlmCallTrace[] = [];
+  const onTrace = (trace: LlmCallTrace) => llmCalls.push(trace);
   console.log(
     `[planner] run ${runId} starting · plannerModel=${normalizedRequest.model} · evaluatorModel=${normalizedRequest.evaluatorModel} · quorum=${normalizedRequest.quorum} · maxIter=${normalizedRequest.maxIterations}`
   );
 
   logAndEmit(onProgress, { phase: "interpreter", status: "start" });
   throwIfCancelled(signal);
-  const interpreterOutput = await runInterpreter(apiKey, normalizedRequest, signal);
+  const interpreterOutput = await runInterpreter(apiKey, normalizedRequest, onTrace, signal);
   logAndEmit(onProgress, {
     phase: "interpreter",
     status: "done",
@@ -101,14 +109,14 @@ export async function runPlanningPipeline(
 
   logAndEmit(onProgress, { phase: "specialist", status: "start", summary: `${AGENT_NAMES.length} agents in parallel` });
   throwIfCancelled(signal);
-  const agentViews = await runSpecialists(apiKey, normalizedRequest, interpreterOutput, onProgress, signal);
+  const agentViews = await runSpecialists(apiKey, normalizedRequest, interpreterOutput, onProgress, onTrace, signal);
   logAndEmit(onProgress, { phase: "specialist", status: "done", summary: `${agentViews.length} perspectives gathered` });
 
   const calendarVersions: CalendarVersionRecord[] = [];
 
   logAndEmit(onProgress, { phase: "planner", status: "start", iteration: 1 });
   throwIfCancelled(signal);
-  let calendar = await runPlanner(apiKey, normalizedRequest, interpreterOutput, agentViews, 1, undefined, undefined, signal);
+  let calendar = await runPlanner(apiKey, normalizedRequest, interpreterOutput, agentViews, 1, undefined, undefined, onTrace, signal);
   logAndEmit(onProgress, { phase: "planner", status: "done", iteration: 1, summary: `${calendar.days?.length ?? 0} day(s) drafted` });
 
   let finalRecord: CalendarVersionRecord | null = null;
@@ -126,6 +134,7 @@ export async function runPlanningPipeline(
       agentViews,
       calendar,
       onProgress,
+      onTrace,
       signal
     );
     const critiques = normalizeCritiques(rawCritiques, calendar.calendar_version);
@@ -168,6 +177,7 @@ export async function runPlanningPipeline(
         version + 1,
         calendar,
         critiques,
+        onTrace,
         signal
       );
       logAndEmit(onProgress, { phase: "planner", status: "done", iteration: version + 1, summary: `${calendar.days?.length ?? 0} day(s) drafted` });
@@ -204,6 +214,7 @@ export async function runPlanningPipeline(
     finalRecord,
     hardMetrics,
     stopReason,
+    onTrace,
     signal
   );
   logAndEmit(onProgress, {
@@ -224,7 +235,8 @@ export async function runPlanningPipeline(
     finalCalendar: finalRecord.calendar,
     critiques: finalRecord.critiques,
     validation: finalRecord.validation,
-    evaluation
+    evaluation,
+    usage: summarizeUsage(llmCalls)
   };
 
   const finalResult = {
@@ -250,7 +262,12 @@ export async function runPlanningPipeline(
   return finalResult;
 }
 
-async function runInterpreter(apiKey: string, request: ResolvedRequest, signal?: AbortSignal): Promise<InterpreterOutput> {
+async function runInterpreter(
+  apiKey: string,
+  request: ResolvedRequest,
+  onTrace: (trace: LlmCallTrace) => void = noopTrace,
+  signal?: AbortSignal
+): Promise<InterpreterOutput> {
   const current = new Date();
   const user = [
     `Current datetime: ${current.toISOString()}`,
@@ -276,6 +293,7 @@ async function runInterpreter(apiKey: string, request: ResolvedRequest, signal?:
     schemaName: "interpreter_output",
     schema: interpreterSchema,
     signal,
+    onTrace,
     maxCompletionTokens: 12_000,
     timeoutMs: 120_000
   });
@@ -288,6 +306,7 @@ async function runSpecialists(
   request: ResolvedRequest,
   interpreterOutput: InterpreterOutput,
   onProgress: ProgressCallback = noopProgress,
+  onTrace: (trace: LlmCallTrace) => void = noopTrace,
   signal?: AbortSignal
 ): Promise<SpecialistAgentView[]> {
   return Promise.all(
@@ -316,6 +335,7 @@ async function runSpecialists(
         schemaName: "specialist_agent_view",
         schema: specialistSchema,
         signal,
+        onTrace,
         maxCompletionTokens: 16_000,
         timeoutMs: 150_000
       });
@@ -335,6 +355,7 @@ async function runPlanner(
   version: number,
   previousCalendar?: CalendarProposal,
   critiques?: AgentCritique[],
+  onTrace?: (trace: LlmCallTrace) => void,
   signal?: AbortSignal
 ): Promise<CalendarProposal> {
   const user = version === 1
@@ -349,6 +370,7 @@ async function runPlanner(
     schemaName: "calendar_proposal",
     schema: calendarSchema,
     signal,
+    onTrace,
     maxCompletionTokens: 24_000,
     timeoutMs: 180_000
   });
@@ -361,6 +383,7 @@ async function runCritiques(
   agentViews: SpecialistAgentView[],
   calendar: CalendarProposal,
   onProgress: ProgressCallback = noopProgress,
+  onTrace: (trace: LlmCallTrace) => void = noopTrace,
   signal?: AbortSignal
 ): Promise<AgentCritique[]> {
   return Promise.all(
@@ -400,6 +423,7 @@ async function runCritiques(
         schemaName: "agent_critique",
         schema: critiqueSchema,
         signal,
+        onTrace,
         maxCompletionTokens: 12_000,
         timeoutMs: 120_000
       });
@@ -425,6 +449,7 @@ async function runScheduleEvaluator(
   finalRecord: CalendarVersionRecord,
   hardMetrics: ScheduleEvaluation["hard_metrics"],
   stopReason: string,
+  onTrace: (trace: LlmCallTrace) => void,
   signal?: AbortSignal
 ): Promise<ScheduleEvaluation> {
   const user = [
@@ -464,6 +489,7 @@ async function runScheduleEvaluator(
     schemaName: "schedule_evaluation",
     schema: scheduleEvaluationSchema,
     signal,
+    onTrace,
     maxCompletionTokens: 8_000,
     timeoutMs: 120_000
   });
@@ -482,6 +508,24 @@ function normalizeRequest(request: PlanningRequest): ResolvedRequest {
     model,
     evaluatorModel: model,
     planningWindowOverride: request.planningWindowOverride
+  };
+}
+
+function summarizeUsage(calls: LlmCallTrace[]): PlanningUsageSummary {
+  const estimatedCosts = calls
+    .map((call) => call.estimatedCostUsd)
+    .filter((cost): cost is number => typeof cost === "number");
+  const allCostsKnown = estimatedCosts.length === calls.length;
+
+  return {
+    callCount: calls.length,
+    promptTokens: calls.reduce((sum, call) => sum + call.promptTokens, 0),
+    completionTokens: calls.reduce((sum, call) => sum + call.completionTokens, 0),
+    totalTokens: calls.reduce((sum, call) => sum + call.totalTokens, 0),
+    estimatedCostUsd: allCostsKnown
+      ? Math.round(estimatedCosts.reduce((sum, cost) => sum + cost, 0) * 1_000_000) / 1_000_000
+      : null,
+    calls
   };
 }
 

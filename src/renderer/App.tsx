@@ -17,10 +17,16 @@ import {
   Check,
   X,
   Trash2,
-  Settings
+  Settings,
+  BarChart3,
+  RefreshCw
 } from "lucide-react";
 import type {
   AppConfig,
+  BenchmarkExperiment,
+  BenchmarkProgressEvent,
+  BenchmarkRequest,
+  BenchmarkScenarioSummary,
   CalendarBlock,
   PlannerDefaults,
   PlanningRequest,
@@ -46,6 +52,29 @@ const MODEL_OPTIONS = [
   "openai/gpt-5-nano",
 ];
 
+const BENCHMARK_MODEL_OPTIONS = MODEL_OPTIONS.filter((model) => !model.includes(":free"));
+
+const FALLBACK_BENCHMARK_SCENARIOS: BenchmarkScenarioSummary[] = [
+  {
+    id: "01_urgent_mixed_deadlines",
+    promptFile: "01_urgent_mixed_deadlines.txt",
+    difficulty: "medium",
+    title: "Urgent mixed deadlines"
+  },
+  {
+    id: "05_fixed_commitments_busy_week",
+    promptFile: "05_fixed_commitments_busy_week.txt",
+    difficulty: "challenging",
+    title: "Fixed commitments busy week"
+  },
+  {
+    id: "09_no_deadlines_self_study",
+    promptFile: "09_no_deadlines_self_study.txt",
+    difficulty: "easy",
+    title: "No-deadline self study"
+  }
+];
+
 const MODEL_INFO: Record<string, { name: string; price: string }> = {
   "google/gemini-2.5-flash-lite-preview-09-2025": { name: "Gemini 2.5 Flash Lite Preview 09-2025", price: "$0.10 / $0.40" },
   "google/gemini-3.1-flash-lite-preview": { name: "Gemini 3.1 Flash Lite", price: "$0.25 / $1.50" },
@@ -54,6 +83,8 @@ const MODEL_INFO: Record<string, { name: string; price: string }> = {
   "openai/gpt-5-nano": { name: "GPT-5 Nano", price: "$0.05 / $0.40" },
   "nvidia/nemotron-3-super-120b-a12b:free": { name: "Nemotron 3 Super", price: "free" },
 };
+
+const plannerApi = window.plannerApi ?? createBrowserFallbackApi();
 
 function formatModel(model: string): React.ReactNode {
   const info = MODEL_INFO[model];
@@ -96,20 +127,34 @@ export default function App() {
   const activeRunGeneration = useRef(0);
   const cancelledRunGeneration = useRef<number | null>(null);
   const [cancelledGeneration, setCancelledGeneration] = useState<number | null>(null);
+  const [mode, setMode] = useState<"planner" | "analytics">("planner");
+  const [benchmarkExperiments, setBenchmarkExperiments] = useState<BenchmarkExperiment[]>([]);
+  const [benchmarkScenarios, setBenchmarkScenarios] = useState<BenchmarkScenarioSummary[]>([]);
+  const [benchmarkEvents, setBenchmarkEvents] = useState<BenchmarkProgressEvent[]>([]);
+  const activeBenchmarkGeneration = useRef(0);
 
   useEffect(() => {
-    window.plannerApi.getDefaults().then(setDefaults);
-    window.plannerApi.getConfig().then((c) => {
+    plannerApi.getDefaults().then(setDefaults);
+    plannerApi.getConfig().then((c) => {
       setSettings(c);
     });
     refreshSaved();
+    refreshBenchmarks();
+    plannerApi.listBenchmarkScenarios().then(setBenchmarkScenarios);
   }, []);
 
   useEffect(() => {
-    return window.plannerApi.onProgress((ev) => {
+    return plannerApi.onProgress((ev) => {
       if (ev.clientRunId && ev.clientRunId !== String(activeRunGeneration.current)) return;
       if (cancelledRunGeneration.current === activeRunGeneration.current) return;
       setSteps((prev) => applyProgress(prev, ev));
+    });
+  }, []);
+
+  useEffect(() => {
+    return plannerApi.onBenchmarkProgress((ev) => {
+      if (ev.clientRunId && ev.clientRunId !== String(activeBenchmarkGeneration.current)) return;
+      setBenchmarkEvents((prev) => [ev, ...prev].slice(0, 80));
     });
   }, []);
 
@@ -142,7 +187,7 @@ export default function App() {
         if (ext === "json" || ext === "ics") {
           const text = await file.text();
           try {
-            const imported = await window.plannerApi.parseImport(text, file.name);
+            const imported = await plannerApi.parseImport(text, file.name);
             setResult(imported);
             refreshSaved();
           } catch (err) {
@@ -165,19 +210,35 @@ export default function App() {
   }, []);
 
   async function refreshSaved() {
-    const calendars = await window.plannerApi.listCalendars();
+    const calendars = await plannerApi.listCalendars();
     setSaved(calendars);
     return calendars;
   }
 
+  async function refreshBenchmarks() {
+    const experiments = await plannerApi.listBenchmarkExperiments();
+    setBenchmarkExperiments(experiments);
+    return experiments;
+  }
+
   const plannerMutation = useMutation({
     mutationFn: ({ request, generation }: { request: PlanningRequest; generation: number }) =>
-      window.plannerApi.runPlanner(request, String(generation)),
+      plannerApi.runPlanner(request, String(generation)),
     onSuccess: (res, variables) => {
       if (variables.generation !== activeRunGeneration.current) return;
       if (cancelledRunGeneration.current === variables.generation) return;
       setResult(res);
       void refreshSaved();
+    }
+  });
+
+  const benchmarkMutation = useMutation({
+    mutationFn: ({ request, generation }: { request: BenchmarkRequest; generation: number }) =>
+      plannerApi.runBenchmark(request, String(generation)),
+    onSuccess: (experiment, variables) => {
+      if (variables.generation !== activeBenchmarkGeneration.current) return;
+      setBenchmarkExperiments((prev) => [experiment, ...prev.filter((candidate) => candidate.id !== experiment.id)]);
+      void refreshBenchmarks();
     }
   });
 
@@ -241,8 +302,8 @@ export default function App() {
 
   async function handleSettingsChange(next: AppConfig) {
     setSettings(next);
-    await window.plannerApi.setConfig(next);
-    const d = await window.plannerApi.getDefaults();
+    await plannerApi.setConfig(next);
+    const d = await plannerApi.getDefaults();
     setDefaults(d);
   }
 
@@ -252,9 +313,23 @@ export default function App() {
     setCancelledGeneration(generation);
     setSteps([]);
     plannerMutation.reset();
-    void window.plannerApi.cancelPlanner().catch((err) => {
+    void plannerApi.cancelPlanner().catch((err) => {
       console.error("Cancel failed:", err);
     });
+  }
+
+  function runBenchmark(request: BenchmarkRequest) {
+    activeBenchmarkGeneration.current += 1;
+    setBenchmarkEvents([]);
+    benchmarkMutation.reset();
+    benchmarkMutation.mutate({ request, generation: activeBenchmarkGeneration.current });
+  }
+
+  function cancelBenchmark() {
+    void plannerApi.cancelBenchmark().catch((err) => {
+      console.error("Benchmark cancel failed:", err);
+    });
+    benchmarkMutation.reset();
   }
 
   function reset() {
@@ -266,7 +341,7 @@ export default function App() {
   }
 
   async function handleImport() {
-    const imported = await window.plannerApi.importFile();
+    const imported = await plannerApi.importFile();
     if (imported) {
       setResult(imported);
       refreshSaved();
@@ -274,7 +349,7 @@ export default function App() {
   }
 
   async function handleLoad(savedCal: SavedCalendar) {
-    const loaded = await window.plannerApi.loadCalendar(savedCal.id);
+    const loaded = await plannerApi.loadCalendar(savedCal.id);
     if (loaded) {
       setResult(loaded.result);
       setSteps([]);
@@ -291,7 +366,7 @@ export default function App() {
 
   async function handleConfirmDelete() {
     if (!pendingDelete) return;
-    await window.plannerApi.deleteCalendar(pendingDelete.id);
+    await plannerApi.deleteCalendar(pendingDelete.id);
     setPendingDelete(null);
     refreshSaved();
   }
@@ -318,7 +393,7 @@ export default function App() {
   async function handleConfirmSave(name: string) {
     if (!result) return;
     setSaveStatus("saving");
-    const savedCalendar = await window.plannerApi.saveCalendar(name, result);
+    const savedCalendar = await plannerApi.saveCalendar(name, result);
     setSaved((prev) => [savedCalendar, ...prev]);
     setSaveStatus("saved");
     void refreshSaved();
@@ -329,7 +404,20 @@ export default function App() {
   }
 
   let content: React.ReactNode;
-  if (isRunning || (steps.length > 0 && !result && error === "")) {
+  if (mode === "analytics") {
+    content = (
+      <AnalyticsView
+        experiments={benchmarkExperiments}
+        scenarios={benchmarkScenarios}
+        onRefresh={refreshBenchmarks}
+        onRunBenchmark={runBenchmark}
+        onCancelBenchmark={cancelBenchmark}
+        isBenchmarkRunning={benchmarkMutation.isPending}
+        benchmarkEvents={benchmarkEvents}
+        benchmarkError={benchmarkMutation.error instanceof Error ? benchmarkMutation.error.message : ""}
+      />
+    );
+  } else if (isRunning || (steps.length > 0 && !result && error === "")) {
     content = <RunningView steps={steps} onCancel={cancelPlanner} />;
   } else if (result) {
     content = (
@@ -375,6 +463,9 @@ export default function App() {
         onDelete={handleRequestDelete}
         onOpenSettings={() => setSettingsOpen(true)}
         showSettings={!result}
+        showModeSwitch={!(result && mode === "planner")}
+        mode={mode}
+        onSetMode={setMode}
       >
         {content}
       </AppLayout>
@@ -431,7 +522,10 @@ function AppLayout({
   onLoad,
   onDelete,
   onOpenSettings,
-  showSettings = true
+  showSettings = true,
+  showModeSwitch = true,
+  mode,
+  onSetMode
 }: {
   children: React.ReactNode;
   sidebarOpen: boolean;
@@ -442,6 +536,9 @@ function AppLayout({
   onDelete: (c: SavedCalendar) => void;
   onOpenSettings: () => void;
   showSettings?: boolean;
+  showModeSwitch?: boolean;
+  mode: "planner" | "analytics";
+  onSetMode: (mode: "planner" | "analytics") => void;
 }) {
   return (
     <div className="app-layout">
@@ -509,8 +606,451 @@ function AppLayout({
             <Settings size={16} />
           </button>
         )}
+        {showModeSwitch && (
+          <div className="mode-switch" role="tablist" aria-label="App view">
+            <button
+              className={mode === "planner" ? "active" : ""}
+              onClick={() => onSetMode("planner")}
+              role="tab"
+              aria-selected={mode === "planner"}
+              title="Planner"
+            >
+              <CalendarIcon size={14} />
+              <span>Planner</span>
+            </button>
+            <button
+              className={mode === "analytics" ? "active" : ""}
+              onClick={() => onSetMode("analytics")}
+              role="tab"
+              aria-selected={mode === "analytics"}
+              title="Benchmarks"
+            >
+              <BarChart3 size={14} />
+              <span>Analytics</span>
+            </button>
+          </div>
+        )}
         {children}
       </div>
+    </div>
+  );
+}
+
+function createBrowserFallbackApi(): typeof window.plannerApi {
+  return {
+    async runPlanner() {
+      throw new Error("Planner runs require the Electron app.");
+    },
+    async cancelPlanner() {
+      return undefined;
+    },
+    async getDefaults() {
+      return {
+        quorum: 5,
+        maxIterations: 3,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC",
+        model: MODEL_OPTIONS[0],
+        evaluatorModel: MODEL_OPTIONS[0],
+        hasApiKey: false
+      };
+    },
+    onProgress() {
+      return () => undefined;
+    },
+    async listCalendars() {
+      return [];
+    },
+    async saveCalendar() {
+      throw new Error("Saving plans requires the Electron app.");
+    },
+    async loadCalendar() {
+      return null;
+    },
+    async deleteCalendar() {
+      return false;
+    },
+    async importFile() {
+      return null;
+    },
+    async getConfig() {
+      return { quorum: 5, model: MODEL_OPTIONS[0], maxIterations: 3 };
+    },
+    async setConfig() {
+      return undefined;
+    },
+    async parseImport() {
+      throw new Error("Importing files requires the Electron app.");
+    },
+    async listBenchmarkExperiments() {
+      return [];
+    },
+    async listBenchmarkScenarios() {
+      return FALLBACK_BENCHMARK_SCENARIOS;
+    },
+    async runBenchmark() {
+      throw new Error("Benchmark runs require the Electron app.");
+    },
+    async cancelBenchmark() {
+      return undefined;
+    },
+    onBenchmarkProgress() {
+      return () => undefined;
+    }
+  };
+}
+
+function AnalyticsView({
+  experiments,
+  scenarios,
+  onRefresh,
+  onRunBenchmark,
+  onCancelBenchmark,
+  isBenchmarkRunning,
+  benchmarkEvents,
+  benchmarkError
+}: {
+  experiments: BenchmarkExperiment[];
+  scenarios: BenchmarkScenarioSummary[];
+  onRefresh: () => void;
+  onRunBenchmark: (request: BenchmarkRequest) => void;
+  onCancelBenchmark: () => void;
+  isBenchmarkRunning: boolean;
+  benchmarkEvents: BenchmarkProgressEvent[];
+  benchmarkError: string;
+}) {
+  const [runModalOpen, setRunModalOpen] = useState(false);
+  const aggregates = useMemo(
+    () => experiments.flatMap((experiment) => experiment.aggregates.map((aggregate) => ({ ...aggregate, experimentId: experiment.id }))),
+    [experiments]
+  );
+  const latest = experiments[0];
+  const latestRuns = latest?.runs ?? [];
+  const best = aggregates
+    .filter((aggregate) => aggregate.okCount > 0)
+    .sort((a, b) => {
+      const aScore = a.costBenefitScore ?? a.averageDeterministicScore ?? -1;
+      const bScore = b.costBenefitScore ?? b.averageDeterministicScore ?? -1;
+      return bScore - aScore;
+    })
+    .slice(0, 8);
+
+  return (
+    <main className="analytics-shell">
+      <header className="analytics-header">
+        <div>
+          <h1>Benchmark analytics</h1>
+          <p className="subtitle">
+            Model quality, quorum strictness, iteration cost, and deterministic mistake labels.
+          </p>
+        </div>
+        <div className="analytics-actions">
+          <button className="btn-secondary" onClick={onRefresh} disabled={isBenchmarkRunning}>
+            <RefreshCw size={14} />
+            <span>Refresh</span>
+          </button>
+          {isBenchmarkRunning ? (
+            <button className="btn-danger" onClick={onCancelBenchmark}>
+              <X size={14} />
+              <span>Cancel</span>
+            </button>
+          ) : (
+            <button className="btn-primary" onClick={() => setRunModalOpen(true)}>
+              <BarChart3 size={14} />
+              <span>Run benchmark</span>
+            </button>
+          )}
+        </div>
+      </header>
+
+      {(isBenchmarkRunning || benchmarkEvents.length > 0 || benchmarkError) && (
+        <section className="benchmark-progress">
+          <div className="benchmark-progress-head">
+            <span>{isBenchmarkRunning ? "Benchmark running" : benchmarkError ? "Benchmark error" : "Latest benchmark activity"}</span>
+            <strong>
+              {benchmarkEvents[0] ? `${benchmarkEvents[0].current}/${benchmarkEvents[0].total}` : "-"}
+            </strong>
+          </div>
+          {benchmarkError && <div className="err">{benchmarkError}</div>}
+          <div className="benchmark-events">
+            {benchmarkEvents.slice(0, 6).map((event, index) => (
+              <div className={`benchmark-event event-phase-${event.phase}`} key={`${event.timestamp}-${index}`}>
+                <span>{formatBenchmarkPhase(event.phase)}</span>
+                <p>{event.summary}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {experiments.length === 0 ? (
+        <div className="analytics-empty">
+          Run <code>npm run benchmark -- --models model-a,model-b --quorums 3,5 --max-iterations 2,3</code> to create benchmark output.
+        </div>
+      ) : (
+        <>
+          <section className="metric-band">
+            <div>
+              <span className="metric-label">Experiments</span>
+              <strong>{experiments.length}</strong>
+            </div>
+            <div>
+              <span className="metric-label">Runs</span>
+              <strong>{experiments.reduce((sum, experiment) => sum + experiment.runs.length, 0)}</strong>
+            </div>
+            <div>
+              <span className="metric-label">Latest</span>
+              <strong>{latest ? formatDateTime(latest.createdAt) : "-"}</strong>
+            </div>
+            <div>
+              <span className="metric-label">Best deterministic</span>
+              <strong>{formatNullable(best[0]?.averageDeterministicScore, "")}</strong>
+            </div>
+          </section>
+
+          <section className="analytics-section">
+            <div className="section-title-row">
+              <h2>Cost-benefit ranking</h2>
+              <span>{best.length} configuration{best.length === 1 ? "" : "s"}</span>
+            </div>
+            <div className="data-table-wrap">
+              <table className="data-table">
+                <thead>
+                  <tr>
+                    <th>Model</th>
+                    <th>Q</th>
+                    <th>Iter</th>
+                    <th>Runs</th>
+                    <th>Deterministic</th>
+                    <th>LLM score</th>
+                    <th>Avg cost</th>
+                    <th>Tokens</th>
+                    <th>Mistakes</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {best.map((aggregate) => (
+                    <tr key={`${aggregate.experimentId}-${aggregate.model}-${aggregate.quorum}-${aggregate.maxIterations}`}>
+                      <td>{formatCompactModel(aggregate.model)}</td>
+                      <td>{aggregate.quorum}</td>
+                      <td>{aggregate.maxIterations}</td>
+                      <td>{aggregate.okCount}/{aggregate.runCount}</td>
+                      <td>{formatNullable(aggregate.averageDeterministicScore, "%")}</td>
+                      <td>{formatNullable(aggregate.averageOverallScore, "/5")}</td>
+                      <td>{formatCost(aggregate.averageCostUsd)}</td>
+                      <td>{formatNumber(aggregate.averageTokens)}</td>
+                      <td>{aggregate.criticalMistakes} critical / {aggregate.totalMistakes} total</td>
+                      <td>{formatNullable(aggregate.costBenefitScore, "")}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section className="analytics-section">
+            <div className="section-title-row">
+              <h2>Latest runs</h2>
+              <span>{latest?.id}</span>
+            </div>
+            <div className="data-table-wrap">
+              <table className="data-table">
+                <thead>
+                  <tr>
+                    <th>Scenario</th>
+                    <th>Difficulty</th>
+                    <th>Model</th>
+                    <th>Q</th>
+                    <th>Iter</th>
+                    <th>Status</th>
+                    <th>Deterministic</th>
+                    <th>Score</th>
+                    <th>Cost</th>
+                    <th>Cost source</th>
+                    <th>Mistakes</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {latestRuns.map((run) => (
+                    <tr key={`${run.model}-${run.quorum}-${run.maxIterations}-${run.scenarioId}`}>
+                      <td>{run.scenarioTitle}</td>
+                      <td>{run.difficulty}</td>
+                      <td>{formatCompactModel(run.model)}</td>
+                      <td>{run.quorum}</td>
+                      <td>{run.iterations ?? "-"}</td>
+                      <td>
+                        <span className={`status-pill status-${run.status}`}>{run.status}</span>
+                      </td>
+                      <td>{formatNullable(run.deterministicScore, "%")}</td>
+                      <td>{formatNullable(run.overallScore, "/5")}</td>
+                      <td>{formatCost(run.estimatedCostUsd)}</td>
+                      <td>{formatCostSource(run.costSource)}</td>
+                      <td>{run.criticalMistakeCount} critical / {run.mistakeCount} total</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </>
+      )}
+      {runModalOpen && (
+        <BenchmarkRunModal
+          scenarios={scenarios}
+          onClose={() => setRunModalOpen(false)}
+          onRun={(request) => {
+            setRunModalOpen(false);
+            onRunBenchmark(request);
+          }}
+        />
+      )}
+    </main>
+  );
+}
+
+function BenchmarkRunModal({
+  scenarios,
+  onRun,
+  onClose
+}: {
+  scenarios: BenchmarkScenarioSummary[];
+  onRun: (request: BenchmarkRequest) => void;
+  onClose: () => void;
+}) {
+  const [models, setModels] = useState<string[]>([
+    "google/gemini-2.5-flash-lite-preview-09-2025",
+    "google/gemini-3.1-flash-lite-preview"
+  ]);
+  const [quorums, setQuorums] = useState<number[]>([3, 5]);
+  const [iterations, setIterations] = useState<number[]>([2, 3]);
+  const [scope, setScope] = useState<"quick" | "all">("quick");
+  const selectedScenarios = scope === "all" ? scenarios : scenarios.slice(0, 3);
+  const runCount = models.length * quorums.length * iterations.length * selectedScenarios.length;
+  const disabled = runCount === 0;
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  function submit(e: React.FormEvent) {
+    e.preventDefault();
+    if (disabled) return;
+    onRun({
+      models,
+      quorums,
+      maxIterations: iterations,
+      scenarios: selectedScenarios.map((scenario) => scenario.id),
+      retries: 1,
+      delayMs: 0,
+      forceFree: false
+    });
+  }
+
+  return (
+    <div className="modal-backdrop" onClick={onClose}>
+      <form
+        className="modal modal-lg"
+        onClick={(e) => e.stopPropagation()}
+        onSubmit={submit}
+        role="dialog"
+        aria-modal="true"
+      >
+        <header className="modal-header">
+          <div>
+            <h3>Run benchmark</h3>
+          </div>
+          <button type="button" className="icon-btn" onClick={onClose} aria-label="Close">
+            <X size={16} />
+          </button>
+        </header>
+        <div className="modal-body benchmark-modal-body">
+          <div className="benchmark-run-count">
+            <span>Planned runs</span>
+            <strong>{runCount}</strong>
+          </div>
+
+          <div className="field">
+            <span className="meta-label">Scope</span>
+            <div className="segmented">
+              <button type="button" className={scope === "quick" ? "active" : ""} onClick={() => setScope("quick")}>
+                Quick ({Math.min(3, scenarios.length)})
+              </button>
+              <button type="button" className={scope === "all" ? "active" : ""} onClick={() => setScope("all")}>
+                All ({scenarios.length})
+              </button>
+            </div>
+            <div className="field-hint">Quick uses the first three fixtures. All runs the full scenario set.</div>
+          </div>
+
+          <div className="field">
+            <span className="meta-label">Models</span>
+            <div className="check-grid">
+              {BENCHMARK_MODEL_OPTIONS.map((model) => (
+                <label key={model} className="check-row">
+                  <input
+                    type="checkbox"
+                    checked={models.includes(model)}
+                    onChange={() => setModels((prev) => toggleValue(prev, model))}
+                  />
+                  <span>{formatCompactModel(model)}</span>
+                </label>
+              ))}
+            </div>
+            <div className="field-hint">Free models are intentionally excluded from app benchmarks.</div>
+          </div>
+
+          <div className="benchmark-options-row">
+            <div className="field">
+              <span className="meta-label">Quorum</span>
+              <div className="check-inline">
+                {[3, 5].map((value) => (
+                  <label key={value} className="check-row compact">
+                    <input
+                      type="checkbox"
+                      checked={quorums.includes(value)}
+                      onChange={() => setQuorums((prev) => toggleValue(prev, value).sort())}
+                    />
+                    <span>{value}/5</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div className="field">
+              <span className="meta-label">Max iterations</span>
+              <div className="check-inline">
+                {[2, 3].map((value) => (
+                  <label key={value} className="check-row compact">
+                    <input
+                      type="checkbox"
+                      checked={iterations.includes(value)}
+                      onChange={() => setIterations((prev) => toggleValue(prev, value).sort())}
+                    />
+                    <span>{value}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {scenarios.length === 0 && (
+            <div className="warn">No benchmark scenarios were found. Check benchmarks/scenarios.json.</div>
+          )}
+        </div>
+        <footer className="modal-footer">
+          <button type="button" className="btn-secondary" onClick={onClose}>
+            Cancel
+          </button>
+          <button type="submit" className="btn-primary" disabled={disabled}>
+            <BarChart3 size={14} />
+            <span>Start {runCount} run{runCount === 1 ? "" : "s"}</span>
+          </button>
+        </footer>
+      </form>
     </div>
   );
 }
@@ -802,6 +1342,7 @@ function ResultView({
     (c) => c.approval === "approve" || c.approval === "approve_with_minor_concerns"
   ).length;
   const evaluation = result.evaluation;
+  const runCost = result.usage?.estimatedCostUsd;
 
   const handleEventClick = (arg: EventClickArg) => {
     const block = arg.event.extendedProps.block as CalendarBlock | undefined;
@@ -822,7 +1363,13 @@ function ResultView({
             {evaluation && (
               <>
                 <span className="dot">·</span>
-                eval {evaluation.overall_score}/5
+                quality {evaluation.overall_score}/5
+              </>
+            )}
+            {typeof runCost === "number" && (
+              <>
+                <span className="dot">·</span>
+                <span className="schedule-cost">cost {formatCost(runCost)}</span>
               </>
             )}
           </p>
@@ -835,15 +1382,15 @@ function ResultView({
                 onClick={() => setEvaluationOpen((v) => !v)}
                 aria-expanded={evaluationOpen}
                 aria-haspopup="menu"
-                title="Schedule evaluation"
+                title="Schedule quality"
               >
-                Evaluation
+                Quality
                 <ChevronDown size={11} className={`chev ${evaluationOpen ? "open" : ""}`} />
               </button>
               {evaluationOpen && (
                 <div className="agent-notes-menu" role="menu">
                   <div className="agent-notes-head">
-                    <span>Schedule evaluation</span>
+                    <span>Schedule quality</span>
                     <span>{evaluation.overall_score}/5</span>
                   </div>
                   <div className="evaluation-composite">
@@ -1199,6 +1746,60 @@ function formatMetricValue(metric: string, value: number): string {
 
 function formatCompactModel(model: string): string {
   return MODEL_INFO[model]?.name ?? model;
+}
+
+function formatDateTime(value: string): string {
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+}
+
+function formatNullable(value: number | null | undefined, suffix: string): string {
+  if (typeof value !== "number" || !Number.isFinite(value)) {
+    return "-";
+  }
+  return `${Math.round(value * 10) / 10}${suffix}`;
+}
+
+function formatCost(value: number | null | undefined): string {
+  if (typeof value !== "number" || !Number.isFinite(value)) {
+    return "-";
+  }
+  return `$${value.toFixed(4)}`;
+}
+
+function formatCostSource(value: "traced" | "legacy_estimate" | null | undefined): string {
+  if (value === "traced") return "traced";
+  if (value === "legacy_estimate") return "estimated";
+  return "-";
+}
+
+function formatBenchmarkPhase(phase: BenchmarkProgressEvent["phase"]): string {
+  const labels: Record<BenchmarkProgressEvent["phase"], string> = {
+    start: "Start",
+    run_start: "Running",
+    run_done: "Done",
+    run_error: "Issue",
+    complete: "Complete",
+    error: "Error"
+  };
+  return labels[phase];
+}
+
+function formatNumber(value: number | null | undefined): string {
+  if (typeof value !== "number" || !Number.isFinite(value)) {
+    return "-";
+  }
+  return Math.round(value).toLocaleString();
+}
+
+function toggleValue<T>(values: T[], value: T): T[] {
+  return values.includes(value) ? values.filter((candidate) => candidate !== value) : [...values, value];
 }
 
 // Replace any leftover task IDs (T1, T12, etc.) with the task's human name.

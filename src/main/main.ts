@@ -4,13 +4,16 @@ import path from "node:path";
 import { importFromIcs, importFromJson } from "./import";
 import type { PlanningResult } from "../shared/types";
 import { loadConfig, saveConfig } from "./config";
+import { listBenchmarkExperiments, loadScenarios } from "./benchmarkAnalytics";
+import { runBenchmarkExperiment } from "./benchmark";
 import { getPlannerDefaults, runPlanningPipeline } from "./planner";
 import { deleteCalendar, listCalendars, loadCalendar, saveCalendar } from "./storage";
-import type { AppConfig, PlanningRequest, ProgressEvent } from "../shared/types";
+import type { AppConfig, BenchmarkProgressEvent, BenchmarkRequest, PlanningRequest, ProgressEvent } from "../shared/types";
 
 
 const isDev = Boolean(process.env.VITE_DEV_SERVER_URL);
 let activePlannerController: AbortController | null = null;
+let activeBenchmarkController: AbortController | null = null;
 
 function createWindow(): void {
   const win = new BrowserWindow({
@@ -118,6 +121,57 @@ ipcMain.handle("import:parse", async (_event, content: string, filename: string)
     return importFromIcs(content);
   }
   return importFromJson(content);
+});
+
+ipcMain.handle("benchmark:list", async () => {
+  return listBenchmarkExperiments();
+});
+
+ipcMain.handle("benchmark:scenarios", async () => {
+  return loadScenarios().map((scenario) => ({
+    id: scenario.id,
+    promptFile: scenario.promptFile,
+    difficulty: scenario.difficulty,
+    title: scenario.title
+  }));
+});
+
+ipcMain.handle("benchmark:run", async (event, request: BenchmarkRequest, clientRunId?: string) => {
+  activeBenchmarkController?.abort();
+  const controller = new AbortController();
+  activeBenchmarkController = controller;
+  try {
+    return await runBenchmarkExperiment(request, (ev) => {
+      const payload: BenchmarkProgressEvent = { ...ev, clientRunId, timestamp: new Date().toISOString() };
+      if (!event.sender.isDestroyed()) {
+        event.sender.send("benchmark:progress", payload);
+      }
+    }, controller.signal);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error(`[benchmark] error — ${message}`);
+    if (!event.sender.isDestroyed()) {
+      const payload: BenchmarkProgressEvent = {
+        clientRunId,
+        phase: "error",
+        current: 0,
+        total: 0,
+        summary: message,
+        timestamp: new Date().toISOString()
+      };
+      event.sender.send("benchmark:progress", payload);
+    }
+    throw err;
+  } finally {
+    if (activeBenchmarkController === controller) {
+      activeBenchmarkController = null;
+    }
+  }
+});
+
+ipcMain.handle("benchmark:cancel", async () => {
+  console.log("[main] benchmark cancel requested");
+  activeBenchmarkController?.abort();
 });
 
 ipcMain.handle("storage:import", async () => {

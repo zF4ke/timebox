@@ -128,3 +128,64 @@ The app also computes deterministic hard metrics:
 - availability overrun hours, using each day's `assumed_available_hours`
 
 The final displayed score is 50% qualitative model score and 50% hard-metric score. This keeps objective failures visible while still measuring schedule qualities that cannot be counted reliably.
+
+## Benchmark Layer
+
+The final-delivery benchmark is a repeatable experiment layer around the planner. It is not part of calendar acceptance.
+
+Benchmark scenarios live in `benchmarks/scenarios.json` and point to fixed natural-language inputs in `prompts/*.txt`. Each scenario records:
+
+- difficulty (`easy`, `medium`, `challenging`)
+- expected task/topic keywords
+- minimum amount of scheduled work
+- whether late-night work should be avoided
+
+The benchmark CLI runs a matrix:
+
+```text
+model × quorum × max_iterations × scenario
+```
+
+For each run it stores:
+
+- full planning JSON
+- ICS calendar export
+- deterministic mistake JSON
+- flat CSV/JSON summaries
+- experiment manifest and aggregate rankings
+
+Free OpenRouter models (`:free`) are skipped by default because benchmark latency becomes impractical. They can only be included with an explicit `--force-free` flag.
+
+### Deterministic Scoring
+
+The deterministic scorer is intentionally simple and explainable. It scores:
+
+- expected task coverage
+- deadline discipline
+- availability discipline
+- fixed-commitment explanation
+- wellbeing / late-night respect
+- revision efficiency and quorum convergence
+
+It also emits named mistakes, such as missing expected tasks, deadline violations, availability overruns, late work despite a user request to avoid it, unresolved critical critiques, max-iteration fallback, and quorum failure.
+
+This gives a fairer loop for prompt improvement:
+
+```text
+run fixed benchmark → inspect mistake labels → update prompts → rerun same benchmark → compare aggregates
+```
+
+### Cost Tracking
+
+Every OpenRouter JSON call can now emit a trace with:
+
+- schema / phase name
+- model
+- latency
+- prompt and completion token counts
+- whether token usage came from the provider or was estimated from character counts
+- estimated USD cost when local pricing is known
+
+The planning result aggregates those traces under `usage`, so cost-benefit analysis can be plotted later from stored JSON without rerunning models.
+
+Legacy result folders pulled from earlier experiments predate the tracing layer. For those rows only, the analytics scanner estimates cost from the stored JSON artifact size and known model pricing, and marks the value as a legacy estimate. New benchmark runs keep the stronger per-call trace evidence.

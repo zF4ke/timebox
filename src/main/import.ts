@@ -205,6 +205,14 @@ export function importFromIcs(content: string): PlanningResult {
       comparison_notes: ["Do not compare this score directly with generated plans."],
       recommendation: "Use this import as calendar data, not as a model-quality evaluation."
     },
+    usage: {
+      callCount: 0,
+      promptTokens: 0,
+      completionTokens: 0,
+      totalTokens: 0,
+      estimatedCostUsd: 0,
+      calls: []
+    },
     exports: { json: JSON.stringify(calendar, null, 2), ics: content }
   };
 

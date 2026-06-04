@@ -1,0 +1,137 @@
+[
+  {
+    "id": "01_urgent_mixed_deadlines",
+    "promptFile": "01_urgent_mixed_deadlines.txt",
+    "title": "Urgent mixed deadlines",
+    "difficulty": "medium",
+    "expectedTaskKeywords": [["operating", "systems", "lab"], ["statistics", "quiz"], ["aasma", "project", "idea"]],
+    "avoidLateNight": true,
+    "minWorkBlocks": 5
+  },
+  {
+    "id": "02_wellbeing_low_energy",
+    "promptFile": "02_wellbeing_low_energy.txt",
+    "title": "Low energy same-week planning",
+    "difficulty": "medium",
+    "expectedTaskKeywords": [["machine", "learning", "assignment"], ["networks", "worksheet"], ["software", "engineering", "quiz"]],
+    "avoidLateNight": true,
+    "minWorkBlocks": 5
+  },
+  {
+    "id": "03_grade_weighted_priorities",
+    "promptFile": "03_grade_weighted_priorities.txt",
+    "title": "Grade-weighted priorities",
+    "difficulty": "medium",
+    "expectedTaskKeywords": [["database", "project"], ["ai", "homework"], ["history", "essay"], ["friend", "slides"]],
+    "avoidLateNight": false,
+    "minWorkBlocks": 6
+  },
+  {
+    "id": "04_group_project_coordination",
+    "promptFile": "04_group_project_coordination.txt",
+    "title": "Group project coordination",
+    "difficulty": "challenging",
+    "expectedTaskKeywords": [["distributed", "systems"], ["fault", "tolerance"], ["demo", "explanation"], ["algorithms", "problem", "set"]],
+    "avoidLateNight": false,
+    "minWorkBlocks": 7
+  },
+  {
+    "id": "05_fixed_commitments_busy_week",
+    "promptFile": "05_fixed_commitments_busy_week.txt",
+    "title": "Fixed commitments busy week",
+    "difficulty": "challenging",
+    "expectedTaskKeywords": [["computer", "graphics"], ["security", "quiz"], ["aasma", "reflection"], ["buy", "materials"]],
+    "avoidLateNight": false,
+    "minWorkBlocks": 6
+  },
+  {
+    "id": "06_uncertain_scope_hidden_work",
+    "promptFile": "06_uncertain_scope_hidden_work.txt",
+    "title": "Uncertain scope and hidden work",
+    "difficulty": "challenging",
+    "expectedTaskKeywords": [["simulator"], ["programming", "languages", "oral"], ["math", "exercise"]],
+    "avoidLateNight": false,
+    "minWorkBlocks": 6
+  },
+  {
+    "id": "07_exam_week_revision",
+    "promptFile": "07_exam_week_revision.txt",
+    "title": "Exam week spaced revision",
+    "difficulty": "medium",
+    "expectedTaskKeywords": [["calculus", "exam"], ["databases", "exam"], ["ethics", "forum"]],
+    "avoidLateNight": false,
+    "minWorkBlocks": 7
+  },
+  {
+    "id": "08_part_time_job_commute",
+    "promptFile": "08_part_time_job_commute.txt",
+    "title": "Part-time job and commute",
+    "difficulty": "challenging",
+    "expectedTaskKeywords": [["web", "development", "project"], ["linear", "algebra"], ["aasma", "seminar"]],
+    "avoidLateNight": true,
+    "minWorkBlocks": 5
+  },
+  {
+    "id": "09_no_deadlines_self_study",
+    "promptFile": "09_no_deadlines_self_study.txt",
+    "title": "No-deadline self study",
+    "difficulty": "easy",
+    "expectedTaskKeywords": [["reinforcement", "learning"], ["react", "hooks"], ["portfolio"], ["portuguese", "vocabulary"]],
+    "avoidLateNight": false,
+    "minWorkBlocks": 6
+  },
+  {
+    "id": "10_overloaded_impossible_week",
+    "promptFile": "10_overloaded_impossible_week.txt",
+    "title": "Overloaded impossible week",
+    "difficulty": "challenging",
+    "expectedTaskKeywords": [["compiler", "project"], ["machine", "learning", "report"], ["cybersecurity", "lab"], ["statistics", "test"], ["group", "presentation"]],
+    "avoidLateNight": false,
+    "minWorkBlocks": 8
+  },
+  {
+    "id": "11_short_two_day_crunch",
+    "promptFile": "11_short_two_day_crunch.txt",
+    "title": "Two-day demo crunch",
+    "difficulty": "medium",
+    "expectedTaskKeywords": [["mobile", "app", "demo"], ["probability", "quiz"]],
+    "avoidLateNight": true,
+    "minWorkBlocks": 4
+  },
+  {
+    "id": "12_long_term_capstone",
+    "promptFile": "12_long_term_capstone.txt",
+    "title": "Long-term capstone",
+    "difficulty": "challenging",
+    "expectedTaskKeywords": [["capstone", "prototype"], ["technical", "report"], ["evaluation", "plan"], ["progress", "presentation"], ["data", "mining"]],
+    "avoidLateNight": false,
+    "minWorkBlocks": 10
+  },
+  {
+    "id": "13_conflicting_preferences",
+    "promptFile": "13_conflicting_preferences.txt",
+    "title": "Ambition versus exhaustion",
+    "difficulty": "challenging",
+    "expectedTaskKeywords": [["ai", "project"], ["networks", "quiz"]],
+    "avoidLateNight": true,
+    "minWorkBlocks": 5
+  },
+  {
+    "id": "14_many_small_tasks",
+    "promptFile": "14_many_small_tasks.txt",
+    "title": "Many small tasks",
+    "difficulty": "easy",
+    "expectedTaskKeywords": [["scholarship", "form"], ["project", "advisor"], ["java", "exercises"], ["recorded", "lecture"], ["flashcards"], ["doctor", "appointment"], ["github", "readme"], ["math", "revision"]],
+    "avoidLateNight": false,
+    "minWorkBlocks": 8
+  },
+  {
+    "id": "15_missed_start_recovery",
+    "promptFile": "15_missed_start_recovery.txt",
+    "title": "Missed-start recovery",
+    "difficulty": "medium",
+    "expectedTaskKeywords": [["software", "architecture"], ["database", "worksheet"], ["operating", "systems"]],
+    "avoidLateNight": true,
+    "minWorkBlocks": 5
+  }
+]
