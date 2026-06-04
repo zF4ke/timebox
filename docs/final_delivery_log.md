@@ -415,6 +415,29 @@ for prompt improvement, and noted that the packaged app still used the default E
   `%TEMP%\timebox-release-codex`, and the resulting portable executable was copied to
   `release-new\Timebox 0.1.0.exe`.
 
+## Scientifically fairer benchmark ranking (2026-06-04)
+
+**Problem:** The Cost-benefit ranking mixed rows from different benchmark experiments
+and used `deterministic_score / average_cost`, so small cost differences produced huge
+value swings and configurations with more scenarios could look unfairly worse than
+quick 3-scenario runs.
+
+### What changed
+- The ranking table now uses only the latest experiment's aggregates, so rows compare
+  the same scenario set and run conditions.
+- Renamed the table to "Latest experiment ranking".
+- Replaced the raw per-dollar ratio with a bounded adjusted value:
+  - deterministic score is the primary quality signal;
+  - fixed-judge LLM score is secondary because it is less deterministic;
+  - reliability, failed runs, critical mistakes, and non-critical mistakes affect the score;
+  - cost is a tie-breaker instead of dominating the ranking.
+- Added a short UI note explaining the adjusted value.
+
+### Verification
+- `npm run typecheck` — clean.
+- `npm test` — 11 passing.
+- `npm run build` — clean; Vite emitted only the existing large-chunk warning.
+
 ## Park prompt tuning for baseline benchmark (2026-06-04)
 
 **Problem:** The prompt-tuning changes should not be active before the first controlled

@@ -61,6 +61,7 @@ const MODEL_OPTIONS = [
 ];
 
 const BENCHMARK_MODEL_OPTIONS = MODEL_OPTIONS.filter((model) => !model.includes(":free"));
+const BENCHMARK_SCENARIO_PRESETS = [3, 5, 8, 10, 15] as const;
 
 const FALLBACK_BENCHMARK_SCENARIOS: BenchmarkScenarioSummary[] = [
   {
@@ -930,13 +931,13 @@ function AnalyticsView({
 }) {
   const [runModalOpen, setRunModalOpen] = useState(false);
   const [promptBrowserOpen, setPromptBrowserOpen] = useState(false);
-  const aggregates = useMemo(
-    () => experiments.flatMap((experiment) => experiment.aggregates.map((aggregate) => ({ ...aggregate, experimentId: experiment.id }))),
-    [experiments]
-  );
   const latest = experiments[0];
   const latestRuns = latest?.runs ?? [];
-  const best = aggregates
+  const latestAggregates = useMemo(
+    () => (latest?.aggregates ?? []).map((aggregate) => ({ ...aggregate, experimentId: latest?.id ?? "latest" })),
+    [latest]
+  );
+  const best = latestAggregates
     .filter((aggregate) => aggregate.okCount > 0)
     .sort((a, b) => {
       const aScore = a.costBenefitScore ?? a.averageDeterministicScore ?? -1;
@@ -1149,9 +1150,12 @@ function AnalyticsView({
 
           <section className="analytics-section">
             <div className="section-title-row">
-              <h2>Cost-benefit ranking</h2>
-              <span>{best.length} configuration{best.length === 1 ? "" : "s"}</span>
+              <h2>Latest experiment ranking</h2>
+              <span>same scenario set · deterministic-first adjusted value</span>
             </div>
+            <p className="section-note">
+              Adjusted value weights deterministic score most, uses the fixed judge as secondary evidence, penalizes failures and critical mistakes, and treats cost as a tie-breaker.
+            </p>
             <div className="data-table-wrap">
               <table className="data-table">
                 <thead>
@@ -1165,7 +1169,7 @@ function AnalyticsView({
                     <SortTh label="Avg cost" field="averageCostUsd" sort={ranking.sort} onSort={ranking.onSort} align="right" />
                     <SortTh label="Tokens" field="averageTokens" sort={ranking.sort} onSort={ranking.onSort} align="right" />
                     <SortTh label="Mistakes" field="mistakes" sort={ranking.sort} onSort={ranking.onSort} align="right" />
-                    <SortTh label="Value" field="costBenefitScore" sort={ranking.sort} onSort={ranking.onSort} align="right" />
+                    <SortTh label="Adjusted value" field="costBenefitScore" sort={ranking.sort} onSort={ranking.onSort} align="right" />
                   </tr>
                 </thead>
                 <tbody>
@@ -1375,12 +1379,13 @@ function BenchmarkRunModal({
   ]);
   const [quorums, setQuorums] = useState<number[]>([3, 5]);
   const [iterations, setIterations] = useState<number[]>([2, 3]);
-  const [scope, setScope] = useState<"quick" | "all">("quick");
+  const [scenarioLimit, setScenarioLimit] = useState<number>(5);
   const [evaluatorModel, setEvaluatorModel] = useState<string>(
     BENCHMARK_MODEL_OPTIONS.includes(defaultEvaluator) ? defaultEvaluator : BENCHMARK_MODEL_OPTIONS[0]
   );
   const [budget, setBudget] = useState<string>("");
-  const selectedScenarios = scope === "all" ? scenarios : scenarios.slice(0, 3);
+  const scenarioPresetOptions = BENCHMARK_SCENARIO_PRESETS.filter((count) => count < scenarios.length);
+  const selectedScenarios = scenarios.slice(0, Math.min(scenarioLimit, scenarios.length));
   const runCount = models.length * quorums.length * iterations.length * selectedScenarios.length;
 
   // Pre-flight estimate. Prefer real per-model cost calibrated from past traced
@@ -1480,16 +1485,29 @@ function BenchmarkRunModal({
           </div>
 
           <div className="field">
-            <span className="meta-label">Scope</span>
-            <div className="segmented">
-              <button type="button" className={scope === "quick" ? "active" : ""} onClick={() => setScope("quick")}>
-                Quick ({Math.min(3, scenarios.length)})
-              </button>
-              <button type="button" className={scope === "all" ? "active" : ""} onClick={() => setScope("all")}>
+            <span className="meta-label">Scenario count</span>
+            <div className="segmented segmented-wrap">
+              {scenarioPresetOptions.map((count) => (
+                <button
+                  type="button"
+                  key={count}
+                  className={scenarioLimit === count ? "active" : ""}
+                  onClick={() => setScenarioLimit(count)}
+                >
+                  {count}
+                </button>
+              ))}
+              <button
+                type="button"
+                className={scenarioLimit >= scenarios.length ? "active" : ""}
+                onClick={() => setScenarioLimit(scenarios.length)}
+              >
                 All ({scenarios.length})
               </button>
             </div>
-            <div className="field-hint">Quick uses the first three fixtures. All runs the full scenario set.</div>
+            <div className="field-hint">
+              Uses the first {selectedScenarios.length} fixture{selectedScenarios.length === 1 ? "" : "s"} from the fixed benchmark set.
+            </div>
           </div>
 
           <div className="field">

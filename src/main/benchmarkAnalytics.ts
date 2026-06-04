@@ -107,6 +107,8 @@ export function aggregateBenchmarkRuns(runs: BenchmarkRunSummary[]): BenchmarkAg
       const averageCostUsd = average(ok.map((run) => run.estimatedCostUsd));
       const averageTokens = average(ok.map((run) => run.totalTokens));
       const averageIterations = average(ok.map((run) => run.iterations));
+      const criticalMistakes = group.reduce((sum, run) => sum + run.criticalMistakeCount, 0);
+      const totalMistakes = group.reduce((sum, run) => sum + run.mistakeCount, 0);
 
       return {
         model: first.model,
@@ -119,9 +121,17 @@ export function aggregateBenchmarkRuns(runs: BenchmarkRunSummary[]): BenchmarkAg
         averageCostUsd,
         averageTokens,
         averageIterations,
-        costBenefitScore: costBenefit(averageDeterministicScore, averageCostUsd),
-        criticalMistakes: group.reduce((sum, run) => sum + run.criticalMistakeCount, 0),
-        totalMistakes: group.reduce((sum, run) => sum + run.mistakeCount, 0)
+        costBenefitScore: costBenefit({
+          averageDeterministicScore,
+          averageOverallScore,
+          averageCostUsd,
+          okCount: ok.length,
+          runCount: group.length,
+          criticalMistakes,
+          totalMistakes
+        }),
+        criticalMistakes,
+        totalMistakes
       };
     })
     .sort(compareAggregate);
@@ -303,11 +313,39 @@ function average(values: Array<number | null>): number | null {
   return Math.round((valid.reduce((sum, value) => sum + value, 0) / valid.length) * 1000) / 1000;
 }
 
-function costBenefit(score: number | null, cost: number | null): number | null {
-  if (score === null || cost === null) {
+function costBenefit(input: {
+  averageDeterministicScore: number | null;
+  averageOverallScore: number | null;
+  averageCostUsd: number | null;
+  okCount: number;
+  runCount: number;
+  criticalMistakes: number;
+  totalMistakes: number;
+}): number | null {
+  if (input.averageDeterministicScore === null) {
     return null;
   }
-  return Math.round((score / Math.max(cost, 0.000001)) * 1000) / 1000;
+
+  const deterministic = input.averageDeterministicScore;
+  const llm = input.averageOverallScore === null ? deterministic : input.averageOverallScore * 20;
+  const reliability = input.runCount > 0 ? (input.okCount / input.runCount) * 100 : 0;
+  const criticalPerRun = input.criticalMistakes / Math.max(input.runCount, 1);
+  const totalPerRun = input.totalMistakes / Math.max(input.runCount, 1);
+  const nonCriticalPerRun = Math.max(0, totalPerRun - criticalPerRun);
+
+  // Keep cost in the ranking, but do not let cent-level differences overwhelm
+  // quality. log10 makes $0.015 vs $0.018 a small tie-breaker instead of a huge
+  // ratio swing, while genuinely expensive runs still lose value.
+  const costPenalty = input.averageCostUsd === null
+    ? 0
+    : Math.min(12, Math.log10(1 + input.averageCostUsd * 1000) * 2.5);
+
+  const quality =
+    deterministic * 0.7 +
+    llm * 0.15 +
+    reliability * 0.15;
+  const mistakePenalty = criticalPerRun * 4 + nonCriticalPerRun * 0.7;
+  return Math.round(Math.max(0, Math.min(100, quality - mistakePenalty - costPenalty)) * 10) / 10;
 }
 
 function compareAggregate(a: BenchmarkAggregate, b: BenchmarkAggregate): number {

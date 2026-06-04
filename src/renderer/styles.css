@@ -386,6 +386,14 @@ code {
   font-size: 12px;
 }
 
+.section-note {
+  max-width: 820px;
+  margin: -2px 0 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
 .data-table-wrap {
   overflow: auto;
   border-top: 1px solid var(--border);
@@ -774,7 +782,7 @@ code {
 
 .btn-secondary.spinning svg,
 .btn-secondary.pulsing svg {
-  animation: spin 800ms linear infinite;
+  animation: spin-text-icon 800ms linear infinite;
 }
 
 .btn-secondary.pulsing {
@@ -785,6 +793,7 @@ code {
 .btn-primary svg {
   display: block;
   flex-shrink: 0;
+  transform: translateY(1px);
 }
 
 .btn-secondary span,
@@ -1654,6 +1663,10 @@ code {
   background: var(--bg);
 }
 
+.segmented-wrap {
+  flex-wrap: wrap;
+}
+
 .segmented button {
   height: 28px;
   padding: 0 10px;
@@ -1939,6 +1952,11 @@ code {
 .cancel-btn svg {
   display: block;
   flex-shrink: 0;
+  transform: translateY(1px);
+}
+
+@keyframes spin-text-icon {
+  to { transform: translateY(1px) rotate(360deg); }
 }
 
 /* ---------- Save button states ---------- */
