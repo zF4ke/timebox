@@ -1,0 +1,62 @@
+commit b13b6b6d31dad2ca1c0d55d4169a8c7c1461f46c
+Author: Pedro Silva <pedrohsilva955@gmail.com>
+Date:   Thu Jun 4 15:03:32 2026 +0100
+
+    Tune benchmark prompts and delivery polish
+
+diff --git a/src/main/planner.ts b/src/main/planner.ts
+index 580fbac..e27bb03 100644
+--- a/src/main/planner.ts
++++ b/src/main/planner.ts
+@@ -717,7 +717,8 @@ function buildInitialPlannerPrompt(
+     "Do NOT create buffer, break, or rest blocks. Unscheduled time in the calendar IS rest time by default. Only create work blocks for actual tasks from the interpreter output.",
+     "Do NOT create generic lifestyle blocks such as 'morning classes', 'dinner', 'decompression', 'commute', 'sleep', 'general buffer time', 'contingency buffer', or similar. Only create blocks for actual tasks from the interpreter output.",
+     "For each day, set assumed_available_hours realistically based on the inferred availability. The sum of ALL block durations on that day MUST NOT exceed assumed_available_hours.",
+-    "Respect the planning window, deadlines, and fixed commitments.",
++    "Respect the planning window, deadlines, and fixed commitments. Any work for a task with an inferred_deadline MUST END before that inferred_deadline.",
++    "If the student says they want to avoid late-night work, slept badly, is low-energy, or is stressed, avoid blocks ending at or after 22:00 unless the schedule is otherwise impossible.",
+     "Include compromise reasoning so specialist agents can critique the actual tradeoffs.",
+     "Keep all prose fields concise: one short sentence per description, reasoning, compromise, weakness, and strategy item.",
+     "Create a usable calendar. If tasks exist, days must not be empty.",
+@@ -749,7 +750,8 @@ function buildRevisionPlannerPrompt(
+     "Do NOT create buffer, break, or rest blocks. Unscheduled time in the calendar IS rest time by default. Only create work blocks for actual tasks from the interpreter output.",
+     "Do NOT create generic lifestyle blocks such as 'morning classes', 'dinner', 'decompression', 'commute', 'sleep', 'general buffer time', 'contingency buffer', or similar. Only create blocks for actual tasks from the interpreter output.",
+     "For each day, set assumed_available_hours realistically. The sum of ALL block durations on that day MUST NOT exceed assumed_available_hours.",
+-    "Respect the planning window, deadlines, and fixed commitments.",
++    "Respect the planning window, deadlines, and fixed commitments. Any work for a task with an inferred_deadline MUST END before that inferred_deadline.",
++    "If the student says they want to avoid late-night work, slept badly, is low-energy, or is stressed, avoid blocks ending at or after 22:00 unless the schedule is otherwise impossible.",
+     "Include compromise reasoning so specialist agents can critique the actual tradeoffs.",
+     "Keep all prose fields concise: one short sentence per description, reasoning, compromise, weakness, change, and planner_response.",
+     "Revision priority: address critical critiques first, then rejected/major critiques, while preserving approved parts. Do NOT add buffer or break blocks — unscheduled time is implicitly rest.",
+diff --git a/src/main/prompts/base-system.md b/src/main/prompts/base-system.md
+index 06afde9..8a861eb 100644
+--- a/src/main/prompts/base-system.md
++++ b/src/main/prompts/base-system.md
+@@ -4,3 +4,6 @@ The JSON object must match the provided schema and enum values exactly.
+ Use concrete ISO date strings. Calendar blocks must have absolute ISO start and end datetimes.
+ Preserve uncertainty instead of inventing fake precision.
+ NEVER use raw task IDs (T1, T2, T3, etc.) in any user-facing string field — descriptions, reasoning, comments, assessments, concerns, recommendations, issues, suggested_fixes, overall_strategy, compromises, known_weaknesses, or any prose. The user does not know what those IDs mean. Always use the task's human-readable name (e.g. "AASMA proposal", "DB lab"). The task_id field itself is allowed where the schema requires it.
++A task deadline means work for that task must END before the deadline. Work after the deadline is not useful unless the student explicitly asks for post-deadline cleanup.
++Do not create calendar blocks for rest, breaks, buffers, contingency, decompression, meals, commute, sleep, or generic lifestyle time. Leave those periods empty; unscheduled time is implicitly rest.
++If the student asks to avoid late-night work, is low-energy, slept badly, or mentions stress, avoid ending work at or after 22:00 unless there is no feasible earlier alternative.
+diff --git a/src/main/prompts/deadline-agent.md b/src/main/prompts/deadline-agent.md
+index 7bdf4b1..52fb7f0 100644
+--- a/src/main/prompts/deadline-agent.md
++++ b/src/main/prompts/deadline-agent.md
+@@ -1,3 +1,5 @@
+ Protect deadlines and urgency.
+ Look for earliest due dates, latest safe start, deadline-day risk, and tasks that cannot be delayed.
++Treat deadlines literally: scheduled work must end before the inferred deadline timestamp, not merely start before it.
++Reject calendars that put required work after the deadline unless the student explicitly asked for post-deadline cleanup.
+ Approve only if all deadline tasks receive meaningful work before their deadlines.
+diff --git a/src/main/prompts/wellbeing-agent.md b/src/main/prompts/wellbeing-agent.md
+index 0721c3b..acf2265 100644
+--- a/src/main/prompts/wellbeing-agent.md
++++ b/src/main/prompts/wellbeing-agent.md
+@@ -1,4 +1,6 @@
+ Protect sleep, stress, breaks, and sustainable workload.
+ Look for overfilled days, late-night work, cognitively heavy stacking, and reduced energy clues.
+ If a day is too heavy, recommend FEWER or SHORTER work blocks — do NOT recommend adding buffer/break/rest blocks to the calendar. Unscheduled time is implicitly rest.
++If the student asks to avoid late-night work, slept badly, is low-energy, or mentions stress, treat work ending at or after 22:00 as a wellbeing concern unless no earlier slot is feasible.
++When rejecting, suggest moving, shortening, or dropping lower-priority work rather than adding rest, buffer, contingency, or decompression blocks.
+ Approve only if the plan is humane enough to follow.

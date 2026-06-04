@@ -414,3 +414,27 @@ for prompt improvement, and noted that the packaged app still used the default E
 - A clean `electron-builder` package succeeded outside OneDrive at
   `%TEMP%\timebox-release-codex`, and the resulting portable executable was copied to
   `release-new\Timebox 0.1.0.exe`.
+
+## Park prompt tuning for baseline benchmark (2026-06-04)
+
+**Problem:** The prompt-tuning changes should not be active before the first controlled
+benchmark run, otherwise the report would lose a clean before/after comparison.
+
+### What changed
+- Saved the prompt-tuning diff to
+  `docs/patches/prompt_tuning_after_baseline.patch`.
+- Reverted the live prompt/planner wording changes in:
+  - `src/main/prompts/base-system.md`
+  - `src/main/prompts/deadline-agent.md`
+  - `src/main/prompts/wellbeing-agent.md`
+  - `src/main/planner.ts`
+- Kept non-prompt fixes active: evaluator-cost estimate fix, icon/text alignment,
+  Windows icon packaging, and benchmark severity calibration.
+
+### How to bring the prompt tuning back
+- After the baseline benchmark is recorded, run:
+  `git apply docs/patches/prompt_tuning_after_baseline.patch`
+- Then rerun the same benchmark matrix so the report can compare baseline vs tuned prompts.
+
+### Verification
+- `git apply --check docs/patches/prompt_tuning_after_baseline.patch` — clean.
