@@ -10,6 +10,7 @@ import type {
 import { aggregateBenchmarkRuns, defaultProjectRoot, loadScenarios } from "./benchmarkAnalytics";
 import { scoreBenchmarkResult, type BenchmarkScenario } from "./benchmarkScoring";
 import { getPlannerDefaults, runPlanningPipeline } from "./planner";
+import { promptsHash } from "./prompts";
 import { isFreeModel } from "./modelCosts";
 
 interface BenchmarkOptions {
@@ -21,6 +22,8 @@ interface BenchmarkOptions {
   delayMs: number;
   retries: number;
   forceFree: boolean;
+  evaluatorModel: string;
+  maxBudgetUsd: number | null;
 }
 
 type BenchmarkProgressCallback = (event: Omit<BenchmarkProgressEvent, "timestamp">) => void;
@@ -53,24 +56,32 @@ export async function runBenchmarkExperiment(
     throw new Error("No benchmark scenarios selected.");
   }
 
+  const evaluatorModel = options.evaluatorModel || getPlannerDefaults().evaluatorModel;
+  const promptHash = promptsHash();
+
   const experiment: BenchmarkExperiment = {
     id: path.basename(outDir),
     createdAt: new Date().toISOString(),
     resultsDir: outDir,
     runs: [],
-    aggregates: []
+    aggregates: [],
+    evaluatorModel,
+    promptHash,
+    budgetUsd: options.maxBudgetUsd ?? undefined,
+    stoppedByBudget: false
   };
 
-  writeManifest(outDir, options, benchmarkModels, scenarios);
+  writeManifest(outDir, options, benchmarkModels, scenarios, evaluatorModel, promptHash);
   writeExperiment(outDir, experiment);
 
   const total = benchmarkModels.length * options.quorums.length * options.maxIterations.length * scenarios.length;
   let index = 0;
+  let spentUsd = 0;
   onProgress({
     phase: "start",
     current: 0,
     total,
-    summary: `Starting ${total} benchmark run(s).`
+    summary: `Starting ${total} benchmark run(s)${options.maxBudgetUsd ? ` · budget $${options.maxBudgetUsd.toFixed(2)}` : ""} · judge ${formatCompactModel(evaluatorModel)} · prompts ${promptHash}`
   });
 
   for (const model of benchmarkModels) {
@@ -78,6 +89,23 @@ export async function runBenchmarkExperiment(
       for (const maxIterations of options.maxIterations) {
         for (const scenario of scenarios) {
           throwIfCancelled(signal);
+
+          // Budget guard: stop before starting a run once we have already spent
+          // up to (or past) the cap. We check before the run because a run's cost
+          // is only known after it completes.
+          if (options.maxBudgetUsd !== null && spentUsd >= options.maxBudgetUsd) {
+            experiment.stoppedByBudget = true;
+            writeExperiment(outDir, experiment);
+            console.log(`[benchmark] budget cap $${options.maxBudgetUsd} reached after $${spentUsd.toFixed(4)}; stopping early.`);
+            onProgress({
+              phase: "complete",
+              current: index,
+              total,
+              summary: `Stopped early at budget cap $${options.maxBudgetUsd.toFixed(2)} (spent $${spentUsd.toFixed(4)}).`
+            });
+            return experiment;
+          }
+
           index += 1;
           onProgress({
             phase: "run_start",
@@ -91,6 +119,7 @@ export async function runBenchmarkExperiment(
 
           const run = await runScenarioWithRetries(
             model,
+            evaluatorModel,
             quorum,
             maxIterations,
             scenario,
@@ -99,6 +128,7 @@ export async function runBenchmarkExperiment(
             options.retries,
             signal
           );
+          spentUsd += run.estimatedCostUsd ?? 0;
           experiment.runs.push(run);
           experiment.aggregates = aggregateBenchmarkRuns(experiment.runs);
           writeExperiment(outDir, experiment);
@@ -108,7 +138,7 @@ export async function runBenchmarkExperiment(
             current: index,
             total,
             summary: run.status === "ok"
-              ? `${scenario.title}: ${run.deterministicScore ?? "-"} deterministic · ${run.criticalMistakeCount} critical mistake(s)`
+              ? `${scenario.title}: ${run.deterministicScore ?? "-"} deterministic · ${run.criticalMistakeCount} critical mistake(s) · spent $${spentUsd.toFixed(4)}`
               : `${scenario.title}: ${run.error}`,
             run
           });
@@ -133,7 +163,8 @@ export async function runBenchmarkExperiment(
 
 async function main(): Promise<void> {
   const options = parseArgs(process.argv.slice(2));
-  await runBenchmarkExperiment(options, (event) => {
+  const request: BenchmarkRequest = { ...options, maxBudgetUsd: options.maxBudgetUsd ?? undefined };
+  await runBenchmarkExperiment(request, (event) => {
     if (event.phase === "run_start" || event.phase === "run_done" || event.phase === "run_error" || event.phase === "complete") {
       console.log(`[benchmark] ${event.current}/${event.total} ${event.summary}`);
     }
@@ -142,6 +173,7 @@ async function main(): Promise<void> {
 
 async function runScenarioWithRetries(
   model: string,
+  evaluatorModel: string,
   quorum: number,
   maxIterations: number,
   scenario: BenchmarkScenario,
@@ -157,7 +189,7 @@ async function runScenarioWithRetries(
       if (attempt > 0) {
         console.log(`[benchmark] retry ${attempt}/${retries} ${scenario.id}`);
       }
-      return await runScenario(model, quorum, maxIterations, scenario, runsDir, signal);
+      return await runScenario(model, evaluatorModel, quorum, maxIterations, scenario, runsDir, signal);
     } catch (error) {
       lastError = error;
       if (isAbortError(error)) {
@@ -173,11 +205,12 @@ async function runScenarioWithRetries(
   const message = lastError instanceof Error ? lastError.message : String(lastError);
   const errorPath = path.join(errorsDir, `${safeName(model)}__q${quorum}__i${maxIterations}__${scenario.id}.txt`);
   fs.writeFileSync(errorPath, message, "utf-8");
-  return errorRun(model, quorum, maxIterations, scenario, message, errorPath);
+  return errorRun(model, evaluatorModel, quorum, maxIterations, scenario, message, errorPath);
 }
 
 async function runScenario(
   model: string,
+  evaluatorModel: string,
   quorum: number,
   maxIterations: number,
   scenario: BenchmarkScenario,
@@ -191,7 +224,7 @@ async function runScenario(
     {
       userInput,
       model,
-      evaluatorModel: model,
+      evaluatorModel,
       quorum,
       maxIterations
     },
@@ -213,25 +246,26 @@ async function runScenario(
   fs.writeFileSync(icsPath, result.exports.ics, "utf-8");
   fs.writeFileSync(mistakesPath, JSON.stringify(deterministic, null, 2), "utf-8");
 
-  return okRun(model, quorum, maxIterations, scenario, result, deterministic.score, deterministic.mistakeCount, deterministic.mistakes.filter((mistake) => mistake.severity === "critical").length, jsonPath, icsPath);
+  return okRun(model, evaluatorModel, quorum, maxIterations, scenario, result, deterministic, jsonPath, icsPath);
 }
 
 function okRun(
   model: string,
+  evaluatorModel: string,
   quorum: number,
   maxIterations: number,
   scenario: BenchmarkScenario,
   result: PlanningResult,
-  deterministicScore: number,
-  mistakeCount: number,
-  criticalMistakeCount: number,
+  deterministic: ReturnType<typeof scoreBenchmarkResult>,
   jsonPath: string,
   icsPath: string
 ): BenchmarkRunSummary {
   const finalVersion = result.calendarVersions.find(
     (record) => record.calendar.calendar_version === result.finalCalendar.calendar_version
   );
-  const generationTime = result.evaluation.hard_metrics.metrics.find((metric) => metric.name === "generation_time_seconds");
+  // Benchmark runs always evaluate, so result.evaluation is expected here.
+  const evaluation = result.evaluation;
+  const generationTime = evaluation?.hard_metrics.metrics.find((metric) => metric.name === "generation_time_seconds");
 
   return {
     scenarioId: scenario.id,
@@ -241,18 +275,20 @@ function okRun(
     quorum,
     maxIterations,
     status: "ok",
-    overallScore: result.evaluation.overall_score,
-    deterministicScore,
-    modelScore: result.evaluation.model_score,
-    hardScore: result.evaluation.hard_score,
+    overallScore: evaluation?.overall_score ?? null,
+    deterministicScore: deterministic.score,
+    modelScore: evaluation?.model_score ?? null,
+    hardScore: evaluation?.hard_score ?? null,
     approvals: finalVersion?.approvals ?? null,
     iterations: result.calendarVersions.length,
     generationTimeSeconds: typeof generationTime?.value === "number" ? generationTime.value : null,
     estimatedCostUsd: result.usage.estimatedCostUsd,
     costSource: result.usage.estimatedCostUsd === null ? null : "traced",
     totalTokens: result.usage.totalTokens,
-    mistakeCount,
-    criticalMistakeCount,
+    mistakeCount: deterministic.mistakeCount,
+    criticalMistakeCount: deterministic.mistakes.filter((mistake) => mistake.severity === "critical").length,
+    mistakes: deterministic.mistakes,
+    evaluatorModel,
     jsonPath,
     icsPath,
     error: ""
@@ -261,6 +297,7 @@ function okRun(
 
 function errorRun(
   model: string,
+  evaluatorModel: string,
   quorum: number,
   maxIterations: number,
   scenario: BenchmarkScenario,
@@ -287,6 +324,8 @@ function errorRun(
     totalTokens: null,
     mistakeCount: 1,
     criticalMistakeCount: 1,
+    mistakes: [],
+    evaluatorModel,
     jsonPath: "",
     icsPath: "",
     error: `${error} (${errorPath})`
@@ -303,7 +342,9 @@ function parseArgs(args: string[]): BenchmarkOptions {
     outDir: "",
     delayMs: 0,
     retries: 1,
-    forceFree: false
+    forceFree: false,
+    evaluatorModel: defaults.evaluatorModel,
+    maxBudgetUsd: null
   };
 
   for (let i = 0; i < args.length; i += 1) {
@@ -320,6 +361,12 @@ function parseArgs(args: string[]): BenchmarkOptions {
       i += 1;
     } else if (arg === "--scenarios" && next) {
       options.scenarios = splitList(next);
+      i += 1;
+    } else if (arg === "--evaluator" && next) {
+      options.evaluatorModel = next.trim();
+      i += 1;
+    } else if (arg === "--max-budget" && next) {
+      options.maxBudgetUsd = parsePositiveFloat(next, "--max-budget");
       i += 1;
     } else if (arg === "--out" && next) {
       options.outDir = next;
@@ -352,7 +399,9 @@ function normalizeOptions(request: BenchmarkRequest): BenchmarkOptions {
     outDir: request.outDir ?? "",
     delayMs: request.delayMs ?? 0,
     retries: request.retries ?? 1,
-    forceFree: request.forceFree ?? false
+    forceFree: request.forceFree ?? false,
+    evaluatorModel: request.evaluatorModel?.trim() || defaults.evaluatorModel,
+    maxBudgetUsd: typeof request.maxBudgetUsd === "number" && request.maxBudgetUsd > 0 ? request.maxBudgetUsd : null
   };
 }
 
@@ -368,7 +417,9 @@ function writeManifest(
   outDir: string,
   options: BenchmarkOptions,
   models: string[],
-  scenarios: BenchmarkScenario[]
+  scenarios: BenchmarkScenario[],
+  evaluatorModel: string,
+  promptHash: string
 ): void {
   fs.writeFileSync(
     path.join(outDir, "manifest.json"),
@@ -376,6 +427,9 @@ function writeManifest(
       {
         createdAt: new Date().toISOString(),
         models,
+        evaluatorModel,
+        promptHash,
+        budgetUsd: options.maxBudgetUsd ?? null,
         quorums: options.quorums,
         maxIterations: options.maxIterations,
         scenarioIds: scenarios.map((scenario) => scenario.id),
@@ -414,6 +468,7 @@ function writeSummaryFiles(outDir: string, runs: BenchmarkRunSummary[]): void {
     "totalTokens",
     "mistakeCount",
     "criticalMistakeCount",
+    "evaluatorModel",
     "jsonPath",
     "icsPath",
     "error"
@@ -434,6 +489,14 @@ function parsePositiveInt(value: string, label: string): number {
   return parsed;
 }
 
+function parsePositiveFloat(value: string, label: string): number {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed) || parsed <= 0) {
+    throw new Error(`${label} must be a positive number.`);
+  }
+  return parsed;
+}
+
 function printHelpAndExit(): never {
   console.log([
     "Usage:",
@@ -444,6 +507,8 @@ function printHelpAndExit(): never {
     "  --quorums <list>         Comma-separated quorum values. Default: configured quorum",
     "  --max-iterations <list>  Comma-separated max-iteration values. Default: configured value",
     "  --scenarios <list>       Optional comma-separated scenario ids or prompt filenames",
+    "  --evaluator <model>      Fixed judge model that scores every run. Default: configured evaluator",
+    "  --max-budget <usd>       Stop the matrix before a run that would exceed this dollar cap",
     "  --out <dir>              Output directory. Default: benchmark-results/<timestamp>",
     "  --delay-ms <n>           Delay between runs",
     "  --retries <n>            Retries for transient provider errors",

@@ -19,13 +19,20 @@ import {
   Trash2,
   Settings,
   BarChart3,
-  RefreshCw
+  RefreshCw,
+  ArrowUp,
+  ArrowDown,
+  ChevronsUpDown,
+  CalendarPlus
 } from "lucide-react";
 import type {
   AppConfig,
+  BenchmarkAggregate,
   BenchmarkExperiment,
+  BenchmarkMistake,
   BenchmarkProgressEvent,
   BenchmarkRequest,
+  BenchmarkRunSummary,
   BenchmarkScenarioSummary,
   CalendarBlock,
   PlannerDefaults,
@@ -83,6 +90,28 @@ const MODEL_INFO: Record<string, { name: string; price: string }> = {
   "openai/gpt-5-nano": { name: "GPT-5 Nano", price: "$0.05 / $0.40" },
   "nvidia/nemotron-3-super-120b-a12b:free": { name: "Nemotron 3 Super", price: "free" },
 };
+
+// Numeric pricing (USD per million tokens) mirroring src/main/modelCosts.ts.
+// Used only for the pre-flight budget estimate; the authoritative cost guard
+// runs in the benchmark process against real traced usage.
+const MODEL_PRICING: Record<string, { input: number; output: number }> = {
+  "google/gemini-2.5-flash-lite-preview-09-2025": { input: 0.1, output: 0.4 },
+  "google/gemini-3.1-flash-lite-preview": { input: 0.25, output: 1.5 },
+  "minimax/minimax-m2.7": { input: 0.3, output: 1.2 },
+  "deepseek/deepseek-v3.2": { input: 0.26, output: 0.38 },
+  "openai/gpt-5-nano": { input: 0.05, output: 0.4 }
+};
+
+// Rough per-run token profile for a full pipeline (interpreter + 5 specialists +
+// planner drafts + critique rounds + 1 evaluator), scaled by max iterations.
+function estimateRunCostUsd(model: string, maxIterations: number): number | null {
+  const pricing = MODEL_PRICING[model];
+  if (!pricing) return null;
+  const calls = 1 + 5 + maxIterations + maxIterations * 5 + 1;
+  const promptTokens = calls * 7000;
+  const completionTokens = calls * 1800;
+  return (promptTokens / 1_000_000) * pricing.input + (completionTokens / 1_000_000) * pricing.output;
+}
 
 const plannerApi = window.plannerApi ?? createBrowserFallbackApi();
 
@@ -221,6 +250,11 @@ export default function App() {
     return experiments;
   }
 
+  async function clearBenchmarks() {
+    await plannerApi.clearBenchmarkExperiments();
+    await refreshBenchmarks();
+  }
+
   const plannerMutation = useMutation({
     mutationFn: ({ request, generation }: { request: PlanningRequest; generation: number }) =>
       plannerApi.runPlanner(request, String(generation)),
@@ -295,7 +329,9 @@ export default function App() {
       userInput,
       quorum: settings.quorum,
       maxIterations: settings.maxIterations,
-      model: settings.model
+      model: settings.model,
+      // Quality scoring is exclusive to the benchmarking section.
+      evaluate: false
     };
     plannerMutation.mutate({ request, generation: activeRunGeneration.current });
   }
@@ -360,6 +396,19 @@ export default function App() {
     }
   }
 
+  async function handleOpenBenchmarkRun(run: BenchmarkRunSummary) {
+    if (!run.jsonPath) return;
+    const loaded = await plannerApi.openBenchmarkRun(run.jsonPath, run.icsPath);
+    if (loaded) {
+      setResult(loaded);
+      setSteps([]);
+      setSaveStatus("idle");
+      setDuplicateSavePending(false);
+      plannerMutation.reset();
+      setMode("planner");
+    }
+  }
+
   function handleRequestDelete(cal: SavedCalendar) {
     setPendingDelete(cal);
   }
@@ -409,9 +458,12 @@ export default function App() {
       <AnalyticsView
         experiments={benchmarkExperiments}
         scenarios={benchmarkScenarios}
+        defaultEvaluator={defaults?.evaluatorModel ?? settings.evaluatorModel ?? settings.model}
         onRefresh={refreshBenchmarks}
+        onClear={clearBenchmarks}
         onRunBenchmark={runBenchmark}
         onCancelBenchmark={cancelBenchmark}
+        onOpenRun={handleOpenBenchmarkRun}
         isBenchmarkRunning={benchmarkMutation.isPending}
         benchmarkEvents={benchmarkEvents}
         benchmarkError={benchmarkMutation.error instanceof Error ? benchmarkMutation.error.message : ""}
@@ -569,9 +621,7 @@ function AppLayout({
               <button className="saved-name" onClick={() => onLoad(cal)} title={cal.name}>
                 <span>{cal.name}</span>
                 <small>
-                  {cal.result.evaluation
-                    ? `${cal.result.evaluation.overall_score}/5 · ${formatCompactModel(cal.result.evaluation.planner_model)}`
-                    : formatCompactModel(cal.result.request.model ?? "unknown model")}
+                  {formatCompactModel(cal.result.request.model ?? "unknown model")}
                 </small>
               </button>
               <button
@@ -684,6 +734,12 @@ function createBrowserFallbackApi(): typeof window.plannerApi {
     async listBenchmarkExperiments() {
       return [];
     },
+    async openBenchmarkRun() {
+      return null;
+    },
+    async clearBenchmarkExperiments() {
+      return undefined;
+    },
     async listBenchmarkScenarios() {
       return FALLBACK_BENCHMARK_SCENARIOS;
     },
@@ -699,21 +755,139 @@ function createBrowserFallbackApi(): typeof window.plannerApi {
   };
 }
 
+type SortDir = "asc" | "desc";
+interface SortState {
+  key: string;
+  dir: SortDir;
+}
+type SortValue = string | number | null;
+type Accessors<T> = Record<string, (row: T) => SortValue>;
+
+const DIFFICULTY_RANK: Record<string, number> = { easy: 0, medium: 1, challenging: 2 };
+const SEVERITY_RANK: Record<string, number> = { critical: 0, major: 1, minor: 2 };
+
+function compareValues(a: SortValue, b: SortValue, dir: SortDir): number {
+  // Nulls always sort last, regardless of direction.
+  if (a === null && b === null) return 0;
+  if (a === null) return 1;
+  if (b === null) return -1;
+  const raw =
+    typeof a === "number" && typeof b === "number"
+      ? a - b
+      : String(a).localeCompare(String(b), undefined, { numeric: true });
+  return dir === "asc" ? raw : -raw;
+}
+
+function useSortedRows<T>(rows: T[], accessors: Accessors<T>, initial: SortState) {
+  const [sort, setSort] = useState<SortState>(initial);
+  const sorted = useMemo(() => {
+    const accessor = accessors[sort.key];
+    if (!accessor) return rows;
+    return [...rows].sort((a, b) => compareValues(accessor(a), accessor(b), sort.dir));
+    // accessors is a stable module-level const, safe to omit from deps.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [rows, sort]);
+  const onSort = (key: string) =>
+    setSort((prev) => (prev.key === key ? { key, dir: prev.dir === "asc" ? "desc" : "asc" } : { key, dir: "desc" }));
+  return { sorted, sort, onSort };
+}
+
+function SortTh({
+  label,
+  field,
+  sort,
+  onSort,
+  align
+}: {
+  label: string;
+  field: string;
+  sort: SortState;
+  onSort: (key: string) => void;
+  align?: "right";
+}) {
+  const active = sort.key === field;
+  return (
+    <th
+      className={`sortable${active ? " active" : ""}${align === "right" ? " num" : ""}`}
+      onClick={() => onSort(field)}
+      aria-sort={active ? (sort.dir === "asc" ? "ascending" : "descending") : "none"}
+    >
+      <span className="th-inner">
+        <span>{label}</span>
+        {active ? (
+          sort.dir === "asc" ? <ArrowUp size={12} /> : <ArrowDown size={12} />
+        ) : (
+          <ChevronsUpDown size={12} className="th-idle" />
+        )}
+      </span>
+    </th>
+  );
+}
+
+type RankingRow = BenchmarkAggregate & { experimentId: string };
+
+const RANKING_ACCESSORS: Accessors<RankingRow> = {
+  model: (r) => formatCompactModel(r.model),
+  quorum: (r) => r.quorum,
+  maxIterations: (r) => r.maxIterations,
+  okCount: (r) => r.okCount,
+  averageDeterministicScore: (r) => r.averageDeterministicScore,
+  averageOverallScore: (r) => r.averageOverallScore,
+  averageCostUsd: (r) => r.averageCostUsd,
+  averageTokens: (r) => r.averageTokens,
+  mistakes: (r) => r.criticalMistakes * 1000 + r.totalMistakes,
+  costBenefitScore: (r) => r.costBenefitScore
+};
+
+const RUN_ACCESSORS: Accessors<BenchmarkRunSummary> = {
+  scenarioTitle: (r) => r.scenarioTitle,
+  difficulty: (r) => DIFFICULTY_RANK[r.difficulty] ?? 99,
+  model: (r) => formatCompactModel(r.model),
+  quorum: (r) => r.quorum,
+  iterations: (r) => r.iterations,
+  status: (r) => r.status,
+  deterministicScore: (r) => r.deterministicScore,
+  overallScore: (r) => r.overallScore,
+  estimatedCostUsd: (r) => r.estimatedCostUsd,
+  costSource: (r) => r.costSource,
+  mistakes: (r) => r.criticalMistakeCount * 1000 + r.mistakeCount
+};
+
+interface MistakeRow {
+  code: string;
+  severity: BenchmarkMistake["severity"];
+  count: number;
+  example: string;
+}
+
+const MISTAKE_ACCESSORS: Accessors<MistakeRow> = {
+  code: (r) => r.code,
+  severity: (r) => SEVERITY_RANK[r.severity] ?? 99,
+  count: (r) => r.count,
+  example: (r) => r.example
+};
+
 function AnalyticsView({
   experiments,
   scenarios,
+  defaultEvaluator,
   onRefresh,
+  onClear,
   onRunBenchmark,
   onCancelBenchmark,
+  onOpenRun,
   isBenchmarkRunning,
   benchmarkEvents,
   benchmarkError
 }: {
   experiments: BenchmarkExperiment[];
   scenarios: BenchmarkScenarioSummary[];
+  defaultEvaluator: string;
   onRefresh: () => void;
+  onClear: () => void;
   onRunBenchmark: (request: BenchmarkRequest) => void;
   onCancelBenchmark: () => void;
+  onOpenRun: (run: BenchmarkRunSummary) => void;
   isBenchmarkRunning: boolean;
   benchmarkEvents: BenchmarkProgressEvent[];
   benchmarkError: string;
@@ -734,6 +908,61 @@ function AnalyticsView({
     })
     .slice(0, 8);
 
+  // Aggregate deterministic mistake labels across the latest experiment so the
+  // most common failure modes are obvious targets for prompt tuning.
+  const topMistakes = useMemo(() => {
+    const counts = new Map<string, { code: string; severity: BenchmarkMistake["severity"]; count: number; example: string }>();
+    for (const run of latestRuns) {
+      for (const mistake of run.mistakes ?? []) {
+        const existing = counts.get(mistake.code);
+        if (existing) {
+          existing.count += 1;
+        } else {
+          counts.set(mistake.code, { code: mistake.code, severity: mistake.severity, count: 1, example: mistake.message });
+        }
+      }
+    }
+    const severityRank = { critical: 0, major: 1, minor: 2 } as const;
+    return Array.from(counts.values()).sort(
+      (a, b) => b.count - a.count || severityRank[a.severity] - severityRank[b.severity]
+    );
+  }, [latestRuns]);
+
+  // Calibrate the pre-flight cost estimate from real traced runs: average the
+  // actual cost per ok run per model across every experiment. Far more accurate
+  // than the token heuristic once any real data exists.
+  const costCalibration = useMemo(() => {
+    const sums = new Map<string, { cost: number; count: number }>();
+    for (const experiment of experiments) {
+      for (const run of experiment.runs) {
+        if (run.status !== "ok" || run.costSource !== "traced" || typeof run.estimatedCostUsd !== "number") continue;
+        const entry = sums.get(run.model) ?? { cost: 0, count: 0 };
+        entry.cost += run.estimatedCostUsd;
+        entry.count += 1;
+        sums.set(run.model, entry);
+      }
+    }
+    const result: Record<string, number> = {};
+    for (const [model, entry] of sums) {
+      if (entry.count > 0) result[model] = entry.cost / entry.count;
+    }
+    return result;
+  }, [experiments]);
+
+  // Points for the cost-vs-quality scatter (one per config in the best list).
+  const scatterPoints = best
+    .filter((aggregate) => typeof aggregate.averageCostUsd === "number" && typeof aggregate.averageDeterministicScore === "number")
+    .map((aggregate) => ({
+      model: aggregate.model,
+      label: `${formatCompactModel(aggregate.model)} · Q${aggregate.quorum} · ${aggregate.maxIterations} iter`,
+      cost: aggregate.averageCostUsd as number,
+      score: aggregate.averageDeterministicScore as number
+    }));
+
+  const ranking = useSortedRows(best, RANKING_ACCESSORS, { key: "costBenefitScore", dir: "desc" });
+  const runs = useSortedRows(latestRuns, RUN_ACCESSORS, { key: "scenarioTitle", dir: "asc" });
+  const mistakes = useSortedRows(topMistakes, MISTAKE_ACCESSORS, { key: "count", dir: "desc" });
+
   return (
     <main className="analytics-shell">
       <header className="analytics-header">
@@ -747,6 +976,18 @@ function AnalyticsView({
           <button className="btn-secondary" onClick={onRefresh} disabled={isBenchmarkRunning}>
             <RefreshCw size={14} />
             <span>Refresh</span>
+          </button>
+          <button
+            className="btn-secondary"
+            onClick={() => {
+              if (window.confirm("Clear all benchmark analytics? This permanently deletes stored results.")) {
+                onClear();
+              }
+            }}
+            disabled={isBenchmarkRunning || experiments.length === 0}
+          >
+            <Trash2 size={14} />
+            <span>Clear</span>
           </button>
           {isBenchmarkRunning ? (
             <button className="btn-danger" onClick={onCancelBenchmark}>
@@ -798,14 +1039,57 @@ function AnalyticsView({
               <strong>{experiments.reduce((sum, experiment) => sum + experiment.runs.length, 0)}</strong>
             </div>
             <div>
-              <span className="metric-label">Latest</span>
-              <strong>{latest ? formatDateTime(latest.createdAt) : "-"}</strong>
-            </div>
-            <div>
               <span className="metric-label">Best deterministic</span>
               <strong>{formatNullable(best[0]?.averageDeterministicScore, "")}</strong>
             </div>
+            <div>
+              <span className="metric-label">Judge</span>
+              <strong>{latest?.evaluatorModel ? formatCompactModel(latest.evaluatorModel) : "mixed"}</strong>
+            </div>
+            <div>
+              <span className="metric-label">Prompts</span>
+              <strong>{latest?.promptHash ?? "—"}</strong>
+            </div>
           </section>
+
+          <section className="analytics-section">
+            <div className="section-title-row">
+              <h2>Cost vs quality</h2>
+              <span>{scatterPoints.length} configuration{scatterPoints.length === 1 ? "" : "s"}</span>
+            </div>
+            <ScatterChart points={scatterPoints} />
+          </section>
+
+          {topMistakes.length > 0 && (
+            <section className="analytics-section">
+              <div className="section-title-row">
+                <h2>Top mistakes</h2>
+                <span>latest run · prompt-tuning targets</span>
+              </div>
+              <div className="data-table-wrap">
+                <table className="data-table">
+                  <thead>
+                    <tr>
+                      <SortTh label="Mistake" field="code" sort={mistakes.sort} onSort={mistakes.onSort} />
+                      <SortTh label="Severity" field="severity" sort={mistakes.sort} onSort={mistakes.onSort} />
+                      <SortTh label="Count" field="count" sort={mistakes.sort} onSort={mistakes.onSort} align="right" />
+                      <SortTh label="Example" field="example" sort={mistakes.sort} onSort={mistakes.onSort} />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {mistakes.sorted.map((mistake) => (
+                      <tr key={mistake.code}>
+                        <td>{mistake.code}</td>
+                        <td><span className={`status-pill severity-${mistake.severity}`}>{mistake.severity}</span></td>
+                        <td className="num">{mistake.count}</td>
+                        <td className="mistake-example">{mistake.example}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          )}
 
           <section className="analytics-section">
             <div className="section-title-row">
@@ -816,31 +1100,31 @@ function AnalyticsView({
               <table className="data-table">
                 <thead>
                   <tr>
-                    <th>Model</th>
-                    <th>Q</th>
-                    <th>Iter</th>
-                    <th>Runs</th>
-                    <th>Deterministic</th>
-                    <th>LLM score</th>
-                    <th>Avg cost</th>
-                    <th>Tokens</th>
-                    <th>Mistakes</th>
-                    <th>Value</th>
+                    <SortTh label="Model" field="model" sort={ranking.sort} onSort={ranking.onSort} />
+                    <SortTh label="Q" field="quorum" sort={ranking.sort} onSort={ranking.onSort} align="right" />
+                    <SortTh label="Iter" field="maxIterations" sort={ranking.sort} onSort={ranking.onSort} align="right" />
+                    <SortTh label="Runs" field="okCount" sort={ranking.sort} onSort={ranking.onSort} align="right" />
+                    <SortTh label="Deterministic" field="averageDeterministicScore" sort={ranking.sort} onSort={ranking.onSort} align="right" />
+                    <SortTh label="LLM score" field="averageOverallScore" sort={ranking.sort} onSort={ranking.onSort} align="right" />
+                    <SortTh label="Avg cost" field="averageCostUsd" sort={ranking.sort} onSort={ranking.onSort} align="right" />
+                    <SortTh label="Tokens" field="averageTokens" sort={ranking.sort} onSort={ranking.onSort} align="right" />
+                    <SortTh label="Mistakes" field="mistakes" sort={ranking.sort} onSort={ranking.onSort} align="right" />
+                    <SortTh label="Value" field="costBenefitScore" sort={ranking.sort} onSort={ranking.onSort} align="right" />
                   </tr>
                 </thead>
                 <tbody>
-                  {best.map((aggregate) => (
+                  {ranking.sorted.map((aggregate) => (
                     <tr key={`${aggregate.experimentId}-${aggregate.model}-${aggregate.quorum}-${aggregate.maxIterations}`}>
                       <td>{formatCompactModel(aggregate.model)}</td>
-                      <td>{aggregate.quorum}</td>
-                      <td>{aggregate.maxIterations}</td>
-                      <td>{aggregate.okCount}/{aggregate.runCount}</td>
-                      <td>{formatNullable(aggregate.averageDeterministicScore, "%")}</td>
-                      <td>{formatNullable(aggregate.averageOverallScore, "/5")}</td>
-                      <td>{formatCost(aggregate.averageCostUsd)}</td>
-                      <td>{formatNumber(aggregate.averageTokens)}</td>
-                      <td>{aggregate.criticalMistakes} critical / {aggregate.totalMistakes} total</td>
-                      <td>{formatNullable(aggregate.costBenefitScore, "")}</td>
+                      <td className="num">{aggregate.quorum}</td>
+                      <td className="num">{aggregate.maxIterations}</td>
+                      <td className="num">{aggregate.okCount}/{aggregate.runCount}</td>
+                      <td className="num">{formatNullable(aggregate.averageDeterministicScore, "%")}</td>
+                      <td className="num">{formatNullable(aggregate.averageOverallScore, "/5")}</td>
+                      <td className="num">{formatCost(aggregate.averageCostUsd)}</td>
+                      <td className="num">{formatNumber(aggregate.averageTokens)}</td>
+                      <td className="num">{aggregate.criticalMistakes} crit / {aggregate.totalMistakes} total</td>
+                      <td className="num">{formatNullable(aggregate.costBenefitScore, "")}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -857,35 +1141,49 @@ function AnalyticsView({
               <table className="data-table">
                 <thead>
                   <tr>
-                    <th>Scenario</th>
-                    <th>Difficulty</th>
-                    <th>Model</th>
-                    <th>Q</th>
-                    <th>Iter</th>
-                    <th>Status</th>
-                    <th>Deterministic</th>
-                    <th>Score</th>
-                    <th>Cost</th>
-                    <th>Cost source</th>
-                    <th>Mistakes</th>
+                    <SortTh label="Scenario" field="scenarioTitle" sort={runs.sort} onSort={runs.onSort} />
+                    <SortTh label="Difficulty" field="difficulty" sort={runs.sort} onSort={runs.onSort} />
+                    <SortTh label="Model" field="model" sort={runs.sort} onSort={runs.onSort} />
+                    <SortTh label="Q" field="quorum" sort={runs.sort} onSort={runs.onSort} align="right" />
+                    <SortTh label="Iter" field="iterations" sort={runs.sort} onSort={runs.onSort} align="right" />
+                    <SortTh label="Status" field="status" sort={runs.sort} onSort={runs.onSort} />
+                    <SortTh label="Deterministic" field="deterministicScore" sort={runs.sort} onSort={runs.onSort} align="right" />
+                    <SortTh label="Score" field="overallScore" sort={runs.sort} onSort={runs.onSort} align="right" />
+                    <SortTh label="Cost" field="estimatedCostUsd" sort={runs.sort} onSort={runs.onSort} align="right" />
+                    <SortTh label="Cost source" field="costSource" sort={runs.sort} onSort={runs.onSort} />
+                    <SortTh label="Mistakes" field="mistakes" sort={runs.sort} onSort={runs.onSort} align="right" />
+                    <th aria-label="Open in planner" />
                   </tr>
                 </thead>
                 <tbody>
-                  {latestRuns.map((run) => (
+                  {runs.sorted.map((run) => (
                     <tr key={`${run.model}-${run.quorum}-${run.maxIterations}-${run.scenarioId}`}>
                       <td>{run.scenarioTitle}</td>
                       <td>{run.difficulty}</td>
                       <td>{formatCompactModel(run.model)}</td>
-                      <td>{run.quorum}</td>
-                      <td>{run.iterations ?? "-"}</td>
+                      <td className="num">{run.quorum}</td>
+                      <td className="num">{run.iterations ?? "-"}</td>
                       <td>
                         <span className={`status-pill status-${run.status}`}>{run.status}</span>
                       </td>
-                      <td>{formatNullable(run.deterministicScore, "%")}</td>
-                      <td>{formatNullable(run.overallScore, "/5")}</td>
-                      <td>{formatCost(run.estimatedCostUsd)}</td>
+                      <td className="num">{formatNullable(run.deterministicScore, "%")}</td>
+                      <td className="num">{formatNullable(run.overallScore, "/5")}</td>
+                      <td className="num">{formatCost(run.estimatedCostUsd)}</td>
                       <td>{formatCostSource(run.costSource)}</td>
-                      <td>{run.criticalMistakeCount} critical / {run.mistakeCount} total</td>
+                      <td className="num">{run.criticalMistakeCount} crit / {run.mistakeCount} total</td>
+                      <td className="row-action">
+                        {run.status === "ok" && run.jsonPath ? (
+                          <button
+                            type="button"
+                            className="open-run-btn"
+                            onClick={() => onOpenRun(run)}
+                            title="Open this schedule in the Planner"
+                          >
+                            <CalendarPlus size={13} />
+                            <span>Open</span>
+                          </button>
+                        ) : null}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -897,6 +1195,8 @@ function AnalyticsView({
       {runModalOpen && (
         <BenchmarkRunModal
           scenarios={scenarios}
+          defaultEvaluator={defaultEvaluator}
+          costCalibration={costCalibration}
           onClose={() => setRunModalOpen(false)}
           onRun={(request) => {
             setRunModalOpen(false);
@@ -908,12 +1208,103 @@ function AnalyticsView({
   );
 }
 
+const CHART_PALETTE = ["#6366f1", "#10b981", "#f59e0b", "#ef4444", "#0ea5e9", "#a855f7"];
+
+function ScatterChart({ points }: { points: Array<{ model: string; label: string; cost: number; score: number }> }) {
+  if (points.length === 0) {
+    return <div className="chart-empty">No traced cost/score pairs yet.</div>;
+  }
+
+  const width = 680;
+  const height = 300;
+  const pad = { left: 64, right: 28, top: 24, bottom: 52 };
+  const plotW = width - pad.left - pad.right;
+  const plotH = height - pad.top - pad.bottom;
+
+  // Give the costliest point ~12% headroom so it never sits on the right edge.
+  const maxCost = Math.max(...points.map((p) => p.cost), 0.0001) * 1.12;
+  const x = (cost: number) => pad.left + (cost / maxCost) * plotW;
+  const y = (score: number) => pad.top + (1 - score / 100) * plotH; // score is 0–100
+
+  // Stable color per distinct model.
+  const models = Array.from(new Set(points.map((p) => p.model)));
+  const colorOf = (model: string) => CHART_PALETTE[models.indexOf(model) % CHART_PALETTE.length];
+
+  const yTicks = [0, 25, 50, 75, 100];
+  const xTicks = [0, maxCost / 2, maxCost];
+  const axisY = height - pad.bottom;
+
+  return (
+    <div className="chart-wrap">
+      <svg viewBox={`0 0 ${width} ${height}`} className="scatter" role="img" aria-label="Cost versus deterministic quality">
+        {/* horizontal gridlines + y ticks */}
+        {yTicks.map((tick) => (
+          <g key={tick}>
+            <line x1={pad.left} y1={y(tick)} x2={width - pad.right} y2={y(tick)} className="grid" />
+            <text x={pad.left - 10} y={y(tick) + 3} textAnchor="end" className="tick">{tick}</text>
+          </g>
+        ))}
+
+        {/* x ticks (cost) */}
+        {xTicks.map((tick, i) => (
+          <text key={i} x={x(tick)} y={axisY + 18} textAnchor={i === 0 ? "start" : i === xTicks.length - 1 ? "end" : "middle"} className="tick">
+            {formatCost(tick)}
+          </text>
+        ))}
+
+        {/* axes */}
+        <line x1={pad.left} y1={axisY} x2={width - pad.right} y2={axisY} className="axis" />
+        <line x1={pad.left} y1={pad.top} x2={pad.left} y2={axisY} className="axis" />
+
+        {/* axis labels */}
+        <text x={pad.left + plotW / 2} y={height - 8} textAnchor="middle" className="axis-label">cost per run (USD) →</text>
+        <text
+          transform={`rotate(-90, 18, ${pad.top + plotH / 2})`}
+          x={18}
+          y={pad.top + plotH / 2}
+          textAnchor="middle"
+          className="axis-label"
+        >
+          ← quality (0–100)
+        </text>
+
+        {/* points */}
+        {points.map((point) => (
+          <g key={point.label}>
+            <circle cx={x(point.cost)} cy={y(point.score)} r={6} className="dot" style={{ fill: colorOf(point.model) }}>
+              <title>{`${point.label}\n${formatCost(point.cost)} · ${Math.round(point.score)}/100`}</title>
+            </circle>
+            <text x={x(point.cost)} y={y(point.score) - 11} textAnchor="middle" className="dot-label">
+              {Math.round(point.score)}
+            </text>
+          </g>
+        ))}
+      </svg>
+      <div className="chart-footer">
+        <div className="chart-legend-models">
+          {models.map((model) => (
+            <span key={model} className="legend-item">
+              <span className="legend-swatch" style={{ background: colorOf(model) }} />
+              {formatCompactModel(model)}
+            </span>
+          ))}
+        </div>
+        <span className="chart-hint">Top-left is best: higher quality, lower cost.</span>
+      </div>
+    </div>
+  );
+}
+
 function BenchmarkRunModal({
   scenarios,
+  defaultEvaluator,
+  costCalibration,
   onRun,
   onClose
 }: {
   scenarios: BenchmarkScenarioSummary[];
+  defaultEvaluator: string;
+  costCalibration: Record<string, number>;
   onRun: (request: BenchmarkRequest) => void;
   onClose: () => void;
 }) {
@@ -924,9 +1315,46 @@ function BenchmarkRunModal({
   const [quorums, setQuorums] = useState<number[]>([3, 5]);
   const [iterations, setIterations] = useState<number[]>([2, 3]);
   const [scope, setScope] = useState<"quick" | "all">("quick");
+  const [evaluatorModel, setEvaluatorModel] = useState<string>(
+    BENCHMARK_MODEL_OPTIONS.includes(defaultEvaluator) ? defaultEvaluator : BENCHMARK_MODEL_OPTIONS[0]
+  );
+  const [budget, setBudget] = useState<string>("");
   const selectedScenarios = scope === "all" ? scenarios : scenarios.slice(0, 3);
   const runCount = models.length * quorums.length * iterations.length * selectedScenarios.length;
-  const disabled = runCount === 0;
+
+  // Pre-flight estimate. Prefer real per-model cost calibrated from past traced
+  // runs; fall back to the token heuristic for models with no history. The real
+  // cap is still enforced against traced usage during the run.
+  const estimate = useMemo(() => {
+    let total = 0;
+    let known = true;
+    let calibrated = false;
+    let heuristic = false;
+    for (const model of models) {
+      const calibratedCost = costCalibration[model];
+      for (const iter of iterations) {
+        let perRun: number | null;
+        if (typeof calibratedCost === "number") {
+          perRun = calibratedCost;
+          calibrated = true;
+        } else {
+          perRun = estimateRunCostUsd(model, iter);
+          if (perRun !== null) heuristic = true;
+        }
+        if (perRun === null) {
+          known = false;
+          continue;
+        }
+        total += perRun * quorums.length * selectedScenarios.length;
+      }
+    }
+    return { total, known, calibrated, heuristic };
+  }, [models, iterations, quorums.length, selectedScenarios.length, costCalibration]);
+
+  const budgetValue = budget.trim() === "" ? null : Number(budget);
+  const budgetInvalid = budgetValue !== null && (!Number.isFinite(budgetValue) || budgetValue <= 0);
+  const overBudget = budgetValue !== null && !budgetInvalid && estimate.known && estimate.total > budgetValue;
+  const disabled = runCount === 0 || budgetInvalid;
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -946,7 +1374,9 @@ function BenchmarkRunModal({
       scenarios: selectedScenarios.map((scenario) => scenario.id),
       retries: 1,
       delayMs: 0,
-      forceFree: false
+      forceFree: false,
+      evaluatorModel,
+      maxBudgetUsd: budgetValue ?? undefined
     });
   }
 
@@ -969,8 +1399,23 @@ function BenchmarkRunModal({
         </header>
         <div className="modal-body benchmark-modal-body">
           <div className="benchmark-run-count">
-            <span>Planned runs</span>
-            <strong>{runCount}</strong>
+            <div>
+              <span>Planned runs</span>
+              <strong>{runCount}</strong>
+            </div>
+            <div>
+              <span>Est. cost</span>
+              <strong className={overBudget ? "over-budget" : ""}>
+                {estimate.known ? `≈ ${formatCost(estimate.total)}` : "unknown"}
+              </strong>
+              <small className="estimate-basis">
+                {estimate.calibrated && !estimate.heuristic
+                  ? "from past runs"
+                  : estimate.calibrated && estimate.heuristic
+                    ? "mixed: past runs + heuristic"
+                    : "rough heuristic"}
+              </small>
+            </div>
           </div>
 
           <div className="field">
@@ -1036,6 +1481,41 @@ function BenchmarkRunModal({
               </div>
             </div>
           </div>
+
+          <div className="benchmark-options-row">
+            <div className="field">
+              <span className="meta-label">Evaluator (judge)</span>
+              <Dropdown
+                value={evaluatorModel}
+                options={BENCHMARK_MODEL_OPTIONS}
+                onChange={setEvaluatorModel}
+                format={(m) => formatCompactModel(m)}
+              />
+              <div className="field-hint">One fixed judge scores every model so results stay comparable.</div>
+            </div>
+
+            <div className="field">
+              <label className="meta-label" htmlFor="benchmark-budget">Budget cap (USD)</label>
+              <input
+                id="benchmark-budget"
+                className="text-input"
+                type="number"
+                min="0"
+                step="0.01"
+                value={budget}
+                onChange={(e) => setBudget(e.target.value)}
+                placeholder="no cap"
+              />
+              <div className="field-hint">Optional. The matrix stops before a run that would exceed this.</div>
+            </div>
+          </div>
+
+          {budgetInvalid && <div className="warn">Budget cap must be a positive number.</div>}
+          {overBudget && (
+            <div className="warn">
+              Estimated cost ({formatCost(estimate.total)}) exceeds your cap ({formatCost(budgetValue!)}). The run will stop early when the cap is hit.
+            </div>
+          )}
 
           {scenarios.length === 0 && (
             <div className="warn">No benchmark scenarios were found. Check benchmarks/scenarios.json.</div>
@@ -1315,14 +1795,12 @@ function ResultView({
 }) {
   const [exportOpen, setExportOpen] = useState(false);
   const [concernsOpen, setConcernsOpen] = useState(false);
-  const [evaluationOpen, setEvaluationOpen] = useState(false);
   const [activeBlock, setActiveBlock] = useState<CalendarBlock | null>(null);
   const exportRef = useRef<HTMLDivElement>(null);
   const concernsRef = useRef<HTMLDivElement>(null);
-  const evaluationRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!exportOpen && !concernsOpen && !evaluationOpen) return;
+    if (!exportOpen && !concernsOpen) return;
     const close = (e: MouseEvent) => {
       if (exportRef.current && !exportRef.current.contains(e.target as Node)) {
         setExportOpen(false);
@@ -1330,18 +1808,14 @@ function ResultView({
       if (concernsRef.current && !concernsRef.current.contains(e.target as Node)) {
         setConcernsOpen(false);
       }
-      if (evaluationRef.current && !evaluationRef.current.contains(e.target as Node)) {
-        setEvaluationOpen(false);
-      }
     };
     document.addEventListener("mousedown", close);
     return () => document.removeEventListener("mousedown", close);
-  }, [exportOpen, concernsOpen, evaluationOpen]);
+  }, [exportOpen, concernsOpen]);
 
   const approvals = result.critiques.filter(
     (c) => c.approval === "approve" || c.approval === "approve_with_minor_concerns"
   ).length;
-  const evaluation = result.evaluation;
   const runCost = result.usage?.estimatedCostUsd;
 
   const handleEventClick = (arg: EventClickArg) => {
@@ -1356,16 +1830,6 @@ function ResultView({
           <h2>Plan</h2>
           <p>
             {formatWindow(result.finalCalendar.planning_window.start_date, result.finalCalendar.planning_window.end_date)}
-            <span className="dot">·</span>
-            {approvals}/5 approvals
-            <span className="dot">·</span>
-            {result.validation.valid ? "clean" : `${result.validation.violations.length} issue(s) logged`}
-            {evaluation && (
-              <>
-                <span className="dot">·</span>
-                quality {evaluation.overall_score}/5
-              </>
-            )}
             {typeof runCost === "number" && (
               <>
                 <span className="dot">·</span>
@@ -1375,110 +1839,6 @@ function ResultView({
           </p>
         </div>
         <div className="actions">
-          {evaluation && (
-            <div className="agent-notes-wrap" ref={evaluationRef}>
-              <button
-                className="agent-notes-trigger"
-                onClick={() => setEvaluationOpen((v) => !v)}
-                aria-expanded={evaluationOpen}
-                aria-haspopup="menu"
-                title="Schedule quality"
-              >
-                Quality
-                <ChevronDown size={11} className={`chev ${evaluationOpen ? "open" : ""}`} />
-              </button>
-              {evaluationOpen && (
-                <div className="agent-notes-menu" role="menu">
-                  <div className="agent-notes-head">
-                    <span>Schedule quality</span>
-                    <span>{evaluation.overall_score}/5</span>
-                  </div>
-                  <div className="evaluation-composite">
-                    <div>
-                      <span>Final</span>
-                      <strong>{evaluation.overall_score}/5</strong>
-                    </div>
-                    <div>
-                      <span>Model</span>
-                      <strong>{evaluation.model_score ?? evaluation.overall_score}/5</strong>
-                    </div>
-                    <div>
-                      <span>Hard</span>
-                      <strong>{evaluation.hard_score ?? 0}/5</strong>
-                    </div>
-                  </div>
-                  <div className="evaluation-models">
-                    <span>Planner: {formatCompactModel(evaluation.planner_model)}</span>
-                    <span>Evaluator: {formatCompactModel(evaluation.evaluator_model)}</span>
-                  </div>
-                  {evaluation.hard_metrics && (
-                    <div className="evaluation-hard">
-                      <div className="evaluation-subhead">
-                        <span>Hard constraints</span>
-                        <span>{evaluation.hard_metrics.score}/100</span>
-                      </div>
-                      {evaluation.hard_metrics.metrics.map((metric) => (
-                        <div className="evaluation-score" key={metric.name}>
-                          <div>
-                            <strong>{formatMetricName(metric.name)}</strong>
-                            <span>{metric.explanation}</span>
-                          </div>
-                          <b>{formatMetricValue(metric.name, metric.value)}</b>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  <div className="evaluation-scores">
-                    <div className="evaluation-subhead">
-                      <span>Model judgement</span>
-                      <span>{evaluation.model_score ?? evaluation.overall_score}/5</span>
-                    </div>
-                    {evaluation.dimension_scores.map((score) => (
-                      <div className="evaluation-score" key={score.dimension}>
-                        <div>
-                          <strong>{formatDimension(score.dimension)}</strong>
-                          <span>{humanize(score.rationale, taskNameMap)}</span>
-                        </div>
-                        <b>{score.score}/5</b>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="agent-note evaluation-section">
-                    <div className="agent-note-top">
-                      <strong>Strengths</strong>
-                    </div>
-                    <div className="agent-note-list">
-                      {evaluation.strengths.map((item, index) => (
-                        <div className="agent-note-item" key={`strength-${index}`}>
-                          <p>{humanize(item, taskNameMap)}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="agent-note evaluation-section">
-                    <div className="agent-note-top">
-                      <strong>Weaknesses</strong>
-                    </div>
-                    <div className="agent-note-list">
-                      {evaluation.weaknesses.map((item, index) => (
-                        <div className="agent-note-item" key={`weakness-${index}`}>
-                          <p>{humanize(item, taskNameMap)}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="agent-note evaluation-section">
-                    <div className="agent-note-top">
-                      <strong>Recommendation</strong>
-                    </div>
-                    <div className="agent-note-item">
-                      <p>{humanize(evaluation.recommendation, taskNameMap)}</p>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
           <div className="agent-notes-wrap" ref={concernsRef}>
             <button
               className="agent-notes-trigger"
@@ -1715,33 +2075,6 @@ function formatWindow(start: string, end: string): string {
       ...(includeYear ? { year: "numeric" } : {})
     });
   return `${fmt(s, !sameYear)} → ${fmt(e, true)}`;
-}
-
-function formatDimension(dimension: string): string {
-  return dimension
-    .split("_")
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(" ");
-}
-
-function formatMetricName(metric: string): string {
-  const names: Record<string, string> = {
-    generation_time_seconds: "Generation speed",
-    rejection_count: "Rejections",
-    critical_count: "Critical issues",
-    major_count: "Major issues",
-    deadline_violation_count: "Deadline violations",
-    task_coverage_ratio: "Task coverage",
-    availability_overrun_hours: "Availability overrun"
-  };
-  return names[metric] ?? formatDimension(metric);
-}
-
-function formatMetricValue(metric: string, value: number): string {
-  if (metric === "generation_time_seconds") return `${value}s`;
-  if (metric === "task_coverage_ratio") return `${Math.round(value * 100)}%`;
-  if (metric === "availability_overrun_hours") return `${value}h`;
-  return String(value);
 }
 
 function formatCompactModel(model: string): string {
@@ -2102,7 +2435,20 @@ function SettingsModal({
               onChange={(m) => setDraft({ ...draft, model: m })}
               format={formatModel}
             />
-            <div className="field-hint">OpenRouter model used to create schedules and evaluate the final result.</div>
+            <div className="field-hint">OpenRouter model used to create schedules.</div>
+          </div>
+
+          <div className="field">
+            <span className="meta-label">Evaluator (judge) model</span>
+            <Dropdown
+              value={draft.evaluatorModel ?? draft.model}
+              options={BENCHMARK_MODEL_OPTIONS}
+              onChange={(m) => setDraft({ ...draft, evaluatorModel: m })}
+              format={formatModel}
+            />
+            <div className="field-hint">
+              Fixed judge that scores schedules during benchmarks. Keep this the same across runs so model scores stay comparable.
+            </div>
           </div>
 
           <div className="field">

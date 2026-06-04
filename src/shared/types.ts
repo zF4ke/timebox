@@ -21,6 +21,12 @@ export interface PlanningRequest {
   model?: string;
   evaluatorModel?: string;
   planningWindowOverride?: PlanningWindowOverride;
+  /**
+   * Run the LLM schedule evaluator after planning. Defaults to true.
+   * Interactive planner runs pass false so the diagnostic score (and its
+   * extra LLM call / cost) stays exclusive to the benchmarking section.
+   */
+  evaluate?: boolean;
 }
 
 export interface LlmCallTrace {
@@ -251,7 +257,8 @@ export interface PlanningResult {
   finalCalendar: CalendarProposal;
   critiques: AgentCritique[];
   validation: ConstraintValidation;
-  evaluation: ScheduleEvaluation;
+  /** Diagnostic schedule score. Only computed for benchmark runs and imports. */
+  evaluation?: ScheduleEvaluation;
   usage: PlanningUsageSummary;
   exports: {
     json: string;
@@ -305,6 +312,10 @@ export interface BenchmarkRunSummary {
   totalTokens: number | null;
   mistakeCount: number;
   criticalMistakeCount: number;
+  /** Deterministic mistake labels for this run, used to aggregate common failures. */
+  mistakes: BenchmarkMistake[];
+  /** The fixed judge model that scored this run (may differ from the model under test). */
+  evaluatorModel: string | null;
   jsonPath: string;
   icsPath: string;
   error: string;
@@ -332,6 +343,14 @@ export interface BenchmarkExperiment {
   resultsDir: string;
   runs: BenchmarkRunSummary[];
   aggregates: BenchmarkAggregate[];
+  /** Fixed judge model used to score every run in this experiment. */
+  evaluatorModel?: string;
+  /** Hash of the prompt files in effect when this experiment ran. */
+  promptHash?: string;
+  /** Dollar cap requested for this experiment, if any. */
+  budgetUsd?: number;
+  /** True if the experiment was halted early by the budget cap. */
+  stoppedByBudget?: boolean;
 }
 
 export interface BenchmarkRequest {
@@ -343,6 +362,10 @@ export interface BenchmarkRequest {
   delayMs?: number;
   retries?: number;
   forceFree?: boolean;
+  /** Fixed judge model that scores every run. Defaults to the configured evaluator. */
+  evaluatorModel?: string;
+  /** Optional hard dollar cap. The matrix stops before a run that would exceed it. */
+  maxBudgetUsd?: number;
 }
 
 export type BenchmarkProgressPhase =
@@ -415,6 +438,8 @@ export interface PlannerApi {
   setConfig(config: AppConfig): Promise<void>;
   parseImport(content: string, filename: string): Promise<PlanningResult>;
   listBenchmarkExperiments(): Promise<BenchmarkExperiment[]>;
+  openBenchmarkRun(jsonPath: string, icsPath: string): Promise<PlanningResult | null>;
+  clearBenchmarkExperiments(): Promise<void>;
   listBenchmarkScenarios(): Promise<BenchmarkScenarioSummary[]>;
   runBenchmark(request: BenchmarkRequest, clientRunId?: string): Promise<BenchmarkExperiment>;
   cancelBenchmark(): Promise<void>;

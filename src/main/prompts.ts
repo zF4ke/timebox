@@ -1,3 +1,4 @@
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import type { AgentName } from "../shared/types";
@@ -31,3 +32,21 @@ export const AGENT_NAMES: AgentName[] = [
   "Wellbeing Agent",
   "Risk Agent"
 ];
+
+// A short, stable fingerprint of every prompt file currently in effect.
+// Stamped into benchmark manifests so a re-run after prompt tuning is
+// distinguishable from the runs that produced the old numbers.
+export function promptsHash(): string {
+  const files = fs
+    .readdirSync(PROMPTS_DIR)
+    .filter((file) => file.endsWith(".md"))
+    .sort();
+  const hash = crypto.createHash("sha256");
+  for (const file of files) {
+    hash.update(file);
+    hash.update("\0");
+    hash.update(fs.readFileSync(path.join(PROMPTS_DIR, file)));
+    hash.update("\0");
+  }
+  return hash.digest("hex").slice(0, 12);
+}

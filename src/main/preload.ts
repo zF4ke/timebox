@@ -56,6 +56,12 @@ const api: PlannerApi = {
   listBenchmarkExperiments(): Promise<BenchmarkExperiment[]> {
     return ipcRenderer.invoke("benchmark:list") as Promise<BenchmarkExperiment[]>;
   },
+  openBenchmarkRun(jsonPath: string, icsPath: string): Promise<PlanningResult | null> {
+    return ipcRenderer.invoke("benchmark:openRun", jsonPath, icsPath) as Promise<PlanningResult | null>;
+  },
+  clearBenchmarkExperiments(): Promise<void> {
+    return ipcRenderer.invoke("benchmark:clear") as Promise<void>;
+  },
   listBenchmarkScenarios(): Promise<BenchmarkScenarioSummary[]> {
     return ipcRenderer.invoke("benchmark:scenarios") as Promise<BenchmarkScenarioSummary[]>;
   },

@@ -6,6 +6,8 @@ export interface AppConfig {
   model: string;
   apiKey?: string;
   maxIterations?: number;
+  /** Fixed judge model used by the schedule evaluator / benchmarks. */
+  evaluatorModel?: string;
 }
 
 const DEFAULT_MODEL = "nvidia/nemotron-3-super-120b-a12b:free";
@@ -31,6 +33,9 @@ export function loadConfig(): AppConfig {
       }
       if (typeof parsed.maxIterations === "number") {
         config.maxIterations = parsed.maxIterations;
+      }
+      if (typeof parsed.evaluatorModel === "string" && parsed.evaluatorModel.trim()) {
+        config.evaluatorModel = parsed.evaluatorModel.trim();
       }
       return config;
     }

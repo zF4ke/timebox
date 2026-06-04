@@ -32,6 +32,21 @@ export function listBenchmarkExperiments(rootDir = defaultProjectRoot()): Benchm
   return experiments.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }
 
+export function clearBenchmarkExperiments(rootDir = defaultProjectRoot()): void {
+  for (const dirName of ["results", "benchmark-results"]) {
+    const dir = path.join(rootDir, dirName);
+    try {
+      if (fs.existsSync(dir)) {
+        // maxRetries/retryDelay ride out transient Windows/OneDrive file locks
+        // (EBUSY/EPERM) instead of failing the whole clear on the first locked file.
+        fs.rmSync(dir, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 });
+      }
+    } catch (err) {
+      console.error(`[benchmark] failed to clear ${dir}:`, err);
+    }
+  }
+}
+
 export function loadScenarios(rootDir = defaultProjectRoot()): BenchmarkScenario[] {
   const scenariosPath = path.join(rootDir, "benchmarks", "scenarios.json");
   if (!fs.existsSync(scenariosPath)) {
@@ -167,6 +182,8 @@ function legacyRowToRun(row: LegacySummaryRow, resultDir: string, scenarios: Ben
       totalTokens: null,
       mistakeCount: 1,
       criticalMistakeCount: 1,
+      mistakes: [],
+      evaluatorModel: null,
       jsonPath,
       icsPath,
       error: row.error
@@ -199,6 +216,8 @@ function legacyRowToRun(row: LegacySummaryRow, resultDir: string, scenarios: Ben
     totalTokens: tracedTokens ?? legacyUsage.tokens,
     mistakeCount: deterministic?.mistakeCount ?? 0,
     criticalMistakeCount: deterministic?.mistakes.filter((mistake) => mistake.severity === "critical").length ?? 0,
+    mistakes: deterministic?.mistakes ?? [],
+    evaluatorModel: result?.request.evaluatorModel ?? null,
     jsonPath,
     icsPath,
     error: ""

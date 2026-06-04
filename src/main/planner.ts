@@ -45,7 +45,7 @@ import { AGENT_NAMES, AGENT_PROMPTS, BASE_SYSTEM_PROMPT, SCHEDULE_EVALUATOR_PROM
 import { calendarSchema, critiqueSchema, interpreterSchema, scheduleEvaluationSchema, specialistSchema } from "./schemas";
 import { validateCalendar } from "./validation";
 
-interface ResolvedRequest extends Required<Omit<PlanningRequest, "planningWindowOverride">> {
+interface ResolvedRequest extends Required<Omit<PlanningRequest, "planningWindowOverride" | "evaluate">> {
   planningWindowOverride?: PlanningRequest["planningWindowOverride"];
 }
 
@@ -65,17 +65,12 @@ export function getPlannerDefaults(): PlannerDefaults {
     maxIterations: clampInteger(config.maxIterations ?? 3, 1, 5),
     timezone: systemTimezone(),
     model,
-    evaluatorModel: model,
+    // The judge defaults to the planner model only when none is configured.
+    // A fixed judge is what makes model_score comparable across models.
+    evaluatorModel: config.evaluatorModel?.trim() || model,
     hasApiKey: Boolean(config.apiKey?.trim())
   };
 }
-
-function parseNumber(value: string | undefined, defaultValue: number): number {
-  const parsed = Number(value);
-  return Number.isFinite(parsed) && parsed > 0 ? parsed : defaultValue;
-}
-
-
 
 export async function runPlanningPipeline(
   request: PlanningRequest,
@@ -190,39 +185,46 @@ export async function runPlanningPipeline(
     logAndEmit(onProgress, { phase: "decision", status: "done", summary: stopReason });
   }
 
-  const generationTimeSeconds = (Date.now() - runStartedAt) / 1000;
-  const hardMetrics = evaluateHardMetrics({
-    calendar: finalRecord.calendar,
-    critiques: finalRecord.critiques,
-    validation: finalRecord.validation,
-    interpreterOutput,
-    generationTimeSeconds
-  });
+  // The LLM schedule evaluator is a diagnostic used only for benchmarking.
+  // Interactive planner runs skip it (request.evaluate === false) so they don't
+  // pay for the extra evaluator call and never surface a quality score.
+  const shouldEvaluate = request.evaluate !== false;
+  let evaluation: ScheduleEvaluation | undefined;
+  if (shouldEvaluate) {
+    const generationTimeSeconds = (Date.now() - runStartedAt) / 1000;
+    const hardMetrics = evaluateHardMetrics({
+      calendar: finalRecord.calendar,
+      critiques: finalRecord.critiques,
+      validation: finalRecord.validation,
+      interpreterOutput,
+      generationTimeSeconds
+    });
 
-  logAndEmit(onProgress, {
-    phase: "evaluate",
-    status: "start",
-    iteration: finalRecord.calendar.calendar_version,
-    summary: `scoring final calendar with ${normalizedRequest.evaluatorModel}`
-  });
-  throwIfCancelled(signal);
-  const evaluation = await runScheduleEvaluator(
-    apiKey,
-    normalizedRequest,
-    interpreterOutput,
-    agentViews,
-    finalRecord,
-    hardMetrics,
-    stopReason,
-    onTrace,
-    signal
-  );
-  logAndEmit(onProgress, {
-    phase: "evaluate",
-    status: "done",
-    iteration: finalRecord.calendar.calendar_version,
-    summary: `overall ${evaluation.overall_score.toFixed(1)}/5`
-  });
+    logAndEmit(onProgress, {
+      phase: "evaluate",
+      status: "start",
+      iteration: finalRecord.calendar.calendar_version,
+      summary: `scoring final calendar with ${normalizedRequest.evaluatorModel}`
+    });
+    throwIfCancelled(signal);
+    evaluation = await runScheduleEvaluator(
+      apiKey,
+      normalizedRequest,
+      interpreterOutput,
+      agentViews,
+      finalRecord,
+      hardMetrics,
+      stopReason,
+      onTrace,
+      signal
+    );
+    logAndEmit(onProgress, {
+      phase: "evaluate",
+      status: "done",
+      iteration: finalRecord.calendar.calendar_version,
+      summary: `overall ${evaluation.overall_score.toFixed(1)}/5`
+    });
+  }
 
   const resultWithoutExports = {
     runId,
@@ -506,7 +508,8 @@ function normalizeRequest(request: PlanningRequest): ResolvedRequest {
     maxIterations: clampInteger(request.maxIterations ?? defaults.maxIterations, 1, 5),
     timezone: request.timezone?.trim() || defaults.timezone,
     model,
-    evaluatorModel: model,
+    // Fixed judge: prefer the explicit request judge, then the configured judge.
+    evaluatorModel: request.evaluatorModel?.trim() || defaults.evaluatorModel,
     planningWindowOverride: request.planningWindowOverride
   };
 }

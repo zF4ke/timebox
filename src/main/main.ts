@@ -4,7 +4,7 @@ import path from "node:path";
 import { importFromIcs, importFromJson } from "./import";
 import type { PlanningResult } from "../shared/types";
 import { loadConfig, saveConfig } from "./config";
-import { listBenchmarkExperiments, loadScenarios } from "./benchmarkAnalytics";
+import { clearBenchmarkExperiments, listBenchmarkExperiments, loadScenarios } from "./benchmarkAnalytics";
 import { runBenchmarkExperiment } from "./benchmark";
 import { getPlannerDefaults, runPlanningPipeline } from "./planner";
 import { deleteCalendar, listCalendars, loadCalendar, saveCalendar } from "./storage";
@@ -125,6 +125,27 @@ ipcMain.handle("import:parse", async (_event, content: string, filename: string)
 
 ipcMain.handle("benchmark:list", async () => {
   return listBenchmarkExperiments();
+});
+
+ipcMain.handle("benchmark:openRun", async (_event, jsonPath: string, icsPath: string): Promise<PlanningResult | null> => {
+  try {
+    if (!jsonPath || !fs.existsSync(jsonPath)) {
+      return null;
+    }
+    const raw = fs.readFileSync(jsonPath, "utf-8");
+    const parsed = JSON.parse(raw);
+    // Stored benchmark JSON is a PlanningResult without the `exports` field.
+    const result = (parsed.result ?? parsed) as Omit<PlanningResult, "exports">;
+    const ics = icsPath && fs.existsSync(icsPath) ? fs.readFileSync(icsPath, "utf-8") : "";
+    return { ...result, exports: { json: raw, ics } };
+  } catch (err) {
+    console.error("[main] benchmark:openRun failed:", err);
+    return null;
+  }
+});
+
+ipcMain.handle("benchmark:clear", async () => {
+  clearBenchmarkExperiments();
 });
 
 ipcMain.handle("benchmark:scenarios", async () => {

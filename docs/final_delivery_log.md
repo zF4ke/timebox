@@ -132,3 +132,126 @@ Chronological log for the final delivery benchmark and evaluation work.
   - `node dist-electron\main\benchmark.js --help` passed without API use.
   - Scenario fixture discovery found all 15 benchmark scenarios from the compiled Electron output.
   - `npm run dist` passed and produced `release-current\Timebox 0.1.0.exe`.
+
+## Planner / evaluation separation (2026-06-04)
+
+Goal: keep the diagnostic "quality" score exclusive to the benchmarking section,
+and remove score chrome from the Planner result view.
+
+- Added `evaluate?: boolean` to `PlanningRequest` (defaults true for backward
+  compatibility and benchmark runs). Interactive planner runs now pass
+  `evaluate: false`, so the pipeline skips the LLM schedule-evaluator call —
+  saving one model call (and its credits) on every normal plan.
+- Made `PlanningResult.evaluation` optional. The planner pipeline only computes
+  hard metrics + the evaluator when `evaluate !== false`.
+- Benchmark runner (`okRun`) now reads `result.evaluation` defensively.
+- App.tsx:
+  - Removed the "Quality" dropdown and the entire schedule-evaluation panel from
+    the Planner result header.
+  - Removed the `·5/5 approvals·N issue(s) logged·quality X/5` metadata line.
+    Kept the planning window and the green schedule cost.
+  - Sidebar saved-plan rows now show the model only (no score).
+  - Deleted now-dead helpers (`formatDimension`, `formatMetricName`,
+    `formatMetricValue`) and the evaluation CSS block.
+- Verification: `npm run typecheck`, `npm test` (11 passing), `npm run build` all passed.
+
+## Evaluation fairness + analytics depth (2026-06-04)
+
+Addressed the five gaps from the step-back review.
+
+1. **Fixed judge model (the big one).**
+   - `evaluatorModel` is no longer forced to equal the planner model. It now
+     comes from config (`AppConfig.evaluatorModel`) / the benchmark request, and
+     only falls back to the planner model when nothing is configured.
+   - Added an **Evaluator (judge) selector in Settings** and in the **Run
+     benchmark** modal. One fixed judge scores every model under test, so
+     `model_score` is finally comparable across models.
+   - `benchmark.runScenario` passes the fixed judge (not the model under test).
+     The judge is stamped into each experiment + manifest + run summary.
+2. **Mistake-improvement loop closed.**
+   - `BenchmarkRunSummary` now carries `mistakes[]`. A new **Top mistakes** panel
+     aggregates deterministic mistake codes across the latest experiment, sorted
+     by frequency then severity — direct prompt-tuning targets.
+3. **Charts.** Added a dependency-free inline-SVG **cost-vs-quality scatter**
+   (`ScatterChart`) in Analytics; up-and-left is better.
+4. **Prompt version stamp.** `promptsHash()` hashes the prompt `.md` files;
+   stamped into `manifest.json`, the experiment object, and shown in the
+   Analytics metric band so pre/post-tuning runs are distinguishable.
+5. **Budget guard.** `BenchmarkRequest.maxBudgetUsd` + a CLI `--max-budget` flag.
+   The runner tracks cumulative traced cost and stops before a run that would
+   exceed the cap (`stoppedByBudget`). The run modal shows a rough pre-flight
+   estimate and warns when it exceeds the entered cap.
+
+CLI additions: `--evaluator <model>`, `--max-budget <usd>`.
+
+Verification: `npm run typecheck`, `npm test` (11 passing), `npm run build` all
+passed. Visual check confirmed the run modal renders the judge selector, budget
+cap, live cost estimate, and the over-budget warning.
+
+## Estimate calibration + repo cleanup + rebuild (2026-06-04)
+
+- **Calibrated cost estimate.** The Run-benchmark modal now prefers the real
+  average traced cost-per-run per model (computed from every stored experiment)
+  and only falls back to the token heuristic for models with no history. A small
+  basis label shows "from past runs" / "mixed" / "rough heuristic".
+- **Codebase cleanup.**
+  - Deleted dead UI scaffold: `src/renderer/components/ui/*` (badge, button,
+    card, dialog, form) and `src/renderer/lib/utils.ts` — nothing imported them.
+  - Removed the 7 now-unused dependencies they pulled in: `@radix-ui/react-dialog`,
+    `@radix-ui/react-label`, `@radix-ui/react-separator`, `@radix-ui/react-slot`,
+    `class-variance-authority`, `clsx`, `tailwind-merge`.
+  - Consolidated the two release folders into a single `release/`
+    (electron-builder output renamed from `release-current/`), updated README,
+    and simplified `.gitignore`.
+- **Rebuilt executable:** `release/Timebox 0.1.0.exe` (portable, ~90 MB).
+- Verified: `npm run typecheck`, `npm test` (11 passing), `npm run build`,
+  `npm run dist` all passed; browser check confirmed the calibrated estimate
+  and basis label render.
+
+## Requirements compliance check (2026-06-04)
+
+Checked against `Project-AAMAS2026.pdf` (course) and the Group 45 proposal:
+- Track = **Agent Orchestration**; reproduces the **MACI** core idea
+  (planner → specialist critique → revision). ✓
+- All 5 proposal objectives implemented (NL interpretation w/ current date,
+  5 specialist agents, compromise reasoning, critique-driven revision,
+  quorum + no-critical + hard-constraint acceptance). ✓
+- Proposal's evaluation questions (quorum strictness/convergence, #revision
+  rounds, LLM-call cost = agents × iterations × scenarios) are now measurable
+  via the benchmark matrix. ✓
+- Final-delivery artifacts: full source ✓, README run instructions ✓,
+  executable ✓. **Still outstanding: the 4-page ACM report and 7-min
+  presentation** (content-only deliverables, not code).
+
+## Cost-vs-quality chart polish (2026-06-04)
+
+Fixed the scatter chart based on review feedback (y-label overlapping the "100"
+tick, no x-axis cost values, dots running to the edge):
+- Y-axis label is now a rotated vertical caption ("← quality (0–100)"), well
+  clear of the tick labels.
+- Added x-axis cost tick values ($0 / mid / max) and a centered "cost per run
+  (USD) →" caption.
+- Added ~12% headroom on the cost axis so the costliest point isn't on the edge.
+- Points are color-coded per model with a model legend below the chart, a numeric
+  score label above each dot, and a "top-left is best" hint.
+- Verified via DOM geometry in the browser (rotated label at x=18 vs "100" tick at
+  x=54; cost ticks present; 4 color dots + 4-model legend) using a temporary
+  in-memory fixture that was removed afterward.
+
+## Sortable analytics tables + open-run-in-planner (2026-06-04)
+
+- **Sortable tables.** Added a small generic sort layer (`useSortedRows` hook,
+  `SortTh` header, `compareValues` with nulls-last and numeric-aware string
+  compare). All three analytics tables (Top mistakes, Cost-benefit ranking,
+  Latest runs) now sort on any column header, toggling asc/desc with an arrow
+  indicator and `aria-sort`. Numeric columns are right-aligned and tabular.
+- **Open a run's schedule in the Planner.** Each ok run in "Latest runs" has an
+  "Open" button. New IPC `benchmark:openRun(jsonPath, icsPath)` reads the stored
+  run JSON, reattaches `exports` from the json/ics files, and the renderer loads
+  it as the current result and switches to the Planner tab.
+  - Added `PlannerApi.openBenchmarkRun`, the preload binding, the main handler,
+    and a browser-fallback stub.
+- Verified in the browser with a temporary fixture (since removed): 3 tables,
+  25 sortable headers, 3 Open buttons (errored run correctly shows none), and a
+  Cost-column click reorders desc with nulls last (`aria-sort="descending"`).
+- `npm run typecheck` + `npm test` (11 passing) pass; executable rebuilt.

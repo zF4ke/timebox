@@ -61,7 +61,7 @@ Free OpenRouter models containing `:free` are skipped by default because they ar
 npm run dist
 ```
 
-Output goes to `release-current/`. On Windows this produces a portable `.exe`. On macOS a `.dmg`. On Linux an `AppImage`.
+Output goes to `release/` (gitignored). On Windows this produces a portable `.exe`. On macOS a `.dmg`. On Linux an `AppImage`.
 
 ### Production setup
 
@@ -77,7 +77,7 @@ Output goes to `release-current/`. On Windows this produces a portable `.exe`. O
 - **Specialist agents critique** each calendar version. Approval requires no critical critiques and at least `quorum` approvals (configurable, default 5).
 - **Validation** checks structural issues (deadline violations, unknown tasks, rest blocks) but is informational only — it does not block acceptance.
 - **Stop condition**: no critical critique + approvals ≥ quorum, or max iterations reached.
-- **Schedule Evaluator** scores the selected final calendar after acceptance. It is diagnostic only. The final evaluation is 50% model judgement and 50% deterministic hard metrics.
+- **Schedule Evaluator** scores the selected final calendar after acceptance. It is diagnostic only and runs **only during benchmarks** (interactive planner runs skip it to save credits). A single **fixed judge model** scores every model under test so scores stay comparable. The final evaluation is 50% model judgement and 50% deterministic hard metrics.
 - **JSON export** = full audit trail with reasoning. **ICS export** = importable into Google/Apple Calendar.
 
 ## UI Features
@@ -88,10 +88,9 @@ Output goes to `release-current/`. On Windows this produces a portable `.exe`. O
 - **Calendar view** — FullCalendar week grid with color-coded event types.
 - **Event details** — click any calendar block to see description, reasoning, and timing.
 - **Saved plans sidebar** — auto-saves plans, with load and delete.
-- **Settings** — configurable quorum (1–5), max iterations (1–5), model picker with pricing, and OpenRouter API key. Persisted to the OS user-data directory.
-- **Quality panel** — shows final score, model score, hard-metric score, each hard metric, dimension scores, strengths, weaknesses, and the planner/evaluator models used.
-- **Run cost** — calendar results show traced schedule cost in green when available.
-- **Analytics view** — separate benchmark dashboard for model/quorum/iteration comparisons, deterministic scores, cost-benefit ranking, token/cost estimates, mistake counts, and in-app benchmark execution.
+- **Settings** — configurable quorum (1–5), max iterations (1–5), planner model picker with pricing, a fixed **evaluator (judge) model** for benchmarks, and OpenRouter API key. Persisted to the OS user-data directory.
+- **Run cost** — calendar results show traced schedule cost in green when available. (Quality scoring is intentionally exclusive to the Analytics/benchmark section.)
+- **Analytics view** — separate benchmark dashboard for model/quorum/iteration comparisons, deterministic scores, a cost-vs-quality scatter chart, cost-benefit ranking, token/cost estimates, an aggregated **top-mistakes** panel for prompt tuning, the judge model and prompt hash in effect, a per-matrix **budget cap**, and in-app benchmark execution.
 - **Import** — drag-and-drop JSON/ICS files anywhere on the app, or use the Import button in the sidebar.
 - **Humanized task IDs** — raw IDs like "T1" are automatically replaced with task names in all UI text.
 
@@ -116,7 +115,7 @@ Output goes to `release-current/`. On Windows this produces a portable `.exe`. O
 
 ## Evaluation Strategy
 
-The evaluator is a separate post-run model call, not another acceptance gate. It receives the original student input, interpreter output, specialist views, selected final calendar, final critiques, validation log, and hard metrics. It writes a `ScheduleEvaluation` object into the JSON export.
+The evaluator is a separate post-run model call, not another acceptance gate. It runs during benchmark runs (skipped on interactive planner runs). A single **fixed judge model** — chosen in Settings or via the benchmark's `--evaluator` flag — scores every model under test, so `model_score` is comparable across models instead of each model grading its own work. It receives the original student input, interpreter output, specialist views, selected final calendar, final critiques, validation log, and hard metrics, and writes a `ScheduleEvaluation` object into the JSON export.
 
 The final score is:
 
