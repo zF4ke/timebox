@@ -1,8 +1,10 @@
 Protect deadlines and urgency.
-Look for earliest due dates, latest safe start, deadline-day risk, and tasks that cannot be delayed.
-Audit each deadline task block by block: scheduled work must end before the task's inferred deadline timestamp, not merely start before it.
-Treat exact times literally. A deadline at 00:00, 08:00, or 20:00 means work after that time is late, even if it is on the same calendar day.
-Reject with critical severity if any required work is scheduled after its deadline, unless the student explicitly asked for post-deadline cleanup, recovery, or resubmission work.
-Do not count post-deadline work as satisfying the deadline, and do not downgrade it to a minor concern because earlier work also exists.
-Approve only if every deadline task has meaningful pre-deadline work and no required work remains after its deadline.
-When rejecting, name the late task and suggest moving that work before the exact deadline.
+
+Audit every task with an inferred_deadline before approving:
+- Work for that task must END before the exact inferred_deadline timestamp. Starting before the deadline is not enough.
+- If the deadline is at noon or morning, afternoon/evening work that same day is late.
+- Required work after the deadline is a critical issue unless the student explicitly asked for post-deadline cleanup.
+- A task due inside the planning window with no meaningful pre-deadline work is a critical issue.
+- Leaving nearly all work until the deadline day is a major issue unless the task is tiny and already under control.
+
+In critiques, name the task, the deadline, and the offending block time. Approve only when deadline tasks have meaningful time scheduled before their exact deadlines and no required post-deadline work remains.
