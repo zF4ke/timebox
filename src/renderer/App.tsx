@@ -434,6 +434,8 @@ export default function App() {
       setDuplicateSavePending(false);
       plannerMutation.reset();
       setMode("planner");
+    } else {
+      alert("Could not open this benchmark run. The stored JSON artifact was not found or could not be parsed.");
     }
   }
 
@@ -931,13 +933,31 @@ function AnalyticsView({
 }) {
   const [runModalOpen, setRunModalOpen] = useState(false);
   const [promptBrowserOpen, setPromptBrowserOpen] = useState(false);
+  const [selectedExperimentId, setSelectedExperimentId] = useState<string>("");
+  const previousLatestExperimentId = useRef<string>("");
   const latest = experiments[0];
-  const latestRuns = latest?.runs ?? [];
-  const latestAggregates = useMemo(
-    () => (latest?.aggregates ?? []).map((aggregate) => ({ ...aggregate, experimentId: latest?.id ?? "latest" })),
-    [latest]
+  const selectedExperiment = experiments.find((experiment) => experiment.id === selectedExperimentId) ?? latest;
+  const selectedRuns = selectedExperiment?.runs ?? [];
+  const selectedAggregates = useMemo(
+    () => (selectedExperiment?.aggregates ?? []).map((aggregate) => ({ ...aggregate, experimentId: selectedExperiment?.id ?? "latest" })),
+    [selectedExperiment]
   );
-  const best = latestAggregates
+
+  useEffect(() => {
+    if (experiments.length === 0) {
+      setSelectedExperimentId("");
+      previousLatestExperimentId.current = "";
+      return;
+    }
+    const nextLatestId = experiments[0].id;
+    const wasShowingLatest = !selectedExperimentId || selectedExperimentId === previousLatestExperimentId.current;
+    if (wasShowingLatest || !experiments.some((experiment) => experiment.id === selectedExperimentId)) {
+      setSelectedExperimentId(nextLatestId);
+    }
+    previousLatestExperimentId.current = nextLatestId;
+  }, [experiments, selectedExperimentId]);
+
+  const best = selectedAggregates
     .filter((aggregate) => aggregate.okCount > 0)
     .sort((a, b) => {
       const aScore = a.costBenefitScore ?? a.averageDeterministicScore ?? -1;
@@ -950,7 +970,7 @@ function AnalyticsView({
   // most common failure modes are obvious targets for prompt tuning.
   const topMistakes = useMemo(() => {
     const counts = new Map<string, { code: string; severity: BenchmarkMistake["severity"]; count: number; example: string }>();
-    for (const run of latestRuns) {
+    for (const run of selectedRuns) {
       for (const mistake of run.mistakes ?? []) {
         const existing = counts.get(mistake.code);
         if (existing) {
@@ -964,7 +984,7 @@ function AnalyticsView({
     return Array.from(counts.values()).sort(
       (a, b) => b.count - a.count || severityRank[a.severity] - severityRank[b.severity]
     );
-  }, [latestRuns]);
+  }, [selectedRuns]);
 
   // Calibrate the pre-flight cost estimate from real traced runs: average the
   // actual cost per ok run per planner/judge model pair across every experiment.
@@ -999,7 +1019,7 @@ function AnalyticsView({
     }));
 
   const ranking = useSortedRows(best, RANKING_ACCESSORS, { key: "costBenefitScore", dir: "desc" });
-  const runs = useSortedRows(latestRuns, RUN_ACCESSORS, { key: "scenarioTitle", dir: "asc" });
+  const runs = useSortedRows(selectedRuns, RUN_ACCESSORS, { key: "scenarioTitle", dir: "asc" });
   const mistakes = useSortedRows(topMistakes, MISTAKE_ACCESSORS, { key: "count", dir: "desc" });
 
   return (
@@ -1101,11 +1121,37 @@ function AnalyticsView({
             </div>
             <div>
               <span className="metric-label">Judge</span>
-              <strong>{latest?.evaluatorModel ? formatCompactModel(latest.evaluatorModel) : "mixed"}</strong>
+              <strong>{selectedExperiment?.evaluatorModel ? formatCompactModel(selectedExperiment.evaluatorModel) : "mixed"}</strong>
             </div>
             <div>
               <span className="metric-label">Prompts</span>
-              <strong>{latest?.promptHash ?? "—"}</strong>
+              <strong>{selectedExperiment?.promptHash ?? "—"}</strong>
+            </div>
+          </section>
+
+          <section className="analytics-section">
+            <div className="section-title-row">
+              <h2>Benchmark run</h2>
+              <span>{selectedExperiment?.id === latest?.id ? "latest selected" : "historical run selected"}</span>
+            </div>
+            <div className="experiment-browser">
+              <label htmlFor="benchmark-experiment-select">Experiment</label>
+              <select
+                id="benchmark-experiment-select"
+                value={selectedExperiment?.id ?? ""}
+                onChange={(event) => setSelectedExperimentId(event.target.value)}
+              >
+                {experiments.map((experiment, index) => (
+                  <option key={experiment.id} value={experiment.id}>
+                    {index === 0 ? "Latest · " : ""}{formatExperimentOption(experiment)}
+                  </option>
+                ))}
+              </select>
+              <div className="experiment-summary">
+                <span>{selectedExperiment?.runs.length ?? 0} runs</span>
+                <span>{selectedExperiment?.aggregates.length ?? 0} configurations</span>
+                <span>{selectedExperiment?.createdAt ? formatDateTime(selectedExperiment.createdAt) : "—"}</span>
+              </div>
             </div>
           </section>
 
@@ -1121,7 +1167,7 @@ function AnalyticsView({
             <section className="analytics-section">
               <div className="section-title-row">
                 <h2>Top mistakes</h2>
-                <span>latest run · prompt-tuning targets</span>
+                <span>selected run · prompt-tuning targets</span>
               </div>
               <div className="data-table-wrap">
                 <table className="data-table">
@@ -1150,7 +1196,7 @@ function AnalyticsView({
 
           <section className="analytics-section">
             <div className="section-title-row">
-              <h2>Latest experiment ranking</h2>
+              <h2>Experiment ranking</h2>
               <span>same scenario set · deterministic-first adjusted value</span>
             </div>
             <p className="section-note">
@@ -1194,8 +1240,8 @@ function AnalyticsView({
 
           <section className="analytics-section">
             <div className="section-title-row">
-              <h2>Latest runs</h2>
-              <span>{latest?.id}</span>
+              <h2>Runs</h2>
+              <span>{selectedExperiment?.id}</span>
             </div>
             <div className="data-table-wrap">
               <table className="data-table">
@@ -2268,6 +2314,13 @@ function formatDateTime(value: string): string {
     hour: "2-digit",
     minute: "2-digit"
   });
+}
+
+function formatExperimentOption(experiment: BenchmarkExperiment): string {
+  const modelCount = new Set(experiment.runs.map((run) => run.model)).size;
+  const runLabel = `${experiment.runs.length} run${experiment.runs.length === 1 ? "" : "s"}`;
+  const modelLabel = `${modelCount} model${modelCount === 1 ? "" : "s"}`;
+  return `${formatDateTime(experiment.createdAt)} · ${runLabel} · ${modelLabel}`;
 }
 
 function formatNullable(value: number | null | undefined, suffix: string): string {

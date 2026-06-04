@@ -174,15 +174,46 @@ function readStoredBenchmarkExperiments(rootDir: string): BenchmarkExperiment[] 
   const experiments: BenchmarkExperiment[] = [];
   for (const entry of fs.readdirSync(benchmarkDir, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
-    const experimentPath = path.join(benchmarkDir, entry.name, "experiment.json");
+    const experimentDir = path.join(benchmarkDir, entry.name);
+    const experimentPath = path.join(experimentDir, "experiment.json");
     if (!fs.existsSync(experimentPath)) continue;
     try {
-      experiments.push(JSON.parse(fs.readFileSync(experimentPath, "utf-8")) as BenchmarkExperiment);
+      const experiment = JSON.parse(fs.readFileSync(experimentPath, "utf-8")) as BenchmarkExperiment;
+      experiments.push(normalizeStoredExperiment(experiment, experimentDir));
     } catch {
       // Ignore incomplete experiments; the CLI writes summaries incrementally.
     }
   }
   return experiments;
+}
+
+function normalizeStoredExperiment(experiment: BenchmarkExperiment, experimentDir: string): BenchmarkExperiment {
+  const runsDir = path.join(experimentDir, "runs");
+  const runs = experiment.runs.map((run) => {
+    const jsonPath = resolveStoredRunArtifact(run.jsonPath, runsDir);
+    const icsPath = resolveStoredRunArtifact(run.icsPath, runsDir);
+    return { ...run, jsonPath, icsPath };
+  });
+  return {
+    ...experiment,
+    resultsDir: experimentDir,
+    runs,
+    aggregates: aggregateBenchmarkRuns(runs)
+  };
+}
+
+function resolveStoredRunArtifact(storedPath: string, runsDir: string): string {
+  if (!storedPath) {
+    return "";
+  }
+  if (fs.existsSync(storedPath)) {
+    return storedPath;
+  }
+  const candidate = path.join(runsDir, path.basename(storedPath));
+  if (fs.existsSync(candidate)) {
+    return candidate;
+  }
+  return storedPath;
 }
 
 function legacyRowToRun(row: LegacySummaryRow, resultDir: string, scenarios: BenchmarkScenario[]): BenchmarkRunSummary {
