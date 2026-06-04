@@ -1,1 +1,0 @@
-Unterminated string in JSON at position 4733 (line 1 column 4734). Raw response saved to /home/dan1e1/.config/timebox/debug/2026-05-29T12-45-13-407Z_raw_schedule_evaluation.json.

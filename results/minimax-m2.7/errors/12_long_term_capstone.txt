@@ -1,1 +1,0 @@
-OpenRouter truncated interpreter_output before valid JSON completed (finish_reason=length, 2553 chars). Raw response saved to /home/dan1e1/.config/timebox/debug/2026-05-29T13-35-53-023Z_raw_interpreter_output.json.

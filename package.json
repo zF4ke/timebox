@@ -12,7 +12,6 @@
     "build": "npm run typecheck && npm run build:electron && vite build",
     "build:electron": "tsc -p tsconfig.electron.json && node -e \"require('fs').cpSync('src/main/prompts', 'dist-electron/main/prompts', {recursive:true, force:true})\"",
     "preview": "vite preview --host 127.0.0.1",
-    "benchmark": "npm run build:electron && node dist-electron/main/benchmark.js",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.renderer.json --noEmit && tsc -p tsconfig.electron.json --noEmit",
     "dist": "npm run build && electron-builder"

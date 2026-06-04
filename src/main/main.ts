@@ -145,7 +145,7 @@ ipcMain.handle("benchmark:openRun", async (_event, jsonPath: string, icsPath: st
 });
 
 ipcMain.handle("benchmark:clear", async () => {
-  clearBenchmarkExperiments();
+  return clearBenchmarkExperiments();
 });
 
 ipcMain.handle("benchmark:scenarios", async () => {
@@ -193,6 +193,65 @@ ipcMain.handle("benchmark:run", async (event, request: BenchmarkRequest, clientR
 ipcMain.handle("benchmark:cancel", async () => {
   console.log("[main] benchmark cancel requested");
   activeBenchmarkController?.abort();
+});
+
+function findPromptDirs(): { scenario: string | null; agent: string | null } {
+  const appPath = app.getAppPath();
+  const candidates = {
+    scenario: [
+      path.join(appPath, "prompts"),
+      path.join(process.cwd(), "prompts")
+    ],
+    agent: [
+      path.join(appPath, "src", "main", "prompts"),
+      path.join(appPath, "dist-electron", "main", "prompts"),
+      path.join(process.cwd(), "src", "main", "prompts")
+    ]
+  };
+  return {
+    scenario: candidates.scenario.find((d) => fs.existsSync(d)) ?? null,
+    agent: candidates.agent.find((d) => fs.existsSync(d)) ?? null
+  };
+}
+
+ipcMain.handle("prompts:list", async () => {
+  const dirs = findPromptDirs();
+  const categories: { name: string; category: "scenario" | "agent"; prompts: { name: string; path: string; category: "scenario" | "agent" }[] }[] = [];
+
+  if (dirs.scenario) {
+    const prompts = fs.readdirSync(dirs.scenario)
+      .filter((f) => f.endsWith(".txt"))
+      .map((f) => ({ name: f, path: path.join(dirs.scenario as string, f), category: "scenario" as const }));
+    if (prompts.length > 0) {
+      categories.push({ name: "Scenario prompts", category: "scenario", prompts });
+    }
+  }
+
+  if (dirs.agent) {
+    const prompts = fs.readdirSync(dirs.agent)
+      .filter((f) => f.endsWith(".md"))
+      .map((f) => ({ name: f, path: path.join(dirs.agent as string, f), category: "agent" as const }));
+    if (prompts.length > 0) {
+      categories.push({ name: "Agent prompts", category: "agent", prompts });
+    }
+  }
+
+  return categories;
+});
+
+ipcMain.handle("prompts:read", async (_event, filePath: string) => {
+  // Security: only allow reading from the project's prompts directories
+  const resolved = path.resolve(filePath);
+  const dirs = findPromptDirs();
+  const allowedRoots = [dirs.scenario, dirs.agent].filter(Boolean) as string[];
+  const isAllowed = allowedRoots.some((root) => resolved.startsWith(root));
+  if (!isAllowed) {
+    throw new Error("Access denied: path outside allowed prompt directories");
+  }
+  if (!fs.existsSync(resolved)) {
+    throw new Error("Prompt file not found");
+  }
+  return fs.readFileSync(resolved, "utf-8");
 });
 
 ipcMain.handle("storage:import", async () => {

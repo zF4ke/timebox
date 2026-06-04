@@ -368,6 +368,24 @@ export interface BenchmarkRequest {
   maxBudgetUsd?: number;
 }
 
+export interface ClearBenchmarkResult {
+  success: boolean;
+  cleared: string[];
+  errors: string[];
+}
+
+export interface PromptFile {
+  name: string;
+  path: string;
+  category: "scenario" | "agent";
+}
+
+export interface PromptCategory {
+  name: string;
+  category: "scenario" | "agent";
+  prompts: PromptFile[];
+}
+
 export type BenchmarkProgressPhase =
   | "start"
   | "run_start"
@@ -439,8 +457,10 @@ export interface PlannerApi {
   parseImport(content: string, filename: string): Promise<PlanningResult>;
   listBenchmarkExperiments(): Promise<BenchmarkExperiment[]>;
   openBenchmarkRun(jsonPath: string, icsPath: string): Promise<PlanningResult | null>;
-  clearBenchmarkExperiments(): Promise<void>;
+  clearBenchmarkExperiments(): Promise<ClearBenchmarkResult>;
   listBenchmarkScenarios(): Promise<BenchmarkScenarioSummary[]>;
+  listPrompts(): Promise<PromptCategory[]>;
+  readPrompt(path: string): Promise<string>;
   runBenchmark(request: BenchmarkRequest, clientRunId?: string): Promise<BenchmarkExperiment>;
   cancelBenchmark(): Promise<void>;
   onBenchmarkProgress(cb: (event: BenchmarkProgressEvent) => void): () => void;

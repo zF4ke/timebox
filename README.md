@@ -30,22 +30,11 @@ The final-delivery benchmark is separate from the normal planner UI. It runs fix
 
 The current baseline interpretation of the pulled result sets is in [`docs/benchmark_summary.md`](docs/benchmark_summary.md).
 
-In the app, open **Analytics** and click **Run benchmark**. The launcher uses non-free models only, shows the number of planned runs before starting, streams progress, and can be cancelled.
+In the app, open **Analytics** and click **Run benchmark**. The launcher lets you choose models, quorum values, max iterations, and scenarios; shows a pre-flight cost estimate; supports a dollar budget cap; streams progress; and can be cancelled.
 
-```bash
-npm run benchmark -- --models google/gemini-3.1-flash-lite-preview,deepseek/deepseek-v3.2 --quorums 3,5 --max-iterations 2,3
-```
+Benchmark outputs are stored in the OS user-data directory (`AppData/Roaming/Timebox/benchmark-results/<timestamp>/` on Windows):
 
-Useful options:
-
-```bash
-npm run benchmark -- --scenarios 01_urgent_mixed_deadlines,13_conflicting_preferences
-npm run benchmark -- --out benchmark-results/my-run --delay-ms 1000 --retries 2
-```
-
-Benchmark outputs go to `benchmark-results/<timestamp>/`:
-
-- `manifest.json` — models, quorum values, iteration values, scenario ids, and free-model policy.
+- `manifest.json` — models, quorum values, iteration values, scenario ids, judge model, prompt hash, and budget cap.
 - `experiment.json` — all run summaries plus aggregate rankings.
 - `summary.json` / `summary.csv` — flat run table for plotting.
 - `runs/*.json` — full planning result with interpreter output, agent views, all calendar versions, critiques, validation, evaluation, and per-call usage/cost traces.
@@ -53,7 +42,7 @@ Benchmark outputs go to `benchmark-results/<timestamp>/`:
 - `runs/*.mistakes.json` — deterministic score breakdown and labeled mistakes.
 - `errors/*.txt` — provider/runtime failures.
 
-Free OpenRouter models containing `:free` are skipped by default because they are too slow for benchmarking. Use `--force-free` only for a deliberate one-off comparison.
+Free OpenRouter models containing `:free` are excluded from the benchmark launcher because they are too slow for matrix runs.
 
 ## Package for distribution
 
@@ -138,7 +127,7 @@ The deterministic scorer emits labeled mistakes such as `missing_expected_task`,
 
 Each OpenRouter call is traced in the JSON export with schema name, model, prompt/completion tokens, latency, and estimated USD cost where pricing is known. When provider token usage is missing, token counts are conservatively estimated from character counts and marked as `usageSource: "estimated"`.
 
-Older pulled benchmark results do not contain per-call token traces. The analytics view still gives them a cost estimate using model pricing and stored JSON artifact size, and marks those rows as `legacy_estimate`. Fresh `npm run benchmark` outputs use traced per-call usage when available.
+Older pulled benchmark results do not contain per-call token traces. The analytics view still gives them a cost estimate using model pricing and stored JSON artifact size, and marks those rows as `legacy_estimate`. Fresh benchmark runs started from the app use traced per-call usage when available.
 
 The old one-model `batch` command was removed because the benchmark runner supersedes it: same purpose, but with matrices, deterministic mistakes, cost tracking, app integration, and richer artifacts.
 

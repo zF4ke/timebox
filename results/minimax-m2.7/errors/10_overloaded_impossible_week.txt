@@ -1,1 +1,0 @@
-OpenRouter truncated specialist_agent_view before valid JSON completed (finish_reason=length, 34650 chars). Raw response saved to /home/dan1e1/.config/timebox/debug/2026-05-29T13-20-40-914Z_raw_specialist_agent_view.json.

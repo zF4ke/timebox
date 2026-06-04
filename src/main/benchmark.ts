@@ -7,7 +7,7 @@ import type {
   BenchmarkRunSummary,
   PlanningResult
 } from "../shared/types";
-import { aggregateBenchmarkRuns, defaultProjectRoot, loadScenarios } from "./benchmarkAnalytics";
+import { aggregateBenchmarkRuns, defaultProjectRoot, getDataRoot, loadScenarios } from "./benchmarkAnalytics";
 import { scoreBenchmarkResult, type BenchmarkScenario } from "./benchmarkScoring";
 import { getPlannerDefaults, runPlanningPipeline } from "./planner";
 import { promptsHash } from "./prompts";
@@ -41,7 +41,7 @@ export async function runBenchmarkExperiment(
   const rootDir = defaultProjectRoot();
   const allScenarios = loadScenarios(rootDir);
   const scenarios = selectScenarios(allScenarios, options.scenarios);
-  const outDir = path.resolve(options.outDir || path.join("benchmark-results", timestamp()));
+  const outDir = path.resolve(options.outDir || path.join(getDataRoot(), "benchmark-results", timestamp()));
   const runsDir = path.join(outDir, "runs");
   const errorsDir = path.join(outDir, "errors");
   fs.mkdirSync(runsDir, { recursive: true });
@@ -159,16 +159,6 @@ export async function runBenchmarkExperiment(
     summary: `Benchmark complete: ${path.join(outDir, "experiment.json")}`
   });
   return experiment;
-}
-
-async function main(): Promise<void> {
-  const options = parseArgs(process.argv.slice(2));
-  const request: BenchmarkRequest = { ...options, maxBudgetUsd: options.maxBudgetUsd ?? undefined };
-  await runBenchmarkExperiment(request, (event) => {
-    if (event.phase === "run_start" || event.phase === "run_done" || event.phase === "run_error" || event.phase === "complete") {
-      console.log(`[benchmark] ${event.current}/${event.total} ${event.summary}`);
-    }
-  });
 }
 
 async function runScenarioWithRetries(
@@ -332,63 +322,6 @@ function errorRun(
   };
 }
 
-function parseArgs(args: string[]): BenchmarkOptions {
-  const defaults = getPlannerDefaults();
-  const options: BenchmarkOptions = {
-    models: [defaults.model],
-    quorums: [defaults.quorum],
-    maxIterations: [defaults.maxIterations],
-    scenarios: [],
-    outDir: "",
-    delayMs: 0,
-    retries: 1,
-    forceFree: false,
-    evaluatorModel: defaults.evaluatorModel,
-    maxBudgetUsd: null
-  };
-
-  for (let i = 0; i < args.length; i += 1) {
-    const arg = args[i];
-    const next = args[i + 1];
-    if (arg === "--models" && next) {
-      options.models = splitList(next);
-      i += 1;
-    } else if (arg === "--quorums" && next) {
-      options.quorums = splitList(next).map((value) => parsePositiveInt(value, "--quorums"));
-      i += 1;
-    } else if (arg === "--max-iterations" && next) {
-      options.maxIterations = splitList(next).map((value) => parsePositiveInt(value, "--max-iterations"));
-      i += 1;
-    } else if (arg === "--scenarios" && next) {
-      options.scenarios = splitList(next);
-      i += 1;
-    } else if (arg === "--evaluator" && next) {
-      options.evaluatorModel = next.trim();
-      i += 1;
-    } else if (arg === "--max-budget" && next) {
-      options.maxBudgetUsd = parsePositiveFloat(next, "--max-budget");
-      i += 1;
-    } else if (arg === "--out" && next) {
-      options.outDir = next;
-      i += 1;
-    } else if (arg === "--delay-ms" && next) {
-      options.delayMs = parsePositiveInt(next, "--delay-ms");
-      i += 1;
-    } else if (arg === "--retries" && next) {
-      options.retries = parsePositiveInt(next, "--retries");
-      i += 1;
-    } else if (arg === "--force-free") {
-      options.forceFree = true;
-    } else if (arg === "--help") {
-      printHelpAndExit();
-    } else {
-      throw new Error(`Unknown or incomplete argument: ${arg}`);
-    }
-  }
-
-  return options;
-}
-
 function normalizeOptions(request: BenchmarkRequest): BenchmarkOptions {
   const defaults = getPlannerDefaults();
   return {
@@ -477,46 +410,6 @@ function writeSummaryFiles(outDir: string, runs: BenchmarkRunSummary[]): void {
   fs.writeFileSync(path.join(outDir, "summary.csv"), csv, "utf-8");
 }
 
-function splitList(value: string): string[] {
-  return value.split(",").map((item) => item.trim()).filter(Boolean);
-}
-
-function parsePositiveInt(value: string, label: string): number {
-  const parsed = Number(value);
-  if (!Number.isInteger(parsed) || parsed < 0) {
-    throw new Error(`${label} must contain non-negative integers.`);
-  }
-  return parsed;
-}
-
-function parsePositiveFloat(value: string, label: string): number {
-  const parsed = Number(value);
-  if (!Number.isFinite(parsed) || parsed <= 0) {
-    throw new Error(`${label} must be a positive number.`);
-  }
-  return parsed;
-}
-
-function printHelpAndExit(): never {
-  console.log([
-    "Usage:",
-    "  npm run benchmark -- --models <m1,m2> --quorums 3,5 --max-iterations 2,3",
-    "",
-    "Options:",
-    "  --models <list>          Comma-separated OpenRouter models. Default: configured model",
-    "  --quorums <list>         Comma-separated quorum values. Default: configured quorum",
-    "  --max-iterations <list>  Comma-separated max-iteration values. Default: configured value",
-    "  --scenarios <list>       Optional comma-separated scenario ids or prompt filenames",
-    "  --evaluator <model>      Fixed judge model that scores every run. Default: configured evaluator",
-    "  --max-budget <usd>       Stop the matrix before a run that would exceed this dollar cap",
-    "  --out <dir>              Output directory. Default: benchmark-results/<timestamp>",
-    "  --delay-ms <n>           Delay between runs",
-    "  --retries <n>            Retries for transient provider errors",
-    "  --force-free             Allow :free models in benchmark runs"
-  ].join("\n"));
-  process.exit(0);
-}
-
 function isRetryable(error: unknown): boolean {
   const message = error instanceof Error ? error.message : String(error);
   return ["timeout", "429", "rate limit", "temporarily", "overloaded", "provider error"].some((needle) =>
@@ -572,11 +465,4 @@ function throwIfCancelled(signal?: AbortSignal): void {
 
 function formatCompactModel(model: string): string {
   return model.split("/").at(-1) ?? model;
-}
-
-if (require.main === module) {
-  main().catch((error) => {
-    console.error(error instanceof Error ? error.message : error);
-    process.exitCode = 1;
-  });
 }

@@ -5,11 +5,13 @@ import type {
   BenchmarkProgressEvent,
   BenchmarkRequest,
   BenchmarkScenarioSummary,
+  ClearBenchmarkResult,
   PlannerApi,
   PlannerDefaults,
   PlanningRequest,
   PlanningResult,
   ProgressEvent,
+  PromptCategory,
   SavedCalendar
 } from "../shared/types";
 
@@ -59,8 +61,14 @@ const api: PlannerApi = {
   openBenchmarkRun(jsonPath: string, icsPath: string): Promise<PlanningResult | null> {
     return ipcRenderer.invoke("benchmark:openRun", jsonPath, icsPath) as Promise<PlanningResult | null>;
   },
-  clearBenchmarkExperiments(): Promise<void> {
-    return ipcRenderer.invoke("benchmark:clear") as Promise<void>;
+  clearBenchmarkExperiments(): Promise<ClearBenchmarkResult> {
+    return ipcRenderer.invoke("benchmark:clear") as Promise<ClearBenchmarkResult>;
+  },
+  listPrompts(): Promise<PromptCategory[]> {
+    return ipcRenderer.invoke("prompts:list") as Promise<PromptCategory[]>;
+  },
+  readPrompt(filePath: string): Promise<string> {
+    return ipcRenderer.invoke("prompts:read", filePath) as Promise<string>;
   },
   listBenchmarkScenarios(): Promise<BenchmarkScenarioSummary[]> {
     return ipcRenderer.invoke("benchmark:scenarios") as Promise<BenchmarkScenarioSummary[]>;

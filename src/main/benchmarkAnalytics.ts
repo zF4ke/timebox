@@ -4,10 +4,21 @@ import type {
   BenchmarkAggregate,
   BenchmarkExperiment,
   BenchmarkRunSummary,
+  ClearBenchmarkResult,
   PlanningResult
 } from "../shared/types";
 import { scoreBenchmarkResult, type BenchmarkScenario } from "./benchmarkScoring";
 import { estimateModelCostUsd, estimateTokensFromChars } from "./modelCosts";
+
+import { app } from "electron";
+
+export function getDataRoot(): string {
+  const root = app.getPath("userData");
+  if (!fs.existsSync(root)) {
+    fs.mkdirSync(root, { recursive: true });
+  }
+  return root;
+}
 
 interface LegacySummaryRow {
   prompt: string;
@@ -27,24 +38,34 @@ interface LegacySummaryRow {
 export function listBenchmarkExperiments(rootDir = defaultProjectRoot()): BenchmarkExperiment[] {
   const scenarios = loadScenarios(rootDir);
   const experiments: BenchmarkExperiment[] = [];
-  experiments.push(...readLegacyResultExperiments(rootDir, scenarios));
-  experiments.push(...readStoredBenchmarkExperiments(rootDir));
+  const dataRoot = getDataRoot();
+  experiments.push(...readLegacyResultExperiments(dataRoot, scenarios));
+  experiments.push(...readStoredBenchmarkExperiments(dataRoot));
   return experiments.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }
 
-export function clearBenchmarkExperiments(rootDir = defaultProjectRoot()): void {
+export function clearBenchmarkExperiments(): ClearBenchmarkResult {
+  const cleared: string[] = [];
+  const errors: string[] = [];
+  const root = getDataRoot();
   for (const dirName of ["results", "benchmark-results"]) {
-    const dir = path.join(rootDir, dirName);
+    const dir = path.join(root, dirName);
     try {
       if (fs.existsSync(dir)) {
-        // maxRetries/retryDelay ride out transient Windows/OneDrive file locks
-        // (EBUSY/EPERM) instead of failing the whole clear on the first locked file.
-        fs.rmSync(dir, { recursive: true, force: true, maxRetries: 5, retryDelay: 200 });
+        fs.rmSync(dir, { recursive: true, force: true, maxRetries: 10, retryDelay: 300 });
+        if (fs.existsSync(dir)) {
+          errors.push(`${dirName}: directory still exists after deletion`);
+        } else {
+          cleared.push(dirName);
+        }
       }
     } catch (err) {
+      const message = err instanceof Error ? err.message : String(err);
       console.error(`[benchmark] failed to clear ${dir}:`, err);
+      errors.push(`${dirName}: ${message}`);
     }
   }
+  return { success: errors.length === 0, cleared, errors };
 }
 
 export function loadScenarios(rootDir = defaultProjectRoot()): BenchmarkScenario[] {

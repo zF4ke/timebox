@@ -255,3 +255,103 @@ tick, no x-axis cost values, dots running to the edge):
   25 sortable headers, 3 Open buttons (errored run correctly shows none), and a
   Cost-column click reorders desc with nulls last (`aria-sort="descending"`).
 - `npm run typecheck` + `npm test` (11 passing) pass; executable rebuilt.
+
+
+## Clear-button fix + prompt browser + button animations (2026-06-04)
+
+**Problem:** Pressing Clear in Benchmark analytics did not remove the data from the UI. Also,
+the user asked to browse prompts inside the Benchmarking tab, and wanted animations on the
+Refresh / Clear buttons.
+
+### What changed
+
+1. **Clear button now actually clears and reports errors.**
+   - `clearBenchmarkExperiments()` in `benchmarkAnalytics.ts` now returns a
+     `ClearBenchmarkResult { success, cleared[], errors[] }` instead of void.
+   - The IPC handler (`main.ts`) returns this result.
+   - `App.tsx` tracks `isClearing` state. The Clear button now:
+     - Shows "Clearing…" + a pulsing animation while active.
+     - Properly `await`s `onClear()` inside an async handler (was fire-and-forget before).
+     - Alerts the user if any directory failed to delete (common on Windows/OneDrive locks).
+     - Calls `refreshBenchmarks()` after clearing so the UI empties immediately.
+   - Added `@keyframes pulse` and `.pulsing` class in `styles.css`.
+
+2. **New Prompt browser modal in the Benchmarking tab.**
+   - Two new IPC endpoints:
+     - `prompts:list` — returns grouped prompt categories (scenario `.txt` files from
+       `prompts/` and agent `.md` files from `src/main/prompts/`).
+     - `prompts:read` — reads a prompt file with path-sanitization (only allows reads
+       from the two allowed prompt directories).
+   - Preload bindings added for both.
+   - `PromptBrowserModal` component in `App.tsx`: sidebar with grouped file list, click
+     to load and display the prompt content in a scrollable `<pre>` panel.
+   - New "Prompts" button (with `BookOpen` icon) in the analytics header, next to Refresh
+     and Clear.
+   - CSS: `.prompt-browser`, `.prompt-browser-sidebar`, `.prompt-browser-content`, etc.
+
+3. **Button animations.**
+   - Refresh button: `.spinning` class applies `@keyframes spin` to the icon when a
+     benchmark is running (visual feedback that something is happening).
+   - Clear button: `.pulsing` class applies a gentle opacity pulse during the clear
+     operation.
+   - Both use CSS `transition` for smooth hover states (already existed, now enhanced
+     with the new keyframes).
+
+### Verification
+- `npm run typecheck` — clean.
+- `npm test` — 11 passing.
+- `npm run build` — green.
+
+
+## Defensive fixes for stale main process + prompt browser UX (2026-06-04)
+
+**Problem:** User reported Clear and Refresh still showing experiments after clicking, and the
+new Prompt browser modal stayed on "Loading…" forever with poor centering.
+
+**Root cause:** `npm run dev` hot-reloads the renderer but keeps the Electron main process +
+preload script from the previous launch. The renderer was running new code against stale IPC
+handlers:
+- `benchmark:clear` old handler returned `undefined` → new renderer code did `result.success`
+  which threw before the refresh could happen.
+- `prompts:list` didn't exist in the old main process → `plannerApi.listPrompts` was
+  `undefined`, causing a synchronous throw that React didn't surface, leaving the modal stuck.
+
+### What changed
+
+1. **Backend deletion more robust.**
+   - `clearBenchmarkExperiments` now uses `maxRetries: 10, retryDelay: 300` (was 5 × 200 ms).
+   - After `fs.rmSync` it explicitly checks `fs.existsSync(dir)` again and reports an error if
+     the directory is still present (Windows/OneDrive sometimes claims success but keeps the
+     folder around briefly).
+
+2. **Frontend Clear is defensive + optimistic.**
+   - `clearBenchmarks()` now calls `setBenchmarkExperiments([])` immediately so the UI empties
+     right away, even if the backend is slow or fails.
+   - Handles stale main processes that return `undefined` instead of `ClearBenchmarkResult`.
+   - Catches and alerts any unexpected errors.
+
+3. **Prompt browser detects stale preload.**
+   - `PromptBrowserModal` now checks `typeof plannerApi.listPrompts !== "function"` before
+     calling it. If the method is missing, it shows a clear error message:
+     *"Prompt browser requires a newer app version. Please restart the app (or npm run dev)
+     so the main process picks up the latest IPC handlers."*
+   - This prevents the synchronous throw that was freezing the modal.
+
+4. **CSS fixes.**
+   - `.prompt-browser-placeholder` now uses `display: flex; align-items: center;
+     justify-content: center; height: 100%;` so "Loading…" and empty states are actually
+     centered.
+   - `.prompt-browser-error` now has a visible red-bordered box with background so error
+     messages are readable.
+
+### What the user needs to do
+Because these changes touch **main-process IPC handlers and the preload script**, the Electron
+main process must be restarted for them to take effect:
+- If running `npm run dev`: stop it (`Ctrl+C`) and start it again.
+- If running the packaged `.exe`: the already-built `release/Timebox 0.1.0.exe` does NOT
+  include these latest fixes. Run `npm run dist` again after restarting dev, or use the
+  already-built exe and accept that Prompts won't work until the next build.
+
+### Verification
+- `npm run typecheck` — clean.
+- `npm test` — 11 passing.

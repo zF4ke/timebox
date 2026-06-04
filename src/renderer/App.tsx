@@ -23,7 +23,8 @@ import {
   ArrowUp,
   ArrowDown,
   ChevronsUpDown,
-  CalendarPlus
+  CalendarPlus,
+  BookOpen
 } from "lucide-react";
 import type {
   AppConfig,
@@ -159,6 +160,7 @@ export default function App() {
   const [mode, setMode] = useState<"planner" | "analytics">("planner");
   const [benchmarkExperiments, setBenchmarkExperiments] = useState<BenchmarkExperiment[]>([]);
   const [benchmarkScenarios, setBenchmarkScenarios] = useState<BenchmarkScenarioSummary[]>([]);
+  const [isClearing, setIsClearing] = useState(false);
   const [benchmarkEvents, setBenchmarkEvents] = useState<BenchmarkProgressEvent[]>([]);
   const activeBenchmarkGeneration = useRef(0);
 
@@ -251,8 +253,21 @@ export default function App() {
   }
 
   async function clearBenchmarks() {
-    await plannerApi.clearBenchmarkExperiments();
-    await refreshBenchmarks();
+    setIsClearing(true);
+    // Optimistically empty the UI so the user sees immediate feedback.
+    setBenchmarkExperiments([]);
+    try {
+      const result = await plannerApi.clearBenchmarkExperiments();
+      // Defensive: old main processes return undefined instead of ClearBenchmarkResult.
+      if (result && typeof result === "object" && !result.success) {
+        alert(`Clear partially failed:\n${result.errors.join("\n")}`);
+      }
+    } catch (err) {
+      alert(`Clear failed: ${err instanceof Error ? err.message : String(err)}`);
+    } finally {
+      setIsClearing(false);
+      await refreshBenchmarks();
+    }
   }
 
   const plannerMutation = useMutation({
@@ -461,6 +476,7 @@ export default function App() {
         defaultEvaluator={defaults?.evaluatorModel ?? settings.evaluatorModel ?? settings.model}
         onRefresh={refreshBenchmarks}
         onClear={clearBenchmarks}
+        isClearing={isClearing}
         onRunBenchmark={runBenchmark}
         onCancelBenchmark={cancelBenchmark}
         onOpenRun={handleOpenBenchmarkRun}
@@ -738,10 +754,16 @@ function createBrowserFallbackApi(): typeof window.plannerApi {
       return null;
     },
     async clearBenchmarkExperiments() {
-      return undefined;
+      return { success: true, cleared: [], errors: [] };
     },
     async listBenchmarkScenarios() {
       return FALLBACK_BENCHMARK_SCENARIOS;
+    },
+    async listPrompts() {
+      return [];
+    },
+    async readPrompt() {
+      return "";
     },
     async runBenchmark() {
       throw new Error("Benchmark runs require the Electron app.");
@@ -873,6 +895,7 @@ function AnalyticsView({
   defaultEvaluator,
   onRefresh,
   onClear,
+  isClearing,
   onRunBenchmark,
   onCancelBenchmark,
   onOpenRun,
@@ -885,6 +908,7 @@ function AnalyticsView({
   defaultEvaluator: string;
   onRefresh: () => void;
   onClear: () => void;
+  isClearing: boolean;
   onRunBenchmark: (request: BenchmarkRequest) => void;
   onCancelBenchmark: () => void;
   onOpenRun: (run: BenchmarkRunSummary) => void;
@@ -893,6 +917,7 @@ function AnalyticsView({
   benchmarkError: string;
 }) {
   const [runModalOpen, setRunModalOpen] = useState(false);
+  const [promptBrowserOpen, setPromptBrowserOpen] = useState(false);
   const aggregates = useMemo(
     () => experiments.flatMap((experiment) => experiment.aggregates.map((aggregate) => ({ ...aggregate, experimentId: experiment.id }))),
     [experiments]
@@ -973,21 +998,39 @@ function AnalyticsView({
           </p>
         </div>
         <div className="analytics-actions">
-          <button className="btn-secondary" onClick={onRefresh} disabled={isBenchmarkRunning}>
+          <button
+            className={`btn-secondary ${isBenchmarkRunning ? "spinning" : ""}`}
+            onClick={onRefresh}
+            disabled={isBenchmarkRunning}
+            title="Refresh experiment list"
+          >
             <RefreshCw size={14} />
             <span>Refresh</span>
           </button>
           <button
-            className="btn-secondary"
-            onClick={() => {
+            className={`btn-secondary ${isClearing ? "pulsing" : ""}`}
+            onClick={async () => {
               if (window.confirm("Clear all benchmark analytics? This permanently deletes stored results.")) {
-                onClear();
+                try {
+                  await onClear();
+                } catch {
+                  // Errors are surfaced by the clear handler; no-op here to avoid unhandled rejection.
+                }
               }
             }}
-            disabled={isBenchmarkRunning || experiments.length === 0}
+            disabled={isBenchmarkRunning || isClearing || experiments.length === 0}
+            title="Clear all stored benchmark results"
           >
             <Trash2 size={14} />
-            <span>Clear</span>
+            <span>{isClearing ? "Clearing…" : "Clear"}</span>
+          </button>
+          <button
+            className="btn-secondary"
+            onClick={() => setPromptBrowserOpen(true)}
+            title="Browse scenario and agent prompts"
+          >
+            <BookOpen size={14} />
+            <span>Prompts</span>
           </button>
           {isBenchmarkRunning ? (
             <button className="btn-danger" onClick={onCancelBenchmark}>
@@ -1025,7 +1068,7 @@ function AnalyticsView({
 
       {experiments.length === 0 ? (
         <div className="analytics-empty">
-          Run <code>npm run benchmark -- --models model-a,model-b --quorums 3,5 --max-iterations 2,3</code> to create benchmark output.
+          No benchmark runs yet. Click <strong>Run benchmark</strong> above to start a matrix comparison.
         </div>
       ) : (
         <>
@@ -1202,6 +1245,11 @@ function AnalyticsView({
             setRunModalOpen(false);
             onRunBenchmark(request);
           }}
+        />
+      )}
+      {promptBrowserOpen && (
+        <PromptBrowserModal
+          onClose={() => setPromptBrowserOpen(false)}
         />
       )}
     </main>
@@ -1531,6 +1579,105 @@ function BenchmarkRunModal({
           </button>
         </footer>
       </form>
+    </div>
+  );
+}
+
+function PromptBrowserModal({ onClose }: { onClose: () => void }) {
+  const [categories, setCategories] = useState<{ name: string; category: "scenario" | "agent"; prompts: { name: string; path: string; category: "scenario" | "agent" }[] }[]>([]);
+  const [selected, setSelected] = useState<string | null>(null);
+  const [content, setContent] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [contentLoading, setContentLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let mounted = true;
+    if (typeof plannerApi.listPrompts !== "function") {
+      if (mounted) {
+        setError("Prompt browser requires a newer app version. Please restart the app (or npm run dev) so the main process picks up the latest IPC handlers.");
+        setIsLoading(false);
+      }
+      return;
+    }
+    plannerApi.listPrompts().then((data) => {
+      if (mounted) {
+        setCategories(data);
+        setIsLoading(false);
+      }
+    }).catch((err) => {
+      if (mounted) {
+        setError(err instanceof Error ? err.message : String(err));
+        setIsLoading(false);
+      }
+    });
+    return () => { mounted = false; };
+  }, []);
+
+  async function handleSelect(path: string) {
+    setSelected(path);
+    setContentLoading(true);
+    setError("");
+    try {
+      const text = await plannerApi.readPrompt(path);
+      setContent(text);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
+      setContent("");
+    } finally {
+      setContentLoading(false);
+    }
+  }
+
+  return (
+    <div className="modal-backdrop" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
+      <div className="modal-panel prompt-browser">
+        <header className="modal-header">
+          <h2>Browse prompts</h2>
+          <button type="button" className="icon-btn" onClick={onClose} aria-label="Close">
+            <X size={16} />
+          </button>
+        </header>
+        <div className="prompt-browser-body">
+          <aside className="prompt-browser-sidebar">
+            {isLoading && <div className="prompt-browser-loading">Loading…</div>}
+            {!isLoading && error && categories.length === 0 && (
+              <div className="prompt-browser-error">{error}</div>
+            )}
+            {!isLoading && categories.length === 0 && !error && (
+              <div className="prompt-browser-empty">No prompts found.</div>
+            )}
+            {!isLoading && categories.map((cat) => (
+              <div key={cat.category} className="prompt-browser-category">
+                <div className="prompt-browser-category-title">{cat.name}</div>
+                <ul className="prompt-browser-list">
+                  {cat.prompts.map((p) => (
+                    <li key={p.path}>
+                      <button
+                        className={`prompt-browser-file ${selected === p.path ? "active" : ""}`}
+                        onClick={() => handleSelect(p.path)}
+                      >
+                        {p.name}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </aside>
+          <main className="prompt-browser-content">
+            {selected == null && (
+              <div className="prompt-browser-placeholder">
+                Select a prompt file from the sidebar to view its contents.
+              </div>
+            )}
+            {contentLoading && <div className="prompt-browser-placeholder">Loading…</div>}
+            {!contentLoading && selected != null && (
+              <pre className="prompt-browser-pre">{content}</pre>
+            )}
+          </main>
+        </div>
+      </div>
     </div>
   );
 }
