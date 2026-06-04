@@ -15,6 +15,10 @@ const isDev = Boolean(process.env.VITE_DEV_SERVER_URL);
 let activePlannerController: AbortController | null = null;
 let activeBenchmarkController: AbortController | null = null;
 
+function appIconPath(): string {
+  return path.join(__dirname, "../../assets/app_icon.ico");
+}
+
 function createWindow(): void {
   const win = new BrowserWindow({
     width: 1100,
@@ -23,6 +27,7 @@ function createWindow(): void {
     minHeight: 520,
     backgroundColor: "#fafafa",
     title: "Timebox",
+    icon: appIconPath(),
     autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
@@ -273,6 +278,10 @@ ipcMain.handle("storage:import", async () => {
   }
   return importFromJson(content);
 });
+
+if (process.platform === "win32") {
+  app.setAppUserModelId("com.aasma.timebox");
+}
 
 app.whenReady().then(createWindow);
 

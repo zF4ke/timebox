@@ -217,6 +217,7 @@ code {
   height: 30px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   padding: 0 10px;
   border: 0;
@@ -467,6 +468,7 @@ code {
 .open-run-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
   padding: 4px 9px;
   border: 1px solid var(--border);
@@ -721,6 +723,7 @@ code {
 .btn-primary {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   vertical-align: middle;
   gap: 6px;
   height: 32px;
@@ -780,7 +783,18 @@ code {
 
 .btn-secondary svg,
 .btn-primary svg {
+  display: block;
   flex-shrink: 0;
+}
+
+.btn-secondary span,
+.btn-primary span,
+.btn-danger span,
+.open-run-btn span,
+.mode-switch button span {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
 }
 
 .chev {
@@ -973,6 +987,9 @@ code {
 }
 
 .cancel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
   height: 32px;
   padding: 0 14px;
@@ -1897,6 +1914,7 @@ code {
 .btn-danger {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   height: 32px;
   padding: 0 12px;
@@ -1913,6 +1931,14 @@ code {
 
 .btn-danger:hover {
   opacity: 0.9;
+}
+
+.btn-danger svg,
+.open-run-btn svg,
+.mode-switch button svg,
+.cancel-btn svg {
+  display: block;
+  flex-shrink: 0;
 }
 
 /* ---------- Save button states ---------- */

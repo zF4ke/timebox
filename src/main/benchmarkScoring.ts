@@ -29,9 +29,10 @@ export function scoreBenchmarkResult(result: PlanningResult, scenario: Benchmark
   const revisionEfficiency = scoreRevisionEfficiency(result, mistakes);
 
   if (workBlocks.length < scenario.minWorkBlocks) {
+    const deficit = scenario.minWorkBlocks - workBlocks.length;
     mistakes.push({
       code: "too_few_work_blocks",
-      severity: "major",
+      severity: deficit <= 1 ? "minor" : "major",
       message: `Expected at least ${scenario.minWorkBlocks} work blocks for this scenario, found ${workBlocks.length}.`,
       evidence: scenario.id
     });
@@ -126,7 +127,7 @@ function scoreAvailabilityDiscipline(result: PlanningResult, mistakes: Benchmark
       overrunHours += overrun;
       mistakes.push({
         code: "availability_overrun",
-        severity: overrun >= 2 ? "major" : "minor",
+        severity: overrun >= 3 ? "major" : "minor",
         message: `${day.date} schedules ${round1(overrun)}h above assumed availability.`,
         evidence: `${day.date}: ${scheduled}h scheduled / ${day.assumed_available_hours}h available`
       });
@@ -187,10 +188,12 @@ function scoreWellbeing(
     : [];
 
   for (const block of lateBlocks) {
-    penalty += 25;
+    const end = new Date(block.end);
+    const severity = !Number.isNaN(end.getTime()) && end.getHours() >= 23 ? "major" : "minor";
+    penalty += severity === "major" ? 25 : 15;
     mistakes.push({
       code: "late_work_when_avoided",
-      severity: "major",
+      severity,
       message: "Scenario asked to avoid late-night work, but a late work block was scheduled.",
       evidence: `${block.task_name ?? block.description}: ${block.start} -> ${block.end}`
     });
@@ -200,10 +203,13 @@ function scoreWellbeing(
     (critique) => critique.agent === "Wellbeing Agent" && critique.approval === "reject"
   );
   if (wellbeingRejects.length > 0) {
-    penalty += 20;
+    const hasSevereReject = wellbeingRejects.some(
+      (critique) => critique.severity === "critical" || critique.severity === "major"
+    );
+    penalty += hasSevereReject ? 20 : 10;
     mistakes.push({
       code: "wellbeing_agent_rejected",
-      severity: "major",
+      severity: hasSevereReject ? "major" : "minor",
       message: "Wellbeing Agent rejected the selected calendar.",
       evidence: wellbeingRejects.map((critique) => critique.overall_comment).join(" | ")
     });
@@ -222,16 +228,17 @@ function scoreRevisionEfficiency(result: PlanningResult, mistakes: BenchmarkMist
   if (!accepted) {
     mistakes.push({
       code: "max_iterations_fallback",
-      severity: "major",
+      severity: "minor",
       message: "No calendar reached the acceptance rule before the max-iteration fallback.",
       evidence: result.stopReason
     });
   }
 
   if (approvals < (result.request.quorum ?? 5)) {
+    const approvalDeficit = (result.request.quorum ?? 5) - approvals;
     mistakes.push({
       code: "quorum_not_reached",
-      severity: "major",
+      severity: approvalDeficit <= 1 ? "minor" : "major",
       message: `Selected calendar has ${approvals} approval(s), below quorum ${result.request.quorum ?? 5}.`,
       evidence: result.stopReason
     });

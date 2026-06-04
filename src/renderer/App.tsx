@@ -103,15 +103,27 @@ const MODEL_PRICING: Record<string, { input: number; output: number }> = {
   "openai/gpt-5-nano": { input: 0.05, output: 0.4 }
 };
 
-// Rough per-run token profile for a full pipeline (interpreter + 5 specialists +
-// planner drafts + critique rounds + 1 evaluator), scaled by max iterations.
-function estimateRunCostUsd(model: string, maxIterations: number): number | null {
+// Rough per-run token profile for a full pipeline. Planner-model calls are
+// interpreter + 5 specialists + planner drafts + critique rounds. The final
+// schedule-evaluator call uses the fixed judge model, so price it separately.
+function estimateRunCostUsd(model: string, maxIterations: number, evaluatorModel: string): number | null {
   const pricing = MODEL_PRICING[model];
-  if (!pricing) return null;
-  const calls = 1 + 5 + maxIterations + maxIterations * 5 + 1;
-  const promptTokens = calls * 7000;
-  const completionTokens = calls * 1800;
-  return (promptTokens / 1_000_000) * pricing.input + (completionTokens / 1_000_000) * pricing.output;
+  const evaluatorPricing = MODEL_PRICING[evaluatorModel];
+  if (!pricing || !evaluatorPricing) return null;
+  const plannerCalls = 1 + 5 + maxIterations + maxIterations * 5;
+  const promptTokens = 7000;
+  const completionTokens = 1800;
+  const plannerCost =
+    (plannerCalls * promptTokens / 1_000_000) * pricing.input +
+    (plannerCalls * completionTokens / 1_000_000) * pricing.output;
+  const evaluatorCost =
+    (promptTokens / 1_000_000) * evaluatorPricing.input +
+    (completionTokens / 1_000_000) * evaluatorPricing.output;
+  return plannerCost + evaluatorCost;
+}
+
+function calibrationKey(model: string, evaluatorModel: string | null | undefined): string {
+  return `${model}::${evaluatorModel ?? ""}`;
 }
 
 const plannerApi = window.plannerApi ?? createBrowserFallbackApi();
@@ -954,22 +966,23 @@ function AnalyticsView({
   }, [latestRuns]);
 
   // Calibrate the pre-flight cost estimate from real traced runs: average the
-  // actual cost per ok run per model across every experiment. Far more accurate
-  // than the token heuristic once any real data exists.
+  // actual cost per ok run per planner/judge model pair across every experiment.
+  // Far more accurate than the token heuristic once matching real data exists.
   const costCalibration = useMemo(() => {
     const sums = new Map<string, { cost: number; count: number }>();
     for (const experiment of experiments) {
       for (const run of experiment.runs) {
         if (run.status !== "ok" || run.costSource !== "traced" || typeof run.estimatedCostUsd !== "number") continue;
-        const entry = sums.get(run.model) ?? { cost: 0, count: 0 };
+        const key = calibrationKey(run.model, run.evaluatorModel);
+        const entry = sums.get(key) ?? { cost: 0, count: 0 };
         entry.cost += run.estimatedCostUsd;
         entry.count += 1;
-        sums.set(run.model, entry);
+        sums.set(key, entry);
       }
     }
     const result: Record<string, number> = {};
-    for (const [model, entry] of sums) {
-      if (entry.count > 0) result[model] = entry.cost / entry.count;
+    for (const [key, entry] of sums) {
+      if (entry.count > 0) result[key] = entry.cost / entry.count;
     }
     return result;
   }, [experiments]);
@@ -1379,14 +1392,14 @@ function BenchmarkRunModal({
     let calibrated = false;
     let heuristic = false;
     for (const model of models) {
-      const calibratedCost = costCalibration[model];
+      const calibratedCost = costCalibration[calibrationKey(model, evaluatorModel)];
       for (const iter of iterations) {
         let perRun: number | null;
         if (typeof calibratedCost === "number") {
           perRun = calibratedCost;
           calibrated = true;
         } else {
-          perRun = estimateRunCostUsd(model, iter);
+          perRun = estimateRunCostUsd(model, iter, evaluatorModel);
           if (perRun !== null) heuristic = true;
         }
         if (perRun === null) {
@@ -1397,7 +1410,7 @@ function BenchmarkRunModal({
       }
     }
     return { total, known, calibrated, heuristic };
-  }, [models, iterations, quorums.length, selectedScenarios.length, costCalibration]);
+  }, [models, iterations, quorums.length, selectedScenarios.length, costCalibration, evaluatorModel]);
 
   const budgetValue = budget.trim() === "" ? null : Number(budget);
   const budgetInvalid = budgetValue !== null && (!Number.isFinite(budgetValue) || budgetValue <= 0);
@@ -1461,7 +1474,7 @@ function BenchmarkRunModal({
                   ? "from past runs"
                   : estimate.calibrated && estimate.heuristic
                     ? "mixed: past runs + heuristic"
-                    : "rough heuristic"}
+                    : "rough heuristic"} · includes fixed judge
               </small>
             </div>
           </div>

@@ -302,7 +302,6 @@ Refresh / Clear buttons.
 - `npm test` — 11 passing.
 - `npm run build` — green.
 
-
 ## Defensive fixes for stale main process + prompt browser UX (2026-06-04)
 
 **Problem:** User reported Clear and Refresh still showing experiments after clicking, and the
@@ -348,10 +347,70 @@ handlers:
 Because these changes touch **main-process IPC handlers and the preload script**, the Electron
 main process must be restarted for them to take effect:
 - If running `npm run dev`: stop it (`Ctrl+C`) and start it again.
-- If running the packaged `.exe`: the already-built `release/Timebox 0.1.0.exe` does NOT
-  include these latest fixes. Run `npm run dist` again after restarting dev, or use the
-  already-built exe and accept that Prompts won't work until the next build.
+- If running an older packaged `.exe`: rebuild or use the newer executable noted in the
+  later packaging entry.
 
 ### Verification
 - `npm run typecheck` — clean.
 - `npm test` — 11 passing.
+
+## Cost estimate, prompt tuning, icon, and alignment fixes (2026-06-04)
+
+**Problem:** User observed that a benchmark estimated at about `$0.1874` only reduced
+OpenRouter credits from `$3.95` to `$3.85`, asked whether the evaluator contributed to cost,
+reported vertically misaligned icons/text in buttons, supplied deterministic mistake labels
+for prompt improvement, and noted that the packaged app still used the default Electron icon.
+
+### What changed
+
+1. **Cost estimate clarification and fix.**
+   - Confirmed traced benchmark cost already includes the schedule-evaluator call because
+     every OpenRouter JSON call emits a `LlmCallTrace` and the planning result sums all
+     traces.
+   - Fixed the pre-flight benchmark estimate so the fixed evaluator/judge call is priced
+     with the selected judge model, not implicitly with the planner model.
+   - Calibrated historical estimates by planner-model + evaluator-model pair, so a run with
+     one judge does not incorrectly calibrate estimates for another judge.
+   - The modal estimate label now says it includes the fixed judge.
+
+2. **Prompt tuning from top mistake labels.**
+   - `base-system.md` now states that deadline work must end before the deadline, empty time
+     is rest, and late-night work should be avoided when the student asks for that or signals
+     low energy/stress.
+   - Initial and revision planner prompts now repeat the deadline-end and late-night rules.
+   - `deadline-agent.md` now treats deadlines literally and rejects post-deadline required
+     work.
+   - `wellbeing-agent.md` now recommends moving/shortening/dropping work rather than adding
+     rest/buffer/contingency blocks.
+
+3. **Scoring severity calibration.**
+   - Kept true post-deadline work critical.
+   - Downgraded moderate availability overrun, ordinary late-night avoidance misses,
+     one-block deficits, one-vote quorum misses, and max-iteration fallback from major to
+     minor where appropriate.
+   - Wellbeing rejection severity now follows whether the underlying critique is severe.
+
+4. **Button alignment.**
+   - Centralized flex alignment for icon/text buttons including Refresh, Clear, Prompts,
+     Cancel, Run benchmark, Open, and mode-switch buttons.
+
+5. **Windows app icon.**
+   - Generated `assets/app_icon.ico` from the existing PNG.
+   - Added `win.icon` in `package.json`, bundled `assets/`, and passed the icon to
+     `BrowserWindow`.
+   - Added `app.setAppUserModelId("com.aasma.timebox")` on Windows for better taskbar
+     identity.
+   - Added `release-*/` to `.gitignore` for temporary ignored release outputs.
+
+### Verification
+- `npm run typecheck` — clean.
+- `npm test` — 11 passing.
+- `npm run build` — clean; Vite emitted only the existing large-chunk warning.
+- Browser visual automation was attempted, but the bundled Playwright package in this
+  runtime was incomplete (`playwright-core` missing), so screenshot verification could not
+  run.
+- `npm run dist` rebuilt source successfully but failed when OneDrive/Windows locked the old
+  `release/win-unpacked/resources/app.asar` cleanup path.
+- A clean `electron-builder` package succeeded outside OneDrive at
+  `%TEMP%\timebox-release-codex`, and the resulting portable executable was copied to
+  `release-new\Timebox 0.1.0.exe`.

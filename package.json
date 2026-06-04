@@ -25,12 +25,14 @@
     "files": [
       "dist-electron",
       "dist-renderer",
+      "assets",
       "benchmarks",
       "prompts",
       "results"
     ],
     "win": {
       "target": "portable",
+      "icon": "assets/app_icon.ico",
       "signAndEditExecutable": false
     },
     "mac": {
