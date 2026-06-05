@@ -103,6 +103,7 @@ export function aggregateBenchmarkRuns(runs: BenchmarkRunSummary[]): BenchmarkAg
       const first = group[0];
       const ok = group.filter((run) => run.status === "ok");
       const averageOverallScore = average(ok.map((run) => run.overallScore));
+      const averageModelScore = average(ok.map((run) => run.modelScore));
       const averageDeterministicScore = average(ok.map((run) => run.deterministicScore));
       const averageCostUsd = average(ok.map((run) => run.estimatedCostUsd));
       const averageTokens = average(ok.map((run) => run.totalTokens));
@@ -124,7 +125,7 @@ export function aggregateBenchmarkRuns(runs: BenchmarkRunSummary[]): BenchmarkAg
         averageIterations,
         costBenefitScore: costBenefit({
           averageDeterministicScore,
-          averageOverallScore,
+          averageModelScore,
           averageCostUsd,
           okCount: ok.length,
           runCount: group.length,
@@ -374,7 +375,7 @@ function average(values: Array<number | null>): number | null {
 
 function costBenefit(input: {
   averageDeterministicScore: number | null;
-  averageOverallScore: number | null;
+  averageModelScore: number | null;
   averageCostUsd: number | null;
   okCount: number;
   runCount: number;
@@ -385,12 +386,31 @@ function costBenefit(input: {
     return null;
   }
 
-  const deterministic = input.averageDeterministicScore;
-  const llm = input.averageOverallScore === null ? deterministic : input.averageOverallScore * 20;
-  const reliability = input.runCount > 0 ? (input.okCount / input.runCount) * 100 : 0;
+  const deterministic = input.averageDeterministicScore; // 0-100
+
+  // Use the INDEPENDENT judge only (modelScore). We deliberately avoid
+  // overallScore here: overallScore already folds in hardScore (a deterministic
+  // metric), so blending it would double-count deterministic evidence and dilute
+  // the judge's nominal weight to ~7.5%. modelScore (1-5) rescaled to 0-100 keeps
+  // the judge a genuine, independent cross-check.
+  const judge = input.averageModelScore === null ? deterministic : input.averageModelScore * 20;
+
+  // Deterministic-first, but the judge is a real 30% secondary signal. Both terms
+  // are on a 0-100 scale with comparable spread (sd ~ 8), so these weights reflect
+  // actual contribution to the ranking, not an artifact of differing units.
+  const quality = deterministic * 0.7 + judge * 0.3;
+
+  // Reliability is handled as an explicit penalty rather than blended into quality:
+  // it is near-constant (almost every config passes all runs), so including it in a
+  // variance-driven weighted sum consumed weight while adding no discriminating
+  // signal. A config that crashes runs is now docked directly.
+  const failureRate = input.runCount > 0 ? 1 - input.okCount / input.runCount : 0;
+  const failurePenalty = failureRate * 40;
+
   const criticalPerRun = input.criticalMistakes / Math.max(input.runCount, 1);
   const totalPerRun = input.totalMistakes / Math.max(input.runCount, 1);
   const nonCriticalPerRun = Math.max(0, totalPerRun - criticalPerRun);
+  const mistakePenalty = criticalPerRun * 4 + nonCriticalPerRun * 0.7;
 
   // Keep cost in the ranking, but do not let cent-level differences overwhelm
   // quality. log10 makes $0.015 vs $0.018 a small tie-breaker instead of a huge
@@ -399,12 +419,9 @@ function costBenefit(input: {
     ? 0
     : Math.min(12, Math.log10(1 + input.averageCostUsd * 1000) * 2.5);
 
-  const quality =
-    deterministic * 0.7 +
-    llm * 0.15 +
-    reliability * 0.15;
-  const mistakePenalty = criticalPerRun * 4 + nonCriticalPerRun * 0.7;
-  return Math.round(Math.max(0, Math.min(100, quality - mistakePenalty - costPenalty)) * 10) / 10;
+  return Math.round(
+    Math.max(0, Math.min(100, quality - failurePenalty - mistakePenalty - costPenalty)) * 10
+  ) / 10;
 }
 
 function compareAggregate(a: BenchmarkAggregate, b: BenchmarkAggregate): number {
