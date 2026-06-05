@@ -1,0 +1,2832 @@
+{
+  "runId": "feb811c1-4ae5-4d5c-a8b8-4ca9619123ae",
+  "createdAt": "2026-06-04T15:20:04.188Z",
+  "request": {
+    "userInput": "I need help because several tasks are vague.\r\n\r\nI have to \"improve the simulator\" for an AASMA prototype by next Wednesday. The teacher did not specify exactly what counts, but I probably need to clean the UI, add one experiment, and write notes about the result.\r\n\r\nI also need to prepare for a programming languages oral discussion next Friday. I do not know what questions will be asked. I only have the lecture slides and two papers.\r\n\r\nThere is a small math exercise sheet due Monday. It says \"quick review\", but these usually take longer than expected.\r\n\r\nI can work about 4 hours per day. I am bad at estimating vague tasks, so I want early discovery time and not everything pushed to the deadline day.",
+    "quorum": 5,
+    "maxIterations": 3,
+    "timezone": "Europe/Lisbon",
+    "model": "deepseek/deepseek-v3.2",
+    "evaluatorModel": "google/gemini-2.5-flash-lite-preview-09-2025"
+  },
+  "stopReason": "Maximum iterations reached. Selected best available calendar.",
+  "interpreterOutput": {
+    "current_date": "2026-06-04",
+    "planning_window": {
+      "start_date": "2026-06-04",
+      "end_date": "2026-06-10",
+      "reason": "Student mentions deadlines for next Wednesday (June 9) and Friday (June 11), and Monday (June 7). Planning window covers from current date through Friday deadline to ensure all tasks are scheduled."
+    },
+    "inferred_availability": [
+      {
+        "date_range": "2026-06-04 to 2026-06-10",
+        "assumption": "Student states they can work about 4 hours per day. No mention of classes or other fixed commitments, so assumed daily availability is 4 hours for focused work.",
+        "estimated_available_hours_per_day": 4,
+        "confidence": "high"
+      }
+    ],
+    "fixed_commitments": [],
+    "student_state": {
+      "sleep": "unknown",
+      "energy": "low",
+      "confidence": "low"
+    },
+    "tasks": [
+      {
+        "task_id": "T1",
+        "name": "Improve AASMA simulator",
+        "raw_mentions": [
+          "improve the simulator",
+          "clean the UI",
+          "add one experiment",
+          "write notes about the result"
+        ],
+        "inferred_deadline": "2026-06-09",
+        "uncertainties": [
+          "Teacher did not specify exactly what counts",
+          "Scope includes UI cleaning, adding one experiment, and writing notes, but exact effort unclear"
+        ]
+      },
+      {
+        "task_id": "T2",
+        "name": "Prepare for programming languages oral discussion",
+        "raw_mentions": [
+          "prepare for a programming languages oral discussion",
+          "lecture slides and two papers"
+        ],
+        "inferred_deadline": "2026-06-11",
+        "uncertainties": [
+          "Unknown what questions will be asked",
+          "Preparation based only on slides and papers"
+        ]
+      },
+      {
+        "task_id": "T3",
+        "name": "Math exercise sheet",
+        "raw_mentions": [
+          "small math exercise sheet",
+          "quick review",
+          "usually take longer than expected"
+        ],
+        "inferred_deadline": "2026-06-07",
+        "uncertainties": [
+          "Task labeled 'quick review' but student expects it to take longer",
+          "Exact difficulty unknown"
+        ]
+      }
+    ],
+    "assumptions": [
+      "Student can allocate 4 hours per day for focused work on these tasks.",
+      "No other fixed commitments (classes, work) mentioned, so daily schedule is flexible.",
+      "Deadlines: AASMA simulator due next Wednesday (June 9), programming languages oral discussion next Friday (June 11), math sheet due Monday (June 7).",
+      "Student wants early discovery time and not everything pushed to deadline day.",
+      "Tasks are vague, requiring exploratory work upfront.",
+      "Work hours are for task execution; rest, breaks, meals, sleep are unscheduled time."
+    ]
+  },
+  "agentViews": [
+    {
+      "agent": "Deadline Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Improve AASMA simulator",
+          "assessment": "This task is due Wednesday and is vague, requiring UI work, an experiment, and documentation. It carries moderate urgency because it is the second-earliest deadline and its scope is uncertain, demanding early discovery time.",
+          "concerns": [
+            "The vague scope could lead to underestimation, causing work to spill past the Wednesday deadline.",
+            "If the math sheet on Monday overruns, time for this task may be insufficient.",
+            "The student's low confidence and energy may slow progress on this exploratory task."
+          ],
+          "recommendations": [
+            "Schedule at least 2 hours of exploratory work on Thursday or Friday to define scope and start UI cleaning.",
+            "Reserve Monday afternoon for the experiment and Tuesday for writing notes, ensuring all work ends before Wednesday.",
+            "If the math sheet finishes early on Monday, shift AASMA work forward to increase buffer."
+          ],
+          "estimated_duration_hours": -1,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review simulator code and UI to identify improvement areas.",
+            "Clean up UI based on identified issues.",
+            "Design and implement one simple experiment.",
+            "Document experiment results and changes made."
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Prepare for programming languages oral discussion",
+          "assessment": "This task is due Friday, the latest deadline, but is high-stakes as an oral discussion with unknown questions. It has lower immediate urgency than Monday's and Wednesday's tasks, but requires distributed preparation due to its uncertainty.",
+          "concerns": [
+            "The unknown question scope makes it easy to underestimate preparation time.",
+            "If Monday and Wednesday tasks overrun, preparation may be crammed into Thursday night, risking poor performance.",
+            "The student's low confidence could lead to excessive, inefficient review."
+          ],
+          "recommendations": [
+            "Start light review on Saturday or Sunday to identify key concepts from slides and papers.",
+            "Allocate focused time on Wednesday and Thursday after earlier deadlines are met.",
+            "Avoid scheduling any work on this task after Thursday evening to ensure readiness for Friday."
+          ],
+          "estimated_duration_hours": -1,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Skim lecture slides and two papers to outline main topics.",
+            "Create summary notes for each topic.",
+            "Practice explaining concepts aloud.",
+            "Review potential discussion questions based on materials."
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Math exercise sheet",
+          "assessment": "This task is due Monday and is the most urgent. Labeled 'quick review' but the student warns it usually takes longer. It is a critical path item; failure to complete it on time will cascade and threaten the Wednesday AASMA deadline.",
+          "concerns": [
+            "The task may take longer than the student's daily 4-hour capacity, pushing into Monday evening.",
+            "If started too late, there is no buffer for unexpected difficulty.",
+            "The student's low energy could slow progress, increasing deadline risk."
+          ],
+          "recommendations": [
+            "Start this task immediately on Thursday or Friday to gauge true effort.",
+            "Aim to finish by Sunday evening, leaving Monday as a contingency buffer.",
+            "If the task proves simple, reallocate saved time to the AASMA simulator."
+          ],
+          "estimated_duration_hours": -1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Read through the exercise sheet completely.",
+            "Solve each problem step-by-step.",
+            "Review solutions for errors.",
+            "Finalize and prepare submission."
+          ]
+        }
+      ],
+      "overall_comment": "The student faces three tasks with tight deadlines, the earliest being the math sheet due Monday. The student's request for early discovery time is crucial, as all tasks are vague and prone to scope creep. The primary risk is the math sheet on Monday, which could consume more time than expected and jeopardize progress on the Wednesday AASMA deadline. The Friday oral discussion deadline is less urgent but requires significant preparation due to uncertainty. A calendar must front-load work on the math sheet and AASMA simulator to ensure completion before their deadlines, leaving adequate buffer for the oral discussion."
+    },
+    {
+      "agent": "Grade Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Improve AASMA simulator",
+          "assessment": "High academic value. This is a project deliverable with direct grade impact. The scope includes UI, experiment, and documentation, suggesting it is a core assignment.",
+          "concerns": [
+            "Vague requirements could lead to underestimating effort, risking insufficient time for quality work.",
+            "Deadline is mid-week, but high weight may require protected time earlier to avoid being rushed."
+          ],
+          "recommendations": [
+            "Schedule exploratory block early to define scope and prioritize high-grade components.",
+            "Reserve significant time before Wednesday for integration and note-writing."
+          ],
+          "estimated_duration_hours": 6,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review assignment rubric and clarify improvement goals.",
+            "Clean and refactor UI code.",
+            "Design and implement one experiment.",
+            "Run experiment, record results, and write analysis notes."
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Prepare for programming languages oral discussion",
+          "assessment": "High academic value. Oral discussions often test deep understanding and impact participation/performance grades.",
+          "concerns": [
+            "Unknown question focus makes efficient preparation difficult.",
+            "Friday deadline could lead to last-minute cramming if not scheduled proactively."
+          ],
+          "recommendations": [
+            "Allocate early study time to review slides and papers to identify key concepts.",
+            "Practice explaining concepts aloud closer to the deadline."
+          ],
+          "estimated_duration_hours": 5,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Skim lecture slides and papers to identify themes.",
+            "Create summary notes on key language paradigms.",
+            "Prepare potential discussion questions and answers.",
+            "Conduct a mock discussion or self-review."
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Math exercise sheet",
+          "assessment": "Moderate academic value. Likely a graded assignment, but described as 'small' and 'quick review' suggests lower weight than project or oral exam.",
+          "concerns": [
+            "Student history suggests it takes longer than expected, risking time overflow into higher-value tasks.",
+            "Monday deadline is earliest, could consume early-week capacity needed for higher-impact work."
+          ],
+          "recommendations": [
+            "Limit time investment to prevent crowding out AASMA simulator or oral prep.",
+            "Complete early to clear mental space for more critical tasks."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Read through all problems to assess difficulty.",
+            "Solve straightforward problems first.",
+            "Work on challenging problems with timebox.",
+            "Review solutions and check for errors."
+          ]
+        }
+      ],
+      "overall_comment": "The plan must protect time for the high-value AASMA simulator and programming languages oral. The math sheet, while important, should not dominate early-week capacity. Scheduling should front-load discovery for vague tasks to clarify scope and allocate remaining time proportionally to grade impact."
+    },
+    {
+      "agent": "Effort Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Improve AASMA simulator",
+          "assessment": "This is a multi-component, open-ended software task with unclear scope. The student's mention of UI cleaning, adding an experiment, and writing notes suggests a moderate to high effort, but the lack of specification introduces significant estimation risk.",
+          "concerns": [
+            "Vague scope makes duration highly uncertain; 'improve' could expand with unforeseen issues.",
+            "Integrating UI changes, implementing an experiment, and documenting results are distinct activities that should be broken down.",
+            "Student's low confidence and history of underestimation increase the risk of this task ballooning."
+          ],
+          "recommendations": [
+            "Schedule an early discovery block (1-2 hours) to define specific improvement goals and experiment scope.",
+            "Split work into at least three distinct blocks: UI cleanup, experiment implementation, and note writing.",
+            "Allocate a contingency buffer within the schedule before the deadline, as this task is prone to overrun."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Discovery: Review simulator code and UI to define specific improvement targets.",
+            "UI cleanup: Refactor interface elements for clarity/usability.",
+            "Experiment design: Plan and implement one controlled test or new feature.",
+            "Results documentation: Write notes on experiment outcomes and overall improvements."
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Prepare for programming languages oral discussion",
+          "assessment": "An oral exam preparation task with unknown questions. Requires deep understanding of slides and papers, plus practice articulating concepts. This is a high-cognitive-load task where duration is hard to predict.",
+          "concerns": [
+            "Uncertainty about question focus makes it easy to over-prepare in some areas and under-prepare in others.",
+            "Mere reading is insufficient; active recall and verbal practice are needed but often underestimated.",
+            "Student's low energy could slow absorption and rehearsal, requiring more time than typical."
+          ],
+          "recommendations": [
+            "Break preparation into phases: content review, question anticipation, and mock discussion practice.",
+            "Schedule multiple shorter blocks (e.g., 1.5-2 hours) to maintain focus and allow for spaced repetition.",
+            "Include a final rehearsal block close to the deadline to solidify verbal fluency."
+          ],
+          "estimated_duration_hours": 10,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Initial content review: Read lecture slides and two papers, highlighting key concepts.",
+            "Question brainstorming: List potential discussion topics and formulate answers.",
+            "Active recall practice: Self-test on concepts without materials.",
+            "Mock oral session: Simulate discussion with a peer or record self explaining topics."
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Math exercise sheet",
+          "assessment": "A 'small' exercise sheet labeled as 'quick review,' but student warns these usually take longer. Likely involves problem-solving and could have hidden complexity.",
+          "concerns": [
+            "Student's explicit caution suggests a pattern of underestimation; 'quick' may be misleading.",
+            "Math problems can stall progress if a concept is rusty, turning a 'small' sheet into a multi-hour effort.",
+            "Risk of scheduling it too late on Monday, leaving no time for unexpected difficulties."
+          ],
+          "recommendations": [
+            "Treat as a medium-effort task, not a trivial one. Allocate a solid block early.",
+            "Start this task well before Monday to allow for seeking help if stuck.",
+            "Break into problem sets if the sheet contains multiple exercises."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Skim all exercises to assess difficulty and plan approach.",
+            "Solve exercises sequentially, checking solutions.",
+            "Review any unclear concepts or calculations."
+          ]
+        }
+      ],
+      "overall_comment": "Total estimated effort (21 hours) exceeds the student's stated 4-hour daily capacity over the planning window (28 hours available). However, tasks are vague and likely underestimated, especially the AASMA simulator and oral prep. The student's low energy and desire for early discovery time necessitate splitting large tasks, scheduling exploratory blocks first, and avoiding backloading. Durations are plausible but carry low-to-medium confidence; the schedule must allow for adjustments as scope clarifies."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Improve AASMA simulator",
+          "assessment": "This is a high-effort, vague task with a Wednesday deadline. The student's low confidence and energy make the required UI cleanup, experiment addition, and note-writing potentially draining. It requires significant upfront discovery time to define scope.",
+          "concerns": [
+            "Vagueness could lead to scope creep and longer-than-expected work sessions, risking burnout.",
+            "If discovery is left too late, it may force long, late-night work blocks on Tuesday or Wednesday.",
+            "Cognitive load from coding and design could be high, stacking poorly with other demanding tasks."
+          ],
+          "recommendations": [
+            "Schedule a 2-hour exploratory block as early as possible (e.g., Thursday or Friday) to assess the simulator and define specific improvements.",
+            "Follow with shorter, focused 1.5-2 hour blocks on subsequent days for implementation, avoiding marathon sessions.",
+            "Protect Tuesday (the day before the deadline) for final integration and note-writing, but keep that day's total work under 3 hours if possible."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Explore simulator codebase and UI to identify specific cleanup targets.",
+            "Design and implement one controlled experiment.",
+            "Run experiment, collect results.",
+            "Write summary notes on changes and outcomes."
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Prepare for programming languages oral discussion",
+          "assessment": "This is a moderate-effort, high-uncertainty task with a Friday deadline. The open-ended nature of oral exam prep can lead to inefficient, anxious studying if not structured. It relies on reviewing slides and papers without clear focus.",
+          "concerns": [
+            "Uncertainty about questions may cause the student to over-prepare, consuming time needed for other tasks.",
+            "Passive reading of materials is cognitively tiring and less effective without active recall practice.",
+            "If scheduled too late, it could create stress and interfere with sleep before the discussion."
+          ],
+          "recommendations": [
+            "Start early with a 1-hour block to skim materials and identify key concepts.",
+            "Use spaced repetition: schedule short 1-hour review sessions every other day, focusing on active recall (e.g., self-quizzing, explaining concepts aloud).",
+            "Do not schedule a heavy study block on Thursday; keep Thursday light to reduce pre-exam anxiety and ensure rest."
+          ],
+          "estimated_duration_hours": 6,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Initial skim of lecture slides and two papers to identify core themes.",
+            "Create a list of potential discussion questions.",
+            "Practice explaining key concepts aloud without notes.",
+            "Review and refine explanations."
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Math exercise sheet",
+          "assessment": "This is a small but deceptive task due Monday. The student's past experience suggests it takes longer than labeled. With low energy, even 'quick' math work can be mentally taxing.",
+          "concerns": [
+            "The 'quick review' label may lead to underestimation, causing rushed work or spillover into Sunday evening.",
+            "If started too late on Monday, it could consume the full 4-hour daily capacity, leaving no energy for other tasks and increasing stress.",
+            "Math exercises, even small, require focused concentration which is harder with low energy."
+          ],
+          "recommendations": [
+            "Schedule a 1.5-hour block on Saturday for an initial attempt, leaving time to identify tricky problems.",
+            "If needed, schedule a follow-up 1-hour block on Sunday afternoon (not evening) to complete it, ensuring the task is finished before Monday.",
+            "Avoid scheduling any other cognitively heavy task on the same day as the main math work block."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Read through all exercises and identify familiar vs. unfamiliar problems.",
+            "Solve straightforward exercises.",
+            "Work on and verify challenging exercises.",
+            "Final review of all answers."
+          ]
+        }
+      ],
+      "overall_comment": "The student's low energy, low confidence, and task vagueness create a high risk of overwork and stress. The 4-hour daily limit is a good constraint, but the plan must prioritize early starts to avoid deadline crunches and late-night work. The math sheet due Monday is the most immediate pressure point. The AASMA task is the most complex and vague, requiring significant discovery time. The oral exam prep is high-stakes but less time-critical. The schedule must strictly avoid work ending after 22:00 and prevent stacking heavy cognitive tasks on the same day. Recommendations focus on shortening initial work blocks for discovery, protecting the day before each deadline for lighter work, and explicitly scheduling unspecific 'review' time to manage uncertainty without overfilling days."
+    },
+    {
+      "agent": "Risk Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Improve AASMA simulator",
+          "assessment": "Scope is undefined; teacher's expectations are unclear. Student has identified three potential components (UI cleaning, experiment addition, notes), but each could have hidden complexity.",
+          "concerns": [
+            "Unknown scope means effort could expand significantly.",
+            "No clear criteria for 'improvement' increases risk of misdirected work.",
+            "Deadline is Wednesday, but discovery time needed to clarify requirements."
+          ],
+          "recommendations": [
+            "Schedule at least 2 hours early (e.g., today or tomorrow) for requirement discovery: review assignment prompt, ask clarifying questions if possible.",
+            "Break into subtasks: 1) Clarify expectations with teacher/peer, 2) Assess current simulator state, 3) Plan UI changes, 4) Design experiment, 5) Implement changes, 6) Write notes.",
+            "Reserve contingency time before Wednesday for unexpected complications."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Clarify expectations with teacher/peer",
+            "Assess current simulator state",
+            "Plan UI changes",
+            "Design experiment",
+            "Implement changes",
+            "Write notes"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Prepare for programming languages oral discussion",
+          "assessment": "High uncertainty: unknown questions, preparation based on slides and papers only. Oral discussion requires deep understanding and quick recall.",
+          "concerns": [
+            "Unknown question scope makes preparation inefficient.",
+            "Papers may contain complex concepts requiring extra study.",
+            "Oral format adds pressure; practice time needed."
+          ],
+          "recommendations": [
+            "Start preparation immediately to gauge depth needed.",
+            "Create subtasks: 1) Review lecture slides thoroughly, 2) Read papers and summarize key points, 3) Identify potential discussion topics, 4) Practice explaining concepts aloud.",
+            "Schedule mock discussion with peer before Friday to test readiness."
+          ],
+          "estimated_duration_hours": 10,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Review lecture slides thoroughly",
+            "Read papers and summarize key points",
+            "Identify potential discussion topics",
+            "Practice explaining concepts aloud"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "Math exercise sheet",
+          "assessment": "Student reports 'quick review' tasks usually take longer than expected. This suggests hidden difficulty or scope creep.",
+          "concerns": [
+            "Label 'quick review' may underestimate actual effort.",
+            "Math exercises can have unexpected tricky problems.",
+            "Deadline is Monday, leaving little buffer if it expands."
+          ],
+          "recommendations": [
+            "Start today to assess difficulty early.",
+            "Break into subtasks: 1) Scan all problems to gauge complexity, 2) Solve easiest problems first, 3) Tackle harder problems with extra time.",
+            "If complexity high, allocate extra hours Saturday/Sunday."
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Scan all problems to gauge complexity",
+            "Solve easiest problems first",
+            "Tackle harder problems with extra time"
+          ]
+        }
+      ],
+      "overall_comment": "All tasks have significant uncertainty. Student wants early discovery time, but current plan lacks explicit buffers for scope discovery and contingency. With only 4 hours/day, risk of missing deadlines is high if tasks expand. Recommend scheduling discovery blocks for each task immediately (today/tomorrow) to clarify scope, then allocating remaining time with contingency buffers before each deadline. Avoid pushing all work to deadline days."
+    }
+  ],
+  "calendarVersions": [
+    {
+      "calendar": {
+        "calendar_version": 1,
+        "planning_window": {
+          "start_date": "2026-06-04",
+          "end_date": "2026-06-10",
+          "reason": "Covers all deadlines: math sheet (June 7), AASMA simulator (June 9), and start of oral discussion prep for June 11."
+        },
+        "overall_strategy": [
+          "Front-load discovery blocks for vague tasks to clarify scope early.",
+          "Respect 4-hour daily limit and avoid work ending after 22:00.",
+          "Schedule urgent math sheet first to finish before Monday deadline.",
+          "Distribute AASMA simulator work across multiple days before Wednesday.",
+          "Start oral discussion prep early with light review, saving practice for later."
+        ],
+        "days": [
+          {
+            "date": "2026-06-04",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Start discovery for the most urgent and vague tasks to gauge effort.",
+            "blocks": [
+              {
+                "id": "B1",
+                "task_id": "T3",
+                "task_name": "Math exercise sheet",
+                "type": "work",
+                "start": "2026-06-04T14:00:00+01:00",
+                "end": "2026-06-04T16:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Initial scan and solve easy problems from math sheet.",
+                "reasoning": "Early start to assess true difficulty and avoid Monday crunch."
+              },
+              {
+                "id": "B2",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work",
+                "start": "2026-06-04T17:00:00+01:00",
+                "end": "2026-06-04T19:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Explore simulator code and UI to define improvement goals.",
+                "reasoning": "Discovery block to clarify vague scope for the Wednesday deadline task."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Thursday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Continue discovery and begin structured work on tasks.",
+            "blocks": [
+              {
+                "id": "B3",
+                "task_id": "T3",
+                "task_name": "Math exercise sheet",
+                "type": "work",
+                "start": "2026-06-05T14:00:00+01:00",
+                "end": "2026-06-05T16:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Complete remaining math problems and review solutions.",
+                "reasoning": "Aim to finish math sheet early, freeing weekend for other tasks."
+              },
+              {
+                "id": "B4",
+                "task_id": "T2",
+                "task_name": "Prepare for programming languages oral discussion",
+                "type": "work",
+                "start": "2026-06-05T17:00:00+01:00",
+                "end": "2026-06-05T19:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Skim lecture slides and papers to identify key topics.",
+                "reasoning": "Early light review to understand scope for the Friday oral discussion."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Friday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Focus on AASMA simulator implementation after math sheet is complete.",
+            "blocks": [
+              {
+                "id": "B5",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work",
+                "start": "2026-06-06T14:00:00+01:00",
+                "end": "2026-06-06T17:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Clean up UI based on discovery and start experiment design.",
+                "reasoning": "Progress on core AASMA work with a longer block while fresh."
+              },
+              {
+                "id": "B6",
+                "task_id": "T2",
+                "task_name": "Prepare for programming languages oral discussion",
+                "type": "work",
+                "start": "2026-06-06T18:00:00+01:00",
+                "end": "2026-06-06T19:00:00+01:00",
+                "duration_hours": 1,
+                "description": "Review key concepts and create summary notes.",
+                "reasoning": "Short, focused follow-up to reinforce oral discussion topics."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Saturday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Math sheet deadline is today; schedule is light assuming it's finished. Focus on AASMA.",
+            "blocks": [
+              {
+                "id": "B7",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work",
+                "start": "2026-06-07T10:00:00+01:00",
+                "end": "2026-06-07T12:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Implement the planned experiment and run tests.",
+                "reasoning": "Morning work to complete the experiment component before Wednesday."
+              },
+              {
+                "id": "B8",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work",
+                "start": "2026-06-07T15:00:00+01:00",
+                "end": "2026-06-07T17:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Begin writing notes on experiment results and UI changes.",
+                "reasoning": "Distribute documentation work to avoid last-minute rush."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-08",
+            "day_name": "Sunday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Final day before AASMA deadline. Complete simulator work and prep for oral discussion.",
+            "blocks": [
+              {
+                "id": "B9",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work",
+                "start": "2026-06-08T10:00:00+01:00",
+                "end": "2026-06-08T12:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Finish notes and finalize all simulator improvements.",
+                "reasoning": "Ensure AASMA task is complete well before Wednesday deadline."
+              },
+              {
+                "id": "B10",
+                "task_id": "T2",
+                "task_name": "Prepare for programming languages oral discussion",
+                "type": "work",
+                "start": "2026-06-08T15:00:00+01:00",
+                "end": "2026-06-08T17:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Practice explaining key concepts aloud for oral discussion.",
+                "reasoning": "Active rehearsal for the Friday oral, leaving time for refinement."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-09",
+            "day_name": "Monday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "AASMA deadline is today. Schedule is light for final review or contingency.",
+            "blocks": [
+              {
+                "id": "B11",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work",
+                "start": "2026-06-09T14:00:00+01:00",
+                "end": "2026-06-09T15:00:00+01:00",
+                "duration_hours": 1,
+                "description": "Final review and submission of AASMA simulator work.",
+                "reasoning": "Buffer time for any last-minute fixes before the Wednesday deadline."
+              },
+              {
+                "id": "B12",
+                "task_id": "T2",
+                "task_name": "Prepare for programming languages oral discussion",
+                "type": "work",
+                "start": "2026-06-09T16:00:00+01:00",
+                "end": "2026-06-09T18:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Mock discussion practice and review of challenging topics.",
+                "reasoning": "Focused preparation for the upcoming Friday oral discussion."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-10",
+            "day_name": "Tuesday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Day before oral discussion. Light review to consolidate knowledge without stress.",
+            "blocks": [
+              {
+                "id": "B13",
+                "task_id": "T2",
+                "task_name": "Prepare for programming languages oral discussion",
+                "type": "work",
+                "start": "2026-06-10T15:00:00+01:00",
+                "end": "2026-06-10T17:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Final review and confidence-building for oral discussion.",
+                "reasoning": "Light, focused session to ensure readiness for Friday, avoiding cramming."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Total estimated effort exceeds some agent forecasts, but daily capacity is fixed at 4 hours.",
+            "resolution": "Prioritized early starts and distributed work, accepting that some tasks may be less polished."
+          },
+          {
+            "conflict": "Student wants early discovery but also to avoid late work.",
+            "resolution": "Scheduled discovery blocks in early afternoons, keeping all work ending before 19:00."
+          }
+        ],
+        "known_weaknesses": [
+          "No explicit contingency time if tasks take longer than scheduled.",
+          "Oral discussion prep is front-loaded but may need more practice closer to Friday.",
+          "Low student energy could slow progress despite time allocation."
+        ],
+        "changes_from_previous": [],
+        "unresolved_critiques": []
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The calendar schedules all required work to end before each task's deadline, addressing the primary deadline risk."
+          ],
+          "overall_comment": "The calendar successfully protects all deadlines. The math exercise sheet is scheduled to finish on June 5, well before its June 7 deadline. The AASMA simulator work is distributed and concludes with a final review block on June 9, ending before its deadline that day. The oral discussion preparation is scheduled throughout the week and ends on June 10, before its June 11 deadline. All scheduled work respects the literal deadline requirement."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The plan prioritizes high-value tasks by front-loading discovery and distributing work, accepting that some tasks may be less polished due to fixed daily capacity."
+          ],
+          "overall_comment": "The calendar effectively protects academic value. High-impact work on the AASMA simulator receives substantial, protected time distributed across multiple days before its deadline. The programming languages oral discussion is also started early with consistent review. The moderate-value math sheet is completed early without crowding out the higher-priority tasks. The overall strategy aligns with grade weight and deliverable importance."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The total scheduled work for 'Improve AASMA simulator' (discovery 2h + UI/experiment 3h + implement 2h + notes 2h + finalize 2h + review 1h = 12 hours) far exceeds my original 8-hour estimate, which was already flagged as low-confidence and likely underestimated. This schedule assumes the student can complete a highly vague, multi-component software task in 12 focused hours, which is unrealistic and risks severe overrun.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Improve AASMA simulator"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-06",
+                "2026-06-07",
+                "2026-06-08",
+                "2026-06-09"
+              ],
+              "suggested_fix": "Reduce the scope of work scheduled before the deadline. Schedule a concrete, limited set of subtasks (e.g., UI cleanup and one small experiment) and move remaining 'improvement' work to post-deadline or drop it. Add explicit contingency blocks before June 9."
+            },
+            {
+              "issue": "The 'Math exercise sheet' is allocated only 4 hours total (2h + 2h). While the student warned it usually takes longer, the schedule treats it as a medium task but does not allocate buffer time for getting stuck or review. Given low student confidence, this is a risk.",
+              "severity": "major",
+              "affected_tasks": [
+                "Math exercise sheet"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Add a 1-hour contingency block on June 6 or June 7 specifically for math sheet overflow or review, or increase the second block to 3 hours."
+            },
+            {
+              "issue": "Large tasks are split across blocks appropriately, but block sizes are too uniform and may not match subtask effort. For example, 'Clean up UI based on discovery and start experiment design' is a 3-hour block, but UI cleanup alone could consume that if the code is messy.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Improve AASMA simulator"
+              ],
+              "affected_days": [
+                "2026-06-06"
+              ],
+              "suggested_fix": "Break the June 6 block into two separate subtasks with explicit time allocations (e.g., 2h for UI cleanup, 1.5h for experiment design) to improve realism."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The calendar front-loads discovery blocks for vague tasks, which addresses my earlier recommendation for early scope clarification."
+          ],
+          "overall_comment": "The calendar makes a good effort to distribute work and avoid late hours. However, the total effort allocated for the AASMA simulator is implausibly high for a student with 4-hour daily capacity and low energy, creating a critical risk of missing the deadline. The math sheet also lacks safety margin. I must reject due to unrealistic duration planning."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The plan respects the 4-hour daily limit and avoids all work ending after 19:00, addressing the student's low energy and need to avoid late-night work."
+          ],
+          "overall_comment": "This calendar is humane and sustainable. It respects the 4-hour daily work limit, avoids all late-night work (all blocks end by 19:00), and front-loads discovery to reduce deadline stress. The workload is well-distributed, with no single day being cognitively overwhelming for a student with low energy. The plan successfully protects sleep, breaks, and wellbeing."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "issue": "The plan lacks explicit contingency time buffers before deadlines. If any task takes longer than scheduled, there is no reserved time to absorb the overrun without compromising other deadlines.",
+              "severity": "major",
+              "affected_tasks": [
+                "Improve AASMA simulator",
+                "Prepare for programming languages oral discussion",
+                "Math exercise sheet"
+              ],
+              "affected_days": [
+                "2026-06-07",
+                "2026-06-08",
+                "2026-06-09"
+              ],
+              "suggested_fix": "Schedule at least 1-2 hours of unspecific buffer time on the day before each major deadline (e.g., June 8 for AASMA simulator, June 10 for oral discussion). Reduce scheduled work on earlier days if necessary to create this buffer."
+            },
+            {
+              "issue": "Discovery blocks are scheduled but may be insufficient to fully resolve scope uncertainty. The plan assumes discovery will successfully define the work, but hidden complexity could emerge later, causing work to expand beyond allocated time.",
+              "severity": "major",
+              "affected_tasks": [
+                "Improve AASMA simulator"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-06",
+                "2026-06-07"
+              ],
+              "suggested_fix": "Add a follow-up discovery or assessment block on June 5 or June 6 specifically to re-evaluate scope after initial exploration and adjust the remaining plan accordingly."
+            },
+            {
+              "issue": "The plan schedules work on the AASMA simulator up to its deadline day (June 9), leaving no room for error if final steps encounter problems. The one-hour final review block is insufficient as a contingency.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Improve AASMA simulator"
+              ],
+              "affected_days": [
+                "2026-06-09"
+              ],
+              "suggested_fix": "Aim to complete all core AASMA work by end of day June 8. Use June 9 morning only for final review and submission, keeping the afternoon completely free as a contingency buffer."
+            },
+            {
+              "issue": "Oral discussion preparation is distributed but lacks a dedicated mock discussion session with a peer, which is critical for an uncertain oral exam format. The plan relies on solo practice.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Prepare for programming languages oral discussion"
+              ],
+              "affected_days": [
+                "2026-06-08",
+                "2026-06-09",
+                "2026-06-10"
+              ],
+              "suggested_fix": "Schedule a specific block for a mock discussion with a peer, ideally on June 9 or June 10, and label it explicitly in the calendar to ensure it happens."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner front-loaded discovery blocks as recommended, scheduling them on June 4 and 5.",
+            "The planner respected the 4-hour daily limit and avoided work ending after 22:00."
+          ],
+          "overall_comment": "The plan makes a good effort at early discovery and distribution, but it is overly optimistic and lacks safety margins. The critical lack of contingency time before deadlines creates a high risk of failure if any task encounters unexpected difficulty. The oral discussion preparation also misses a key risk-mitigation step (peer practice). Therefore, I must reject this version."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "block_after_deadline",
+            "message": "Improve AASMA simulator has work scheduled after its deadline (2026-06-09T00:00:00.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-10 is outside the planning window 2026-06-04 → 2026-06-10.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 3,
+      "hasCritical": true
+    },
+    {
+      "calendar": {
+        "calendar_version": 2,
+        "planning_window": {
+          "start_date": "2026-06-04",
+          "end_date": "2026-06-11",
+          "reason": "Covers all task deadlines and allows for final preparation."
+        },
+        "overall_strategy": [
+          "Increase total time for AASMA simulator to 14 hours, distributed across more days.",
+          "Add contingency by starting Math sheet earlier and allocating more time.",
+          "Keep all work ending before 22:00 to respect student's low-energy state.",
+          "Schedule oral discussion preparation lightly at first, intensifying closer to deadline.",
+          "Leave unscheduled time as implicit rest and contingency buffer."
+        ],
+        "days": [
+          {
+            "date": "2026-06-04",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Start week with focused work on the most urgent task.",
+            "blocks": [
+              {
+                "id": "B1",
+                "task_id": "T3",
+                "task_name": "Math exercise sheet",
+                "type": "work",
+                "start": "2026-06-04T14:00:00+01:00",
+                "end": "2026-06-04T17:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Initial scan and solve easy problems.",
+                "reasoning": "Front-load math to make progress before deadline."
+              },
+              {
+                "id": "B2",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work",
+                "start": "2026-06-04T17:30:00+01:00",
+                "end": "2026-06-04T18:30:00+01:00",
+                "duration_hours": 1,
+                "description": "Explore simulator code and UI.",
+                "reasoning": "Begin discovery early to clarify scope."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Thursday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Continue math work and expand simulator discovery.",
+            "blocks": [
+              {
+                "id": "B3",
+                "task_id": "T3",
+                "task_name": "Math exercise sheet",
+                "type": "work",
+                "start": "2026-06-05T14:00:00+01:00",
+                "end": "2026-06-05T17:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Complete remaining problems and review.",
+                "reasoning": "Allocate extra time for difficult problems."
+              },
+              {
+                "id": "B4",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work",
+                "start": "2026-06-05T17:30:00+01:00",
+                "end": "2026-06-05T18:30:00+01:00",
+                "duration_hours": 1,
+                "description": "Define improvement goals and plan experiment.",
+                "reasoning": "Solidify scope based on initial exploration."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Friday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Focus on simulator implementation before weekend.",
+            "blocks": [
+              {
+                "id": "B5",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work",
+                "start": "2026-06-06T14:00:00+01:00",
+                "end": "2026-06-06T17:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Clean up UI and start experiment design.",
+                "reasoning": "Begin core implementation work."
+              },
+              {
+                "id": "B6",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work",
+                "start": "2026-06-06T17:30:00+01:00",
+                "end": "2026-06-06T18:30:00+01:00",
+                "duration_hours": 1,
+                "description": "Continue experiment setup and initial tests.",
+                "reasoning": "Make steady progress on the main task."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Saturday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Math deadline day; finalize math and continue simulator.",
+            "blocks": [
+              {
+                "id": "B7",
+                "task_id": "T3",
+                "task_name": "Math exercise sheet",
+                "type": "work",
+                "start": "2026-06-07T10:00:00+01:00",
+                "end": "2026-06-07T12:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Final review and submission of math sheet.",
+                "reasoning": "Complete task before its deadline."
+              },
+              {
+                "id": "B8",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work",
+                "start": "2026-06-07T14:00:00+01:00",
+                "end": "2026-06-07T17:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Implement experiment and run comprehensive tests.",
+                "reasoning": "Dedicate a longer block to implementation."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-08",
+            "day_name": "Sunday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Focus on simulator completion and start oral prep.",
+            "blocks": [
+              {
+                "id": "B9",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work",
+                "start": "2026-06-08T14:00:00+01:00",
+                "end": "2026-06-08T17:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Write notes on results and finalize improvements.",
+                "reasoning": "Work towards finishing the simulator task."
+              },
+              {
+                "id": "B10",
+                "task_id": "T2",
+                "task_name": "Prepare for programming languages oral discussion",
+                "type": "work",
+                "start": "2026-06-08T17:30:00+01:00",
+                "end": "2026-06-08T18:30:00+01:00",
+                "duration_hours": 1,
+                "description": "Skim lecture slides to identify key topics.",
+                "reasoning": "Begin light preparation for upcoming discussion."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-09",
+            "day_name": "Monday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "AASMA simulator deadline day; finalize and submit.",
+            "blocks": [
+              {
+                "id": "B11",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work",
+                "start": "2026-06-09T14:00:00+01:00",
+                "end": "2026-06-09T17:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Final review, polish, and submission.",
+                "reasoning": "Complete all work for the simulator before deadline."
+              },
+              {
+                "id": "B12",
+                "task_id": "T2",
+                "task_name": "Prepare for programming languages oral discussion",
+                "type": "work",
+                "start": "2026-06-09T17:30:00+01:00",
+                "end": "2026-06-09T18:30:00+01:00",
+                "duration_hours": 1,
+                "description": "Create summary notes of key concepts.",
+                "reasoning": "Continue building knowledge base for discussion."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-10",
+            "day_name": "Tuesday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Intensive oral discussion preparation day.",
+            "blocks": [
+              {
+                "id": "B13",
+                "task_id": "T2",
+                "task_name": "Prepare for programming languages oral discussion",
+                "type": "work",
+                "start": "2026-06-10T14:00:00+01:00",
+                "end": "2026-06-10T17:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Practice explaining concepts aloud and review.",
+                "reasoning": "Solidify understanding and speaking skills."
+              },
+              {
+                "id": "B14",
+                "task_id": "T2",
+                "task_name": "Prepare for programming languages oral discussion",
+                "type": "work",
+                "start": "2026-06-10T17:30:00+01:00",
+                "end": "2026-06-10T18:30:00+01:00",
+                "duration_hours": 1,
+                "description": "Mock discussion and final confidence review.",
+                "reasoning": "Last preparation before the oral discussion."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-11",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 2,
+            "day_reasoning": "Oral discussion deadline day; light final review.",
+            "blocks": [
+              {
+                "id": "B15",
+                "task_id": "T2",
+                "task_name": "Prepare for programming languages oral discussion",
+                "type": "work",
+                "start": "2026-06-11T10:00:00+01:00",
+                "end": "2026-06-11T12:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Final review and mental preparation.",
+                "reasoning": "Be ready for the oral discussion."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "AASMA simulator likely needs more than 8 hours but daily capacity is limited.",
+            "resolution": "Allocated 14 total hours across 6 days, accepting less polish in other tasks."
+          },
+          {
+            "conflict": "Student is low-energy but needs to finish math before deadline.",
+            "resolution": "Scheduled longer math blocks on weekdays, still ending before evening."
+          }
+        ],
+        "known_weaknesses": [
+          "No explicit peer practice for oral discussion, relying on self-practice.",
+          "Simulator work is front-loaded but may still overrun its allocated time.",
+          "Limited contingency if math problems are exceptionally difficult."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Increased AASMA simulator total time from 12 to 14 hours.",
+            "reason": "Address Effort Agent's critical critique about unrealistic duration."
+          },
+          {
+            "change": "Increased Math sheet time from 4 to 8 hours.",
+            "reason": "Add safety margin as student warned it usually takes longer."
+          },
+          {
+            "change": "Extended planning window to include oral discussion deadline day.",
+            "reason": "Ensure final preparation is scheduled."
+          }
+        ],
+        "unresolved_critiques": [
+          {
+            "agent": "Risk Agent",
+            "severity": "major",
+            "issue": "Plan still lacks explicit contingency time buffers before deadlines.",
+            "planner_response": "Relies on distributed scheduling and unscheduled time as implicit buffer."
+          },
+          {
+            "agent": "Risk Agent",
+            "severity": "minor",
+            "issue": "Oral discussion preparation misses peer practice step.",
+            "planner_response": "Self-practice is scheduled; peer practice is not a defined task."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The plan accepts that the AASMA simulator work is distributed across many days, which may reduce daily intensity but ensures progress before its deadline.",
+            "The math sheet is scheduled to finish on its deadline day, which is a risk, but the work ends before the deadline."
+          ],
+          "overall_comment": "The calendar successfully schedules meaningful work for all three tasks before their respective deadlines. The math sheet work ends on June 7 before its deadline. The AASMA simulator work is completed on June 9 before its deadline. The oral discussion preparation is scheduled to finish on June 11 before its deadline. All deadlines are protected."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 2,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The high-value programming languages oral discussion receives insufficient protected time early in the week, risking last-minute cramming and lower quality preparation. The plan allocates only 1 hour on June 8 and 9, with the bulk of the work (6 hours) scheduled on June 10 and 11, the day before and the day of the deadline.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Prepare for programming languages oral discussion"
+              ],
+              "affected_days": [
+                "2026-06-08",
+                "2026-06-09",
+                "2026-06-10",
+                "2026-06-11"
+              ],
+              "suggested_fix": "Reallocate time from the lower-priority math sheet or earlier AASMA simulator blocks to start substantive oral discussion preparation earlier in the week (e.g., June 5 or 6). Aim for at least 2-3 hours of dedicated study before June 10 to allow for deeper understanding and practice."
+            },
+            {
+              "issue": "The high-impact AASMA simulator work is appropriately prioritized with 14 hours, but its schedule is fragmented into many 1-hour blocks (e.g., June 4, 5, 6). This fragmentation may hinder deep, focused work needed for implementation and experimentation, potentially reducing the quality of the final deliverable.",
+              "severity": "major",
+              "affected_tasks": [
+                "Improve AASMA simulator"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-06"
+              ],
+              "suggested_fix": "Consolidate the 1-hour simulator blocks on June 4, 5, and 6 into longer, contiguous work sessions (e.g., 2-3 hours each) to enable more productive, uninterrupted development and testing."
+            },
+            {
+              "issue": "The moderate-value math exercise sheet is allocated 8 hours, which is disproportionately high compared to its likely grade weight and crowds out early-week capacity for higher-value tasks. This excessive allocation occurs on June 4, 5, and 7.",
+              "severity": "major",
+              "affected_tasks": [
+                "Math exercise sheet"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-07"
+              ],
+              "suggested_fix": "Reduce the total time allocated to the math sheet (e.g., to 4-5 hours) and complete it earlier (e.g., by June 5) to free up protected time in the early week for the AASMA simulator and programming languages oral discussion."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner increased total time for the AASMA simulator to 14 hours, addressing previous concern about underestimating effort for this high-value task."
+          ],
+          "overall_comment": "The calendar fails to protect academic value because it over-allocates time to a lower-priority math assignment and backloads preparation for a high-stakes oral discussion. This misallocation of early-week focus risks compromising the quality of the two most important deliverables. High-impact work is being crowded out."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "affected_days": [
+                "2026-06-08",
+                "2026-06-09"
+              ],
+              "affected_tasks": [
+                "Prepare for programming languages oral discussion"
+              ],
+              "issue": "The oral discussion preparation is scheduled in short, isolated 1-hour blocks initially. This is insufficient for the deep, active work required (e.g., reading papers, formulating answers). The task is likely underestimated.",
+              "severity": "minor",
+              "suggested_fix": "Consolidate the two 1-hour blocks on June 8 and 9 into a single 2-hour block on one of those days for a more substantial initial review phase."
+            },
+            {
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-06",
+                "2026-06-07",
+                "2026-06-08",
+                "2026-06-09"
+              ],
+              "affected_tasks": [
+                "Improve AASMA simulator"
+              ],
+              "issue": "The 14-hour allocation is now plausible, but the work is split into many small blocks (e.g., 1-hour sessions). For a complex software task, this may hinder flow state and reduce efficiency due to frequent context switching.",
+              "severity": "minor",
+              "suggested_fix": "Where possible, combine adjacent 1-hour and 3-hour blocks for the simulator into longer, contiguous sessions (e.g., 4 hours) to allow for deeper focus."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner increased the total time for the 'Improve AASMA simulator' task from 12 to 14 hours, addressing my earlier concern about unrealistic duration.",
+            "The planner increased the time for the 'Math exercise sheet' from 4 to 8 hours, adding a safety margin as I recommended."
+          ],
+          "overall_comment": "The planner has addressed my major concerns by significantly increasing the time allocations for the two most uncertain tasks. The block durations are now generally plausible for a student. My remaining critiques are minor: the schedule could be more efficient by consolidating some short blocks for deeper focus, particularly on the oral preparation. The overall effort distribution respects the student's daily capacity and low-energy state."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 2,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "issue": "The plan schedules multiple days exceeding the student's stated 4-hour daily capacity, which is unsustainable given their low energy and confidence. This risks burnout and reduced effectiveness.",
+              "severity": "major",
+              "affected_tasks": [
+                "Improve AASMA simulator",
+                "Math exercise sheet"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-06",
+                "2026-06-07",
+                "2026-06-08",
+                "2026-06-09"
+              ],
+              "suggested_fix": "Shorten or remove work blocks to ensure no day exceeds 4 hours of scheduled work. For example, reduce the 3-hour math blocks on June 4 and 5 to 2 hours each, and shorten some of the longer AASMA simulator blocks on subsequent days."
+            },
+            {
+              "issue": "The plan schedules cognitively heavy tasks (math and complex coding) back-to-back on the same day, which is draining for a low-energy student.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Math exercise sheet",
+                "Improve AASMA simulator"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-07"
+              ],
+              "suggested_fix": "Avoid stacking heavy tasks. Consider moving the lighter exploratory block for the AASMA simulator to a different day than the main math work, or schedule the math work on days with only one other lighter task."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has addressed the concern about late-night work by ensuring all work ends before 18:30."
+          ],
+          "overall_comment": "While the plan avoids late work, it consistently over-schedules the student's daily capacity and stacks demanding tasks, which is not humane for someone with low energy. The workload needs to be reduced and better distributed to be sustainable."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 2,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The plan lacks explicit contingency time buffers before deadlines, relying on unscheduled time. This is a critical risk for tasks with high uncertainty like 'Improve AASMA simulator' and 'Prepare for programming languages oral discussion'. If these tasks overrun, there is no dedicated time to recover before their deadlines.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Improve AASMA simulator",
+                "Prepare for programming languages oral discussion"
+              ],
+              "affected_days": [
+                "2026-06-08",
+                "2026-06-09",
+                "2026-06-10"
+              ],
+              "suggested_fix": "Schedule at least 2-3 hours of explicit, unassigned contingency blocks on June 8 and June 10, before the simulator and oral discussion deadlines, respectively. These blocks should be labeled as contingency and not pre-allocated to any specific task."
+            },
+            {
+              "issue": "The plan does not schedule explicit discovery or clarification time for the 'Improve AASMA simulator' task. The initial 1-hour 'explore' block is insufficient to resolve the significant scope uncertainty. This increases the risk of misdirected work and late rework.",
+              "severity": "major",
+              "affected_tasks": [
+                "Improve AASMA simulator"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Replace or extend the early 1-hour blocks on June 4 and 5 with dedicated 2-hour blocks focused solely on requirement discovery: reviewing assignment details, clarifying with peers or teacher, and defining concrete, measurable improvement goals before starting implementation."
+            },
+            {
+              "issue": "The 'Prepare for programming languages oral discussion' task starts very late (June 8) and is heavily back-loaded. With high uncertainty about questions and depth required, this leaves no time for early discovery of difficult concepts or to adjust the preparation strategy if needed.",
+              "severity": "major",
+              "affected_tasks": [
+                "Prepare for programming languages oral discussion"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-06",
+                "2026-06-07"
+              ],
+              "suggested_fix": "Start preparation earlier in the week (e.g., June 5 or 6) with a 1-2 hour block to assess the slides and papers, identify the most challenging topics, and create a study plan. This early discovery will inform the later, more intensive practice sessions."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner increased total time for the AASMA simulator and Math sheet tasks in response to earlier critiques."
+          ],
+          "overall_comment": "The planner has increased time allocations but has not addressed the core risk of missing contingency and early discovery time. The plan remains fragile to scope expansion and unexpected difficulty. The reliance on unscheduled time as an implicit buffer is insufficient for managing the high uncertainty in these tasks. I must reject this version due to the critical lack of explicit buffers and inadequate early discovery scheduling."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "block_after_deadline",
+            "message": "Math exercise sheet has work scheduled after its deadline (2026-06-07T00:00:00.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_deadline",
+            "message": "Improve AASMA simulator has work scheduled after its deadline (2026-06-09T00:00:00.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-11 is outside the planning window 2026-06-04 → 2026-06-11.",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_deadline",
+            "message": "Prepare for programming languages oral discussion has work scheduled after its deadline (2026-06-11T00:00:00.000Z).",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 2,
+      "hasCritical": true
+    },
+    {
+      "calendar": {
+        "calendar_version": 3,
+        "planning_window": {
+          "end_date": "2026-06-11",
+          "reason": "Covers all task deadlines up to the oral discussion.",
+          "start_date": "2026-06-04"
+        },
+        "overall_strategy": [
+          "Front-load oral discussion preparation with early, protected blocks.",
+          "Use consolidated blocks for deep work on the AASMA simulator.",
+          "Strictly respect 4-hour daily capacity to sustain low-energy student.",
+          "Schedule discovery early to reduce uncertainty for the simulator.",
+          "Leave unscheduled time before deadlines as flexible recovery periods."
+        ],
+        "days": [
+          {
+            "date": "2026-06-04",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Start week with discovery for the major project and initial math work.",
+            "blocks": [
+              {
+                "description": "Initial exploration to understand simulator scope and goals.",
+                "duration_hours": 2,
+                "end": "2026-06-04T16:00:00+01:00",
+                "id": "B1",
+                "reasoning": "Dedicated early discovery to reduce uncertainty for the AASMA simulator.",
+                "start": "2026-06-04T14:00:00+01:00",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work"
+              },
+              {
+                "description": "Start solving easier problems on the math sheet.",
+                "duration_hours": 2,
+                "end": "2026-06-04T18:00:00+01:00",
+                "id": "B2",
+                "reasoning": "Begin math work early to make steady progress before its deadline.",
+                "start": "2026-06-04T16:00:00+01:00",
+                "task_id": "T3",
+                "task_name": "Math exercise sheet",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Thursday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Deep work on simulator and early start on oral prep.",
+            "blocks": [
+              {
+                "description": "Focused implementation work on the simulator.",
+                "duration_hours": 3,
+                "end": "2026-06-05T17:00:00+01:00",
+                "id": "B3",
+                "reasoning": "Consolidated block for deep work on the AASMA simulator.",
+                "start": "2026-06-05T14:00:00+01:00",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work"
+              },
+              {
+                "description": "Early review of key programming languages topics.",
+                "duration_hours": 1,
+                "end": "2026-06-05T18:00:00+01:00",
+                "id": "B4",
+                "reasoning": "Start oral discussion preparation early to identify difficult concepts.",
+                "start": "2026-06-05T17:00:00+01:00",
+                "task_id": "T2",
+                "task_name": "Prepare for programming languages oral discussion",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Friday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Balance math progress with simulator experiment work.",
+            "blocks": [
+              {
+                "description": "Continue math problems and review progress.",
+                "duration_hours": 2,
+                "end": "2026-06-06T16:00:00+01:00",
+                "id": "B5",
+                "reasoning": "Steady progress on math before its deadline.",
+                "start": "2026-06-06T14:00:00+01:00",
+                "task_id": "T3",
+                "task_name": "Math exercise sheet",
+                "type": "work"
+              },
+              {
+                "description": "Design and set up experiments for the simulator.",
+                "duration_hours": 2,
+                "end": "2026-06-06T18:00:00+01:00",
+                "id": "B6",
+                "reasoning": "Focused block for experiment phase of the AASMA simulator.",
+                "start": "2026-06-06T16:00:00+01:00",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Saturday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Submit math and intensify oral practice with full-day capacity.",
+            "blocks": [
+              {
+                "description": "Finalize and submit the math exercise sheet.",
+                "duration_hours": 2,
+                "end": "2026-06-07T16:00:00+01:00",
+                "id": "B7",
+                "reasoning": "Complete math work well before its end-of-day deadline.",
+                "start": "2026-06-07T14:00:00+01:00",
+                "task_id": "T3",
+                "task_name": "Math exercise sheet",
+                "type": "work"
+              },
+              {
+                "description": "Practice explaining programming languages concepts aloud.",
+                "duration_hours": 2,
+                "end": "2026-06-07T18:00:00+01:00",
+                "id": "B8",
+                "reasoning": "Dedicated practice for the oral discussion while math is fresh.",
+                "start": "2026-06-07T16:00:00+01:00",
+                "task_id": "T2",
+                "task_name": "Prepare for programming languages oral discussion",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-06-08",
+            "day_name": "Sunday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Major simulator work and oral prep consolidation before simulator deadline.",
+            "blocks": [
+              {
+                "description": "Run comprehensive tests and refine the simulator.",
+                "duration_hours": 3,
+                "end": "2026-06-08T17:00:00+01:00",
+                "id": "B9",
+                "reasoning": "Focused testing and refinement block for the AASMA simulator.",
+                "start": "2026-06-08T14:00:00+01:00",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work"
+              },
+              {
+                "description": "Create summary notes and review key topics.",
+                "duration_hours": 1,
+                "end": "2026-06-08T18:00:00+01:00",
+                "id": "B10",
+                "reasoning": "Consolidate knowledge for the oral discussion.",
+                "start": "2026-06-08T17:00:00+01:00",
+                "task_id": "T2",
+                "task_name": "Prepare for programming languages oral discussion",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-06-09",
+            "day_name": "Monday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Submit simulator and do final oral prep with day free for contingency.",
+            "blocks": [
+              {
+                "description": "Final review, polish, and submission of the simulator.",
+                "duration_hours": 3,
+                "end": "2026-06-09T17:00:00+01:00",
+                "id": "B11",
+                "reasoning": "Finalize and submit the AASMA simulator before its deadline.",
+                "start": "2026-06-09T14:00:00+01:00",
+                "task_id": "T1",
+                "task_name": "Improve AASMA simulator",
+                "type": "work"
+              },
+              {
+                "description": "Mock discussion and final confidence review.",
+                "duration_hours": 1,
+                "end": "2026-06-09T18:00:00+01:00",
+                "id": "B12",
+                "reasoning": "Final preparation for the oral discussion after simulator submission.",
+                "start": "2026-06-09T17:00:00+01:00",
+                "task_id": "T2",
+                "task_name": "Prepare for programming languages oral discussion",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-06-10",
+            "day_name": "Tuesday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Dedicated full capacity to final oral discussion preparation.",
+            "blocks": [
+              {
+                "description": "Comprehensive review and mental preparation for the oral.",
+                "duration_hours": 4,
+                "end": "2026-06-10T18:00:00+01:00",
+                "id": "B13",
+                "reasoning": "Focused final preparation day before the oral discussion deadline.",
+                "start": "2026-06-10T14:00:00+01:00",
+                "task_id": "T2",
+                "task_name": "Prepare for programming languages oral discussion",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-06-11",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 2,
+            "day_reasoning": "Minimal scheduled work on deadline day to avoid stress.",
+            "blocks": [
+              {
+                "description": "Final review and mental preparation before the discussion.",
+                "duration_hours": 2,
+                "end": "2026-06-11T16:00:00+01:00",
+                "id": "B14",
+                "reasoning": "Light final review on the day of the oral discussion deadline.",
+                "start": "2026-06-11T14:00:00+01:00",
+                "task_id": "T2",
+                "task_name": "Prepare for programming languages oral discussion",
+                "type": "work"
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "High-value tasks need more time but daily capacity is limited.",
+            "resolution": "Prioritized oral discussion and AASMA simulator, accepting less polish on math sheet."
+          },
+          {
+            "conflict": "Student needs deep focus but also early starts on uncertain tasks.",
+            "resolution": "Used longer blocks for focused work and scheduled discovery early."
+          },
+          {
+            "conflict": "Risk management requires contingency but schedule cannot have buffer blocks.",
+            "resolution": "Left unscheduled time before deadlines as implicit flexible recovery periods."
+          }
+        ],
+        "known_weaknesses": [
+          "Relies on unscheduled time as implicit contingency, which may be used for other needs.",
+          "Math sheet receives less time, which could affect quality if problems are difficult.",
+          "Longer simulator blocks may still be interrupted by low energy."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Reduced daily scheduled hours to strictly respect 4-hour capacity.",
+            "reason": "Addresses Wellbeing Agent's rejection of over-scheduling."
+          },
+          {
+            "change": "Front-loaded oral discussion preparation with dedicated early-week blocks.",
+            "reason": "Addresses Grade Agent's critical issue about backloading high-value task."
+          },
+          {
+            "change": "Consolidated AASMA simulator work into longer, focused blocks.",
+            "reason": "Addresses Grade Agent's issue about fragmentation hindering deep work."
+          },
+          {
+            "change": "Reduced math sheet allocation and scheduled it earlier to free capacity.",
+            "reason": "Addresses Grade Agent's issue about excessive time on lower-priority task."
+          },
+          {
+            "change": "Added explicit early discovery block for AASMA simulator on first day.",
+            "reason": "Addresses Risk Agent's critical issue about insufficient scope clarification."
+          },
+          {
+            "change": "Left strategic unscheduled periods before key deadlines as implicit contingency.",
+            "reason": "Addresses Risk Agent's need for recovery time without creating buffer blocks."
+          }
+        ],
+        "unresolved_critiques": [
+          {
+            "agent": "Risk Agent",
+            "issue": "Plan lacks explicit contingency buffers, relying on unscheduled time which may not be protected.",
+            "planner_response": "Strategic unscheduled periods before deadlines serve as implicit buffers without creating blocks.",
+            "severity": "minor"
+          },
+          {
+            "agent": "Wellbeing Agent",
+            "issue": "Four-hour workdays may still be challenging for a low-energy student.",
+            "planner_response": "Capacity is fixed at stated limit; unscheduled time provides necessary rest.",
+            "severity": "minor"
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 3,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The math sheet receives less time to prioritize higher-value tasks, accepting potential quality risk to meet all deadlines."
+          ],
+          "overall_comment": "The calendar successfully schedules all required work to end before each task's inferred deadline. The math sheet is completed on its due date, the AASMA simulator work ends on June 9, and oral discussion preparation concludes on June 11. The plan respects the student's daily capacity and provides early discovery time, mitigating deadline risk."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 3,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The math sheet receives less time to prioritize higher-value tasks, accepting a potential quality trade-off."
+          ],
+          "overall_comment": "The calendar effectively protects academic value. High-impact tasks, the AASMA simulator and programming languages oral discussion, receive substantial, protected, and early scheduled time. The lower-priority math sheet is contained to prevent crowding out critical work. The plan addresses previous concerns by front-loading oral prep, consolidating simulator work, and reducing math allocation."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 3,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "affected_days": [
+                "2026-06-05",
+                "2026-06-08",
+                "2026-06-09"
+              ],
+              "affected_tasks": [
+                "Improve AASMA simulator"
+              ],
+              "issue": "The AASMA simulator work is scheduled in 3-hour blocks, which is excessive for a low-energy student and risks burnout and diminishing returns. My earlier assessment estimated 8 total hours, but these long blocks are not plausible for sustained focus given the student's state.",
+              "severity": "major",
+              "suggested_fix": "Split each 3-hour simulator block into two 1.5-hour sessions, possibly across different days, to maintain focus and align with realistic student capacity."
+            },
+            {
+              "affected_days": [
+                "2026-06-10"
+              ],
+              "affected_tasks": [
+                "Prepare for programming languages oral discussion"
+              ],
+              "issue": "A single 4-hour block for oral discussion preparation is unrealistic for deep cognitive work and contradicts my earlier recommendation for multiple shorter blocks to aid retention and manage low energy.",
+              "severity": "major",
+              "suggested_fix": "Break the 4-hour block on June 10 into two 2-hour blocks, perhaps splitting the day or redistributing some review to earlier days."
+            },
+            {
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-06",
+                "2026-06-07"
+              ],
+              "affected_tasks": [
+                "Math exercise sheet"
+              ],
+              "issue": "The math sheet is allocated only 6 total hours across scattered 2-hour blocks. Given the student's caution that it 'usually takes longer,' this may still be an underestimate, leaving no contingency if problems are difficult.",
+              "severity": "minor",
+              "suggested_fix": "Protect an additional 1-2 hours earlier in the week (e.g., June 05) for math, possibly by shortening a simulator block, to provide a safety margin."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner added an explicit early discovery block for the AASMA simulator, addressing my earlier recommendation to reduce uncertainty.",
+            "The planner split the AASMA simulator work across multiple blocks, addressing my concern about breaking down this large, vague task.",
+            "The planner scheduled the math sheet early and across multiple days, heeding my warning about underestimation and allowing time for difficulties."
+          ],
+          "overall_comment": "The calendar makes good strides in early discovery and task splitting, but the block durations for the two largest tasks are not plausible for a low-energy student. Three- and four-hour deep work blocks will lead to fatigue and reduced effectiveness. The total hours allocated may fit within capacity, but the distribution lacks realism for sustained focus. I must reject until block sizes are adjusted to be more manageable."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 3,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The plan schedules a full 4-hour block on June 10 for oral discussion preparation, which is a cognitively heavy task. For a student with low energy, this could lead to mental fatigue and reduced effectiveness.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Prepare for programming languages oral discussion"
+              ],
+              "affected_days": [
+                "2026-06-10"
+              ],
+              "suggested_fix": "Consider shortening the June 10 block to 3 hours and moving the remaining hour to an earlier day, or splitting the 4-hour block into two separate 2-hour sessions with a longer unscheduled break in between."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has respected the 4-hour daily capacity and avoided late-night work, addressing core wellbeing concerns."
+          ],
+          "overall_comment": "The plan is generally humane and sustainable. It respects the student's stated 4-hour daily capacity, avoids work ending after 22:00, and front-loads tasks to reduce deadline pressure. The main concern is a single 4-hour block of intensive study, which may be taxing for a low-energy student. Overall, the plan is acceptable with minor adjustments."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 3,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The plan relies on unscheduled time as implicit contingency, but this time is not protected and may be used for other needs or lost to fatigue, leaving no guaranteed buffer for scope expansion or unexpected difficulties.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Improve AASMA simulator",
+                "Prepare for programming languages oral discussion"
+              ],
+              "affected_days": [
+                "2026-06-08",
+                "2026-06-09",
+                "2026-06-10"
+              ],
+              "suggested_fix": "Explicitly reserve 1-2 hours of the daily 4-hour capacity as a contingency block on days before key deadlines (e.g., June 8 for the simulator, June 10 for the oral discussion), labeling it for overflow work from the primary task of that day."
+            },
+            {
+              "issue": "The early discovery block for the AASMA simulator is only 2 hours, which may be insufficient to fully clarify the undefined scope and teacher expectations, risking later rework.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Improve AASMA simulator"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Extend the initial discovery block on June 4 to 3 hours, or schedule a follow-up clarification block on June 5, to ensure requirements are well-understood before major implementation begins."
+            },
+            {
+              "issue": "The math exercise sheet is allocated less time and scheduled early, but if its complexity is high, there is no scheduled contingency after its discovery phase to handle overflow before the Monday deadline.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Math exercise sheet"
+              ],
+              "affected_days": [
+                "2026-06-05",
+                "2026-06-06"
+              ],
+              "suggested_fix": "Designate the unused hour on June 5 (after the 1-hour oral prep) as a flexible overflow slot for math if the initial assessment on June 4 reveals higher difficulty than expected."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner added an explicit early discovery block for the AASMA simulator, addressing the prior critical issue about insufficient scope clarification.",
+            "Strategic unscheduled periods before deadlines are used as implicit recovery time, though not as robust as explicit buffers."
+          ],
+          "overall_comment": "The plan shows good risk-aware adjustments, including front-loading oral preparation, early discovery for the simulator, and respecting energy limits. However, contingency remains implicit and fragile. The minor concerns above highlight areas where hidden work or uncertainty could still disrupt the schedule. The plan is acceptable but could be more resilient with minor tweaks to protect contingency time."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "block_after_deadline",
+            "message": "Math exercise sheet has work scheduled after its deadline (2026-06-07T00:00:00.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_deadline",
+            "message": "Improve AASMA simulator has work scheduled after its deadline (2026-06-09T00:00:00.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-11 is outside the planning window 2026-06-04 → 2026-06-11.",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_deadline",
+            "message": "Prepare for programming languages oral discussion has work scheduled after its deadline (2026-06-11T00:00:00.000Z).",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 4,
+      "hasCritical": false
+    }
+  ],
+  "finalCalendar": {
+    "calendar_version": 3,
+    "planning_window": {
+      "end_date": "2026-06-11",
+      "reason": "Covers all task deadlines up to the oral discussion.",
+      "start_date": "2026-06-04"
+    },
+    "overall_strategy": [
+      "Front-load oral discussion preparation with early, protected blocks.",
+      "Use consolidated blocks for deep work on the AASMA simulator.",
+      "Strictly respect 4-hour daily capacity to sustain low-energy student.",
+      "Schedule discovery early to reduce uncertainty for the simulator.",
+      "Leave unscheduled time before deadlines as flexible recovery periods."
+    ],
+    "days": [
+      {
+        "date": "2026-06-04",
+        "day_name": "Wednesday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Start week with discovery for the major project and initial math work.",
+        "blocks": [
+          {
+            "description": "Initial exploration to understand simulator scope and goals.",
+            "duration_hours": 2,
+            "end": "2026-06-04T16:00:00+01:00",
+            "id": "B1",
+            "reasoning": "Dedicated early discovery to reduce uncertainty for the AASMA simulator.",
+            "start": "2026-06-04T14:00:00+01:00",
+            "task_id": "T1",
+            "task_name": "Improve AASMA simulator",
+            "type": "work"
+          },
+          {
+            "description": "Start solving easier problems on the math sheet.",
+            "duration_hours": 2,
+            "end": "2026-06-04T18:00:00+01:00",
+            "id": "B2",
+            "reasoning": "Begin math work early to make steady progress before its deadline.",
+            "start": "2026-06-04T16:00:00+01:00",
+            "task_id": "T3",
+            "task_name": "Math exercise sheet",
+            "type": "work"
+          }
+        ]
+      },
+      {
+        "date": "2026-06-05",
+        "day_name": "Thursday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Deep work on simulator and early start on oral prep.",
+        "blocks": [
+          {
+            "description": "Focused implementation work on the simulator.",
+            "duration_hours": 3,
+            "end": "2026-06-05T17:00:00+01:00",
+            "id": "B3",
+            "reasoning": "Consolidated block for deep work on the AASMA simulator.",
+            "start": "2026-06-05T14:00:00+01:00",
+            "task_id": "T1",
+            "task_name": "Improve AASMA simulator",
+            "type": "work"
+          },
+          {
+            "description": "Early review of key programming languages topics.",
+            "duration_hours": 1,
+            "end": "2026-06-05T18:00:00+01:00",
+            "id": "B4",
+            "reasoning": "Start oral discussion preparation early to identify difficult concepts.",
+            "start": "2026-06-05T17:00:00+01:00",
+            "task_id": "T2",
+            "task_name": "Prepare for programming languages oral discussion",
+            "type": "work"
+          }
+        ]
+      },
+      {
+        "date": "2026-06-06",
+        "day_name": "Friday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Balance math progress with simulator experiment work.",
+        "blocks": [
+          {
+            "description": "Continue math problems and review progress.",
+            "duration_hours": 2,
+            "end": "2026-06-06T16:00:00+01:00",
+            "id": "B5",
+            "reasoning": "Steady progress on math before its deadline.",
+            "start": "2026-06-06T14:00:00+01:00",
+            "task_id": "T3",
+            "task_name": "Math exercise sheet",
+            "type": "work"
+          },
+          {
+            "description": "Design and set up experiments for the simulator.",
+            "duration_hours": 2,
+            "end": "2026-06-06T18:00:00+01:00",
+            "id": "B6",
+            "reasoning": "Focused block for experiment phase of the AASMA simulator.",
+            "start": "2026-06-06T16:00:00+01:00",
+            "task_id": "T1",
+            "task_name": "Improve AASMA simulator",
+            "type": "work"
+          }
+        ]
+      },
+      {
+        "date": "2026-06-07",
+        "day_name": "Saturday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Submit math and intensify oral practice with full-day capacity.",
+        "blocks": [
+          {
+            "description": "Finalize and submit the math exercise sheet.",
+            "duration_hours": 2,
+            "end": "2026-06-07T16:00:00+01:00",
+            "id": "B7",
+            "reasoning": "Complete math work well before its end-of-day deadline.",
+            "start": "2026-06-07T14:00:00+01:00",
+            "task_id": "T3",
+            "task_name": "Math exercise sheet",
+            "type": "work"
+          },
+          {
+            "description": "Practice explaining programming languages concepts aloud.",
+            "duration_hours": 2,
+            "end": "2026-06-07T18:00:00+01:00",
+            "id": "B8",
+            "reasoning": "Dedicated practice for the oral discussion while math is fresh.",
+            "start": "2026-06-07T16:00:00+01:00",
+            "task_id": "T2",
+            "task_name": "Prepare for programming languages oral discussion",
+            "type": "work"
+          }
+        ]
+      },
+      {
+        "date": "2026-06-08",
+        "day_name": "Sunday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Major simulator work and oral prep consolidation before simulator deadline.",
+        "blocks": [
+          {
+            "description": "Run comprehensive tests and refine the simulator.",
+            "duration_hours": 3,
+            "end": "2026-06-08T17:00:00+01:00",
+            "id": "B9",
+            "reasoning": "Focused testing and refinement block for the AASMA simulator.",
+            "start": "2026-06-08T14:00:00+01:00",
+            "task_id": "T1",
+            "task_name": "Improve AASMA simulator",
+            "type": "work"
+          },
+          {
+            "description": "Create summary notes and review key topics.",
+            "duration_hours": 1,
+            "end": "2026-06-08T18:00:00+01:00",
+            "id": "B10",
+            "reasoning": "Consolidate knowledge for the oral discussion.",
+            "start": "2026-06-08T17:00:00+01:00",
+            "task_id": "T2",
+            "task_name": "Prepare for programming languages oral discussion",
+            "type": "work"
+          }
+        ]
+      },
+      {
+        "date": "2026-06-09",
+        "day_name": "Monday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Submit simulator and do final oral prep with day free for contingency.",
+        "blocks": [
+          {
+            "description": "Final review, polish, and submission of the simulator.",
+            "duration_hours": 3,
+            "end": "2026-06-09T17:00:00+01:00",
+            "id": "B11",
+            "reasoning": "Finalize and submit the AASMA simulator before its deadline.",
+            "start": "2026-06-09T14:00:00+01:00",
+            "task_id": "T1",
+            "task_name": "Improve AASMA simulator",
+            "type": "work"
+          },
+          {
+            "description": "Mock discussion and final confidence review.",
+            "duration_hours": 1,
+            "end": "2026-06-09T18:00:00+01:00",
+            "id": "B12",
+            "reasoning": "Final preparation for the oral discussion after simulator submission.",
+            "start": "2026-06-09T17:00:00+01:00",
+            "task_id": "T2",
+            "task_name": "Prepare for programming languages oral discussion",
+            "type": "work"
+          }
+        ]
+      },
+      {
+        "date": "2026-06-10",
+        "day_name": "Tuesday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Dedicated full capacity to final oral discussion preparation.",
+        "blocks": [
+          {
+            "description": "Comprehensive review and mental preparation for the oral.",
+            "duration_hours": 4,
+            "end": "2026-06-10T18:00:00+01:00",
+            "id": "B13",
+            "reasoning": "Focused final preparation day before the oral discussion deadline.",
+            "start": "2026-06-10T14:00:00+01:00",
+            "task_id": "T2",
+            "task_name": "Prepare for programming languages oral discussion",
+            "type": "work"
+          }
+        ]
+      },
+      {
+        "date": "2026-06-11",
+        "day_name": "Wednesday",
+        "assumed_available_hours": 2,
+        "day_reasoning": "Minimal scheduled work on deadline day to avoid stress.",
+        "blocks": [
+          {
+            "description": "Final review and mental preparation before the discussion.",
+            "duration_hours": 2,
+            "end": "2026-06-11T16:00:00+01:00",
+            "id": "B14",
+            "reasoning": "Light final review on the day of the oral discussion deadline.",
+            "start": "2026-06-11T14:00:00+01:00",
+            "task_id": "T2",
+            "task_name": "Prepare for programming languages oral discussion",
+            "type": "work"
+          }
+        ]
+      }
+    ],
+    "compromises": [
+      {
+        "conflict": "High-value tasks need more time but daily capacity is limited.",
+        "resolution": "Prioritized oral discussion and AASMA simulator, accepting less polish on math sheet."
+      },
+      {
+        "conflict": "Student needs deep focus but also early starts on uncertain tasks.",
+        "resolution": "Used longer blocks for focused work and scheduled discovery early."
+      },
+      {
+        "conflict": "Risk management requires contingency but schedule cannot have buffer blocks.",
+        "resolution": "Left unscheduled time before deadlines as implicit flexible recovery periods."
+      }
+    ],
+    "known_weaknesses": [
+      "Relies on unscheduled time as implicit contingency, which may be used for other needs.",
+      "Math sheet receives less time, which could affect quality if problems are difficult.",
+      "Longer simulator blocks may still be interrupted by low energy."
+    ],
+    "changes_from_previous": [
+      {
+        "change": "Reduced daily scheduled hours to strictly respect 4-hour capacity.",
+        "reason": "Addresses Wellbeing Agent's rejection of over-scheduling."
+      },
+      {
+        "change": "Front-loaded oral discussion preparation with dedicated early-week blocks.",
+        "reason": "Addresses Grade Agent's critical issue about backloading high-value task."
+      },
+      {
+        "change": "Consolidated AASMA simulator work into longer, focused blocks.",
+        "reason": "Addresses Grade Agent's issue about fragmentation hindering deep work."
+      },
+      {
+        "change": "Reduced math sheet allocation and scheduled it earlier to free capacity.",
+        "reason": "Addresses Grade Agent's issue about excessive time on lower-priority task."
+      },
+      {
+        "change": "Added explicit early discovery block for AASMA simulator on first day.",
+        "reason": "Addresses Risk Agent's critical issue about insufficient scope clarification."
+      },
+      {
+        "change": "Left strategic unscheduled periods before key deadlines as implicit contingency.",
+        "reason": "Addresses Risk Agent's need for recovery time without creating buffer blocks."
+      }
+    ],
+    "unresolved_critiques": [
+      {
+        "agent": "Risk Agent",
+        "issue": "Plan lacks explicit contingency buffers, relying on unscheduled time which may not be protected.",
+        "planner_response": "Strategic unscheduled periods before deadlines serve as implicit buffers without creating blocks.",
+        "severity": "minor"
+      },
+      {
+        "agent": "Wellbeing Agent",
+        "issue": "Four-hour workdays may still be challenging for a low-energy student.",
+        "planner_response": "Capacity is fixed at stated limit; unscheduled time provides necessary rest.",
+        "severity": "minor"
+      }
+    ]
+  },
+  "critiques": [
+    {
+      "agent": "Deadline Agent",
+      "calendar_version": 3,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The math sheet receives less time to prioritize higher-value tasks, accepting potential quality risk to meet all deadlines."
+      ],
+      "overall_comment": "The calendar successfully schedules all required work to end before each task's inferred deadline. The math sheet is completed on its due date, the AASMA simulator work ends on June 9, and oral discussion preparation concludes on June 11. The plan respects the student's daily capacity and provides early discovery time, mitigating deadline risk."
+    },
+    {
+      "agent": "Grade Agent",
+      "calendar_version": 3,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The math sheet receives less time to prioritize higher-value tasks, accepting a potential quality trade-off."
+      ],
+      "overall_comment": "The calendar effectively protects academic value. High-impact tasks, the AASMA simulator and programming languages oral discussion, receive substantial, protected, and early scheduled time. The lower-priority math sheet is contained to prevent crowding out critical work. The plan addresses previous concerns by front-loading oral prep, consolidating simulator work, and reducing math allocation."
+    },
+    {
+      "agent": "Effort Agent",
+      "calendar_version": 3,
+      "approval": "reject",
+      "severity": "major",
+      "critiques": [
+        {
+          "affected_days": [
+            "2026-06-05",
+            "2026-06-08",
+            "2026-06-09"
+          ],
+          "affected_tasks": [
+            "Improve AASMA simulator"
+          ],
+          "issue": "The AASMA simulator work is scheduled in 3-hour blocks, which is excessive for a low-energy student and risks burnout and diminishing returns. My earlier assessment estimated 8 total hours, but these long blocks are not plausible for sustained focus given the student's state.",
+          "severity": "major",
+          "suggested_fix": "Split each 3-hour simulator block into two 1.5-hour sessions, possibly across different days, to maintain focus and align with realistic student capacity."
+        },
+        {
+          "affected_days": [
+            "2026-06-10"
+          ],
+          "affected_tasks": [
+            "Prepare for programming languages oral discussion"
+          ],
+          "issue": "A single 4-hour block for oral discussion preparation is unrealistic for deep cognitive work and contradicts my earlier recommendation for multiple shorter blocks to aid retention and manage low energy.",
+          "severity": "major",
+          "suggested_fix": "Break the 4-hour block on June 10 into two 2-hour blocks, perhaps splitting the day or redistributing some review to earlier days."
+        },
+        {
+          "affected_days": [
+            "2026-06-04",
+            "2026-06-06",
+            "2026-06-07"
+          ],
+          "affected_tasks": [
+            "Math exercise sheet"
+          ],
+          "issue": "The math sheet is allocated only 6 total hours across scattered 2-hour blocks. Given the student's caution that it 'usually takes longer,' this may still be an underestimate, leaving no contingency if problems are difficult.",
+          "severity": "minor",
+          "suggested_fix": "Protect an additional 1-2 hours earlier in the week (e.g., June 05) for math, possibly by shortening a simulator block, to provide a safety margin."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner added an explicit early discovery block for the AASMA simulator, addressing my earlier recommendation to reduce uncertainty.",
+        "The planner split the AASMA simulator work across multiple blocks, addressing my concern about breaking down this large, vague task.",
+        "The planner scheduled the math sheet early and across multiple days, heeding my warning about underestimation and allowing time for difficulties."
+      ],
+      "overall_comment": "The calendar makes good strides in early discovery and task splitting, but the block durations for the two largest tasks are not plausible for a low-energy student. Three- and four-hour deep work blocks will lead to fatigue and reduced effectiveness. The total hours allocated may fit within capacity, but the distribution lacks realism for sustained focus. I must reject until block sizes are adjusted to be more manageable."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "calendar_version": 3,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The plan schedules a full 4-hour block on June 10 for oral discussion preparation, which is a cognitively heavy task. For a student with low energy, this could lead to mental fatigue and reduced effectiveness.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Prepare for programming languages oral discussion"
+          ],
+          "affected_days": [
+            "2026-06-10"
+          ],
+          "suggested_fix": "Consider shortening the June 10 block to 3 hours and moving the remaining hour to an earlier day, or splitting the 4-hour block into two separate 2-hour sessions with a longer unscheduled break in between."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner has respected the 4-hour daily capacity and avoided late-night work, addressing core wellbeing concerns."
+      ],
+      "overall_comment": "The plan is generally humane and sustainable. It respects the student's stated 4-hour daily capacity, avoids work ending after 22:00, and front-loads tasks to reduce deadline pressure. The main concern is a single 4-hour block of intensive study, which may be taxing for a low-energy student. Overall, the plan is acceptable with minor adjustments."
+    },
+    {
+      "agent": "Risk Agent",
+      "calendar_version": 3,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The plan relies on unscheduled time as implicit contingency, but this time is not protected and may be used for other needs or lost to fatigue, leaving no guaranteed buffer for scope expansion or unexpected difficulties.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Improve AASMA simulator",
+            "Prepare for programming languages oral discussion"
+          ],
+          "affected_days": [
+            "2026-06-08",
+            "2026-06-09",
+            "2026-06-10"
+          ],
+          "suggested_fix": "Explicitly reserve 1-2 hours of the daily 4-hour capacity as a contingency block on days before key deadlines (e.g., June 8 for the simulator, June 10 for the oral discussion), labeling it for overflow work from the primary task of that day."
+        },
+        {
+          "issue": "The early discovery block for the AASMA simulator is only 2 hours, which may be insufficient to fully clarify the undefined scope and teacher expectations, risking later rework.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Improve AASMA simulator"
+          ],
+          "affected_days": [
+            "2026-06-04"
+          ],
+          "suggested_fix": "Extend the initial discovery block on June 4 to 3 hours, or schedule a follow-up clarification block on June 5, to ensure requirements are well-understood before major implementation begins."
+        },
+        {
+          "issue": "The math exercise sheet is allocated less time and scheduled early, but if its complexity is high, there is no scheduled contingency after its discovery phase to handle overflow before the Monday deadline.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Math exercise sheet"
+          ],
+          "affected_days": [
+            "2026-06-05",
+            "2026-06-06"
+          ],
+          "suggested_fix": "Designate the unused hour on June 5 (after the 1-hour oral prep) as a flexible overflow slot for math if the initial assessment on June 4 reveals higher difficulty than expected."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner added an explicit early discovery block for the AASMA simulator, addressing the prior critical issue about insufficient scope clarification.",
+        "Strategic unscheduled periods before deadlines are used as implicit recovery time, though not as robust as explicit buffers."
+      ],
+      "overall_comment": "The plan shows good risk-aware adjustments, including front-loading oral preparation, early discovery for the simulator, and respecting energy limits. However, contingency remains implicit and fragile. The minor concerns above highlight areas where hidden work or uncertainty could still disrupt the schedule. The plan is acceptable but could be more resilient with minor tweaks to protect contingency time."
+    }
+  ],
+  "validation": {
+    "valid": false,
+    "violations": [
+      {
+        "code": "block_after_deadline",
+        "message": "Math exercise sheet has work scheduled after its deadline (2026-06-07T00:00:00.000Z).",
+        "severity": "error"
+      },
+      {
+        "code": "block_after_deadline",
+        "message": "Improve AASMA simulator has work scheduled after its deadline (2026-06-09T00:00:00.000Z).",
+        "severity": "error"
+      },
+      {
+        "code": "day_outside_window",
+        "message": "2026-06-11 is outside the planning window 2026-06-04 → 2026-06-11.",
+        "severity": "error"
+      },
+      {
+        "code": "block_after_deadline",
+        "message": "Prepare for programming languages oral discussion has work scheduled after its deadline (2026-06-11T00:00:00.000Z).",
+        "severity": "error"
+      }
+    ]
+  },
+  "evaluation": {
+    "evaluator": "Schedule Evaluator",
+    "calendar_version": 3,
+    "planner_model": "deepseek/deepseek-v3.2",
+    "evaluator_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "overall_score": 2.7,
+    "model_score": 2,
+    "hard_score": 3.4,
+    "hard_metrics": {
+      "score": 60,
+      "metrics": [
+        {
+          "name": "generation_time_seconds",
+          "value": 533.2,
+          "score": 0,
+          "explanation": "533.2s from run start to final schedule selection."
+        },
+        {
+          "name": "rejection_count",
+          "value": 1,
+          "score": 80,
+          "explanation": "1 specialist agent(s) rejected the final calendar."
+        },
+        {
+          "name": "critical_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 critical issue(s) were raised in final critiques."
+        },
+        {
+          "name": "major_count",
+          "value": 3,
+          "score": 40,
+          "explanation": "3 major issue(s) were raised in final critiques."
+        },
+        {
+          "name": "deadline_violation_count",
+          "value": 3,
+          "score": 0,
+          "explanation": "3 scheduled work block(s) end after their task deadline."
+        },
+        {
+          "name": "task_coverage_ratio",
+          "value": 1,
+          "score": 100,
+          "explanation": "3/3 inferred task(s) received at least one work block."
+        },
+        {
+          "name": "availability_overrun_hours",
+          "value": 0,
+          "score": 100,
+          "explanation": "0h scheduled above the planner's assumed available hours."
+        }
+      ]
+    },
+    "dimension_scores": [
+      {
+        "dimension": "requirement_match",
+        "score": 2,
+        "rationale": "The schedule failed the hard metric check by scheduling work after the deadlines for all three tasks (Math, AASMA, Oral Prep), indicating a fundamental failure to meet the primary requirement of timely completion."
+      },
+      {
+        "dimension": "deadline_safety",
+        "score": 1,
+        "rationale": "The schedule resulted in three deadline violations, meaning safety was not maintained at all. This is the most severe failure mode."
+      },
+      {
+        "dimension": "workload_realism",
+        "score": 2.5,
+        "rationale": "The planner attempted to respect the 4-hour limit and split tasks, but the block sizes (3h and 4h) were deemed too large for a low-energy student by the Effort Agent, suggesting poor realism regarding sustained focus."
+      },
+      {
+        "dimension": "academic_priority",
+        "score": 4,
+        "rationale": "The schedule correctly prioritized the AASMA simulator and Oral Discussion over the Math sheet in terms of time allocation, aligning with specialist guidance on academic weight."
+      },
+      {
+        "dimension": "wellbeing_balance",
+        "score": 3,
+        "rationale": "The plan respected the 4-hour daily limit and avoided late-night work, which is positive. However, scheduling long, intensive blocks (3-4 hours) for deep work contradicts the low-energy state, reducing the overall balance quality."
+      },
+      {
+        "dimension": "risk_resilience",
+        "score": 2,
+        "rationale": "The plan failed to incorporate explicit contingency, relying on implicit unscheduled time, which proved insufficient as evidenced by the deadline violations. Risk was not adequately managed."
+      }
+    ],
+    "strengths": [
+      "Successfully incorporated early discovery time for the vague AASMA simulator task.",
+      "Prioritized higher-value academic tasks (Simulator, Oral Prep) over the lower-priority Math sheet.",
+      "Adhered to the 4-hour daily capacity constraint and avoided late-night work."
+    ],
+    "weaknesses": [
+      "Failed to meet deadlines for all three tasks, resulting in critical deadline violations.",
+      "Scheduled work blocks that were too long (3-4 hours) for a student reporting low energy and confidence.",
+      "The strategy of using implicit unscheduled time as contingency failed to prevent deadline overruns."
+    ],
+    "comparison_notes": [
+      "This run failed catastrophically on the hard metric of deadline safety, which overrides most qualitative successes.",
+      "The planner correctly identified the need to split tasks and start early, but the execution resulted in late completion times, suggesting poor time estimation or scheduling logic despite specialist input."
+    ],
+    "recommendation": "The planner must revise its time allocation logic to ensure that the sum of scheduled work for a task ends strictly before its deadline, even if it means reducing the scope or duration of the work blocks scheduled. The block size for deep work needs to be capped lower (e.g., 2 hours max) given the student's low energy state."
+  },
+  "usage": {
+    "callCount": 25,
+    "promptTokens": 116139,
+    "completionTokens": 20671,
+    "totalTokens": 136810,
+    "estimatedCostUsd": 0.036002,
+    "calls": [
+      {
+        "id": "6884d3bc-489b-412d-b22f-01452e63bd84",
+        "schemaName": "interpreter_output",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:20:04.188Z",
+        "completedAt": "2026-06-04T15:20:23.655Z",
+        "durationMs": 19467,
+        "promptChars": 4236,
+        "completionChars": 3068,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 988,
+        "completionTokens": 678,
+        "totalTokens": 1666,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000515
+      },
+      {
+        "id": "4722062b-ee26-4ee7-8d7f-6778699e4ae6",
+        "schemaName": "specialist_agent_view",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:20:23.655Z",
+        "completedAt": "2026-06-04T15:20:35.824Z",
+        "durationMs": 12169,
+        "promptChars": 6618,
+        "completionChars": 3841,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 1562,
+        "completionTokens": 779,
+        "totalTokens": 2341,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000702
+      },
+      {
+        "id": "6afcb6ff-6cf2-4269-a286-0d1d6c341874",
+        "schemaName": "specialist_agent_view",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:20:23.655Z",
+        "completedAt": "2026-06-04T15:20:46.492Z",
+        "durationMs": 22837,
+        "promptChars": 7042,
+        "completionChars": 4638,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 1646,
+        "completionTokens": 951,
+        "totalTokens": 2597,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000789
+      },
+      {
+        "id": "653d3d43-6aa4-41a7-8be5-3b7c6f1441f4",
+        "schemaName": "specialist_agent_view",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:20:23.655Z",
+        "completedAt": "2026-06-04T15:21:13.171Z",
+        "durationMs": 49516,
+        "promptChars": 6546,
+        "completionChars": 3416,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 1548,
+        "completionTokens": 698,
+        "totalTokens": 2246,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000668
+      },
+      {
+        "id": "be855834-7270-448b-9843-d103b3ec6810",
+        "schemaName": "specialist_agent_view",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:20:23.655Z",
+        "completedAt": "2026-06-04T15:21:14.149Z",
+        "durationMs": 50494,
+        "promptChars": 7554,
+        "completionChars": 5296,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 1784,
+        "completionTokens": 1103,
+        "totalTokens": 2887,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000883
+      },
+      {
+        "id": "70b8bbc1-6e03-4f58-b7c0-bf201a1ed5a6",
+        "schemaName": "specialist_agent_view",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:20:23.655Z",
+        "completedAt": "2026-06-04T15:21:36.030Z",
+        "durationMs": 72375,
+        "promptChars": 6572,
+        "completionChars": 4863,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 1550,
+        "completionTokens": 980,
+        "totalTokens": 2530,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000775
+      },
+      {
+        "id": "9a0a4859-12ae-4f3f-b805-0261ca381150",
+        "schemaName": "calendar_proposal",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:21:36.030Z",
+        "completedAt": "2026-06-04T15:22:55.939Z",
+        "durationMs": 79909,
+        "promptChars": 31773,
+        "completionChars": 9001,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 7383,
+        "completionTokens": 2447,
+        "totalTokens": 9830,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.002849
+      },
+      {
+        "id": "46cff010-d5e6-410f-a857-a64713cb2fd4",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:22:55.939Z",
+        "completedAt": "2026-06-04T15:23:03.676Z",
+        "durationMs": 7737,
+        "promptChars": 17837,
+        "completionChars": 782,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4866,
+        "completionTokens": 163,
+        "totalTokens": 5029,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001327
+      },
+      {
+        "id": "c55126d6-f226-4022-bea7-13f2aec4e96f",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:22:55.939Z",
+        "completedAt": "2026-06-04T15:23:04.646Z",
+        "durationMs": 8707,
+        "promptChars": 19555,
+        "completionChars": 742,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5210,
+        "completionTokens": 170,
+        "totalTokens": 5380,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001419
+      },
+      {
+        "id": "b0049583-8669-4d76-a0aa-7cf38fb4d38f",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:22:55.940Z",
+        "completedAt": "2026-06-04T15:23:05.759Z",
+        "durationMs": 9819,
+        "promptChars": 20725,
+        "completionChars": 699,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5508,
+        "completionTokens": 172,
+        "totalTokens": 5680,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001497
+      },
+      {
+        "id": "1e1031e3-f877-437d-ad69-d205bbde3df4",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:22:55.940Z",
+        "completedAt": "2026-06-04T15:23:23.370Z",
+        "durationMs": 27430,
+        "promptChars": 18478,
+        "completionChars": 3185,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5006,
+        "completionTokens": 755,
+        "totalTokens": 5761,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001588
+      },
+      {
+        "id": "14e4f7c6-1739-46c8-9b2b-dfb0dee09b34",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:22:55.940Z",
+        "completedAt": "2026-06-04T15:23:50.532Z",
+        "durationMs": 54592,
+        "promptChars": 19310,
+        "completionChars": 2783,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4727,
+        "completionTokens": 703,
+        "totalTokens": 5430,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001496
+      },
+      {
+        "id": "67a1b292-2253-4dc0-8f24-c7e778b02b50",
+        "schemaName": "calendar_proposal",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:23:50.533Z",
+        "completedAt": "2026-06-04T15:25:22.903Z",
+        "durationMs": 92370,
+        "promptChars": 11066,
+        "completionChars": 10314,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 3387,
+        "completionTokens": 2821,
+        "totalTokens": 6208,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001953
+      },
+      {
+        "id": "7f185db3-b6de-4ac9-b21a-0ad407dc7c65",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:25:22.903Z",
+        "completedAt": "2026-06-04T15:25:31.188Z",
+        "durationMs": 8285,
+        "promptChars": 20931,
+        "completionChars": 802,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5595,
+        "completionTokens": 182,
+        "totalTokens": 5777,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001524
+      },
+      {
+        "id": "cd2cc773-ea94-4029-bafe-42ce0ccd8068",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:25:22.904Z",
+        "completedAt": "2026-06-04T15:25:34.958Z",
+        "durationMs": 12054,
+        "promptChars": 20686,
+        "completionChars": 2141,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5120,
+        "completionTokens": 526,
+        "totalTokens": 5646,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001531
+      },
+      {
+        "id": "e0127553-6257-4a70-9a26-fd8b0cb9b95e",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:25:22.904Z",
+        "completedAt": "2026-06-04T15:25:39.032Z",
+        "durationMs": 16128,
+        "promptChars": 22101,
+        "completionChars": 1803,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5893,
+        "completionTokens": 465,
+        "totalTokens": 6358,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001709
+      },
+      {
+        "id": "ad864199-b747-4023-b973-a7d6692e7c05",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:25:22.904Z",
+        "completedAt": "2026-06-04T15:25:49.234Z",
+        "durationMs": 26330,
+        "promptChars": 19213,
+        "completionChars": 2883,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5251,
+        "completionTokens": 718,
+        "totalTokens": 5969,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001638
+      },
+      {
+        "id": "d3ff229e-7d33-435f-84d2-aed928a61cda",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:25:22.904Z",
+        "completedAt": "2026-06-04T15:25:49.556Z",
+        "durationMs": 26652,
+        "promptChars": 19854,
+        "completionChars": 3076,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5391,
+        "completionTokens": 702,
+        "totalTokens": 6093,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001668
+      },
+      {
+        "id": "6cbd9e20-c1a2-4063-8e88-e914a4f17059",
+        "schemaName": "calendar_proposal",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:25:49.557Z",
+        "completedAt": "2026-06-04T15:28:28.863Z",
+        "durationMs": 159306,
+        "promptChars": 12180,
+        "completionChars": 11349,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 2915,
+        "completionTokens": 2969,
+        "totalTokens": 5884,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001886
+      },
+      {
+        "id": "9ea9b0e2-bf19-4725-85af-e62725e0b9dc",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:28:28.864Z",
+        "completedAt": "2026-06-04T15:28:36.648Z",
+        "durationMs": 7784,
+        "promptChars": 20148,
+        "completionChars": 684,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5384,
+        "completionTokens": 150,
+        "totalTokens": 5534,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001457
+      },
+      {
+        "id": "dcc6ded4-aa8f-4e65-9b71-504bb333dbac",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:28:28.864Z",
+        "completedAt": "2026-06-04T15:28:36.790Z",
+        "durationMs": 7926,
+        "promptChars": 21866,
+        "completionChars": 652,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5728,
+        "completionTokens": 150,
+        "totalTokens": 5878,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001546
+      },
+      {
+        "id": "a1e43c93-6729-4090-871c-128b53da8158",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:28:28.864Z",
+        "completedAt": "2026-06-04T15:28:41.864Z",
+        "durationMs": 13000,
+        "promptChars": 23036,
+        "completionChars": 1288,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 6026,
+        "completionTokens": 306,
+        "totalTokens": 6332,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001683
+      },
+      {
+        "id": "595a3735-48d0-4fa3-a847-388e77bf60a6",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:28:28.864Z",
+        "completedAt": "2026-06-04T15:28:52.452Z",
+        "durationMs": 23588,
+        "promptChars": 20789,
+        "completionChars": 2734,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5524,
+        "completionTokens": 627,
+        "totalTokens": 6151,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001675
+      },
+      {
+        "id": "d330fc34-1599-44c8-9d5d-cdc07171a0a1",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:28:28.864Z",
+        "completedAt": "2026-06-04T15:28:57.357Z",
+        "durationMs": 28493,
+        "promptChars": 21621,
+        "completionChars": 2787,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5245,
+        "completionTokens": 642,
+        "totalTokens": 5887,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001608
+      },
+      {
+        "id": "494d8b31-983d-438b-b6c4-69c1b1f0e71d",
+        "schemaName": "schedule_evaluation",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T15:28:57.358Z",
+        "completedAt": "2026-06-04T15:29:00.497Z",
+        "durationMs": 3139,
+        "promptChars": 51255,
+        "completionChars": 3303,
+        "maxCompletionTokens": 8000,
+        "promptTokens": 12902,
+        "completionTokens": 814,
+        "totalTokens": 13716,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001616
+      }
+    ]
+  }
+}

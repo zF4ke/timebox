@@ -1,0 +1,70 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:B1_T1_01@timebox.local
+DTSTAMP:20260604T143720Z
+DTSTART:20260604T140000Z
+DTEND:20260604T190000Z
+SUMMARY:Operating Systems Lab Coding
+DESCRIPTION:Complete the coding portion of the Operating Systems Lab.\\n\\nReasoning: This task is unstarted and due tomorrow\, requiring immediate focus using the afternoon availability.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2_T1_02@timebox.local
+DTSTAMP:20260604T143720Z
+DTSTART:20260605T120000Z
+DTEND:20260605T133000Z
+SUMMARY:Operating Systems Lab Report Writing
+DESCRIPTION:Write and finalize the short report for the Operating Systems Lab.\\n\\nReasoning: This must be completed immediately after coding (which is assumed finished or nearly finished today) to meet the 23:59 deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2_T3_01@timebox.local
+DTSTAMP:20260604T143720Z
+DTSTART:20260605T133000Z
+DTEND:20260605T153000Z
+SUMMARY:Statistics Quiz Study (Formulas)
+DESCRIPTION:Initial focused study on Statistics formulas\, starting immediately after submitting the OS Lab.\\n\\nReasoning: Starting the Statistics study today leverages available time after the critical OS Lab submission\, addressing the student's weakness early.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3_T3_02@timebox.local
+DTSTAMP:20260604T143720Z
+DTSTART:20260606T090000Z
+DTEND:20260606T130000Z
+SUMMARY:Statistics Quiz Study (Formulas)
+DESCRIPTION:Dedicated session to practice Statistics formulas and work through related problems.\\n\\nReasoning: This block utilizes the full available time slot to address the stated weakness in formulas for the quiz due tomorrow.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4_T3_03@timebox.local
+DTSTAMP:20260604T143720Z
+DTSTART:20260607T090000Z
+DTEND:20260607T100000Z
+SUMMARY:Statistics Quiz Study (Formulas)
+DESCRIPTION:Final quick review of Statistics formulas before the quiz deadline.\\n\\nReasoning: A short session to ensure confidence before the quiz deadline at 23:59.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4_T4_01@timebox.local
+DTSTAMP:20260604T143720Z
+DTSTART:20260607T100000Z
+DTEND:20260607T120000Z
+SUMMARY:AASMA Project Idea Submission
+DESCRIPTION:Brainstorm potential topics and select the final project idea for the AASMA class.\\n\\nReasoning: Starting the low-priority AASMA proposal now utilizes available time after the Statistics study\, ensuring topic selection is done early.
+END:VEVENT
+BEGIN:VEVENT
+UID:B5_T4_02@timebox.local
+DTSTAMP:20260604T143720Z
+DTSTART:20260608T090000Z
+DTEND:20260608T110000Z
+SUMMARY:AASMA Project Idea Submission
+DESCRIPTION:Draft the main content of the one-page AASMA project idea.\\n\\nReasoning: Allocating 2 hours to drafting ensures the bulk of the writing is done mid-week\, leaving buffer time before the Friday deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B7_T4_03@timebox.local
+DTSTAMP:20260604T143720Z
+DTSTART:20260610T090000Z
+DTEND:20260610T100000Z
+SUMMARY:AASMA Project Idea Submission
+DESCRIPTION:Final review\, formatting\, and submission preparation for the AASMA project idea.\\n\\nReasoning: This finalizes the AASMA proposal one day before the deadline\, respecting the 4-hour daily limit.
+END:VEVENT
+END:VCALENDAR

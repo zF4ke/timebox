@@ -94,7 +94,7 @@ export function defaultProjectRoot(): string {
 export function aggregateBenchmarkRuns(runs: BenchmarkRunSummary[]): BenchmarkAggregate[] {
   const groups = new Map<string, BenchmarkRunSummary[]>();
   for (const run of runs) {
-    const key = `${run.model}__${run.quorum}__${run.maxIterations}`;
+    const key = `${run.model}__${run.evaluatorModel ?? ""}__${run.quorum}__${run.maxIterations}`;
     groups.set(key, [...(groups.get(key) ?? []), run]);
   }
 
@@ -112,6 +112,7 @@ export function aggregateBenchmarkRuns(runs: BenchmarkRunSummary[]): BenchmarkAg
 
       return {
         model: first.model,
+        evaluatorModel: first.evaluatorModel ?? null,
         quorum: first.quorum,
         maxIterations: first.maxIterations,
         runCount: group.length,

@@ -58,6 +58,7 @@ const MODEL_OPTIONS = [
   "minimax/minimax-m2.7",
   "deepseek/deepseek-v3.2",
   "deepseek/deepseek-v4-flash",
+  "qwen/qwen3.6-flash",
   "openai/gpt-5-nano",
 ];
 
@@ -91,6 +92,7 @@ const MODEL_INFO: Record<string, { name: string; price: string }> = {
   "minimax/minimax-m2.7": { name: "MiniMax M2.7", price: "$0.30 / $1.20" },
   "deepseek/deepseek-v3.2": { name: "DeepSeek V3.2", price: "$0.26 / $0.38" },
   "deepseek/deepseek-v4-flash": { name: "DeepSeek V4 Flash", price: "$0.0983 / $0.1966" },
+  "qwen/qwen3.6-flash": { name: "Qwen3.6 Flash", price: "$0.1875 / $1.125" },
   "openai/gpt-5-nano": { name: "GPT-5 Nano", price: "$0.05 / $0.40" },
   "nvidia/nemotron-3-super-120b-a12b:free": { name: "Nemotron 3 Super", price: "free" },
 };
@@ -104,26 +106,35 @@ const MODEL_PRICING: Record<string, { input: number; output: number }> = {
   "minimax/minimax-m2.7": { input: 0.3, output: 1.2 },
   "deepseek/deepseek-v3.2": { input: 0.26, output: 0.38 },
   "deepseek/deepseek-v4-flash": { input: 0.0983, output: 0.1966 },
+  "qwen/qwen3.6-flash": { input: 0.1875, output: 1.125 },
   "openai/gpt-5-nano": { input: 0.05, output: 0.4 }
 };
 
 // Rough per-run token profile for a full pipeline. Planner-model calls are
-// interpreter + 5 specialists + planner drafts + critique rounds. The final
-// schedule-evaluator call uses the fixed judge model, so price it separately.
-function estimateRunCostUsd(model: string, maxIterations: number, evaluatorModel: string): number | null {
+// interpreter + 5 specialists + planner drafts + critique rounds. Evaluator
+// calls are priced separately so multi-judge benchmarks do not overcount the
+// generation step.
+function estimatePlannerCostUsd(model: string, maxIterations: number): number | null {
   const pricing = MODEL_PRICING[model];
-  const evaluatorPricing = MODEL_PRICING[evaluatorModel];
-  if (!pricing || !evaluatorPricing) return null;
+  if (!pricing) return null;
   const plannerCalls = 1 + 5 + maxIterations + maxIterations * 5;
   const promptTokens = 7000;
   const completionTokens = 1800;
-  const plannerCost =
+  return (
     (plannerCalls * promptTokens / 1_000_000) * pricing.input +
-    (plannerCalls * completionTokens / 1_000_000) * pricing.output;
-  const evaluatorCost =
+    (plannerCalls * completionTokens / 1_000_000) * pricing.output
+  );
+}
+
+function estimateEvaluatorCostUsd(evaluatorModel: string): number | null {
+  const evaluatorPricing = MODEL_PRICING[evaluatorModel];
+  if (!evaluatorPricing) return null;
+  const promptTokens = 7000;
+  const completionTokens = 1800;
+  return (
     (promptTokens / 1_000_000) * evaluatorPricing.input +
-    (completionTokens / 1_000_000) * evaluatorPricing.output;
-  return plannerCost + evaluatorCost;
+    (completionTokens / 1_000_000) * evaluatorPricing.output
+  );
 }
 
 function calibrationKey(model: string, evaluatorModel: string | null | undefined): string {
@@ -873,6 +884,7 @@ type RankingRow = BenchmarkAggregate & { experimentId: string };
 
 const RANKING_ACCESSORS: Accessors<RankingRow> = {
   model: (r) => formatCompactModel(r.model),
+  evaluatorModel: (r) => formatCompactModel(r.evaluatorModel ?? ""),
   quorum: (r) => r.quorum,
   maxIterations: (r) => r.maxIterations,
   okCount: (r) => r.okCount,
@@ -888,6 +900,7 @@ const RUN_ACCESSORS: Accessors<BenchmarkRunSummary> = {
   scenarioTitle: (r) => r.scenarioTitle,
   difficulty: (r) => DIFFICULTY_RANK[r.difficulty] ?? 99,
   model: (r) => formatCompactModel(r.model),
+  evaluatorModel: (r) => formatCompactModel(r.evaluatorModel ?? ""),
   quorum: (r) => r.quorum,
   iterations: (r) => r.iterations,
   status: (r) => r.status,
@@ -1129,7 +1142,7 @@ function AnalyticsView({
             </div>
             <div>
               <span className="metric-label">Judge</span>
-              <strong>{selectedExperiment?.evaluatorModel ? formatCompactModel(selectedExperiment.evaluatorModel) : "mixed"}</strong>
+              <strong>{formatExperimentJudges(selectedExperiment)}</strong>
             </div>
             <div>
               <span className="metric-label">Prompts</span>
@@ -1215,6 +1228,7 @@ function AnalyticsView({
                 <thead>
                   <tr>
                     <SortTh label="Model" field="model" sort={ranking.sort} onSort={ranking.onSort} />
+                    <SortTh label="Judge" field="evaluatorModel" sort={ranking.sort} onSort={ranking.onSort} />
                     <SortTh label="Q" field="quorum" sort={ranking.sort} onSort={ranking.onSort} align="right" />
                     <SortTh label="Iter" field="maxIterations" sort={ranking.sort} onSort={ranking.onSort} align="right" />
                     <SortTh label="Runs" field="okCount" sort={ranking.sort} onSort={ranking.onSort} align="right" />
@@ -1228,8 +1242,9 @@ function AnalyticsView({
                 </thead>
                 <tbody>
                   {ranking.sorted.map((aggregate) => (
-                    <tr key={`${aggregate.experimentId}-${aggregate.model}-${aggregate.quorum}-${aggregate.maxIterations}`}>
+                    <tr key={`${aggregate.experimentId}-${aggregate.model}-${aggregate.evaluatorModel ?? "judge"}-${aggregate.quorum}-${aggregate.maxIterations}`}>
                       <td>{formatCompactModel(aggregate.model)}</td>
+                      <td>{aggregate.evaluatorModel ? formatCompactModel(aggregate.evaluatorModel) : "mixed"}</td>
                       <td className="num">{aggregate.quorum}</td>
                       <td className="num">{aggregate.maxIterations}</td>
                       <td className="num">{aggregate.okCount}/{aggregate.runCount}</td>
@@ -1258,6 +1273,7 @@ function AnalyticsView({
                     <SortTh label="Scenario" field="scenarioTitle" sort={runs.sort} onSort={runs.onSort} />
                     <SortTh label="Difficulty" field="difficulty" sort={runs.sort} onSort={runs.onSort} />
                     <SortTh label="Model" field="model" sort={runs.sort} onSort={runs.onSort} />
+                    <SortTh label="Judge" field="evaluatorModel" sort={runs.sort} onSort={runs.onSort} />
                     <SortTh label="Q" field="quorum" sort={runs.sort} onSort={runs.onSort} align="right" />
                     <SortTh label="Iter" field="iterations" sort={runs.sort} onSort={runs.onSort} align="right" />
                     <SortTh label="Status" field="status" sort={runs.sort} onSort={runs.onSort} />
@@ -1271,10 +1287,11 @@ function AnalyticsView({
                 </thead>
                 <tbody>
                   {runs.sorted.map((run) => (
-                    <tr key={`${run.model}-${run.quorum}-${run.maxIterations}-${run.scenarioId}`}>
+                    <tr key={`${run.model}-${run.evaluatorModel ?? "judge"}-${run.quorum}-${run.maxIterations}-${run.scenarioId}`}>
                       <td>{run.scenarioTitle}</td>
                       <td>{run.difficulty}</td>
                       <td>{formatCompactModel(run.model)}</td>
+                      <td>{run.evaluatorModel ? formatCompactModel(run.evaluatorModel) : "mixed"}</td>
                       <td className="num">{run.quorum}</td>
                       <td className="num">{run.iterations ?? "-"}</td>
                       <td>
@@ -1434,13 +1451,14 @@ function BenchmarkRunModal({
   const [quorums, setQuorums] = useState<number[]>([3, 5]);
   const [iterations, setIterations] = useState<number[]>([2, 3]);
   const [scenarioLimit, setScenarioLimit] = useState<number>(5);
-  const [evaluatorModel, setEvaluatorModel] = useState<string>(
+  const [evaluatorModels, setEvaluatorModels] = useState<string[]>([
     BENCHMARK_MODEL_OPTIONS.includes(defaultEvaluator) ? defaultEvaluator : BENCHMARK_MODEL_OPTIONS[0]
-  );
+  ]);
   const [budget, setBudget] = useState<string>("");
   const scenarioPresetOptions = BENCHMARK_SCENARIO_PRESETS.filter((count) => count < scenarios.length);
   const selectedScenarios = scenarios.slice(0, Math.min(scenarioLimit, scenarios.length));
-  const runCount = models.length * quorums.length * iterations.length * selectedScenarios.length;
+  const plannerRunCount = models.length * quorums.length * iterations.length * selectedScenarios.length;
+  const runCount = plannerRunCount * evaluatorModels.length;
 
   // Pre-flight estimate. Prefer real per-model cost calibrated from past traced
   // runs; fall back to the token heuristic for models with no history. The real
@@ -1451,30 +1469,34 @@ function BenchmarkRunModal({
     let calibrated = false;
     let heuristic = false;
     for (const model of models) {
-      const calibratedCost = costCalibration[calibrationKey(model, evaluatorModel)];
       for (const iter of iterations) {
-        let perRun: number | null;
+        const calibratedCost = evaluatorModels.length === 1
+          ? costCalibration[calibrationKey(model, evaluatorModels[0])]
+          : undefined;
         if (typeof calibratedCost === "number") {
-          perRun = calibratedCost;
+          total += calibratedCost * quorums.length * selectedScenarios.length;
           calibrated = true;
-        } else {
-          perRun = estimateRunCostUsd(model, iter, evaluatorModel);
-          if (perRun !== null) heuristic = true;
+          continue;
         }
-        if (perRun === null) {
+
+        const plannerCost = estimatePlannerCostUsd(model, iter);
+        const evaluatorCosts = evaluatorModels.map((evaluatorModel) => estimateEvaluatorCostUsd(evaluatorModel));
+        if (plannerCost === null || evaluatorCosts.some((cost) => cost === null)) {
           known = false;
           continue;
         }
-        total += perRun * quorums.length * selectedScenarios.length;
+        const knownEvaluatorCosts = evaluatorCosts as number[];
+        total += (plannerCost + knownEvaluatorCosts.reduce((sum, cost) => sum + cost, 0)) * quorums.length * selectedScenarios.length;
+        heuristic = true;
       }
     }
     return { total, known, calibrated, heuristic };
-  }, [models, iterations, quorums.length, selectedScenarios.length, costCalibration, evaluatorModel]);
+  }, [models, iterations, quorums.length, selectedScenarios.length, costCalibration, evaluatorModels]);
 
   const budgetValue = budget.trim() === "" ? null : Number(budget);
   const budgetInvalid = budgetValue !== null && (!Number.isFinite(budgetValue) || budgetValue <= 0);
   const overBudget = budgetValue !== null && !budgetInvalid && estimate.known && estimate.total > budgetValue;
-  const disabled = runCount === 0 || budgetInvalid;
+  const disabled = runCount === 0 || evaluatorModels.length === 0 || budgetInvalid;
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -1495,7 +1517,7 @@ function BenchmarkRunModal({
       retries: 1,
       delayMs: 0,
       forceFree: false,
-      evaluatorModel,
+      evaluatorModels,
       maxBudgetUsd: budgetValue ?? undefined
     });
   }
@@ -1520,8 +1542,9 @@ function BenchmarkRunModal({
         <div className="modal-body benchmark-modal-body">
           <div className="benchmark-run-count">
             <div>
-              <span>Planned runs</span>
-              <strong>{runCount}</strong>
+              <span>Planner runs</span>
+              <strong>{plannerRunCount}</strong>
+              <small className="estimate-basis">{runCount} judge score{runCount === 1 ? "" : "s"}</small>
             </div>
             <div>
               <span>Est. cost</span>
@@ -1529,11 +1552,11 @@ function BenchmarkRunModal({
                 {estimate.known ? `≈ ${formatCost(estimate.total)}` : "unknown"}
               </strong>
               <small className="estimate-basis">
-                {estimate.calibrated && !estimate.heuristic
+                  {estimate.calibrated && !estimate.heuristic
                   ? "from past runs"
                   : estimate.calibrated && estimate.heuristic
                     ? "mixed: past runs + heuristic"
-                    : "rough heuristic"} · includes fixed judge
+                    : "rough heuristic"} · includes {evaluatorModels.length} judge{evaluatorModels.length === 1 ? "" : "s"}
               </small>
             </div>
           </div>
@@ -1617,14 +1640,20 @@ function BenchmarkRunModal({
 
           <div className="benchmark-options-row">
             <div className="field">
-              <span className="meta-label">Evaluator (judge)</span>
-              <Dropdown
-                value={evaluatorModel}
-                options={BENCHMARK_MODEL_OPTIONS}
-                onChange={setEvaluatorModel}
-                format={(m) => formatCompactModel(m)}
-              />
-              <div className="field-hint">One fixed judge scores every model so results stay comparable.</div>
+              <span className="meta-label">Evaluators (judges)</span>
+              <div className="check-grid">
+                {BENCHMARK_MODEL_OPTIONS.map((model) => (
+                  <label key={model} className="check-row">
+                    <input
+                      type="checkbox"
+                      checked={evaluatorModels.includes(model)}
+                      onChange={() => setEvaluatorModels((prev) => toggleValue(prev, model))}
+                    />
+                    <span>{formatCompactModel(model)}</span>
+                  </label>
+                ))}
+              </div>
+              <div className="field-hint">Each judge scores the same generated schedule. Use several judges to test evaluator bias.</div>
             </div>
 
             <div className="field">
@@ -1644,6 +1673,7 @@ function BenchmarkRunModal({
           </div>
 
           {budgetInvalid && <div className="warn">Budget cap must be a positive number.</div>}
+          {evaluatorModels.length === 0 && <div className="warn">Select at least one evaluator.</div>}
           {overBudget && (
             <div className="warn">
               Estimated cost ({formatCost(estimate.total)}) exceeds your cap ({formatCost(budgetValue!)}). The run will stop early when the cap is hit.
@@ -2334,9 +2364,21 @@ function formatDateTime(value: string): string {
 
 function formatExperimentOption(experiment: BenchmarkExperiment): string {
   const modelCount = new Set(experiment.runs.map((run) => run.model)).size;
+  const judgeCount = new Set(experiment.runs.map((run) => run.evaluatorModel).filter(Boolean)).size;
   const runLabel = `${experiment.runs.length} run${experiment.runs.length === 1 ? "" : "s"}`;
   const modelLabel = `${modelCount} model${modelCount === 1 ? "" : "s"}`;
-  return `${formatDateTime(experiment.createdAt)} · ${runLabel} · ${modelLabel}`;
+  const judgeLabel = judgeCount > 1 ? ` · ${judgeCount} judges` : "";
+  return `${formatDateTime(experiment.createdAt)} · ${runLabel} · ${modelLabel}${judgeLabel}`;
+}
+
+function formatExperimentJudges(experiment: BenchmarkExperiment | null | undefined): string {
+  if (!experiment) return "-";
+  const judges = experiment.evaluatorModels?.length
+    ? experiment.evaluatorModels
+    : Array.from(new Set(experiment.runs.map((run) => run.evaluatorModel).filter((model): model is string => Boolean(model))));
+  if (judges.length === 0) return experiment.evaluatorModel ? formatCompactModel(experiment.evaluatorModel) : "mixed";
+  if (judges.length === 1) return formatCompactModel(judges[0]);
+  return `${judges.length} judges`;
 }
 
 function formatNullable(value: number | null | undefined, suffix: string): string {

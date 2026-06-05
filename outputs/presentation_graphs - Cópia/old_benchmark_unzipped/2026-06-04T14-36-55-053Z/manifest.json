@@ -1,0 +1,28 @@
+{
+  "createdAt": "2026-06-04T14:36:55.057Z",
+  "models": [
+    "google/gemini-2.5-flash-lite-preview-09-2025",
+    "google/gemini-3.1-flash-lite-preview",
+    "deepseek/deepseek-v3.2"
+  ],
+  "evaluatorModel": "google/gemini-2.5-flash-lite-preview-09-2025",
+  "promptHash": "4d9a45fc3910",
+  "budgetUsd": null,
+  "quorums": [
+    5
+  ],
+  "maxIterations": [
+    3
+  ],
+  "scenarioIds": [
+    "01_urgent_mixed_deadlines",
+    "02_wellbeing_low_energy",
+    "03_grade_weighted_priorities",
+    "04_group_project_coordination",
+    "05_fixed_commitments_busy_week",
+    "06_uncertain_scope_hidden_work",
+    "07_exam_week_revision",
+    "08_part_time_job_commute"
+  ],
+  "freeModelsSkippedUnlessForced": true
+}

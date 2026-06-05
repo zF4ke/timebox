@@ -323,6 +323,7 @@ export interface BenchmarkRunSummary {
 
 export interface BenchmarkAggregate {
   model: string;
+  evaluatorModel: string | null;
   quorum: number;
   maxIterations: number;
   runCount: number;
@@ -345,6 +346,8 @@ export interface BenchmarkExperiment {
   aggregates: BenchmarkAggregate[];
   /** Fixed judge model used to score every run in this experiment. */
   evaluatorModel?: string;
+  /** Fixed judge models used to score every generated schedule in this experiment. */
+  evaluatorModels?: string[];
   /** Hash of the prompt files in effect when this experiment ran. */
   promptHash?: string;
   /** Dollar cap requested for this experiment, if any. */
@@ -364,6 +367,8 @@ export interface BenchmarkRequest {
   forceFree?: boolean;
   /** Fixed judge model that scores every run. Defaults to the configured evaluator. */
   evaluatorModel?: string;
+  /** Fixed judge models that each score the same generated schedule. */
+  evaluatorModels?: string[];
   /** Optional hard dollar cap. The matrix stops before a run that would exceed it. */
   maxBudgetUsd?: number;
 }

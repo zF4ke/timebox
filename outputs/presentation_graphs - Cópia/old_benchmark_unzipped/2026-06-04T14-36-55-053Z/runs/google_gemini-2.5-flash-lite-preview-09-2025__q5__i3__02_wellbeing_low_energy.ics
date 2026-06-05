@@ -1,0 +1,54 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:D1B1@timebox.local
+DTSTAMP:20260604T143800Z
+DTSTART:20260604T110000Z
+DTEND:20260604T130000Z
+SUMMARY:Networks worksheet
+DESCRIPTION:Complete the Networks worksheet which had a deadline earlier today.\\n\\nReasoning: Address the immediate missed deadline first thing after assumed morning commitments.
+END:VEVENT
+BEGIN:VEVENT
+UID:D1B2@timebox.local
+DTSTAMP:20260604T143800Z
+DTSTART:20260604T133000Z
+DTEND:20260604T173000Z
+SUMMARY:Machine learning assignment
+DESCRIPTION:First focused block for the Machine Learning assignment: running core experiments and initial analysis.\\n\\nReasoning: Start the high-priority assignment immediately after the backlog item\, using the first large chunk of afternoon time.
+END:VEVENT
+BEGIN:VEVENT
+UID:D1B3@timebox.local
+DTSTAMP:20260604T143800Z
+DTSTART:20260604T180000Z
+DTEND:20260604T200000Z
+SUMMARY:Software engineering reading quiz review
+DESCRIPTION:Review the three chapters for the Software Engineering reading quiz scheduled for tomorrow morning.\\n\\nReasoning: Moved from Friday afternoon to Thursday evening to meet the Friday morning deadline\, addressing the critical critique.
+END:VEVENT
+BEGIN:VEVENT
+UID:D1B4@timebox.local
+DTSTAMP:20260604T143800Z
+DTSTART:20260604T200000Z
+DTEND:20260604T220000Z
+SUMMARY:Machine learning assignment
+DESCRIPTION:Finalizing experiment explanation and submission for the Machine Learning assignment.\\n\\nReasoning: Schedule the remaining 2 hours of the 8-hour estimate to ensure completion before the midnight deadline\, accepting the late finish due to task priority.
+END:VEVENT
+BEGIN:VEVENT
+UID:D2B1@timebox.local
+DTSTAMP:20260604T143800Z
+DTSTART:20260605T130000Z
+DTEND:20260605T143000Z
+SUMMARY:Software engineering reading quiz review
+DESCRIPTION:Complete the remaining estimated 1.5 hours of review for the Software Engineering reading quiz.\\n\\nReasoning: Scheduling the final portion of the review time\, assuming the student might want to review results or context post-quiz\, although the primary preparation was done Thursday.
+END:VEVENT
+BEGIN:VEVENT
+UID:D3B1@timebox.local
+DTSTAMP:20260604T143800Z
+DTSTART:20260606T090000Z
+DTEND:20260606T100000Z
+SUMMARY:Machine learning assignment
+DESCRIPTION:Finalize and polish the Machine Learning assignment submission.\\n\\nReasoning: Scheduling the final hour estimated for the ML assignment to ensure the full 8 hours are completed\, respecting the low-energy constraint by scheduling it in the morning.
+END:VEVENT
+END:VCALENDAR

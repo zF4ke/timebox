@@ -1,0 +1,110 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:B1@timebox.local
+DTSTAMP:20260604T153649Z
+DTSTART:20260604T170000Z
+DTEND:20260604T190000Z
+SUMMARY:Databases exam
+DESCRIPTION:Review database normalization concepts and practice schema design.\\n\\nReasoning: Start databases preparation early with a core topic.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2@timebox.local
+DTSTAMP:20260604T153649Z
+DTSTART:20260605T170000Z
+DTEND:20260605T190000Z
+SUMMARY:Databases exam
+DESCRIPTION:Study ACID properties and transaction isolation levels.\\n\\nReasoning: Focus on the weak transactions topic early to identify gaps.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3@timebox.local
+DTSTAMP:20260604T153649Z
+DTSTART:20260606T160000Z
+DTEND:20260606T170000Z
+SUMMARY:Ethics forum post
+DESCRIPTION:Read\, draft\, and submit the ethics forum post.\\n\\nReasoning: Complete the post before its deadline to clear mental load.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4@timebox.local
+DTSTAMP:20260604T153649Z
+DTSTART:20260606T173000Z
+DTEND:20260606T193000Z
+SUMMARY:Databases exam
+DESCRIPTION:Practice writing complex SQL queries.\\n\\nReasoning: Build SQL skills after completing the ethics post.
+END:VEVENT
+BEGIN:VEVENT
+UID:B5@timebox.local
+DTSTAMP:20260604T153649Z
+DTSTART:20260607T100000Z
+DTEND:20260607T123000Z
+SUMMARY:Databases exam
+DESCRIPTION:Review database indexing and query optimization.\\n\\nReasoning: Cover another key databases topic in a focused morning block.
+END:VEVENT
+BEGIN:VEVENT
+UID:B6@timebox.local
+DTSTAMP:20260604T153649Z
+DTSTART:20260607T140000Z
+DTEND:20260607T163000Z
+SUMMARY:Calculus exam
+DESCRIPTION:Start calculus review with a focus on series convergence tests.\\n\\nReasoning: Begin calculus preparation early\, targeting the weak series topic.
+END:VEVENT
+BEGIN:VEVENT
+UID:B7@timebox.local
+DTSTAMP:20260604T153649Z
+DTSTART:20260608T100000Z
+DTEND:20260608T120000Z
+SUMMARY:Databases exam
+DESCRIPTION:Mixed practice on normalization and transactions.\\n\\nReasoning: Integrate multiple databases topics to reinforce learning.
+END:VEVENT
+BEGIN:VEVENT
+UID:B8@timebox.local
+DTSTAMP:20260604T153649Z
+DTSTART:20260608T140000Z
+DTEND:20260608T163000Z
+SUMMARY:Calculus exam
+DESCRIPTION:Practice integral techniques and applications.\\n\\nReasoning: Build on series knowledge with another core calculus topic.
+END:VEVENT
+BEGIN:VEVENT
+UID:B9@timebox.local
+DTSTAMP:20260604T153649Z
+DTSTART:20260609T170000Z
+DTEND:20260609T193000Z
+SUMMARY:Databases exam
+DESCRIPTION:Comprehensive final review of all databases topics.\\n\\nReasoning: Consolidate knowledge the evening before the exam.
+END:VEVENT
+BEGIN:VEVENT
+UID:B10@timebox.local
+DTSTAMP:20260604T153649Z
+DTSTART:20260610T090000Z
+DTEND:20260610T110000Z
+SUMMARY:Databases exam
+DESCRIPTION:Final quick review and problem practice before the exam.\\n\\nReasoning: Refresh memory and build confidence on the exam day.
+END:VEVENT
+BEGIN:VEVENT
+UID:B11@timebox.local
+DTSTAMP:20260604T153649Z
+DTSTART:20260611T090000Z
+DTEND:20260611T120000Z
+SUMMARY:Calculus exam
+DESCRIPTION:Deep practice on series and power series problems.\\n\\nReasoning: Focus on the weakest topic with a long morning block.
+END:VEVENT
+BEGIN:VEVENT
+UID:B12@timebox.local
+DTSTAMP:20260604T153649Z
+DTSTART:20260611T140000Z
+DTEND:20260611T163000Z
+SUMMARY:Calculus exam
+DESCRIPTION:Mixed practice on integrals and differential equations.\\n\\nReasoning: Review remaining calculus topics to ensure comprehensive preparation.
+END:VEVENT
+BEGIN:VEVENT
+UID:B13@timebox.local
+DTSTAMP:20260604T153649Z
+DTSTART:20260612T080000Z
+DTEND:20260612T103000Z
+SUMMARY:Calculus exam
+DESCRIPTION:Final comprehensive review of key calculus concepts.\\n\\nReasoning: Consolidate learning and enter the exam with fresh recall.
+END:VEVENT
+END:VCALENDAR
