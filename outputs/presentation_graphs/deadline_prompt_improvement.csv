@@ -1,0 +1,5 @@
+prompt,model_label,deadline_critical,deadline_total,all_mistakes,runs
+Old prompt,Gemini 2.5 Flash Lite,4,4,13,8
+Old prompt,Gemini 3.1 Flash Lite,2,2,7,8
+Deadline prompt tuned,Gemini 2.5 Flash Lite,1,1,6,8
+Deadline prompt tuned,Gemini 3.1 Flash Lite,1,1,6,8

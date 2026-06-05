@@ -1,0 +1,17 @@
+prompt,code,label,critical,major,minor,total
+Before prompt change,availability_overrun,Availability overrun,0,0,8,8
+Before prompt change,block_after_deadline,Work after deadline,5,0,0,5
+Before prompt change,too_few_work_blocks,Too few work blocks,0,0,2,2
+Before prompt change,late_work_when_avoided,Late work despite request,0,1,0,1
+Before prompt change,final_critical_critiques,Unresolved critical critiques,1,0,0,1
+Before prompt change,max_iterations_fallback,Max-iteration fallback,0,0,1,1
+Before prompt change,quorum_not_reached,Quorum not reached,0,0,1,1
+Before prompt change,missing_expected_task,Missing expected task,1,0,0,1
+After prompt change,availability_overrun,Availability overrun,0,0,3,3
+After prompt change,rest_block_not_allowed,Explicit rest/buffer block,0,0,2,2
+After prompt change,block_after_deadline,Work after deadline,1,0,0,1
+After prompt change,final_critical_critiques,Unresolved critical critiques,1,0,0,1
+After prompt change,max_iterations_fallback,Max-iteration fallback,0,0,1,1
+After prompt change,quorum_not_reached,Quorum not reached,0,0,1,1
+After prompt change,missing_expected_task,Missing expected task,1,0,0,1
+After prompt change,fixed_commitments_not_explained,Fixed commitments not explained,0,0,1,1

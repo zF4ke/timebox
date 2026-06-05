@@ -1,0 +1,54 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:b1@timebox.local
+DTSTAMP:20260604T144153Z
+DTSTART:20260604T150000Z
+DTEND:20260604T200000Z
+SUMMARY:Operating systems lab
+DESCRIPTION:Implement core coding requirements for the lab.\\n\\nReasoning: Completing the coding today is critical to allow time for the report tomorrow.
+END:VEVENT
+BEGIN:VEVENT
+UID:b2@timebox.local
+DTSTAMP:20260604T144153Z
+DTSTART:20260605T130000Z
+DTEND:20260605T150000Z
+SUMMARY:Operating systems lab
+DESCRIPTION:Draft and submit the lab report.\\n\\nReasoning: Finalizing the report immediately after classes ensures the deadline is met.
+END:VEVENT
+BEGIN:VEVENT
+UID:b3@timebox.local
+DTSTAMP:20260604T144153Z
+DTSTART:20260605T150000Z
+DTEND:20260605T180000Z
+SUMMARY:Statistics quiz
+DESCRIPTION:Review hypothesis test and confidence interval formulas.\\n\\nReasoning: Starting study early helps address formula weaknesses before the quiz.
+END:VEVENT
+BEGIN:VEVENT
+UID:b4@timebox.local
+DTSTAMP:20260604T144153Z
+DTSTART:20260606T100000Z
+DTEND:20260606T130000Z
+SUMMARY:Statistics quiz
+DESCRIPTION:Complete practice problems for hypothesis tests and confidence intervals.\\n\\nReasoning: Active practice is necessary to build confidence in formulas.
+END:VEVENT
+BEGIN:VEVENT
+UID:b5@timebox.local
+DTSTAMP:20260604T144153Z
+DTSTART:20260608T140000Z
+DTEND:20260608T153000Z
+SUMMARY:AASMA project idea
+DESCRIPTION:Brainstorm and select a project topic.\\n\\nReasoning: Starting early prevents last-minute stress.
+END:VEVENT
+BEGIN:VEVENT
+UID:b6@timebox.local
+DTSTAMP:20260604T144153Z
+DTSTART:20260609T140000Z
+DTEND:20260609T153000Z
+SUMMARY:AASMA project idea
+DESCRIPTION:Write the one-page project proposal.\\n\\nReasoning: Completing the draft early allows for final polish.
+END:VEVENT
+END:VCALENDAR

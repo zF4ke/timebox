@@ -52,11 +52,12 @@ I slept badly yesterday.`;
 const QUORUM_OPTIONS = [1, 2, 3, 4, 5];
 
 const MODEL_OPTIONS = [
-  "nvidia/nemotron-3-super-120b-a12b:free",
   "google/gemini-2.5-flash-lite-preview-09-2025",
+  "nvidia/nemotron-3-super-120b-a12b:free",
   "google/gemini-3.1-flash-lite-preview",
   "minimax/minimax-m2.7",
   "deepseek/deepseek-v3.2",
+  "deepseek/deepseek-v4-flash",
   "openai/gpt-5-nano",
 ];
 
@@ -89,6 +90,7 @@ const MODEL_INFO: Record<string, { name: string; price: string }> = {
   "google/gemini-3.1-flash-lite-preview": { name: "Gemini 3.1 Flash Lite", price: "$0.25 / $1.50" },
   "minimax/minimax-m2.7": { name: "MiniMax M2.7", price: "$0.30 / $1.20" },
   "deepseek/deepseek-v3.2": { name: "DeepSeek V3.2", price: "$0.26 / $0.38" },
+  "deepseek/deepseek-v4-flash": { name: "DeepSeek V4 Flash", price: "$0.0983 / $0.1966" },
   "openai/gpt-5-nano": { name: "GPT-5 Nano", price: "$0.05 / $0.40" },
   "nvidia/nemotron-3-super-120b-a12b:free": { name: "Nemotron 3 Super", price: "free" },
 };
@@ -101,6 +103,7 @@ const MODEL_PRICING: Record<string, { input: number; output: number }> = {
   "google/gemini-3.1-flash-lite-preview": { input: 0.25, output: 1.5 },
   "minimax/minimax-m2.7": { input: 0.3, output: 1.2 },
   "deepseek/deepseek-v3.2": { input: 0.26, output: 0.38 },
+  "deepseek/deepseek-v4-flash": { input: 0.0983, output: 0.1966 },
   "openai/gpt-5-nano": { input: 0.05, output: 0.4 }
 };
 
@@ -128,6 +131,10 @@ function calibrationKey(model: string, evaluatorModel: string | null | undefined
 }
 
 const plannerApi = window.plannerApi ?? createBrowserFallbackApi();
+
+function isFreeModel(model: string | null | undefined): boolean {
+  return Boolean(model?.includes(":free"));
+}
 
 function formatModel(model: string): React.ReactNode {
   const info = MODEL_INFO[model];
@@ -521,6 +528,7 @@ export default function App() {
         userInput={userInput}
         setUserInput={setUserInput}
         defaults={defaults}
+        model={settings.model}
         error={error}
         onRun={runPlanner}
       />
@@ -1763,12 +1771,14 @@ function ComposerView({
   userInput,
   setUserInput,
   defaults,
+  model,
   error,
   onRun
 }: {
   userInput: string;
   setUserInput: (v: string) => void;
   defaults: PlannerDefaults | null;
+  model: string;
   error: string;
   onRun: () => void;
 }) {
@@ -1816,6 +1826,12 @@ function ComposerView({
 
         {defaults && !defaults.hasApiKey && (
           <div className="warn">Set your OpenRouter API key in Settings to run the planner.</div>
+        )}
+
+        {isFreeModel(model) && (
+          <div className="warn">
+            Free OpenRouter models are really, really slow and will probably timeout.
+          </div>
         )}
 
         {error && <div className="err">{error}</div>}
@@ -2667,6 +2683,11 @@ function SettingsModal({
               format={formatModel}
             />
             <div className="field-hint">OpenRouter model used to create schedules.</div>
+            {isFreeModel(draft.model) && (
+              <div className="warn">
+                Free OpenRouter models are really, really slow and will probably timeout.
+              </div>
+            )}
           </div>
 
           <div className="field">

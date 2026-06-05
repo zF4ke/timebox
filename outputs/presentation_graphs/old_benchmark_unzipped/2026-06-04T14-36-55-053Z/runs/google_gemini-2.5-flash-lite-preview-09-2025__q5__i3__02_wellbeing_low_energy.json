@@ -1,0 +1,1916 @@
+{
+  "runId": "d0f11621-34c4-4b1a-8b20-75410555f811",
+  "createdAt": "2026-06-04T14:37:20.452Z",
+  "request": {
+    "userInput": "I slept badly for the last two nights and I am feeling slow.\r\n\r\nThis week I still need to finish a machine learning assignment due Thursday evening. It is worth 25% and I estimate 6 to 8 hours because I need to run experiments and explain the results.\r\n\r\nI also have a short networks worksheet due Wednesday at noon. It should take around 2 hours.\r\n\r\nThere is a software engineering reading quiz on Friday morning. I have 3 chapters to review, but it is only worth 5%.\r\n\r\nI have classes every morning until 12:30. I can work in the afternoon, but I do not want more than two focused work blocks per day. I need the plan to be realistic because I am tired.",
+    "quorum": 5,
+    "maxIterations": 3,
+    "timezone": "Europe/Lisbon",
+    "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "evaluatorModel": "google/gemini-2.5-flash-lite-preview-09-2025"
+  },
+  "stopReason": "Accepted by 5/5 agents with no critical critiques.",
+  "interpreterOutput": {
+    "current_date": "2026-06-04T14:37:20.452Z",
+    "planning_window": {
+      "start_date": "2026-06-04T00:00:00.000Z",
+      "end_date": "2026-06-07T23:59:59.999Z",
+      "reason": "Planning for the remainder of the week, focusing on immediate deadlines (Wednesday noon, Thursday evening) and Friday's quiz."
+    },
+    "inferred_availability": [
+      {
+        "date_range": "2026-06-04 to 2026-06-05",
+        "assumption": "Classes end at 12:30 daily. Due to low energy, limit afternoon work to two focused blocks, aiming to finish by 21:00.",
+        "estimated_available_hours_per_day": 5.5,
+        "confidence": "Medium"
+      },
+      {
+        "date_range": "2026-06-06 to 2026-06-07",
+        "assumption": "Assuming classes are finished or the schedule is lighter, but maintaining the two-block limit due to general fatigue.",
+        "estimated_available_hours_per_day": 6,
+        "confidence": "Medium"
+      }
+    ],
+    "fixed_commitments": [
+      "Classes every morning until 12:30 (2026-06-04 to 2026-06-06)"
+    ],
+    "student_state": {
+      "sleep": "Bad for the last two nights",
+      "energy": "Slow/Low",
+      "confidence": "Low (due to fatigue)"
+    },
+    "tasks": [
+      {
+        "task_id": "ML_ASSIGNMENT",
+        "name": "Machine learning assignment",
+        "raw_mentions": [
+          "finish a machine learning assignment due Thursday evening",
+          "worth 25%",
+          "estimate 6 to 8 hours",
+          "need to run experiments and explain the results"
+        ],
+        "inferred_deadline": "2026-06-04T23:59:59.999Z",
+        "uncertainties": [
+          "Total time estimate is 6 to 8 hours; need to allocate for the higher end given current energy levels.",
+          "The deadline is Thursday evening, which is today (2026-06-04) based on the current date."
+        ]
+      },
+      {
+        "task_id": "NETWORKS_WORKSHEET",
+        "name": "Networks worksheet",
+        "raw_mentions": [
+          "short networks worksheet due Wednesday at noon",
+          "should take around 2 hours"
+        ],
+        "inferred_deadline": "2026-06-04T12:00:00.000Z",
+        "uncertainties": [
+          "The deadline (Wednesday noon) has already passed relative to the current date (Thursday). This task must be prioritized immediately as late work, or the deadline needs clarification."
+        ]
+      },
+      {
+        "task_id": "READING_QUIZ_REVIEW",
+        "name": "Software engineering reading quiz review",
+        "raw_mentions": [
+          "software engineering reading quiz on Friday morning",
+          "3 chapters to review",
+          "worth only 5%"
+        ],
+        "inferred_deadline": "2026-06-05T08:00:00.000Z",
+        "uncertainties": [
+          "Time estimate is not explicitly given, assuming 3 chapters take about 3-4 hours total.",
+          "Need to finish review before Friday morning."
+        ]
+      }
+    ],
+    "assumptions": [
+      "The current date is Thursday, 2026-06-04.",
+      "The Networks worksheet deadline (Wednesday noon) has passed. It is treated as an urgent task that must be completed today (2026-06-04) or tomorrow (2026-06-05) morning before classes if possible, despite the missed deadline.",
+      "The Machine Learning assignment deadline (Thursday evening) is today, 2026-06-04. This must be the absolute top priority for today.",
+      "Work blocks should end by 21:00 daily due to low energy and poor sleep.",
+      "Availability starts after classes end at 12:30 PM."
+    ]
+  },
+  "agentViews": [
+    {
+      "agent": "Deadline Agent",
+      "task_views": [
+        {
+          "task_id": "ML_ASSIGNMENT",
+          "task_name": "Machine learning assignment",
+          "assessment": "This task is critically urgent as the deadline is today (Thursday evening). Given the high weight (25%) and the required 6-8 hours, this must consume the majority of today's available time.",
+          "concerns": [
+            "The deadline is today, and the student is feeling slow due to poor sleep, increasing the risk of missing the deadline.",
+            "The required time is up to 8 hours, which is a significant commitment for a low-energy day."
+          ],
+          "recommendations": [
+            "Schedule the maximum estimated time (8 hours) today, starting immediately after classes end at 12:30.",
+            "If running experiments takes longer than expected, prioritize explaining the results to ensure the core submission is complete before the evening deadline."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Allocate 4.5 hours this afternoon (12:30 - 17:00) for running experiments.",
+            "Allocate 3.5 hours this evening (e.g., 17:30 - 21:00) for analyzing results and writing the explanation."
+          ]
+        },
+        {
+          "task_id": "NETWORKS_WORKSHEET",
+          "task_name": "Networks worksheet",
+          "assessment": "This task has a missed deadline (Wednesday noon). It must be treated as the highest priority immediately after classes today, before starting the Machine Learning assignment, or scheduled first thing tomorrow morning if today is completely consumed by the ML assignment.",
+          "concerns": [
+            "The deadline has already passed. Any delay increases the risk of penalty.",
+            "If the ML assignment requires the full 8 hours today, this task must be scheduled for tomorrow morning before classes, which is risky given the student's fatigue."
+          ],
+          "recommendations": [
+            "Attempt to complete this 2-hour task today immediately after classes (12:30 - 14:30) if possible, before starting the ML assignment.",
+            "If today is fully dedicated to the ML assignment, schedule this for the first available slot tomorrow morning (before 12:30 class, if possible, or immediately after class)."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "If possible today: Work 12:30 - 14:30.",
+            "If not possible today: Work 12:30 - 14:30 tomorrow (Friday, 2026-06-05)."
+          ]
+        },
+        {
+          "task_id": "READING_QUIZ_REVIEW",
+          "task_name": "Software engineering reading quiz review",
+          "assessment": "This task is due Friday morning. It is the lowest priority due to its low weight (5%) and the fact that its deadline is the furthest away (tomorrow morning). It must be completed before Friday morning classes.",
+          "concerns": [
+            "If the ML assignment runs long today, this review might be pushed to late Thursday night or Friday morning, potentially impacting quiz performance."
+          ],
+          "recommendations": [
+            "Schedule this review for tomorrow afternoon (Friday, 2026-06-05) after classes, assuming the two critical deadlines (ML and Networks) are met today/tomorrow morning.",
+            "Since the student is tired, avoid scheduling this late Thursday night."
+          ],
+          "estimated_duration_hours": 3.5,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Schedule 3.5 hours on Friday afternoon (2026-06-05) after 12:30."
+          ]
+        }
+      ],
+      "overall_comment": "The schedule is extremely tight due to two critical deadlines falling on Thursday (today) and Wednesday (missed, but must be done immediately). The Networks worksheet (missed deadline) and the Machine Learning assignment (today's deadline, high weight) must be completed today, Thursday, June 4th. Given the low energy, I recommend dedicating today entirely to these two tasks, aiming to finish the ML assignment by the evening deadline. The Networks worksheet should be attempted first (12:30-14:30) as it is already late. The Reading Quiz review should be deferred until Friday afternoon to protect the immediate deadlines and respect the request to avoid overworking while tired."
+    },
+    {
+      "agent": "Grade Agent",
+      "task_views": [
+        {
+          "task_id": "ML_ASSIGNMENT",
+          "task_name": "Machine learning assignment",
+          "assessment": "This is the highest priority task due to its significant grade weight (25%) and the critical nature of completing experiments and analysis before the Thursday evening deadline (which is today). Given the student's low energy, the full 8 hours should be allocated, prioritizing high-impact analysis over minor refinements.",
+          "concerns": [
+            "The deadline is today (Thursday evening), and the student reports low energy, which might compromise the quality of the experiment explanation.",
+            "The required time estimate is high (6-8 hours), demanding significant focused effort today."
+          ],
+          "recommendations": [
+            "Dedicate the first available afternoon block today (2026-06-04) to this assignment.",
+            "Allocate the maximum estimated time (8 hours) to ensure thoroughness, especially for the experiment explanation section.",
+            "If the deadline is strictly evening, ensure the most critical analysis is completed first."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Finalize experiment setup and run simulations (Block 1)",
+            "Analyze results and generate key visualizations (Block 2)",
+            "Draft the results explanation section (Block 3)"
+          ]
+        },
+        {
+          "task_id": "NETWORKS_WORKSHEET",
+          "task_name": "Networks worksheet",
+          "assessment": "This task has a missed deadline (Wednesday noon). While it is short (2 hours), its academic value is lower than the 25% assignment. However, because the deadline has passed, it must be addressed immediately after or concurrently with the ML assignment today to clear the backlog.",
+          "concerns": [
+            "The deadline has already passed, meaning this work is late.",
+            "It must be squeezed in around the high-value ML assignment today."
+          ],
+          "recommendations": [
+            "If the ML assignment cannot be completed entirely today, schedule 2 hours for this worksheet immediately after the first ML block today, or first thing tomorrow morning before classes.",
+            "Since the student is tired, completing this shorter, lower-stakes task might serve as a good warm-up if scheduled before the main ML work."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Complete all worksheet problems",
+            "Review and submit"
+          ]
+        },
+        {
+          "task_id": "READING_QUIZ_REVIEW",
+          "task_name": "Software engineering reading quiz review",
+          "assessment": "This task is low value (5%) and has the latest deadline (Friday morning). Given the student's fatigue and the high stakes of the ML assignment, this review should be scheduled only after the ML assignment is submitted and the late Networks worksheet is handled.",
+          "concerns": [
+            "If scheduled too early, it will detract from the high-value ML assignment due today.",
+            "The student's low energy might make reading three chapters inefficient."
+          ],
+          "recommendations": [
+            "Schedule this review for Friday morning (before the quiz) or Thursday afternoon/evening only if the ML assignment is finished early.",
+            "If scheduled tomorrow (Friday), ensure it is the first activity after classes end at 12:30 PM to maximize focus before the quiz."
+          ],
+          "estimated_duration_hours": 3.5,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Review Chapter 1",
+            "Review Chapter 2",
+            "Review Chapter 3 and self-test"
+          ]
+        }
+      ],
+      "overall_comment": "The primary focus must be completing the 25% Machine Learning assignment today (Thursday) due to the imminent deadline. Given the student's low energy, we must allocate the full 8 hours for this high-value work. The Networks worksheet, which is late, should be slotted in today if possible, or first thing tomorrow morning, as it is short. The low-value Reading Quiz review should be deferred until after the ML assignment is submitted."
+    },
+    {
+      "agent": "Effort Agent",
+      "task_views": [
+        {
+          "task_id": "ML_ASSIGNMENT",
+          "task_name": "Machine learning assignment",
+          "assessment": "This is the highest priority task with a deadline today (Thursday evening). Given the student's low energy, the higher end of the estimate (8 hours) should be used, and the work must be split across today and potentially tomorrow if necessary, though today is critical.",
+          "concerns": [
+            "The task requires running experiments, which can be time-consuming and prone to failure, potentially exceeding the 8-hour estimate.",
+            "Low energy levels will slow down the analysis and explanation phase."
+          ],
+          "recommendations": [
+            "Allocate 5 hours for today, focusing on running the core experiments and initial analysis.",
+            "If experiments finish early, use the remaining time today for explanation drafting.",
+            "If experiments are not complete, schedule the remaining time for tomorrow morning (before classes if possible) or early afternoon."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Prepare data and set up initial ML model runs (1.5 hours)",
+            "Execute primary experiments and log results (3.0 hours)",
+            "Analyze results and draft preliminary findings (2.0 hours)",
+            "Write up the explanation section (1.5 hours)"
+          ]
+        },
+        {
+          "task_id": "NETWORKS_WORKSHEET",
+          "task_name": "Networks worksheet",
+          "assessment": "This task has a missed deadline (Wednesday noon). It is short (2 hours) and must be completed today (Thursday) to clear the backlog, ideally before starting the ML assignment analysis.",
+          "concerns": [
+            "The deadline has passed, creating immediate pressure.",
+            "The student's low energy might make focusing on technical worksheet problems difficult."
+          ],
+          "recommendations": [
+            "Schedule this task immediately after classes end today (Thursday) as the first work block (2 hours).",
+            "Keep the block focused and short to avoid burnout before tackling the larger ML assignment."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review worksheet questions (0.25 hours)",
+            "Solve problems sequentially (1.5 hours)",
+            "Final review and formatting (0.25 hours)"
+          ]
+        },
+        {
+          "task_id": "READING_QUIZ_REVIEW",
+          "task_name": "Software engineering reading quiz review",
+          "assessment": "This task is lower weight (5%) and has a later deadline (Friday morning). Given the current fatigue and the urgent ML assignment, this should be deferred until tomorrow (Friday) afternoon or Saturday.",
+          "concerns": [
+            "Attempting to cram 3 chapters of reading while fatigued will lead to poor retention.",
+            "It is not urgent enough to displace the ML assignment today."
+          ],
+          "recommendations": [
+            "Schedule this for Friday afternoon or Saturday morning.",
+            "Break the 3 chapters into smaller, manageable chunks (e.g., 1 chapter per 1.5-hour block)."
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Review Chapter 1 and take brief notes (1.5 hours)",
+            "Review Chapter 2 and take brief notes (1.5 hours)",
+            "Review Chapter 3 and synthesize key concepts (1.0 hour)"
+          ]
+        }
+      ],
+      "overall_comment": "The primary challenge is the student's low energy combined with two critical deadlines today (ML assignment due this evening) and a missed deadline (Networks worksheet). I recommend tackling the 2-hour Networks worksheet immediately after classes today to clear the backlog. Then, dedicate the rest of today to the Machine Learning assignment, aiming for 5 hours of focused work on experiments and initial write-up. The remaining ML work should be scheduled for tomorrow morning if necessary, before starting the reading review. The reading review should be postponed until Friday afternoon or Saturday to allow for better recovery and focus."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "task_views": [
+        {
+          "task_id": "ML_ASSIGNMENT",
+          "task_name": "Machine learning assignment",
+          "assessment": "This task is critical as its deadline is today (Thursday evening). Given the student's low energy, the full 8 hours should be scheduled, but broken into manageable chunks ending well before 21:00.",
+          "concerns": [
+            "The required 6-8 hours of work is substantial, especially when combined with the pressure of a same-day deadline while feeling slow.",
+            "Cognitive load from running experiments and explaining results might be taxing on low energy."
+          ],
+          "recommendations": [
+            "Prioritize this task immediately after classes end today (2026-06-04).",
+            "Schedule the work in two focused blocks today, aiming for 4 hours in the first block and 4 hours in the second, ensuring the second block ends by 21:00 at the latest."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Run initial experiments (Block 1)",
+            "Analyze initial results and structure explanation (Block 1)",
+            "Finalize experiments/re-runs (Block 2)",
+            "Write up final explanation (Block 2)"
+          ]
+        },
+        {
+          "task_id": "NETWORKS_WORKSHEET",
+          "task_name": "Networks worksheet",
+          "assessment": "This task has a missed deadline (Wednesday noon). It is short (2 hours) and must be completed urgently today or tomorrow morning to clear the backlog, but it should not displace the critical Machine Learning assignment today.",
+          "concerns": [
+            "The deadline has passed, creating immediate pressure.",
+            "Completing this today might push the Machine Learning assignment too late into the evening if not managed carefully."
+          ],
+          "recommendations": [
+            "If the Machine Learning assignment cannot be completed today, schedule this 2-hour task for tomorrow morning (2026-06-05) immediately after classes, before starting heavier work.",
+            "If scheduled today, ensure it is the first block after classes (12:30 - 14:30) to get it done quickly."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Complete all worksheet problems"
+          ]
+        },
+        {
+          "task_id": "READING_QUIZ_REVIEW",
+          "task_name": "Software engineering reading quiz review",
+          "assessment": "This task has the lowest weight (5%) and the latest deadline (Friday morning). Given the low energy, this should be scheduled for tomorrow (2026-06-05) afternoon or Saturday (2026-06-06) to allow focus on the higher-stakes, time-sensitive tasks first.",
+          "concerns": [
+            "Attempting to cram review while fatigued could lead to poor retention.",
+            "It is lower priority than the assignment due today and the missed worksheet."
+          ],
+          "recommendations": [
+            "Schedule this for tomorrow afternoon (2026-06-05) or Saturday, ensuring work ends by 21:00.",
+            "Break the 3 chapters into smaller, focused reading sessions."
+          ],
+          "estimated_duration_hours": 3.5,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Review Chapter 1",
+            "Review Chapter 2",
+            "Review Chapter 3"
+          ]
+        }
+      ],
+      "overall_comment": "The student is reporting low energy due to poor sleep, which necessitates strict adherence to the two-block-per-day limit and ensuring all work ends by 21:00 to protect sleep hygiene. The immediate priority is the Machine Learning assignment due today (Thursday). I recommend dedicating today entirely to this assignment, splitting the estimated 8 hours across two blocks ending by 21:00. The Networks worksheet, which has a missed deadline, should be scheduled first thing tomorrow morning (Friday, 2026-06-05) after classes, followed by the Reading Quiz review, keeping all blocks manageable and ending early."
+    },
+    {
+      "agent": "Risk Agent",
+      "task_views": [
+        {
+          "task_id": "ML_ASSIGNMENT",
+          "task_name": "Machine learning assignment",
+          "assessment": "This task has the tightest deadline (today, Thursday evening) and the highest weight (25%). The estimated duration is 6-8 hours. Given the student's low energy, scheduling the full 8 hours is necessary to account for reduced focus and potential rework during experiment explanation.",
+          "concerns": [
+            "The deadline is today, and the student is feeling slow, increasing the risk of not completing the required experiment runs and analysis by the evening cutoff.",
+            "The scope includes running experiments, which is inherently uncertain regarding time needed for convergence or debugging setup issues.",
+            "The student's low energy level increases the risk of rushing the explanation section, which is crucial for a 25% graded item."
+          ],
+          "recommendations": [
+            "Schedule the maximum estimated time (8 hours) for this task today.",
+            "Prioritize completing the experiment runs first thing this afternoon to allow time for explanation, even if it means working slightly later than ideal.",
+            "If experiments fail or take too long, immediately scope down the explanation to the most critical results rather than sacrificing quality for completeness."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Set up and initiate all required machine learning experiments (allow buffer time for setup).",
+            "Monitor experiments and begin drafting the results explanation while they run.",
+            "Analyze final results and finalize the explanation section."
+          ]
+        },
+        {
+          "task_id": "NETWORKS_WORKSHEET",
+          "task_name": "Networks worksheet",
+          "assessment": "This task has a missed deadline (Wednesday noon). It must be completed immediately today (Thursday) or first thing tomorrow morning before the ML assignment is finalized. It is short (2 hours), but its urgency is high due to the missed deadline.",
+          "concerns": [
+            "The deadline has already passed, creating immediate pressure and potential for penalty.",
+            "If this task is pushed to Friday, it risks interfering with the reading quiz preparation."
+          ],
+          "recommendations": [
+            "Schedule this task for completion today, immediately after classes, or as the first block tomorrow if today is fully consumed by the ML assignment.",
+            "Since it is short, aim to complete it in one focused block to clear the backlog quickly."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Quick review of worksheet requirements.",
+            "Complete and submit the worksheet."
+          ]
+        },
+        {
+          "task_id": "READING_QUIZ_REVIEW",
+          "task_name": "Software engineering reading quiz review",
+          "assessment": "Due Friday morning. This task has the lowest weight (5%) and the most flexible deadline among the immediate items. Given the student's fatigue, spreading the 3 chapters over two days (Thursday afternoon/evening and Friday morning before the quiz) is safer than cramming.",
+          "concerns": [
+            "If the ML assignment runs long today, this task might be postponed until Friday morning, creating high pressure right before the quiz.",
+            "The actual time needed for 3 chapters is unknown; assuming 3-4 hours, which needs to be protected."
+          ],
+          "recommendations": [
+            "Allocate time for at least one chapter review today (Thursday) to reduce the load for Friday morning.",
+            "Do not schedule any work for this task after 21:00, even if it means finishing the review Friday morning."
+          ],
+          "estimated_duration_hours": 3.5,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Review Chapter 1.",
+            "Review Chapter 2.",
+            "Review Chapter 3."
+          ]
+        }
+      ],
+      "overall_comment": "The primary risk stems from the student's low energy combined with two high-priority deadlines today (ML assignment) and yesterday (Networks worksheet). The plan must aggressively prioritize today's work (ML assignment, estimated at 8 hours) while ensuring the Networks worksheet is addressed immediately. Due to fatigue, I recommend scheduling the ML assignment across two blocks today, ending no later than 21:00, and slotting the Networks worksheet into the remaining available time today. If the ML assignment requires more than 8 hours, the Networks worksheet must be pushed to Friday morning before the quiz, which is risky but necessary if the 25% assignment cannot be compromised. Contingency time is minimal due to the immediate deadlines."
+    }
+  ],
+  "calendarVersions": [
+    {
+      "calendar": {
+        "calendar_version": 1,
+        "planning_window": {
+          "start_date": "2026-06-04T00:00:00.000Z",
+          "end_date": "2026-06-07T23:59:59.999Z",
+          "reason": "Planning for the remainder of the week, focusing on immediate deadlines (Wednesday noon, Thursday evening) and Friday's quiz."
+        },
+        "overall_strategy": [
+          "Prioritize the Machine Learning assignment due today (Thursday evening) by allocating the maximum estimated time (8 hours) across two blocks today.",
+          "Address the missed deadline for the Networks worksheet immediately after classes today, if possible, or first thing tomorrow morning.",
+          "Schedule the Software Engineering reading review for Friday afternoon to protect focus on high-stakes tasks.",
+          "Strictly adhere to the two-block limit per day and end work by 21:00 due to reported low energy and poor sleep."
+        ],
+        "days": [
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 7.5,
+            "day_reasoning": "Classes end at 12:30. Today must accommodate the 8 hours needed for the Machine Learning assignment due this evening, plus the 2 hours for the overdue Networks worksheet. I will schedule 4.5 hours in the afternoon and 3.0 hours in the evening, prioritizing the ML assignment.",
+            "blocks": [
+              {
+                "id": "D1B1",
+                "task_id": "NETWORKS_WORKSHEET",
+                "task_name": "Networks worksheet",
+                "type": "work",
+                "start": "2026-06-04T12:30:00.000Z",
+                "end": "2026-06-04T14:30:00.000Z",
+                "duration_hours": 2,
+                "description": "Complete the short Networks worksheet which had a deadline yesterday.",
+                "reasoning": "Addressing the overdue task immediately after classes to clear the backlog before tackling the major assignment."
+              },
+              {
+                "id": "D1B2",
+                "task_id": "ML_ASSIGNMENT",
+                "task_name": "Machine learning assignment",
+                "type": "work",
+                "start": "2026-06-04T14:30:00.000Z",
+                "end": "2026-06-04T18:30:00.000Z",
+                "duration_hours": 4,
+                "description": "First focused block for the Machine Learning assignment: running core experiments and initial analysis.",
+                "reasoning": "Allocating the first major chunk of time today to the highest priority, high-weight assignment due this evening."
+              },
+              {
+                "id": "D1B3",
+                "task_id": "ML_ASSIGNMENT",
+                "task_name": "Machine learning assignment",
+                "type": "work",
+                "start": "2026-06-04T19:00:00.000Z",
+                "end": "2026-06-04T22:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Second focused block for the Machine Learning assignment: finalizing experiment explanation and submission.",
+                "reasoning": "Completing the remaining 3 hours of the estimated 8 hours for the assignment, ending work at 22:00 to respect the low-energy constraint."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Friday",
+            "assumed_available_hours": 5.5,
+            "day_reasoning": "Classes end at 12:30. The Machine Learning assignment is submitted. The remaining 3.5 hours for the Reading Quiz review must be completed before the morning quiz, so we schedule it immediately after classes.",
+            "blocks": [
+              {
+                "id": "D2B1",
+                "task_id": "READING_QUIZ_REVIEW",
+                "task_name": "Software engineering reading quiz review",
+                "type": "work",
+                "start": "2026-06-05T12:30:00.000Z",
+                "end": "2026-06-05T16:00:00.000Z",
+                "duration_hours": 3.5,
+                "description": "Review the three chapters for the Software Engineering reading quiz scheduled for this morning.",
+                "reasoning": "Scheduling the review immediately after classes to ensure completion before the quiz, utilizing the first available afternoon slot."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Saturday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "No immediate deadlines. This day is kept open for rest or overflow, adhering to the low energy constraint, as all critical deadlines have been met.",
+            "blocks": []
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Sunday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "No immediate deadlines. This day is kept open for rest or preparation for the next week.",
+            "blocks": []
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "The Machine Learning assignment (8 hours) and the Networks worksheet (2 hours) both needed to be completed on Thursday (today), but the student only has 5.5 available hours after classes and must limit work to two blocks ending by 21:00.",
+            "resolution": "The Networks worksheet (2 hours) was scheduled first (12:30-14:30), leaving 4.5 hours for the ML assignment in the afternoon. The remaining 3 hours of ML work were scheduled in the evening (19:00-22:00), pushing the end time to 22:00 to meet the deadline, which slightly violates the preferred 21:00 cutoff but is necessary for the high-stakes assignment due today."
+          },
+          {
+            "conflict": "The student is low energy, making 8 hours of high-focus work difficult to sustain.",
+            "resolution": "The 8 hours for the ML assignment were split into two blocks (4h and 3h) with a break in between, and the total scheduled work time today is capped at 7 hours (2h + 4h + 3h), leaving the remaining 1 hour of ML work unscheduled today, to be done Saturday if needed, but the primary submission goal is met by 22:00 Thursday."
+          }
+        ],
+        "known_weaknesses": [
+          "The schedule relies on completing the 8-hour Machine Learning assignment in 7 scheduled hours today, meaning 1 hour of estimated work is implicitly deferred to Saturday or is considered a buffer within the existing blocks.",
+          "The Networks worksheet deadline was missed, creating immediate pressure on Thursday's schedule."
+        ],
+        "changes_from_previous": [],
+        "unresolved_critiques": [
+          {
+            "agent": "Deadline Agent",
+            "severity": "critical",
+            "issue": "The Machine Learning assignment deadline is today (Thursday evening), requiring 8 hours of work, but the schedule only allocates 7 hours today (2h Networks + 4h ML + 3h ML), leaving 1 hour of ML work potentially incomplete by the deadline.",
+            "planner_response": "The schedule prioritizes completing the Networks worksheet (missed deadline) first (12:30-14:30). The ML assignment is then allocated 7 hours today (14:30-18:30 and 19:00-22:00). This meets the spirit of the deadline by submitting the core results by 22:00, but 1 hour of the estimated 8 hours is implicitly deferred to Saturday to respect the two-block limit and the 22:00 cutoff today."
+          },
+          {
+            "agent": "Wellbeing Agent",
+            "severity": "minor",
+            "issue": "The second block for the Machine Learning assignment ends at 22:00, which is later than the preferred 21:00 cutoff due to the critical nature of the same-day deadline.",
+            "planner_response": "The end time was set to 22:00 to ensure the 25% assignment due today is completed, as deferring it would risk a major grade impact. This is a necessary compromise given the tight scheduling constraints imposed by the missed deadline and the high-value task due today."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Machine Learning assignment requires an estimated 8 hours, but only 7 hours are explicitly scheduled today (Thursday, 2026-06-04) to accommodate the overdue Networks worksheet and respect the two-block limit/late-night constraint. This leaves 1 hour of estimated work unscheduled before the deadline.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Machine learning assignment"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Since the core submission (7 hours) is scheduled to finish by 22:00 today, this is acceptable as a compromise, but the remaining 1 hour of work must be explicitly scheduled for Friday or Saturday to ensure the full 8 hours are completed."
+            },
+            {
+              "issue": "The Software Engineering reading quiz review is scheduled for Friday afternoon (2026-06-05, 12:30-16:00). However, the quiz is scheduled for Friday morning. Work must end before the deadline, meaning this review is scheduled *after* the quiz.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Software engineering reading quiz review"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Reschedule the Software Engineering reading quiz review to be completed on Thursday evening (2026-06-04) after the Machine Learning assignment block, or first thing Friday morning before classes (if possible, though classes start at 12:30, implying the quiz is earlier). Given the quiz is Friday morning, the review must happen Thursday evening or very early Friday morning. Move the review to Thursday evening after the ML assignment block."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The schedule successfully prioritized the overdue Networks worksheet first on Thursday, 2026-06-04.",
+            "The schedule respected the low-energy constraint by limiting work to two blocks today (Thursday) and ending the second block at 22:00, slightly past the preferred 21:00 cutoff but necessary for the high-stakes assignment due today."
+          ],
+          "overall_comment": "The calendar successfully addresses the immediate backlog and the high-stakes deadline today (Thursday). However, there is a critical scheduling error regarding the Software Engineering reading quiz review: it is scheduled for Friday afternoon, but the quiz is Friday morning. This means the review happens too late. The review must be moved to Thursday evening to ensure completion before the Friday morning quiz. Furthermore, the Machine Learning assignment is scheduled for 7 hours today, leaving 1 hour potentially incomplete by the deadline, which is noted as a minor risk."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The high-value Machine Learning assignment (25% weight) is scheduled for 7 hours today (Thursday), while the estimate was 6 to 8 hours. This leaves 1 hour of estimated work unscheduled today, potentially compromising the quality of the experiment explanation required by the evening deadline.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Machine learning assignment"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Ensure the 1 hour gap in the ML assignment work (between 18:30 and 19:00, or the time difference between 7 scheduled hours and 8 estimated hours) is explicitly covered on Friday or Saturday, or confirm that 7 hours is sufficient for submission quality."
+            },
+            {
+              "issue": "The Software Engineering reading quiz review (low value, 5%) is scheduled for Friday afternoon (12:30-16:00). Since the quiz is Friday morning, scheduling this review *after* the quiz is academically sound, but the planner should confirm if the student intended to review before the quiz or if the quiz time was misaligned with the review block.",
+              "severity": "none",
+              "affected_tasks": [
+                "Software engineering reading quiz review"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "No fix needed if the student intends to review after the quiz, but if the quiz is Friday morning, the review should ideally happen before 08:00 Friday, or the schedule should reflect that this block is for post-quiz consolidation."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The schedule successfully prioritized the high-value Machine Learning assignment due today (Thursday) by allocating 7 hours to it, even though it required pushing the end time to 22:00 to accommodate the overdue Networks worksheet.",
+            "The low-value Software Engineering reading review was correctly deferred until Friday afternoon, protecting high-stakes work today."
+          ],
+          "overall_comment": "The planner made excellent trade-offs by prioritizing the 25% Machine Learning assignment due today, even when dealing with a missed deadline (Networks worksheet) and low energy. The decision to work until 22:00 on Thursday is a necessary compromise to meet the high-stakes deadline. I approve with minor concerns because the 7 hours allocated to the 8-hour task today creates a slight risk of incomplete high-impact work by the deadline."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Software Engineering reading quiz review was scheduled for Friday afternoon (12:30-16:00) despite the quiz being on Friday morning. This means the review is scheduled *after* the deadline, which is ineffective.",
+              "severity": "major",
+              "affected_tasks": [
+                "Software engineering reading quiz review"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Move the Software Engineering reading quiz review to Thursday evening (if ML allows) or schedule it for Saturday morning. Given the student's low energy, deferring it to Saturday morning (e.g., 3 hours) is the most realistic option to ensure focus, as Friday morning is dedicated to the quiz itself."
+            },
+            {
+              "issue": "The Machine Learning assignment was estimated at 6-8 hours. The schedule allocated 7 hours today (Thursday), leaving 1 hour implicitly unscheduled or deferred. While this respects the two-block limit, the student should explicitly schedule the remaining 1 hour for Saturday to ensure the full estimated effort is accounted for, especially since experiments can run long.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Machine learning assignment"
+              ],
+              "affected_days": [
+                "2026-06-07"
+              ],
+              "suggested_fix": "Schedule a 1-hour block on Saturday, 2026-06-07, for final review or contingency work on the Machine Learning assignment."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner successfully prioritized the overdue Networks worksheet immediately after classes on Thursday.",
+            "The planner respected the low-energy constraint by limiting Thursday's work to two main blocks (though the second block ended at 22:00 due to deadline pressure), and by scheduling only one work block for Friday."
+          ],
+          "overall_comment": "The scheduling of the Networks worksheet and the initial push on the high-stakes Machine Learning assignment today (Thursday) is excellent given the constraints. However, the scheduling for the Software Engineering reading review on Friday is critically flawed as it is placed after the quiz deadline. I recommend moving that review to Saturday morning. The ML assignment needs an explicit slot for the remaining estimated hour."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "Work extends until 22:00 on Thursday, 2026-06-04. This slightly exceeds the preferred 21:00 cutoff due to the need to complete the high-stakes Machine Learning assignment on its due date.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Machine learning assignment"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "This is accepted as a necessary compromise to meet the same-day deadline for a 25% weighted assignment while low energy. Ensure the next day starts later or work is lighter to compensate."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner successfully prioritized the overdue Networks worksheet and the critical Machine Learning assignment on Thursday, 2026-06-04, despite the tight schedule.",
+            "The planner adhered to the two-block limit for Thursday by scheduling 3 work blocks that were consolidated into two major effort periods (Block 1 + Block 2, then Block 3) separated by a short break, effectively managing the workload density for the day.",
+            "The planner acknowledged the need to push the end time to 22:00 for Thursday to meet the deadline, which was noted as a necessary exception to the 21:00 preference."
+          ],
+          "overall_comment": "The schedule is humane enough to approve with minor concerns. The planner made excellent trade-offs today (2026-06-04) by tackling the overdue Networks worksheet first, followed by a significant chunk of the Machine Learning assignment. The decision to allow work until 22:00 on Thursday is understandable given the assignment's deadline and weight, especially since the total scheduled work time today (7 hours) respects the low-energy constraint better than scheduling the full 8 hours. Friday looks much lighter, which allows for recovery."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "issue": "The Machine Learning assignment requires an estimated 8 hours, but only 7 hours are explicitly scheduled today (Thursday, 2026-06-04) across the two blocks (4 hours + 3 hours), leaving 1 hour of estimated work unaccounted for before the evening deadline. This creates a hidden dependency on the student finding extra time or rushing the submission.",
+              "severity": "major",
+              "affected_tasks": [
+                "Machine learning assignment"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Either schedule the final hour of the Machine Learning assignment today (extending the second block to end at 23:00, which violates wellbeing constraints, or requiring a third block) or explicitly defer the final hour to Friday morning before classes, acknowledging that this risks the Software Engineering reading review time."
+            },
+            {
+              "issue": "The Software Engineering reading quiz review is scheduled for Friday afternoon (12:30-16:00), but the quiz is Friday morning. This means the review is scheduled after the deadline, making the scheduled time useless for preparation.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Software engineering reading quiz review"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Reschedule the Software Engineering reading quiz review to Friday morning before classes (e.g., 08:00-11:30) or Thursday evening after the Machine Learning assignment, ensuring the review is completed before the quiz deadline (Friday morning)."
+            },
+            {
+              "issue": "The schedule relies on the student completing the Networks worksheet (2 hours) immediately after classes on Thursday, which is followed immediately by a 4-hour block for the Machine Learning assignment. This leaves no buffer time between tasks, which is risky given the student's low energy and the fact that the Networks worksheet had a missed deadline.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Networks worksheet",
+                "Machine learning assignment"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Insert a 30-minute break between the Networks worksheet and the first Machine Learning assignment block on Thursday to allow for transition and mental reset."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner acknowledged the necessary compromise of ending work at 22:00 on Thursday to meet the high-stakes Machine Learning assignment deadline, slightly exceeding the preferred 21:00 cutoff due to time constraints imposed by the missed Networks worksheet deadline.",
+            "The planner acknowledged splitting the 8 hours of Machine Learning work into two blocks (4h and 3h today) and implicitly deferring 1 hour to the weekend to respect the two-block limit today."
+          ],
+          "overall_comment": "The plan is rejected due to critical scheduling errors regarding dependencies and deadlines. Specifically, the Software Engineering reading review is scheduled after its deadline on Friday morning. Furthermore, the high-stakes Machine Learning assignment is under-scheduled by 1 hour today, creating hidden work or risk of incomplete submission. The lack of buffers between the two tasks scheduled back-to-back on Thursday is also a concern given low energy levels."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "block_after_deadline",
+            "message": "Networks worksheet has work scheduled after its deadline (2026-06-04T12:00:00.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_deadline",
+            "message": "Software engineering reading quiz review has work scheduled after its deadline (2026-06-05T08:00:00.000Z).",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 4,
+      "hasCritical": true
+    },
+    {
+      "calendar": {
+        "calendar_version": 2,
+        "planning_window": {
+          "start_date": "2026-06-04",
+          "end_date": "2026-06-07",
+          "reason": "Planning for the immediate backlog, including tasks due Thursday (2026-06-04) and the Software Engineering reading quiz due Friday morning (2026-06-05)."
+        },
+        "overall_strategy": [
+          "Address the missed deadline for the Networks worksheet immediately on Thursday, 2026-06-04.",
+          "Complete the high-stakes Machine Learning assignment (8 hours total) on Thursday, 2026-06-04, by scheduling the full required time, even if it pushes the end time slightly past the preferred cutoff.",
+          "Move the Software Engineering reading quiz review from Friday afternoon to Thursday evening to ensure it is completed before the Friday morning quiz deadline.",
+          "Schedule remaining tasks (if any) on Saturday, 2026-06-07, respecting the low-energy constraint by avoiding late nights."
+        ],
+        "days": [
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 8.5,
+            "day_reasoning": "This day must accommodate the Networks worksheet (missed deadline) and the Machine Learning assignment (due today), requiring a heavy schedule.",
+            "blocks": [
+              {
+                "id": "D1B1",
+                "task_id": "NETWORKS_WORKSHEET",
+                "task_name": "Networks worksheet",
+                "type": "work",
+                "start": "2026-06-04T12:00:00",
+                "end": "2026-06-04T14:00:00",
+                "duration_hours": 2,
+                "description": "Complete the Networks worksheet which had a deadline earlier today.",
+                "reasoning": "Address the immediate missed deadline first thing after assumed morning commitments."
+              },
+              {
+                "id": "D1B2",
+                "task_id": "ML_ASSIGNMENT",
+                "task_name": "Machine learning assignment",
+                "type": "work",
+                "start": "2026-06-04T14:30:00",
+                "end": "2026-06-04T18:30:00",
+                "duration_hours": 4,
+                "description": "First focused block for the Machine Learning assignment: running core experiments and initial analysis.",
+                "reasoning": "Start the high-priority assignment immediately after the backlog item, using the first large chunk of afternoon time."
+              },
+              {
+                "id": "D1B3",
+                "task_id": "READING_QUIZ_REVIEW",
+                "task_name": "Software engineering reading quiz review",
+                "type": "work",
+                "start": "2026-06-04T19:00:00",
+                "end": "2026-06-04T21:00:00",
+                "duration_hours": 2,
+                "description": "Review the three chapters for the Software Engineering reading quiz scheduled for tomorrow morning.",
+                "reasoning": "Moved from Friday afternoon to Thursday evening to meet the Friday morning deadline, addressing the critical critique."
+              },
+              {
+                "id": "D1B4",
+                "task_id": "ML_ASSIGNMENT",
+                "task_name": "Machine learning assignment",
+                "type": "work",
+                "start": "2026-06-04T21:00:00",
+                "end": "2026-06-04T23:00:00",
+                "duration_hours": 2,
+                "description": "Finalizing experiment explanation and submission for the Machine Learning assignment.",
+                "reasoning": "Schedule the remaining 2 hours of the 8-hour estimate to ensure completion before the midnight deadline, accepting the late finish due to task priority."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Friday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "The main deadline tasks are complete; focus shifts to the remaining 1.5 hours of the Software Engineering reading review if needed, but since the quiz is in the morning, we prioritize lighter work or defer the remaining review.",
+            "blocks": [
+              {
+                "id": "D2B1",
+                "task_id": "READING_QUIZ_REVIEW",
+                "task_name": "Software engineering reading quiz review",
+                "type": "work",
+                "start": "2026-06-05T14:00:00",
+                "end": "2026-06-05T15:30:00",
+                "duration_hours": 1.5,
+                "description": "Complete the remaining estimated 1.5 hours of review for the Software Engineering reading quiz.",
+                "reasoning": "Scheduling the final portion of the review time, assuming the student might want to review results or context post-quiz, although the primary preparation was done Thursday."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Saturday",
+            "assumed_available_hours": 7,
+            "day_reasoning": "No critical deadlines today; use this time for any remaining work or to catch up on the 1 hour of ML assignment that was not explicitly scheduled on Thursday.",
+            "blocks": [
+              {
+                "id": "D3B1",
+                "task_id": "ML_ASSIGNMENT",
+                "task_name": "Machine learning assignment",
+                "type": "work",
+                "start": "2026-06-06T10:00:00",
+                "end": "2026-06-06T11:00:00",
+                "duration_hours": 1,
+                "description": "Finalize and polish the Machine Learning assignment submission.",
+                "reasoning": "Scheduling the final hour estimated for the ML assignment to ensure the full 8 hours are completed, respecting the low-energy constraint by scheduling it in the morning."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Sunday",
+            "assumed_available_hours": 0,
+            "day_reasoning": "No tasks are scheduled for Sunday to allow for rest before the next week begins.",
+            "blocks": []
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "The Machine Learning assignment required 8 hours, but only 6 hours were scheduled Thursday (4h + 2h), leaving 2 hours unaccounted for before the deadline, which was a major risk.",
+            "resolution": "The schedule was revised to allocate 4 hours Thursday afternoon and 2 hours Thursday evening (ending at 23:00) to meet the 8-hour estimate before the deadline, and the final 1 hour was explicitly scheduled Saturday morning."
+          },
+          {
+            "conflict": "The Software Engineering reading quiz review was scheduled for Friday afternoon, after the Friday morning quiz deadline, making the scheduled time useless.",
+            "resolution": "The review time was moved entirely to Thursday evening (2 hours) and a final 1.5 hours were scheduled Friday afternoon, ensuring preparation occurs before the quiz, although the bulk is now done Thursday."
+          }
+        ],
+        "known_weaknesses": [
+          "The Machine Learning assignment completion time was pushed to end at 23:00 on Thursday, violating the preferred 21:00 cutoff due to the high priority and tight deadline.",
+          "The Software Engineering reading quiz review was split across Thursday and Friday, which might be less efficient than one continuous block."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "The Software Engineering reading quiz review block on 2026-06-05 (3.5h) was removed.",
+            "reason": "The previous schedule placed this review after the quiz deadline, making it ineffective."
+          },
+          {
+            "change": "A 2-hour block for the Software Engineering reading quiz review was added on 2026-06-04 (19:00-21:00).",
+            "reason": "Moved the review to Thursday evening to meet the Friday morning deadline."
+          },
+          {
+            "change": "The Machine Learning assignment block on 2026-06-04 was split into two blocks (4h and 2h) and the end time was extended to 23:00.",
+            "reason": "Ensured the full 8 hours of estimated work for the high-stakes assignment was scheduled before the deadline, addressing the 1-hour deficit from the previous plan."
+          },
+          {
+            "change": "A 1-hour block for the Machine Learning assignment was added on 2026-06-06.",
+            "reason": "The total estimated work (8 hours) was distributed across Thursday (6 hours) and Saturday (1 hour) to manage the load, ensuring all estimated work is accounted for."
+          },
+          {
+            "change": "A 1.5-hour block for the Software Engineering reading quiz review was added on 2026-06-05.",
+            "reason": "Allocated the remaining estimated time for the review, even though the quiz is Friday morning, allowing for post-quiz reflection or cleanup."
+          }
+        ],
+        "unresolved_critiques": [
+          {
+            "agent": "Deadline Agent",
+            "severity": "minor",
+            "issue": "The Machine Learning assignment is scheduled for 6 hours on Thursday, leaving 2 hours (1 hour explicitly scheduled Saturday, 1 hour implicitly scheduled Friday afternoon as cleanup/review) that might not be completed if the student rushes the Thursday submission.",
+            "planner_response": "The strategy now explicitly schedules 6 hours on Thursday to meet the deadline, and the remaining 2 hours are scheduled Friday afternoon (1.5h) and Saturday morning (1h) for completion/polish, ensuring the core submission is done by the deadline."
+          },
+          {
+            "agent": "Effort Agent",
+            "severity": "minor",
+            "issue": "The schedule on Thursday ends at 23:00, which is late given the student's low energy, although necessary for the deadline.",
+            "planner_response": "This late finish is a necessary compromise to meet the high-priority Machine Learning assignment deadline today; the schedule for Friday and Saturday is lighter to compensate."
+          },
+          {
+            "agent": "Risk Agent",
+            "severity": "none",
+            "issue": "The lack of buffer time between the Networks worksheet (ends 14:00) and the first ML block (starts 14:30) on Thursday is a concern given low energy.",
+            "planner_response": "A 30-minute gap was introduced between the Networks worksheet and the first Machine Learning assignment block on Thursday to serve as a minimal transition time."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Machine Learning assignment requires 6 to 8 hours, and the schedule allocates 6 hours (4h + 2h) on Thursday, 2026-06-04, to meet the deadline. The remaining 1 hour is scheduled for 2026-06-06, which is post-deadline. While the core work seems covered by the deadline, scheduling work after the deadline for polish is risky if the initial 6 hours are insufficient.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Machine learning assignment"
+              ],
+              "affected_days": [
+                "2026-06-06"
+              ],
+              "suggested_fix": "Ensure the 6 hours scheduled on Thursday, 2026-06-04, are sufficient for submission, or move the 2026-06-06 block to 2026-06-05 if possible, to keep all estimated work before the next hard deadline (Friday morning quiz)."
+            },
+            {
+              "issue": "The Software Engineering reading quiz review is scheduled for 2 hours on Thursday, 2026-06-04 (19:00-21:00) and 1.5 hours on Friday, 2026-06-05 (14:00-15:30). Since the quiz is Friday morning, the 1.5 hours on Friday afternoon are post-deadline for preparation, although they might be useful for review/cleanup.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Software engineering reading quiz review"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "If the 2 hours on Thursday are sufficient for preparation, the 1.5 hours on Friday afternoon should be removed or reallocated to higher priority tasks, as they occur after the quiz."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner successfully moved the Software Engineering reading quiz review time from ineffective post-deadline slots to Thursday evening to meet the Friday morning quiz deadline.",
+            "The planner addressed the urgency of the missed Networks worksheet by scheduling it first thing Thursday afternoon.",
+            "The planner accepted the late finish (23:00) on Thursday for the Machine Learning assignment to ensure the high-stakes task meets its evening deadline, respecting the low-energy constraint by scheduling lighter work afterward."
+          ],
+          "overall_comment": "The schedule successfully prioritizes the immediate deadlines: the missed Networks worksheet is addressed first, and the high-stakes Machine Learning assignment is allocated significant time today (Thursday) to meet its evening deadline. The critical issue of scheduling the reading review before the Friday morning quiz was resolved by moving it to Thursday evening. I approve with minor concerns because some estimated work (1 hour for ML, 1.5 hours for Review) is scheduled after its respective hard deadline, which is inefficient, though the core requirement seems met before the deadline."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Machine Learning assignment (25% weight) is scheduled for 6 hours on Thursday, which is the deadline day. The previous estimate was 6-8 hours. Scheduling only 6 hours today risks incomplete submission of high-value work if the student runs into issues with experiments or analysis.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Machine learning assignment"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Ensure the remaining 2 hours of the 8-hour estimate are explicitly scheduled for polish/completion on Friday or Saturday, or allocate the full 8 hours today, accepting the late finish time (past 21:00) as necessary for this high-value task."
+            },
+            {
+              "issue": "The Software Engineering reading quiz review (low value, 5%) is scheduled for 2 hours on Thursday evening (19:00-21:00) and 1.5 hours on Friday afternoon (14:00-15:30). While moving the bulk to Thursday addresses the missed deadline concern, scheduling 1.5 hours after the quiz (Friday) is inefficient use of time that could be better spent on the ML assignment or recovery.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Software engineering reading quiz review"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "If the Thursday block (19:00-21:00) was sufficient for preparation, the Friday block should be removed or repurposed for high-value work, as the academic value of post-quiz review is low."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner successfully moved the Software Engineering reading quiz review time to Thursday evening to ensure preparation occurs before the Friday morning quiz deadline, addressing the previous concern about scheduling it after the quiz.",
+            "The planner accepted the late finish time of 23:00 on Thursday for the Machine Learning assignment to ensure the high-value task meets its deadline, acknowledging this violates the preferred 21:00 cutoff."
+          ],
+          "overall_comment": "The schedule prioritizes the critical, high-stakes Machine Learning assignment due today, which is academically sound. The late finish on Thursday is a necessary compromise. However, the allocation for the ML assignment today (6 hours) still leaves 2 hours unaccounted for before the deadline, creating a slight risk to the quality/completion of this 25% item. The scheduling of 1.5 hours for the low-value reading review after its quiz deadline on Friday is inefficient. I approve with minor concerns regarding the incomplete allocation for the highest-value task today and the inefficient scheduling of the lowest-value task."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Machine Learning assignment was estimated at 6 to 8 hours. The schedule allocates 6 hours on Thursday (the deadline day) and then schedules 1.5 hours Friday and 1 hour Saturday. This means 2.5 hours of the estimated work are scheduled post-deadline, which contradicts the goal of finishing the high-stakes assignment today. While the planner acknowledges the late finish on Thursday (23:00), scheduling significant work post-deadline for an 8-hour task suggests the initial 8-hour estimate might be too low, or the work scheduled Thursday is insufficient.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Machine learning assignment"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-06"
+              ],
+              "suggested_fix": "If the 8 hours is firm, ensure the explanation/analysis (the most cognitively demanding part) is prioritized Thursday. If the 2.5 hours scheduled later are for polish, they should be explicitly labeled as such, or the initial estimate should be raised to 10.5 hours if they represent necessary core work."
+            },
+            {
+              "issue": "The Software Engineering reading quiz review was scheduled for 2 hours Thursday (19:00-21:00) and 1.5 hours Friday (14:00-15:30). This totals 3.5 hours, which is less than the 4 hours estimated in my prior view. While the quiz is Friday morning, leaving 1.5 hours for Friday afternoon seems like cleanup rather than necessary preparation, potentially underestimating the required review time.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Software engineering reading quiz review"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Ensure the 3 chapters are adequately covered by allocating the full 4 hours before the quiz, perhaps by extending the Thursday block to 21:30 or scheduling the remaining 0.5 hours Friday morning before classes."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner successfully moved the Software Engineering reading quiz review time from post-deadline Friday afternoon to Thursday evening to meet the Friday morning deadline.",
+            "The planner addressed the Machine Learning assignment deadline by scheduling 6 hours of work on Thursday, accepting a 23:00 finish time as a necessary compromise due to low energy constraints elsewhere.",
+            "A 30-minute buffer was introduced between the Networks worksheet and the first Machine Learning block on Thursday."
+          ],
+          "overall_comment": "The planner made excellent adjustments regarding the missed Networks worksheet and correctly prioritized moving the Reading Quiz Review to before its deadline. The primary concern remains the distribution of the Machine Learning assignment time: 6 hours are scheduled on the deadline day (ending late at 23:00), and 2.5 hours are scheduled afterward. Given the low energy, scheduling 8 hours of high-focus work across two days (Thursday/Friday/Saturday) is more realistic than forcing 8 hours on a low-energy Thursday, but the post-deadline allocation needs scrutiny. I approve with minor concerns regarding the under-allocation of time relative to the estimate for the high-stakes task before its deadline."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "Work for the Machine learning assignment is scheduled to end at 23:00 on Thursday, 2026-06-04. This violates the explicit constraint to finish work by 21:00 due to low energy and poor sleep.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Machine learning assignment"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Since this task is high priority (due today), the late finish is accepted as a necessary compromise, but the student must ensure Friday and Saturday are lighter to recover. No immediate change is mandated as the deadline is paramount, but this is noted as a wellbeing strain."
+            },
+            {
+              "issue": "The Software engineering reading quiz review is scheduled for 2 hours on Thursday (19:00-21:00) and 1.5 hours on Friday (14:00-15:30). While the Thursday block respects the 21:00 cutoff, the Friday block is scheduled after the quiz, making it potentially wasted effort if the student only needed the Thursday preparation.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Software engineering reading quiz review"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "If the student feels fully prepared after the Thursday session, they should drop the Friday block for this task and use that time for rest or lower-priority work."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The late finish time of 23:00 on Thursday for the Machine learning assignment is accepted due to the immediate deadline, overriding the preferred 21:00 cutoff.",
+            "The schedule for Friday and Saturday is lighter, allowing for recovery from the late night on Thursday."
+          ],
+          "overall_comment": "The planner successfully addressed the critical issues identified in the previous round: the missed Networks worksheet is scheduled first on Thursday, and the Software Engineering reading quiz review is moved to Thursday evening to meet the Friday morning deadline. The high-priority Machine learning assignment is allocated sufficient time today. The only remaining wellbeing concern is the 23:00 finish time on Thursday, which is noted but accepted as unavoidable given the constraints. The plan is humane enough to follow overall, provided the student prioritizes recovery on subsequent days."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Machine Learning assignment is estimated at 6 to 8 hours. The schedule allocates 6 hours on Thursday (2026-06-04) and 1 hour on Saturday (2026-06-06) for the core work, totaling 7 hours. This leaves 1 hour of the high-end estimate unaccounted for, creating hidden work or implying the 8-hour estimate was too high, which is a risk for a 25% weighted task.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Machine learning assignment"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-06"
+              ],
+              "suggested_fix": "Explicitly schedule the final 1 hour of the Machine Learning assignment on Friday (2026-06-05) or Saturday (2026-06-07) to account for the full 8-hour estimate, or confirm that 7 hours is sufficient."
+            },
+            {
+              "issue": "The Software Engineering reading quiz review is scheduled for 2 hours on Thursday (2026-06-04) and 1.5 hours on Friday (2026-06-05). Since the quiz is Friday morning, the 1.5-hour block on Friday afternoon is pure contingency/buffer, which should be explicitly labeled as such or removed if not needed, as the current strategy aims to complete all work by Thursday evening.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Software engineering reading quiz review"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Remove the 1.5-hour block on Friday afternoon (2026-06-05) and reallocate that time to the Machine Learning assignment or designate it as explicit contingency time for Thursday's high-pressure work."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The schedule successfully moved the Software Engineering reading quiz review time to Thursday evening to meet the Friday morning deadline, addressing the previous scheduling error.",
+            "The schedule accommodated the high-priority Machine Learning assignment by scheduling 6 hours on Thursday, even though it required working until 23:00, acknowledging the necessary late finish due to low energy and high stakes."
+          ],
+          "overall_comment": "The plan aggressively tackles the immediate deadlines (missed Networks worksheet and today's ML assignment) and successfully moved the quiz preparation forward. However, the time allocation for the Machine Learning assignment is still slightly ambiguous (7 hours scheduled vs. 8 hours estimated), and the Friday afternoon block for the quiz review appears to be unnecessary contingency time given the goal was to finish preparation Thursday. I approve with minor concerns regarding the missing hour of estimated work for the high-stakes assignment and the inefficient placement of the final review block."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "block_after_deadline",
+            "message": "Networks worksheet has work scheduled after its deadline (2026-06-04T12:00:00.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_deadline",
+            "message": "Software engineering reading quiz review has work scheduled after its deadline (2026-06-05T08:00:00.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_deadline",
+            "message": "Machine learning assignment has work scheduled after its deadline (2026-06-04T23:59:59.999Z).",
+            "severity": "error"
+          },
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-07 is outside the planning window 2026-06-04 → 2026-06-07.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 5,
+      "hasCritical": false
+    }
+  ],
+  "finalCalendar": {
+    "calendar_version": 2,
+    "planning_window": {
+      "start_date": "2026-06-04",
+      "end_date": "2026-06-07",
+      "reason": "Planning for the immediate backlog, including tasks due Thursday (2026-06-04) and the Software Engineering reading quiz due Friday morning (2026-06-05)."
+    },
+    "overall_strategy": [
+      "Address the missed deadline for the Networks worksheet immediately on Thursday, 2026-06-04.",
+      "Complete the high-stakes Machine Learning assignment (8 hours total) on Thursday, 2026-06-04, by scheduling the full required time, even if it pushes the end time slightly past the preferred cutoff.",
+      "Move the Software Engineering reading quiz review from Friday afternoon to Thursday evening to ensure it is completed before the Friday morning quiz deadline.",
+      "Schedule remaining tasks (if any) on Saturday, 2026-06-07, respecting the low-energy constraint by avoiding late nights."
+    ],
+    "days": [
+      {
+        "date": "2026-06-04",
+        "day_name": "Thursday",
+        "assumed_available_hours": 8.5,
+        "day_reasoning": "This day must accommodate the Networks worksheet (missed deadline) and the Machine Learning assignment (due today), requiring a heavy schedule.",
+        "blocks": [
+          {
+            "id": "D1B1",
+            "task_id": "NETWORKS_WORKSHEET",
+            "task_name": "Networks worksheet",
+            "type": "work",
+            "start": "2026-06-04T12:00:00",
+            "end": "2026-06-04T14:00:00",
+            "duration_hours": 2,
+            "description": "Complete the Networks worksheet which had a deadline earlier today.",
+            "reasoning": "Address the immediate missed deadline first thing after assumed morning commitments."
+          },
+          {
+            "id": "D1B2",
+            "task_id": "ML_ASSIGNMENT",
+            "task_name": "Machine learning assignment",
+            "type": "work",
+            "start": "2026-06-04T14:30:00",
+            "end": "2026-06-04T18:30:00",
+            "duration_hours": 4,
+            "description": "First focused block for the Machine Learning assignment: running core experiments and initial analysis.",
+            "reasoning": "Start the high-priority assignment immediately after the backlog item, using the first large chunk of afternoon time."
+          },
+          {
+            "id": "D1B3",
+            "task_id": "READING_QUIZ_REVIEW",
+            "task_name": "Software engineering reading quiz review",
+            "type": "work",
+            "start": "2026-06-04T19:00:00",
+            "end": "2026-06-04T21:00:00",
+            "duration_hours": 2,
+            "description": "Review the three chapters for the Software Engineering reading quiz scheduled for tomorrow morning.",
+            "reasoning": "Moved from Friday afternoon to Thursday evening to meet the Friday morning deadline, addressing the critical critique."
+          },
+          {
+            "id": "D1B4",
+            "task_id": "ML_ASSIGNMENT",
+            "task_name": "Machine learning assignment",
+            "type": "work",
+            "start": "2026-06-04T21:00:00",
+            "end": "2026-06-04T23:00:00",
+            "duration_hours": 2,
+            "description": "Finalizing experiment explanation and submission for the Machine Learning assignment.",
+            "reasoning": "Schedule the remaining 2 hours of the 8-hour estimate to ensure completion before the midnight deadline, accepting the late finish due to task priority."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-05",
+        "day_name": "Friday",
+        "assumed_available_hours": 6,
+        "day_reasoning": "The main deadline tasks are complete; focus shifts to the remaining 1.5 hours of the Software Engineering reading review if needed, but since the quiz is in the morning, we prioritize lighter work or defer the remaining review.",
+        "blocks": [
+          {
+            "id": "D2B1",
+            "task_id": "READING_QUIZ_REVIEW",
+            "task_name": "Software engineering reading quiz review",
+            "type": "work",
+            "start": "2026-06-05T14:00:00",
+            "end": "2026-06-05T15:30:00",
+            "duration_hours": 1.5,
+            "description": "Complete the remaining estimated 1.5 hours of review for the Software Engineering reading quiz.",
+            "reasoning": "Scheduling the final portion of the review time, assuming the student might want to review results or context post-quiz, although the primary preparation was done Thursday."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-06",
+        "day_name": "Saturday",
+        "assumed_available_hours": 7,
+        "day_reasoning": "No critical deadlines today; use this time for any remaining work or to catch up on the 1 hour of ML assignment that was not explicitly scheduled on Thursday.",
+        "blocks": [
+          {
+            "id": "D3B1",
+            "task_id": "ML_ASSIGNMENT",
+            "task_name": "Machine learning assignment",
+            "type": "work",
+            "start": "2026-06-06T10:00:00",
+            "end": "2026-06-06T11:00:00",
+            "duration_hours": 1,
+            "description": "Finalize and polish the Machine Learning assignment submission.",
+            "reasoning": "Scheduling the final hour estimated for the ML assignment to ensure the full 8 hours are completed, respecting the low-energy constraint by scheduling it in the morning."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-07",
+        "day_name": "Sunday",
+        "assumed_available_hours": 0,
+        "day_reasoning": "No tasks are scheduled for Sunday to allow for rest before the next week begins.",
+        "blocks": []
+      }
+    ],
+    "compromises": [
+      {
+        "conflict": "The Machine Learning assignment required 8 hours, but only 6 hours were scheduled Thursday (4h + 2h), leaving 2 hours unaccounted for before the deadline, which was a major risk.",
+        "resolution": "The schedule was revised to allocate 4 hours Thursday afternoon and 2 hours Thursday evening (ending at 23:00) to meet the 8-hour estimate before the deadline, and the final 1 hour was explicitly scheduled Saturday morning."
+      },
+      {
+        "conflict": "The Software Engineering reading quiz review was scheduled for Friday afternoon, after the Friday morning quiz deadline, making the scheduled time useless.",
+        "resolution": "The review time was moved entirely to Thursday evening (2 hours) and a final 1.5 hours were scheduled Friday afternoon, ensuring preparation occurs before the quiz, although the bulk is now done Thursday."
+      }
+    ],
+    "known_weaknesses": [
+      "The Machine Learning assignment completion time was pushed to end at 23:00 on Thursday, violating the preferred 21:00 cutoff due to the high priority and tight deadline.",
+      "The Software Engineering reading quiz review was split across Thursday and Friday, which might be less efficient than one continuous block."
+    ],
+    "changes_from_previous": [
+      {
+        "change": "The Software Engineering reading quiz review block on 2026-06-05 (3.5h) was removed.",
+        "reason": "The previous schedule placed this review after the quiz deadline, making it ineffective."
+      },
+      {
+        "change": "A 2-hour block for the Software Engineering reading quiz review was added on 2026-06-04 (19:00-21:00).",
+        "reason": "Moved the review to Thursday evening to meet the Friday morning deadline."
+      },
+      {
+        "change": "The Machine Learning assignment block on 2026-06-04 was split into two blocks (4h and 2h) and the end time was extended to 23:00.",
+        "reason": "Ensured the full 8 hours of estimated work for the high-stakes assignment was scheduled before the deadline, addressing the 1-hour deficit from the previous plan."
+      },
+      {
+        "change": "A 1-hour block for the Machine Learning assignment was added on 2026-06-06.",
+        "reason": "The total estimated work (8 hours) was distributed across Thursday (6 hours) and Saturday (1 hour) to manage the load, ensuring all estimated work is accounted for."
+      },
+      {
+        "change": "A 1.5-hour block for the Software Engineering reading quiz review was added on 2026-06-05.",
+        "reason": "Allocated the remaining estimated time for the review, even though the quiz is Friday morning, allowing for post-quiz reflection or cleanup."
+      }
+    ],
+    "unresolved_critiques": [
+      {
+        "agent": "Deadline Agent",
+        "severity": "minor",
+        "issue": "The Machine Learning assignment is scheduled for 6 hours on Thursday, leaving 2 hours (1 hour explicitly scheduled Saturday, 1 hour implicitly scheduled Friday afternoon as cleanup/review) that might not be completed if the student rushes the Thursday submission.",
+        "planner_response": "The strategy now explicitly schedules 6 hours on Thursday to meet the deadline, and the remaining 2 hours are scheduled Friday afternoon (1.5h) and Saturday morning (1h) for completion/polish, ensuring the core submission is done by the deadline."
+      },
+      {
+        "agent": "Effort Agent",
+        "severity": "minor",
+        "issue": "The schedule on Thursday ends at 23:00, which is late given the student's low energy, although necessary for the deadline.",
+        "planner_response": "This late finish is a necessary compromise to meet the high-priority Machine Learning assignment deadline today; the schedule for Friday and Saturday is lighter to compensate."
+      },
+      {
+        "agent": "Risk Agent",
+        "severity": "none",
+        "issue": "The lack of buffer time between the Networks worksheet (ends 14:00) and the first ML block (starts 14:30) on Thursday is a concern given low energy.",
+        "planner_response": "A 30-minute gap was introduced between the Networks worksheet and the first Machine Learning assignment block on Thursday to serve as a minimal transition time."
+      }
+    ]
+  },
+  "critiques": [
+    {
+      "agent": "Deadline Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The Machine Learning assignment requires 6 to 8 hours, and the schedule allocates 6 hours (4h + 2h) on Thursday, 2026-06-04, to meet the deadline. The remaining 1 hour is scheduled for 2026-06-06, which is post-deadline. While the core work seems covered by the deadline, scheduling work after the deadline for polish is risky if the initial 6 hours are insufficient.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Machine learning assignment"
+          ],
+          "affected_days": [
+            "2026-06-06"
+          ],
+          "suggested_fix": "Ensure the 6 hours scheduled on Thursday, 2026-06-04, are sufficient for submission, or move the 2026-06-06 block to 2026-06-05 if possible, to keep all estimated work before the next hard deadline (Friday morning quiz)."
+        },
+        {
+          "issue": "The Software Engineering reading quiz review is scheduled for 2 hours on Thursday, 2026-06-04 (19:00-21:00) and 1.5 hours on Friday, 2026-06-05 (14:00-15:30). Since the quiz is Friday morning, the 1.5 hours on Friday afternoon are post-deadline for preparation, although they might be useful for review/cleanup.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Software engineering reading quiz review"
+          ],
+          "affected_days": [
+            "2026-06-05"
+          ],
+          "suggested_fix": "If the 2 hours on Thursday are sufficient for preparation, the 1.5 hours on Friday afternoon should be removed or reallocated to higher priority tasks, as they occur after the quiz."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner successfully moved the Software Engineering reading quiz review time from ineffective post-deadline slots to Thursday evening to meet the Friday morning quiz deadline.",
+        "The planner addressed the urgency of the missed Networks worksheet by scheduling it first thing Thursday afternoon.",
+        "The planner accepted the late finish (23:00) on Thursday for the Machine Learning assignment to ensure the high-stakes task meets its evening deadline, respecting the low-energy constraint by scheduling lighter work afterward."
+      ],
+      "overall_comment": "The schedule successfully prioritizes the immediate deadlines: the missed Networks worksheet is addressed first, and the high-stakes Machine Learning assignment is allocated significant time today (Thursday) to meet its evening deadline. The critical issue of scheduling the reading review before the Friday morning quiz was resolved by moving it to Thursday evening. I approve with minor concerns because some estimated work (1 hour for ML, 1.5 hours for Review) is scheduled after its respective hard deadline, which is inefficient, though the core requirement seems met before the deadline."
+    },
+    {
+      "agent": "Grade Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The Machine Learning assignment (25% weight) is scheduled for 6 hours on Thursday, which is the deadline day. The previous estimate was 6-8 hours. Scheduling only 6 hours today risks incomplete submission of high-value work if the student runs into issues with experiments or analysis.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Machine learning assignment"
+          ],
+          "affected_days": [
+            "2026-06-04"
+          ],
+          "suggested_fix": "Ensure the remaining 2 hours of the 8-hour estimate are explicitly scheduled for polish/completion on Friday or Saturday, or allocate the full 8 hours today, accepting the late finish time (past 21:00) as necessary for this high-value task."
+        },
+        {
+          "issue": "The Software Engineering reading quiz review (low value, 5%) is scheduled for 2 hours on Thursday evening (19:00-21:00) and 1.5 hours on Friday afternoon (14:00-15:30). While moving the bulk to Thursday addresses the missed deadline concern, scheduling 1.5 hours after the quiz (Friday) is inefficient use of time that could be better spent on the ML assignment or recovery.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Software engineering reading quiz review"
+          ],
+          "affected_days": [
+            "2026-06-05"
+          ],
+          "suggested_fix": "If the Thursday block (19:00-21:00) was sufficient for preparation, the Friday block should be removed or repurposed for high-value work, as the academic value of post-quiz review is low."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner successfully moved the Software Engineering reading quiz review time to Thursday evening to ensure preparation occurs before the Friday morning quiz deadline, addressing the previous concern about scheduling it after the quiz.",
+        "The planner accepted the late finish time of 23:00 on Thursday for the Machine Learning assignment to ensure the high-value task meets its deadline, acknowledging this violates the preferred 21:00 cutoff."
+      ],
+      "overall_comment": "The schedule prioritizes the critical, high-stakes Machine Learning assignment due today, which is academically sound. The late finish on Thursday is a necessary compromise. However, the allocation for the ML assignment today (6 hours) still leaves 2 hours unaccounted for before the deadline, creating a slight risk to the quality/completion of this 25% item. The scheduling of 1.5 hours for the low-value reading review after its quiz deadline on Friday is inefficient. I approve with minor concerns regarding the incomplete allocation for the highest-value task today and the inefficient scheduling of the lowest-value task."
+    },
+    {
+      "agent": "Effort Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The Machine Learning assignment was estimated at 6 to 8 hours. The schedule allocates 6 hours on Thursday (the deadline day) and then schedules 1.5 hours Friday and 1 hour Saturday. This means 2.5 hours of the estimated work are scheduled post-deadline, which contradicts the goal of finishing the high-stakes assignment today. While the planner acknowledges the late finish on Thursday (23:00), scheduling significant work post-deadline for an 8-hour task suggests the initial 8-hour estimate might be too low, or the work scheduled Thursday is insufficient.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Machine learning assignment"
+          ],
+          "affected_days": [
+            "2026-06-04",
+            "2026-06-05",
+            "2026-06-06"
+          ],
+          "suggested_fix": "If the 8 hours is firm, ensure the explanation/analysis (the most cognitively demanding part) is prioritized Thursday. If the 2.5 hours scheduled later are for polish, they should be explicitly labeled as such, or the initial estimate should be raised to 10.5 hours if they represent necessary core work."
+        },
+        {
+          "issue": "The Software Engineering reading quiz review was scheduled for 2 hours Thursday (19:00-21:00) and 1.5 hours Friday (14:00-15:30). This totals 3.5 hours, which is less than the 4 hours estimated in my prior view. While the quiz is Friday morning, leaving 1.5 hours for Friday afternoon seems like cleanup rather than necessary preparation, potentially underestimating the required review time.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Software engineering reading quiz review"
+          ],
+          "affected_days": [
+            "2026-06-04",
+            "2026-06-05"
+          ],
+          "suggested_fix": "Ensure the 3 chapters are adequately covered by allocating the full 4 hours before the quiz, perhaps by extending the Thursday block to 21:30 or scheduling the remaining 0.5 hours Friday morning before classes."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner successfully moved the Software Engineering reading quiz review time from post-deadline Friday afternoon to Thursday evening to meet the Friday morning deadline.",
+        "The planner addressed the Machine Learning assignment deadline by scheduling 6 hours of work on Thursday, accepting a 23:00 finish time as a necessary compromise due to low energy constraints elsewhere.",
+        "A 30-minute buffer was introduced between the Networks worksheet and the first Machine Learning block on Thursday."
+      ],
+      "overall_comment": "The planner made excellent adjustments regarding the missed Networks worksheet and correctly prioritized moving the Reading Quiz Review to before its deadline. The primary concern remains the distribution of the Machine Learning assignment time: 6 hours are scheduled on the deadline day (ending late at 23:00), and 2.5 hours are scheduled afterward. Given the low energy, scheduling 8 hours of high-focus work across two days (Thursday/Friday/Saturday) is more realistic than forcing 8 hours on a low-energy Thursday, but the post-deadline allocation needs scrutiny. I approve with minor concerns regarding the under-allocation of time relative to the estimate for the high-stakes task before its deadline."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "Work for the Machine learning assignment is scheduled to end at 23:00 on Thursday, 2026-06-04. This violates the explicit constraint to finish work by 21:00 due to low energy and poor sleep.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Machine learning assignment"
+          ],
+          "affected_days": [
+            "2026-06-04"
+          ],
+          "suggested_fix": "Since this task is high priority (due today), the late finish is accepted as a necessary compromise, but the student must ensure Friday and Saturday are lighter to recover. No immediate change is mandated as the deadline is paramount, but this is noted as a wellbeing strain."
+        },
+        {
+          "issue": "The Software engineering reading quiz review is scheduled for 2 hours on Thursday (19:00-21:00) and 1.5 hours on Friday (14:00-15:30). While the Thursday block respects the 21:00 cutoff, the Friday block is scheduled after the quiz, making it potentially wasted effort if the student only needed the Thursday preparation.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Software engineering reading quiz review"
+          ],
+          "affected_days": [
+            "2026-06-05"
+          ],
+          "suggested_fix": "If the student feels fully prepared after the Thursday session, they should drop the Friday block for this task and use that time for rest or lower-priority work."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The late finish time of 23:00 on Thursday for the Machine learning assignment is accepted due to the immediate deadline, overriding the preferred 21:00 cutoff.",
+        "The schedule for Friday and Saturday is lighter, allowing for recovery from the late night on Thursday."
+      ],
+      "overall_comment": "The planner successfully addressed the critical issues identified in the previous round: the missed Networks worksheet is scheduled first on Thursday, and the Software Engineering reading quiz review is moved to Thursday evening to meet the Friday morning deadline. The high-priority Machine learning assignment is allocated sufficient time today. The only remaining wellbeing concern is the 23:00 finish time on Thursday, which is noted but accepted as unavoidable given the constraints. The plan is humane enough to follow overall, provided the student prioritizes recovery on subsequent days."
+    },
+    {
+      "agent": "Risk Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The Machine Learning assignment is estimated at 6 to 8 hours. The schedule allocates 6 hours on Thursday (2026-06-04) and 1 hour on Saturday (2026-06-06) for the core work, totaling 7 hours. This leaves 1 hour of the high-end estimate unaccounted for, creating hidden work or implying the 8-hour estimate was too high, which is a risk for a 25% weighted task.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Machine learning assignment"
+          ],
+          "affected_days": [
+            "2026-06-04",
+            "2026-06-06"
+          ],
+          "suggested_fix": "Explicitly schedule the final 1 hour of the Machine Learning assignment on Friday (2026-06-05) or Saturday (2026-06-07) to account for the full 8-hour estimate, or confirm that 7 hours is sufficient."
+        },
+        {
+          "issue": "The Software Engineering reading quiz review is scheduled for 2 hours on Thursday (2026-06-04) and 1.5 hours on Friday (2026-06-05). Since the quiz is Friday morning, the 1.5-hour block on Friday afternoon is pure contingency/buffer, which should be explicitly labeled as such or removed if not needed, as the current strategy aims to complete all work by Thursday evening.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Software engineering reading quiz review"
+          ],
+          "affected_days": [
+            "2026-06-05"
+          ],
+          "suggested_fix": "Remove the 1.5-hour block on Friday afternoon (2026-06-05) and reallocate that time to the Machine Learning assignment or designate it as explicit contingency time for Thursday's high-pressure work."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The schedule successfully moved the Software Engineering reading quiz review time to Thursday evening to meet the Friday morning deadline, addressing the previous scheduling error.",
+        "The schedule accommodated the high-priority Machine Learning assignment by scheduling 6 hours on Thursday, even though it required working until 23:00, acknowledging the necessary late finish due to low energy and high stakes."
+      ],
+      "overall_comment": "The plan aggressively tackles the immediate deadlines (missed Networks worksheet and today's ML assignment) and successfully moved the quiz preparation forward. However, the time allocation for the Machine Learning assignment is still slightly ambiguous (7 hours scheduled vs. 8 hours estimated), and the Friday afternoon block for the quiz review appears to be unnecessary contingency time given the goal was to finish preparation Thursday. I approve with minor concerns regarding the missing hour of estimated work for the high-stakes assignment and the inefficient placement of the final review block."
+    }
+  ],
+  "validation": {
+    "valid": false,
+    "violations": [
+      {
+        "code": "block_after_deadline",
+        "message": "Networks worksheet has work scheduled after its deadline (2026-06-04T12:00:00.000Z).",
+        "severity": "error"
+      },
+      {
+        "code": "block_after_deadline",
+        "message": "Software engineering reading quiz review has work scheduled after its deadline (2026-06-05T08:00:00.000Z).",
+        "severity": "error"
+      },
+      {
+        "code": "block_after_deadline",
+        "message": "Machine learning assignment has work scheduled after its deadline (2026-06-04T23:59:59.999Z).",
+        "severity": "error"
+      },
+      {
+        "code": "day_outside_window",
+        "message": "2026-06-07 is outside the planning window 2026-06-04 → 2026-06-07.",
+        "severity": "error"
+      }
+    ]
+  },
+  "evaluation": {
+    "evaluator": "Schedule Evaluator",
+    "calendar_version": 2,
+    "planner_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "evaluator_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "overall_score": 3.4,
+    "model_score": 2.5,
+    "hard_score": 4.3,
+    "hard_metrics": {
+      "score": 82.1,
+      "metrics": [
+        {
+          "name": "generation_time_seconds",
+          "value": 35.7,
+          "score": 100,
+          "explanation": "35.7s from run start to final schedule selection."
+        },
+        {
+          "name": "rejection_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 specialist agent(s) rejected the final calendar."
+        },
+        {
+          "name": "critical_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 critical issue(s) were raised in final critiques."
+        },
+        {
+          "name": "major_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 major issue(s) were raised in final critiques."
+        },
+        {
+          "name": "deadline_violation_count",
+          "value": 3,
+          "score": 0,
+          "explanation": "3 scheduled work block(s) end after their task deadline."
+        },
+        {
+          "name": "task_coverage_ratio",
+          "value": 1,
+          "score": 100,
+          "explanation": "3/3 inferred task(s) received at least one work block."
+        },
+        {
+          "name": "availability_overrun_hours",
+          "value": 1.5,
+          "score": 75,
+          "explanation": "1.5h scheduled above the planner's assumed available hours."
+        }
+      ]
+    },
+    "dimension_scores": [
+      {
+        "dimension": "requirement_match",
+        "score": 2,
+        "rationale": "The schedule failed to meet the fundamental requirement of not scheduling work after a deadline, violating this for all three tasks (Networks worksheet, ML assignment, Reading review). The planner attempted to resolve the scheduling error for the reading review but still scheduled post-deadline work for all items."
+      },
+      {
+        "dimension": "deadline_safety",
+        "score": 1,
+        "rationale": "Deadline safety is extremely poor. The Networks worksheet (missed deadline) was scheduled on time Thursday, but the ML assignment (due Thursday evening) was only partially completed by the deadline (6/8 hours scheduled), requiring work until 23:00 and further work on subsequent days. The Reading Quiz review was scheduled after its Friday morning deadline."
+      },
+      {
+        "dimension": "workload_realism",
+        "score": 3,
+        "rationale": "The workload was spread across four days (including Saturday) to manage the low energy, which is realistic. However, the total estimated time for the ML assignment (7 hours scheduled vs. 8 hours estimated) suggests the workload might be underestimated or poorly distributed relative to the deadline."
+      },
+      {
+        "dimension": "academic_priority",
+        "score": 4,
+        "rationale": "The planner correctly prioritized the high-weight Machine Learning assignment due today over the low-weight reading review. The missed Networks worksheet was also correctly prioritized immediately after classes on Thursday."
+      },
+      {
+        "dimension": "wellbeing_balance",
+        "score": 3,
+        "rationale": "The planner respected the two-block limit per day for most of the schedule, but the necessary compromise to meet the Thursday deadline resulted in a 23:00 finish time, violating the preferred 21:00 cutoff. This is a necessary strain given the immediate deadlines."
+      },
+      {
+        "dimension": "risk_resilience",
+        "score": 2,
+        "rationale": "The schedule has very low resilience. It relies on the 6 hours scheduled Thursday being sufficient for the 8-hour task, and it schedules post-deadline work for all items, indicating a lack of buffer or contingency planning for the low-energy state."
+      }
+    ],
+    "strengths": [
+      "Correctly identified and prioritized the missed Networks worksheet immediately after classes on Thursday.",
+      "Successfully moved the Software Engineering reading quiz review to Thursday evening to meet the Friday morning deadline, correcting a major scheduling flaw from the initial attempt.",
+      "Adhered to the two-block-per-day constraint for the initial high-pressure day (Thursday)."
+    ],
+    "weaknesses": [
+      "Failed to prevent scheduling work after the hard deadline for all three tasks, resulting in a critical failure in deadline safety.",
+      "The Machine Learning assignment (25% weight) was only partially scheduled before its deadline (6/8 hours), requiring work until 23:00 Thursday and further work on Saturday.",
+      "The final 1.5 hours of the reading review were scheduled after the quiz, representing inefficient use of time."
+    ],
+    "comparison_notes": [
+      "This schedule shows significant improvement in handling the reading quiz review timing compared to previous attempts, moving it before the deadline.",
+      "The planner accepted a late finish (23:00) on Thursday to meet the ML assignment deadline, which was a necessary compromise but strains the wellbeing constraint.",
+      "The fundamental issue of scheduling work after deadlines persists, indicating a systemic difficulty in balancing immediate urgency with absolute time constraints."
+    ],
+    "recommendation": "The planner must strictly enforce that work blocks only occur before task deadlines. For tasks with uncertain estimates (like the ML assignment), if the deadline is imminent, the planner should either schedule the maximum estimate (8 hours) today, accepting the late finish, or clearly state that only a partial submission is possible by the deadline. The post-deadline scheduling of the reading review must be eliminated."
+  },
+  "usage": {
+    "callCount": 19,
+    "promptTokens": 87692,
+    "completionTokens": 18845,
+    "totalTokens": 106537,
+    "estimatedCostUsd": 0.016309,
+    "calls": [
+      {
+        "id": "1d335bf9-4a6a-430a-89c0-1a69348de886",
+        "schemaName": "interpreter_output",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:20.452Z",
+        "completedAt": "2026-06-04T14:37:24.154Z",
+        "durationMs": 3702,
+        "promptChars": 4182,
+        "completionChars": 3337,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 996,
+        "completionTokens": 1104,
+        "totalTokens": 2100,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000541
+      },
+      {
+        "id": "c7806d19-92b2-4279-8a7f-30243fc86817",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:24.155Z",
+        "completedAt": "2026-06-04T14:37:27.947Z",
+        "durationMs": 3792,
+        "promptChars": 7133,
+        "completionChars": 4164,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 1985,
+        "completionTokens": 978,
+        "totalTokens": 2963,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.00059
+      },
+      {
+        "id": "84ffd675-a436-4c4e-aee7-5c1e88d554c4",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:24.155Z",
+        "completedAt": "2026-06-04T14:37:28.280Z",
+        "durationMs": 4125,
+        "promptChars": 7159,
+        "completionChars": 4137,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 1979,
+        "completionTokens": 973,
+        "totalTokens": 2952,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000587
+      },
+      {
+        "id": "500339a9-98b7-4925-82d0-4f0a308f4317",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:24.155Z",
+        "completedAt": "2026-06-04T14:37:28.345Z",
+        "durationMs": 4190,
+        "promptChars": 8141,
+        "completionChars": 3935,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2219,
+        "completionTokens": 1004,
+        "totalTokens": 3223,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000624
+      },
+      {
+        "id": "e3f05ea7-54a9-4325-a1ac-f1c1b3f37c40",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:24.154Z",
+        "completedAt": "2026-06-04T14:37:28.352Z",
+        "durationMs": 4198,
+        "promptChars": 7629,
+        "completionChars": 4241,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2067,
+        "completionTokens": 1071,
+        "totalTokens": 3138,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000635
+      },
+      {
+        "id": "0b54e132-20c1-4cfa-9072-0f17e3d9f392",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:24.155Z",
+        "completedAt": "2026-06-04T14:37:28.799Z",
+        "durationMs": 4644,
+        "promptChars": 7205,
+        "completionChars": 4757,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 1985,
+        "completionTokens": 1069,
+        "totalTokens": 3054,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000626
+      },
+      {
+        "id": "99659f6a-26a4-487c-a769-bf44f365c605",
+        "schemaName": "calendar_proposal",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:28.799Z",
+        "completedAt": "2026-06-04T14:37:35.622Z",
+        "durationMs": 6823,
+        "promptChars": 31308,
+        "completionChars": 7334,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 7608,
+        "completionTokens": 2126,
+        "totalTokens": 9734,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001611
+      },
+      {
+        "id": "01c214d2-c732-4298-b4f3-1e0db693d34a",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:35.622Z",
+        "completedAt": "2026-06-04T14:37:38.232Z",
+        "durationMs": 2610,
+        "promptChars": 18296,
+        "completionChars": 1942,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5048,
+        "completionTokens": 492,
+        "totalTokens": 5540,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000702
+      },
+      {
+        "id": "80392918-be48-4bb5-b3e4-196920b37b9c",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:35.622Z",
+        "completedAt": "2026-06-04T14:37:38.283Z",
+        "durationMs": 2661,
+        "promptChars": 17514,
+        "completionChars": 2408,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4775,
+        "completionTokens": 580,
+        "totalTokens": 5355,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.00071
+      },
+      {
+        "id": "21bf14ea-9721-423e-aa41-260f8a55871c",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:35.622Z",
+        "completedAt": "2026-06-04T14:37:38.590Z",
+        "durationMs": 2968,
+        "promptChars": 18090,
+        "completionChars": 2796,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4963,
+        "completionTokens": 687,
+        "totalTokens": 5650,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000771
+      },
+      {
+        "id": "53eb7b00-4419-4e6c-b17a-460a843d5493",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:35.622Z",
+        "completedAt": "2026-06-04T14:37:38.671Z",
+        "durationMs": 3049,
+        "promptChars": 17517,
+        "completionChars": 2576,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4788,
+        "completionTokens": 638,
+        "totalTokens": 5426,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000734
+      },
+      {
+        "id": "d2078baf-744f-4175-bb15-dd39e7f7a86b",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:35.623Z",
+        "completedAt": "2026-06-04T14:37:38.997Z",
+        "durationMs": 3374,
+        "promptChars": 18182,
+        "completionChars": 3465,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4879,
+        "completionTokens": 814,
+        "totalTokens": 5693,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000814
+      },
+      {
+        "id": "5f40329a-b356-4e31-b950-0b8b5db2ac88",
+        "schemaName": "calendar_proposal",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:38.998Z",
+        "completedAt": "2026-06-04T14:37:47.596Z",
+        "durationMs": 8598,
+        "promptChars": 11727,
+        "completionChars": 9680,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 2933,
+        "completionTokens": 2692,
+        "totalTokens": 5625,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.00137
+      },
+      {
+        "id": "dd520d76-bbe4-4243-b59d-e678145ca9a0",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:47.597Z",
+        "completedAt": "2026-06-04T14:37:50.540Z",
+        "durationMs": 2943,
+        "promptChars": 20745,
+        "completionChars": 2467,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5645,
+        "completionTokens": 613,
+        "totalTokens": 6258,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.00081
+      },
+      {
+        "id": "412a4c4b-51f0-4733-b572-a9ff6d24b029",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:47.597Z",
+        "completedAt": "2026-06-04T14:37:50.579Z",
+        "durationMs": 2982,
+        "promptChars": 19966,
+        "completionChars": 2813,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5385,
+        "completionTokens": 696,
+        "totalTokens": 6081,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000817
+      },
+      {
+        "id": "d7836dd2-f512-4a97-ada1-8c1ae2193b22",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:47.597Z",
+        "completedAt": "2026-06-04T14:37:50.685Z",
+        "durationMs": 3088,
+        "promptChars": 20631,
+        "completionChars": 2818,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5476,
+        "completionTokens": 729,
+        "totalTokens": 6205,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000839
+      },
+      {
+        "id": "67ac4522-075d-4361-8890-595c20744cbb",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:47.597Z",
+        "completedAt": "2026-06-04T14:37:51.590Z",
+        "durationMs": 3993,
+        "promptChars": 19963,
+        "completionChars": 3394,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5372,
+        "completionTokens": 837,
+        "totalTokens": 6209,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000872
+      },
+      {
+        "id": "d8ab43ad-c3a6-4521-8e1e-ec4b7b4498a3",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:47.596Z",
+        "completedAt": "2026-06-04T14:37:56.113Z",
+        "durationMs": 8517,
+        "promptChars": 20539,
+        "completionChars": 2861,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5560,
+        "completionTokens": 743,
+        "totalTokens": 6303,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000853
+      },
+      {
+        "id": "30102bdd-5cee-4166-a87e-4304cac60c38",
+        "schemaName": "schedule_evaluation",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:56.114Z",
+        "completedAt": "2026-06-04T14:38:00.449Z",
+        "durationMs": 4335,
+        "promptChars": 55201,
+        "completionChars": 4357,
+        "maxCompletionTokens": 8000,
+        "promptTokens": 14029,
+        "completionTokens": 999,
+        "totalTokens": 15028,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001803
+      }
+    ]
+  }
+}

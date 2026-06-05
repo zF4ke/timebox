@@ -3,6 +3,7 @@ dist-electron/
 dist-renderer/
 release/
 release-*/
+delivery/
 .vite/
 *.log
 .env

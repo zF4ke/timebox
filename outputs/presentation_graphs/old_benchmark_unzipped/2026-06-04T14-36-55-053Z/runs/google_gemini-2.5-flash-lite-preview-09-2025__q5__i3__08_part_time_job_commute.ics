@@ -1,0 +1,70 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:THU_WORK_1@timebox.local
+DTSTAMP:20260604T144134Z
+DTSTART:20260604T100000Z
+DTEND:20260604T120000Z
+SUMMARY:AASMA seminar paper reading and discussion points
+DESCRIPTION:Read the required paper and draft 5 discussion points for the seminar.\\n\\nReasoning: Scheduling the AASMA reading first to ensure completion before the Friday morning deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:THU_WORK_2@timebox.local
+DTSTAMP:20260604T144134Z
+DTSTART:20260604T120000Z
+DTEND:20260604T143000Z
+SUMMARY:Linear algebra homework
+DESCRIPTION:Complete the 3 hours of work required for the overdue homework assignment.\\n\\nReasoning: Scheduling the overdue homework immediately after T5\, reducing the duration slightly to 2.5h to create a 30-minute buffer before the required 16:15 departure time for the evening shift.
+END:VEVENT
+BEGIN:VEVENT
+UID:THU_WORK_3@timebox.local
+DTSTAMP:20260604T144134Z
+DTSTART:20260604T170000Z
+DTEND:20260604T193000Z
+SUMMARY:Web development project: Implement authentication
+DESCRIPTION:Implement the core authentication logic for the web project.\\n\\nReasoning: Starting the main web development task after the fixed work commitment\, utilizing available evening focus time.
+END:VEVENT
+BEGIN:VEVENT
+UID:FRI_WORK_1@timebox.local
+DTSTAMP:20260604T144134Z
+DTSTART:20260605T100000Z
+DTEND:20260605T120000Z
+SUMMARY:Web development project: Implement authentication
+DESCRIPTION:Continue implementing the core authentication logic for the web project.\\n\\nReasoning: Continuing the highest priority web task (T1) during the student's preferred focus window.
+END:VEVENT
+BEGIN:VEVENT
+UID:FRI_WORK_2@timebox.local
+DTSTAMP:20260604T144134Z
+DTSTART:20260605T120000Z
+DTEND:20260605T150000Z
+SUMMARY:Web development project: Polish CSS
+DESCRIPTION:Polish the CSS styling and ensure responsiveness for the web project.\\n\\nReasoning: Allocating the full 3 hours for the CSS polishing task (T2) immediately following T1 work.
+END:VEVENT
+BEGIN:VEVENT
+UID:SAT_WORK_1@timebox.local
+DTSTAMP:20260604T144134Z
+DTSTART:20260606T090000Z
+DTEND:20260606T103000Z
+SUMMARY:Web development project: Implement authentication
+DESCRIPTION:Final review and debugging of authentication implementation.\\n\\nReasoning: Allocating the remaining time needed for T1 to ensure authentication is fully stable before the deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:SAT_WORK_2@timebox.local
+DTSTAMP:20260604T144134Z
+DTSTART:20260606T103000Z
+DTEND:20260606T123000Z
+SUMMARY:Web development project: Write README
+DESCRIPTION:Write the final README documentation for the project submission.\\n\\nReasoning: Completing the documentation task (T3) on Saturday afternoon.
+END:VEVENT
+BEGIN:VEVENT
+UID:SAT_WORK_3@timebox.local
+DTSTAMP:20260604T144134Z
+DTSTART:20260606T130000Z
+DTEND:20260606T133000Z
+SUMMARY:Linear algebra homework
+DESCRIPTION:Complete the remaining 0.5 hours for the overdue homework assignment.\\n\\nReasoning: Adding the remaining 0.5 hours for the overdue Linear Algebra homework (T4) to ensure it is fully completed.
+END:VEVENT
+END:VCALENDAR

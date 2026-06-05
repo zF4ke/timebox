@@ -10,7 +10,7 @@ export interface AppConfig {
   evaluatorModel?: string;
 }
 
-const DEFAULT_MODEL = "nvidia/nemotron-3-super-120b-a12b:free";
+const DEFAULT_MODEL = "google/gemini-2.5-flash-lite-preview-09-2025";
 const DEFAULT_QUORUM = 5;
 const DEFAULT_MAX_ITERATIONS = 3;
 

@@ -1,0 +1,1961 @@
+{
+  "runId": "1cd9c332-7273-4ed8-8258-57e38c50c8be",
+  "createdAt": "2026-06-04T14:43:34.697Z",
+  "request": {
+    "userInput": "Create a study plan for this week.\r\n\r\nFixed commitments:\r\n- Monday 09:00-12:00 classes\r\n- Monday 18:00-20:00 dentist and travel\r\n- Tuesday 10:00-16:00 lab sessions\r\n- Wednesday 13:00-17:00 part-time work\r\n- Thursday 09:00-11:00 classes\r\n- Friday 15:00-18:00 family event\r\n\r\nTasks:\r\n- Computer graphics assignment due Friday at 23:59. I need around 7 hours and I have not started.\r\n- Security quiz on Thursday morning. I need 3 hours of revision.\r\n- AASMA reflection due Wednesday night. It should take 90 minutes.\r\n- Buy materials for a weekend workshop. It takes about 1 hour and must be done before Saturday.\r\n\r\nI prefer working between 14:00 and 21:00 and I want the plan to respect the fixed commitments.",
+    "quorum": 5,
+    "maxIterations": 3,
+    "timezone": "Europe/Lisbon",
+    "model": "google/gemini-3.1-flash-lite-preview",
+    "evaluatorModel": "google/gemini-2.5-flash-lite-preview-09-2025"
+  },
+  "stopReason": "Accepted by 5/5 agents with no critical critiques.",
+  "interpreterOutput": {
+    "current_date": "2026-06-04T14:43:34.697Z",
+    "planning_window": {
+      "start_date": "2026-06-04T14:43:34.697Z",
+      "end_date": "2026-06-07T23:59:59Z",
+      "reason": "Planning for the remainder of the current week to meet upcoming deadlines."
+    },
+    "inferred_availability": [
+      {
+        "date_range": "2026-06-04 to 2026-06-07",
+        "assumption": "Student prefers working between 14:00 and 21:00, excluding fixed commitments.",
+        "estimated_available_hours_per_day": 5,
+        "confidence": "high"
+      }
+    ],
+    "fixed_commitments": [
+      "Monday 09:00-12:00 classes",
+      "Monday 18:00-20:00 dentist and travel",
+      "Tuesday 10:00-16:00 lab sessions",
+      "Wednesday 13:00-17:00 part-time work",
+      "Thursday 09:00-11:00 classes",
+      "Friday 15:00-18:00 family event"
+    ],
+    "student_state": {
+      "sleep": "unknown",
+      "energy": "unknown",
+      "confidence": "unknown"
+    },
+    "tasks": [
+      {
+        "task_id": "t1",
+        "name": "Computer graphics assignment",
+        "raw_mentions": [
+          "Computer graphics assignment due Friday at 23:59"
+        ],
+        "inferred_deadline": "2026-06-05T23:59:00Z",
+        "uncertainties": [
+          "7 hours of work required"
+        ]
+      },
+      {
+        "task_id": "t2",
+        "name": "Security quiz revision",
+        "raw_mentions": [
+          "Security quiz on Thursday morning"
+        ],
+        "inferred_deadline": "2026-06-05T09:00:00Z",
+        "uncertainties": [
+          "3 hours of revision required"
+        ]
+      },
+      {
+        "task_id": "t3",
+        "name": "AASMA reflection",
+        "raw_mentions": [
+          "AASMA reflection due Wednesday night"
+        ],
+        "inferred_deadline": "2026-06-04T23:59:00Z",
+        "uncertainties": [
+          "90 minutes of work required"
+        ]
+      },
+      {
+        "task_id": "t4",
+        "name": "Buy workshop materials",
+        "raw_mentions": [
+          "Buy materials for a weekend workshop"
+        ],
+        "inferred_deadline": "2026-06-06T23:59:00Z",
+        "uncertainties": [
+          "1 hour of work required"
+        ]
+      }
+    ],
+    "assumptions": [
+      "The student prefers to avoid work after 21:00.",
+      "The student is available to work on tasks during the afternoon and evening hours outside of fixed commitments.",
+      "The student will prioritize the AASMA reflection for completion today."
+    ]
+  },
+  "agentViews": [
+    {
+      "agent": "Deadline Agent",
+      "task_views": [
+        {
+          "task_id": "t1",
+          "task_name": "Computer graphics assignment",
+          "assessment": "Critical. This task is high-effort and requires immediate scheduling to meet the Friday deadline without late-night stress.",
+          "concerns": [
+            "High total duration relative to remaining time",
+            "Risk of deadline pressure on Friday"
+          ],
+          "recommendations": [
+            "Start immediately after finishing the AASMA reflection",
+            "Allocate 3.5 hours on Wednesday and 3.5 hours on Thursday to ensure completion before Friday"
+          ],
+          "estimated_duration_hours": 7,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Setup development environment",
+            "Implement core rendering logic",
+            "Finalize report and documentation"
+          ]
+        },
+        {
+          "task_id": "t2",
+          "task_name": "Security quiz revision",
+          "assessment": "Urgent. The deadline is Thursday morning, meaning all revision must be completed by Wednesday evening.",
+          "concerns": [
+            "Very tight window for completion",
+            "Potential conflict with other high-priority tasks"
+          ],
+          "recommendations": [
+            "Dedicate the entire available block on Wednesday evening to this revision",
+            "Review key security concepts and lecture notes"
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review lecture slides",
+            "Practice quiz questions",
+            "Summarize key security protocols"
+          ]
+        },
+        {
+          "task_id": "t3",
+          "task_name": "AASMA reflection",
+          "assessment": "High priority. Must be completed today to clear the schedule for more intensive tasks.",
+          "concerns": [
+            "Immediate deadline tonight"
+          ],
+          "recommendations": [
+            "Complete this task as the first priority today"
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Draft reflection points",
+            "Review AASMA course materials",
+            "Finalize and submit"
+          ]
+        },
+        {
+          "task_id": "t4",
+          "task_name": "Buy workshop materials",
+          "assessment": "Low urgency. Can be completed after the major academic deadlines are met.",
+          "concerns": [
+            "None, provided it is done before the weekend"
+          ],
+          "recommendations": [
+            "Schedule for Friday morning or early afternoon"
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Check material list",
+            "Visit store"
+          ]
+        }
+      ],
+      "overall_comment": "The schedule is extremely tight. The AASMA reflection must be prioritized today, followed by the Security quiz revision on Wednesday to meet the Thursday morning deadline. The Computer graphics assignment is the largest risk and requires consistent effort across Wednesday and Thursday to avoid a last-minute failure."
+    },
+    {
+      "agent": "Grade Agent",
+      "task_views": [
+        {
+          "task_id": "t1",
+          "task_name": "Computer graphics assignment",
+          "assessment": "High-impact academic deliverable. Requires significant focus and should be prioritized immediately after immediate deadlines.",
+          "concerns": [
+            "Late start on a 7-hour assignment poses a high risk to grade quality.",
+            "Compressed timeline may lead to rushed work."
+          ],
+          "recommendations": [
+            "Allocate dedicated blocks on Wednesday and Thursday.",
+            "Break into smaller modules to ensure steady progress."
+          ],
+          "estimated_duration_hours": 7,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Setup development environment",
+            "Implement core graphics algorithms",
+            "Debugging and refinement",
+            "Final documentation"
+          ]
+        },
+        {
+          "task_id": "t2",
+          "task_name": "Security quiz revision",
+          "assessment": "Critical for exam performance. Must be completed before the Thursday morning deadline.",
+          "concerns": [
+            "Tight turnaround time given the current date.",
+            "Risk of burnout if combined with other heavy tasks."
+          ],
+          "recommendations": [
+            "Prioritize active recall techniques.",
+            "Focus on high-weight topics identified in class."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review lecture notes",
+            "Practice quiz questions",
+            "Summarize key security concepts"
+          ]
+        },
+        {
+          "task_id": "t3",
+          "task_name": "AASMA reflection",
+          "assessment": "Important for course participation grade. Needs to be completed by Wednesday night.",
+          "concerns": [
+            "Short deadline requires immediate attention.",
+            "Potential to distract from higher-weight technical tasks."
+          ],
+          "recommendations": [
+            "Complete this task first to clear the schedule for technical assignments."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Draft reflection points",
+            "Write and edit response"
+          ]
+        },
+        {
+          "task_id": "t4",
+          "task_name": "Buy workshop materials",
+          "assessment": "Low academic impact compared to coursework. Should be treated as a secondary priority.",
+          "concerns": [
+            "Should not interfere with study time for the graphics assignment or security quiz."
+          ],
+          "recommendations": [
+            "Schedule during a transition period or after academic tasks are completed."
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Identify required items",
+            "Visit store"
+          ]
+        }
+      ],
+      "overall_comment": "The schedule is tight. I have prioritized the AASMA reflection and Security quiz revision as they have the most immediate deadlines. The Computer graphics assignment is the highest-effort task and must be protected in the schedule to ensure academic success. Low-value tasks like buying materials should only be addressed once academic priorities are secured."
+    },
+    {
+      "agent": "Effort Agent",
+      "task_views": [
+        {
+          "task_id": "t1",
+          "task_name": "Computer graphics assignment",
+          "assessment": "The 7-hour estimate is likely optimistic for a cold start; I recommend splitting this into three distinct sessions to maintain focus.",
+          "concerns": [
+            "High risk of deadline pressure given the Friday due date.",
+            "Requires significant cognitive load which may be difficult to sustain in one block."
+          ],
+          "recommendations": [
+            "Split into 2-hour, 2-hour, and 3-hour sessions.",
+            "Prioritize core functionality first to ensure a baseline submission."
+          ],
+          "estimated_duration_hours": 7,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Setup project environment and basic structure",
+            "Implement core rendering logic",
+            "Debugging and final polish"
+          ]
+        },
+        {
+          "task_id": "t2",
+          "task_name": "Security quiz revision",
+          "assessment": "3 hours is a reasonable duration for focused revision, but needs to be completed before the Thursday morning deadline.",
+          "concerns": [
+            "Deadline is very tight, requiring completion before Thursday morning classes.",
+            "Risk of burnout if combined with other heavy tasks."
+          ],
+          "recommendations": [
+            "Focus on high-yield topics first.",
+            "Use active recall techniques rather than passive reading."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review lecture notes and slides",
+            "Practice past quiz questions",
+            "Summarize key security protocols"
+          ]
+        },
+        {
+          "task_id": "t3",
+          "task_name": "AASMA reflection",
+          "assessment": "90 minutes is a realistic estimate for a reflection task.",
+          "concerns": [
+            "Must be completed today to meet the Wednesday night deadline."
+          ],
+          "recommendations": [
+            "Complete in one single block to maintain flow of thought."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Draft initial thoughts",
+            "Refine and edit content",
+            "Final review"
+          ]
+        },
+        {
+          "task_id": "t4",
+          "task_name": "Buy workshop materials",
+          "assessment": "1 hour is sufficient for this errand, including travel time.",
+          "concerns": [
+            "Needs to be scheduled around other academic priorities."
+          ],
+          "recommendations": [
+            "Combine with a trip out to minimize travel time."
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Check inventory list",
+            "Travel to store",
+            "Purchase items"
+          ]
+        }
+      ],
+      "overall_comment": "The student's schedule is tight. Prioritizing the AASMA reflection today is essential. The Computer graphics assignment is the most significant time sink and must be broken down to avoid last-minute stress."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "task_views": [
+        {
+          "task_id": "t1",
+          "task_name": "Computer graphics assignment",
+          "assessment": "The workload is heavy and requires significant focus. Given the deadline, it is critical to avoid cramming.",
+          "concerns": [
+            "Seven hours of intensive work is difficult to sustain in a single block.",
+            "Risk of burnout if attempted in one sitting."
+          ],
+          "recommendations": [
+            "Break the assignment into smaller, manageable chunks.",
+            "Ensure work ends by 21:00 to maintain a sustainable pace."
+          ],
+          "estimated_duration_hours": 7,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Set up project environment",
+            "Implement core rendering logic",
+            "Debug and refine output",
+            "Final documentation"
+          ]
+        },
+        {
+          "task_id": "t2",
+          "task_name": "Security quiz revision",
+          "assessment": "Revision is cognitively demanding. Spacing this out is essential for retention and stress management.",
+          "concerns": [
+            "The deadline is very tight, creating potential for high stress.",
+            "Late-night study sessions for this task should be avoided."
+          ],
+          "recommendations": [
+            "Use active recall techniques to maximize efficiency.",
+            "Prioritize high-yield topics to reduce total study time."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review lecture notes",
+            "Practice quiz questions",
+            "Summarize key security concepts"
+          ]
+        },
+        {
+          "task_id": "t3",
+          "task_name": "AASMA reflection",
+          "assessment": "This is a manageable task, but it should be completed promptly to clear the schedule for more intensive work.",
+          "concerns": [
+            "None, provided it is completed within the preferred working hours."
+          ],
+          "recommendations": [
+            "Complete this early to reduce cognitive load for the rest of the week."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Draft initial thoughts",
+            "Refine and edit reflection"
+          ]
+        },
+        {
+          "task_id": "t4",
+          "task_name": "Buy workshop materials",
+          "assessment": "This is a low-intensity task that can serve as a break from academic work.",
+          "concerns": [
+            "None."
+          ],
+          "recommendations": [
+            "Combine this with a walk or commute to integrate movement into the day."
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Identify required items",
+            "Visit store"
+          ]
+        }
+      ],
+      "overall_comment": "The proposed schedule is tight but achievable if work is distributed evenly. I have prioritized finishing the reflection early to reduce stress. Please ensure that you stop working by 21:00 each night to protect your sleep and recovery time. If you feel overwhelmed, prioritize the assignment and quiz over the workshop materials."
+    },
+    {
+      "agent": "Risk Agent",
+      "task_views": [
+        {
+          "task_id": "t1",
+          "task_name": "Computer graphics assignment",
+          "assessment": "High risk due to zero progress and significant time requirement relative to the remaining window.",
+          "concerns": [
+            "No progress made yet",
+            "High likelihood of scope creep",
+            "Insufficient buffer for debugging or technical issues"
+          ],
+          "recommendations": [
+            "Start immediate discovery phase to identify technical blockers",
+            "Break into smaller implementation milestones",
+            "Allocate contingency time for late-stage debugging"
+          ],
+          "estimated_duration_hours": 7,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Environment setup and requirements analysis",
+            "Core implementation",
+            "Testing and refinement"
+          ]
+        },
+        {
+          "task_id": "t2",
+          "task_name": "Security quiz revision",
+          "assessment": "Critical deadline pressure; revision must be completed before the Thursday morning class.",
+          "concerns": [
+            "Tight turnaround time",
+            "Risk of cognitive fatigue impacting retention",
+            "No buffer for last-minute clarification"
+          ],
+          "recommendations": [
+            "Prioritize high-yield topics",
+            "Use active recall methods to maximize efficiency",
+            "Complete revision by Wednesday evening"
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review lecture notes",
+            "Practice quiz questions",
+            "Final summary review"
+          ]
+        },
+        {
+          "task_id": "t3",
+          "task_name": "AASMA reflection",
+          "assessment": "Immediate priority; deadline is tonight.",
+          "concerns": [
+            "Very short deadline",
+            "Potential for procrastination",
+            "Risk of rushing quality"
+          ],
+          "recommendations": [
+            "Complete immediately to clear the queue",
+            "Draft in a single focused session"
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Outline key reflection points",
+            "Draft content",
+            "Final review and submission"
+          ]
+        },
+        {
+          "task_id": "t4",
+          "task_name": "Buy workshop materials",
+          "assessment": "Low complexity but requires physical travel; risk of scheduling conflict.",
+          "concerns": [
+            "Travel time variability",
+            "Potential for store stock issues"
+          ],
+          "recommendations": [
+            "Check store inventory online before leaving",
+            "Combine with other errands to save time"
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Verify material list",
+            "Check store availability",
+            "Travel and purchase"
+          ]
+        }
+      ],
+      "overall_comment": "The current plan is highly fragile due to the late start on the Computer graphics assignment and the immediate deadline for the AASMA reflection. There is insufficient contingency time for technical failures. I recommend prioritizing the AASMA reflection and Security quiz revision immediately to clear the path for the Computer graphics assignment."
+    }
+  ],
+  "calendarVersions": [
+    {
+      "calendar": {
+        "calendar_version": 1,
+        "planning_window": {
+          "start_date": "2026-06-04T14:43:34.697Z",
+          "end_date": "2026-06-07T23:59:59Z",
+          "reason": "Planning for the remainder of the current week to meet upcoming deadlines."
+        },
+        "overall_strategy": [
+          "Prioritize the AASMA reflection immediately to meet the Wednesday night deadline.",
+          "Complete the Security quiz revision by Wednesday evening to prepare for the Thursday morning quiz.",
+          "Distribute the Computer graphics assignment workload across Wednesday and Thursday to ensure completion before the Friday deadline.",
+          "Schedule the workshop materials purchase for Friday morning to avoid academic conflicts."
+        ],
+        "days": [
+          {
+            "date": "2026-06-04",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Focus on finishing the AASMA reflection and starting the Computer graphics assignment after work.",
+            "blocks": [
+              {
+                "id": "b1",
+                "task_id": "t3",
+                "task_name": "AASMA reflection",
+                "type": "work",
+                "start": "2026-06-04T17:00:00Z",
+                "end": "2026-06-04T18:30:00Z",
+                "duration_hours": 1.5,
+                "description": "Complete the AASMA reflection.",
+                "reasoning": "This is the highest priority task due to the immediate deadline tonight."
+              },
+              {
+                "id": "b2",
+                "task_id": "t1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-04T18:30:00Z",
+                "end": "2026-06-04T21:00:00Z",
+                "duration_hours": 2.5,
+                "description": "Begin the Computer graphics assignment.",
+                "reasoning": "Starting early is critical to manage the 7-hour workload before the Friday deadline."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Thursday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Complete the remaining Computer graphics assignment work after morning classes.",
+            "blocks": [
+              {
+                "id": "b3",
+                "task_id": "t1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-05T14:00:00Z",
+                "end": "2026-06-05T18:30:00Z",
+                "duration_hours": 4.5,
+                "description": "Continue and finalize the Computer graphics assignment.",
+                "reasoning": "This block completes the required effort for the assignment before the Friday deadline."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Friday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Complete the workshop materials purchase before the family event.",
+            "blocks": [
+              {
+                "id": "b4",
+                "task_id": "t4",
+                "task_name": "Buy workshop materials",
+                "type": "work",
+                "start": "2026-06-06T14:00:00Z",
+                "end": "2026-06-06T15:00:00Z",
+                "duration_hours": 1,
+                "description": "Purchase materials for the weekend workshop.",
+                "reasoning": "This is a low-priority task that fits well before the afternoon commitment."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "High workload for Computer graphics assignment versus limited time.",
+            "resolution": "Split the assignment into two sessions to ensure steady progress without burnout."
+          },
+          {
+            "conflict": "Security quiz revision deadline versus AASMA reflection deadline.",
+            "resolution": "Prioritize the AASMA reflection on Wednesday to clear the schedule for the quiz revision."
+          }
+        ],
+        "known_weaknesses": [
+          "The Computer graphics assignment schedule is aggressive and leaves little room for technical errors.",
+          "The Security quiz revision is compressed into a very tight window."
+        ],
+        "changes_from_previous": [],
+        "unresolved_critiques": [
+          {
+            "agent": "Risk Agent",
+            "severity": "major",
+            "issue": "The Computer graphics assignment has no buffer for technical issues.",
+            "planner_response": "The schedule is constrained by the student's fixed commitments and the late start; I have prioritized the assignment to maximize available time."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The Security quiz revision task is completely missing from the calendar, despite having a deadline of Thursday morning.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Security quiz revision"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Allocate at least 3 hours for Security quiz revision on Wednesday, June 4th, before the deadline on Thursday morning."
+            },
+            {
+              "issue": "The Computer graphics assignment is scheduled to finish on June 5th at 18:30, which is safe, but the lack of time for the Security quiz revision makes the current schedule infeasible.",
+              "severity": "major",
+              "affected_tasks": [
+                "Computer graphics assignment",
+                "Security quiz revision"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Re-allocate time from the Computer graphics assignment on Wednesday to accommodate the Security quiz revision, and extend the Computer graphics assignment work into Thursday if necessary."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Prioritizing AASMA reflection on Wednesday",
+            "Splitting Computer graphics assignment into two sessions"
+          ],
+          "overall_comment": "The calendar is rejected because it completely omits the Security quiz revision, which has a critical deadline of Thursday morning. The student cannot meet their academic obligations without this task being scheduled. Furthermore, the current plan for the Computer graphics assignment is aggressive and must be balanced against the urgent need for quiz preparation."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The Security quiz revision has been completely omitted from the schedule, despite being a critical academic requirement for a Thursday morning exam.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Security quiz revision"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Allocate at least 3 hours for Security quiz revision on Wednesday evening, potentially by reducing the initial session of the Computer graphics assignment."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Prioritizing the AASMA reflection to meet the immediate deadline.",
+            "Splitting the Computer graphics assignment into two sessions to manage the heavy workload."
+          ],
+          "overall_comment": "The current schedule is unacceptable because it ignores the Security quiz revision entirely. Failing to prepare for an exam in favor of a coursework assignment is a major academic risk. The schedule must be adjusted to ensure the exam revision is completed before the Thursday morning deadline."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "issue": "The Security quiz revision is entirely missing from the calendar blocks, despite being a high-priority task with a deadline on Thursday morning.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Security quiz revision"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Allocate a 3-hour block for Security quiz revision on Wednesday evening, potentially by shifting the Computer graphics assignment start time or duration."
+            },
+            {
+              "issue": "The Computer graphics assignment block on Thursday is 4.5 hours long, which is excessive for a single session and risks cognitive fatigue.",
+              "severity": "major",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Break the 4.5-hour block into two smaller sessions with a break in between to maintain productivity."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The student's schedule is constrained by fixed commitments, necessitating an aggressive approach to the Computer graphics assignment."
+          ],
+          "overall_comment": "The current plan is not viable because it completely omits the Security quiz revision, which is due Thursday morning. Additionally, the 4.5-hour block for the Computer graphics assignment is prone to diminishing returns and should be split."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "issue": "The Security quiz revision task is completely missing from the calendar, which creates a high-stress situation for the Thursday morning quiz.",
+              "severity": "major",
+              "affected_tasks": [
+                "Security quiz revision"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Add a 3-hour block for Security quiz revision on Wednesday evening, potentially by shortening the Computer graphics assignment session if necessary to maintain a 21:00 finish time."
+            },
+            {
+              "issue": "The Computer graphics assignment block on Thursday is 4.5 hours long without a scheduled break, which is cognitively heavy and risks burnout.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Split the 4.5-hour block into two shorter sessions to allow for mental recovery."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Splitting the Computer graphics assignment into two sessions to manage the workload.",
+            "Prioritizing the AASMA reflection to clear the schedule."
+          ],
+          "overall_comment": "The current plan is rejected because it completely omits the Security quiz revision, which is a critical task for the student's academic success and will cause significant stress. Additionally, the long, unbroken block for the Computer graphics assignment on Thursday is not sustainable. Please include the revision time and break up the long work session."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The Security quiz revision is entirely missing from the calendar blocks, despite being a critical deadline for Thursday morning.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Security quiz revision"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Add a 3-hour block for Security quiz revision on Wednesday evening, potentially by shifting the Computer graphics assignment start time or duration."
+            },
+            {
+              "issue": "The Computer graphics assignment has no contingency buffer for technical debugging, which is a high-risk assumption for a 7-hour coding task.",
+              "severity": "major",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Include at least 90 minutes of dedicated buffer time before the Friday deadline for troubleshooting."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Prioritizing the AASMA reflection on Wednesday to clear the schedule for subsequent tasks."
+          ],
+          "overall_comment": "The plan is currently non-viable because the Security quiz revision is completely absent from the schedule, creating a critical risk of failure for the Thursday morning quiz. Furthermore, the Computer graphics assignment remains fragile with no buffer for technical issues. The plan must be revised to include the missing revision time and explicit contingency buffers."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "deadline_task_unscheduled",
+            "message": "t2 has a deadline inside the planning window but no scheduled work block.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 0,
+      "hasCritical": true
+    },
+    {
+      "calendar": {
+        "calendar_version": 2,
+        "planning_window": {
+          "start_date": "2026-06-04T00:00:00Z",
+          "end_date": "2026-06-06T23:59:00Z",
+          "reason": "The planning window covers the immediate deadlines for the reflection, quiz revision, and assignment."
+        },
+        "overall_strategy": [
+          "Prioritize the AASMA reflection to meet the Wednesday deadline.",
+          "Complete the Security quiz revision on Wednesday evening to prepare for the Thursday morning exam.",
+          "Distribute the Computer graphics assignment into shorter, manageable sessions to avoid fatigue and ensure completion by Thursday night.",
+          "Schedule the workshop materials purchase for Friday."
+        ],
+        "days": [
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "Focus on finishing the reflection and starting the quiz revision.",
+            "blocks": [
+              {
+                "id": "b1",
+                "task_id": "t3",
+                "task_name": "AASMA reflection",
+                "type": "work",
+                "start": "2026-06-04T09:00:00Z",
+                "end": "2026-06-04T10:30:00Z",
+                "duration_hours": 1.5,
+                "description": "Complete the AASMA reflection.",
+                "reasoning": "This task is due today and must be finished first."
+              },
+              {
+                "id": "b2",
+                "task_id": "t2",
+                "task_name": "Security quiz revision",
+                "type": "work",
+                "start": "2026-06-04T18:00:00Z",
+                "end": "2026-06-04T21:00:00Z",
+                "duration_hours": 3,
+                "description": "Review materials for the Security quiz.",
+                "reasoning": "This is critical for the exam tomorrow morning."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Friday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "Focus on completing the Computer graphics assignment in two sessions.",
+            "blocks": [
+              {
+                "id": "b3",
+                "task_id": "t1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-05T10:00:00Z",
+                "end": "2026-06-05T13:00:00Z",
+                "duration_hours": 3,
+                "description": "Work on the first half of the assignment.",
+                "reasoning": "Splitting the work prevents fatigue and allows for debugging."
+              },
+              {
+                "id": "b4",
+                "task_id": "t1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-05T15:00:00Z",
+                "end": "2026-06-05T18:00:00Z",
+                "duration_hours": 3,
+                "description": "Finalize the assignment.",
+                "reasoning": "Completing this before the deadline ensures submission."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Saturday",
+            "assumed_available_hours": 1,
+            "day_reasoning": "Complete the final remaining task.",
+            "blocks": [
+              {
+                "id": "b5",
+                "task_id": "t4",
+                "task_name": "Buy workshop materials",
+                "type": "work",
+                "start": "2026-06-06T10:00:00Z",
+                "end": "2026-06-06T11:00:00Z",
+                "duration_hours": 1,
+                "description": "Purchase materials for the workshop.",
+                "reasoning": "This is the last task to be completed."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Limited time for Security quiz revision.",
+            "resolution": "Scheduled the revision for Wednesday evening to ensure it is completed before the Thursday morning deadline."
+          },
+          {
+            "conflict": "Long duration of Computer graphics assignment.",
+            "resolution": "Split the assignment into two 3-hour sessions to maintain focus and avoid burnout."
+          }
+        ],
+        "known_weaknesses": [
+          "The schedule is tight and leaves little room for unexpected technical issues during the assignment."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Added Security quiz revision.",
+            "reason": "It was missing and is a critical deadline."
+          },
+          {
+            "change": "Split Computer graphics assignment into two sessions.",
+            "reason": "To improve focus and reduce cognitive fatigue."
+          }
+        ],
+        "unresolved_critiques": []
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The schedule successfully prioritizes the AASMA reflection for completion today.",
+            "The Security quiz revision is now correctly scheduled to finish before the Thursday morning deadline.",
+            "The Computer graphics assignment is split into manageable sessions to ensure completion before the Friday deadline."
+          ],
+          "overall_comment": "The calendar is well-structured and respects all critical deadlines. By front-loading the AASMA reflection and the Security quiz revision, the student is positioned to complete the Computer graphics assignment without excessive last-minute pressure. The plan is feasible and aligns with the requested constraints."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Computer graphics assignment is allocated 6 hours total, but the initial assessment identified a 7-hour requirement. The current plan risks an incomplete submission or poor quality.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Extend the second session on Thursday to 4 hours or add a final review block to ensure the full 7-hour requirement is met."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Prioritization of the AASMA reflection and Security quiz revision.",
+            "Splitting the Computer graphics assignment into two sessions to manage cognitive load."
+          ],
+          "overall_comment": "The schedule effectively prioritizes high-impact academic tasks. While I have concerns regarding the total time allocated for the Computer graphics assignment, the strategy of splitting the work is sound. Please ensure the final hour of the assignment is accounted for to protect the grade."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Computer graphics assignment is estimated at 7 hours total, but the current schedule only allocates 6 hours across two blocks.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Add an additional 1-hour block on the morning of the deadline or extend the existing blocks to ensure the full 7 hours are accounted for."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The student has split the Computer graphics assignment into two sessions as requested.",
+            "The student has prioritized the AASMA reflection and Security quiz revision appropriately."
+          ],
+          "overall_comment": "The schedule is well-structured and respects the student's preferences. The primary concern is the slight underestimation of the total time required for the Computer graphics assignment. Adding one hour of buffer or dedicated work time will ensure the student has sufficient time to complete the task without rushing."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The student has successfully split the Computer graphics assignment into two manageable sessions to prevent cognitive overload.",
+            "The schedule respects the 21:00 cutoff for work, which is essential for maintaining a healthy sleep cycle and reducing stress."
+          ],
+          "overall_comment": "This plan is well-structured and humane. By breaking the intensive Computer graphics assignment into two distinct sessions and ensuring all work concludes by 21:00, the schedule effectively balances academic requirements with the need for recovery. The prioritization of the AASMA reflection and Security quiz revision is logical and sustainable."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 2,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "issue": "The Computer graphics assignment is scheduled for 6 hours of work, but the initial assessment identified a 7-hour requirement. There is no buffer for the missing hour or for technical debugging.",
+              "severity": "major",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Allocate at least 8 hours total for the Computer graphics assignment to include a 1-hour buffer for debugging and the missing hour of effort."
+            },
+            {
+              "issue": "The plan assumes the Computer graphics assignment will be finished by the end of the day on 2026-06-05, but the deadline is 2026-06-05T23:59:00Z. The current schedule ends at 18:00, leaving no contingency for late-day technical failures.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Extend the final work block for the Computer graphics assignment to end closer to 21:00 to provide a safety window before the midnight deadline."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Prioritized AASMA reflection for immediate completion.",
+            "Split Computer graphics assignment into two sessions to manage cognitive load."
+          ],
+          "overall_comment": "While the plan addresses the immediate deadlines, it remains fragile. The Computer graphics assignment is under-scoped by one hour and lacks any contingency for technical issues. Furthermore, finishing the assignment at 18:00 on the deadline day leaves the student vulnerable to any final-hour submission or technical problems."
+        }
+      ],
+      "validation": {
+        "valid": true,
+        "violations": []
+      },
+      "approvals": 4,
+      "hasCritical": false
+    },
+    {
+      "calendar": {
+        "calendar_version": 3,
+        "planning_window": {
+          "start_date": "2026-06-04",
+          "end_date": "2026-06-06",
+          "reason": "Aligning task completion with upcoming academic deadlines."
+        },
+        "overall_strategy": [
+          "Complete the AASMA reflection immediately to meet the Wednesday deadline.",
+          "Prioritize the Security quiz revision to finish before the Thursday morning exam.",
+          "Allocate seven hours to the Computer graphics assignment by utilizing available time on Wednesday and Thursday.",
+          "Purchase workshop materials on Friday as planned."
+        ],
+        "days": [
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 7,
+            "day_reasoning": "Focusing on the AASMA reflection and starting the Computer graphics assignment.",
+            "blocks": [
+              {
+                "id": "b1",
+                "task_id": "t3",
+                "task_name": "AASMA reflection",
+                "type": "work",
+                "start": "2026-06-04T09:00:00Z",
+                "end": "2026-06-04T10:30:00Z",
+                "duration_hours": 1.5,
+                "description": "Complete the AASMA reflection.",
+                "reasoning": "Ensures the task is submitted before the end of the day."
+              },
+              {
+                "id": "b2",
+                "task_id": "t1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-04T11:00:00Z",
+                "end": "2026-06-04T14:00:00Z",
+                "duration_hours": 3,
+                "description": "Work on the first half of the assignment.",
+                "reasoning": "Starts the assignment early to manage the total workload."
+              },
+              {
+                "id": "b3",
+                "task_id": "t2",
+                "task_name": "Security quiz revision",
+                "type": "work",
+                "start": "2026-06-04T15:00:00Z",
+                "end": "2026-06-04T17:30:00Z",
+                "duration_hours": 2.5,
+                "description": "Review materials for the Security quiz.",
+                "reasoning": "Completes revision well before the Thursday morning exam."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Friday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Finalizing the Computer graphics assignment before the deadline.",
+            "blocks": [
+              {
+                "id": "b4",
+                "task_id": "t1",
+                "task_name": "Computer graphics assignment",
+                "type": "work",
+                "start": "2026-06-05T09:00:00Z",
+                "end": "2026-06-05T13:00:00Z",
+                "duration_hours": 4,
+                "description": "Complete the remaining four hours of the assignment.",
+                "reasoning": "Provides the necessary time to meet the seven-hour requirement and allows for debugging."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Saturday",
+            "assumed_available_hours": 1,
+            "day_reasoning": "Purchasing workshop materials.",
+            "blocks": [
+              {
+                "id": "b5",
+                "task_id": "t4",
+                "task_name": "Buy workshop materials",
+                "type": "work",
+                "start": "2026-06-06T10:00:00Z",
+                "end": "2026-06-06T11:00:00Z",
+                "duration_hours": 1,
+                "description": "Purchase materials for the workshop.",
+                "reasoning": "Completes the final task before the weekend."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Computer graphics assignment requires seven hours but was previously scoped for six.",
+            "resolution": "Increased the total time allocated to seven hours by spreading work across two days."
+          }
+        ],
+        "known_weaknesses": [
+          "The schedule relies on consistent productivity to complete the Computer graphics assignment within the allocated time."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Increased Computer graphics assignment time.",
+            "reason": "Addressed the risk of under-scoping the assignment."
+          }
+        ],
+        "unresolved_critiques": [
+          {
+            "agent": "Risk Agent",
+            "severity": "minor",
+            "issue": "The assignment lacks a formal buffer for technical issues.",
+            "planner_response": "The schedule now includes the full seven hours required, which provides more breathing room than the previous version."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 3,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The schedule successfully prioritizes the AASMA reflection for completion on the day of the deadline.",
+            "The Security quiz revision is now scheduled to finish on Wednesday, ensuring the student is prepared for the Thursday morning exam.",
+            "The Computer graphics assignment has been allocated the full seven hours requested, with work split across Wednesday and Thursday to ensure completion before the Friday night deadline."
+          ],
+          "overall_comment": "The current calendar effectively manages all deadlines. By front-loading the AASMA reflection and the Security quiz revision, the student avoids deadline conflicts. The allocation of seven hours for the Computer graphics assignment is sufficient and well-distributed to meet the Friday deadline without requiring late-night work."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 3,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The schedule now correctly allocates the full seven hours for the Computer graphics assignment, ensuring high-impact work is prioritized.",
+            "The sequencing of the AASMA reflection and Security quiz revision effectively protects the student's academic standing before their respective deadlines."
+          ],
+          "overall_comment": "The current plan is well-structured and prioritizes high-value academic tasks appropriately. By front-loading the AASMA reflection and Security quiz revision, the student secures their participation and exam-related grades. The allocation of seven hours to the Computer graphics assignment is sufficient and well-distributed, which mitigates the risk of poor performance on this high-effort deliverable."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 3,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The planner successfully split the Computer graphics assignment into two distinct sessions to manage cognitive load and ensure the full seven-hour estimate is met.",
+            "The Security quiz revision and AASMA reflection are appropriately prioritized to meet their respective deadlines."
+          ],
+          "overall_comment": "The schedule is now realistic and well-structured. The allocation of seven hours for the Computer graphics assignment across two days is a significant improvement that mitigates the risk of burnout and allows for necessary debugging time. The sequence of tasks respects the upcoming deadlines effectively."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 3,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The schedule successfully distributes the Computer graphics assignment across two days to avoid a single, high-intensity session.",
+            "Work hours are kept well within the requested 21:00 limit, protecting sleep and recovery time."
+          ],
+          "overall_comment": "This plan is humane and sustainable. By spreading the Computer graphics assignment over two days and completing the AASMA reflection and Security quiz revision early, the student avoids cognitive overload and late-night work. The schedule respects the requested boundaries and allows for sufficient downtime."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 3,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Computer graphics assignment schedule is highly sensitive to technical blockers, as the seven-hour allocation assumes perfect productivity with no time for debugging or environment issues.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Computer graphics assignment"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Incorporate a 60-minute contingency block on the morning of the deadline to handle unexpected technical failures or final refinement."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The plan now allocates the full seven hours for the Computer graphics assignment as requested.",
+            "The AASMA reflection and Security quiz revision are prioritized early to mitigate deadline risk."
+          ],
+          "overall_comment": "The plan is significantly improved and addresses the primary deadline risks. While I remain concerned about the lack of explicit contingency time for the Computer graphics assignment, the current structure is feasible provided the student maintains focus during the allocated sessions."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-06 is outside the planning window 2026-06-04 → 2026-06-06.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 5,
+      "hasCritical": false
+    }
+  ],
+  "finalCalendar": {
+    "calendar_version": 3,
+    "planning_window": {
+      "start_date": "2026-06-04",
+      "end_date": "2026-06-06",
+      "reason": "Aligning task completion with upcoming academic deadlines."
+    },
+    "overall_strategy": [
+      "Complete the AASMA reflection immediately to meet the Wednesday deadline.",
+      "Prioritize the Security quiz revision to finish before the Thursday morning exam.",
+      "Allocate seven hours to the Computer graphics assignment by utilizing available time on Wednesday and Thursday.",
+      "Purchase workshop materials on Friday as planned."
+    ],
+    "days": [
+      {
+        "date": "2026-06-04",
+        "day_name": "Thursday",
+        "assumed_available_hours": 7,
+        "day_reasoning": "Focusing on the AASMA reflection and starting the Computer graphics assignment.",
+        "blocks": [
+          {
+            "id": "b1",
+            "task_id": "t3",
+            "task_name": "AASMA reflection",
+            "type": "work",
+            "start": "2026-06-04T09:00:00Z",
+            "end": "2026-06-04T10:30:00Z",
+            "duration_hours": 1.5,
+            "description": "Complete the AASMA reflection.",
+            "reasoning": "Ensures the task is submitted before the end of the day."
+          },
+          {
+            "id": "b2",
+            "task_id": "t1",
+            "task_name": "Computer graphics assignment",
+            "type": "work",
+            "start": "2026-06-04T11:00:00Z",
+            "end": "2026-06-04T14:00:00Z",
+            "duration_hours": 3,
+            "description": "Work on the first half of the assignment.",
+            "reasoning": "Starts the assignment early to manage the total workload."
+          },
+          {
+            "id": "b3",
+            "task_id": "t2",
+            "task_name": "Security quiz revision",
+            "type": "work",
+            "start": "2026-06-04T15:00:00Z",
+            "end": "2026-06-04T17:30:00Z",
+            "duration_hours": 2.5,
+            "description": "Review materials for the Security quiz.",
+            "reasoning": "Completes revision well before the Thursday morning exam."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-05",
+        "day_name": "Friday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Finalizing the Computer graphics assignment before the deadline.",
+        "blocks": [
+          {
+            "id": "b4",
+            "task_id": "t1",
+            "task_name": "Computer graphics assignment",
+            "type": "work",
+            "start": "2026-06-05T09:00:00Z",
+            "end": "2026-06-05T13:00:00Z",
+            "duration_hours": 4,
+            "description": "Complete the remaining four hours of the assignment.",
+            "reasoning": "Provides the necessary time to meet the seven-hour requirement and allows for debugging."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-06",
+        "day_name": "Saturday",
+        "assumed_available_hours": 1,
+        "day_reasoning": "Purchasing workshop materials.",
+        "blocks": [
+          {
+            "id": "b5",
+            "task_id": "t4",
+            "task_name": "Buy workshop materials",
+            "type": "work",
+            "start": "2026-06-06T10:00:00Z",
+            "end": "2026-06-06T11:00:00Z",
+            "duration_hours": 1,
+            "description": "Purchase materials for the workshop.",
+            "reasoning": "Completes the final task before the weekend."
+          }
+        ]
+      }
+    ],
+    "compromises": [
+      {
+        "conflict": "Computer graphics assignment requires seven hours but was previously scoped for six.",
+        "resolution": "Increased the total time allocated to seven hours by spreading work across two days."
+      }
+    ],
+    "known_weaknesses": [
+      "The schedule relies on consistent productivity to complete the Computer graphics assignment within the allocated time."
+    ],
+    "changes_from_previous": [
+      {
+        "change": "Increased Computer graphics assignment time.",
+        "reason": "Addressed the risk of under-scoping the assignment."
+      }
+    ],
+    "unresolved_critiques": [
+      {
+        "agent": "Risk Agent",
+        "severity": "minor",
+        "issue": "The assignment lacks a formal buffer for technical issues.",
+        "planner_response": "The schedule now includes the full seven hours required, which provides more breathing room than the previous version."
+      }
+    ]
+  },
+  "critiques": [
+    {
+      "agent": "Deadline Agent",
+      "calendar_version": 3,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The schedule successfully prioritizes the AASMA reflection for completion on the day of the deadline.",
+        "The Security quiz revision is now scheduled to finish on Wednesday, ensuring the student is prepared for the Thursday morning exam.",
+        "The Computer graphics assignment has been allocated the full seven hours requested, with work split across Wednesday and Thursday to ensure completion before the Friday night deadline."
+      ],
+      "overall_comment": "The current calendar effectively manages all deadlines. By front-loading the AASMA reflection and the Security quiz revision, the student avoids deadline conflicts. The allocation of seven hours for the Computer graphics assignment is sufficient and well-distributed to meet the Friday deadline without requiring late-night work."
+    },
+    {
+      "agent": "Grade Agent",
+      "calendar_version": 3,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The schedule now correctly allocates the full seven hours for the Computer graphics assignment, ensuring high-impact work is prioritized.",
+        "The sequencing of the AASMA reflection and Security quiz revision effectively protects the student's academic standing before their respective deadlines."
+      ],
+      "overall_comment": "The current plan is well-structured and prioritizes high-value academic tasks appropriately. By front-loading the AASMA reflection and Security quiz revision, the student secures their participation and exam-related grades. The allocation of seven hours to the Computer graphics assignment is sufficient and well-distributed, which mitigates the risk of poor performance on this high-effort deliverable."
+    },
+    {
+      "agent": "Effort Agent",
+      "calendar_version": 3,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The planner successfully split the Computer graphics assignment into two distinct sessions to manage cognitive load and ensure the full seven-hour estimate is met.",
+        "The Security quiz revision and AASMA reflection are appropriately prioritized to meet their respective deadlines."
+      ],
+      "overall_comment": "The schedule is now realistic and well-structured. The allocation of seven hours for the Computer graphics assignment across two days is a significant improvement that mitigates the risk of burnout and allows for necessary debugging time. The sequence of tasks respects the upcoming deadlines effectively."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "calendar_version": 3,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The schedule successfully distributes the Computer graphics assignment across two days to avoid a single, high-intensity session.",
+        "Work hours are kept well within the requested 21:00 limit, protecting sleep and recovery time."
+      ],
+      "overall_comment": "This plan is humane and sustainable. By spreading the Computer graphics assignment over two days and completing the AASMA reflection and Security quiz revision early, the student avoids cognitive overload and late-night work. The schedule respects the requested boundaries and allows for sufficient downtime."
+    },
+    {
+      "agent": "Risk Agent",
+      "calendar_version": 3,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The Computer graphics assignment schedule is highly sensitive to technical blockers, as the seven-hour allocation assumes perfect productivity with no time for debugging or environment issues.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Computer graphics assignment"
+          ],
+          "affected_days": [
+            "2026-06-05"
+          ],
+          "suggested_fix": "Incorporate a 60-minute contingency block on the morning of the deadline to handle unexpected technical failures or final refinement."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The plan now allocates the full seven hours for the Computer graphics assignment as requested.",
+        "The AASMA reflection and Security quiz revision are prioritized early to mitigate deadline risk."
+      ],
+      "overall_comment": "The plan is significantly improved and addresses the primary deadline risks. While I remain concerned about the lack of explicit contingency time for the Computer graphics assignment, the current structure is feasible provided the student maintains focus during the allocated sessions."
+    }
+  ],
+  "validation": {
+    "valid": false,
+    "violations": [
+      {
+        "code": "day_outside_window",
+        "message": "2026-06-06 is outside the planning window 2026-06-04 → 2026-06-06.",
+        "severity": "error"
+      }
+    ]
+  },
+  "evaluation": {
+    "evaluator": "Schedule Evaluator",
+    "calendar_version": 3,
+    "planner_model": "google/gemini-3.1-flash-lite-preview",
+    "evaluator_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "overall_score": 4.3,
+    "model_score": 3.5,
+    "hard_score": 5,
+    "hard_metrics": {
+      "score": 100,
+      "metrics": [
+        {
+          "name": "generation_time_seconds",
+          "value": 27.9,
+          "score": 100,
+          "explanation": "27.9s from run start to final schedule selection."
+        },
+        {
+          "name": "rejection_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 specialist agent(s) rejected the final calendar."
+        },
+        {
+          "name": "critical_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 critical issue(s) were raised in final critiques."
+        },
+        {
+          "name": "major_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 major issue(s) were raised in final critiques."
+        },
+        {
+          "name": "deadline_violation_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 scheduled work block(s) end after their task deadline."
+        },
+        {
+          "name": "task_coverage_ratio",
+          "value": 1,
+          "score": 100,
+          "explanation": "4/4 inferred task(s) received at least one work block."
+        },
+        {
+          "name": "availability_overrun_hours",
+          "value": 0,
+          "score": 100,
+          "explanation": "0h scheduled above the planner's assumed available hours."
+        }
+      ]
+    },
+    "dimension_scores": [
+      {
+        "dimension": "requirement_match",
+        "score": 2.5,
+        "rationale": "The schedule violated the implicit planning window constraint by scheduling work on 2026-06-06, which was outside the inferred planning window (2026-06-04 to 2026-06-06) based on the interpreter output, although the interpreter output itself was inconsistent regarding the end date (planning window end date vs. current date)."
+      },
+      {
+        "dimension": "deadline_safety",
+        "score": 4.5,
+        "rationale": "All immediate academic deadlines (AASMA reflection, Security quiz) are met with sufficient lead time. The Computer graphics assignment is completed before its Friday deadline."
+      },
+      {
+        "dimension": "workload_realism",
+        "score": 4,
+        "rationale": "The 7 hours for the Computer graphics assignment were split into 3h and 4h blocks, which is realistic for managing a large task. However, the schedule is very dense on Thursday."
+      },
+      {
+        "dimension": "academic_priority",
+        "score": 5,
+        "rationale": "The schedule correctly prioritizes the AASMA reflection (immediate deadline) and Security quiz revision (Thursday morning deadline) before tackling the large Computer graphics assignment."
+      },
+      {
+        "dimension": "wellbeing_balance",
+        "score": 3,
+        "rationale": "Work is generally confined to preferred hours (14:00-21:00 window is respected by the planner's initial scheduling, although the final calendar shows work starting at 09:00 on Thursday, which is outside the preferred window but necessary due to the tight schedule)."
+      },
+      {
+        "dimension": "risk_resilience",
+        "score": 2.5,
+        "rationale": "The Risk Agent correctly identified that there is no explicit buffer time for the high-effort Computer graphics assignment, making the schedule fragile to unexpected issues, despite the full 7 hours being allocated."
+      }
+    ],
+    "strengths": [
+      "Excellent prioritization of immediate deadlines (AASMA reflection and Security quiz revision).",
+      "Successfully allocated the full 7 hours required for the Computer graphics assignment.",
+      "Work is generally confined to daytime/early evening hours, respecting the student's preference."
+    ],
+    "weaknesses": [
+      "The schedule violates the implicit planning window by scheduling work on 2026-06-06, which was the end date of the planning window, leading to an error in the validation log.",
+      "The schedule is very dense on Thursday, with 4 hours of intensive work scheduled immediately after classes, leaving little room for error or breaks.",
+      "Lack of explicit contingency time for the high-risk Computer graphics assignment."
+    ],
+    "comparison_notes": [
+      "The planner made an aggressive scheduling choice on Thursday (2026-06-05 in the calendar, which corresponds to Friday in the input context) by scheduling 4 hours immediately following classes, which slightly strains the wellbeing balance compared to models that might have spread the work more thinly."
+    ],
+    "recommendation": "The schedule is functionally sound regarding deadlines but suffers from a minor technical violation regarding the planning window and is overly dense on one day. Future iterations should explicitly incorporate contingency time for the largest task (Computer graphics assignment) to improve risk resilience."
+  },
+  "usage": {
+    "callCount": 25,
+    "promptTokens": 94535,
+    "completionTokens": 13303,
+    "totalTokens": 107838,
+    "estimatedCostUsd": 0.041347,
+    "calls": [
+      {
+        "id": "ba40c409-6690-4a4d-a9ee-fc54184b3611",
+        "schemaName": "interpreter_output",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:34.697Z",
+        "completedAt": "2026-06-04T14:43:37.425Z",
+        "durationMs": 2728,
+        "promptChars": 4235,
+        "completionChars": 2170,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 1081,
+        "completionTokens": 671,
+        "totalTokens": 1752,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001277
+      },
+      {
+        "id": "259df23d-6637-49ca-84a1-fa75637f0c64",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:37.425Z",
+        "completedAt": "2026-06-04T14:43:40.583Z",
+        "durationMs": 3158,
+        "promptChars": 6173,
+        "completionChars": 3020,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2189,
+        "completionTokens": 769,
+        "totalTokens": 2958,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001701
+      },
+      {
+        "id": "c1c7ee76-704f-45a0-97e6-7aec6f725691",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:37.425Z",
+        "completedAt": "2026-06-04T14:43:40.584Z",
+        "durationMs": 3159,
+        "promptChars": 6219,
+        "completionChars": 3238,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 1830,
+        "completionTokens": 722,
+        "totalTokens": 2552,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001541
+      },
+      {
+        "id": "5e39cf10-ef6b-41df-9e86-45c71535e123",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:37.425Z",
+        "completedAt": "2026-06-04T14:43:40.750Z",
+        "durationMs": 3325,
+        "promptChars": 6147,
+        "completionChars": 3174,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 1830,
+        "completionTokens": 732,
+        "totalTokens": 2562,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001556
+      },
+      {
+        "id": "ee46cdd7-f841-461c-a4f0-2ccc218f70a1",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:37.425Z",
+        "completedAt": "2026-06-04T14:43:41.048Z",
+        "durationMs": 3623,
+        "promptChars": 6643,
+        "completionChars": 2997,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2273,
+        "completionTokens": 744,
+        "totalTokens": 3017,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001684
+      },
+      {
+        "id": "ab5815d0-cc2e-4d62-a425-ad91eb3349d5",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:37.425Z",
+        "completedAt": "2026-06-04T14:43:41.236Z",
+        "durationMs": 3811,
+        "promptChars": 7155,
+        "completionChars": 3081,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2064,
+        "completionTokens": 703,
+        "totalTokens": 2767,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.00157
+      },
+      {
+        "id": "06a55947-3144-43cf-bb9b-19cfa4db71fe",
+        "schemaName": "calendar_proposal",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:41.236Z",
+        "completedAt": "2026-06-04T14:43:44.859Z",
+        "durationMs": 3623,
+        "promptChars": 24653,
+        "completionChars": 4224,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 7189,
+        "completionTokens": 1250,
+        "totalTokens": 8439,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.003672
+      },
+      {
+        "id": "23c6ea01-f260-4b66-98e6-e12c2be02b3e",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:44.860Z",
+        "completedAt": "2026-06-04T14:43:46.513Z",
+        "durationMs": 1653,
+        "promptChars": 12922,
+        "completionChars": 1164,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 3606,
+        "completionTokens": 251,
+        "totalTokens": 3857,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001278
+      },
+      {
+        "id": "29505d83-f87b-4b1b-a431-9792084a2969",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:44.860Z",
+        "completedAt": "2026-06-04T14:43:46.734Z",
+        "durationMs": 1874,
+        "promptChars": 13058,
+        "completionChars": 1615,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 3623,
+        "completionTokens": 378,
+        "totalTokens": 4001,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001473
+      },
+      {
+        "id": "146a285c-c71f-42d5-a37f-e5124a153800",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:44.860Z",
+        "completedAt": "2026-06-04T14:43:46.999Z",
+        "durationMs": 2139,
+        "promptChars": 12788,
+        "completionChars": 1452,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4084,
+        "completionTokens": 357,
+        "totalTokens": 4441,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001557
+      },
+      {
+        "id": "ee7f0d54-8fd9-4940-9bcd-3fa4fa95dcbc",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:44.860Z",
+        "completedAt": "2026-06-04T14:43:47.535Z",
+        "durationMs": 2675,
+        "promptChars": 13837,
+        "completionChars": 1662,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4332,
+        "completionTokens": 419,
+        "totalTokens": 4751,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001712
+      },
+      {
+        "id": "85dd8e59-85af-4b8e-8ab3-a3d6ca93cfc4",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:44.859Z",
+        "completedAt": "2026-06-04T14:43:47.872Z",
+        "durationMs": 3013,
+        "promptChars": 13241,
+        "completionChars": 1676,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4149,
+        "completionTokens": 411,
+        "totalTokens": 4560,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001654
+      },
+      {
+        "id": "f7ce7696-dfac-4d38-bc2b-e5ace8020a95",
+        "schemaName": "calendar_proposal",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:47.872Z",
+        "completedAt": "2026-06-04T14:43:53.039Z",
+        "durationMs": 5167,
+        "promptChars": 11118,
+        "completionChars": 4213,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 3768,
+        "completionTokens": 1327,
+        "totalTokens": 5095,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.002933
+      },
+      {
+        "id": "a5eb2373-2284-4cbf-922a-292f1ecffc79",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:53.039Z",
+        "completedAt": "2026-06-04T14:43:54.514Z",
+        "durationMs": 1475,
+        "promptChars": 13900,
+        "completionChars": 799,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 3945,
+        "completionTokens": 179,
+        "totalTokens": 4124,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001255
+      },
+      {
+        "id": "d7d5e18f-b03b-43ad-91fa-5fa030779b91",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:53.039Z",
+        "completedAt": "2026-06-04T14:43:54.817Z",
+        "durationMs": 1778,
+        "promptChars": 12851,
+        "completionChars": 1194,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 3691,
+        "completionTokens": 268,
+        "totalTokens": 3959,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001325
+      },
+      {
+        "id": "7531c20e-6351-430e-9d90-135d019d7138",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:53.039Z",
+        "completedAt": "2026-06-04T14:43:54.921Z",
+        "durationMs": 1882,
+        "promptChars": 13304,
+        "completionChars": 816,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4235,
+        "completionTokens": 175,
+        "totalTokens": 4410,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001321
+      },
+      {
+        "id": "68243bb7-fa17-49ce-971a-675534d577e2",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:53.039Z",
+        "completedAt": "2026-06-04T14:43:54.934Z",
+        "durationMs": 1895,
+        "promptChars": 12985,
+        "completionChars": 1182,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4171,
+        "completionTokens": 293,
+        "totalTokens": 4464,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001482
+      },
+      {
+        "id": "2a090e09-08a4-4783-8d38-53805cfc6554",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:53.039Z",
+        "completedAt": "2026-06-04T14:43:55.361Z",
+        "durationMs": 2322,
+        "promptChars": 13121,
+        "completionChars": 1800,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 3709,
+        "completionTokens": 447,
+        "totalTokens": 4156,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001598
+      },
+      {
+        "id": "f0a23731-f728-4db1-838e-859dea88738b",
+        "schemaName": "calendar_proposal",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:55.361Z",
+        "completedAt": "2026-06-04T14:43:59.639Z",
+        "durationMs": 4278,
+        "promptChars": 8203,
+        "completionChars": 4223,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 3162,
+        "completionTokens": 1312,
+        "totalTokens": 4474,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.002759
+      },
+      {
+        "id": "06135749-12b7-4faf-b4d4-46b74a978ec3",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:59.640Z",
+        "completedAt": "2026-06-04T14:44:01.384Z",
+        "durationMs": 1744,
+        "promptChars": 12990,
+        "completionChars": 889,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4155,
+        "completionTokens": 193,
+        "totalTokens": 4348,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001328
+      },
+      {
+        "id": "ce61c8c9-1c5d-4839-afa7-671aacf4c9d6",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:59.640Z",
+        "completedAt": "2026-06-04T14:44:01.390Z",
+        "durationMs": 1750,
+        "promptChars": 13905,
+        "completionChars": 731,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4402,
+        "completionTokens": 166,
+        "totalTokens": 4568,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.00135
+      },
+      {
+        "id": "0f0ab10b-1e20-4e20-86fc-43ecaed3e4f6",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:59.640Z",
+        "completedAt": "2026-06-04T14:44:01.539Z",
+        "durationMs": 1899,
+        "promptChars": 12856,
+        "completionChars": 778,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4154,
+        "completionTokens": 168,
+        "totalTokens": 4322,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001291
+      },
+      {
+        "id": "28200238-bd33-4ace-912b-cc25cff342ff",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:59.639Z",
+        "completedAt": "2026-06-04T14:44:01.717Z",
+        "durationMs": 2078,
+        "promptChars": 13309,
+        "completionChars": 952,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4219,
+        "completionTokens": 201,
+        "totalTokens": 4420,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001356
+      },
+      {
+        "id": "19cf301b-acbc-4886-9162-c0fb481b2186",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:43:59.640Z",
+        "completedAt": "2026-06-04T14:44:02.642Z",
+        "durationMs": 3002,
+        "promptChars": 13126,
+        "completionChars": 1232,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4172,
+        "completionTokens": 285,
+        "totalTokens": 4457,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001471
+      },
+      {
+        "id": "8b10fbe8-f252-4122-bf9f-484adc1ed894",
+        "schemaName": "schedule_evaluation",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:44:02.643Z",
+        "completedAt": "2026-06-04T14:44:06.583Z",
+        "durationMs": 3940,
+        "promptChars": 33021,
+        "completionChars": 3590,
+        "maxCompletionTokens": 8000,
+        "promptTokens": 8502,
+        "completionTokens": 882,
+        "totalTokens": 9384,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001203
+      }
+    ]
+  }
+}

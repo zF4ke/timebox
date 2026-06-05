@@ -1,0 +1,62 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:B1@timebox.local
+DTSTAMP:20260604T154202Z
+DTSTART:20260604T130000Z
+DTEND:20260604T160000Z
+SUMMARY:Linear algebra homework
+DESCRIPTION:Complete linear algebra homework.\\n\\nReasoning: Scheduled to finish well before the 20:00 deadline and the 17:00 work shift start.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2@timebox.local
+DTSTAMP:20260604T154202Z
+DTSTART:20260605T100000Z
+DTEND:20260605T130000Z
+SUMMARY:AASMA seminar paper reading and discussion points
+DESCRIPTION:Read AASMA paper and draft discussion points.\\n\\nReasoning: Allocates more time to finish before the Friday 08:00 deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3@timebox.local
+DTSTAMP:20260604T154202Z
+DTSTART:20260605T140000Z
+DTEND:20260605T170000Z
+SUMMARY:Web development project
+DESCRIPTION:Start implementing authentication for the web project.\\n\\nReasoning: Front-loads web project work to reduce Sunday load\, ends before work shift.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4@timebox.local
+DTSTAMP:20260604T154202Z
+DTSTART:20260606T100000Z
+DTEND:20260606T130000Z
+SUMMARY:Web development project
+DESCRIPTION:Continue web development project with CSS polishing.\\n\\nReasoning: Continues project progress with a focused morning block.
+END:VEVENT
+BEGIN:VEVENT
+UID:B5@timebox.local
+DTSTAMP:20260604T154202Z
+DTSTART:20260606T140000Z
+DTEND:20260606T160000Z
+SUMMARY:Web development project
+DESCRIPTION:Additional web project work on testing or documentation.\\n\\nReasoning: Adds more hours to meet the total effort estimate for the project.
+END:VEVENT
+BEGIN:VEVENT
+UID:B6@timebox.local
+DTSTAMP:20260604T154202Z
+DTSTART:20260607T100000Z
+DTEND:20260607T130000Z
+SUMMARY:Web development project
+DESCRIPTION:Finalize web development project features.\\n\\nReasoning: Breaks the final work into a manageable morning session.
+END:VEVENT
+BEGIN:VEVENT
+UID:B7@timebox.local
+DTSTAMP:20260604T154202Z
+DTSTART:20260607T140000Z
+DTEND:20260607T170000Z
+SUMMARY:Web development project
+DESCRIPTION:Complete README\, final testing\, and project submission.\\n\\nReasoning: Final afternoon block to finish the project well before the 23:59 deadline.
+END:VEVENT
+END:VCALENDAR

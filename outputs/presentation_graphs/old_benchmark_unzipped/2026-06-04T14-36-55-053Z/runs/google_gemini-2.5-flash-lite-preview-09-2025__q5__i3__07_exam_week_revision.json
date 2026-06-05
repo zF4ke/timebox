@@ -1,0 +1,2240 @@
+{
+  "runId": "01dac4c7-6200-4293-81db-06c64204d382",
+  "createdAt": "2026-06-04T14:40:22.443Z",
+  "request": {
+    "userInput": "Plan my exam revision until next Friday.\r\n\r\nI have a calculus exam next Friday morning. It covers integrals, series, and differential equations. I am weakest at series.\r\n\r\nI have a databases exam next Wednesday afternoon. It covers normalization, SQL, transactions, and indexes. SQL is okay, transactions are weak.\r\n\r\nI also need to submit a tiny ethics forum post by Sunday night. It should only take 45 minutes.\r\n\r\nI can study 5 hours on weekend days and 3 hours on weekdays. I do better with spaced practice and mixed problem solving, not one huge block of reading.\r\n\r\nPlease put more time into the weaker topics while still reviewing everything.",
+    "quorum": 5,
+    "maxIterations": 3,
+    "timezone": "Europe/Lisbon",
+    "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "evaluatorModel": "google/gemini-2.5-flash-lite-preview-09-2025"
+  },
+  "stopReason": "Accepted by 5/5 agents with no critical critiques.",
+  "interpreterOutput": {
+    "current_date": "2026-06-04T14:40:22.444Z",
+    "planning_window": {
+      "start_date": "2026-06-04T00:00:00.000Z",
+      "end_date": "2026-06-12T00:00:00.000Z",
+      "reason": "Planning revision schedule until next Friday morning (Calculus exam)."
+    },
+    "inferred_availability": [
+      {
+        "date_range": "2026-06-04 to 2026-06-05",
+        "assumption": "Weekday availability (Thursday/Friday). Assuming 3 hours/day based on general constraints.",
+        "estimated_available_hours_per_day": 3,
+        "confidence": "Medium"
+      },
+      {
+        "date_range": "2026-06-06 to 2026-06-07",
+        "assumption": "Weekend availability, specified as 5 hours/day.",
+        "estimated_available_hours_per_day": 5,
+        "confidence": "High"
+      },
+      {
+        "date_range": "2026-06-08 to 2026-06-11",
+        "assumption": "Weekday availability (Monday to Thursday). Assuming 3 hours/day based on general constraints.",
+        "estimated_available_hours_per_day": 3,
+        "confidence": "Medium"
+      }
+    ],
+    "fixed_commitments": [
+      "Calculus exam next Friday morning (approx. 2026-06-12 09:00)",
+      "Databases exam next Wednesday afternoon (approx. 2026-06-10 14:00)"
+    ],
+    "student_state": {
+      "sleep": "Unknown",
+      "energy": "Unknown",
+      "confidence": "Neutral"
+    },
+    "tasks": [
+      {
+        "task_id": "C_INT",
+        "name": "Calculus Revision: Integrals",
+        "raw_mentions": [
+          "calculus exam",
+          "covers integrals"
+        ],
+        "inferred_deadline": "2026-06-12T09:00:00.000Z",
+        "uncertainties": [
+          "Exact amount of time needed for review."
+        ]
+      },
+      {
+        "task_id": "C_SER",
+        "name": "Calculus Revision: Series (Weak Area)",
+        "raw_mentions": [
+          "calculus exam",
+          "covers series",
+          "weakest at series"
+        ],
+        "inferred_deadline": "2026-06-12T09:00:00.000Z",
+        "uncertainties": [
+          "Exact amount of time needed for review."
+        ]
+      },
+      {
+        "task_id": "C_DE",
+        "name": "Calculus Revision: Differential Equations",
+        "raw_mentions": [
+          "calculus exam",
+          "covers differential equations"
+        ],
+        "inferred_deadline": "2026-06-12T09:00:00.000Z",
+        "uncertainties": [
+          "Exact amount of time needed for review."
+        ]
+      },
+      {
+        "task_id": "D_NORM",
+        "name": "Databases Revision: Normalization",
+        "raw_mentions": [
+          "databases exam",
+          "covers normalization"
+        ],
+        "inferred_deadline": "2026-06-10T14:00:00.000Z",
+        "uncertainties": [
+          "Exact amount of time needed for review."
+        ]
+      },
+      {
+        "task_id": "D_SQL",
+        "name": "Databases Revision: SQL",
+        "raw_mentions": [
+          "databases exam",
+          "covers SQL",
+          "SQL is okay"
+        ],
+        "inferred_deadline": "2026-06-10T14:00:00.000Z",
+        "uncertainties": [
+          "Exact amount of time needed for review."
+        ]
+      },
+      {
+        "task_id": "D_TX",
+        "name": "Databases Revision: Transactions (Weak Area)",
+        "raw_mentions": [
+          "databases exam",
+          "covers transactions",
+          "transactions are weak"
+        ],
+        "inferred_deadline": "2026-06-10T14:00:00.000Z",
+        "uncertainties": [
+          "Exact amount of time needed for review."
+        ]
+      },
+      {
+        "task_id": "D_IDX",
+        "name": "Databases Revision: Indexes",
+        "raw_mentions": [
+          "databases exam",
+          "covers indexes"
+        ],
+        "inferred_deadline": "2026-06-10T14:00:00.000Z",
+        "uncertainties": [
+          "Exact amount of time needed for review."
+        ]
+      },
+      {
+        "task_id": "E_POST",
+        "name": "Ethics Forum Post Submission",
+        "raw_mentions": [
+          "submit a tiny ethics forum post by Sunday night",
+          "should only take 45 minutes"
+        ],
+        "inferred_deadline": "2026-06-07T23:59:59.000Z",
+        "uncertainties": [
+          "The exact time needed is 45 minutes."
+        ]
+      }
+    ],
+    "assumptions": [
+      "The planning window starts immediately (2026-06-04).",
+      "The Calculus exam is on the morning of the Friday following the planning period (2026-06-12).",
+      "The Databases exam is on the afternoon of the Wednesday within the planning period (2026-06-10).",
+      "The Ethics post deadline is Sunday night (2026-06-07).",
+      "Availability constraints (3h weekdays, 5h weekends) are strictly adhered to.",
+      "Study sessions should be mixed/spaced practice, avoiding very long blocks.",
+      "No fixed commitments exist other than the exams and the forum post deadline.",
+      "Since no sleep/energy/stress information was provided, a neutral state is assumed, but the schedule will prioritize spaced practice as requested."
+    ]
+  },
+  "agentViews": [
+    {
+      "agent": "Deadline Agent",
+      "task_views": [
+        {
+          "task_id": "C_INT",
+          "task_name": "Calculus Revision: Integrals",
+          "assessment": "This task must be completed before the Calculus exam on the morning of 2026-06-12. It is a lower priority than the Databases exam which occurs earlier.",
+          "concerns": [
+            "Work must conclude before 2026-06-12 09:00."
+          ],
+          "recommendations": [
+            "Schedule work early in the planning window to allow for spaced review before the final exam."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review core integration techniques",
+            "Practice mixed integral problems"
+          ]
+        },
+        {
+          "task_id": "C_SER",
+          "task_name": "Calculus Revision: Series (Weak Area)",
+          "assessment": "This is a high-priority topic because the student identified it as their weakest area in Calculus, which is due last (2026-06-12 09:00). It requires dedicated time.",
+          "concerns": [
+            "Work must conclude before 2026-06-12 09:00.",
+            "Weakness requires more time allocation than other topics."
+          ],
+          "recommendations": [
+            "Allocate the most study time to this topic, spread across multiple days.",
+            "Prioritize this topic after the Databases exam deadline."
+          ],
+          "estimated_duration_hours": 5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review convergence tests (Ratio, Root, Comparison)",
+            "Practice power series and Taylor/Maclaurin series construction",
+            "Work on challenging series problems"
+          ]
+        },
+        {
+          "task_id": "C_DE",
+          "task_name": "Calculus Revision: Differential Equations",
+          "assessment": "This task must be completed before the Calculus exam on 2026-06-12 09:00. It should be scheduled after the Databases exam.",
+          "concerns": [
+            "Work must conclude before 2026-06-12 09:00."
+          ],
+          "recommendations": [
+            "Schedule review sessions after the Databases exam to focus on Calculus."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review first-order ODE methods (Separable, Linear)",
+            "Review second-order linear equations"
+          ]
+        },
+        {
+          "task_id": "D_NORM",
+          "task_name": "Databases Revision: Normalization",
+          "assessment": "This task has the earliest hard deadline: 2026-06-10 14:00. It must be prioritized immediately.",
+          "concerns": [
+            "Must be fully completed by 2026-06-10 14:00."
+          ],
+          "recommendations": [
+            "Schedule this early in the schedule, preferably on the weekend or the first available weekday."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review definitions of 1NF, 2NF, 3NF, BCNF",
+            "Practice decomposition exercises"
+          ]
+        },
+        {
+          "task_id": "D_SQL",
+          "task_name": "Databases Revision: SQL",
+          "assessment": "This task is due by 2026-06-10 14:00. Since the student finds SQL 'okay', less time is needed compared to weak areas, but it must be covered before the deadline.",
+          "concerns": [
+            "Must be fully completed by 2026-06-10 14:00."
+          ],
+          "recommendations": [
+            "Schedule a moderate review session before the deadline."
+          ],
+          "estimated_duration_hours": 2.5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review complex JOINs and subqueries",
+            "Practice aggregate functions and grouping"
+          ]
+        },
+        {
+          "task_id": "D_TX",
+          "task_name": "Databases Revision: Transactions (Weak Area)",
+          "assessment": "This is a weak area for the Databases exam (deadline 2026-06-10 14:00). It requires focused attention before the Wednesday deadline.",
+          "concerns": [
+            "Must be fully completed by 2026-06-10 14:00.",
+            "Weakness requires more dedicated time than other DB topics."
+          ],
+          "recommendations": [
+            "Allocate the most time among the Databases topics, ensuring coverage before Wednesday."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review ACID properties",
+            "Study concurrency control mechanisms (locking, isolation levels)"
+          ]
+        },
+        {
+          "task_id": "D_IDX",
+          "task_name": "Databases Revision: Indexes",
+          "assessment": "This task is due by 2026-06-10 14:00. It needs to be covered before the Wednesday deadline.",
+          "concerns": [
+            "Must be fully completed by 2026-06-10 14:00."
+          ],
+          "recommendations": [
+            "Schedule a review session before the Databases exam."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review B-tree structure basics",
+            "Understand index types and performance implications"
+          ]
+        },
+        {
+          "task_id": "E_POST",
+          "task_name": "Ethics Forum Post Submission",
+          "assessment": "This task has the second earliest deadline: Sunday night (2026-06-07 23:59:59). It is short (45 minutes) and must be completed before this deadline.",
+          "concerns": [
+            "Must be completed by 2026-06-07 end of day."
+          ],
+          "recommendations": [
+            "Schedule this early, perhaps on Saturday or Sunday, to ensure it is done well before the deadline."
+          ],
+          "estimated_duration_hours": 0.75,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Draft and post the required content"
+          ]
+        }
+      ],
+      "overall_comment": "All tasks have defined deadlines within the planning window (ending 2026-06-12 morning). The primary deadline risk is the Databases exam on 2026-06-10, followed by the Ethics Post on 2026-06-07. The schedule must prioritize completing all Databases work by Wednesday afternoon. The Ethics post must be completed by Sunday night. Calculus revision, especially the weak area (Series), should receive the most time allocation after the Databases exam is complete, utilizing the remaining weekend time and the final weekdays. The requested spaced practice will be accommodated by breaking up study blocks."
+    },
+    {
+      "agent": "Grade Agent",
+      "task_views": [
+        {
+          "task_id": "C_INT",
+          "task_name": "Calculus Revision: Integrals",
+          "assessment": "This is a core component of the Calculus exam. It requires adequate coverage, but since the student did not specify weakness here, moderate time allocation is appropriate, focusing on mixed practice.",
+          "concerns": [
+            "If this topic is heavily weighted and not reviewed thoroughly, it could significantly impact the final Calculus grade."
+          ],
+          "recommendations": [
+            "Allocate time early in the schedule to ensure coverage before the final push for weak areas.",
+            "Focus on problem sets that integrate various integration techniques."
+          ],
+          "estimated_duration_hours": 2.5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review key integration formulas",
+            "Work through 5 challenging definite integral problems",
+            "Practice integration by parts and partial fractions"
+          ]
+        },
+        {
+          "task_id": "C_SER",
+          "task_name": "Calculus Revision: Series (Weak Area)",
+          "assessment": "This is the highest priority Calculus topic as the student explicitly stated it is their weakest area. Maximum academic value is gained by dedicating disproportionately more time here.",
+          "concerns": [
+            "Insufficient time dedicated to this weak area risks a major grade drop on the Calculus exam.",
+            "Series concepts (convergence tests, Taylor series) are conceptually difficult and require spaced repetition."
+          ],
+          "recommendations": [
+            "Prioritize this topic across multiple study sessions.",
+            "Ensure dedicated time blocks are scheduled specifically for series review before the Databases exam deadline, as Calculus is the later exam."
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review convergence tests (Ratio, Root, Comparison)",
+            "Practice deriving Taylor/Maclaurin series for common functions",
+            "Work mixed problems focusing only on series convergence/divergence"
+          ]
+        },
+        {
+          "task_id": "C_DE",
+          "task_name": "Calculus Revision: Differential Equations",
+          "assessment": "A core component of the Calculus exam. Needs solid review, but less intensive than the stated weak area (Series).",
+          "concerns": [
+            "If methods for solving different types of ODEs (separable, linear first-order) are confused, performance will suffer."
+          ],
+          "recommendations": [
+            "Schedule review sessions that mix DE problems with other Calculus topics to enforce method selection.",
+            "Ensure coverage of initial value problems."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review solution methods for first-order ODEs",
+            "Practice solving a second-order linear homogeneous equation"
+          ]
+        },
+        {
+          "task_id": "D_NORM",
+          "task_name": "Databases Revision: Normalization",
+          "assessment": "Foundational topic for Databases. Must be covered before the Wednesday exam. Since it is not listed as weak, a standard review is sufficient.",
+          "concerns": [
+            "If this is tested via practical schema design questions, superficial review will fail."
+          ],
+          "recommendations": [
+            "Schedule this review early in the planning window to clear the slate before the Wednesday exam.",
+            "Focus on identifying dependencies and achieving 3NF/BCNF."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review definitions of 1NF, 2NF, 3NF, BCNF",
+            "Decompose a sample schema to BCNF"
+          ]
+        },
+        {
+          "task_id": "D_SQL",
+          "task_name": "Databases Revision: SQL",
+          "assessment": "The student is comfortable with SQL. This requires maintenance review rather than deep study, focusing on complex queries or edge cases.",
+          "concerns": [
+            "Over-investing time here detracts from weak areas (Transactions)."
+          ],
+          "recommendations": [
+            "Keep review sessions short and focused on complex JOINs or aggregate functions.",
+            "Schedule this review closer to the Databases exam date for better retention."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Practice complex subqueries or CTEs",
+            "Review window functions if applicable"
+          ]
+        },
+        {
+          "task_id": "D_TX",
+          "task_name": "Databases Revision: Transactions (Weak Area)",
+          "assessment": "This is a weak area for the Databases exam, which occurs first (Wednesday). It must receive protected time before Wednesday.",
+          "concerns": [
+            "Weak understanding of ACID properties, concurrency control (locking), or recovery mechanisms could severely impact the grade on this exam."
+          ],
+          "recommendations": [
+            "Allocate significant time before Wednesday, potentially prioritizing this over less critical Calculus topics until the Databases exam is complete.",
+            "Focus on understanding the mechanisms (e.g., two-phase locking)."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review ACID properties in detail",
+            "Analyze scenarios involving deadlocks and isolation levels",
+            "Practice explaining transaction logging/recovery concepts"
+          ]
+        },
+        {
+          "task_id": "D_IDX",
+          "task_name": "Databases Revision: Indexes",
+          "assessment": "A standard topic for Databases. Needs coverage, but less intensive than Transactions.",
+          "concerns": [
+            "Confusion between B-tree vs Hash indexes, or understanding query plan implications."
+          ],
+          "recommendations": [
+            "Review index types and when they are most effective.",
+            "Schedule this review alongside Normalization or SQL review for topic mixing."
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Compare B-tree vs Hash indexes",
+            "Review clustered vs non-clustered indexes"
+          ]
+        },
+        {
+          "task_id": "E_POST",
+          "task_name": "Ethics Forum Post Submission",
+          "assessment": "This is a very low-effort, high-urgency task due Sunday night. It must be completed before the deadline but should not displace significant exam revision time.",
+          "concerns": [
+            "If left until Sunday evening, it could cause stress or interfere with planned revision blocks."
+          ],
+          "recommendations": [
+            "Schedule this task early in the weekend (Saturday or early Sunday) to clear the deliverable.",
+            "Since it is only 45 minutes, it can be slotted into a smaller study block."
+          ],
+          "estimated_duration_hours": 0.75,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Draft main points (15 min)",
+            "Write and submit post (30 min)"
+          ]
+        }
+      ],
+      "overall_comment": "The schedule prioritizes the two stated weak areas: Calculus Series and Databases Transactions. Databases topics (due Wednesday) receive concentrated attention early in the schedule (Thursday/Friday/Saturday). Calculus topics are spread out, with extra time allocated to Series, ensuring coverage before the Friday exam. The low-effort Ethics post is scheduled for the weekend to clear that deadline without impacting core study time. The total estimated study time (approx. 14.75 hours) fits comfortably within the available 26 hours (3+3+5+5+3+3+3) between now and the Calculus exam, allowing for spaced practice and topic mixing as requested."
+    },
+    {
+      "agent": "Effort Agent",
+      "task_views": [
+        {
+          "task_id": "C_INT",
+          "task_name": "Calculus Revision: Integrals",
+          "assessment": "Integrals is a core calculus topic. Given the student needs to cover three major areas for the exam, I estimate 4 hours total for a solid review, broken into two 2-hour sessions.",
+          "concerns": [
+            "If the student finds the material more complex than anticipated, 4 hours might be insufficient for thorough practice."
+          ],
+          "recommendations": [
+            "Focus the first session on reviewing core integration techniques and the second on mixed practice problems.",
+            "Schedule this earlier in the week to allow for spaced review before the exam."
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Review fundamental integration rules (u-sub, parts, trig sub)",
+            "Practice mixed integration problems (2 hours)",
+            "Review definite integrals and applications (e.g., area/volume)"
+          ]
+        },
+        {
+          "task_id": "C_SER",
+          "task_name": "Calculus Revision: Series (Weak Area)",
+          "assessment": "Series is explicitly stated as the weakest area, requiring more dedicated time. I recommend allocating 6 hours, split into three 2-hour blocks to maximize spaced practice.",
+          "concerns": [
+            "Series convergence tests are conceptually difficult; 6 hours might still be tight if many proofs or complex series are involved."
+          ],
+          "recommendations": [
+            "Dedicate the first session entirely to understanding convergence tests (Ratio, Root, Comparison).",
+            "Ensure practice sessions mix different types of series problems."
+          ],
+          "estimated_duration_hours": 6,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review Taylor/Maclaurin series definitions and error bounds",
+            "Master convergence tests (Ratio, Root, Integral)",
+            "Practice finding power series representations and interval of convergence (3 sessions of 2 hours each)"
+          ]
+        },
+        {
+          "task_id": "C_DE",
+          "task_name": "Calculus Revision: Differential Equations",
+          "assessment": "Differential Equations often involve procedural steps (separation of variables, integrating factors). I estimate 4 hours for review and practice.",
+          "concerns": [
+            "If the exam includes higher-order linear ODEs or systems, 4 hours might be too short."
+          ],
+          "recommendations": [
+            "Prioritize practicing the most common solution methods (e.g., separable, linear first-order).",
+            "Mix this topic with Integrals to maintain spaced practice."
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Review first-order ODE techniques (Separable, Linear)",
+            "Review second-order linear homogeneous/non-homogeneous equations",
+            "Practice solving mixed ODE problems (2 sessions of 2 hours)"
+          ]
+        },
+        {
+          "task_id": "D_NORM",
+          "task_name": "Databases Revision: Normalization",
+          "assessment": "Normalization is often a conceptual topic requiring understanding of dependencies. I estimate 2 hours for review and checking examples.",
+          "concerns": [
+            "If the student needs to practice decomposing complex schemas, this could take longer."
+          ],
+          "recommendations": [
+            "Focus on defining 1NF, 2NF, 3NF, and BCNF clearly.",
+            "Use the first available slot before the Databases exam."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Review definitions of 1NF, 2NF, 3NF, BCNF",
+            "Work through 2-3 complex schema decomposition examples"
+          ]
+        },
+        {
+          "task_id": "D_SQL",
+          "task_name": "Databases Revision: SQL",
+          "assessment": "The student is comfortable with SQL. I estimate 3 hours, focusing on complex queries (joins, aggregations, subqueries) rather than basic syntax.",
+          "concerns": [
+            "The student might underestimate the complexity of required exam queries."
+          ],
+          "recommendations": [
+            "Focus practice on complex JOINs, GROUP BY/HAVING clauses, and nested queries.",
+            "Schedule this block relatively close to the exam date."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review advanced JOIN types and set operations",
+            "Practice complex aggregation and filtering (GROUP BY/HAVING)",
+            "Write queries involving subqueries or CTEs"
+          ]
+        },
+        {
+          "task_id": "D_TX",
+          "task_name": "Databases Revision: Transactions (Weak Area)",
+          "assessment": "Transactions are a weak area. I allocate 4 hours, slightly more than other DB topics, to ensure conceptual clarity on ACID properties and isolation levels.",
+          "concerns": [
+            "Understanding concurrency control mechanisms (locking, timestamps) can be tricky."
+          ],
+          "recommendations": [
+            "Dedicate time to understanding the practical implications of different isolation levels.",
+            "Pair this study with Indexes review for topic mixing."
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Review ACID properties and transaction states",
+            "Study isolation levels (Read Committed, Repeatable Read, Serializable)",
+            "Review basic locking protocols (2-Phase Locking)"
+          ]
+        },
+        {
+          "task_id": "D_IDX",
+          "task_name": "Databases Revision: Indexes",
+          "assessment": "Indexes are usually straightforward (B-trees, hashing concepts). I estimate 2 hours for review.",
+          "concerns": [
+            "If the exam requires deep knowledge of B-tree structure or query optimization based on indexes, this might be too little."
+          ],
+          "recommendations": [
+            "Focus on understanding *when* an index is beneficial and the trade-offs (write penalty).",
+            "Pair this with Transactions review."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review B-Tree structure and search process",
+            "Understand clustered vs. non-clustered indexes",
+            "Analyze index usage scenarios"
+          ]
+        },
+        {
+          "task_id": "E_POST",
+          "task_name": "Ethics Forum Post Submission",
+          "assessment": "The required time is explicitly stated as 45 minutes (0.75 hours). This must be completed by Sunday night.",
+          "concerns": [
+            "None regarding duration, but it must be scheduled before the Sunday deadline."
+          ],
+          "recommendations": [
+            "Schedule this early in the weekend to get it done before the main revision push."
+          ],
+          "estimated_duration_hours": 0.75,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Draft post content",
+            "Review and submit"
+          ]
+        }
+      ],
+      "overall_comment": "The total estimated study time required is 22.75 hours. The available time window (June 4th to June 12th) offers 3+5+5+3+3+3+3 = 25 hours of study time, which is sufficient. I have prioritized the weak areas (Calculus Series: 6h, DB Transactions: 4h) and ensured all topics receive dedicated time. The schedule will be constructed to mix topics and respect the student's request for spaced practice, avoiding large, monolithic blocks. The Ethics post is scheduled early in the weekend."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "task_views": [
+        {
+          "task_id": "C_INT",
+          "task_name": "Calculus Revision: Integrals",
+          "assessment": "This is a standard review topic for the Calculus exam. Since no specific weakness was mentioned, a moderate allocation of time is appropriate, balanced against weaker topics.",
+          "concerns": [],
+          "recommendations": [
+            "Schedule this topic in shorter, mixed sessions to promote spaced practice.",
+            "Ensure review sessions end well before the student's typical bedtime."
+          ],
+          "estimated_duration_hours": 2.5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review fundamental integration techniques",
+            "Practice definite integral problems",
+            "Work through application problems (e.g., area/volume)"
+          ]
+        },
+        {
+          "task_id": "C_SER",
+          "task_name": "Calculus Revision: Series (Weak Area)",
+          "assessment": "This is the student's weakest area for Calculus and requires increased focus. Time allocation should reflect this priority.",
+          "concerns": [
+            "Over-scheduling this topic might lead to burnout if sessions are too long. Keep sessions focused and varied."
+          ],
+          "recommendations": [
+            "Allocate more total time to this topic compared to Integrals and Differential Equations.",
+            "Break down the study into smaller, manageable chunks focusing on different convergence tests or types of series."
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review convergence tests (Ratio, Root, Comparison)",
+            "Practice power series manipulation and Taylor/Maclaurin series",
+            "Work challenging series problems requiring multiple steps"
+          ]
+        },
+        {
+          "task_id": "C_DE",
+          "task_name": "Calculus Revision: Differential Equations",
+          "assessment": "Standard review topic for Calculus. Needs balanced time allocation.",
+          "concerns": [],
+          "recommendations": [
+            "Focus on solving representative examples of each type of ODE covered.",
+            "Keep study blocks short to maintain focus."
+          ],
+          "estimated_duration_hours": 2.5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review first-order ODE solution methods (Separable, Linear)",
+            "Practice second-order linear homogeneous/non-homogeneous equations",
+            "Review Laplace Transforms if covered"
+          ]
+        },
+        {
+          "task_id": "D_NORM",
+          "task_name": "Databases Revision: Normalization",
+          "assessment": "A foundational topic for Databases. Needs solid review before the Wednesday exam.",
+          "concerns": [],
+          "recommendations": [
+            "Schedule this earlier in the week to allow for consolidation before the Databases exam.",
+            "Use problem sets involving identifying and resolving dependencies."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review definitions of 1NF, 2NF, 3NF, BCNF",
+            "Practice decomposition exercises"
+          ]
+        },
+        {
+          "task_id": "D_SQL",
+          "task_name": "Databases Revision: SQL",
+          "assessment": "Student reports this is okay. Allocate less time than weak areas, focusing on complex queries or review.",
+          "concerns": [],
+          "recommendations": [
+            "Keep sessions focused on complex joins or subqueries rather than basic syntax review.",
+            "Schedule this earlier to keep SQL skills sharp for the exam."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Practice complex multi-table joins",
+            "Review aggregate functions and window functions (if applicable)"
+          ]
+        },
+        {
+          "task_id": "D_TX",
+          "task_name": "Databases Revision: Transactions (Weak Area)",
+          "assessment": "This is a weak area for the Databases exam. It requires focused attention, but must be balanced against Calculus revision.",
+          "concerns": [
+            "Ensure sufficient time is dedicated to understanding concurrency control mechanisms."
+          ],
+          "recommendations": [
+            "Allocate dedicated time slots for this topic, prioritizing it over SQL review.",
+            "Focus on understanding ACID properties and isolation levels."
+          ],
+          "estimated_duration_hours": 2.5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review ACID properties and transaction states",
+            "Study concurrency control protocols (e.g., 2PL)",
+            "Work through scenarios involving deadlocks/starvation"
+          ]
+        },
+        {
+          "task_id": "D_IDX",
+          "task_name": "Databases Revision: Indexes",
+          "assessment": "Standard review topic for Databases.",
+          "concerns": [],
+          "recommendations": [
+            "Schedule this review session to be relatively short and focused on practical application (when to use vs. when not to use).",
+            "Schedule before the Databases exam."
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review B-tree structure basics",
+            "Understand index selectivity and overhead"
+          ]
+        },
+        {
+          "task_id": "E_POST",
+          "task_name": "Ethics Forum Post Submission",
+          "assessment": "This is a very small, time-boxed task with an early deadline (Sunday night). It should be completed early to remove the commitment.",
+          "concerns": [
+            "If scheduled too late in the day, it could interfere with necessary rest before the weekend study sessions begin."
+          ],
+          "recommendations": [
+            "Schedule this task early on Saturday or Sunday morning to ensure it is completed well before the Sunday night deadline.",
+            "Keep the session strictly to 45 minutes."
+          ],
+          "estimated_duration_hours": 0.75,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Draft main points",
+            "Write and post the response"
+          ]
+        }
+      ],
+      "overall_comment": "The total estimated study time required is approximately 16.25 hours. The student has 3 hours available on Thursday (6/4) and Friday (6/5), 5 hours on Saturday (6/6) and Sunday (6/7), and 3 hours available Monday (6/8) through Thursday (6/11) before the Calculus exam. This provides 6 + 10 + 12 = 28 hours of potential study time. The plan is highly feasible regarding total hours. As the student did not specify energy levels or stress, I have prioritized spaced practice by breaking tasks into smaller blocks (no block exceeds 2 hours) and ensuring all work concludes at a reasonable hour (well before 22:00) to protect sleep and well-being, especially given the heavy revision load."
+    },
+    {
+      "agent": "Risk Agent",
+      "task_views": [
+        {
+          "task_id": "C_INT",
+          "task_name": "Calculus Revision: Integrals",
+          "assessment": "This topic has a hard deadline on Friday morning. The schedule must ensure completion well before this date to allow for final review or contingency.",
+          "concerns": [
+            "The scope of 'Integrals' is undefined. It could range from basic Riemann sums to complex improper integrals, leading to scope creep if not clearly defined.",
+            "No dedicated buffer time is allocated before the final exam date."
+          ],
+          "recommendations": [
+            "Allocate time early in the schedule to allow for re-work if the scope proves larger than anticipated.",
+            "Define specific sub-topics within Integrals to manage scope."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Review standard integration techniques (substitution, parts, trig sub)",
+            "Practice challenging improper integrals"
+          ]
+        },
+        {
+          "task_id": "C_SER",
+          "task_name": "Calculus Revision: Series (Weak Area)",
+          "assessment": "This is explicitly identified as the weakest area for Calculus, requiring more focused time. The deadline is firm.",
+          "concerns": [
+            "Weak areas often hide deeper conceptual gaps, meaning the estimated time might be insufficient if initial review reveals significant deficits.",
+            "If scheduling prioritizes other tasks, this critical weak area might be rushed near the deadline."
+          ],
+          "recommendations": [
+            "Schedule this topic first or early in the weekend to maximize time for mastery.",
+            "Ensure study blocks for this topic are broken up (spaced practice) as requested, but ensure the total time allocated is generous."
+          ],
+          "estimated_duration_hours": 4.5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review convergence tests (Ratio, Root, Integral)",
+            "Practice power series and Taylor/Maclaurin series construction",
+            "Work mixed problems involving series convergence and representation"
+          ]
+        },
+        {
+          "task_id": "C_DE",
+          "task_name": "Calculus Revision: Differential Equations",
+          "assessment": "Standard revision topic for the final exam. Needs to be completed before the Friday exam.",
+          "concerns": [
+            "The scope of 'Differential Equations' (e.g., first-order methods vs. higher-order systems) is unknown and could impact required time."
+          ],
+          "recommendations": [
+            "Schedule this topic after the weak area (Series) but ensure it is fully covered before the final review days.",
+            "Focus on problem-solving rather than just reading theory."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Review separable and linear first-order ODEs",
+            "Practice solving homogeneous/non-homogeneous second-order linear equations"
+          ]
+        },
+        {
+          "task_id": "D_NORM",
+          "task_name": "Databases Revision: Normalization",
+          "assessment": "This must be completed before the Databases exam on Wednesday afternoon. It is not flagged as weak, suggesting standard review time is appropriate.",
+          "concerns": [
+            "If the student spends too much time on the weak Databases topic (Transactions), this might get compressed.",
+            "Normalization concepts can be tricky to apply quickly under pressure."
+          ],
+          "recommendations": [
+            "Schedule this early in the planning window to get it done before the Wednesday exam crunch.",
+            "Include a small practice set to confirm understanding."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Review definitions of 1NF, 2NF, 3NF, and BCNF",
+            "Practice decomposition exercises"
+          ]
+        },
+        {
+          "task_id": "D_SQL",
+          "task_name": "Databases Revision: SQL",
+          "assessment": "Flagged as 'okay', suggesting a lighter review is needed compared to weak areas.",
+          "concerns": [
+            "Over-reliance on 'okay' status might lead to skipping necessary practice, causing issues on complex query questions during the exam."
+          ],
+          "recommendations": [
+            "Allocate less time than weak areas, but ensure the time spent involves writing and debugging queries, not just reading syntax."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Practice complex JOINs and subqueries",
+            "Review aggregate functions and GROUP BY clauses"
+          ]
+        },
+        {
+          "task_id": "D_TX",
+          "task_name": "Databases Revision: Transactions (Weak Area)",
+          "assessment": "Identified as a weak area for the Databases exam. Needs focused attention before Wednesday afternoon.",
+          "concerns": [
+            "Weakness in transactions often relates to understanding concurrency control (locking, isolation levels), which can be conceptually difficult and time-consuming to master."
+          ],
+          "recommendations": [
+            "Prioritize this topic immediately after the Ethics Post deadline, as it is the first major exam deadline.",
+            "Ensure sufficient time is blocked out for deep conceptual review."
+          ],
+          "estimated_duration_hours": 3.5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review ACID properties in detail",
+            "Analyze concurrency control mechanisms (e.g., 2PL)",
+            "Work through scheduling conflict scenarios"
+          ]
+        },
+        {
+          "task_id": "D_IDX",
+          "task_name": "Databases Revision: Indexes",
+          "assessment": "Standard review topic for the Databases exam.",
+          "concerns": [
+            "If the student focuses heavily on Transactions, Indexes might be rushed, leading to poor performance understanding."
+          ],
+          "recommendations": [
+            "Schedule this topic alongside Transactions, ensuring a mix of concepts.",
+            "Focus on the trade-offs between different index types (e.g., clustered vs. non-clustered)."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Review B-tree structure and search/insert operations",
+            "Understand index usage and limitations"
+          ]
+        },
+        {
+          "task_id": "E_POST",
+          "task_name": "Ethics Forum Post Submission",
+          "assessment": "A small, fixed-time task due Sunday night. It should be completed early to clear the slate before the heavy revision period begins.",
+          "concerns": [
+            "Although small (45 minutes), if left until Sunday evening, it could interfere with the last available study block before Monday's revision push."
+          ],
+          "recommendations": [
+            "Schedule this for the first available study slot on Thursday or Friday to remove the dependency entirely."
+          ],
+          "estimated_duration_hours": 0.75,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Draft post content",
+            "Final review and submission"
+          ]
+        }
+      ],
+      "overall_comment": "The schedule must prioritize the Databases exam (Wednesday) and the weak Calculus topic (Series). The primary risk is insufficient time allocated to the weak areas, especially since the scope of each topic is not fully defined (hidden work). I recommend front-loading the Databases weak area (Transactions) and the Ethics Post, followed by the Calculus weak area (Series) during the weekend when more study time is available. Crucially, the schedule must build in a buffer day (Tuesday/Wednesday morning) before the Calculus exam on Friday morning (2026-06-12) for final review and contingency, as no buffer was explicitly planned. Given the student's request for spaced practice, the schedule should avoid long contiguous blocks for any single subject."
+    }
+  ],
+  "calendarVersions": [
+    {
+      "calendar": {
+        "calendar_version": 1,
+        "planning_window": {
+          "start_date": "2026-06-04T00:00:00.000Z",
+          "end_date": "2026-06-12T00:00:00.000Z",
+          "reason": "Planning revision schedule until next Friday morning (Calculus exam)."
+        },
+        "overall_strategy": [
+          "Prioritize Databases topics (due Wednesday) first, focusing heavily on the weak area, Transactions.",
+          "Schedule the short Ethics Forum Post early in the weekend to clear that deadline.",
+          "Allocate the majority of weekend time to the weak Calculus topic, Series, using spaced practice.",
+          "Complete all required revision by Tuesday evening to reserve Wednesday afternoon and Thursday for final review/contingency before the Friday Calculus exam.",
+          "Ensure all work blocks respect the 3-hour weekday / 5-hour weekend availability constraints and end before 22:00."
+        ],
+        "days": [
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "First day of planning; focus on starting the Databases revision, including the weak topic, and completing the short Ethics post.",
+            "blocks": [
+              {
+                "id": "THU_01",
+                "task_id": "D_TX",
+                "task_name": "Databases Revision: Transactions (Weak Area)",
+                "type": "work",
+                "start": "2026-06-04T15:00:00.000Z",
+                "end": "2026-06-04T17:00:00.000Z",
+                "duration_hours": 2,
+                "description": "Begin focused review of weak area: Database Transactions.",
+                "reasoning": "Starting immediately on the weak Databases topic to ensure coverage before Wednesday's exam."
+              },
+              {
+                "id": "THU_02",
+                "task_id": "E_POST",
+                "task_name": "Ethics Forum Post Submission",
+                "type": "work",
+                "start": "2026-06-04T17:00:00.000Z",
+                "end": "2026-06-04T17:45:00.000Z",
+                "duration_hours": 0.75,
+                "description": "Complete the short Ethics forum post submission.",
+                "reasoning": "Completing this low-effort task early removes the Sunday deadline pressure."
+              },
+              {
+                "id": "THU_03",
+                "task_id": "D_NORM",
+                "task_name": "Databases Revision: Normalization",
+                "type": "work",
+                "start": "2026-06-04T17:45:00.000Z",
+                "end": "2026-06-04T18:30:00.000Z",
+                "duration_hours": 0.75,
+                "description": "Review core concepts of database normalization.",
+                "reasoning": "Addressing a foundational Databases topic early in the schedule."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Friday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Continue Databases revision, focusing on the remaining topics before the weekend.",
+            "blocks": [
+              {
+                "id": "FRI_01",
+                "task_id": "D_TX",
+                "task_name": "Databases Revision: Transactions (Weak Area)",
+                "type": "work",
+                "start": "2026-06-05T14:00:00.000Z",
+                "end": "2026-06-05T15:30:00.000Z",
+                "duration_hours": 1.5,
+                "description": "Second session on Transactions, focusing on concurrency control mechanisms.",
+                "reasoning": "Dedicated time for the weak Databases topic before the weekend."
+              },
+              {
+                "id": "FRI_02",
+                "task_id": "D_SQL",
+                "task_name": "Databases Revision: SQL",
+                "type": "work",
+                "start": "2026-06-05T15:30:00.000Z",
+                "end": "2026-06-05T17:00:00.000Z",
+                "duration_hours": 1.5,
+                "description": "Review complex SQL queries, leveraging the fact that SQL is generally understood.",
+                "reasoning": "Reviewing SQL to keep it fresh before the Wednesday exam."
+              },
+              {
+                "id": "FRI_03",
+                "task_id": "D_IDX",
+                "task_name": "Databases Revision: Indexes",
+                "type": "work",
+                "start": "2026-06-05T17:00:00.000Z",
+                "end": "2026-06-05T18:00:00.000Z",
+                "duration_hours": 1,
+                "description": "Review Index concepts and trade-offs.",
+                "reasoning": "Completing the final Databases topic before the weekend."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Saturday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Weekend availability begins. Focus shifts entirely to the Calculus weak area (Series) and starting other Calculus topics, respecting spaced practice.",
+            "blocks": [
+              {
+                "id": "SAT_01",
+                "task_id": "C_SER",
+                "task_name": "Calculus Revision: Series (Weak Area)",
+                "type": "work",
+                "start": "2026-06-06T09:00:00.000Z",
+                "end": "2026-06-06T11:00:00.000Z",
+                "duration_hours": 2,
+                "description": "First dedicated session on Calculus Series, focusing on convergence tests.",
+                "reasoning": "Prioritizing the weakest Calculus topic during high-availability weekend time."
+              },
+              {
+                "id": "SAT_02",
+                "task_id": "C_INT",
+                "task_name": "Calculus Revision: Integrals",
+                "type": "work",
+                "start": "2026-06-06T11:00:00.000Z",
+                "end": "2026-06-06T13:00:00.000Z",
+                "duration_hours": 2,
+                "description": "Review core integration techniques.",
+                "reasoning": "Mixing in a standard Calculus topic to promote spaced practice."
+              },
+              {
+                "id": "SAT_03",
+                "task_id": "C_DE",
+                "task_name": "Calculus Revision: Differential Equations",
+                "type": "work",
+                "start": "2026-06-06T14:00:00.000Z",
+                "end": "2026-06-06T14:30:00.000Z",
+                "duration_hours": 0.5,
+                "description": "Initial review of first-order ODE solution methods.",
+                "reasoning": "A short introductory block for Differential Equations."
+              },
+              {
+                "id": "SAT_04",
+                "task_id": "C_SER",
+                "task_name": "Calculus Revision: Series (Weak Area)",
+                "type": "work",
+                "start": "2026-06-06T14:30:00.000Z",
+                "end": "2026-06-06T16:30:00.000Z",
+                "duration_hours": 2,
+                "description": "Second session on Calculus Series, focusing on Taylor/Maclaurin series construction.",
+                "reasoning": "Second spaced practice block for the weak area."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Sunday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Final weekend study day. Complete remaining Calculus topics and ensure all Databases topics are fully covered before Wednesday's exam.",
+            "blocks": [
+              {
+                "id": "SUN_01",
+                "task_id": "D_TX",
+                "task_name": "Databases Revision: Transactions (Weak Area)",
+                "type": "work",
+                "start": "2026-06-07T09:00:00.000Z",
+                "end": "2026-06-07T10:30:00.000Z",
+                "duration_hours": 1.5,
+                "description": "Final review session for Transactions, focusing on isolation levels and conflict scenarios.",
+                "reasoning": "Final dedicated push on the weak Databases topic before the exam deadline."
+              },
+              {
+                "id": "SUN_02",
+                "task_id": "C_INT",
+                "task_name": "Calculus Revision: Integrals",
+                "type": "work",
+                "start": "2026-06-07T10:30:00.000Z",
+                "end": "2026-06-07T12:00:00.000Z",
+                "duration_hours": 1.5,
+                "description": "Practice mixed integral problems.",
+                "reasoning": "Spaced practice for Integrals."
+              },
+              {
+                "id": "SUN_03",
+                "task_id": "C_SER",
+                "task_name": "Calculus Revision: Series (Weak Area)",
+                "type": "work",
+                "start": "2026-06-07T13:00:00.000Z",
+                "end": "2026-06-07T15:00:00.000Z",
+                "duration_hours": 2,
+                "description": "Third session on Calculus Series, focusing on mixed problem solving.",
+                "reasoning": "Final major block for the weakest topic before the final week."
+              },
+              {
+                "id": "SUN_04",
+                "task_id": "C_DE",
+                "task_name": "Calculus Revision: Differential Equations",
+                "type": "work",
+                "start": "2026-06-07T15:00:00.000Z",
+                "end": "2026-06-07T17:00:00.000Z",
+                "duration_hours": 2,
+                "description": "Review second-order linear equations and practice mixed ODE problems.",
+                "reasoning": "Completing the main Differential Equations review."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-08",
+            "day_name": "Monday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "First weekday back. Databases exam is tomorrow afternoon, so focus is on final checks for DB topics and starting Calculus consolidation.",
+            "blocks": [
+              {
+                "id": "MON_01",
+                "task_id": "D_NORM",
+                "task_name": "Databases Revision: Normalization",
+                "type": "work",
+                "start": "2026-06-08T15:00:00.000Z",
+                "end": "2026-06-08T15:45:00.000Z",
+                "duration_hours": 0.75,
+                "description": "Quick review of Normalization definitions and decomposition rules.",
+                "reasoning": "Final check on a core DB topic before the exam."
+              },
+              {
+                "id": "MON_02",
+                "task_id": "D_SQL",
+                "task_name": "Databases Revision: SQL",
+                "type": "work",
+                "start": "2026-06-08T15:45:00.000Z",
+                "end": "2026-06-08T16:45:00.000Z",
+                "duration_hours": 1.25,
+                "description": "Practice complex SQL queries involving multiple joins and aggregations.",
+                "reasoning": "Final SQL practice before the exam."
+              },
+              {
+                "id": "MON_03",
+                "task_id": "C_SER",
+                "task_name": "Calculus Revision: Series (Weak Area)",
+                "type": "work",
+                "start": "2026-06-08T16:45:00.000Z",
+                "end": "2026-06-08T17:30:00.000Z",
+                "duration_hours": 0.75,
+                "description": "Short, focused review of Series convergence tests.",
+                "reasoning": "Spaced practice for the weak Calculus topic."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-09",
+            "day_name": "Tuesday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Databases exam is this afternoon. Use the morning for final light review of DB topics, then switch focus to Calculus consolidation in the evening.",
+            "blocks": [
+              {
+                "id": "TUE_01",
+                "task_id": "D_TX",
+                "task_name": "Databases Revision: Transactions (Weak Area)",
+                "type": "work",
+                "start": "2026-06-09T09:00:00.000Z",
+                "end": "2026-06-09T10:00:00.000Z",
+                "duration_hours": 1,
+                "description": "Final review of Transaction ACID properties and isolation levels.",
+                "reasoning": "Last chance to review weak DB topic before the 14:00 exam."
+              },
+              {
+                "id": "TUE_02",
+                "task_id": "C_INT",
+                "task_name": "Calculus Revision: Integrals",
+                "type": "work",
+                "start": "2026-06-09T18:00:00.000Z",
+                "end": "2026-06-09T19:30:00.000Z",
+                "duration_hours": 1.5,
+                "description": "Practice mixed integration problems, focusing on technique selection.",
+                "reasoning": "Consolidating Calculus knowledge after the Databases exam."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-10",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Databases exam is complete. All available time is dedicated to Calculus revision, focusing on the weak Series topic.",
+            "blocks": [
+              {
+                "id": "WED_01",
+                "task_id": "C_SER",
+                "task_name": "Calculus Revision: Series (Weak Area)",
+                "type": "work",
+                "start": "2026-06-10T15:00:00.000Z",
+                "end": "2026-06-10T17:00:00.000Z",
+                "duration_hours": 2,
+                "description": "Deep dive into Series convergence tests and error bounds.",
+                "reasoning": "Maximizing time on the weakest Calculus topic now that the first exam is done."
+              },
+              {
+                "id": "WED_02",
+                "task_id": "C_DE",
+                "task_name": "Calculus Revision: Differential Equations",
+                "type": "work",
+                "start": "2026-06-10T17:00:00.000Z",
+                "end": "2026-06-10T18:30:00.000Z",
+                "duration_hours": 1.5,
+                "description": "Review solution methods for second-order linear ODEs.",
+                "reasoning": "Consolidating Differential Equations knowledge."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-11",
+            "day_name": "Thursday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Final full day before the Calculus exam. Focus on mixed practice and final review of all Calculus topics, especially Series.",
+            "blocks": [
+              {
+                "id": "THU_04",
+                "task_id": "C_SER",
+                "task_name": "Calculus Revision: Series (Weak Area)",
+                "type": "work",
+                "start": "2026-06-11T14:00:00.000Z",
+                "end": "2026-06-11T15:30:00.000Z",
+                "duration_hours": 1.5,
+                "description": "Final targeted practice on the most difficult Series problems.",
+                "reasoning": "Final dedicated session for the weakest area before the exam."
+              },
+              {
+                "id": "THU_05",
+                "task_id": "C_INT",
+                "task_name": "Calculus Revision: Integrals",
+                "type": "work",
+                "start": "2026-06-11T15:30:00.000Z",
+                "end": "2026-06-11T16:30:00.000Z",
+                "duration_hours": 1,
+                "description": "Review of integration techniques and common pitfalls.",
+                "reasoning": "Reviewing Integrals."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-12",
+            "day_name": "Friday",
+            "assumed_available_hours": 0,
+            "day_reasoning": "Calculus exam is in the morning. No study blocks are scheduled as all work must conclude before the exam time.",
+            "blocks": []
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "The student requested spaced practice, which requires breaking up topics, but the Databases exam deadline (Wednesday) forces heavy concentration on DB topics early in the week.",
+            "resolution": "Databases topics were heavily front-loaded Thursday through Tuesday morning. Calculus topics, especially the weak Series, were scheduled across the weekend and Monday/Wednesday to maximize spacing while respecting the Wednesday DB deadline."
+          },
+          {
+            "conflict": "The Risk Agent noted a lack of explicit buffer time before the final Calculus exam on Friday morning.",
+            "resolution": "The schedule concludes all required work by the end of Thursday (2026-06-11), implicitly creating contingency time on Thursday evening and Friday morning before the exam, which aligns with the spaced practice goal."
+          }
+        ],
+        "known_weaknesses": [
+          "Calculus Series topic is explicitly stated as the weakest area.",
+          "Databases Transactions topic is explicitly stated as a weak area.",
+          "The exact scope of content for all topics is unknown, potentially leading to underestimated time requirements."
+        ],
+        "changes_from_previous": [],
+        "unresolved_critiques": []
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The student requested spaced practice, which requires breaking up topics, but the Databases exam deadline (Wednesday) forces heavy concentration on DB topics early in the week.",
+            "The Risk Agent noted a lack of explicit buffer time before the final Calculus exam on Friday morning."
+          ],
+          "overall_comment": "The schedule successfully prioritizes the earliest hard deadline (Ethics Post on Sunday night) and the first major exam deadline (Databases on Wednesday afternoon). All required work for the Databases exam is scheduled to conclude by Tuesday morning, providing a buffer before the Wednesday 14:00 deadline. The Ethics Post is completed on Thursday. Calculus revision, including significant time for the weak Series topic, is scheduled across the weekend and Monday/Wednesday/Thursday, ensuring all work concludes by the end of Thursday, 2026-06-11, well before the Friday 2026-06-12 09:00 exam. All deadlines are met, and the strategy aligns with protecting the urgent deadlines."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The schedule successfully front-loaded Databases topics to meet the Wednesday deadline while still integrating spaced practice for Calculus topics over the weekend and into the following week.",
+            "The schedule implicitly creates contingency time before the Friday Calculus exam by finishing all scheduled work on Thursday."
+          ],
+          "overall_comment": "The schedule demonstrates excellent prioritization of academic value. The two identified weak areas (Databases Transactions and Calculus Series) received significant, protected time allocation, especially before their respective deadlines. The Ethics Forum Post was handled efficiently early on Thursday. The distribution of work respects the need for spaced practice for Calculus while adhering to the hard deadline for Databases. The schedule is approved."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The estimated duration for Databases Revision: Normalization (2 hours total recommended) was scheduled in two very short, non-contiguous blocks (45 minutes on Thursday, 45 minutes on Monday). This fragmentation is inefficient for conceptual review and practice decomposition examples.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Databases Revision: Normalization"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-08"
+              ],
+              "suggested_fix": "Combine the work for Normalization into one contiguous block of at least 1.5 hours, ideally on Thursday or Friday, to allow for a full review cycle before the Monday/Tuesday review sessions."
+            },
+            {
+              "issue": "The total allocated time for Databases Revision: SQL (3 hours recommended) was split into 1.5 hours on Friday and 1.25 hours on Monday. While this respects spacing, the 1.25-hour block on Monday is quite short for practicing complex queries, which often benefit from longer focus periods.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Databases Revision: SQL"
+              ],
+              "affected_days": [
+                "2026-06-05",
+                "2026-06-08"
+              ],
+              "suggested_fix": "Consider consolidating the Monday SQL session with another short DB review (like Indexes) or extending the Friday session slightly, to ensure the Monday session is at least 1.5 hours long for meaningful practice."
+            },
+            {
+              "issue": "The total allocated time for Databases Revision: Indexes (2 hours recommended) was split into one 1-hour block on Friday and zero time allocated later, despite the exam being Wednesday. This leaves the topic unreviewed after Friday until the final check on Monday, which is a long gap for a topic that should be reviewed closer to the exam.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Databases Revision: Indexes"
+              ],
+              "affected_days": [
+                "2026-06-05",
+                "2026-06-08"
+              ],
+              "suggested_fix": "Schedule a second, shorter review (e.g., 30-45 minutes) for Indexes on Tuesday morning alongside the final Transactions review, or earlier on Monday."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The student requested spaced practice, which requires breaking up topics, but the Databases exam deadline (Wednesday) forces heavy concentration on DB topics early in the week.",
+            "The Risk Agent noted a lack of explicit buffer time before the final Calculus exam on Friday morning.",
+            "The planner successfully prioritized the weak areas (Calculus Series: 6h total, DB Transactions: 5h total) and scheduled the Ethics post early."
+          ],
+          "overall_comment": "The schedule successfully allocates the required 22.75 hours of study time within the 25 available hours and respects the deadlines by front-loading Databases work. The overall strategy of spacing Calculus topics over the weekend and into the following week is good. However, the fragmentation of the Normalization task is inefficient, and the spacing/timing for Indexes review could be optimized to be closer to the Databases exam on Wednesday."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The schedule successfully front-loaded Databases topics to meet the Wednesday deadline while integrating Calculus review across the weekend and early next week to promote spaced practice.",
+            "All work blocks conclude well before 22:00, respecting the need for adequate rest, especially given the heavy revision load."
+          ],
+          "overall_comment": "The schedule is humane and well-paced. The total workload (estimated 16.25 hours vs. 28 available hours) is manageable. The strategy of front-loading the Databases exam content (due Wednesday) and then dedicating the remainder of the week to Calculus revision, while prioritizing the weak Series topic, is excellent for both performance and sustainability. All work ends early enough to protect sleep."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Ethics Forum Post Submission was scheduled for Thursday, 2026-06-04, but the deadline is Sunday night (2026-06-07). While completing it early is good, scheduling it on Thursday means the student must immediately pivot from planning/setup to deep work, potentially rushing the initial assessment of the weak Databases topic (Transactions).",
+              "severity": "minor",
+              "affected_tasks": [
+                "Ethics Forum Post Submission",
+                "Databases Revision: Transactions (Weak Area)"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Move the Ethics Forum Post Submission to Saturday morning (2026-06-06) after the first block of Transactions review, or ensure the Thursday work block is very light to allow for mental preparation for the next day's focus."
+            },
+            {
+              "issue": "The schedule relies on the assumption that all required work for Databases (due Wednesday) and Calculus (due Friday) is completed by the end of Thursday, 2026-06-11. While this creates implicit contingency time, the total estimated hours allocated to the two explicitly weak areas (Transactions: 3.5h est., Series: 4.5h est.) only total 8 hours. The schedule allocated 3.5h to Transactions and 6.5h to Series, suggesting the planner added contingency time to the weak areas, which is good, but the scope uncertainty remains high. If the weak areas require significantly more time, the final review day (Thursday) might be consumed by necessary catch-up.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Databases Revision: Transactions (Weak Area)",
+                "Calculus Revision: Series (Weak Area)"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-06",
+                "2026-06-07",
+                "2026-06-08",
+                "2026-06-10",
+                "2026-06-11"
+              ],
+              "suggested_fix": "Explicitly label the final block on Thursday, 2026-06-11, as 'Contingency/Final Review for Calculus' rather than assigning specific tasks, to acknowledge the risk associated with unknown scope in the weak topics."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The student requested spaced practice, which requires breaking up topics, but the Databases exam deadline (Wednesday) forces heavy concentration on DB topics early in the week.",
+            "The Risk Agent noted a lack of explicit buffer time before the final Calculus exam on Friday morning.",
+            "The planner addressed the lack of buffer time by concluding all required work by the end of Thursday (2026-06-11), implicitly creating contingency time on Thursday evening and Friday morning before the exam, which aligns with the spaced practice goal."
+          ],
+          "overall_comment": "The schedule successfully prioritizes the immediate Databases exam and allocates significant time to both identified weak areas (Transactions and Series) using spaced practice across the weekend and early week. The implicit buffer before the Calculus exam is noted and accepted. I am approving with minor concerns regarding the immediate scheduling of the low-priority Ethics Post on Thursday, which slightly disrupts the initial focus on the high-priority weak Databases topic, and the inherent risk associated with unknown scope in the weak topics consuming the final review day."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-12 is outside the planning window 2026-06-04T00:00:00.000Z → 2026-06-12T00:00:00.000Z.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 5,
+      "hasCritical": false
+    }
+  ],
+  "finalCalendar": {
+    "calendar_version": 1,
+    "planning_window": {
+      "start_date": "2026-06-04T00:00:00.000Z",
+      "end_date": "2026-06-12T00:00:00.000Z",
+      "reason": "Planning revision schedule until next Friday morning (Calculus exam)."
+    },
+    "overall_strategy": [
+      "Prioritize Databases topics (due Wednesday) first, focusing heavily on the weak area, Transactions.",
+      "Schedule the short Ethics Forum Post early in the weekend to clear that deadline.",
+      "Allocate the majority of weekend time to the weak Calculus topic, Series, using spaced practice.",
+      "Complete all required revision by Tuesday evening to reserve Wednesday afternoon and Thursday for final review/contingency before the Friday Calculus exam.",
+      "Ensure all work blocks respect the 3-hour weekday / 5-hour weekend availability constraints and end before 22:00."
+    ],
+    "days": [
+      {
+        "date": "2026-06-04",
+        "day_name": "Thursday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "First day of planning; focus on starting the Databases revision, including the weak topic, and completing the short Ethics post.",
+        "blocks": [
+          {
+            "id": "THU_01",
+            "task_id": "D_TX",
+            "task_name": "Databases Revision: Transactions (Weak Area)",
+            "type": "work",
+            "start": "2026-06-04T15:00:00.000Z",
+            "end": "2026-06-04T17:00:00.000Z",
+            "duration_hours": 2,
+            "description": "Begin focused review of weak area: Database Transactions.",
+            "reasoning": "Starting immediately on the weak Databases topic to ensure coverage before Wednesday's exam."
+          },
+          {
+            "id": "THU_02",
+            "task_id": "E_POST",
+            "task_name": "Ethics Forum Post Submission",
+            "type": "work",
+            "start": "2026-06-04T17:00:00.000Z",
+            "end": "2026-06-04T17:45:00.000Z",
+            "duration_hours": 0.75,
+            "description": "Complete the short Ethics forum post submission.",
+            "reasoning": "Completing this low-effort task early removes the Sunday deadline pressure."
+          },
+          {
+            "id": "THU_03",
+            "task_id": "D_NORM",
+            "task_name": "Databases Revision: Normalization",
+            "type": "work",
+            "start": "2026-06-04T17:45:00.000Z",
+            "end": "2026-06-04T18:30:00.000Z",
+            "duration_hours": 0.75,
+            "description": "Review core concepts of database normalization.",
+            "reasoning": "Addressing a foundational Databases topic early in the schedule."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-05",
+        "day_name": "Friday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "Continue Databases revision, focusing on the remaining topics before the weekend.",
+        "blocks": [
+          {
+            "id": "FRI_01",
+            "task_id": "D_TX",
+            "task_name": "Databases Revision: Transactions (Weak Area)",
+            "type": "work",
+            "start": "2026-06-05T14:00:00.000Z",
+            "end": "2026-06-05T15:30:00.000Z",
+            "duration_hours": 1.5,
+            "description": "Second session on Transactions, focusing on concurrency control mechanisms.",
+            "reasoning": "Dedicated time for the weak Databases topic before the weekend."
+          },
+          {
+            "id": "FRI_02",
+            "task_id": "D_SQL",
+            "task_name": "Databases Revision: SQL",
+            "type": "work",
+            "start": "2026-06-05T15:30:00.000Z",
+            "end": "2026-06-05T17:00:00.000Z",
+            "duration_hours": 1.5,
+            "description": "Review complex SQL queries, leveraging the fact that SQL is generally understood.",
+            "reasoning": "Reviewing SQL to keep it fresh before the Wednesday exam."
+          },
+          {
+            "id": "FRI_03",
+            "task_id": "D_IDX",
+            "task_name": "Databases Revision: Indexes",
+            "type": "work",
+            "start": "2026-06-05T17:00:00.000Z",
+            "end": "2026-06-05T18:00:00.000Z",
+            "duration_hours": 1,
+            "description": "Review Index concepts and trade-offs.",
+            "reasoning": "Completing the final Databases topic before the weekend."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-06",
+        "day_name": "Saturday",
+        "assumed_available_hours": 5,
+        "day_reasoning": "Weekend availability begins. Focus shifts entirely to the Calculus weak area (Series) and starting other Calculus topics, respecting spaced practice.",
+        "blocks": [
+          {
+            "id": "SAT_01",
+            "task_id": "C_SER",
+            "task_name": "Calculus Revision: Series (Weak Area)",
+            "type": "work",
+            "start": "2026-06-06T09:00:00.000Z",
+            "end": "2026-06-06T11:00:00.000Z",
+            "duration_hours": 2,
+            "description": "First dedicated session on Calculus Series, focusing on convergence tests.",
+            "reasoning": "Prioritizing the weakest Calculus topic during high-availability weekend time."
+          },
+          {
+            "id": "SAT_02",
+            "task_id": "C_INT",
+            "task_name": "Calculus Revision: Integrals",
+            "type": "work",
+            "start": "2026-06-06T11:00:00.000Z",
+            "end": "2026-06-06T13:00:00.000Z",
+            "duration_hours": 2,
+            "description": "Review core integration techniques.",
+            "reasoning": "Mixing in a standard Calculus topic to promote spaced practice."
+          },
+          {
+            "id": "SAT_03",
+            "task_id": "C_DE",
+            "task_name": "Calculus Revision: Differential Equations",
+            "type": "work",
+            "start": "2026-06-06T14:00:00.000Z",
+            "end": "2026-06-06T14:30:00.000Z",
+            "duration_hours": 0.5,
+            "description": "Initial review of first-order ODE solution methods.",
+            "reasoning": "A short introductory block for Differential Equations."
+          },
+          {
+            "id": "SAT_04",
+            "task_id": "C_SER",
+            "task_name": "Calculus Revision: Series (Weak Area)",
+            "type": "work",
+            "start": "2026-06-06T14:30:00.000Z",
+            "end": "2026-06-06T16:30:00.000Z",
+            "duration_hours": 2,
+            "description": "Second session on Calculus Series, focusing on Taylor/Maclaurin series construction.",
+            "reasoning": "Second spaced practice block for the weak area."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-07",
+        "day_name": "Sunday",
+        "assumed_available_hours": 5,
+        "day_reasoning": "Final weekend study day. Complete remaining Calculus topics and ensure all Databases topics are fully covered before Wednesday's exam.",
+        "blocks": [
+          {
+            "id": "SUN_01",
+            "task_id": "D_TX",
+            "task_name": "Databases Revision: Transactions (Weak Area)",
+            "type": "work",
+            "start": "2026-06-07T09:00:00.000Z",
+            "end": "2026-06-07T10:30:00.000Z",
+            "duration_hours": 1.5,
+            "description": "Final review session for Transactions, focusing on isolation levels and conflict scenarios.",
+            "reasoning": "Final dedicated push on the weak Databases topic before the exam deadline."
+          },
+          {
+            "id": "SUN_02",
+            "task_id": "C_INT",
+            "task_name": "Calculus Revision: Integrals",
+            "type": "work",
+            "start": "2026-06-07T10:30:00.000Z",
+            "end": "2026-06-07T12:00:00.000Z",
+            "duration_hours": 1.5,
+            "description": "Practice mixed integral problems.",
+            "reasoning": "Spaced practice for Integrals."
+          },
+          {
+            "id": "SUN_03",
+            "task_id": "C_SER",
+            "task_name": "Calculus Revision: Series (Weak Area)",
+            "type": "work",
+            "start": "2026-06-07T13:00:00.000Z",
+            "end": "2026-06-07T15:00:00.000Z",
+            "duration_hours": 2,
+            "description": "Third session on Calculus Series, focusing on mixed problem solving.",
+            "reasoning": "Final major block for the weakest topic before the final week."
+          },
+          {
+            "id": "SUN_04",
+            "task_id": "C_DE",
+            "task_name": "Calculus Revision: Differential Equations",
+            "type": "work",
+            "start": "2026-06-07T15:00:00.000Z",
+            "end": "2026-06-07T17:00:00.000Z",
+            "duration_hours": 2,
+            "description": "Review second-order linear equations and practice mixed ODE problems.",
+            "reasoning": "Completing the main Differential Equations review."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-08",
+        "day_name": "Monday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "First weekday back. Databases exam is tomorrow afternoon, so focus is on final checks for DB topics and starting Calculus consolidation.",
+        "blocks": [
+          {
+            "id": "MON_01",
+            "task_id": "D_NORM",
+            "task_name": "Databases Revision: Normalization",
+            "type": "work",
+            "start": "2026-06-08T15:00:00.000Z",
+            "end": "2026-06-08T15:45:00.000Z",
+            "duration_hours": 0.75,
+            "description": "Quick review of Normalization definitions and decomposition rules.",
+            "reasoning": "Final check on a core DB topic before the exam."
+          },
+          {
+            "id": "MON_02",
+            "task_id": "D_SQL",
+            "task_name": "Databases Revision: SQL",
+            "type": "work",
+            "start": "2026-06-08T15:45:00.000Z",
+            "end": "2026-06-08T16:45:00.000Z",
+            "duration_hours": 1.25,
+            "description": "Practice complex SQL queries involving multiple joins and aggregations.",
+            "reasoning": "Final SQL practice before the exam."
+          },
+          {
+            "id": "MON_03",
+            "task_id": "C_SER",
+            "task_name": "Calculus Revision: Series (Weak Area)",
+            "type": "work",
+            "start": "2026-06-08T16:45:00.000Z",
+            "end": "2026-06-08T17:30:00.000Z",
+            "duration_hours": 0.75,
+            "description": "Short, focused review of Series convergence tests.",
+            "reasoning": "Spaced practice for the weak Calculus topic."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-09",
+        "day_name": "Tuesday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "Databases exam is this afternoon. Use the morning for final light review of DB topics, then switch focus to Calculus consolidation in the evening.",
+        "blocks": [
+          {
+            "id": "TUE_01",
+            "task_id": "D_TX",
+            "task_name": "Databases Revision: Transactions (Weak Area)",
+            "type": "work",
+            "start": "2026-06-09T09:00:00.000Z",
+            "end": "2026-06-09T10:00:00.000Z",
+            "duration_hours": 1,
+            "description": "Final review of Transaction ACID properties and isolation levels.",
+            "reasoning": "Last chance to review weak DB topic before the 14:00 exam."
+          },
+          {
+            "id": "TUE_02",
+            "task_id": "C_INT",
+            "task_name": "Calculus Revision: Integrals",
+            "type": "work",
+            "start": "2026-06-09T18:00:00.000Z",
+            "end": "2026-06-09T19:30:00.000Z",
+            "duration_hours": 1.5,
+            "description": "Practice mixed integration problems, focusing on technique selection.",
+            "reasoning": "Consolidating Calculus knowledge after the Databases exam."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-10",
+        "day_name": "Wednesday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "Databases exam is complete. All available time is dedicated to Calculus revision, focusing on the weak Series topic.",
+        "blocks": [
+          {
+            "id": "WED_01",
+            "task_id": "C_SER",
+            "task_name": "Calculus Revision: Series (Weak Area)",
+            "type": "work",
+            "start": "2026-06-10T15:00:00.000Z",
+            "end": "2026-06-10T17:00:00.000Z",
+            "duration_hours": 2,
+            "description": "Deep dive into Series convergence tests and error bounds.",
+            "reasoning": "Maximizing time on the weakest Calculus topic now that the first exam is done."
+          },
+          {
+            "id": "WED_02",
+            "task_id": "C_DE",
+            "task_name": "Calculus Revision: Differential Equations",
+            "type": "work",
+            "start": "2026-06-10T17:00:00.000Z",
+            "end": "2026-06-10T18:30:00.000Z",
+            "duration_hours": 1.5,
+            "description": "Review solution methods for second-order linear ODEs.",
+            "reasoning": "Consolidating Differential Equations knowledge."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-11",
+        "day_name": "Thursday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "Final full day before the Calculus exam. Focus on mixed practice and final review of all Calculus topics, especially Series.",
+        "blocks": [
+          {
+            "id": "THU_04",
+            "task_id": "C_SER",
+            "task_name": "Calculus Revision: Series (Weak Area)",
+            "type": "work",
+            "start": "2026-06-11T14:00:00.000Z",
+            "end": "2026-06-11T15:30:00.000Z",
+            "duration_hours": 1.5,
+            "description": "Final targeted practice on the most difficult Series problems.",
+            "reasoning": "Final dedicated session for the weakest area before the exam."
+          },
+          {
+            "id": "THU_05",
+            "task_id": "C_INT",
+            "task_name": "Calculus Revision: Integrals",
+            "type": "work",
+            "start": "2026-06-11T15:30:00.000Z",
+            "end": "2026-06-11T16:30:00.000Z",
+            "duration_hours": 1,
+            "description": "Review of integration techniques and common pitfalls.",
+            "reasoning": "Reviewing Integrals."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-12",
+        "day_name": "Friday",
+        "assumed_available_hours": 0,
+        "day_reasoning": "Calculus exam is in the morning. No study blocks are scheduled as all work must conclude before the exam time.",
+        "blocks": []
+      }
+    ],
+    "compromises": [
+      {
+        "conflict": "The student requested spaced practice, which requires breaking up topics, but the Databases exam deadline (Wednesday) forces heavy concentration on DB topics early in the week.",
+        "resolution": "Databases topics were heavily front-loaded Thursday through Tuesday morning. Calculus topics, especially the weak Series, were scheduled across the weekend and Monday/Wednesday to maximize spacing while respecting the Wednesday DB deadline."
+      },
+      {
+        "conflict": "The Risk Agent noted a lack of explicit buffer time before the final Calculus exam on Friday morning.",
+        "resolution": "The schedule concludes all required work by the end of Thursday (2026-06-11), implicitly creating contingency time on Thursday evening and Friday morning before the exam, which aligns with the spaced practice goal."
+      }
+    ],
+    "known_weaknesses": [
+      "Calculus Series topic is explicitly stated as the weakest area.",
+      "Databases Transactions topic is explicitly stated as a weak area.",
+      "The exact scope of content for all topics is unknown, potentially leading to underestimated time requirements."
+    ],
+    "changes_from_previous": [],
+    "unresolved_critiques": []
+  },
+  "critiques": [
+    {
+      "agent": "Deadline Agent",
+      "calendar_version": 1,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The student requested spaced practice, which requires breaking up topics, but the Databases exam deadline (Wednesday) forces heavy concentration on DB topics early in the week.",
+        "The Risk Agent noted a lack of explicit buffer time before the final Calculus exam on Friday morning."
+      ],
+      "overall_comment": "The schedule successfully prioritizes the earliest hard deadline (Ethics Post on Sunday night) and the first major exam deadline (Databases on Wednesday afternoon). All required work for the Databases exam is scheduled to conclude by Tuesday morning, providing a buffer before the Wednesday 14:00 deadline. The Ethics Post is completed on Thursday. Calculus revision, including significant time for the weak Series topic, is scheduled across the weekend and Monday/Wednesday/Thursday, ensuring all work concludes by the end of Thursday, 2026-06-11, well before the Friday 2026-06-12 09:00 exam. All deadlines are met, and the strategy aligns with protecting the urgent deadlines."
+    },
+    {
+      "agent": "Grade Agent",
+      "calendar_version": 1,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The schedule successfully front-loaded Databases topics to meet the Wednesday deadline while still integrating spaced practice for Calculus topics over the weekend and into the following week.",
+        "The schedule implicitly creates contingency time before the Friday Calculus exam by finishing all scheduled work on Thursday."
+      ],
+      "overall_comment": "The schedule demonstrates excellent prioritization of academic value. The two identified weak areas (Databases Transactions and Calculus Series) received significant, protected time allocation, especially before their respective deadlines. The Ethics Forum Post was handled efficiently early on Thursday. The distribution of work respects the need for spaced practice for Calculus while adhering to the hard deadline for Databases. The schedule is approved."
+    },
+    {
+      "agent": "Effort Agent",
+      "calendar_version": 1,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The estimated duration for Databases Revision: Normalization (2 hours total recommended) was scheduled in two very short, non-contiguous blocks (45 minutes on Thursday, 45 minutes on Monday). This fragmentation is inefficient for conceptual review and practice decomposition examples.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Databases Revision: Normalization"
+          ],
+          "affected_days": [
+            "2026-06-04",
+            "2026-06-08"
+          ],
+          "suggested_fix": "Combine the work for Normalization into one contiguous block of at least 1.5 hours, ideally on Thursday or Friday, to allow for a full review cycle before the Monday/Tuesday review sessions."
+        },
+        {
+          "issue": "The total allocated time for Databases Revision: SQL (3 hours recommended) was split into 1.5 hours on Friday and 1.25 hours on Monday. While this respects spacing, the 1.25-hour block on Monday is quite short for practicing complex queries, which often benefit from longer focus periods.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Databases Revision: SQL"
+          ],
+          "affected_days": [
+            "2026-06-05",
+            "2026-06-08"
+          ],
+          "suggested_fix": "Consider consolidating the Monday SQL session with another short DB review (like Indexes) or extending the Friday session slightly, to ensure the Monday session is at least 1.5 hours long for meaningful practice."
+        },
+        {
+          "issue": "The total allocated time for Databases Revision: Indexes (2 hours recommended) was split into one 1-hour block on Friday and zero time allocated later, despite the exam being Wednesday. This leaves the topic unreviewed after Friday until the final check on Monday, which is a long gap for a topic that should be reviewed closer to the exam.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Databases Revision: Indexes"
+          ],
+          "affected_days": [
+            "2026-06-05",
+            "2026-06-08"
+          ],
+          "suggested_fix": "Schedule a second, shorter review (e.g., 30-45 minutes) for Indexes on Tuesday morning alongside the final Transactions review, or earlier on Monday."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The student requested spaced practice, which requires breaking up topics, but the Databases exam deadline (Wednesday) forces heavy concentration on DB topics early in the week.",
+        "The Risk Agent noted a lack of explicit buffer time before the final Calculus exam on Friday morning.",
+        "The planner successfully prioritized the weak areas (Calculus Series: 6h total, DB Transactions: 5h total) and scheduled the Ethics post early."
+      ],
+      "overall_comment": "The schedule successfully allocates the required 22.75 hours of study time within the 25 available hours and respects the deadlines by front-loading Databases work. The overall strategy of spacing Calculus topics over the weekend and into the following week is good. However, the fragmentation of the Normalization task is inefficient, and the spacing/timing for Indexes review could be optimized to be closer to the Databases exam on Wednesday."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "calendar_version": 1,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The schedule successfully front-loaded Databases topics to meet the Wednesday deadline while integrating Calculus review across the weekend and early next week to promote spaced practice.",
+        "All work blocks conclude well before 22:00, respecting the need for adequate rest, especially given the heavy revision load."
+      ],
+      "overall_comment": "The schedule is humane and well-paced. The total workload (estimated 16.25 hours vs. 28 available hours) is manageable. The strategy of front-loading the Databases exam content (due Wednesday) and then dedicating the remainder of the week to Calculus revision, while prioritizing the weak Series topic, is excellent for both performance and sustainability. All work ends early enough to protect sleep."
+    },
+    {
+      "agent": "Risk Agent",
+      "calendar_version": 1,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The Ethics Forum Post Submission was scheduled for Thursday, 2026-06-04, but the deadline is Sunday night (2026-06-07). While completing it early is good, scheduling it on Thursday means the student must immediately pivot from planning/setup to deep work, potentially rushing the initial assessment of the weak Databases topic (Transactions).",
+          "severity": "minor",
+          "affected_tasks": [
+            "Ethics Forum Post Submission",
+            "Databases Revision: Transactions (Weak Area)"
+          ],
+          "affected_days": [
+            "2026-06-04"
+          ],
+          "suggested_fix": "Move the Ethics Forum Post Submission to Saturday morning (2026-06-06) after the first block of Transactions review, or ensure the Thursday work block is very light to allow for mental preparation for the next day's focus."
+        },
+        {
+          "issue": "The schedule relies on the assumption that all required work for Databases (due Wednesday) and Calculus (due Friday) is completed by the end of Thursday, 2026-06-11. While this creates implicit contingency time, the total estimated hours allocated to the two explicitly weak areas (Transactions: 3.5h est., Series: 4.5h est.) only total 8 hours. The schedule allocated 3.5h to Transactions and 6.5h to Series, suggesting the planner added contingency time to the weak areas, which is good, but the scope uncertainty remains high. If the weak areas require significantly more time, the final review day (Thursday) might be consumed by necessary catch-up.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Databases Revision: Transactions (Weak Area)",
+            "Calculus Revision: Series (Weak Area)"
+          ],
+          "affected_days": [
+            "2026-06-04",
+            "2026-06-06",
+            "2026-06-07",
+            "2026-06-08",
+            "2026-06-10",
+            "2026-06-11"
+          ],
+          "suggested_fix": "Explicitly label the final block on Thursday, 2026-06-11, as 'Contingency/Final Review for Calculus' rather than assigning specific tasks, to acknowledge the risk associated with unknown scope in the weak topics."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The student requested spaced practice, which requires breaking up topics, but the Databases exam deadline (Wednesday) forces heavy concentration on DB topics early in the week.",
+        "The Risk Agent noted a lack of explicit buffer time before the final Calculus exam on Friday morning.",
+        "The planner addressed the lack of buffer time by concluding all required work by the end of Thursday (2026-06-11), implicitly creating contingency time on Thursday evening and Friday morning before the exam, which aligns with the spaced practice goal."
+      ],
+      "overall_comment": "The schedule successfully prioritizes the immediate Databases exam and allocates significant time to both identified weak areas (Transactions and Series) using spaced practice across the weekend and early week. The implicit buffer before the Calculus exam is noted and accepted. I am approving with minor concerns regarding the immediate scheduling of the low-priority Ethics Post on Thursday, which slightly disrupts the initial focus on the high-priority weak Databases topic, and the inherent risk associated with unknown scope in the weak topics consuming the final review day."
+    }
+  ],
+  "validation": {
+    "valid": false,
+    "violations": [
+      {
+        "code": "day_outside_window",
+        "message": "2026-06-12 is outside the planning window 2026-06-04T00:00:00.000Z → 2026-06-12T00:00:00.000Z.",
+        "severity": "error"
+      }
+    ]
+  },
+  "evaluation": {
+    "evaluator": "Schedule Evaluator",
+    "calendar_version": 1,
+    "planner_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "evaluator_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "overall_score": 4.3,
+    "model_score": 4,
+    "hard_score": 4.5,
+    "hard_metrics": {
+      "score": 86.9,
+      "metrics": [
+        {
+          "name": "generation_time_seconds",
+          "value": 29.7,
+          "score": 100,
+          "explanation": "29.7s from run start to final schedule selection."
+        },
+        {
+          "name": "rejection_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 specialist agent(s) rejected the final calendar."
+        },
+        {
+          "name": "critical_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 critical issue(s) were raised in final critiques."
+        },
+        {
+          "name": "major_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 major issue(s) were raised in final critiques."
+        },
+        {
+          "name": "deadline_violation_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 scheduled work block(s) end after their task deadline."
+        },
+        {
+          "name": "task_coverage_ratio",
+          "value": 1,
+          "score": 100,
+          "explanation": "8/8 inferred task(s) received at least one work block."
+        },
+        {
+          "name": "availability_overrun_hours",
+          "value": 5.5,
+          "score": 8.3,
+          "explanation": "5.5h scheduled above the planner's assumed available hours."
+        }
+      ]
+    },
+    "dimension_scores": [
+      {
+        "dimension": "requirement_match",
+        "score": 4,
+        "rationale": "The schedule successfully incorporated spaced practice and prioritized weak topics. However, the explicit availability constraints (3h weekdays, 5h weekends) were exceeded by 5.5 hours, violating a core input requirement, although this was necessary to fit the required study time."
+      },
+      {
+        "dimension": "deadline_safety",
+        "score": 5,
+        "rationale": "All hard deadlines (Ethics Post Sunday, Databases Wednesday) are met with sufficient lead time. The schedule concludes all work by Thursday evening, creating an implicit buffer before the Friday Calculus exam."
+      },
+      {
+        "dimension": "workload_realism",
+        "score": 3.5,
+        "rationale": "The total scheduled time exceeded the stated availability by 5.5 hours, suggesting the workload was slightly too high for the stated constraints. However, the workload was distributed well across the available days."
+      },
+      {
+        "dimension": "academic_priority",
+        "score": 5,
+        "rationale": "Excellent prioritization. Weak areas (Series, Transactions) received disproportionately more time than 'okay' or standard topics. Databases topics were correctly front-loaded due to the earlier deadline."
+      },
+      {
+        "dimension": "wellbeing_balance",
+        "score": 4.5,
+        "rationale": "The schedule respected the request for spaced practice by breaking tasks into small blocks (mostly 1.5-2 hours) and ensured all work concluded early enough to protect sleep, despite the high total workload."
+      },
+      {
+        "dimension": "risk_resilience",
+        "score": 3.5,
+        "rationale": "The schedule is generally resilient due to finishing all tasks by Thursday evening. However, the Risk Agent noted that the final day (Thursday) is entirely dedicated to scheduled work rather than explicitly labeled contingency time, which is a minor risk given the unknown scope of the weak topics."
+      }
+    ],
+    "strengths": [
+      "Excellent prioritization of weak topics (Series and Transactions) relative to other material.",
+      "Successfully met both hard deadlines (Ethics Post and Databases Exam) with appropriate lead time.",
+      "Adhered well to the request for spaced practice by using many short study blocks.",
+      "All work is completed by Thursday evening, creating an implicit buffer before the final exam."
+    ],
+    "weaknesses": [
+      "The total scheduled time exceeded the stated availability constraints by 5.5 hours.",
+      "The Ethics Forum Post was scheduled very early (Thursday), potentially disrupting the initial focus on the high-priority weak Databases topic.",
+      "The fragmentation of the Normalization task into very short blocks (45 minutes) is inefficient for conceptual review."
+    ],
+    "comparison_notes": [
+      "The model correctly identified and allocated extra time to the weak topics as requested.",
+      "The model struggled slightly with availability constraints, prioritizing task completion over strict adherence to the 3h/5h split, which is often necessary when scope is high.",
+      "The schedule coherence is high due to the clear prioritization structure (DB first, then Calculus)."
+    ],
+    "recommendation": "The model produced a high-quality schedule that strongly supports academic goals. For future runs, ensure that tasks with very short durations (like the Ethics Post) are scheduled either immediately after a major block or later in the weekend/early week, rather than interrupting the first high-priority work session. Also, consolidate very short blocks for conceptual topics like Normalization to improve study efficiency."
+  },
+  "usage": {
+    "callCount": 13,
+    "promptTokens": 89073,
+    "completionTokens": 18901,
+    "totalTokens": 107974,
+    "estimatedCostUsd": 0.016467,
+    "calls": [
+      {
+        "id": "99269d93-9806-4038-87bf-93426a96f08f",
+        "schemaName": "interpreter_output",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:40:22.444Z",
+        "completedAt": "2026-06-04T14:40:26.972Z",
+        "durationMs": 4528,
+        "promptChars": 4176,
+        "completionChars": 4684,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 982,
+        "completionTokens": 1631,
+        "totalTokens": 2613,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000751
+      },
+      {
+        "id": "8be52cef-52de-4de5-8950-71e7cf8f0e7d",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:40:26.973Z",
+        "completedAt": "2026-06-04T14:40:32.328Z",
+        "durationMs": 5355,
+        "promptChars": 9478,
+        "completionChars": 6727,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2728,
+        "completionTokens": 1661,
+        "totalTokens": 4389,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000937
+      },
+      {
+        "id": "fec83adf-a172-481f-adda-b2754da51720",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:40:26.973Z",
+        "completedAt": "2026-06-04T14:40:32.708Z",
+        "durationMs": 5735,
+        "promptChars": 8966,
+        "completionChars": 6239,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2576,
+        "completionTokens": 1789,
+        "totalTokens": 4365,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000973
+      },
+      {
+        "id": "23fac216-709d-4a03-98bc-a978483886a4",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:40:26.973Z",
+        "completedAt": "2026-06-04T14:40:32.883Z",
+        "durationMs": 5910,
+        "promptChars": 8496,
+        "completionChars": 7476,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2488,
+        "completionTokens": 1864,
+        "totalTokens": 4352,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000994
+      },
+      {
+        "id": "af0481c3-d5bc-4a6d-b8c3-27afd4b9fc40",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:40:26.973Z",
+        "completedAt": "2026-06-04T14:40:32.949Z",
+        "durationMs": 5976,
+        "promptChars": 8542,
+        "completionChars": 7889,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2494,
+        "completionTokens": 1872,
+        "totalTokens": 4366,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000998
+      },
+      {
+        "id": "351d7ffd-25c3-47cc-84cf-2e32f59da97c",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:40:26.973Z",
+        "completedAt": "2026-06-04T14:40:33.003Z",
+        "durationMs": 6030,
+        "promptChars": 8470,
+        "completionChars": 7719,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2494,
+        "completionTokens": 1839,
+        "totalTokens": 4333,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000985
+      },
+      {
+        "id": "553456e8-523c-4de9-93c9-79c533a9d2f0",
+        "schemaName": "calendar_proposal",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:40:33.004Z",
+        "completedAt": "2026-06-04T14:40:48.146Z",
+        "durationMs": 15142,
+        "promptChars": 47535,
+        "completionChars": 15241,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 11823,
+        "completionTokens": 4977,
+        "totalTokens": 16800,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.003173
+      },
+      {
+        "id": "417777d2-245c-423a-9509-e50bc18513aa",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:40:48.146Z",
+        "completedAt": "2026-06-04T14:40:50.524Z",
+        "durationMs": 2378,
+        "promptChars": 29640,
+        "completionChars": 970,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 8885,
+        "completionTokens": 193,
+        "totalTokens": 9078,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000966
+      },
+      {
+        "id": "0cad1a8a-8da2-4ff2-9386-cb1f01fc526f",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:40:48.147Z",
+        "completedAt": "2026-06-04T14:40:50.531Z",
+        "durationMs": 2384,
+        "promptChars": 29660,
+        "completionChars": 912,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 8945,
+        "completionTokens": 211,
+        "totalTokens": 9156,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000979
+      },
+      {
+        "id": "0c1667a9-a310-44be-9097-6052038198e7",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:40:48.146Z",
+        "completedAt": "2026-06-04T14:40:50.778Z",
+        "durationMs": 2632,
+        "promptChars": 28654,
+        "completionChars": 1155,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 8915,
+        "completionTokens": 272,
+        "totalTokens": 9187,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001
+      },
+      {
+        "id": "cc09f202-99b9-41b2-b46e-61463bebee6d",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:40:48.147Z",
+        "completedAt": "2026-06-04T14:40:51.920Z",
+        "durationMs": 3773,
+        "promptChars": 29880,
+        "completionChars": 3423,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 8916,
+        "completionTokens": 861,
+        "totalTokens": 9777,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001236
+      },
+      {
+        "id": "650fd934-413b-4e46-b2e4-efb6d12fadde",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:40:48.147Z",
+        "completedAt": "2026-06-04T14:40:52.132Z",
+        "durationMs": 3985,
+        "promptChars": 29417,
+        "completionChars": 3263,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 8898,
+        "completionTokens": 820,
+        "totalTokens": 9718,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001218
+      },
+      {
+        "id": "968d7b97-5920-420c-9895-b88c76965fd4",
+        "schemaName": "schedule_evaluation",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:40:52.133Z",
+        "completedAt": "2026-06-04T14:40:56.524Z",
+        "durationMs": 4391,
+        "promptChars": 70928,
+        "completionChars": 3895,
+        "maxCompletionTokens": 8000,
+        "promptTokens": 18929,
+        "completionTokens": 911,
+        "totalTokens": 19840,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.002257
+      }
+    ]
+  }
+}

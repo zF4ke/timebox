@@ -14,7 +14,8 @@
     "preview": "vite preview --host 127.0.0.1",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.renderer.json --noEmit && tsc -p tsconfig.electron.json --noEmit",
-    "dist": "npm run build && electron-builder"
+    "dist": "npm run build && electron-builder",
+    "package:delivery": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package-delivery.ps1"
   },
   "build": {
     "appId": "com.aasma.timebox",
