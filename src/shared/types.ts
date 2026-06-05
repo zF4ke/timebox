@@ -333,6 +333,7 @@ export interface BenchmarkAggregate {
   averageCostUsd: number | null;
   averageTokens: number | null;
   averageIterations: number | null;
+  averageGenerationTimeSeconds: number | null;
   costBenefitScore: number | null;
   criticalMistakes: number;
   totalMistakes: number;

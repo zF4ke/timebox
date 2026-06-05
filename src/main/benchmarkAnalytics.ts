@@ -108,6 +108,7 @@ export function aggregateBenchmarkRuns(runs: BenchmarkRunSummary[]): BenchmarkAg
       const averageCostUsd = average(ok.map((run) => run.estimatedCostUsd));
       const averageTokens = average(ok.map((run) => run.totalTokens));
       const averageIterations = average(ok.map((run) => run.iterations));
+      const averageGenerationTimeSeconds = average(ok.map((run) => run.generationTimeSeconds));
       const criticalMistakes = group.reduce((sum, run) => sum + run.criticalMistakeCount, 0);
       const totalMistakes = group.reduce((sum, run) => sum + run.mistakeCount, 0);
 
@@ -123,6 +124,7 @@ export function aggregateBenchmarkRuns(runs: BenchmarkRunSummary[]): BenchmarkAg
         averageCostUsd,
         averageTokens,
         averageIterations,
+        averageGenerationTimeSeconds,
         costBenefitScore: costBenefit({
           averageDeterministicScore,
           averageModelScore,

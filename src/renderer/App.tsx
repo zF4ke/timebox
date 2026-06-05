@@ -894,6 +894,7 @@ const RANKING_ACCESSORS: Accessors<RankingRow> = {
   averageDeterministicScore: (r) => r.averageDeterministicScore,
   averageOverallScore: (r) => r.averageOverallScore,
   averageCostUsd: (r) => r.averageCostUsd,
+  averageGenerationTimeSeconds: (r) => r.averageGenerationTimeSeconds,
   averageTokens: (r) => r.averageTokens,
   mistakes: (r) => r.criticalMistakes * 1000 + r.totalMistakes,
   costBenefitScore: (r) => r.costBenefitScore
@@ -957,6 +958,9 @@ function AnalyticsView({
 }) {
   const [runModalOpen, setRunModalOpen] = useState(false);
   const [promptBrowserOpen, setPromptBrowserOpen] = useState(false);
+  // When on, generation time is folded into the adjusted value (a slow model is
+  // penalized). Off lets you compare pure quality regardless of latency.
+  const [considerTime, setConsiderTime] = useState(true);
   const [selectedExperimentId, setSelectedExperimentId] = useState<string>("");
   const previousLatestExperimentId = useRef<string>("");
   const latest = experiments[0];
@@ -1064,6 +1068,7 @@ function AnalyticsView({
         averageOverallScore: wavg(rows, (row) => row.averageOverallScore),
         averageCostUsd: wavg(rows, (row) => row.averageCostUsd),
         averageTokens: wavg(rows, (row) => row.averageTokens),
+        averageGenerationTimeSeconds: wavg(rows, (row) => row.averageGenerationTimeSeconds),
         costBenefitScore: wavg(rows, (row) => row.costBenefitScore),
         criticalMistakes: rows.reduce((sum, row) => sum + row.criticalMistakes, 0),
         totalMistakes: rows.reduce((sum, row) => sum + row.totalMistakes, 0)
@@ -1071,24 +1076,48 @@ function AnalyticsView({
       .sort((a, b) => (b.costBenefitScore ?? -1) - (a.costBenefitScore ?? -1));
   }, [selectedAggregates]);
 
+  // Apply the latency penalty to a base adjusted value when "consider time" is on.
+  const applyTime = (base: number | null, seconds: number | null) => {
+    if (base === null) return null;
+    const adjusted = considerTime ? base - timePenalty(seconds) : base;
+    return Math.round(Math.max(0, adjusted) * 10) / 10;
+  };
+
+  // Per-model rows with the (optionally) time-adjusted value, re-sorted so the
+  // ranking reacts to the toggle.
+  const modelRows = useMemo(
+    () =>
+      modelRollup
+        .map((entry) => ({ ...entry, adjustedValue: applyTime(entry.costBenefitScore, entry.averageGenerationTimeSeconds) }))
+        .sort((a, b) => (b.adjustedValue ?? -1) - (a.adjustedValue ?? -1)),
+    [modelRollup, considerTime]
+  );
+
   // Points for the cost-vs-quality scatter: one per MODEL (its rolled-up adjusted
   // value), so the y-axis reflects the full quality blend — deterministic +
   // independent judge — instead of the ceiling-pinned deterministic score, and
   // the chart shows one dot per model rather than one per config.
-  const scatterPoints = modelRollup
-    .filter((entry) => typeof entry.averageCostUsd === "number" && typeof entry.costBenefitScore === "number")
+  const scatterPoints = modelRows
+    .filter((entry) => typeof entry.averageCostUsd === "number" && typeof entry.adjustedValue === "number")
     .map((entry) => ({
       model: entry.model,
       label: formatCompactModel(entry.model),
       cost: entry.averageCostUsd as number,
-      score: entry.costBenefitScore as number
+      score: entry.adjustedValue as number
     }));
 
   // The ranking table lists every config (not just the top 8 shown in the scatter),
-  // scrolling within a fixed height. Sorting is handled by useSortedRows.
+  // scrolling within a fixed height. The adjusted value (and thus sort order) folds
+  // in the latency penalty when the toggle is on. Sorting is handled by useSortedRows.
   const rankingRows = useMemo(
-    () => selectedAggregates.filter((aggregate) => aggregate.okCount > 0),
-    [selectedAggregates]
+    () =>
+      selectedAggregates
+        .filter((aggregate) => aggregate.okCount > 0)
+        .map((aggregate) => ({
+          ...aggregate,
+          costBenefitScore: applyTime(aggregate.costBenefitScore, aggregate.averageGenerationTimeSeconds)
+        })),
+    [selectedAggregates, considerTime]
   );
   const ranking = useSortedRows(rankingRows, RANKING_ACCESSORS, { key: "costBenefitScore", dir: "desc" });
   const runs = useSortedRows(selectedRuns, RUN_ACCESSORS, { key: "scenarioTitle", dir: "asc" });
@@ -1264,7 +1293,11 @@ function AnalyticsView({
           <section className="analytics-section">
             <div className="section-title-row">
               <h2>Cost vs quality</h2>
-              <span>{scatterPoints.length} configuration{scatterPoints.length === 1 ? "" : "s"}</span>
+              <label className="check-row compact" style={{ marginLeft: "auto" }}>
+                <input type="checkbox" checked={considerTime} onChange={() => setConsiderTime((prev) => !prev)} />
+                <span>Penalize slow generation</span>
+              </label>
+              <span>{scatterPoints.length} model{scatterPoints.length === 1 ? "" : "s"}</span>
             </div>
             <ScatterChart points={scatterPoints} yLabel="← adjusted value (0–100)" />
           </section>
@@ -1276,7 +1309,7 @@ function AnalyticsView({
                 <span>one score per model · all configs combined</span>
               </div>
               <p className="section-note">
-                Every quorum / iteration / judge config for a model is rolled up into a single run-weighted row. Adjusted value is the run-weighted mean of the per-config adjusted values — the headline score plotted above.
+                Every quorum / iteration / judge config for a model is rolled up into a single run-weighted row. Adjusted value is the run-weighted mean of the per-config adjusted values{considerTime ? ", with a latency penalty for slow generation" : ""} — the headline score plotted above.
               </p>
               <div className="data-table-wrap">
                 <table className="data-table">
@@ -1288,13 +1321,14 @@ function AnalyticsView({
                       <th className="num">Deterministic</th>
                       <th className="num">LLM score</th>
                       <th className="num">Avg cost</th>
+                      <th className="num">Avg time</th>
                       <th className="num">Tokens</th>
                       <th className="num">Mistakes</th>
                       <th className="num">Adjusted value</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {modelRollup.map((entry) => (
+                    {modelRows.map((entry) => (
                       <tr key={entry.model}>
                         <td>{formatCompactModel(entry.model)}</td>
                         <td className="num">{entry.configCount}</td>
@@ -1302,9 +1336,10 @@ function AnalyticsView({
                         <td className="num">{formatNullable(entry.averageDeterministicScore, "%")}</td>
                         <td className="num">{formatNullable(entry.averageOverallScore, "/5")}</td>
                         <td className="num">{formatCost(entry.averageCostUsd)}</td>
+                        <td className="num">{formatDuration(entry.averageGenerationTimeSeconds)}</td>
                         <td className="num">{formatNumber(entry.averageTokens)}</td>
                         <td className="num">{entry.criticalMistakes} crit / {entry.totalMistakes} total</td>
-                        <td className="num"><strong>{formatNullable(entry.costBenefitScore, "")}</strong></td>
+                        <td className="num"><strong>{formatNullable(entry.adjustedValue, "")}</strong></td>
                       </tr>
                     ))}
                   </tbody>
@@ -1350,7 +1385,7 @@ function AnalyticsView({
               <span>{ranking.sorted.length} config{ranking.sorted.length === 1 ? "" : "s"} · deterministic-first adjusted value</span>
             </div>
             <p className="section-note">
-              Adjusted value weights deterministic score most, uses the fixed judge as secondary evidence, penalizes failures and critical mistakes, and treats cost as a tie-breaker.
+              Adjusted value weights deterministic score most, uses the fixed judge as secondary evidence, penalizes failures and critical mistakes, and treats cost as a tie-breaker{considerTime ? ". Slow generation is penalized (toggle in Cost vs quality)" : ""}.
             </p>
             <div className="data-table-wrap data-table-scroll">
               <table className="data-table">
@@ -1364,6 +1399,7 @@ function AnalyticsView({
                     <SortTh label="Deterministic" field="averageDeterministicScore" sort={ranking.sort} onSort={ranking.onSort} align="right" />
                     <SortTh label="LLM score" field="averageOverallScore" sort={ranking.sort} onSort={ranking.onSort} align="right" />
                     <SortTh label="Avg cost" field="averageCostUsd" sort={ranking.sort} onSort={ranking.onSort} align="right" />
+                    <SortTh label="Avg time" field="averageGenerationTimeSeconds" sort={ranking.sort} onSort={ranking.onSort} align="right" />
                     <SortTh label="Tokens" field="averageTokens" sort={ranking.sort} onSort={ranking.onSort} align="right" />
                     <SortTh label="Mistakes" field="mistakes" sort={ranking.sort} onSort={ranking.onSort} align="right" />
                     <SortTh label="Adjusted value" field="costBenefitScore" sort={ranking.sort} onSort={ranking.onSort} align="right" />
@@ -1380,6 +1416,7 @@ function AnalyticsView({
                       <td className="num">{formatNullable(aggregate.averageDeterministicScore, "%")}</td>
                       <td className="num">{formatNullable(aggregate.averageOverallScore, "/5")}</td>
                       <td className="num">{formatCost(aggregate.averageCostUsd)}</td>
+                      <td className="num">{formatDuration(aggregate.averageGenerationTimeSeconds)}</td>
                       <td className="num">{formatNumber(aggregate.averageTokens)}</td>
                       <td className="num">{aggregate.criticalMistakes} crit / {aggregate.totalMistakes} total</td>
                       <td className="num">{formatNullable(aggregate.costBenefitScore, "")}</td>
@@ -2557,6 +2594,30 @@ function formatNumber(value: number | null | undefined): string {
 
 function toggleValue<T>(values: T[], value: T): T[] {
   return values.includes(value) ? values.filter((candidate) => candidate !== value) : [...values, value];
+}
+
+function formatDuration(seconds: number | null | undefined): string {
+  if (typeof seconds !== "number" || !Number.isFinite(seconds)) {
+    return "-";
+  }
+  if (seconds < 60) {
+    return `${Math.round(seconds)}s`;
+  }
+  const minutes = Math.floor(seconds / 60);
+  const rest = Math.round(seconds % 60);
+  return `${minutes}m ${rest.toString().padStart(2, "0")}s`;
+}
+
+// Latency penalty subtracted from the adjusted value when "consider time" is on.
+// Generation is free up to ~30s (the fast models average ~22s, so they take no
+// hit); beyond that the penalty grows on a log scale and is capped at 25, so a
+// model that is many times slower takes a large but bounded hit. e.g. ~22s -> 0,
+// ~290s (deepseek) -> ~18.
+function timePenalty(seconds: number | null | undefined): number {
+  if (typeof seconds !== "number" || !Number.isFinite(seconds) || seconds <= 30) {
+    return 0;
+  }
+  return Math.min(25, Math.log10(seconds / 30) * 18);
 }
 
 // Replace any leftover task IDs (T1, T12, etc.) with the task's human name.
