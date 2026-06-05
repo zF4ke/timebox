@@ -1043,6 +1043,33 @@ function AnalyticsView({
   const runs = useSortedRows(selectedRuns, RUN_ACCESSORS, { key: "scenarioTitle", dir: "asc" });
   const mistakes = useSortedRows(topMistakes, MISTAKE_ACCESSORS, { key: "count", dir: "desc" });
 
+  function resumeSelectedExperiment() {
+    if (!selectedExperiment || isBenchmarkRunning) return;
+    const models = Array.from(new Set(selectedExperiment.runs.map((run) => run.model).filter(Boolean)));
+    const quorums = Array.from(new Set(selectedExperiment.runs.map((run) => run.quorum))).sort((a, b) => a - b);
+    const maxIterations = Array.from(new Set(selectedExperiment.runs.map((run) => run.maxIterations))).sort((a, b) => a - b);
+    const scenarioIds = Array.from(new Set(selectedExperiment.runs.map((run) => run.scenarioId).filter(Boolean)));
+    const evaluatorModels = selectedExperiment.evaluatorModels?.length
+      ? selectedExperiment.evaluatorModels
+      : Array.from(new Set(selectedExperiment.runs.map((run) => run.evaluatorModel).filter((model): model is string => Boolean(model))));
+    if (models.length === 0 || quorums.length === 0 || maxIterations.length === 0 || scenarioIds.length === 0 || evaluatorModels.length === 0) {
+      return;
+    }
+    onRunBenchmark({
+      models,
+      quorums,
+      maxIterations,
+      scenarios: scenarioIds,
+      outDir: selectedExperiment.resultsDir,
+      retries: 1,
+      delayMs: 0,
+      forceFree: false,
+      evaluatorModels,
+      skipExistingRuns: true,
+      maxBudgetUsd: selectedExperiment.budgetUsd
+    });
+  }
+
   return (
     <main className="analytics-shell">
       <header className="analytics-header">
@@ -1153,7 +1180,14 @@ function AnalyticsView({
           <section className="analytics-section">
             <div className="section-title-row">
               <h2>Benchmark run</h2>
-              <span>{selectedExperiment?.id === latest?.id ? "latest selected" : "historical run selected"}</span>
+              <button
+                type="button"
+                className="btn-secondary btn-compact"
+                onClick={resumeSelectedExperiment}
+                disabled={!selectedExperiment || isBenchmarkRunning}
+              >
+                Resume selected
+              </button>
             </div>
             <div className="experiment-browser">
               <label htmlFor="benchmark-experiment-select">Experiment</label>

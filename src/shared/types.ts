@@ -369,6 +369,8 @@ export interface BenchmarkRequest {
   evaluatorModel?: string;
   /** Fixed judge models that each score the same generated schedule. */
   evaluatorModels?: string[];
+  /** Resume into outDir by skipping run rows that are already present. */
+  skipExistingRuns?: boolean;
   /** Optional hard dollar cap. The matrix stops before a run that would exceed it. */
   maxBudgetUsd?: number;
 }

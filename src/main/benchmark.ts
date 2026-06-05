@@ -24,12 +24,18 @@ interface BenchmarkOptions {
   retries: number;
   forceFree: boolean;
   evaluatorModels: string[];
+  skipExistingRuns: boolean;
   maxBudgetUsd: number | null;
 }
 
 interface ScenarioRunResult {
   runs: BenchmarkRunSummary[];
   actualCostUsd: number | null;
+}
+
+interface ResumeState {
+  experiment: BenchmarkExperiment | null;
+  runKeys: Set<string>;
 }
 
 type BenchmarkProgressCallback = (event: Omit<BenchmarkProgressEvent, "timestamp">) => void;
@@ -65,7 +71,8 @@ export async function runBenchmarkExperiment(
   const evaluatorModels = options.evaluatorModels.length > 0 ? options.evaluatorModels : [getPlannerDefaults().evaluatorModel];
   const promptHash = promptsHash();
 
-  const experiment: BenchmarkExperiment = {
+  const resume = options.skipExistingRuns ? loadResumeState(outDir) : { experiment: null, runKeys: new Set<string>() };
+  const experiment: BenchmarkExperiment = resume.experiment ?? {
     id: path.basename(outDir),
     createdAt: new Date().toISOString(),
     resultsDir: outDir,
@@ -77,6 +84,13 @@ export async function runBenchmarkExperiment(
     budgetUsd: options.maxBudgetUsd ?? undefined,
     stoppedByBudget: false
   };
+  experiment.resultsDir = outDir;
+  experiment.evaluatorModel = evaluatorModels.length === 1 ? evaluatorModels[0] : "mixed";
+  experiment.evaluatorModels = evaluatorModels;
+  experiment.promptHash = promptHash;
+  experiment.budgetUsd = options.maxBudgetUsd ?? experiment.budgetUsd;
+  experiment.stoppedByBudget = false;
+  experiment.aggregates = aggregateBenchmarkRuns(experiment.runs);
 
   writeManifest(outDir, options, benchmarkModels, scenarios, evaluatorModels, promptHash);
   writeExperiment(outDir, experiment);
@@ -90,7 +104,7 @@ export async function runBenchmarkExperiment(
     phase: "start",
     current: 0,
     total,
-    summary: `Starting ${plannerTotal} planner run(s), ${total} judge score(s)${options.maxBudgetUsd ? ` · budget $${options.maxBudgetUsd.toFixed(2)}` : ""} · judges ${evaluatorModels.map(formatCompactModel).join(", ")} · prompts ${promptHash}`
+    summary: `Starting ${plannerTotal} planner run(s), ${total} judge score(s)${options.maxBudgetUsd ? ` · budget $${options.maxBudgetUsd.toFixed(2)}` : ""}${options.skipExistingRuns ? ` · resuming ${resume.runKeys.size} existing score(s)` : ""} · judges ${evaluatorModels.map(formatCompactModel).join(", ")} · prompts ${promptHash}`
   });
 
   for (const model of benchmarkModels) {
@@ -98,6 +112,14 @@ export async function runBenchmarkExperiment(
       for (const maxIterations of options.maxIterations) {
         for (const scenario of scenarios) {
           throwIfCancelled(signal);
+          const pendingEvaluators = evaluatorModels.filter(
+            (evaluatorModel) => !resume.runKeys.has(runKey(model, evaluatorModel, quorum, maxIterations, scenario.id))
+          );
+          const skippedScores = evaluatorModels.length - pendingEvaluators.length;
+          scoreIndex += skippedScores;
+          if (pendingEvaluators.length === 0) {
+            continue;
+          }
 
           // Budget guard: stop before starting a run once we have already spent
           // up to (or past) the cap. We check before the run because a run's cost
@@ -128,7 +150,7 @@ export async function runBenchmarkExperiment(
 
           const scenarioResult = await runScenarioWithRetries(
             model,
-            evaluatorModels,
+            pendingEvaluators,
             quorum,
             maxIterations,
             scenario,
@@ -141,6 +163,7 @@ export async function runBenchmarkExperiment(
           for (const run of scenarioResult.runs) {
             scoreIndex += 1;
             experiment.runs.push(run);
+            resume.runKeys.add(runKey(run.model, run.evaluatorModel ?? "", run.quorum, run.maxIterations, run.scenarioId));
             experiment.aggregates = aggregateBenchmarkRuns(experiment.runs);
             writeExperiment(outDir, experiment);
             writeSummaryFiles(outDir, experiment.runs);
@@ -191,7 +214,7 @@ async function runScenarioWithRetries(
       if (attempt > 0) {
         console.log(`[benchmark] retry ${attempt}/${retries} ${scenario.id}`);
       }
-      return await runScenario(model, evaluatorModels, quorum, maxIterations, scenario, runsDir, signal);
+      return await runScenario(model, evaluatorModels, quorum, maxIterations, scenario, runsDir, errorsDir, signal);
     } catch (error) {
       lastError = error;
       if (isAbortError(error)) {
@@ -220,6 +243,7 @@ async function runScenario(
   maxIterations: number,
   scenario: BenchmarkScenario,
   runsDir: string,
+  errorsDir: string,
   signal?: AbortSignal
 ): Promise<ScenarioRunResult> {
   const promptPath = path.join(defaultProjectRoot(), "prompts", scenario.promptFile);
@@ -248,16 +272,31 @@ async function runScenario(
   const evaluatorCosts: number[] = [];
 
   for (const evaluatorModel of evaluatorModels) {
-    const evaluationResult = await evaluatePlanningResultWithModel(
-      result,
-      evaluatorModel,
-      (event) => {
-        const version = event.iteration ? ` v${event.iteration}` : "";
-        const summary = event.summary ? ` - ${event.summary}` : "";
-        console.log(`[benchmark:${scenario.id}] ${event.phase}${version} ${event.status}${summary}`);
-      },
-      signal
-    );
+    let evaluationResult: Awaited<ReturnType<typeof evaluatePlanningResultWithModel>>;
+    try {
+      evaluationResult = await evaluatePlanningResultWithModel(
+        result,
+        evaluatorModel,
+        (event) => {
+          const version = event.iteration ? ` v${event.iteration}` : "";
+          const summary = event.summary ? ` - ${event.summary}` : "";
+          console.log(`[benchmark:${scenario.id}] ${event.phase}${version} ${event.status}${summary}`);
+        },
+        signal
+      );
+    } catch (error) {
+      if (isAbortError(error)) {
+        throw error;
+      }
+      const message = error instanceof Error ? error.message : String(error);
+      const errorPath = path.join(
+        errorsDir,
+        `${safeName(model)}__judge_${safeName(evaluatorModel)}__q${quorum}__i${maxIterations}__${scenario.id}.txt`
+      );
+      fs.writeFileSync(errorPath, message, "utf-8");
+      runs.push(errorRun(model, evaluatorModel, quorum, maxIterations, scenario, message, errorPath));
+      continue;
+    }
     if (typeof evaluationResult.usage.estimatedCostUsd === "number") {
       evaluatorCosts.push(evaluationResult.usage.estimatedCostUsd);
     }
@@ -292,7 +331,7 @@ async function runScenario(
     runs.push(okRun(model, evaluatorModel, quorum, maxIterations, scenario, evaluatedResult, deterministic, jsonPath, icsPath));
   }
 
-  const actualCostUsd = typeof result.usage.estimatedCostUsd === "number" && evaluatorCosts.length === evaluatorModels.length
+  const actualCostUsd = typeof result.usage.estimatedCostUsd === "number"
     ? Math.round((result.usage.estimatedCostUsd + evaluatorCosts.reduce((sum, cost) => sum + cost, 0)) * 1_000_000) / 1_000_000
     : null;
 
@@ -394,6 +433,7 @@ function normalizeOptions(request: BenchmarkRequest): BenchmarkOptions {
     retries: request.retries ?? 1,
     forceFree: request.forceFree ?? false,
     evaluatorModels: normalizeEvaluatorModels(request, defaults.evaluatorModel),
+    skipExistingRuns: request.skipExistingRuns ?? false,
     maxBudgetUsd: typeof request.maxBudgetUsd === "number" && request.maxBudgetUsd > 0 ? request.maxBudgetUsd : null
   };
 }
@@ -444,6 +484,37 @@ function normalizeEvaluatorModels(request: BenchmarkRequest, fallback: string): 
     .map((model) => model.trim())
     .filter(Boolean);
   return Array.from(new Set(requested.length > 0 ? requested : [fallback]));
+}
+
+function loadResumeState(outDir: string): ResumeState {
+  const experimentPath = path.join(outDir, "experiment.json");
+  if (!fs.existsSync(experimentPath)) {
+    return { experiment: null, runKeys: new Set<string>() };
+  }
+  try {
+    const experiment = JSON.parse(fs.readFileSync(experimentPath, "utf-8")) as BenchmarkExperiment;
+    const runKeys = new Set(
+      (experiment.runs ?? []).map((run) =>
+        runKey(run.model, run.evaluatorModel ?? "", run.quorum, run.maxIterations, run.scenarioId)
+      )
+    );
+    return {
+      experiment: {
+        ...experiment,
+        runs: experiment.runs ?? [],
+        aggregates: aggregateBenchmarkRuns(experiment.runs ?? [])
+      },
+      runKeys
+    };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.warn(`[benchmark] failed to resume ${experimentPath}: ${message}`);
+    return { experiment: null, runKeys: new Set<string>() };
+  }
+}
+
+function runKey(model: string, evaluatorModel: string, quorum: number, maxIterations: number, scenarioId: string): string {
+  return `${model}__${evaluatorModel}__q${quorum}__i${maxIterations}__${scenarioId}`;
 }
 
 function writeExperiment(outDir: string, experiment: BenchmarkExperiment): void {
