@@ -1032,17 +1032,56 @@ function AnalyticsView({
     return result;
   }, [experiments]);
 
-  // Points for the cost-vs-quality scatter (one per config in the best list).
-  // Plots the reworked Adjusted Value (costBenefitScore) so the y-axis reflects
-  // the full quality blend — deterministic + independent judge — instead of the
-  // deterministic score alone, which sat pinned near the 100 ceiling.
-  const scatterPoints = best
-    .filter((aggregate) => typeof aggregate.averageCostUsd === "number" && typeof aggregate.costBenefitScore === "number")
-    .map((aggregate) => ({
-      model: aggregate.model,
-      label: `${formatCompactModel(aggregate.model)} · Q${aggregate.quorum} · ${aggregate.maxIterations} iter`,
-      cost: aggregate.averageCostUsd as number,
-      score: aggregate.costBenefitScore as number
+  // Roll every config (quorum × iterations × judge) up to one row per model, so
+  // each model has a single headline score. Means are run-weighted (weighted by
+  // okCount) so a config with more successful runs counts proportionally — this is
+  // a true mean over runs, not a mean of means. Adjusted value reuses the per-config
+  // costBenefitScore (single source of truth for the formula) weighted the same way.
+  const modelRollup = useMemo(() => {
+    const wavg = (rows: typeof selectedAggregates, pick: (r: (typeof selectedAggregates)[number]) => number | null) => {
+      let num = 0;
+      let den = 0;
+      for (const row of rows) {
+        const value = pick(row);
+        if (typeof value === "number" && row.okCount > 0) {
+          num += value * row.okCount;
+          den += row.okCount;
+        }
+      }
+      return den > 0 ? num / den : null;
+    };
+    const groups = new Map<string, typeof selectedAggregates>();
+    for (const aggregate of selectedAggregates) {
+      groups.set(aggregate.model, [...(groups.get(aggregate.model) ?? []), aggregate]);
+    }
+    return Array.from(groups.entries())
+      .map(([model, rows]) => ({
+        model,
+        configCount: rows.length,
+        runCount: rows.reduce((sum, row) => sum + row.runCount, 0),
+        okCount: rows.reduce((sum, row) => sum + row.okCount, 0),
+        averageDeterministicScore: wavg(rows, (row) => row.averageDeterministicScore),
+        averageOverallScore: wavg(rows, (row) => row.averageOverallScore),
+        averageCostUsd: wavg(rows, (row) => row.averageCostUsd),
+        averageTokens: wavg(rows, (row) => row.averageTokens),
+        costBenefitScore: wavg(rows, (row) => row.costBenefitScore),
+        criticalMistakes: rows.reduce((sum, row) => sum + row.criticalMistakes, 0),
+        totalMistakes: rows.reduce((sum, row) => sum + row.totalMistakes, 0)
+      }))
+      .sort((a, b) => (b.costBenefitScore ?? -1) - (a.costBenefitScore ?? -1));
+  }, [selectedAggregates]);
+
+  // Points for the cost-vs-quality scatter: one per MODEL (its rolled-up adjusted
+  // value), so the y-axis reflects the full quality blend — deterministic +
+  // independent judge — instead of the ceiling-pinned deterministic score, and
+  // the chart shows one dot per model rather than one per config.
+  const scatterPoints = modelRollup
+    .filter((entry) => typeof entry.averageCostUsd === "number" && typeof entry.costBenefitScore === "number")
+    .map((entry) => ({
+      model: entry.model,
+      label: formatCompactModel(entry.model),
+      cost: entry.averageCostUsd as number,
+      score: entry.costBenefitScore as number
     }));
 
   // The ranking table lists every config (not just the top 8 shown in the scatter),
@@ -1229,6 +1268,50 @@ function AnalyticsView({
             </div>
             <ScatterChart points={scatterPoints} yLabel="← adjusted value (0–100)" />
           </section>
+
+          {modelRollup.length > 0 && (
+            <section className="analytics-section">
+              <div className="section-title-row">
+                <h2>Model summary</h2>
+                <span>one score per model · all configs combined</span>
+              </div>
+              <p className="section-note">
+                Every quorum / iteration / judge config for a model is rolled up into a single run-weighted row. Adjusted value is the run-weighted mean of the per-config adjusted values — the headline score plotted above.
+              </p>
+              <div className="data-table-wrap">
+                <table className="data-table">
+                  <thead>
+                    <tr>
+                      <th>Model</th>
+                      <th className="num">Configs</th>
+                      <th className="num">Runs</th>
+                      <th className="num">Deterministic</th>
+                      <th className="num">LLM score</th>
+                      <th className="num">Avg cost</th>
+                      <th className="num">Tokens</th>
+                      <th className="num">Mistakes</th>
+                      <th className="num">Adjusted value</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {modelRollup.map((entry) => (
+                      <tr key={entry.model}>
+                        <td>{formatCompactModel(entry.model)}</td>
+                        <td className="num">{entry.configCount}</td>
+                        <td className="num">{entry.okCount}/{entry.runCount}</td>
+                        <td className="num">{formatNullable(entry.averageDeterministicScore, "%")}</td>
+                        <td className="num">{formatNullable(entry.averageOverallScore, "/5")}</td>
+                        <td className="num">{formatCost(entry.averageCostUsd)}</td>
+                        <td className="num">{formatNumber(entry.averageTokens)}</td>
+                        <td className="num">{entry.criticalMistakes} crit / {entry.totalMistakes} total</td>
+                        <td className="num"><strong>{formatNullable(entry.costBenefitScore, "")}</strong></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          )}
 
           {topMistakes.length > 0 && (
             <section className="analytics-section">
