@@ -319,6 +319,9 @@ export default function App() {
       if (variables.generation !== activeBenchmarkGeneration.current) return;
       setBenchmarkExperiments((prev) => [experiment, ...prev.filter((candidate) => candidate.id !== experiment.id)]);
       void refreshBenchmarks();
+    },
+    onError: () => {
+      void refreshBenchmarks();
     }
   });
 
@@ -1658,7 +1661,7 @@ function BenchmarkRunModal({
             <div className="field">
               <span className="meta-label">Max iterations</span>
               <div className="check-inline">
-                {[2, 3].map((value) => (
+                {[1, 2, 3].map((value) => (
                   <label key={value} className="check-row compact">
                     <input
                       type="checkbox"
