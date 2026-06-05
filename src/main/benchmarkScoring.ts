@@ -38,14 +38,30 @@ export function scoreBenchmarkResult(result: PlanningResult, scenario: Benchmark
     });
   }
 
-  const score = round1(
-    expectedTaskCoverage * 0.25 +
+  // Quality Score v2. Weights reallocated by criterion validity: each component's
+  // empirical correlation with the independent LLM judge on the 2026-06-05 run
+  // (84 plans). Availability discipline (r=.41, the strongest predictor) and
+  // deadline discipline (r=.28, a hard constraint) carry the most weight; expected-
+  // task coverage (r=.05) and wellbeing (r=.04) are near-constant / low-signal and
+  // are down-weighted but kept above zero so they retain teeth. This holds under
+  // leave-one-scenario-out (mean validity .40), i.e. it is not fit to noise.
+  let score = round1(
+    expectedTaskCoverage * 0.12 +
       deadlineDiscipline * 0.25 +
-      availabilityDiscipline * 0.15 +
-      fixedCommitmentRespect * 0.1 +
-      wellbeingRespect * 0.15 +
-      revisionEfficiency * 0.1
+      availabilityDiscipline * 0.25 +
+      fixedCommitmentRespect * 0.13 +
+      wellbeingRespect * 0.1 +
+      revisionEfficiency * 0.15
   );
+
+  // Critical-violation gate. The weighted sum alone let a plan with a blown
+  // deadline still score ~92 (a validity bug: the headline number disagreed with
+  // an objectively broken plan). Any critical mistake caps the score at 70, with
+  // -8 per additional critical, so a hard correctness failure can never read green.
+  const criticalCount = mistakes.filter((mistake) => mistake.severity === "critical").length;
+  if (criticalCount > 0) {
+    score = clampScore(Math.min(score, 70 - (criticalCount - 1) * 8));
+  }
 
   return {
     score,

@@ -40,7 +40,7 @@ export function listBenchmarkExperiments(rootDir = defaultProjectRoot()): Benchm
   const experiments: BenchmarkExperiment[] = [];
   const dataRoot = getDataRoot();
   experiments.push(...readLegacyResultExperiments(dataRoot, scenarios));
-  experiments.push(...readStoredBenchmarkExperiments(dataRoot));
+  experiments.push(...readStoredBenchmarkExperiments(dataRoot, scenarios));
   return experiments.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }
 
@@ -166,7 +166,7 @@ function readLegacyResultExperiments(rootDir: string, scenarios: BenchmarkScenar
     .filter((experiment): experiment is BenchmarkExperiment => Boolean(experiment));
 }
 
-function readStoredBenchmarkExperiments(rootDir: string): BenchmarkExperiment[] {
+function readStoredBenchmarkExperiments(rootDir: string, scenarios: BenchmarkScenario[]): BenchmarkExperiment[] {
   const benchmarkDir = path.join(rootDir, "benchmark-results");
   if (!fs.existsSync(benchmarkDir)) {
     return [];
@@ -180,7 +180,7 @@ function readStoredBenchmarkExperiments(rootDir: string): BenchmarkExperiment[] 
     if (!fs.existsSync(experimentPath)) continue;
     try {
       const experiment = JSON.parse(fs.readFileSync(experimentPath, "utf-8")) as BenchmarkExperiment;
-      experiments.push(normalizeStoredExperiment(experiment, experimentDir));
+      experiments.push(normalizeStoredExperiment(experiment, experimentDir, scenarios));
     } catch {
       // Ignore incomplete experiments; the CLI writes summaries incrementally.
     }
@@ -188,18 +188,45 @@ function readStoredBenchmarkExperiments(rootDir: string): BenchmarkExperiment[] 
   return experiments;
 }
 
-function normalizeStoredExperiment(experiment: BenchmarkExperiment, experimentDir: string): BenchmarkExperiment {
+function normalizeStoredExperiment(
+  experiment: BenchmarkExperiment,
+  experimentDir: string,
+  scenarios: BenchmarkScenario[]
+): BenchmarkExperiment {
   const runsDir = path.join(experimentDir, "runs");
   const runs = experiment.runs.map((run) => {
     const jsonPath = resolveStoredRunArtifact(run.jsonPath, runsDir);
     const icsPath = resolveStoredRunArtifact(run.icsPath, runsDir);
-    return { ...run, jsonPath, icsPath };
+    // Rescore from the saved planner result so the current scoring formula applies
+    // retroactively (no rerun). Falls back to the stored score if the run artifact
+    // or its scenario is missing. Cost / judge fields are left untouched.
+    const rescored = rescoreStoredRun({ ...run, jsonPath, icsPath }, scenarios);
+    return rescored;
   });
   return {
     ...experiment,
     resultsDir: experimentDir,
     runs,
     aggregates: aggregateBenchmarkRuns(runs)
+  };
+}
+
+function rescoreStoredRun(run: BenchmarkRunSummary, scenarios: BenchmarkScenario[]): BenchmarkRunSummary {
+  if (run.status !== "ok" || !run.jsonPath) {
+    return run;
+  }
+  const scenario = scenarios.find((candidate) => candidate.id === run.scenarioId);
+  const result = readPlanningResult(run.jsonPath);
+  if (!scenario || !result) {
+    return run;
+  }
+  const scored = scoreBenchmarkResult(result, scenario);
+  return {
+    ...run,
+    deterministicScore: scored.score,
+    mistakeCount: scored.mistakeCount,
+    criticalMistakeCount: scored.mistakes.filter((mistake) => mistake.severity === "critical").length,
+    mistakes: scored.mistakes
   };
 }
 
