@@ -461,6 +461,19 @@ code {
   border-bottom: 1px solid var(--border);
 }
 
+/* Scrollable variant for long tables (e.g. the full experiment ranking). Caps
+   the height and keeps the header pinned while the body scrolls. */
+.data-table-scroll {
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.data-table-scroll .data-table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
 .data-table {
   width: 100%;
   min-width: 940px;

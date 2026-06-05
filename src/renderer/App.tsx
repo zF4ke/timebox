@@ -1033,16 +1033,25 @@ function AnalyticsView({
   }, [experiments]);
 
   // Points for the cost-vs-quality scatter (one per config in the best list).
+  // Plots the reworked Adjusted Value (costBenefitScore) so the y-axis reflects
+  // the full quality blend — deterministic + independent judge — instead of the
+  // deterministic score alone, which sat pinned near the 100 ceiling.
   const scatterPoints = best
-    .filter((aggregate) => typeof aggregate.averageCostUsd === "number" && typeof aggregate.averageDeterministicScore === "number")
+    .filter((aggregate) => typeof aggregate.averageCostUsd === "number" && typeof aggregate.costBenefitScore === "number")
     .map((aggregate) => ({
       model: aggregate.model,
       label: `${formatCompactModel(aggregate.model)} · Q${aggregate.quorum} · ${aggregate.maxIterations} iter`,
       cost: aggregate.averageCostUsd as number,
-      score: aggregate.averageDeterministicScore as number
+      score: aggregate.costBenefitScore as number
     }));
 
-  const ranking = useSortedRows(best, RANKING_ACCESSORS, { key: "costBenefitScore", dir: "desc" });
+  // The ranking table lists every config (not just the top 8 shown in the scatter),
+  // scrolling within a fixed height. Sorting is handled by useSortedRows.
+  const rankingRows = useMemo(
+    () => selectedAggregates.filter((aggregate) => aggregate.okCount > 0),
+    [selectedAggregates]
+  );
+  const ranking = useSortedRows(rankingRows, RANKING_ACCESSORS, { key: "costBenefitScore", dir: "desc" });
   const runs = useSortedRows(selectedRuns, RUN_ACCESSORS, { key: "scenarioTitle", dir: "asc" });
   const mistakes = useSortedRows(topMistakes, MISTAKE_ACCESSORS, { key: "count", dir: "desc" });
 
@@ -1218,7 +1227,7 @@ function AnalyticsView({
               <h2>Cost vs quality</h2>
               <span>{scatterPoints.length} configuration{scatterPoints.length === 1 ? "" : "s"}</span>
             </div>
-            <ScatterChart points={scatterPoints} />
+            <ScatterChart points={scatterPoints} yLabel="← adjusted value (0–100)" />
           </section>
 
           {topMistakes.length > 0 && (
@@ -1255,12 +1264,12 @@ function AnalyticsView({
           <section className="analytics-section">
             <div className="section-title-row">
               <h2>Experiment ranking</h2>
-              <span>same scenario set · deterministic-first adjusted value</span>
+              <span>{ranking.sorted.length} config{ranking.sorted.length === 1 ? "" : "s"} · deterministic-first adjusted value</span>
             </div>
             <p className="section-note">
               Adjusted value weights deterministic score most, uses the fixed judge as secondary evidence, penalizes failures and critical mistakes, and treats cost as a tie-breaker.
             </p>
-            <div className="data-table-wrap">
+            <div className="data-table-wrap data-table-scroll">
               <table className="data-table">
                 <thead>
                   <tr>
@@ -1383,7 +1392,13 @@ function AnalyticsView({
 
 const CHART_PALETTE = ["#6366f1", "#10b981", "#f59e0b", "#ef4444", "#0ea5e9", "#a855f7"];
 
-function ScatterChart({ points }: { points: Array<{ model: string; label: string; cost: number; score: number }> }) {
+function ScatterChart({
+  points,
+  yLabel = "← quality (0–100)"
+}: {
+  points: Array<{ model: string; label: string; cost: number; score: number }>;
+  yLabel?: string;
+}) {
   if (points.length === 0) {
     return <div className="chart-empty">No traced cost/score pairs yet.</div>;
   }
@@ -1438,7 +1453,7 @@ function ScatterChart({ points }: { points: Array<{ model: string; label: string
           textAnchor="middle"
           className="axis-label"
         >
-          ← quality (0–100)
+          {yLabel}
         </text>
 
         {/* points */}
