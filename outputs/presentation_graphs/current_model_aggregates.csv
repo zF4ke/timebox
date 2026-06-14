@@ -1,4 +1,0 @@
-experiment,model_label,runs,deterministic,llm_score,cost,tokens,iterations,mistakes,critical
-Current combined,DeepSeek V3.2,8,81.55,2.962,0.036,137479.875,3.0,31,13
-Current combined,Gemini 2.5 Flash Lite,8,97.325,4.462,0.015,101885.125,1.375,6,1
-Current combined,Gemini 3.1 Flash Lite,8,97.475,4.588,0.027,70295.875,1.5,6,2
