@@ -1,6 +1,21 @@
+<div align="center">
+
+<img src="assets/app_icon.png" alt="Timebox" width="84" />
+
 # Timebox
 
-**Five AI agents argue over your week so you don't have to.**
+*Five AI agents argue over your week so you don't have to.*
+
+![License](https://img.shields.io/badge/license-MIT-22c55e)
+![Electron](https://img.shields.io/badge/Electron-39-47848F?logo=electron&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
+
+**[Landing page](landing/index.html)** · **[Download](https://github.com/zF4ke/timebox/releases)** · **[Architecture](docs/architecture.md)**
+
+</div>
+
+---
 
 Timebox is a free, open source desktop app that turns a plain-language description of your week into a realistic weekly study schedule. A team of specialist AI agents drafts the plan, critiques it from five different angles, votes on it under a quorum you control, and then you export it straight to your calendar.
 
@@ -8,11 +23,16 @@ It is an Electron + React + TypeScript app. It is **bring-your-own-key**: you su
 
 > Timebox started life as an AASMA (Autonomous Agents and Multi-Agent Systems) university project. It still ships the benchmark harness it was evaluated with, documented in the developer section below.
 
-<!-- Screenshots: add 1-3 PNGs under assets/ and embed them here, e.g.
-![Planner week grid](assets/screenshot_planner.png)
-![Analytics benchmark view](assets/screenshot_analytics.png)
--->
-<!-- TODO: add a planner screenshot and an Analytics screenshot under assets/ and uncomment the lines above. -->
+## 📸 Preview
+
+<div align="center">
+
+A polished product overview lives in [`landing/index.html`](landing/index.html) (open it in a browser).
+
+<!-- Add a planner + analytics screenshot at docs/preview.png and uncomment: -->
+<!-- <img src="docs/preview.png" alt="Timebox planner" width="860" /> -->
+
+</div>
 
 ---
 

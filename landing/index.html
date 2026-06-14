@@ -59,12 +59,14 @@
     details > summary::-webkit-details-marker { display: none; }
     details[open] .faq-chevron { transform: rotate(45deg); }
 
-    /* calendar mock event blocks — match the app's grayscale events */
     .ev { border-radius: 4px; padding: 5px 7px; line-height: 1.25; overflow: hidden; }
     .ev-work  { background: #171717; color: #fff; }
     .ev-fixed { background: #525252; color: #fff; }
     .ev-buf   { background: #a3a3a3; color: #fff; }
     .ev-due   { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+
+    .lang-btn { color: #a3a3a3; transition: color .2s ease; }
+    .lang-btn.active { color: #0a0a0a; }
   </style>
 </head>
 
@@ -78,14 +80,19 @@
         <span class="font-600 text-ink tracking-tight">Timebox</span>
       </a>
       <nav class="hidden md:flex items-center gap-8 text-sm text-muted">
-        <a href="#how" class="hover:text-ink transition-colors">How it works</a>
-        <a href="#features" class="hover:text-ink transition-colors">Features</a>
-        <a href="#pricing" class="hover:text-ink transition-colors">Pricing</a>
-        <a href="#faq" class="hover:text-ink transition-colors">FAQ</a>
+        <a href="#how" data-i18n="nav.how" class="hover:text-ink transition-colors">How it works</a>
+        <a href="#features" data-i18n="nav.features" class="hover:text-ink transition-colors">Features</a>
+        <a href="#pricing" data-i18n="nav.pricing" class="hover:text-ink transition-colors">Pricing</a>
+        <a href="#faq" data-i18n="nav.faq" class="hover:text-ink transition-colors">FAQ</a>
       </nav>
       <div class="flex items-center gap-3">
+        <div class="flex items-center gap-1.5 text-[13px] font-500" role="group" aria-label="Language">
+          <button type="button" data-lang="en" class="lang-btn active" aria-pressed="true">EN</button>
+          <span class="text-line2">/</span>
+          <button type="button" data-lang="pt" class="lang-btn" aria-pressed="false">PT</button>
+        </div>
         <a href="https://github.com/zF4ke/timebox" class="hidden sm:inline text-sm text-muted hover:text-ink transition-colors">GitHub</a>
-        <a href="https://github.com/zF4ke/timebox/releases" class="inline-flex items-center rounded bg-ink px-3.5 py-2 text-sm font-500 text-white hover:opacity-90 transition-opacity">Download</a>
+        <a href="https://github.com/zF4ke/timebox/releases" data-i18n="nav.download" class="inline-flex items-center rounded bg-ink px-3.5 py-2 text-sm font-500 text-white hover:opacity-90 transition-opacity">Download</a>
       </div>
     </div>
   </header>
@@ -95,30 +102,29 @@
     <!-- Hero -->
     <section class="relative overflow-hidden">
       <div class="relative mx-auto max-w-6xl px-6 pt-20 pb-24 md:pt-24 md:pb-28">
-        <h1 class="reveal font-700 text-ink tracking-tight text-4xl sm:text-5xl md:text-[3.4rem] leading-[1.06] max-w-3xl">
+        <h1 data-i18n="hero.title" class="reveal font-700 text-ink tracking-tight text-4xl sm:text-5xl md:text-[3.4rem] leading-[1.06] max-w-3xl">
           Five AI agents argue over your week so you don't have to.
         </h1>
-        <p class="reveal mt-6 text-lg text-body max-w-2xl leading-relaxed">
+        <p data-i18n="hero.sub" class="reveal mt-6 text-lg text-body max-w-2xl leading-relaxed">
           Timebox turns "I have four deadlines and no idea where to start" into a realistic weekly schedule. A team of specialist AI agents drafts it, critiques it, and votes on it, then you export it to your calendar in one click.
         </p>
         <div class="reveal mt-9 flex flex-col sm:flex-row gap-3 sm:items-center">
           <a href="https://github.com/zF4ke/timebox/releases" class="inline-flex items-center justify-center gap-2 rounded bg-ink px-5 py-3 font-500 text-white hover:opacity-90 transition-opacity">
             <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
-            Download for Windows, macOS &amp; Linux
+            <span data-i18n="hero.cta1">Download for Windows, macOS &amp; Linux</span>
           </a>
-          <a href="https://github.com/zF4ke/timebox" class="inline-flex items-center justify-center gap-2 rounded border border-line bg-card px-5 py-3 font-500 text-ink hover:border-line2 hover:bg-[#f5f5f5] transition-colors">
+          <a href="https://github.com/zF4ke/timebox" data-i18n="hero.cta2" class="inline-flex items-center justify-center gap-2 rounded border border-line bg-card px-5 py-3 font-500 text-ink hover:border-line2 hover:bg-[#f5f5f5] transition-colors">
             View on GitHub
             <span aria-hidden="true">→</span>
           </a>
         </div>
-        <p class="reveal mt-5 text-sm text-muted">
+        <p data-i18n="hero.note" class="reveal mt-5 text-sm text-muted">
           No account. No subscription. Bring your own OpenRouter key, there's a free model built in.
         </p>
 
-        <!-- Hero visual: app result view (week calendar + agent vote), in the app's own light theme -->
+        <!-- Hero visual: app result view (kept in the app's own English UI) -->
         <div class="reveal mt-14 md:mt-16">
           <div class="rounded-lg border border-line bg-card shadow-xl shadow-black/[0.04] overflow-hidden">
-            <!-- window chrome -->
             <div class="flex items-center gap-1.5 px-4 h-9 border-b border-line bg-[#fafafa]">
               <span class="h-2.5 w-2.5 rounded-full bg-line2"></span>
               <span class="h-2.5 w-2.5 rounded-full bg-line2"></span>
@@ -126,7 +132,6 @@
               <span class="ml-3 text-xs text-muted">Timebox</span>
             </div>
 
-            <!-- result header -->
             <div class="flex items-end justify-between gap-4 px-5 pt-5 pb-3 border-b border-line">
               <div>
                 <h2 class="text-ink font-600 text-[17px] tracking-tight">Your week</h2>
@@ -141,10 +146,8 @@
               </div>
             </div>
 
-            <!-- calendar grid -->
             <div class="p-4 sm:p-5">
               <div class="grid grid-cols-[34px_repeat(5,1fr)] gap-x-2">
-                <!-- header row -->
                 <div></div>
                 <div class="text-[11px] font-500 text-muted pb-2">Mon</div>
                 <div class="text-[11px] font-500 text-muted pb-2">Tue</div>
@@ -152,33 +155,27 @@
                 <div class="text-[11px] font-500 text-muted pb-2">Thu</div>
                 <div class="text-[11px] font-500 text-muted pb-2">Fri</div>
 
-                <!-- time gutter -->
                 <div class="flex flex-col justify-between pr-1 text-[10px] text-muted/80 text-right tabular-nums" style="height:240px">
                   <span>09</span><span>11</span><span>13</span><span>15</span><span>17</span>
                 </div>
 
-                <!-- Mon -->
                 <div class="relative border-l border-line" style="height:240px">
                   <div class="ev ev-work absolute left-1 right-1" style="top:6px;height:62px"><strong class="block text-[11px] font-600">Essay A draft</strong><span class="text-[10px] opacity-80">2h focus</span></div>
                   <div class="ev ev-buf absolute left-1 right-1" style="top:74px;height:24px"><span class="text-[10px]">break</span></div>
                   <div class="ev ev-fixed absolute left-1 right-1" style="top:150px;height:40px"><strong class="block text-[11px] font-600">Lecture</strong></div>
                 </div>
-                <!-- Tue -->
                 <div class="relative border-l border-line" style="height:240px">
                   <div class="ev ev-fixed absolute left-1 right-1" style="top:20px;height:40px"><strong class="block text-[11px] font-600">Lab</strong></div>
                   <div class="ev ev-work absolute left-1 right-1" style="top:96px;height:78px"><strong class="block text-[11px] font-600">Exam revision</strong><span class="text-[10px] opacity-80">spaced</span></div>
                 </div>
-                <!-- Wed -->
                 <div class="relative border-l border-line" style="height:240px">
                   <div class="ev ev-work absolute left-1 right-1" style="top:40px;height:64px"><strong class="block text-[11px] font-600">Essay A draft</strong></div>
                   <div class="ev ev-buf absolute left-1 right-1" style="top:150px;height:22px"><span class="text-[10px]">buffer</span></div>
                 </div>
-                <!-- Thu -->
                 <div class="relative border-l border-line" style="height:240px">
                   <div class="ev ev-work absolute left-1 right-1" style="top:14px;height:58px"><strong class="block text-[11px] font-600">Essay B draft</strong></div>
                   <div class="ev ev-fixed absolute left-1 right-1" style="top:110px;height:40px"><strong class="block text-[11px] font-600">Group sync</strong></div>
                 </div>
-                <!-- Fri -->
                 <div class="relative border-l border-line" style="height:240px">
                   <div class="ev ev-work absolute left-1 right-1" style="top:8px;height:50px"><strong class="block text-[11px] font-600">Essay polish</strong></div>
                   <div class="ev ev-due absolute left-1 right-1" style="top:150px;height:40px"><strong class="block text-[11px] font-600">Both essays due</strong></div>
@@ -193,8 +190,8 @@
     <!-- What it does -->
     <section class="border-t border-line">
       <div class="mx-auto max-w-3xl px-6 py-20 md:py-24">
-        <h2 class="reveal font-600 text-ink text-2xl md:text-3xl tracking-tight">What is Timebox?</h2>
-        <p class="reveal mt-5 text-lg leading-relaxed text-body">
+        <h2 data-i18n="what.title" class="reveal font-600 text-ink text-2xl md:text-3xl tracking-tight">What is Timebox?</h2>
+        <p data-i18n="what.body" class="reveal mt-5 text-lg leading-relaxed text-body">
           You describe your week in plain language: tasks, deadlines, when you're free, how you're feeling. Timebox's Interpreter agent extracts the structure, five specialist agents each weigh in from their own angle, and a Planner-Arbiter builds a calendar they can all live with. You get a week grid you can inspect block by block, plus a one-click export to Google or Apple Calendar. Everything runs on your own machine.
         </p>
       </div>
@@ -203,22 +200,22 @@
     <!-- How it works -->
     <section id="how" class="border-t border-line">
       <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <h2 class="reveal font-600 text-ink text-2xl md:text-3xl tracking-tight">How it works</h2>
+        <h2 data-i18n="how.title" class="reveal font-600 text-ink text-2xl md:text-3xl tracking-tight">How it works</h2>
         <div class="mt-12 grid md:grid-cols-3 gap-5">
           <div class="reveal rounded-lg border border-line bg-card p-7">
             <span class="inline-flex h-9 w-9 items-center justify-center rounded bg-ink text-white font-600 text-sm">1</span>
-            <h3 class="mt-5 font-600 text-ink text-lg">Describe your week</h3>
-            <p class="mt-3 text-body leading-relaxed">Type it like you'd tell a friend: "Two essays due Friday, exam Monday, free after 6pm most days, please don't schedule me past midnight." No forms, no rigid fields.</p>
+            <h3 data-i18n="how.s1.title" class="mt-5 font-600 text-ink text-lg">Describe your week</h3>
+            <p data-i18n="how.s1.body" class="mt-3 text-body leading-relaxed">Type it like you'd tell a friend: "Two essays due Friday, exam Monday, free after 6pm most days, please don't schedule me past midnight." No forms, no rigid fields.</p>
           </div>
           <div class="reveal rounded-lg border border-line bg-card p-7">
             <span class="inline-flex h-9 w-9 items-center justify-center rounded bg-ink text-white font-600 text-sm">2</span>
-            <h3 class="mt-5 font-600 text-ink text-lg">The agents negotiate</h3>
-            <p class="mt-3 text-body leading-relaxed">An Interpreter pulls out your tasks and constraints. Five specialists, Deadline, Grade, Effort, Wellbeing, Risk, critique each draft. The Planner revises until they reach quorum or hit your iteration limit. You watch it happen live.</p>
+            <h3 data-i18n="how.s2.title" class="mt-5 font-600 text-ink text-lg">The agents negotiate</h3>
+            <p data-i18n="how.s2.body" class="mt-3 text-body leading-relaxed">An Interpreter pulls out your tasks and constraints. Five specialists, Deadline, Grade, Effort, Wellbeing, Risk, critique each draft. The Planner revises until they reach quorum or hit your iteration limit. You watch it happen live.</p>
           </div>
           <div class="reveal rounded-lg border border-line bg-card p-7">
             <span class="inline-flex h-9 w-9 items-center justify-center rounded bg-ink text-white font-600 text-sm">3</span>
-            <h3 class="mt-5 font-600 text-ink text-lg">Get your calendar</h3>
-            <p class="mt-3 text-body leading-relaxed">Review the week grid, click any block to see why it's there, then export to <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">.ics</code> for Google or Apple Calendar. Plans auto-save locally so you can reload or tweak later.</p>
+            <h3 data-i18n="how.s3.title" class="mt-5 font-600 text-ink text-lg">Get your calendar</h3>
+            <p data-i18n="how.s3.body" class="mt-3 text-body leading-relaxed">Review the week grid, click any block to see why it's there, then export to <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">.ics</code> for Google or Apple Calendar. Plans auto-save locally so you can reload or tweak later.</p>
           </div>
         </div>
       </div>
@@ -227,27 +224,27 @@
     <!-- Features -->
     <section id="features" class="border-t border-line">
       <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <h2 class="reveal font-600 text-ink text-2xl md:text-3xl tracking-tight max-w-2xl">Built around disagreement, not a black box</h2>
+        <h2 data-i18n="feat.title" class="reveal font-600 text-ink text-2xl md:text-3xl tracking-tight max-w-2xl">Built around disagreement, not a black box</h2>
         <div class="mt-12 grid md:grid-cols-2 gap-5">
 
           <div class="reveal rounded-lg border border-line bg-card p-8">
-            <h3 class="font-600 text-ink text-lg">A team of agents, not one opinion</h3>
-            <p class="mt-3 text-body leading-relaxed">Five specialist agents each protect one thing: deadlines, grades, realistic effort, your wellbeing, and hidden risk. They draft, critique, and vote in parallel, and their views are kept separate, so you see the actual trade-offs instead of one averaged guess. Any agent can block a plan it considers unsafe.</p>
+            <h3 data-i18n="f1.title" class="font-600 text-ink text-lg">A team of agents, not one opinion</h3>
+            <p data-i18n="f1.body" class="mt-3 text-body leading-relaxed">Five specialist agents each protect one thing: deadlines, grades, realistic effort, your wellbeing, and hidden risk. They draft, critique, and vote in parallel, and their views are kept separate, so you see the actual trade-offs instead of one averaged guess. Any agent can block a plan it considers unsafe.</p>
           </div>
 
           <div class="reveal rounded-lg border border-line bg-card p-8">
-            <h3 class="font-600 text-ink text-lg">You set the rules of the debate</h3>
-            <p class="mt-3 text-body leading-relaxed">Control how strict the consensus is. Set the <span class="text-ink font-500">quorum</span> (how many of the five must approve, 1 to 5) and the <span class="text-ink font-500">max iterations</span> (how many revision rounds before it settles). Want a fast rough draft? Lower both. Want a plan all five agents defend? Crank it up.</p>
+            <h3 data-i18n="f2.title" class="font-600 text-ink text-lg">You set the rules of the debate</h3>
+            <p data-i18n="f2.body" class="mt-3 text-body leading-relaxed">Control how strict the consensus is. Set the <span class="text-ink font-500">quorum</span> (how many of the five must approve, 1 to 5) and the <span class="text-ink font-500">max iterations</span> (how many revision rounds before it settles). Want a fast rough draft? Lower both. Want a plan all five agents defend? Crank it up.</p>
           </div>
 
           <div class="reveal rounded-lg border border-line bg-card p-8">
-            <h3 class="font-600 text-ink text-lg">Straight into your calendar</h3>
-            <p class="mt-3 text-body leading-relaxed">Export any plan to a standard <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">.ics</code> file that imports cleanly into Google Calendar, Apple Calendar, or Outlook. Or export the full JSON audit trail, every agent view, critique, and revision, if you want to see the reasoning. Drag-and-drop import brings plans back in.</p>
+            <h3 data-i18n="f3.title" class="font-600 text-ink text-lg">Straight into your calendar</h3>
+            <p data-i18n="f3.body" class="mt-3 text-body leading-relaxed">Export any plan to a standard <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">.ics</code> file that imports cleanly into Google Calendar, Apple Calendar, or Outlook. Or export the full JSON audit trail, every agent view, critique, and revision, if you want to see the reasoning. Drag-and-drop import brings plans back in.</p>
           </div>
 
           <div class="reveal rounded-lg border border-line bg-card p-8">
-            <h3 class="font-600 text-ink text-lg">A real benchmark harness <span class="font-400 text-muted text-sm">· for developers</span></h3>
-            <p class="mt-3 text-body leading-relaxed">Timebox ships with the evaluation rig it was built on. Run a model × quorum × iteration matrix, get a pre-flight cost estimate, set a hard budget cap in dollars, and compare models on a cost-vs-quality chart. An LLM judge plus a deterministic mistake scorer (deadline violations, availability overruns, late-night work) tells you which model actually plans best, not just which sounds best.</p>
+            <h3 data-i18n="f4.title" class="font-600 text-ink text-lg">A real benchmark harness <span class="font-400 text-muted text-sm">· for developers</span></h3>
+            <p data-i18n="f4.body" class="mt-3 text-body leading-relaxed">Timebox ships with the evaluation rig it was built on. Run a model × quorum × iteration matrix, get a pre-flight cost estimate, set a hard budget cap in dollars, and compare models on a cost-vs-quality chart. An LLM judge plus a deterministic mistake scorer (deadline violations, availability overruns, late-night work) tells you which model actually plans best, not just which sounds best.</p>
           </div>
 
         </div>
@@ -257,21 +254,20 @@
     <!-- Pricing -->
     <section id="pricing" class="border-t border-line">
       <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <h2 class="reveal font-600 text-ink text-2xl md:text-3xl tracking-tight">Free and open source. The way it should be.</h2>
-        <p class="reveal mt-5 text-lg text-body max-w-3xl leading-relaxed">
+        <h2 data-i18n="price.title" class="reveal font-600 text-ink text-2xl md:text-3xl tracking-tight">Free and open source. The way it should be.</h2>
+        <p data-i18n="price.sub" class="reveal mt-5 text-lg text-body max-w-3xl leading-relaxed">
           The Timebox desktop app is MIT licensed and free forever. You bring your own OpenRouter API key, so you only ever pay the model provider directly, never us. There's a free model built in if you just want to try it.
         </p>
 
         <div class="mt-12 grid lg:grid-cols-3 gap-5 items-start">
 
-          <!-- Desktop (featured) -->
           <div class="reveal rounded-lg bg-card p-8 border-2 border-ink">
             <h3 class="font-600 text-ink text-lg">Desktop</h3>
             <div class="mt-4 flex items-baseline gap-2">
               <span class="font-700 text-ink text-4xl tracking-tight">€0</span>
-              <span class="text-muted text-sm">free forever</span>
+              <span data-i18n="price.t1.unit" class="text-muted text-sm">free forever</span>
             </div>
-            <ul class="mt-6 space-y-3 text-sm text-ink2">
+            <ul data-i18n="price.t1.items" class="mt-6 space-y-3 text-sm text-ink2">
               <li class="flex gap-2.5"><span class="text-ink">✓</span> All five agents</li>
               <li class="flex gap-2.5"><span class="text-ink">✓</span> Quorum &amp; iteration controls</li>
               <li class="flex gap-2.5"><span class="text-ink">✓</span> <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-[13px]">.ics</code> + JSON export</li>
@@ -279,50 +275,48 @@
               <li class="flex gap-2.5"><span class="text-ink">✓</span> Plans stored locally, fully private</li>
               <li class="flex gap-2.5"><span class="text-ink">✓</span> MIT licensed, fork it, change it, ship it</li>
             </ul>
-            <p class="mt-5 text-xs text-muted">Requires your own OpenRouter key (free model included).</p>
-            <a href="https://github.com/zF4ke/timebox/releases" class="mt-7 inline-flex w-full items-center justify-center rounded bg-ink px-5 py-3 font-500 text-white hover:opacity-90 transition-opacity">Download</a>
+            <p data-i18n="price.t1.note" class="mt-5 text-xs text-muted">Requires your own OpenRouter key (free model included).</p>
+            <a href="https://github.com/zF4ke/timebox/releases" data-i18n="price.t1.cta" class="mt-7 inline-flex w-full items-center justify-center rounded bg-ink px-5 py-3 font-500 text-white hover:opacity-90 transition-opacity">Download</a>
           </div>
 
-          <!-- Web Free -->
           <div class="reveal rounded-lg border border-line bg-card p-8">
             <div class="flex items-center justify-between">
               <h3 class="font-600 text-ink text-lg">Web Free</h3>
-              <span class="text-xs text-muted">Coming soon</span>
+              <span data-i18n="price.t2.tag" class="text-xs text-muted">Coming soon</span>
             </div>
             <div class="mt-4 flex items-baseline gap-2">
               <span class="font-700 text-ink text-4xl tracking-tight">€0</span>
               <span class="text-muted text-sm">/mo</span>
             </div>
-            <ul class="mt-6 space-y-3 text-sm text-body">
+            <ul data-i18n="price.t2.items" class="mt-6 space-y-3 text-sm text-body">
               <li>No install, no API key</li>
               <li><span class="text-ink font-500">3 plans / month</span></li>
               <li>Runs in your browser</li>
             </ul>
-            <a href="#waitlist" class="mt-7 inline-flex w-full items-center justify-center rounded border border-line bg-card px-5 py-3 font-500 text-ink hover:border-line2 hover:bg-[#f5f5f5] transition-colors">Join the waitlist</a>
+            <a href="#waitlist" data-i18n="price.t2.cta" class="mt-7 inline-flex w-full items-center justify-center rounded border border-line bg-card px-5 py-3 font-500 text-ink hover:border-line2 hover:bg-[#f5f5f5] transition-colors">Join the waitlist</a>
           </div>
 
-          <!-- Web Pro -->
           <div class="reveal rounded-lg border border-line bg-card p-8">
             <div class="flex items-center justify-between">
               <h3 class="font-600 text-ink text-lg">Web Pro</h3>
-              <span class="text-xs text-muted">Planned</span>
+              <span data-i18n="price.t3.tag" class="text-xs text-muted">Planned</span>
             </div>
             <div class="mt-4 flex items-baseline gap-2">
               <span class="font-700 text-ink text-4xl tracking-tight">€5</span>
               <span class="text-muted text-sm">/mo · or €48/yr</span>
             </div>
-            <ul class="mt-6 space-y-3 text-sm text-body">
+            <ul data-i18n="price.t3.items" class="mt-6 space-y-3 text-sm text-body">
               <li class="text-muted">Everything in Web Free, plus:</li>
               <li>Unlimited plans</li>
               <li>Google Calendar two-way sync</li>
               <li>Plan history across devices</li>
               <li>Priority models</li>
             </ul>
-            <a href="#waitlist" class="mt-7 inline-flex w-full items-center justify-center rounded border border-line bg-card px-5 py-3 font-500 text-ink hover:border-line2 hover:bg-[#f5f5f5] transition-colors">Join the waitlist</a>
+            <a href="#waitlist" data-i18n="price.t3.cta" class="mt-7 inline-flex w-full items-center justify-center rounded border border-line bg-card px-5 py-3 font-500 text-ink hover:border-line2 hover:bg-[#f5f5f5] transition-colors">Join the waitlist</a>
           </div>
         </div>
 
-        <p class="reveal mt-8 text-sm text-muted max-w-3xl leading-relaxed">
+        <p data-i18n="price.foot" class="reveal mt-8 text-sm text-muted max-w-3xl leading-relaxed">
           The hosted Web tiers don't exist yet. They're on the roadmap if there's demand. The desktop app is the real product today, it's free, and it always will be.
         </p>
       </div>
@@ -331,55 +325,55 @@
     <!-- FAQ -->
     <section id="faq" class="border-t border-line">
       <div class="mx-auto max-w-3xl px-6 py-20 md:py-28">
-        <h2 class="reveal font-600 text-ink text-2xl md:text-3xl tracking-tight">Questions</h2>
+        <h2 data-i18n="faq.title" class="reveal font-600 text-ink text-2xl md:text-3xl tracking-tight">Questions</h2>
         <div class="mt-10 divide-y divide-line border-y border-line">
 
           <details class="reveal group py-5">
             <summary class="flex items-center justify-between gap-4 text-ink font-500">
-              Do I need an API key?
+              <span data-i18n="faq.q1.q">Do I need an API key?</span>
               <span class="faq-chevron text-muted text-xl leading-none transition-transform">+</span>
             </summary>
-            <p class="mt-3 text-body leading-relaxed">For the desktop app, yes, an OpenRouter key. It takes a minute to create, and Timebox includes a free default model so you can plan at zero cost. You enter the key once in Settings; it stays on your machine. The planned hosted version won't need a key.</p>
+            <p data-i18n="faq.q1.a" class="mt-3 text-body leading-relaxed">For the desktop app, yes, an OpenRouter key. It takes a minute to create, and Timebox includes a free default model so you can plan at zero cost. You enter the key once in Settings; it stays on your machine. The planned hosted version won't need a key.</p>
           </details>
 
           <details class="reveal group py-5">
             <summary class="flex items-center justify-between gap-4 text-ink font-500">
-              Which models can I use?
+              <span data-i18n="faq.q2.q">Which models can I use?</span>
               <span class="faq-chevron text-muted text-xl leading-none transition-transform">+</span>
             </summary>
-            <p class="mt-3 text-body leading-relaxed">Any chat model on OpenRouter. Out of the box you can pick from a free Nemotron model plus paid options like Gemini Flash Lite, DeepSeek, GPT-5 Nano, and MiniMax, each shown with its per-token price so you know the cost before you run. In our own benchmarks, Gemini 2.5 Flash Lite gave the best quality-per-cent.</p>
+            <p data-i18n="faq.q2.a" class="mt-3 text-body leading-relaxed">Any chat model on OpenRouter. Out of the box you can pick from a free Nemotron model plus paid options like Gemini Flash Lite, DeepSeek, GPT-5 Nano, and MiniMax, each shown with its per-token price so you know the cost before you run. In our own benchmarks, Gemini 2.5 Flash Lite gave the best quality-per-cent.</p>
           </details>
 
           <details class="reveal group py-5">
             <summary class="flex items-center justify-between gap-4 text-ink font-500">
-              Is my data private?
+              <span data-i18n="faq.q3.q">Is my data private?</span>
               <span class="faq-chevron text-muted text-xl leading-none transition-transform">+</span>
             </summary>
-            <p class="mt-3 text-body leading-relaxed">Yes. The desktop app keeps everything, your plans, settings, and key, in your own OS user folder. Nothing is sent anywhere except the model calls you trigger, straight to OpenRouter. There's no Timebox server, no telemetry, no account.</p>
+            <p data-i18n="faq.q3.a" class="mt-3 text-body leading-relaxed">Yes. The desktop app keeps everything, your plans, settings, and key, in your own OS user folder. Nothing is sent anywhere except the model calls you trigger, straight to OpenRouter. There's no Timebox server, no telemetry, no account.</p>
           </details>
 
           <details class="reveal group py-5">
             <summary class="flex items-center justify-between gap-4 text-ink font-500">
-              Is it really free?
+              <span data-i18n="faq.q4.q">Is it really free?</span>
               <span class="faq-chevron text-muted text-xl leading-none transition-transform">+</span>
             </summary>
-            <p class="mt-3 text-body leading-relaxed">The app is free and MIT licensed. The only thing you might pay for is the model usage itself, billed by OpenRouter at their rates, and even that can be €0 with the built-in free model. We don't take a cut.</p>
+            <p data-i18n="faq.q4.a" class="mt-3 text-body leading-relaxed">The app is free and MIT licensed. The only thing you might pay for is the model usage itself, billed by OpenRouter at their rates, and even that can be €0 with the built-in free model. We don't take a cut.</p>
           </details>
 
           <details class="reveal group py-5">
             <summary class="flex items-center justify-between gap-4 text-ink font-500">
-              Why multiple agents instead of just asking ChatGPT?
+              <span data-i18n="faq.q5.q">Why multiple agents instead of just asking ChatGPT?</span>
               <span class="faq-chevron text-muted text-xl leading-none transition-transform">+</span>
             </summary>
-            <p class="mt-3 text-body leading-relaxed">Because one model asked to "make a schedule" hides its trade-offs. Timebox forces five agents to defend deadlines, grades, effort, wellbeing, and risk separately, then reach consensus. You see why a block is where it is, and any agent can veto an unrealistic plan.</p>
+            <p data-i18n="faq.q5.a" class="mt-3 text-body leading-relaxed">Because one model asked to "make a schedule" hides its trade-offs. Timebox forces five agents to defend deadlines, grades, effort, wellbeing, and risk separately, then reach consensus. You see why a block is where it is, and any agent can veto an unrealistic plan.</p>
           </details>
 
           <details class="reveal group py-5">
             <summary class="flex items-center justify-between gap-4 text-ink font-500">
-              What do I need to run it?
+              <span data-i18n="faq.q6.q">What do I need to run it?</span>
               <span class="faq-chevron text-muted text-xl leading-none transition-transform">+</span>
             </summary>
-            <p class="mt-3 text-body leading-relaxed">A Windows, macOS, or Linux machine. Download the build for your OS from GitHub Releases, portable <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">.exe</code> on Windows, <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">.dmg</code> on macOS, <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">AppImage</code> on Linux. No installer ceremony.</p>
+            <p data-i18n="faq.q6.a" class="mt-3 text-body leading-relaxed">A Windows, macOS, or Linux machine. Download the build for your OS from GitHub Releases, portable <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">.exe</code> on Windows, <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">.dmg</code> on macOS, <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">AppImage</code> on Linux. No installer ceremony.</p>
           </details>
 
         </div>
@@ -389,11 +383,11 @@
     <!-- Final CTA -->
     <section class="border-t border-line">
       <div class="relative mx-auto max-w-3xl px-6 py-24 md:py-32 text-center">
-        <h2 class="reveal font-700 text-ink text-3xl md:text-4xl tracking-tight leading-tight">Plan your week in the time it takes to describe it.</h2>
-        <p class="reveal mt-5 text-lg text-body">Free, open source, runs on your machine. See what five agents come up with.</p>
+        <h2 data-i18n="cta.title" class="reveal font-700 text-ink text-3xl md:text-4xl tracking-tight leading-tight">Plan your week in the time it takes to describe it.</h2>
+        <p data-i18n="cta.sub" class="reveal mt-5 text-lg text-body">Free, open source, runs on your machine. See what five agents come up with.</p>
         <div class="reveal mt-9 flex flex-col sm:flex-row gap-3 justify-center">
-          <a href="https://github.com/zF4ke/timebox/releases" class="inline-flex items-center justify-center gap-2 rounded bg-ink px-6 py-3 font-500 text-white hover:opacity-90 transition-opacity">Download Timebox</a>
-          <a href="https://github.com/zF4ke/timebox" class="inline-flex items-center justify-center gap-2 rounded border border-line bg-card px-6 py-3 font-500 text-ink hover:border-line2 hover:bg-[#f5f5f5] transition-colors">Star it on GitHub <span aria-hidden="true">→</span></a>
+          <a href="https://github.com/zF4ke/timebox/releases" data-i18n="cta.btn1" class="inline-flex items-center justify-center gap-2 rounded bg-ink px-6 py-3 font-500 text-white hover:opacity-90 transition-opacity">Download Timebox</a>
+          <a href="https://github.com/zF4ke/timebox" data-i18n="cta.btn2" class="inline-flex items-center justify-center gap-2 rounded border border-line bg-card px-6 py-3 font-500 text-ink hover:border-line2 hover:bg-[#f5f5f5] transition-colors">Star it on GitHub <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
@@ -405,10 +399,10 @@
     <div class="mx-auto max-w-6xl px-6 py-14">
       <div class="rounded-lg border border-line bg-card p-7 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <p class="font-600 text-ink">Want the no-install web version?</p>
-          <p class="text-sm text-muted mt-1">Join the waitlist and we'll let you know if we ship it.</p>
+          <p data-i18n="foot.waitTitle" class="font-600 text-ink">Want the no-install web version?</p>
+          <p data-i18n="foot.waitSub" class="text-sm text-muted mt-1">Join the waitlist and we'll let you know if we ship it.</p>
         </div>
-        <a href="https://github.com/zF4ke/timebox" class="inline-flex items-center justify-center gap-2 rounded bg-ink px-5 py-3 font-500 text-white hover:opacity-90 transition-opacity whitespace-nowrap">Join the waitlist <span aria-hidden="true">→</span></a>
+        <a href="https://github.com/zF4ke/timebox" data-i18n="foot.waitCta" class="inline-flex items-center justify-center gap-2 rounded bg-ink px-5 py-3 font-500 text-white hover:opacity-90 transition-opacity whitespace-nowrap">Join the waitlist <span aria-hidden="true">→</span></a>
       </div>
 
       <div class="mt-10 flex flex-col md:flex-row gap-6 md:items-center md:justify-between text-sm">
@@ -421,9 +415,9 @@
         </div>
         <nav class="flex flex-wrap items-center gap-x-5 gap-y-1 text-muted">
           <a href="https://github.com/zF4ke/timebox" class="hover:text-ink transition-colors">GitHub</a>
-          <a href="https://github.com/zF4ke/timebox/releases" class="hover:text-ink transition-colors">Releases</a>
-          <a href="https://github.com/zF4ke/timebox/tree/master/docs" class="hover:text-ink transition-colors">Docs</a>
-          <a href="https://github.com/zF4ke/timebox/issues" class="hover:text-ink transition-colors">Report an issue</a>
+          <a href="https://github.com/zF4ke/timebox/releases" data-i18n="foot.releases" class="hover:text-ink transition-colors">Releases</a>
+          <a href="https://github.com/zF4ke/timebox/tree/master/docs" data-i18n="foot.docs" class="hover:text-ink transition-colors">Docs</a>
+          <a href="https://github.com/zF4ke/timebox/issues" data-i18n="foot.issue" class="hover:text-ink transition-colors">Report an issue</a>
         </nav>
       </div>
     </div>
@@ -435,17 +429,118 @@
       var els = document.querySelectorAll('.reveal');
       if (prefersReduced || !('IntersectionObserver' in window)) {
         els.forEach(function (el) { el.classList.add('in'); });
-        return;
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        els.forEach(function (el) { io.observe(el); });
       }
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in');
-            io.unobserve(entry.target);
-          }
+    })();
+
+    /* ───────────── i18n (EN / PT) ───────────── */
+    const I18N = {
+      pt: {
+        'nav.how': 'Como funciona',
+        'nav.features': 'Funcionalidades',
+        'nav.pricing': 'Preços',
+        'nav.faq': 'FAQ',
+        'nav.download': 'Descarregar',
+        'hero.title': 'Cinco agentes de IA discutem a tua semana por ti.',
+        'hero.sub': 'O Timebox pega num "tenho quatro entregas e não sei por onde começar" e devolve-te um horário realista para a semana. Uma equipa de agentes de IA monta o plano, critica-o e vota, e tu exportas tudo para o calendário com um clique.',
+        'hero.cta1': 'Descarregar para Windows, macOS e Linux',
+        'hero.cta2': 'Ver no GitHub',
+        'hero.note': "Sem conta. Sem subscrição. Usas a tua chave da OpenRouter, e já vem um modelo gratuito incluído.",
+        'what.title': 'O que é o Timebox?',
+        'what.body': 'Descreves a tua semana por palavras tuas: tarefas, prazos, quando estás livre, como te sentes. O agente Intérprete tira daí a estrutura, cinco agentes especialistas dão a sua opinião cada um do seu ângulo, e um Planeador-Árbitro monta um calendário com que todos conseguem viver. Ficas com uma grelha da semana que podes ver bloco a bloco, e exportas para o Google ou Apple Calendar num clique. Tudo corre na tua máquina.',
+        'how.title': 'Como funciona',
+        'how.s1.title': 'Descreve a tua semana',
+        'how.s1.body': 'Escreve como contarias a um amigo: "Dois ensaios para entregar sexta, exame segunda, livre depois das 18h quase todos os dias, e não me marques nada depois da meia-noite." Sem formulários, sem campos rígidos.',
+        'how.s2.title': 'Os agentes negoceiam',
+        'how.s2.body': 'Um Intérprete tira as tuas tarefas e restrições. Cinco especialistas, Prazo, Nota, Esforço, Bem-estar e Risco, criticam cada versão. O Planeador revê até chegarem a quórum ou ao limite de rondas que definiste. E tu vês isto a acontecer ao vivo.',
+        'how.s3.title': 'Recebe o teu calendário',
+        'how.s3.body': 'Vês a grelha da semana, clicas em qualquer bloco para saber porque está ali, e exportas para <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">.ics</code> para o Google ou Apple Calendar. Os planos guardam-se sozinhos na tua máquina, por isso podes voltar a abri-los ou ajustá-los depois.',
+        'feat.title': 'Feito à volta da discordância, não de uma caixa preta',
+        'f1.title': 'Uma equipa de agentes, não uma só opinião',
+        'f1.body': 'Cinco agentes especialistas defendem cada um a sua coisa: prazos, notas, esforço realista, o teu bem-estar e o risco escondido. Criam, criticam e votam em paralelo, e as opiniões ficam separadas, por isso vês os compromissos reais em vez de um palpite médio. Qualquer agente pode travar um plano que ache pouco seguro.',
+        'f2.title': 'Tu defines as regras do debate',
+        'f2.body': 'Controlas o quão exigente é o consenso. Defines o <span class="text-ink font-500">quórum</span> (quantos dos cinco têm de aprovar, de 1 a 5) e o <span class="text-ink font-500">máximo de rondas</span> (quantas revisões até assentar). Queres um rascunho rápido? Baixa os dois. Queres um plano que os cinco defendam? Sobe-os.',
+        'f3.title': 'Direto para o teu calendário',
+        'f3.body': 'Exporta qualquer plano para um ficheiro <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">.ics</code> normal, que entra sem problemas no Google Calendar, Apple Calendar ou Outlook. Ou exporta o registo completo em JSON, com cada opinião, crítica e revisão, se quiseres ver o raciocínio. E arrastas um ficheiro para o trazeres de volta.',
+        'f4.title': 'Um banco de testes a sério <span class="font-400 text-muted text-sm">· para programadores</span>',
+        'f4.body': 'O Timebox traz o sistema de avaliação com que foi construído. Corres uma matriz de modelo × quórum × rondas, recebes uma estimativa de custo antes de arrancar, pões um limite de orçamento em dólares, e comparas modelos num gráfico de custo vs. qualidade. Um juiz LLM e um avaliador determinístico de erros (prazos furados, horários ultrapassados, trabalho de madrugada) dizem-te que modelo planeia melhor, não só qual soa melhor.',
+        'price.title': 'Grátis e de código aberto. Como deve ser.',
+        'price.sub': 'A app de secretária do Timebox é MIT e grátis para sempre. Usas a tua chave da OpenRouter, por isso só pagas ao fornecedor do modelo, nunca a nós. E vem um modelo gratuito incluído, caso só queiras experimentar.',
+        'price.t1.unit': 'grátis para sempre',
+        'price.t1.items': '<li class="flex gap-2.5"><span class="text-ink">✓</span> Os cinco agentes</li><li class="flex gap-2.5"><span class="text-ink">✓</span> Controlo de quórum e rondas</li><li class="flex gap-2.5"><span class="text-ink">✓</span> Exportação <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-[13px]">.ics</code> + JSON</li><li class="flex gap-2.5"><span class="text-ink">✓</span> Banco de testes</li><li class="flex gap-2.5"><span class="text-ink">✓</span> Planos guardados na tua máquina, totalmente privados</li><li class="flex gap-2.5"><span class="text-ink">✓</span> Licença MIT: faz fork, muda, lança</li>',
+        'price.t1.note': 'Precisa da tua chave da OpenRouter (modelo gratuito incluído).',
+        'price.t1.cta': 'Descarregar',
+        'price.t2.tag': 'Em breve',
+        'price.t2.items': '<li>Sem instalar, sem chave de API</li><li><span class="text-ink font-500">3 planos / mês</span></li><li>Corre no teu navegador</li>',
+        'price.t2.cta': 'Entrar na lista',
+        'price.t3.tag': 'Planeado',
+        'price.t3.items': '<li class="text-muted">Tudo o que tem o Web Free, e ainda:</li><li>Planos sem limite</li><li>Sincronização com o Google Calendar</li><li>Histórico entre dispositivos</li><li>Modelos prioritários</li>',
+        'price.t3.cta': 'Entrar na lista',
+        'price.foot': 'As versões Web ainda não existem. Estão no roteiro se houver procura. A app de secretária é o produto a sério hoje, é grátis, e vai continuar a ser.',
+        'faq.title': 'Perguntas',
+        'faq.q1.q': 'Preciso de uma chave de API?',
+        'faq.q1.a': 'Para a app de secretária, sim, uma chave da OpenRouter. Cria-se num minuto, e o Timebox traz um modelo gratuito para planeares sem gastar nada. Metes a chave uma vez nas Definições e ela fica na tua máquina. A versão Web planeada não vai precisar de chave.',
+        'faq.q2.q': 'Que modelos posso usar?',
+        'faq.q2.a': 'Qualquer modelo de conversa da OpenRouter. À partida tens um Nemotron gratuito e opções pagas como o Gemini Flash Lite, DeepSeek, GPT-5 Nano e MiniMax, cada um com o preço por token à vista para saberes o custo antes de correr. Nos nossos testes, o Gemini 2.5 Flash Lite deu a melhor qualidade por cêntimo.',
+        'faq.q3.q': 'Os meus dados ficam privados?',
+        'faq.q3.a': 'Sim. A app guarda tudo, planos, definições e chave, na tua própria pasta de utilizador. Nada sai dali a não ser as chamadas ao modelo que tu fazes, diretas à OpenRouter. Não há servidor do Timebox, não há telemetria, não há conta.',
+        'faq.q4.q': 'É mesmo grátis?',
+        'faq.q4.a': 'A app é grátis e MIT. A única coisa que podes pagar é o uso do modelo, cobrado pela OpenRouter aos preços deles, e até isso pode ser €0 com o modelo gratuito incluído. Nós não levamos nada.',
+        'faq.q5.q': 'Porquê vários agentes em vez de pedir ao ChatGPT?',
+        'faq.q5.a': 'Porque um modelo a quem pedes "faz-me um horário" esconde os compromissos que fez. O Timebox obriga cinco agentes a defender prazos, notas, esforço, bem-estar e risco em separado, e só depois a chegar a acordo. Vês porque é que um bloco está onde está, e qualquer agente pode vetar um plano irrealista.',
+        'faq.q6.q': 'O que preciso para o correr?',
+        'faq.q6.a': 'Um computador com Windows, macOS ou Linux. Descarrega a versão para o teu sistema das Releases do GitHub: <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">.exe</code> portátil no Windows, <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">.dmg</code> no macOS, <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">AppImage</code> no Linux. Sem instalações complicadas.',
+        'cta.title': 'Planeia a semana no tempo que demoras a descrevê-la.',
+        'cta.sub': 'Grátis, código aberto, corre na tua máquina. Vê o que cinco agentes inventam.',
+        'cta.btn1': 'Descarregar o Timebox',
+        'cta.btn2': 'Dá-lhe uma estrela no GitHub →',
+        'foot.waitTitle': 'Queres a versão Web sem instalar?',
+        'foot.waitSub': 'Entra na lista e avisamos-te se a lançarmos.',
+        'foot.waitCta': 'Entrar na lista →',
+        'foot.releases': 'Releases',
+        'foot.docs': 'Documentação',
+        'foot.issue': 'Reportar um problema',
+      },
+    };
+
+    (function () {
+      const nodes = document.querySelectorAll('[data-i18n]');
+      const EN = {};
+      nodes.forEach((el) => { EN[el.getAttribute('data-i18n')] = el.innerHTML; });
+
+      function apply(lang) {
+        const dict = lang === 'pt' ? I18N.pt : null;
+        nodes.forEach((el) => {
+          const key = el.getAttribute('data-i18n');
+          const val = dict && dict[key] != null ? dict[key] : EN[key];
+          if (val != null) el.innerHTML = val;
         });
-      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-      els.forEach(function (el) { io.observe(el); });
+        document.documentElement.lang = lang;
+        document.querySelectorAll('.lang-btn').forEach((b) => {
+          const on = b.getAttribute('data-lang') === lang;
+          b.classList.toggle('active', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        try { localStorage.setItem('timebox_lang', lang); } catch (e) {}
+      }
+
+      document.querySelectorAll('.lang-btn').forEach((b) => {
+        b.addEventListener('click', () => apply(b.getAttribute('data-lang')));
+      });
+
+      let initial = 'en';
+      try {
+        const saved = localStorage.getItem('timebox_lang');
+        if (saved) initial = saved;
+        else if ((navigator.language || '').toLowerCase().startsWith('pt')) initial = 'pt';
+      } catch (e) {}
+      if (initial === 'pt') apply('pt');
     })();
   </script>
 </body>
