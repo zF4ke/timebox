@@ -4,7 +4,7 @@ Chronological log for the final delivery benchmark and evaluation work.
 
 ## 2026-06-04
 
-- Started from the project root `C:\Users\yFake\OneDrive\Ambiente de Trabalho\www\ist\P4\AASMA\project`.
+- Started from the project root (the repository checkout directory).
 - Read the local `AGENTS.md` instructions and confirmed the project structure: Electron main process in `src/main`, React renderer in `src/renderer`, shared types in `src/shared`, prompt markdown files in `src/main/prompts`, and project documents in `docs`.
 - Checked the initial git state: clean `master` tracking `origin/master`.
 - Pulled colleague changes with `git pull --ff-only`, updating from `41188f4` to `e69e0c8`.
