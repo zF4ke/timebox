@@ -2,8 +2,17 @@
   "name": "timebox",
   "version": "0.1.0",
   "private": true,
-  "author": "AASMA Team",
-  "description": "Electron prototype for Timebox, a multi-agent student planning app.",
+  "license": "MIT",
+  "author": "Pedro Silva",
+  "description": "Timebox, a multi-agent student schedule planner. Five LLM agents draft, critique and vote on a weekly study schedule, then export to calendar.",
+  "homepage": "https://github.com/zF4ke/timebox#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zF4ke/timebox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/zF4ke/timebox/issues"
+  },
   "main": "dist-electron/main/main.js",
   "scripts": {
     "dev": "concurrently -k \"npm:dev:renderer\" \"npm:dev:electron\"",
