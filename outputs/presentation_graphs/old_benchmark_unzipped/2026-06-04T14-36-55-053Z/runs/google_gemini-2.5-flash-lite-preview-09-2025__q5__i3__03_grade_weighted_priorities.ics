@@ -1,0 +1,126 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:D20260604T0900@timebox.local
+DTSTAMP:20260604T143844Z
+DTSTART:20260604T090000Z
+DTEND:20260604T110000Z
+SUMMARY:Database Project: Write Queries
+DESCRIPTION:Begin drafting the core SQL queries required for the database milestone.\\n\\nReasoning: Start the highest priority project work immediately.
+END:VEVENT
+BEGIN:VEVENT
+UID:D20260604T1100@timebox.local
+DTSTAMP:20260604T143844Z
+DTSTART:20260604T110000Z
+DTEND:20260604T120000Z
+SUMMARY:Help Friend Review Slides
+DESCRIPTION:Fulfill the commitment to review a friend's slides.\\n\\nReasoning: Scheduling the fixed commitment as requested.
+END:VEVENT
+BEGIN:VEVENT
+UID:D20260605T0900@timebox.local
+DTSTAMP:20260604T143844Z
+DTSTART:20260605T090000Z
+DTEND:20260605T120000Z
+SUMMARY:Database Project: Write Queries
+DESCRIPTION:Continue developing and optimizing the required SQL queries for the milestone\, aiming to finish the writing phase today.\\n\\nReasoning: Front-loading database query work to ensure it is ready for testing tomorrow.
+END:VEVENT
+BEGIN:VEVENT
+UID:D20260605T1300@timebox.local
+DTSTAMP:20260604T143844Z
+DTSTART:20260605T130000Z
+DTEND:20260605T150000Z
+SUMMARY:AI Homework: Complete remaining 3 exercises
+DESCRIPTION:Work on the first two exercises for the AI homework assignment.\\n\\nReasoning: Begin work on the AI Homework to ensure it is completed before the Sunday deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:D20260606T0900@timebox.local
+DTSTAMP:20260604T143844Z
+DTSTART:20260606T090000Z
+DTEND:20260606T110000Z
+SUMMARY:AI Homework: Complete remaining 3 exercises
+DESCRIPTION:Complete the final exercise for the AI homework assignment.\\n\\nReasoning: Finish the AI Homework early on Saturday to provide a buffer before the Sunday deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:D20260606T1100@timebox.local
+DTSTAMP:20260604T143844Z
+DTSTART:20260606T110000Z
+DTEND:20260606T130000Z
+SUMMARY:Database Project: Write Tests
+DESCRIPTION:Begin writing unit tests for the queries developed on Thursday and Friday.\\n\\nReasoning: Start testing the database milestone components.
+END:VEVENT
+BEGIN:VEVENT
+UID:D20260606T1400@timebox.local
+DTSTAMP:20260604T143844Z
+DTSTART:20260606T140000Z
+DTEND:20260606T150000Z
+SUMMARY:Database Project: Write Queries
+DESCRIPTION:Address any immediate failures found during initial testing of the queries.\\n\\nReasoning: Allocating 1 hour of buffer time specifically for debugging the database queries based on initial test runs.
+END:VEVENT
+BEGIN:VEVENT
+UID:D20260607T0900@timebox.local
+DTSTAMP:20260604T143844Z
+DTSTART:20260607T090000Z
+DTEND:20260607T100000Z
+SUMMARY:AI Homework: Complete remaining 3 exercises
+DESCRIPTION:Final review and submission preparation for the AI homework.\\n\\nReasoning: Ensuring the AI Homework is finalized and submitted early on Sunday.
+END:VEVENT
+BEGIN:VEVENT
+UID:D20260607T1000@timebox.local
+DTSTAMP:20260604T143844Z
+DTSTART:20260607T100000Z
+DTEND:20260607T120000Z
+SUMMARY:Database Project: Write Tests
+DESCRIPTION:Complete remaining tests for the database project queries.\\n\\nReasoning: Continuing testing immediately after AI homework submission.
+END:VEVENT
+BEGIN:VEVENT
+UID:D20260607T1200@timebox.local
+DTSTAMP:20260604T143844Z
+DTSTART:20260607T120000Z
+DTEND:20260607T133000Z
+SUMMARY:Database Project: Create Demo Script
+DESCRIPTION:Create the short demo script based on the functional queries and tests.\\n\\nReasoning: Allocating the necessary time to create the demo script today.
+END:VEVENT
+BEGIN:VEVENT
+UID:D20260608T0900@timebox.local
+DTSTAMP:20260604T143844Z
+DTSTART:20260608T090000Z
+DTEND:20260608T093000Z
+SUMMARY:Database Project: Create Demo Script
+DESCRIPTION:Final practice run of the demo script and submission preparation.\\n\\nReasoning: Finalizing the database milestone submission.
+END:VEVENT
+BEGIN:VEVENT
+UID:D20260608T0930@timebox.local
+DTSTAMP:20260604T143844Z
+DTSTART:20260608T093000Z
+DTEND:20260608T110000Z
+SUMMARY:History Essay: Research
+DESCRIPTION:Begin initial research for the history essay now that the major project is submitted.\\n\\nReasoning: Transitioning focus to the next major assignment.
+END:VEVENT
+BEGIN:VEVENT
+UID:D20260609T0900@timebox.local
+DTSTAMP:20260604T143844Z
+DTSTART:20260609T090000Z
+DTEND:20260609T110000Z
+SUMMARY:History Essay: Research
+DESCRIPTION:Continue deep dive into primary sources for the history essay.\\n\\nReasoning: Allocating focused time for research.
+END:VEVENT
+BEGIN:VEVENT
+UID:D20260610T0900@timebox.local
+DTSTAMP:20260604T143844Z
+DTSTART:20260610T090000Z
+DTEND:20260610T100000Z
+SUMMARY:History Essay: Research
+DESCRIPTION:Finalize initial research notes for the history essay.\\n\\nReasoning: Wrapping up the research phase before outlining.
+END:VEVENT
+BEGIN:VEVENT
+UID:D20260610T1000@timebox.local
+DTSTAMP:20260604T143844Z
+DTSTART:20260610T100000Z
+DTEND:20260610T110000Z
+SUMMARY:History Essay: Create Outline
+DESCRIPTION:Draft the main structure and thesis for the history essay.\\n\\nReasoning: Meeting the outline deadline for the history essay.
+END:VEVENT
+END:VCALENDAR

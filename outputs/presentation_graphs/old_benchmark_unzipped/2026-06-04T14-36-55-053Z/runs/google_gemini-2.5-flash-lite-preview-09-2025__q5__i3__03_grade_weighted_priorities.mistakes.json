@@ -1,0 +1,18 @@
+{
+  "score": 97.5,
+  "expectedTaskCoverage": 100,
+  "deadlineDiscipline": 100,
+  "availabilityDiscipline": 91,
+  "fixedCommitmentRespect": 100,
+  "wellbeingRespect": 100,
+  "revisionEfficiency": 88,
+  "mistakeCount": 1,
+  "mistakes": [
+    {
+      "code": "availability_overrun",
+      "severity": "minor",
+      "message": "2026-06-07 schedules 0.5h above assumed availability.",
+      "evidence": "2026-06-07: 4.5h scheduled / 4h available"
+    }
+  ]
+}

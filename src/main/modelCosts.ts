@@ -24,6 +24,14 @@ const MODEL_PRICING: Record<string, ModelPricing> = {
     inputPerMillionUsd: 0.26,
     outputPerMillionUsd: 0.38
   },
+  "deepseek/deepseek-v4-flash": {
+    inputPerMillionUsd: 0.0983,
+    outputPerMillionUsd: 0.1966
+  },
+  "qwen/qwen3.6-flash": {
+    inputPerMillionUsd: 0.1875,
+    outputPerMillionUsd: 1.125
+  },
   "openai/gpt-5-nano": {
     inputPerMillionUsd: 0.05,
     outputPerMillionUsd: 0.40

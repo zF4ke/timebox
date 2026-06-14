@@ -1,0 +1,126 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:B1@timebox.local
+DTSTAMP:20260604T144022Z
+DTSTART:20260604T090000Z
+DTEND:20260604T110000Z
+SUMMARY:Improve AASMA simulator prototype
+DESCRIPTION:Define acceptance criteria for UI improvements and outline the required steps for the new experiment.\\n\\nReasoning: Initial scoping for the AASMA task as requested.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2@timebox.local
+DTSTAMP:20260604T144022Z
+DTSTART:20260604T110000Z
+DTEND:20260604T130000Z
+SUMMARY:Math exercise sheet review
+DESCRIPTION:Initial review of problems and solving the first set of exercises.\\n\\nReasoning: Start work on the Math exercise sheet to mitigate deadline risk.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3@timebox.local
+DTSTAMP:20260604T144022Z
+DTSTART:20260605T090000Z
+DTEND:20260605T110000Z
+SUMMARY:Improve AASMA simulator prototype
+DESCRIPTION:Implement the defined UI cleanup tasks for the simulator.\\n\\nReasoning: Direct implementation work on the simulator improvements.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4@timebox.local
+DTSTAMP:20260604T144022Z
+DTSTART:20260605T110000Z
+DTEND:20260605T130000Z
+SUMMARY:Math exercise sheet review
+DESCRIPTION:Continue solving the core problems on the math exercise sheet.\\n\\nReasoning: Continue progress on the Math task before the weekend.
+END:VEVENT
+BEGIN:VEVENT
+UID:B5@timebox.local
+DTSTAMP:20260604T144022Z
+DTSTART:20260606T090000Z
+DTEND:20260606T120000Z
+SUMMARY:Improve AASMA simulator prototype
+DESCRIPTION:Design parameters and begin implementation/running of the required new experiment.\\n\\nReasoning: Significant block dedicated to running the core experiment for AASMA.
+END:VEVENT
+BEGIN:VEVENT
+UID:B6@timebox.local
+DTSTAMP:20260604T144022Z
+DTSTART:20260606T120000Z
+DTEND:20260606T130000Z
+SUMMARY:Math exercise sheet review
+DESCRIPTION:Final review and formatting of the math exercise sheet.\\n\\nReasoning: Finalizing the Math task to ensure it is ready before the deadline protection period starts.
+END:VEVENT
+BEGIN:VEVENT
+UID:B7@timebox.local
+DTSTAMP:20260604T144022Z
+DTSTART:20260607T090000Z
+DTEND:20260607T103000Z
+SUMMARY:Improve AASMA simulator prototype
+DESCRIPTION:Write up the initial notes about the results from the new experiment.\\n\\nReasoning: Analyzing results immediately after running the experiment.
+END:VEVENT
+BEGIN:VEVENT
+UID:B8@timebox.local
+DTSTAMP:20260604T144022Z
+DTSTART:20260607T103000Z
+DTEND:20260607T123000Z
+SUMMARY:Math exercise sheet review
+DESCRIPTION:Final check and submission preparation for the Math exercise sheet.\\n\\nReasoning: Adding dedicated protection time for the Math deadline tomorrow.
+END:VEVENT
+BEGIN:VEVENT
+UID:B9@timebox.local
+DTSTAMP:20260604T144022Z
+DTSTART:20260607T123000Z
+DTEND:20260607T140000Z
+SUMMARY:Programming Languages Oral Discussion Preparation
+DESCRIPTION:Thoroughly review lecture slides and identify core concepts for the oral discussion.\\n\\nReasoning: Starting the Programming Languages preparation early to cover the material.
+END:VEVENT
+BEGIN:VEVENT
+UID:B10@timebox.local
+DTSTAMP:20260604T144022Z
+DTSTART:20260608T090000Z
+DTEND:20260608T100000Z
+SUMMARY:Math exercise sheet review
+DESCRIPTION:Final submission check for the Math exercise sheet.\\n\\nReasoning: Final protection block scheduled on the due date to ensure submission.
+END:VEVENT
+BEGIN:VEVENT
+UID:B11@timebox.local
+DTSTAMP:20260604T144022Z
+DTSTART:20260608T100000Z
+DTEND:20260608T130000Z
+SUMMARY:Programming Languages Oral Discussion Preparation
+DESCRIPTION:Deep dive review and annotation of the first provided paper.\\n\\nReasoning: Dedicated time for the first paper review\, following the initial slide review.
+END:VEVENT
+BEGIN:VEVENT
+UID:B12@timebox.local
+DTSTAMP:20260604T144022Z
+DTSTART:20260609T090000Z
+DTEND:20260609T100000Z
+SUMMARY:Improve AASMA simulator prototype
+DESCRIPTION:Final review and testing of the simulator improvements before submission.\\n\\nReasoning: Final check scheduled the day before the deadline\, using June 10th as a buffer.
+END:VEVENT
+BEGIN:VEVENT
+UID:B13@timebox.local
+DTSTAMP:20260604T144022Z
+DTSTART:20260609T100000Z
+DTEND:20260609T130000Z
+SUMMARY:Programming Languages Oral Discussion Preparation
+DESCRIPTION:Deep dive review and annotation of the second provided paper.\\n\\nReasoning: Continuing deep dive into the second required paper.
+END:VEVENT
+BEGIN:VEVENT
+UID:B14@timebox.local
+DTSTAMP:20260604T144022Z
+DTSTART:20260610T090000Z
+DTEND:20260610T130000Z
+SUMMARY:Programming Languages Oral Discussion Preparation
+DESCRIPTION:Create a list of 10 potential discussion questions based on synthesized material and draft answers.\\n\\nReasoning: Dedicated block to synthesize material and prepare specific questions\, utilizing the full available time.
+END:VEVENT
+BEGIN:VEVENT
+UID:B15@timebox.local
+DTSTAMP:20260604T144022Z
+DTSTART:20260611T090000Z
+DTEND:20260611T130000Z
+SUMMARY:Programming Languages Oral Discussion Preparation
+DESCRIPTION:Practice articulating complex concepts aloud and review drafted answers to potential questions.\\n\\nReasoning: Final practice session to solidify understanding before the discussion.
+END:VEVENT
+END:VCALENDAR

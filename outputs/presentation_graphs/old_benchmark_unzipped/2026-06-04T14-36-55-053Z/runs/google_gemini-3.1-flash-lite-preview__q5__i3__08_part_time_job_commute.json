@@ -1,0 +1,1540 @@
+{
+  "runId": "6059265a-e8c0-4e28-9b25-0a03904b3cdc",
+  "createdAt": "2026-06-04T14:45:01.532Z",
+  "request": {
+    "userInput": "I am a student with a part-time job and a long commute.\r\n\r\nWork shifts:\r\n- Tuesday 17:00-22:00\r\n- Thursday 17:00-22:00\r\n- Saturday 09:00-15:00\r\n\r\nCommute takes 45 minutes each way and I am usually tired after shifts.\r\n\r\nAcademic tasks:\r\n- Web development project due Sunday night. I need to implement authentication, polish CSS, and write a README. Maybe 8 hours total.\r\n- Linear algebra homework due Wednesday at 20:00. It should take 3 hours.\r\n- Read one paper for AASMA seminar before Friday morning and write 5 discussion points.\r\n\r\nI can work in mornings if needed, but I focus better from 11:00 to 16:00. Avoid scheduling demanding study immediately after job shifts.",
+    "quorum": 5,
+    "maxIterations": 3,
+    "timezone": "Europe/Lisbon",
+    "model": "google/gemini-3.1-flash-lite-preview",
+    "evaluatorModel": "google/gemini-2.5-flash-lite-preview-09-2025"
+  },
+  "stopReason": "Accepted by 5/5 agents with no critical critiques.",
+  "interpreterOutput": {
+    "current_date": "2026-06-04T14:45:01.532Z",
+    "planning_window": {
+      "start_date": "2026-06-04T14:45:01.532Z",
+      "end_date": "2026-06-07T23:59:59.999Z",
+      "reason": "Covering the period until the final deadline for the web development project."
+    },
+    "inferred_availability": [
+      {
+        "date_range": "2026-06-04 to 2026-06-07",
+        "assumption": "Availability is constrained by work shifts, commute times, and the need to avoid late-night study after shifts.",
+        "estimated_available_hours_per_day": 4,
+        "confidence": "medium"
+      }
+    ],
+    "fixed_commitments": [
+      "Work shift: Thursday 17:00-22:00",
+      "Work shift: Saturday 09:00-15:00"
+    ],
+    "student_state": {
+      "sleep": "unknown",
+      "energy": "low after shifts",
+      "confidence": "unknown"
+    },
+    "tasks": [
+      {
+        "task_id": "task_001",
+        "name": "Web development project",
+        "raw_mentions": [
+          "Web development project due Sunday night. I need to implement authentication, polish CSS, and write a README. Maybe 8 hours total."
+        ],
+        "inferred_deadline": "2026-06-07T23:59:59.999Z",
+        "uncertainties": [
+          "Exact time required for authentication implementation",
+          "Scope of CSS polishing"
+        ]
+      },
+      {
+        "task_id": "task_002",
+        "name": "Linear algebra homework",
+        "raw_mentions": [
+          "Linear algebra homework due Wednesday at 20:00. It should take 3 hours."
+        ],
+        "inferred_deadline": "2026-06-03T20:00:00.000Z",
+        "uncertainties": [
+          "Task is already past the inferred deadline"
+        ]
+      },
+      {
+        "task_id": "task_003",
+        "name": "AASMA seminar paper reading and discussion",
+        "raw_mentions": [
+          "Read one paper for AASMA seminar before Friday morning and write 5 discussion points."
+        ],
+        "inferred_deadline": "2026-06-05T08:00:00.000Z",
+        "uncertainties": [
+          "Complexity of the paper",
+          "Time required to formulate discussion points"
+        ]
+      }
+    ],
+    "assumptions": [
+      "Commute time of 45 minutes each way is non-productive time.",
+      "Student prefers to work between 11:00 and 16:00.",
+      "No study sessions are scheduled immediately following work shifts due to fatigue."
+    ]
+  },
+  "agentViews": [
+    {
+      "agent": "Deadline Agent",
+      "task_views": [
+        {
+          "task_id": "task_001",
+          "task_name": "Web development project",
+          "assessment": "The project is at high risk due to the 8-hour workload and limited availability before the Sunday deadline.",
+          "concerns": [
+            "Limited focus hours available between work shifts",
+            "Risk of procrastination leading to a Sunday night crunch"
+          ],
+          "recommendations": [
+            "Prioritize authentication implementation immediately",
+            "Allocate 4 hours on Friday and 4 hours on Sunday morning to ensure completion before the deadline"
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Implement authentication",
+            "Polish CSS",
+            "Write README"
+          ]
+        },
+        {
+          "task_id": "task_002",
+          "task_name": "Linear algebra homework",
+          "assessment": "This task is critically overdue as the deadline was Wednesday at 20:00.",
+          "concerns": [
+            "The deadline has already passed",
+            "Potential late submission penalties"
+          ],
+          "recommendations": [
+            "Complete and submit immediately to minimize late penalties",
+            "Contact the instructor regarding the missed deadline"
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Complete homework problems",
+            "Submit to course portal",
+            "Email instructor regarding late submission"
+          ]
+        },
+        {
+          "task_id": "task_003",
+          "task_name": "AASMA seminar paper reading and discussion",
+          "assessment": "This task is at extreme risk as the deadline is Friday morning and the student has a work shift on Thursday evening.",
+          "concerns": [
+            "The deadline is imminent",
+            "Fatigue from Thursday work shift will impact ability to read and synthesize content",
+            "Very limited time window before Friday morning"
+          ],
+          "recommendations": [
+            "Attempt to complete reading and discussion points before the Thursday work shift",
+            "If not possible, prioritize this immediately upon waking on Thursday"
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Read seminar paper",
+            "Formulate 5 discussion points",
+            "Submit discussion points"
+          ]
+        }
+      ],
+      "overall_comment": "The student is facing a critical situation with the Linear algebra homework already past its deadline and the AASMA seminar task due very soon. Immediate action is required to address these urgent items before focusing on the Web development project."
+    },
+    {
+      "agent": "Grade Agent",
+      "task_views": [
+        {
+          "task_id": "task_001",
+          "task_name": "Web development project",
+          "assessment": "High-impact deliverable with significant weight; requires focused, multi-session effort to ensure quality.",
+          "concerns": [
+            "Risk of rushing CSS and documentation due to late-week time constraints.",
+            "Authentication implementation is technically complex and prone to debugging delays."
+          ],
+          "recommendations": [
+            "Prioritize authentication logic during peak energy hours (11:00-16:00).",
+            "Allocate dedicated time for README and CSS polish on Friday to avoid weekend burnout."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Implement authentication backend",
+            "Integrate authentication frontend",
+            "CSS styling and responsiveness polish",
+            "Write project README"
+          ]
+        },
+        {
+          "task_id": "task_002",
+          "task_name": "Linear algebra homework",
+          "assessment": "Critical foundational work; however, the deadline has already passed, making this a high-risk item for grade impact.",
+          "concerns": [
+            "Deadline has passed; immediate action is required to minimize late penalties.",
+            "Potential for academic integrity issues if not prioritized correctly."
+          ],
+          "recommendations": [
+            "Contact instructor immediately regarding the missed deadline.",
+            "Complete the work as soon as possible to demonstrate effort."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review lecture notes for relevant topics",
+            "Solve problem set",
+            "Verify solutions",
+            "Submit to instructor"
+          ]
+        },
+        {
+          "task_id": "task_003",
+          "task_name": "AASMA seminar paper reading and discussion",
+          "assessment": "Moderate impact; essential for seminar participation and engagement grades.",
+          "concerns": [
+            "Tight deadline before Friday morning leaves little room for error.",
+            "Fatigue from Thursday work shift may impede comprehension of complex academic material."
+          ],
+          "recommendations": [
+            "Complete reading and draft discussion points before the Thursday work shift.",
+            "Do not attempt to read or write points immediately after returning from work."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Read seminar paper",
+            "Identify key arguments",
+            "Draft 5 discussion points"
+          ]
+        }
+      ],
+      "overall_comment": "The student's schedule is heavily constrained by work and commute. The Linear algebra homework is already overdue, which is the highest priority for grade protection. The Web development project is the most significant remaining deliverable and must be protected from being squeezed by the AASMA seminar preparation."
+    },
+    {
+      "agent": "Effort Agent",
+      "task_views": [
+        {
+          "task_id": "task_001",
+          "task_name": "Web development project",
+          "assessment": "The 8-hour estimate is optimistic given the complexity of authentication and CSS polishing. I recommend splitting this into smaller, manageable blocks to avoid burnout.",
+          "concerns": [
+            "Authentication implementation often takes longer than expected due to debugging.",
+            "CSS polishing is open-ended and can easily exceed time estimates.",
+            "The deadline is tight given the student's work schedule."
+          ],
+          "recommendations": [
+            "Prioritize authentication logic first.",
+            "Time-box the CSS polishing phase to prevent scope creep.",
+            "Allocate at least 10 hours total to account for testing and documentation."
+          ],
+          "estimated_duration_hours": 10,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Implement user authentication backend",
+            "Integrate authentication frontend forms",
+            "Polish CSS for responsive design",
+            "Write project README documentation"
+          ]
+        },
+        {
+          "task_id": "task_002",
+          "task_name": "Linear algebra homework",
+          "assessment": "This task is already past the deadline. If the student is still working on it, it should be prioritized immediately to minimize late penalties.",
+          "concerns": [
+            "The deadline has already passed, making this a high-risk task.",
+            "Student may be rushing, leading to errors."
+          ],
+          "recommendations": [
+            "Complete immediately if submission is still possible.",
+            "Focus on high-weight problems first."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review lecture notes for relevant topics",
+            "Solve core problem set",
+            "Verify calculations"
+          ]
+        },
+        {
+          "task_id": "task_003",
+          "task_name": "AASMA seminar paper reading and discussion",
+          "assessment": "The task is feasible but requires focused attention. Reading and synthesizing academic papers is mentally demanding and should be done during peak energy hours.",
+          "concerns": [
+            "The deadline is early Friday morning, leaving very little time given the Thursday work shift.",
+            "Fatigue from the Thursday shift may impact comprehension."
+          ],
+          "recommendations": [
+            "Complete the reading before the Thursday work shift.",
+            "Draft discussion points immediately after reading to ensure retention."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Read and annotate the seminar paper",
+            "Identify key arguments and methodologies",
+            "Draft 5 discussion points"
+          ]
+        }
+      ],
+      "overall_comment": "The student's schedule is highly constrained by work and commute. The Web development project is the most significant time sink and needs to be broken down to fit into the available 11:00-16:00 windows. The Linear algebra homework is overdue and requires immediate attention. The AASMA seminar task must be completed before the Thursday work shift to avoid late-night stress."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "task_views": [
+        {
+          "task_id": "task_001",
+          "task_name": "Web development project",
+          "assessment": "The workload is manageable if spread across the remaining days, but requires careful pacing to avoid burnout given the student's job commitments.",
+          "concerns": [
+            "Risk of cramming on Sunday after a busy week.",
+            "Potential for cognitive fatigue when working on complex coding tasks after a long commute."
+          ],
+          "recommendations": [
+            "Break the work into smaller, focused sessions of 2 hours maximum.",
+            "Prioritize the authentication implementation early in the week to reduce stress."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Implement authentication",
+            "Polish CSS",
+            "Write README"
+          ]
+        },
+        {
+          "task_id": "task_002",
+          "task_name": "Linear algebra homework",
+          "assessment": "This task is past the deadline. Attempting to complete it now may cause unnecessary stress.",
+          "concerns": [
+            "The deadline has already passed, making this a high-stress item.",
+            "Adding this to an already busy schedule risks overall wellbeing."
+          ],
+          "recommendations": [
+            "Contact the instructor regarding the late submission policy before spending time on it.",
+            "Do not prioritize this over current, upcoming deadlines."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review late submission policy",
+            "Complete homework problems"
+          ]
+        },
+        {
+          "task_id": "task_003",
+          "task_name": "AASMA seminar paper reading and discussion",
+          "assessment": "The deadline is very tight, requiring immediate attention.",
+          "concerns": [
+            "The proximity to the deadline may force late-night work, which contradicts the student's wellbeing needs.",
+            "Reading complex papers while tired from a commute is inefficient."
+          ],
+          "recommendations": [
+            "Dedicate a short, focused morning session to this task to ensure it is completed before the Friday morning deadline.",
+            "Avoid working on this late at night."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Read paper",
+            "Draft 5 discussion points"
+          ]
+        }
+      ],
+      "overall_comment": "The student's schedule is heavily constrained by work and commuting. To maintain wellbeing, I strongly advise against scheduling any academic work immediately after work shifts. The current plan must prioritize rest after shifts to prevent burnout. The linear algebra homework should be deprioritized until the student confirms if it can still be submitted for credit."
+    },
+    {
+      "agent": "Risk Agent",
+      "task_views": [
+        {
+          "task_id": "task_001",
+          "task_name": "Web development project",
+          "assessment": "High risk due to the multi-part nature of the work (authentication, CSS, documentation) and the tight window before the Sunday deadline.",
+          "concerns": [
+            "Authentication implementation often contains hidden technical debt or bugs.",
+            "CSS polishing is prone to scope creep.",
+            "The deadline is at the end of the week, leaving no buffer for final deployment issues."
+          ],
+          "recommendations": [
+            "Prioritize authentication early to identify blockers.",
+            "Time-box CSS polishing to prevent over-engineering.",
+            "Complete the README as you go to avoid a last-minute rush."
+          ],
+          "estimated_duration_hours": 10,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Implement authentication backend",
+            "Test authentication flow",
+            "Apply CSS styles",
+            "Write project documentation"
+          ]
+        },
+        {
+          "task_id": "task_002",
+          "task_name": "Linear algebra homework",
+          "assessment": "Critical failure: The deadline has already passed. This task is now a recovery effort.",
+          "concerns": [
+            "The task is overdue, which may impact grades significantly.",
+            "No information on whether late submission is permitted."
+          ],
+          "recommendations": [
+            "Immediately contact the instructor regarding the late submission.",
+            "Complete the work as quickly as possible to minimize late penalties."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Contact instructor",
+            "Solve linear algebra problems",
+            "Submit late assignment"
+          ]
+        },
+        {
+          "task_id": "task_003",
+          "task_name": "AASMA seminar paper reading and discussion",
+          "assessment": "High risk due to the very short lead time before the Friday morning deadline.",
+          "concerns": [
+            "The deadline is imminent, leaving almost no time for deep reading or reflection.",
+            "The student's energy levels after work shifts may impede comprehension."
+          ],
+          "recommendations": [
+            "Skim the paper for key arguments first to ensure the 5 points are drafted quickly.",
+            "Allocate time immediately to avoid missing the seminar preparation requirement."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Read paper abstract and conclusion",
+            "Identify 5 key discussion points",
+            "Draft discussion points"
+          ]
+        }
+      ],
+      "overall_comment": "The schedule is highly fragile. The Linear algebra homework is already overdue, and the AASMA seminar task is due almost immediately. The Web development project lacks sufficient buffer time for a student with significant work and commute constraints. Immediate prioritization of the overdue and imminent deadlines is required."
+    }
+  ],
+  "calendarVersions": [
+    {
+      "calendar": {
+        "calendar_version": 1,
+        "planning_window": {
+          "start_date": "2026-06-04T14:45:01.532Z",
+          "end_date": "2026-06-07T23:59:59.999Z",
+          "reason": "Covering the period until the final deadline for the web development project."
+        },
+        "overall_strategy": [
+          "Prioritize the overdue Linear algebra homework immediately to minimize late penalties.",
+          "Complete the AASMA seminar paper reading and discussion points before the Thursday work shift to ensure readiness for Friday.",
+          "Allocate focused blocks for the Web development project during peak energy hours to ensure completion by Sunday night."
+        ],
+        "days": [
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Focus on completing the AASMA seminar task before the evening work shift.",
+            "blocks": [
+              {
+                "id": "b1",
+                "task_id": "task_003",
+                "task_name": "AASMA seminar paper reading and discussion",
+                "type": "work",
+                "start": "2026-06-04T11:00:00Z",
+                "end": "2026-06-04T13:00:00Z",
+                "duration_hours": 2,
+                "description": "Read the seminar paper and draft five discussion points.",
+                "reasoning": "Completing this before the work shift avoids late-night stress and meets the Friday morning deadline."
+              },
+              {
+                "id": "b2",
+                "task_id": "task_002",
+                "task_name": "Linear algebra homework",
+                "type": "work",
+                "start": "2026-06-04T13:00:00Z",
+                "end": "2026-06-04T15:00:00Z",
+                "duration_hours": 2,
+                "description": "Complete the remaining problems for the overdue homework.",
+                "reasoning": "Addressing the overdue assignment immediately is critical for grade recovery."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Friday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Focus on the Web development project authentication implementation.",
+            "blocks": [
+              {
+                "id": "b3",
+                "task_id": "task_001",
+                "task_name": "Web development project",
+                "type": "work",
+                "start": "2026-06-05T11:00:00Z",
+                "end": "2026-06-05T15:00:00Z",
+                "duration_hours": 4,
+                "description": "Implement authentication backend and frontend integration.",
+                "reasoning": "Using peak energy hours for the most complex part of the project ensures progress."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Saturday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Limited availability due to work shift; focus on light project tasks if energy permits.",
+            "blocks": []
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Sunday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Final push to complete the Web development project before the deadline.",
+            "blocks": [
+              {
+                "id": "b4",
+                "task_id": "task_001",
+                "task_name": "Web development project",
+                "type": "work",
+                "start": "2026-06-07T11:00:00Z",
+                "end": "2026-06-07T15:00:00Z",
+                "duration_hours": 4,
+                "description": "Polish CSS and write the project README.",
+                "reasoning": "Completing the final requirements during the day avoids a late-night crunch."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Linear algebra homework is already overdue.",
+            "resolution": "Prioritized immediately on Thursday to minimize further late penalties."
+          },
+          {
+            "conflict": "AASMA seminar paper deadline is Friday morning.",
+            "resolution": "Scheduled for Thursday morning to ensure completion before the work shift."
+          }
+        ],
+        "known_weaknesses": [
+          "The Linear algebra homework is already past the deadline, so late penalties may still apply.",
+          "The Web development project schedule is tight and leaves little room for unexpected technical issues."
+        ],
+        "changes_from_previous": [],
+        "unresolved_critiques": [
+          {
+            "agent": "Deadline Agent",
+            "severity": "major",
+            "issue": "Linear algebra homework is overdue.",
+            "planner_response": "Scheduled for immediate completion on Thursday."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "Prioritized the overdue Linear algebra homework for immediate completion on Thursday to mitigate late penalties.",
+            "Scheduled the AASMA seminar paper reading and discussion before the Thursday work shift to meet the Friday morning deadline.",
+            "Structured the Web development project into two distinct blocks to avoid a high-risk Sunday night crunch."
+          ],
+          "overall_comment": "The proposed schedule effectively addresses the critical deadlines. By prioritizing the overdue Linear algebra homework and the imminent AASMA seminar task on Thursday, the student creates a clear path to complete the Web development project before the Sunday night deadline. The plan respects the student's energy constraints and avoids late-night work."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "Prioritizing the overdue Linear algebra homework immediately to mitigate grade impact.",
+            "Completing the AASMA seminar paper reading and discussion points before the Friday morning deadline.",
+            "Allocating the Web development project into two distinct, high-energy blocks to ensure quality and avoid last-minute rushing."
+          ],
+          "overall_comment": "The current plan effectively prioritizes high-impact academic tasks. By addressing the overdue Linear algebra homework first and securing dedicated time for the Web development project during peak energy hours, the student is well-positioned to protect their grade. The schedule respects the constraints of the work shifts while ensuring academic deliverables are handled with appropriate urgency."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Web development project is allocated 8 hours, which is likely insufficient for authentication and CSS polish. The risk of technical debt or debugging time is high.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-05",
+                "2026-06-07"
+              ],
+              "suggested_fix": "Add a 2-hour buffer block on June 6th or extend the existing blocks to account for testing and documentation."
+            },
+            {
+              "issue": "The Linear algebra homework is only allocated 2 hours, but the initial estimate was 3 hours.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Linear algebra homework"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Extend the block on June 4th to 3 hours to ensure the full assignment is completed."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Prioritizing the overdue Linear algebra homework immediately.",
+            "Completing the AASMA seminar paper reading before the Thursday work shift."
+          ],
+          "overall_comment": "The schedule is realistic regarding the student's energy levels and work constraints. While the Web development project and Linear algebra homework estimates are slightly optimistic, the plan is feasible if the student maintains focus during the allocated blocks."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 1,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The student has successfully avoided scheduling academic work after work shifts.",
+            "The schedule respects the student's preference for working during peak energy hours (11:00-16:00).",
+            "The plan avoids late-night work entirely, protecting sleep and recovery time."
+          ],
+          "overall_comment": "The current plan is humane and well-structured. By front-loading the most urgent tasks and keeping the daily workload within the student's capacity, the schedule minimizes stress and avoids the risk of burnout. The decision to avoid post-shift work is excellent for maintaining wellbeing."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "issue": "The Web development project is allocated only 8 hours, which is the optimistic estimate, leaving zero buffer for the identified technical uncertainties like authentication bugs or scope creep.",
+              "severity": "major",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-05",
+                "2026-06-07"
+              ],
+              "suggested_fix": "Allocate at least 2 additional hours of contingency time on 2026-06-06 to handle potential technical blockers."
+            },
+            {
+              "issue": "The Linear algebra homework is overdue, but the plan only allocates 2 hours when the initial estimate was 3 hours, creating a high risk of incomplete submission.",
+              "severity": "major",
+              "affected_tasks": [
+                "Linear algebra homework"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Allocate the full 3 hours required for the assignment to ensure it is completed in one session."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Prioritization of the overdue Linear algebra homework on Thursday.",
+            "Completion of the AASMA seminar paper reading before the Friday deadline."
+          ],
+          "overall_comment": "The plan is too optimistic regarding task durations and lacks necessary contingency buffers. The Web development project is particularly fragile, as it assumes perfect execution with no time for debugging or deployment issues. The Linear algebra homework allocation is insufficient based on the original estimate."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "block_before_window",
+            "message": "Read the seminar paper and draft five discussion points. starts before the planning window.",
+            "severity": "error"
+          },
+          {
+            "code": "block_before_window",
+            "message": "Complete the remaining problems for the overdue homework. starts before the planning window.",
+            "severity": "error"
+          },
+          {
+            "code": "block_after_deadline",
+            "message": "Linear algebra homework has work scheduled after its deadline (2026-06-03T20:00:00.000Z).",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 4,
+      "hasCritical": false
+    },
+    {
+      "calendar": {
+        "calendar_version": 2,
+        "planning_window": {
+          "start_date": "2026-06-04",
+          "end_date": "2026-06-07",
+          "reason": "Focus on completing overdue Linear algebra homework and finishing the Web development project before the weekend."
+        },
+        "overall_strategy": [
+          "Prioritize the Linear algebra homework to finish it as quickly as possible despite being overdue.",
+          "Complete the AASMA seminar paper reading and discussion points before the Friday morning deadline.",
+          "Allocate extended time for the Web development project to account for potential debugging and deployment issues."
+        ],
+        "days": [
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "Extended hours to address the overdue Linear algebra homework and start the AASMA seminar paper reading.",
+            "blocks": [
+              {
+                "id": "b1",
+                "task_id": "task_002",
+                "task_name": "Linear algebra homework",
+                "type": "work",
+                "start": "2026-06-04T09:00:00",
+                "end": "2026-06-04T12:00:00",
+                "duration_hours": 3,
+                "description": "Complete all remaining problems for the Linear algebra homework.",
+                "reasoning": "Allocating full estimated time to ensure the overdue assignment is finished."
+              },
+              {
+                "id": "b2",
+                "task_id": "task_003",
+                "task_name": "AASMA seminar paper reading and discussion",
+                "type": "work",
+                "start": "2026-06-04T13:00:00",
+                "end": "2026-06-04T16:00:00",
+                "duration_hours": 3,
+                "description": "Read the seminar paper and draft five discussion points.",
+                "reasoning": "Ensuring completion before the Friday morning deadline."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Friday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Focusing on the Web development project backend implementation.",
+            "blocks": [
+              {
+                "id": "b3",
+                "task_id": "task_001",
+                "task_name": "Web development project",
+                "type": "work",
+                "start": "2026-06-05T10:00:00",
+                "end": "2026-06-05T15:00:00",
+                "duration_hours": 5,
+                "description": "Implement authentication backend and start frontend integration.",
+                "reasoning": "Starting early to allow time for troubleshooting authentication logic."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Saturday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Dedicated time for Web development project frontend and debugging.",
+            "blocks": [
+              {
+                "id": "b4",
+                "task_id": "task_001",
+                "task_name": "Web development project",
+                "type": "work",
+                "start": "2026-06-06T10:00:00",
+                "end": "2026-06-06T15:00:00",
+                "duration_hours": 5,
+                "description": "Continue frontend integration and resolve identified bugs.",
+                "reasoning": "Providing extra time for debugging to mitigate technical risks."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Sunday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Finalizing the Web development project before the deadline.",
+            "blocks": [
+              {
+                "id": "b5",
+                "task_id": "task_001",
+                "task_name": "Web development project",
+                "type": "work",
+                "start": "2026-06-07T10:00:00",
+                "end": "2026-06-07T14:00:00",
+                "duration_hours": 4,
+                "description": "Polish CSS and write the project README.",
+                "reasoning": "Finalizing the project well before the Sunday night deadline."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Linear algebra homework is overdue.",
+            "resolution": "Allocated full 3 hours on Thursday to ensure completion."
+          },
+          {
+            "conflict": "Web development project has high technical risk.",
+            "resolution": "Increased total time allocation to 14 hours to allow for debugging."
+          }
+        ],
+        "known_weaknesses": [
+          "The schedule remains tight if unexpected critical bugs arise in the Web development project."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Increased Linear algebra homework time from 2 to 3 hours.",
+            "reason": "To meet the original estimate and ensure the overdue task is completed."
+          },
+          {
+            "change": "Increased Web development project time from 8 to 14 hours.",
+            "reason": "To provide a buffer for debugging and technical uncertainties."
+          }
+        ],
+        "unresolved_critiques": [
+          {
+            "agent": "Risk Agent",
+            "severity": "minor",
+            "issue": "The Web development project still lacks a formal buffer block.",
+            "planner_response": "I have increased the total task duration to account for potential issues instead of adding explicit buffer blocks."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "Prioritized the overdue Linear algebra homework as the first task on Thursday to minimize further late penalties.",
+            "Scheduled the AASMA seminar paper reading and discussion to conclude well before the Friday morning deadline.",
+            "Increased the total time allocation for the Web development project to 14 hours, providing a sufficient buffer for debugging and completion before the Sunday night deadline."
+          ],
+          "overall_comment": "The updated calendar effectively addresses the critical deadline risks identified in the previous round. The overdue Linear algebra homework is scheduled for immediate completion, and the AASMA seminar task is safely positioned before its deadline. The Web development project has been granted significant extra time, which mitigates the risk of a last-minute crunch."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "Prioritized the overdue Linear algebra homework immediately to mitigate late penalties.",
+            "Increased the time allocation for the Web development project to 14 hours to protect the quality of the high-impact deliverable.",
+            "Scheduled the AASMA seminar paper reading before the Friday morning deadline to ensure seminar participation grades are protected."
+          ],
+          "overall_comment": "The current plan effectively prioritizes the most critical academic tasks. By addressing the overdue Linear algebra homework first and providing a generous time buffer for the Web development project, the student is well-positioned to maintain their grades. The schedule respects the student's energy constraints by avoiding late-night work."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "Increased Web development project time to 14 hours to account for debugging and technical complexity.",
+            "Prioritized Linear algebra homework to ensure completion of the overdue task.",
+            "Scheduled AASMA seminar paper reading before the Thursday work shift to avoid fatigue-related comprehension issues."
+          ],
+          "overall_comment": "The updated schedule is realistic and addresses previous concerns regarding task duration. The allocation of 14 hours for the Web development project provides a sufficient buffer for the identified technical risks, and the daily blocks are well-structured to avoid late-night work."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The student is prioritizing the overdue Linear algebra homework to resolve the stress of an outstanding deadline.",
+            "The Web development project allocation has been increased to 14 hours to provide a safety margin for technical issues, which is a sustainable way to manage risk without adding explicit, rigid buffer blocks."
+          ],
+          "overall_comment": "The current schedule is well-paced and respects the student's need for rest by avoiding late-night work and keeping daily sessions within reasonable limits. By spreading the Web development project across multiple days, the student avoids the risk of a high-pressure, last-minute crunch. This plan is humane and sustainable."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Web development project lacks a dedicated contingency buffer for final deployment, relying instead on increased total duration which may be consumed by scope creep.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-07"
+              ],
+              "suggested_fix": "Ensure the final block on Sunday is strictly for deployment and documentation, and stop all feature development by 12:00 on that day to reserve the final hours for unforeseen technical failures."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has significantly increased the time allocation for the Web development project to account for technical uncertainty.",
+            "The planner has prioritized the overdue Linear algebra homework immediately to mitigate further grade impact."
+          ],
+          "overall_comment": "The plan is much more robust than the previous iteration. By increasing the time allocation for the Web development project, the student has created implicit space for debugging. While I would prefer an explicit contingency block, the current structure provides enough flexibility to handle minor issues, provided the student adheres to the early-start strategy."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "block_after_deadline",
+            "message": "Linear algebra homework has work scheduled after its deadline (2026-06-03T20:00:00.000Z).",
+            "severity": "error"
+          },
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-07 is outside the planning window 2026-06-04 → 2026-06-07.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 5,
+      "hasCritical": false
+    }
+  ],
+  "finalCalendar": {
+    "calendar_version": 2,
+    "planning_window": {
+      "start_date": "2026-06-04",
+      "end_date": "2026-06-07",
+      "reason": "Focus on completing overdue Linear algebra homework and finishing the Web development project before the weekend."
+    },
+    "overall_strategy": [
+      "Prioritize the Linear algebra homework to finish it as quickly as possible despite being overdue.",
+      "Complete the AASMA seminar paper reading and discussion points before the Friday morning deadline.",
+      "Allocate extended time for the Web development project to account for potential debugging and deployment issues."
+    ],
+    "days": [
+      {
+        "date": "2026-06-04",
+        "day_name": "Thursday",
+        "assumed_available_hours": 6,
+        "day_reasoning": "Extended hours to address the overdue Linear algebra homework and start the AASMA seminar paper reading.",
+        "blocks": [
+          {
+            "id": "b1",
+            "task_id": "task_002",
+            "task_name": "Linear algebra homework",
+            "type": "work",
+            "start": "2026-06-04T09:00:00",
+            "end": "2026-06-04T12:00:00",
+            "duration_hours": 3,
+            "description": "Complete all remaining problems for the Linear algebra homework.",
+            "reasoning": "Allocating full estimated time to ensure the overdue assignment is finished."
+          },
+          {
+            "id": "b2",
+            "task_id": "task_003",
+            "task_name": "AASMA seminar paper reading and discussion",
+            "type": "work",
+            "start": "2026-06-04T13:00:00",
+            "end": "2026-06-04T16:00:00",
+            "duration_hours": 3,
+            "description": "Read the seminar paper and draft five discussion points.",
+            "reasoning": "Ensuring completion before the Friday morning deadline."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-05",
+        "day_name": "Friday",
+        "assumed_available_hours": 5,
+        "day_reasoning": "Focusing on the Web development project backend implementation.",
+        "blocks": [
+          {
+            "id": "b3",
+            "task_id": "task_001",
+            "task_name": "Web development project",
+            "type": "work",
+            "start": "2026-06-05T10:00:00",
+            "end": "2026-06-05T15:00:00",
+            "duration_hours": 5,
+            "description": "Implement authentication backend and start frontend integration.",
+            "reasoning": "Starting early to allow time for troubleshooting authentication logic."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-06",
+        "day_name": "Saturday",
+        "assumed_available_hours": 5,
+        "day_reasoning": "Dedicated time for Web development project frontend and debugging.",
+        "blocks": [
+          {
+            "id": "b4",
+            "task_id": "task_001",
+            "task_name": "Web development project",
+            "type": "work",
+            "start": "2026-06-06T10:00:00",
+            "end": "2026-06-06T15:00:00",
+            "duration_hours": 5,
+            "description": "Continue frontend integration and resolve identified bugs.",
+            "reasoning": "Providing extra time for debugging to mitigate technical risks."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-07",
+        "day_name": "Sunday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Finalizing the Web development project before the deadline.",
+        "blocks": [
+          {
+            "id": "b5",
+            "task_id": "task_001",
+            "task_name": "Web development project",
+            "type": "work",
+            "start": "2026-06-07T10:00:00",
+            "end": "2026-06-07T14:00:00",
+            "duration_hours": 4,
+            "description": "Polish CSS and write the project README.",
+            "reasoning": "Finalizing the project well before the Sunday night deadline."
+          }
+        ]
+      }
+    ],
+    "compromises": [
+      {
+        "conflict": "Linear algebra homework is overdue.",
+        "resolution": "Allocated full 3 hours on Thursday to ensure completion."
+      },
+      {
+        "conflict": "Web development project has high technical risk.",
+        "resolution": "Increased total time allocation to 14 hours to allow for debugging."
+      }
+    ],
+    "known_weaknesses": [
+      "The schedule remains tight if unexpected critical bugs arise in the Web development project."
+    ],
+    "changes_from_previous": [
+      {
+        "change": "Increased Linear algebra homework time from 2 to 3 hours.",
+        "reason": "To meet the original estimate and ensure the overdue task is completed."
+      },
+      {
+        "change": "Increased Web development project time from 8 to 14 hours.",
+        "reason": "To provide a buffer for debugging and technical uncertainties."
+      }
+    ],
+    "unresolved_critiques": [
+      {
+        "agent": "Risk Agent",
+        "severity": "minor",
+        "issue": "The Web development project still lacks a formal buffer block.",
+        "planner_response": "I have increased the total task duration to account for potential issues instead of adding explicit buffer blocks."
+      }
+    ]
+  },
+  "critiques": [
+    {
+      "agent": "Deadline Agent",
+      "calendar_version": 2,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "Prioritized the overdue Linear algebra homework as the first task on Thursday to minimize further late penalties.",
+        "Scheduled the AASMA seminar paper reading and discussion to conclude well before the Friday morning deadline.",
+        "Increased the total time allocation for the Web development project to 14 hours, providing a sufficient buffer for debugging and completion before the Sunday night deadline."
+      ],
+      "overall_comment": "The updated calendar effectively addresses the critical deadline risks identified in the previous round. The overdue Linear algebra homework is scheduled for immediate completion, and the AASMA seminar task is safely positioned before its deadline. The Web development project has been granted significant extra time, which mitigates the risk of a last-minute crunch."
+    },
+    {
+      "agent": "Grade Agent",
+      "calendar_version": 2,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "Prioritized the overdue Linear algebra homework immediately to mitigate late penalties.",
+        "Increased the time allocation for the Web development project to 14 hours to protect the quality of the high-impact deliverable.",
+        "Scheduled the AASMA seminar paper reading before the Friday morning deadline to ensure seminar participation grades are protected."
+      ],
+      "overall_comment": "The current plan effectively prioritizes the most critical academic tasks. By addressing the overdue Linear algebra homework first and providing a generous time buffer for the Web development project, the student is well-positioned to maintain their grades. The schedule respects the student's energy constraints by avoiding late-night work."
+    },
+    {
+      "agent": "Effort Agent",
+      "calendar_version": 2,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "Increased Web development project time to 14 hours to account for debugging and technical complexity.",
+        "Prioritized Linear algebra homework to ensure completion of the overdue task.",
+        "Scheduled AASMA seminar paper reading before the Thursday work shift to avoid fatigue-related comprehension issues."
+      ],
+      "overall_comment": "The updated schedule is realistic and addresses previous concerns regarding task duration. The allocation of 14 hours for the Web development project provides a sufficient buffer for the identified technical risks, and the daily blocks are well-structured to avoid late-night work."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "calendar_version": 2,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The student is prioritizing the overdue Linear algebra homework to resolve the stress of an outstanding deadline.",
+        "The Web development project allocation has been increased to 14 hours to provide a safety margin for technical issues, which is a sustainable way to manage risk without adding explicit, rigid buffer blocks."
+      ],
+      "overall_comment": "The current schedule is well-paced and respects the student's need for rest by avoiding late-night work and keeping daily sessions within reasonable limits. By spreading the Web development project across multiple days, the student avoids the risk of a high-pressure, last-minute crunch. This plan is humane and sustainable."
+    },
+    {
+      "agent": "Risk Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The Web development project lacks a dedicated contingency buffer for final deployment, relying instead on increased total duration which may be consumed by scope creep.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Web development project"
+          ],
+          "affected_days": [
+            "2026-06-07"
+          ],
+          "suggested_fix": "Ensure the final block on Sunday is strictly for deployment and documentation, and stop all feature development by 12:00 on that day to reserve the final hours for unforeseen technical failures."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner has significantly increased the time allocation for the Web development project to account for technical uncertainty.",
+        "The planner has prioritized the overdue Linear algebra homework immediately to mitigate further grade impact."
+      ],
+      "overall_comment": "The plan is much more robust than the previous iteration. By increasing the time allocation for the Web development project, the student has created implicit space for debugging. While I would prefer an explicit contingency block, the current structure provides enough flexibility to handle minor issues, provided the student adheres to the early-start strategy."
+    }
+  ],
+  "validation": {
+    "valid": false,
+    "violations": [
+      {
+        "code": "block_after_deadline",
+        "message": "Linear algebra homework has work scheduled after its deadline (2026-06-03T20:00:00.000Z).",
+        "severity": "error"
+      },
+      {
+        "code": "day_outside_window",
+        "message": "2026-06-07 is outside the planning window 2026-06-04 → 2026-06-07.",
+        "severity": "error"
+      }
+    ]
+  },
+  "evaluation": {
+    "evaluator": "Schedule Evaluator",
+    "calendar_version": 2,
+    "planner_model": "google/gemini-3.1-flash-lite-preview",
+    "evaluator_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "overall_score": 4.4,
+    "model_score": 4,
+    "hard_score": 4.8,
+    "hard_metrics": {
+      "score": 95.2,
+      "metrics": [
+        {
+          "name": "generation_time_seconds",
+          "value": 21.4,
+          "score": 100,
+          "explanation": "21.4s from run start to final schedule selection."
+        },
+        {
+          "name": "rejection_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 specialist agent(s) rejected the final calendar."
+        },
+        {
+          "name": "critical_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 critical issue(s) were raised in final critiques."
+        },
+        {
+          "name": "major_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 major issue(s) were raised in final critiques."
+        },
+        {
+          "name": "deadline_violation_count",
+          "value": 1,
+          "score": 66.7,
+          "explanation": "1 scheduled work block(s) end after their task deadline."
+        },
+        {
+          "name": "task_coverage_ratio",
+          "value": 1,
+          "score": 100,
+          "explanation": "3/3 inferred task(s) received at least one work block."
+        },
+        {
+          "name": "availability_overrun_hours",
+          "value": 0,
+          "score": 100,
+          "explanation": "0h scheduled above the planner's assumed available hours."
+        }
+      ]
+    },
+    "dimension_scores": [
+      {
+        "dimension": "requirement_match",
+        "score": 3,
+        "rationale": "The schedule failed to meet the fundamental requirement of not scheduling work after a deadline, as the Linear algebra homework was scheduled for completion on Thursday, June 4th, despite its deadline being Wednesday, June 3rd. This is a critical failure in deadline adherence."
+      },
+      {
+        "dimension": "deadline_safety",
+        "score": 4.5,
+        "rationale": "Despite the overdue task scheduling error, the plan successfully places the AASMA seminar task before its Friday morning deadline and allocates significant time to the Sunday deadline project, increasing safety for upcoming deadlines."
+      },
+      {
+        "dimension": "workload_realism",
+        "score": 4.5,
+        "rationale": "The planner correctly identified the need to increase the time allocation for the Web development project (to 14 hours) based on specialist input, making the workload estimate more realistic than the initial 8 hours."
+      },
+      {
+        "dimension": "academic_priority",
+        "score": 4,
+        "rationale": "The plan correctly prioritized the overdue Linear algebra homework and the imminent AASMA seminar task before tackling the larger Web development project."
+      },
+      {
+        "dimension": "wellbeing_balance",
+        "score": 5,
+        "rationale": "The schedule successfully avoided scheduling demanding study immediately after work shifts and did not schedule work past 22:00, respecting the student's fatigue concerns."
+      },
+      {
+        "dimension": "risk_resilience",
+        "score": 4,
+        "rationale": "The increased time allocation for the Web development project provides good resilience against technical issues, although the explicit failure to check the Linear algebra deadline reduces overall resilience."
+      }
+    ],
+    "strengths": [
+      "Successfully avoided scheduling academic work immediately following work shifts, respecting fatigue constraints.",
+      "Significantly increased the time buffer for the Web development project (from 8h to 14h) to account for technical complexity.",
+      "Prioritized the imminent AASMA seminar task to ensure it was completed before the Friday morning deadline."
+    ],
+    "weaknesses": [
+      "Failed to recognize or adhere to the fact that the Linear algebra homework deadline (Wednesday 20:00) had already passed when scheduling work for it on Thursday, June 4th.",
+      "The validation log shows a critical violation regarding scheduling work after the deadline, which should have been prevented."
+    ],
+    "comparison_notes": [
+      "The planner demonstrated good responsiveness to specialist advice regarding increasing the time budget for the Web development project.",
+      "The failure to handle the already-overdue Linear algebra homework correctly (scheduling it on Thursday) is a significant oversight that impacts the requirement match score."
+    ],
+    "recommendation": "The planner needs a stronger internal check against the provided interpreter output regarding task deadlines, especially when a task is already overdue. While the schedule is otherwise well-balanced regarding wellbeing and workload realism, the deadline violation is a major flaw."
+  },
+  "usage": {
+    "callCount": 19,
+    "promptTokens": 66094,
+    "completionTokens": 9549,
+    "totalTokens": 75643,
+    "estimatedCostUsd": 0.028723,
+    "calls": [
+      {
+        "id": "8990cfe3-1839-4df3-a2ca-7a2687e8c32c",
+        "schemaName": "interpreter_output",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:01.532Z",
+        "completedAt": "2026-06-04T14:45:04.180Z",
+        "durationMs": 2648,
+        "promptChars": 4200,
+        "completionChars": 2230,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 1044,
+        "completionTokens": 659,
+        "totalTokens": 1703,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.00125
+      },
+      {
+        "id": "286d0d77-cb1d-40e9-be81-2f5ce39c08b9",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:04.180Z",
+        "completedAt": "2026-06-04T14:45:06.891Z",
+        "durationMs": 2711,
+        "promptChars": 6540,
+        "completionChars": 2679,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 1794,
+        "completionTokens": 595,
+        "totalTokens": 2389,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001341
+      },
+      {
+        "id": "79f144f3-856a-4581-adca-050bd84dd763",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:04.181Z",
+        "completedAt": "2026-06-04T14:45:07.259Z",
+        "durationMs": 3078,
+        "promptChars": 7052,
+        "completionChars": 2832,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 1946,
+        "completionTokens": 601,
+        "totalTokens": 2547,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001388
+      },
+      {
+        "id": "028d8fd7-309a-4366-85f4-79789efab048",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:04.181Z",
+        "completedAt": "2026-06-04T14:45:07.704Z",
+        "durationMs": 3523,
+        "promptChars": 6044,
+        "completionChars": 2982,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 1712,
+        "completionTokens": 618,
+        "totalTokens": 2330,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001355
+      },
+      {
+        "id": "bd89d0ba-b306-49e7-81a9-40269443e112",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:04.181Z",
+        "completedAt": "2026-06-04T14:45:07.798Z",
+        "durationMs": 3617,
+        "promptChars": 6116,
+        "completionChars": 3017,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2078,
+        "completionTokens": 707,
+        "totalTokens": 2785,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.00158
+      },
+      {
+        "id": "f8bca710-4922-4551-9444-9623f07be86a",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:04.181Z",
+        "completedAt": "2026-06-04T14:45:08.026Z",
+        "durationMs": 3845,
+        "promptChars": 6070,
+        "completionChars": 3220,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2072,
+        "completionTokens": 754,
+        "totalTokens": 2826,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001649
+      },
+      {
+        "id": "b2ca76ce-1f2d-478f-9156-92eda7e7f8b2",
+        "schemaName": "calendar_proposal",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:08.026Z",
+        "completedAt": "2026-06-04T14:45:12.079Z",
+        "durationMs": 4053,
+        "promptChars": 23760,
+        "completionChars": 4291,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 5734,
+        "completionTokens": 1139,
+        "totalTokens": 6873,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.003142
+      },
+      {
+        "id": "f34091a2-0c89-4167-9312-16a3d512ab2b",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:12.079Z",
+        "completedAt": "2026-06-04T14:45:13.523Z",
+        "durationMs": 1444,
+        "promptChars": 13476,
+        "completionChars": 751,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 3700,
+        "completionTokens": 157,
+        "totalTokens": 3857,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001161
+      },
+      {
+        "id": "4761f1b5-019e-4a93-b5c1-2787aa12e992",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:12.079Z",
+        "completedAt": "2026-06-04T14:45:14.071Z",
+        "durationMs": 1992,
+        "promptChars": 12618,
+        "completionChars": 912,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 3962,
+        "completionTokens": 194,
+        "totalTokens": 4156,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001282
+      },
+      {
+        "id": "88f22d8f-be11-4432-bfab-d565823ccff0",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:12.079Z",
+        "completedAt": "2026-06-04T14:45:14.096Z",
+        "durationMs": 2017,
+        "promptChars": 12882,
+        "completionChars": 1509,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 3539,
+        "completionTokens": 404,
+        "totalTokens": 3943,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001491
+      },
+      {
+        "id": "c46041a1-4a05-483b-9108-2732281ea411",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:12.079Z",
+        "completedAt": "2026-06-04T14:45:14.385Z",
+        "durationMs": 2306,
+        "promptChars": 12811,
+        "completionChars": 902,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 3992,
+        "completionTokens": 192,
+        "totalTokens": 4184,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001286
+      },
+      {
+        "id": "cf85eb86-c1cc-492a-881a-0def084ab10e",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:12.080Z",
+        "completedAt": "2026-06-04T14:45:15.253Z",
+        "durationMs": 3173,
+        "promptChars": 12725,
+        "completionChars": 1647,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 3977,
+        "completionTokens": 417,
+        "totalTokens": 4394,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.00162
+      },
+      {
+        "id": "a582cfe7-9ab2-4053-a34d-61759436d09b",
+        "schemaName": "calendar_proposal",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:15.254Z",
+        "completedAt": "2026-06-04T14:45:20.009Z",
+        "durationMs": 4755,
+        "promptChars": 8389,
+        "completionChars": 4955,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 2130,
+        "completionTokens": 1238,
+        "totalTokens": 3368,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.00239
+      },
+      {
+        "id": "f6b46f1d-f089-4e94-82e7-5bba8b2dcdb8",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:20.009Z",
+        "completedAt": "2026-06-04T14:45:21.373Z",
+        "durationMs": 1364,
+        "promptChars": 13552,
+        "completionChars": 779,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 3719,
+        "completionTokens": 176,
+        "totalTokens": 3895,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001194
+      },
+      {
+        "id": "984fe72a-d01f-4302-8e01-07cc78c5010a",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:20.009Z",
+        "completedAt": "2026-06-04T14:45:21.549Z",
+        "durationMs": 1540,
+        "promptChars": 14146,
+        "completionChars": 843,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4353,
+        "completionTokens": 191,
+        "totalTokens": 4544,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001375
+      },
+      {
+        "id": "4785bf2f-8800-431f-8eb8-c87bb2a659c4",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:20.009Z",
+        "completedAt": "2026-06-04T14:45:21.919Z",
+        "durationMs": 1910,
+        "promptChars": 13395,
+        "completionChars": 1389,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 3678,
+        "completionTokens": 315,
+        "totalTokens": 3993,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001392
+      },
+      {
+        "id": "22612501-6cf8-43a5-83d7-36f3df445941",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:20.009Z",
+        "completedAt": "2026-06-04T14:45:22.300Z",
+        "durationMs": 2291,
+        "promptChars": 13481,
+        "completionChars": 969,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4172,
+        "completionTokens": 204,
+        "totalTokens": 4376,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001349
+      },
+      {
+        "id": "d39bcb6f-282f-420b-a055-9ceb257753de",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-3.1-flash-lite-preview",
+        "startedAt": "2026-06-04T14:45:20.009Z",
+        "completedAt": "2026-06-04T14:45:22.976Z",
+        "durationMs": 2967,
+        "promptChars": 13288,
+        "completionChars": 890,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4142,
+        "completionTokens": 193,
+        "totalTokens": 4335,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001325
+      },
+      {
+        "id": "6279fe51-425c-4a25-96f6-4d6565693527",
+        "schemaName": "schedule_evaluation",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:45:22.976Z",
+        "completedAt": "2026-06-04T14:45:27.284Z",
+        "durationMs": 4308,
+        "promptChars": 33167,
+        "completionChars": 3445,
+        "maxCompletionTokens": 8000,
+        "promptTokens": 8350,
+        "completionTokens": 795,
+        "totalTokens": 9145,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001153
+      }
+    ]
+  }
+}

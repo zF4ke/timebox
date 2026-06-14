@@ -264,6 +264,71 @@ export async function runPlanningPipeline(
   return finalResult;
 }
 
+export async function evaluatePlanningResultWithModel(
+  result: PlanningResult,
+  evaluatorModel: string,
+  onProgress: ProgressCallback = noopProgress,
+  signal?: AbortSignal
+): Promise<{ evaluation: ScheduleEvaluation; usage: PlanningUsageSummary }> {
+  const config = loadConfig();
+  const apiKey = config.apiKey;
+  if (!apiKey) {
+    throw new Error("Missing OpenRouter API key. Set it in Settings.");
+  }
+
+  const normalizedRequest = normalizeRequest({
+    ...result.request,
+    evaluatorModel,
+    evaluate: true
+  });
+  const finalRecord = result.calendarVersions.find(
+    (record) => record.calendar.calendar_version === result.finalCalendar.calendar_version
+  ) ?? {
+    calendar: result.finalCalendar,
+    critiques: result.critiques,
+    validation: result.validation,
+    approvals: countApprovals(result.critiques),
+    hasCritical: hasCriticalCritique(result.critiques)
+  };
+  const generationTimeSeconds = existingGenerationTimeSeconds(result);
+  const hardMetrics = evaluateHardMetrics({
+    calendar: finalRecord.calendar,
+    critiques: finalRecord.critiques,
+    validation: finalRecord.validation,
+    interpreterOutput: result.interpreterOutput,
+    generationTimeSeconds
+  });
+  const llmCalls: LlmCallTrace[] = [];
+  const onTrace = (trace: LlmCallTrace) => llmCalls.push(trace);
+
+  logAndEmit(onProgress, {
+    phase: "evaluate",
+    status: "start",
+    iteration: finalRecord.calendar.calendar_version,
+    summary: `scoring frozen calendar with ${normalizedRequest.evaluatorModel}`
+  });
+  throwIfCancelled(signal);
+  const evaluation = await runScheduleEvaluator(
+    apiKey,
+    normalizedRequest,
+    result.interpreterOutput,
+    result.agentViews,
+    finalRecord,
+    hardMetrics,
+    result.stopReason,
+    onTrace,
+    signal
+  );
+  logAndEmit(onProgress, {
+    phase: "evaluate",
+    status: "done",
+    iteration: finalRecord.calendar.calendar_version,
+    summary: `overall ${evaluation.overall_score.toFixed(1)}/5`
+  });
+
+  return { evaluation, usage: summarizeUsage(llmCalls) };
+}
+
 async function runInterpreter(
   apiKey: string,
   request: ResolvedRequest,
@@ -514,7 +579,7 @@ function normalizeRequest(request: PlanningRequest): ResolvedRequest {
   };
 }
 
-function summarizeUsage(calls: LlmCallTrace[]): PlanningUsageSummary {
+export function summarizeUsage(calls: LlmCallTrace[]): PlanningUsageSummary {
   const estimatedCosts = calls
     .map((call) => call.estimatedCostUsd)
     .filter((cost): cost is number => typeof cost === "number");
@@ -530,6 +595,22 @@ function summarizeUsage(calls: LlmCallTrace[]): PlanningUsageSummary {
       : null,
     calls
   };
+}
+
+function existingGenerationTimeSeconds(result: PlanningResult): number {
+  const metric = result.evaluation?.hard_metrics?.metrics?.find((candidate) => candidate.name === "generation_time_seconds");
+  if (typeof metric?.value === "number" && Number.isFinite(metric.value)) {
+    return metric.value;
+  }
+  const lastCompletedAt = result.usage.calls
+    .map((call) => Date.parse(call.completedAt))
+    .filter((value) => Number.isFinite(value))
+    .sort((a, b) => b - a)[0];
+  const createdAt = Date.parse(result.createdAt);
+  if (Number.isFinite(createdAt) && Number.isFinite(lastCompletedAt) && lastCompletedAt >= createdAt) {
+    return (lastCompletedAt - createdAt) / 1000;
+  }
+  return 0;
 }
 
 function normalizeInterpreter(

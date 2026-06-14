@@ -1,0 +1,102 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:B1@timebox.local
+DTSTAMP:20260604T151311Z
+DTSTART:20260606T093000Z
+DTEND:20260606T110000Z
+SUMMARY:Algorithms problem set
+DESCRIPTION:Assess difficulty of the three unsolved algorithms problems.\\n\\nReasoning: Early discovery to gauge effort and adjust weekend plan.
+END:VEVENT
+BEGIN:VEVENT
+UID:B2@timebox.local
+DTSTAMP:20260604T151311Z
+DTSTART:20260606T120000Z
+DTEND:20260606T143000Z
+SUMMARY:Algorithms problem set
+DESCRIPTION:Solve the first unsolved algorithms problem.\\n\\nReasoning: Deep work on first problem after understanding scope.
+END:VEVENT
+BEGIN:VEVENT
+UID:B3@timebox.local
+DTSTAMP:20260604T151311Z
+DTSTART:20260606T153000Z
+DTEND:20260606T173000Z
+SUMMARY:Distributed systems group project: final presentation preparation
+DESCRIPTION:Create detailed outline for the distributed systems presentation.\\n\\nReasoning: Foundation for slide drafting\; ensures alignment with group structure.
+END:VEVENT
+BEGIN:VEVENT
+UID:B4@timebox.local
+DTSTAMP:20260604T151311Z
+DTSTART:20260607T100000Z
+DTEND:20260607T130000Z
+SUMMARY:Algorithms problem set
+DESCRIPTION:Solve the second unsolved algorithms problem.\\n\\nReasoning: Continue algorithms work while momentum is high.
+END:VEVENT
+BEGIN:VEVENT
+UID:B5@timebox.local
+DTSTAMP:20260604T151311Z
+DTSTART:20260607T140000Z
+DTEND:20260607T170000Z
+SUMMARY:Algorithms problem set
+DESCRIPTION:Solve the third unsolved algorithms problem.\\n\\nReasoning: Complete all problem solving to meet Tuesday deadline early.
+END:VEVENT
+BEGIN:VEVENT
+UID:B6@timebox.local
+DTSTAMP:20260604T151311Z
+DTSTART:20260607T180000Z
+DTEND:20260607T200000Z
+SUMMARY:Distributed systems group project: final presentation preparation
+DESCRIPTION:Draft slides for personal sections: fault tolerance and demo explanation.\\n\\nReasoning: Explicit work on personal sections before Monday group meeting.
+END:VEVENT
+BEGIN:VEVENT
+UID:B7@timebox.local
+DTSTAMP:20260604T151311Z
+DTSTART:20260608T103000Z
+DTEND:20260608T120000Z
+SUMMARY:Algorithms problem set
+DESCRIPTION:Final review and polish of the algorithms problem set solutions.\\n\\nReasoning: Ensure solutions are complete and ready for Tuesday deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:B8@timebox.local
+DTSTAMP:20260604T151311Z
+DTSTART:20260608T130000Z
+DTEND:20260608T153000Z
+SUMMARY:Distributed systems group project: final presentation preparation
+DESCRIPTION:Refine and complete all individual slides for the presentation.\\n\\nReasoning: Polish slides before evening group integration meeting.
+END:VEVENT
+BEGIN:VEVENT
+UID:B9@timebox.local
+DTSTAMP:20260604T151311Z
+DTSTART:20260609T110000Z
+DTEND:20260609T130000Z
+SUMMARY:Distributed systems group project: final presentation preparation
+DESCRIPTION:Incorporate group feedback and integrate slides into master deck.\\n\\nReasoning: Apply changes from Monday meeting for cohesive presentation.
+END:VEVENT
+BEGIN:VEVENT
+UID:B10@timebox.local
+DTSTAMP:20260604T151311Z
+DTSTART:20260609T140000Z
+DTEND:20260609T160000Z
+SUMMARY:Distributed systems group project: final presentation preparation
+DESCRIPTION:Practice delivery and timing for the presentation.\\n\\nReasoning: Individual rehearsal to smooth transitions and pacing.
+END:VEVENT
+BEGIN:VEVENT
+UID:B11@timebox.local
+DTSTAMP:20260604T151311Z
+DTSTART:20260609T170000Z
+DTEND:20260609T183000Z
+SUMMARY:Distributed systems group project: final presentation preparation
+DESCRIPTION:Review notes and refine technical explanations.\\n\\nReasoning: Deepen understanding of key concepts for Q&A.
+END:VEVENT
+BEGIN:VEVENT
+UID:B12@timebox.local
+DTSTAMP:20260604T151311Z
+DTSTART:20260610T200000Z
+DTEND:20260610T220000Z
+SUMMARY:Distributed systems group project: final presentation preparation
+DESCRIPTION:Final group rehearsal and integration check.\\n\\nReasoning: Critical full run-through with group to sync and fix issues.
+END:VEVENT
+END:VCALENDAR

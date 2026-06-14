@@ -1,0 +1,2575 @@
+{
+  "runId": "8a901601-7fee-436e-b3e8-e472c20995f4",
+  "createdAt": "2026-06-04T15:06:45.864Z",
+  "request": {
+    "userInput": "I am working on a group project for distributed systems.\r\n\r\nThe final presentation is next Thursday at 14:00. Our group still needs to finish the architecture diagram, divide speaking parts, prepare slides, and rehearse. Two teammates can only meet Monday after 18:00 and Wednesday after 17:00.\r\n\r\nMy personal responsibility is the fault tolerance section and the demo explanation. I have rough notes but no slides.\r\n\r\nI also have an individual algorithms problem set due Tuesday night. It has 5 problems, and I have solved 2.\r\n\r\nI am free this weekend except Sunday dinner. During weekdays I have classes from 10:00 to 15:00.\r\n\r\nPlease make sure the group work is ready before the presentation and leave time for coordination problems.",
+    "quorum": 5,
+    "maxIterations": 3,
+    "timezone": "Europe/Lisbon",
+    "model": "deepseek/deepseek-v3.2",
+    "evaluatorModel": "google/gemini-2.5-flash-lite-preview-09-2025"
+  },
+  "stopReason": "Maximum iterations reached. Selected best available calendar.",
+  "interpreterOutput": {
+    "current_date": "2026-06-04T15:06:45.864Z",
+    "planning_window": {
+      "start_date": "2026-06-04T15:06:45.864Z",
+      "end_date": "2026-06-11T14:00:00.000Z",
+      "reason": "Final presentation is on Thursday 2026-06-11 at 14:00, which is the last known deadline. Planning covers from now until that presentation."
+    },
+    "inferred_availability": [
+      {
+        "date_range": "2026-06-04",
+        "assumption": "Today (Thursday). Classes until 15:00. Available after 15:00.",
+        "estimated_available_hours_per_day": 7,
+        "confidence": "high"
+      },
+      {
+        "date_range": "2026-06-05",
+        "assumption": "Friday. Classes from 10:00 to 15:00. Available after 15:00.",
+        "estimated_available_hours_per_day": 7,
+        "confidence": "high"
+      },
+      {
+        "date_range": "2026-06-06",
+        "assumption": "Saturday. Free except unspecified personal time. Assume full day available.",
+        "estimated_available_hours_per_day": 12,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-06-07",
+        "assumption": "Sunday. Free except dinner. Assume available most of day.",
+        "estimated_available_hours_per_day": 10,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-06-08",
+        "assumption": "Monday. Classes from 10:00 to 15:00. Group meeting after 18:00. Available after 15:00 except for meeting.",
+        "estimated_available_hours_per_day": 5,
+        "confidence": "high"
+      },
+      {
+        "date_range": "2026-06-09",
+        "assumption": "Tuesday. Classes from 10:00 to 15:00. Algorithms problem set due at night. Available after 15:00.",
+        "estimated_available_hours_per_day": 7,
+        "confidence": "high"
+      },
+      {
+        "date_range": "2026-06-10",
+        "assumption": "Wednesday. Classes from 10:00 to 15:00. Group meeting after 17:00. Available after 15:00 except for meeting.",
+        "estimated_available_hours_per_day": 5,
+        "confidence": "high"
+      },
+      {
+        "date_range": "2026-06-11",
+        "assumption": "Thursday. Presentation at 14:00. Available before 14:00 for final prep.",
+        "estimated_available_hours_per_day": 4,
+        "confidence": "high"
+      }
+    ],
+    "fixed_commitments": [
+      "Classes weekdays 10:00-15:00",
+      "Group meeting Monday after 18:00",
+      "Group meeting Wednesday after 17:00",
+      "Sunday dinner",
+      "Distributed systems final presentation Thursday 2026-06-11 at 14:00"
+    ],
+    "student_state": {
+      "sleep": "normal",
+      "energy": "normal",
+      "confidence": "normal"
+    },
+    "tasks": [
+      {
+        "task_id": "T1",
+        "name": "Distributed systems group project: final presentation preparation",
+        "raw_mentions": [
+          "final presentation is next Thursday at 14:00",
+          "group still needs to finish the architecture diagram, divide speaking parts, prepare slides, and rehearse",
+          "my personal responsibility is the fault tolerance section and the demo explanation",
+          "I have rough notes but no slides"
+        ],
+        "inferred_deadline": "2026-06-11T14:00:00.000Z",
+        "uncertainties": [
+          "Exact duration needed for each subtask (architecture diagram, speaking parts, slides, rehearsal)",
+          "How much time group meetings will cover",
+          "Coordination delays with teammates"
+        ]
+      },
+      {
+        "task_id": "T2",
+        "name": "Algorithms problem set",
+        "raw_mentions": [
+          "individual algorithms problem set due Tuesday night",
+          "It has 5 problems, and I have solved 2"
+        ],
+        "inferred_deadline": "2026-06-09T23:59:59.000Z",
+        "uncertainties": [
+          "Difficulty of remaining 3 problems",
+          "Exact due time Tuesday night (assumed 23:59)"
+        ]
+      }
+    ],
+    "assumptions": [
+      "Next Thursday is 2026-06-11.",
+      "Tuesday night deadline for algorithms problem set is 2026-06-09 at 23:59.",
+      "Group meetings on Monday and Wednesday are fixed commitments but duration unspecified.",
+      "Sunday dinner is a fixed commitment but duration unspecified.",
+      "Weekday classes are fixed from 10:00 to 15:00.",
+      "No mention of sleep issues, low energy, or stress, so student state is normal.",
+      "All work must be completed before respective deadlines; no post-deadline work planned.",
+      "Planning window ends at presentation time on 2026-06-11."
+    ]
+  },
+  "agentViews": [
+    {
+      "agent": "Deadline Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Distributed systems group project: final presentation preparation",
+          "assessment": "Critical deadline on Thursday 2026-06-11 at 14:00. Work includes personal responsibilities (fault tolerance section, demo explanation slides) and group coordination (architecture diagram, speaking parts, rehearsal). Must be fully ready before the presentation starts.",
+          "concerns": [
+            "Group coordination only possible Monday and Wednesday evenings, risking last-minute integration.",
+            "Personal slide creation and rehearsal may be compressed if not started early.",
+            "Any delay pushes work into Wednesday night or Thursday morning, leaving no buffer for issues."
+          ],
+          "recommendations": [
+            "Complete all personal slide creation and notes before Monday's group meeting.",
+            "Use weekend for intensive independent work on fault tolerance and demo explanation.",
+            "Schedule a final personal review block on Thursday morning before 14:00."
+          ],
+          "estimated_duration_hours": 10,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Create slides for fault tolerance section from rough notes",
+            "Draft demo explanation script and slides",
+            "Review and finalize architecture diagram with group",
+            "Coordinate speaking parts assignment",
+            "Full group rehearsal"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Algorithms problem set",
+          "assessment": "Hard deadline on Tuesday 2026-06-09 at 23:59. Three problems remain unsolved. Must be completed before the deadline, competing with weekend group project work.",
+          "concerns": [
+            "Deadline is earlier than group project, creating immediate time pressure.",
+            "If postponed to Monday or Tuesday, risk of running out of time due to classes and group meetings.",
+            "Unknown difficulty of remaining problems could cause schedule overrun."
+          ],
+          "recommendations": [
+            "Prioritize completing at least one more problem this weekend to reduce Tuesday burden.",
+            "Finish all problem set work by Tuesday afternoon to avoid last-minute rush before 23:59.",
+            "Do not schedule any group project work on Tuesday evening after classes."
+          ],
+          "estimated_duration_hours": 6,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Solve problem 3",
+            "Solve problem 4",
+            "Solve problem 5",
+            "Review all solutions and finalize submission"
+          ]
+        }
+      ],
+      "overall_comment": "Two hard deadlines: algorithms problem set due Tuesday night and group presentation Thursday afternoon. The algorithms deadline is more urgent and cannot be delayed. The group project has a later deadline but requires coordination on fixed meeting times, creating a tight window. A calendar must ensure all algorithms work ends before 2026-06-09T23:59:59.000Z and all presentation preparation ends before 2026-06-11T14:00:00.000Z. Weekend and early week hours are critical to avoid deadline-day risk."
+    },
+    {
+      "agent": "Grade Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Distributed systems group project: final presentation preparation",
+          "assessment": "This is a high-stakes, high-grade-weight deliverable. It is a group project final presentation, typically a major component of the course grade. The student has specific responsibilities (fault tolerance section and demo explanation) that are critical to the presentation's success. The deadline is absolute and immovable.",
+          "concerns": [
+            "The presentation is a single event with no opportunity for revision or late submission, making it extremely high-risk if not fully prepared.",
+            "Coordination with teammates on limited meeting times (Monday and Wednesday evenings) introduces significant risk of delays and last-minute work.",
+            "The student only has rough notes and no slides for their sections, indicating substantial work remains.",
+            "The proximity of the algorithms problem set deadline on Tuesday may crowd out necessary preparation time for the presentation if not carefully managed."
+          ],
+          "recommendations": [
+            "Prioritize completing all individual slides and content for the fault tolerance and demo sections before the first group meeting on Monday to enable efficient integration and rehearsal.",
+            "Advocate for a clear division of speaking parts and a full group rehearsal during the Wednesday meeting to identify and fix issues with a full day buffer before the presentation.",
+            "Protect time on Sunday and Monday before the group meeting for deep, focused work on this project. The algorithms work should be completed earlier to avoid conflict."
+          ],
+          "estimated_duration_hours": 12,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Create detailed outline and slides for the fault tolerance section.",
+            "Create detailed outline and slides for the demo explanation.",
+            "Review and integrate personal slides with the master group slide deck.",
+            "Prepare speaking notes and practice individual presentation parts.",
+            "Participate in full group rehearsal and final integration."
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Algorithms problem set",
+          "assessment": "This is an individual assignment with a firm deadline. Problem sets are typically significant for the course grade, though often less weight than a final project presentation. The student has completed 2 of 5 problems, leaving 3 problems of unknown difficulty.",
+          "concerns": [
+            "The deadline is earlier (Tuesday night) than the presentation, creating a natural pressure to prioritize it, which could lead to rushed work on the higher-value presentation.",
+            "If the remaining problems are difficult, they could consume most of the weekend and Monday, leaving insufficient time for high-quality presentation preparation.",
+            "Submitting an incomplete or low-quality problem set will directly impact the algorithms course grade."
+          ],
+          "recommendations": [
+            "Complete the algorithms problem set by end of day Sunday to completely clear the deck for the critical final days of presentation preparation.",
+            "If problems are complex, start work immediately on Friday and Saturday to make steady progress and avoid a last-minute crunch on Monday or Tuesday.",
+            "Do not let this assignment spill into Monday evening, as that time is needed for finalizing personal presentation work before the group meeting."
+          ],
+          "estimated_duration_hours": 9,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Solve remaining problem 3.",
+            "Solve remaining problem 4.",
+            "Solve remaining problem 5.",
+            "Review all solutions for correctness and clarity.",
+            "Finalize and submit the problem set."
+          ]
+        }
+      ],
+      "overall_comment": "The distributed systems final presentation is the highest academic value task due to its likely high grade weight, finality, and group dependency. The algorithms problem set is important but must not be allowed to crowd out the protected time needed for the presentation. The schedule is tight but feasible if the algorithms work is completed over the weekend, freeing up Monday and Wednesday for focused group project integration and rehearsal. The critical risk is coordination delays with the group; the student must be proactive in completing their individual contributions early to mitigate this. Grade protection requires ensuring the presentation receives the highest priority in time allocation, especially on Monday and Wednesday."
+    },
+    {
+      "agent": "Effort Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Distributed systems group project: final presentation preparation",
+          "assessment": "This is a large, complex group task with multiple interdependent components: finalizing architecture, dividing speaking parts, creating slides for the student's sections, and rehearsing. The student has rough notes but no slides, indicating significant work is needed. Group coordination on Monday and Wednesday will consume time and may have delays.",
+          "concerns": [
+            "The task is vague and encompasses several distinct activities that should be broken down for accurate time estimation.",
+            "Group coordination and waiting for others' contributions can cause unpredictable delays and idle time.",
+            "Creating slides from rough notes for both the fault tolerance section and demo explanation is likely underestimated.",
+            "Rehearsal time may be insufficient if only scheduled right before the presentation."
+          ],
+          "recommendations": [
+            "Break the monolithic group project task into specific, actionable subtasks for individual work.",
+            "Allocate dedicated blocks for individual slide creation before the group meetings to have concrete material to discuss.",
+            "Schedule a final rehearsal block on Wednesday after the group meeting or Thursday morning before the presentation.",
+            "Add contingency buffers between subtasks to account for coordination delays."
+          ],
+          "estimated_duration_hours": 12,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review rough notes and outline slides for fault tolerance section.",
+            "Create draft slides for fault tolerance section.",
+            "Outline and create draft slides for demo explanation.",
+            "Refine and finalize all personal slides (graphics, speaker notes).",
+            "Prepare speaking notes and practice personal sections individually.",
+            "Attend Monday group meeting (integrate work, assign speaking parts).",
+            "Incorporate feedback and update slides after Monday meeting.",
+            "Attend Wednesday group meeting (full run-through, final adjustments).",
+            "Final group rehearsal (full presentation practice)."
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Algorithms problem set",
+          "assessment": "An individual assignment with 5 problems, 2 of which are already solved. The remaining 3 problems require focused, deep work. Problem difficulty is unknown and could vary significantly, making the total effort hard to predict.",
+          "concerns": [
+            "Estimating time for 3 unsolved algorithm problems is highly uncertain without knowing their complexity.",
+            "The student may underestimate the time needed for problem-solving, debugging, and writing clear solutions.",
+            "Large blocks of contiguous focused time are needed, which may be scarce on weekdays after classes.",
+            "Risk of spillover if problems are harder than expected, conflicting with group project work."
+          ],
+          "recommendations": [
+            "Treat each remaining problem as a separate subtask to improve estimation and scheduling.",
+            "Start work early, ideally over the weekend, to gauge difficulty and avoid last-minute rush before the Tuesday deadline.",
+            "Schedule longer, uninterrupted blocks (2-3 hours) for each problem to allow for deep concentration.",
+            "Include time for final review and formatting of the complete problem set."
+          ],
+          "estimated_duration_hours": 9,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Read and understand problem 3, outline solution approach.",
+            "Solve problem 3, write final solution.",
+            "Read and understand problem 4, outline solution approach.",
+            "Solve problem 4, write final solution.",
+            "Read and understand problem 5, outline solution approach.",
+            "Solve problem 5, write final solution.",
+            "Review all 5 solutions for correctness and clarity, compile final submission."
+          ]
+        }
+      ],
+      "overall_comment": "The total estimated effort (21 hours) is plausible within the available time before the deadlines. However, the group project task is overly broad and must be split into concrete subtasks to ensure realistic scheduling. The algorithms problem set carries high uncertainty; starting early is critical. The schedule must account for the fixed group meetings and avoid overloading the evenings before the presentation. Durations for individual work blocks should generally not exceed 3-4 hours to maintain student focus and energy."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Distributed systems group project: final presentation preparation",
+          "assessment": "A complex group task with multiple interdependent subtasks and coordination requirements. The deadline is firm and high-stakes.",
+          "concerns": [
+            "Coordination with teammates on fixed meeting times may limit flexible scheduling.",
+            "The workload is substantial and could spill into late hours if not managed proactively.",
+            "Cognitive load from this task is high, especially when combined with the algorithms problem set."
+          ],
+          "recommendations": [
+            "Use weekend blocks for independent slide creation and diagram work to reduce weekday pressure.",
+            "Clarify speaking parts and rehearsal agenda in advance to make group meetings efficient.",
+            "Aim to complete all individual contributions by Wednesday to allow Thursday for final integration and calm preparation."
+          ],
+          "estimated_duration_hours": 12,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Create slides for fault tolerance section",
+            "Prepare demo explanation script",
+            "Draft architecture diagram contribution",
+            "Review and consolidate group slides",
+            "Rehearse individual presentation part"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Algorithms problem set",
+          "assessment": "An individual assignment with a closer deadline. Progress is good, but three problems remain unsolved.",
+          "concerns": [
+            "Risk of Tuesday work extending past 22:00 if problems are difficult.",
+            "High cognitive demand from algorithms work could lead to fatigue before the group project deadline.",
+            "Leaving this work until Tuesday evening creates a single point of high stress."
+          ],
+          "recommendations": [
+            "Start algorithms work on Saturday or Sunday to solve at least one more problem early.",
+            "Protect Tuesday evening by setting a hard stop at 21:00 to avoid late-night work and ensure adequate rest.",
+            "If stuck, allocate a short focused block on Monday afternoon before the group meeting."
+          ],
+          "estimated_duration_hours": 6,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Solve problem 3",
+            "Solve problem 4",
+            "Solve problem 5",
+            "Review and format all solutions for submission"
+          ]
+        }
+      ],
+      "overall_comment": "The plan is feasible but tight, with a high workload concentrated on the weekend and Tuesday evening. The main wellbeing risk is the potential for a cognitively heavy and long workday on Tuesday, where the algorithms problem set deadline could push work late into the night. While the student hasn't explicitly reported stress or low energy, the schedule leaves little margin for error or rest. To protect sustainable workload, I recommend front-loading more work on the weekend to ease the pressure on Tuesday and ensure work ends at a reasonable hour."
+    },
+    {
+      "agent": "Risk Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Distributed systems group project: final presentation preparation",
+          "assessment": "This is a complex group task with multiple interdependent components and a hard deadline. The student has only rough notes for their personal sections, and the group has not completed core deliverables like the architecture diagram or slide deck. The plan relies on two short group meetings late in the timeline, which introduces significant coordination risk.",
+          "concerns": [
+            "High uncertainty in scope: The architecture diagram, slide creation, and rehearsal are undefined in effort.",
+            "Critical dependency on teammates' availability and progress outside the two meetings.",
+            "No buffer for integration, review, or last-minute changes before the Thursday 14:00 presentation.",
+            "The final group rehearsal is scheduled for Wednesday evening, leaving no time for substantive revisions if issues are found.",
+            "The student's personal work (fault tolerance, demo) is not started and depends on the overall slide structure."
+          ],
+          "recommendations": [
+            "Schedule a solo discovery block before the Monday group meeting to draft the fault tolerance slides and demo explanation outline.",
+            "Advocate for the group to share a draft architecture diagram and slide skeleton by Sunday to allow asynchronous review.",
+            "Insist on a contingency buffer on Tuesday or Wednesday morning for final integration and troubleshooting.",
+            "Prepare a backup plan for the demo explanation in case of technical issues during the presentation."
+          ],
+          "estimated_duration_hours": 12,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Solo work: Draft fault tolerance section slides from rough notes.",
+            "Solo work: Write script and key points for demo explanation.",
+            "Group coordination: Review and finalize architecture diagram.",
+            "Group coordination: Divide speaking parts and align slide transitions.",
+            "Group work: Integrate all sections into a single slide deck.",
+            "Group work: Full presentation rehearsal with timing."
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Algorithms problem set",
+          "assessment": "An individual task with known scope (5 problems, 2 solved) and a closer deadline. While the remaining work is quantifiable, the difficulty of the unsolved problems is unknown. The deadline is Tuesday night, immediately before the final push for the group project.",
+          "concerns": [
+            "Unknown difficulty of the 3 remaining problems could cause the work to expand beyond estimates.",
+            "No time buffer between the problem set deadline and the critical group project work on Wednesday.",
+            "If the problem set runs long, it will directly steal time and mental energy from the final presentation preparation.",
+            "The student has not started the unsolved problems, so there is no early discovery of potential roadblocks."
+          ],
+          "recommendations": [
+            "Start the next unsolved problem immediately (today or Friday) to gauge its difficulty and refine time estimates.",
+            "Aim to complete at least one more problem before the weekend to reduce the peak load on Monday/Tuesday.",
+            "Schedule the final problem for completion no later than Tuesday afternoon to leave a pre-deadline buffer for review.",
+            "If a problem is exceptionally difficult, identify it early to seek help or allocate more focused time."
+          ],
+          "estimated_duration_hours": 9,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Review and finalize the 2 solved problems for clarity and correctness.",
+            "Solve problem 3.",
+            "Solve problem 4.",
+            "Solve problem 5.",
+            "Final review and submission of the complete problem set."
+          ]
+        }
+      ],
+      "overall_comment": "The plan is high-risk due to tight coupling and lack of contingency. The algorithms problem set deadline creates a hard stop on Tuesday, compressing all critical group project integration and rehearsal into a narrow 36-hour window from Wednesday morning to Thursday presentation. This leaves no room for discovery of hidden work, coordination delays, or technical issues. The group's success hinges on flawless execution in two late-evening meetings with no prior integration. I cannot approve this plan without earlier solo discovery work on both tasks and explicit buffers for integration and rehearsal before the final day."
+    }
+  ],
+  "calendarVersions": [
+    {
+      "calendar": {
+        "calendar_version": 1,
+        "planning_window": {
+          "end_date": "2026-06-11T14:00:00.000Z",
+          "reason": "Final presentation is on Thursday 2026-06-11 at 14:00, which is the last known deadline. Planning covers from now until that presentation.",
+          "start_date": "2026-06-04T15:06:45.864Z"
+        },
+        "overall_strategy": [
+          "Finish algorithms problem set by Sunday to clear weekdays for presentation.",
+          "Complete all individual presentation slides before Monday group meeting.",
+          "Use Wednesday meeting for final rehearsal and integration.",
+          "Leave Thursday morning for final review."
+        ],
+        "days": [
+          {
+            "date": "2026-06-04",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 7,
+            "day_reasoning": "Today is Thursday; classes until 15:00. Start algorithms problem set early to gauge difficulty.",
+            "blocks": []
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Thursday",
+            "assumed_available_hours": -1,
+            "day_reasoning": "Friday; classes 10:00-15:00. Focus on algorithms to reduce weekend burden.",
+            "blocks": []
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Friday",
+            "assumed_available_hours": 12,
+            "day_reasoning": "Saturday; full day available. Prioritize algorithms to finish by Sunday, then start presentation slides.",
+            "blocks": []
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Saturday",
+            "assumed_available_hours": 10,
+            "day_reasoning": "Sunday; free except dinner. Finish algorithms problem set, then create draft slides for presentation.",
+            "blocks": []
+          },
+          {
+            "date": "2026-06-08",
+            "day_name": "Sunday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Monday; classes 10:00-15:00, group meeting after 18:00. Finalize personal slides before meeting.",
+            "blocks": []
+          },
+          {
+            "date": "2026-06-09",
+            "day_name": "Monday",
+            "assumed_available_hours": 7,
+            "day_reasoning": "Tuesday; classes 10:00-15:00, algorithms due at night. Final problem set review and submission.",
+            "blocks": []
+          },
+          {
+            "date": "2026-06-10",
+            "day_name": "Tuesday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Wednesday; classes 10:00-15:00, group meeting after 17:00. Rehearse and integrate presentation.",
+            "blocks": []
+          },
+          {
+            "date": "2026-06-11",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Thursday; presentation at 14:00. Final review and preparation before presentation.",
+            "blocks": []
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Algorithms problem set deadline is Tuesday night, leaving only Wednesday and Thursday morning for final group project integration and rehearsal.",
+            "resolution": "Front-load algorithms work on weekend to finish by Monday, freeing Tuesday for final problem set review and Wednesday/Thursday for presentation."
+          },
+          {
+            "conflict": "Group meetings are only Monday and Wednesday evenings, risking last-minute coordination delays.",
+            "resolution": "Complete all individual slides before Monday meeting to enable efficient integration and leave Wednesday for rehearsal."
+          }
+        ],
+        "known_weaknesses": [
+          "No contingency time for unexpected delays in algorithms problems or group coordination.",
+          "Relies on group meetings being efficient and productive.",
+          "Workload is heavy on weekend and Tuesday."
+        ],
+        "changes_from_previous": [],
+        "unresolved_critiques": []
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The calendar contains no scheduled work blocks. All tasks, including the algorithms problem set due Tuesday night and the presentation due Thursday, are unscheduled. This guarantees that no meaningful work will be completed before their deadlines.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation",
+                "Algorithms problem set"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-06",
+                "2026-06-07",
+                "2026-06-08",
+                "2026-06-09",
+                "2026-06-10",
+                "2026-06-11"
+              ],
+              "suggested_fix": "Schedule concrete work blocks for the algorithms problem set to end before 2026-06-09T23:59:59.000Z and for presentation preparation to end before 2026-06-11T14:00:00.000Z. Use the stated overall strategy as a guide to allocate time on specific days."
+            }
+          ],
+          "acknowledged_compromises": [],
+          "overall_comment": "The calendar is empty. An overall strategy is described but not implemented. Without any scheduled work, both deadlines will be missed. This is a critical failure from a deadline perspective. The calendar must be populated with specific time blocks for each task, ending before their respective deadlines."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The calendar contains no scheduled work blocks, leaving all high-value academic tasks unscheduled and unprotected. The distributed systems final presentation and the algorithms problem set are at severe risk of being incomplete or rushed.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation",
+                "Algorithms problem set"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-06",
+                "2026-06-07",
+                "2026-06-08",
+                "2026-06-09",
+                "2026-06-10",
+                "2026-06-11"
+              ],
+              "suggested_fix": "Schedule concrete work blocks for the algorithms problem set on Friday, Saturday, and Sunday to finish it early. Schedule protected, multi-hour blocks for the distributed systems presentation on Monday, Wednesday, and Thursday morning before the deadline."
+            }
+          ],
+          "acknowledged_compromises": [],
+          "overall_comment": "The current calendar is empty and fails to protect any academic work. The high-stakes final presentation, which is likely a major grade component, has no dedicated time. The algorithms problem set, while important, could crowd out the presentation if not scheduled carefully. A concrete schedule must be created to allocate sufficient, protected time to both deliverables based on their grade weight and deadlines."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "Calendar contains no scheduled work blocks. The overall strategy mentions tasks but no concrete time allocations, making effort realism impossible to assess.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation",
+                "Algorithms problem set"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-06",
+                "2026-06-07",
+                "2026-06-08",
+                "2026-06-09",
+                "2026-06-10",
+                "2026-06-11"
+              ],
+              "suggested_fix": "Populate the calendar with specific work blocks for each task and subtask, using the estimated available hours per day. Assign durations based on subtask breakdowns (e.g., 2-3 hours per algorithms problem, multiple blocks for slide creation and rehearsal). Ensure total scheduled hours match realistic effort estimates."
+            },
+            {
+              "issue": "Large, vague tasks are not broken into subtasks within the schedule, preventing realistic duration checks and risk of underestimation.",
+              "severity": "major",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation"
+              ],
+              "affected_days": [],
+              "suggested_fix": "Schedule distinct blocks for specific subtasks: outline fault tolerance slides, create draft slides, prepare demo explanation slides, individual practice, and final rehearsal. Allocate separate time for each to avoid underestimating total effort."
+            },
+            {
+              "issue": "Algorithms problem set work is not scheduled, leaving high uncertainty unaddressed and risking deadline miss.",
+              "severity": "major",
+              "affected_tasks": [
+                "Algorithms problem set"
+              ],
+              "affected_days": [],
+              "suggested_fix": "Schedule dedicated blocks for each remaining problem (3 problems) over the weekend and Monday, with 2-3 hours per problem plus review time. Start early to gauge difficulty and avoid last-minute rush."
+            }
+          ],
+          "acknowledged_compromises": [],
+          "overall_comment": "The calendar is empty of work blocks, so no effort realism can be evaluated. My earlier concerns about task vagueness and underestimation are not addressed because nothing is scheduled. A valid calendar must include concrete blocks with start/end times for each task, split into plausible subtasks, to allow critique of durations and student plausibility."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "issue": "The calendar contains no scheduled work blocks, leaving all tasks unscheduled. This fails to protect against unsustainable workload, as there is no plan to distribute work, which risks last-minute cramming, late-night work, and high stress.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation",
+                "Algorithms problem set"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-06",
+                "2026-06-07",
+                "2026-06-08",
+                "2026-06-09",
+                "2026-06-10",
+                "2026-06-11"
+              ],
+              "suggested_fix": "Schedule concrete work blocks for the algorithms problem set on Saturday and Sunday to finish it early, as per the overall strategy. Schedule blocks for presentation preparation on Monday, Wednesday, and Thursday morning to ensure a humane distribution and avoid overloading Tuesday."
+            }
+          ],
+          "acknowledged_compromises": [],
+          "overall_comment": "An empty calendar is not a plan. Without scheduled work, the student is likely to procrastinate and face an unsustainable, high-stress crunch, especially around the Tuesday deadline and Thursday presentation. A wellbeing-focused plan must proactively allocate time to prevent late-night work and cognitive overload."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The calendar is completely empty with no scheduled work blocks, providing zero protection against hidden work, uncertainty, or deadline pressure. There is no early discovery time allocated for either the algorithms problem set or the distributed systems presentation.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation",
+                "Algorithms problem set"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-06",
+                "2026-06-07",
+                "2026-06-08",
+                "2026-06-09",
+                "2026-06-10",
+                "2026-06-11"
+              ],
+              "suggested_fix": "Schedule concrete work blocks starting immediately. For the algorithms problem set, schedule time today or Friday to start the next unsolved problem to gauge difficulty. For the presentation, schedule solo discovery time before the Monday group meeting to draft slides from rough notes. Allocate explicit contingency buffers before the Tuesday deadline and the Thursday presentation."
+            },
+            {
+              "issue": "The overall strategy mentions finishing the algorithms problem set by Sunday, but the empty calendar provides no evidence this is feasible. The lack of scheduled work makes the plan's assumptions about front-loading and freeing up weekdays entirely fragile.",
+              "severity": "major",
+              "affected_tasks": [
+                "Algorithms problem set"
+              ],
+              "affected_days": [
+                "2026-06-06",
+                "2026-06-07",
+                "2026-06-08",
+                "2026-06-09"
+              ],
+              "suggested_fix": "Schedule specific blocks on Saturday and Sunday for solving the remaining algorithms problems. Include a review block on Monday or Tuesday morning before the deadline to act as a buffer and ensure completion."
+            },
+            {
+              "issue": "The plan relies on completing all individual presentation slides before the Monday group meeting, but with no work scheduled before then, this is impossible. This creates a critical dependency failure where the Monday meeting cannot be productive.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-06",
+                "2026-06-07"
+              ],
+              "suggested_fix": "Schedule dedicated solo work blocks before Monday, specifically for drafting the fault tolerance section and demo explanation from the student's rough notes. This provides the necessary input for the Monday group meeting."
+            },
+            {
+              "issue": "There are no buffers scheduled before the Tuesday algorithms deadline or the Thursday presentation. Any delay will cascade directly into the final, critical preparation period with no recovery time.",
+              "severity": "major",
+              "affected_tasks": [
+                "Algorithms problem set",
+                "Distributed systems group project: final presentation preparation"
+              ],
+              "affected_days": [
+                "2026-06-09",
+                "2026-06-10",
+                "2026-06-11"
+              ],
+              "suggested_fix": "Reserve explicit contingency time on Tuesday afternoon before the problem set deadline and on Wednesday morning before the group meeting. Do not schedule work to end exactly at the deadline; finish earlier to allow for review and unexpected issues."
+            }
+          ],
+          "acknowledged_compromises": [],
+          "overall_comment": "An empty calendar is the highest-risk plan possible. It contains no early discovery, no contingency, and makes all stated strategies and assumptions purely theoretical. From a risk perspective, this plan guarantees failure because no work is actually scheduled to happen. I must reject it outright. A viable plan must schedule concrete work blocks starting immediately to validate effort estimates and create buffers for the hard deadlines."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-11 is outside the planning window 2026-06-04T15:06:45.864Z → 2026-06-11T14:00:00.000Z.",
+            "severity": "error"
+          },
+          {
+            "code": "deadline_task_unscheduled",
+            "message": "T1 has a deadline inside the planning window but no scheduled work block.",
+            "severity": "error"
+          },
+          {
+            "code": "deadline_task_unscheduled",
+            "message": "T2 has a deadline inside the planning window but no scheduled work block.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 0,
+      "hasCritical": true
+    },
+    {
+      "calendar": {
+        "calendar_version": 2,
+        "planning_window": {
+          "start_date": "2026-06-04",
+          "end_date": "2026-06-11",
+          "reason": "Cover all work days before the distributed systems presentation deadline."
+        },
+        "overall_strategy": [
+          "Finish algorithms problem set by Sunday to clear weekdays for presentation.",
+          "Complete all individual presentation slides before Monday group meeting.",
+          "Use Wednesday meeting for final rehearsal and integration.",
+          "Leave Thursday morning for final review."
+        ],
+        "days": [
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 7,
+            "day_reasoning": "Start algorithms work early to front-load effort.",
+            "blocks": [
+              {
+                "id": "B1",
+                "task_id": "T2",
+                "task_name": "Algorithms problem set",
+                "type": "work",
+                "start": "2026-06-04T09:00:00.000Z",
+                "end": "2026-06-04T12:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Begin algorithms problem set.",
+                "reasoning": "Start early to avoid last-minute rush."
+              },
+              {
+                "id": "B2",
+                "task_id": "T2",
+                "task_name": "Algorithms problem set",
+                "type": "work",
+                "start": "2026-06-04T14:00:00.000Z",
+                "end": "2026-06-04T17:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Continue algorithms problem set.",
+                "reasoning": "Maintain momentum on algorithms."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Friday",
+            "assumed_available_hours": 8,
+            "day_reasoning": "Focus on algorithms to progress significantly.",
+            "blocks": [
+              {
+                "id": "B3",
+                "task_id": "T2",
+                "task_name": "Algorithms problem set",
+                "type": "work",
+                "start": "2026-06-05T10:00:00.000Z",
+                "end": "2026-06-05T13:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Work on algorithms problem set.",
+                "reasoning": "Advance algorithms work."
+              },
+              {
+                "id": "B4",
+                "task_id": "T2",
+                "task_name": "Algorithms problem set",
+                "type": "work",
+                "start": "2026-06-05T15:00:00.000Z",
+                "end": "2026-06-05T18:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Continue algorithms problem set.",
+                "reasoning": "Push towards completion."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Saturday",
+            "assumed_available_hours": 12,
+            "day_reasoning": "Use weekend to finish algorithms problem set.",
+            "blocks": [
+              {
+                "id": "B5",
+                "task_id": "T2",
+                "task_name": "Algorithms problem set",
+                "type": "work",
+                "start": "2026-06-06T09:00:00.000Z",
+                "end": "2026-06-06T12:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Finalize algorithms problem set.",
+                "reasoning": "Complete algorithms before deadline."
+              },
+              {
+                "id": "B6",
+                "task_id": "T2",
+                "task_name": "Algorithms problem set",
+                "type": "work",
+                "start": "2026-06-06T14:00:00.000Z",
+                "end": "2026-06-06T17:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Review algorithms problem set.",
+                "reasoning": "Ensure algorithms quality."
+              },
+              {
+                "id": "B7",
+                "task_id": "T1",
+                "task_name": "Distributed systems group project: final presentation preparation",
+                "type": "work",
+                "start": "2026-06-06T18:00:00.000Z",
+                "end": "2026-06-06T21:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Start presentation slides.",
+                "reasoning": "Begin presentation after algorithms."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Sunday",
+            "assumed_available_hours": 10,
+            "day_reasoning": "Complete individual presentation slides before Monday meeting.",
+            "blocks": [
+              {
+                "id": "B8",
+                "task_id": "T1",
+                "task_name": "Distributed systems group project: final presentation preparation",
+                "type": "work",
+                "start": "2026-06-07T10:00:00.000Z",
+                "end": "2026-06-07T13:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Develop presentation slides.",
+                "reasoning": "Progress on presentation."
+              },
+              {
+                "id": "B9",
+                "task_id": "T1",
+                "task_name": "Distributed systems group project: final presentation preparation",
+                "type": "work",
+                "start": "2026-06-07T15:00:00.000Z",
+                "end": "2026-06-07T18:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Continue presentation slides.",
+                "reasoning": "Advance presentation work."
+              },
+              {
+                "id": "B10",
+                "task_id": "T1",
+                "task_name": "Distributed systems group project: final presentation preparation",
+                "type": "work",
+                "start": "2026-06-07T19:00:00.000Z",
+                "end": "2026-06-07T22:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Finish individual slides.",
+                "reasoning": "Complete slides for Monday meeting."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-08",
+            "day_name": "Monday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Group meeting evening; light work before.",
+            "blocks": [
+              {
+                "id": "B11",
+                "task_id": "T1",
+                "task_name": "Distributed systems group project: final presentation preparation",
+                "type": "work",
+                "start": "2026-06-08T16:00:00.000Z",
+                "end": "2026-06-08T19:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Prepare for group meeting.",
+                "reasoning": "Review slides before meeting."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-09",
+            "day_name": "Tuesday",
+            "assumed_available_hours": 7,
+            "day_reasoning": "Integrate group feedback after Monday meeting.",
+            "blocks": [
+              {
+                "id": "B12",
+                "task_id": "T1",
+                "task_name": "Distributed systems group project: final presentation preparation",
+                "type": "work",
+                "start": "2026-06-09T10:00:00.000Z",
+                "end": "2026-06-09T13:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Refine presentation slides.",
+                "reasoning": "Apply meeting feedback."
+              },
+              {
+                "id": "B13",
+                "task_id": "T1",
+                "task_name": "Distributed systems group project: final presentation preparation",
+                "type": "work",
+                "start": "2026-06-09T15:00:00.000Z",
+                "end": "2026-06-09T18:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Continue presentation refinement.",
+                "reasoning": "Polish presentation content."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-10",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Group meeting evening; rehearsal focus.",
+            "blocks": [
+              {
+                "id": "B14",
+                "task_id": "T1",
+                "task_name": "Distributed systems group project: final presentation preparation",
+                "type": "work",
+                "start": "2026-06-10T16:00:00.000Z",
+                "end": "2026-06-10T19:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Rehearse presentation.",
+                "reasoning": "Prepare for Wednesday meeting."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-11",
+            "day_name": "Thursday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Final review before presentation deadline.",
+            "blocks": [
+              {
+                "id": "B15",
+                "task_id": "T1",
+                "task_name": "Distributed systems group project: final presentation preparation",
+                "type": "work",
+                "start": "2026-06-11T09:00:00.000Z",
+                "end": "2026-06-11T12:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Final presentation review.",
+                "reasoning": "Last check before submission."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Algorithms problem set deadline is Tuesday night, leaving only Wednesday and Thursday morning for final group project integration and rehearsal.",
+            "resolution": "Front-load algorithms work on weekend to finish by Sunday, freeing weekdays for presentation."
+          },
+          {
+            "conflict": "Group meetings are only Monday and Wednesday evenings, risking last-minute coordination delays.",
+            "resolution": "Complete all individual slides before Monday meeting to enable efficient integration."
+          }
+        ],
+        "known_weaknesses": [
+          "No contingency time for unexpected delays.",
+          "Presentation rehearsal time is limited.",
+          "Algorithms problem set effort estimate may be optimistic."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Added concrete work blocks for algorithms problem set and presentation.",
+            "reason": "Address critical critiques about empty calendar."
+          },
+          {
+            "change": "Scheduled algorithms work to finish before its deadline.",
+            "reason": "Ensure deadline compliance."
+          },
+          {
+            "change": "Scheduled presentation work to complete before Thursday deadline.",
+            "reason": "Protect high-grade presentation."
+          }
+        ],
+        "unresolved_critiques": []
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The calendar front-loads the algorithms problem set to finish by Sunday, freeing weekdays for the presentation. This addresses the earlier concern about the Tuesday deadline risk.",
+            "Group coordination is limited to Monday and Wednesday evenings, but all individual work is scheduled to be complete before the Monday meeting, mitigating last-minute integration risk."
+          ],
+          "overall_comment": "The calendar successfully protects both deadlines. All scheduled work for the algorithms problem set ends on 2026-06-06, well before its 2026-06-09 deadline. All scheduled work for the distributed systems presentation ends on 2026-06-11 at 12:00, before its 14:00 deadline. The strategy of finishing the earlier deadline task first is sound and eliminates deadline-day risk for both tasks."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The schedule allocates only 3 hours on Monday for presentation preparation before the group meeting, which may be insufficient for finalizing slides and preparing for integration.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation"
+              ],
+              "affected_days": [
+                "2026-06-08"
+              ],
+              "suggested_fix": "Consider adding a short work block earlier on Monday, if available after classes, to ensure slides are fully ready for the evening meeting."
+            },
+            {
+              "issue": "The total scheduled work for the presentation (12 hours) matches the estimated need, but the distribution leaves little buffer for rehearsal and integration after the Wednesday group meeting.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation"
+              ],
+              "affected_days": [
+                "2026-06-10",
+                "2026-06-11"
+              ],
+              "suggested_fix": "Protect the time on Wednesday after the group meeting or Thursday morning for any final adjustments identified during rehearsal."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner front-loaded the algorithms problem set to finish by Sunday, protecting weekday time for the high-value presentation.",
+            "The planner completed individual presentation slides before the Monday group meeting to enable efficient integration."
+          ],
+          "overall_comment": "The calendar correctly prioritizes the high-grade-weight distributed systems presentation. The algorithms problem set is scheduled to finish early, preventing it from crowding out critical presentation work. The protected time for presentation preparation on Sunday, Monday, and Wednesday is appropriate. Minor concerns exist about the sufficiency of time for final integration and rehearsal, but the overall strategy protects academic value."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 2,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The 'Distributed systems group project: final presentation preparation' task is scheduled as monolithic blocks with vague descriptions like 'Develop presentation slides' and 'Continue presentation slides'. This fails to break the large, complex task into concrete subtasks, making duration estimates unrealistic and hiding coordination risks.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation"
+              ],
+              "affected_days": [
+                "2026-06-06",
+                "2026-06-07",
+                "2026-06-08",
+                "2026-06-09",
+                "2026-06-10",
+                "2026-06-11"
+              ],
+              "suggested_fix": "Replace monolithic blocks with subtask-specific blocks (e.g., 'Outline fault tolerance slides', 'Create draft slides for demo explanation', 'Incorporate Monday meeting feedback', 'Practice personal sections', 'Final group rehearsal'). Allocate specific durations to each subtask based on a realistic breakdown."
+            },
+            {
+              "issue": "The 'Algorithms problem set' is scheduled as generic 'work on' blocks, underestimating the effort for three unsolved problems. Each problem requires distinct deep work phases (understanding, solving, writing). The current plan allocates 12 hours across four days, but this may be insufficient if problems are hard, and the blocks are not tied to specific subtasks.",
+              "severity": "major",
+              "affected_tasks": [
+                "Algorithms problem set"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-06"
+              ],
+              "suggested_fix": "Break the algorithms work into subtask blocks per problem (e.g., 'Solve problem 3', 'Solve problem 4', 'Solve problem 5', 'Final review'). Ensure each block has a clear goal and realistic duration (2-3 hours per problem). Consider starting earlier on Saturday to gauge difficulty."
+            },
+            {
+              "issue": "Block sizes are implausibly uniform (all exactly 3 hours) and ignore student focus limits. Long, unbroken 3-hour blocks scheduled back-to-back (e.g., three on Sunday) are unrealistic for sustained high-quality work without breaks.",
+              "severity": "major",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation",
+                "Algorithms problem set"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-06",
+                "2026-06-07"
+              ],
+              "suggested_fix": "Vary block durations (e.g., 1.5–2.5 hours) and insert gaps between intense work blocks to maintain focus. Avoid scheduling three consecutive 3-hour blocks on a single day."
+            }
+          ],
+          "acknowledged_compromises": [],
+          "overall_comment": "The calendar addresses the need to schedule work before deadlines but lacks realistic task breakdowns and plausible block sizing. The group project remains a vague monolith, and algorithms work is not subtasked, making effort estimates unreliable. Uniform 3-hour blocks are not student-plausible. A critical fix is required to split tasks into concrete subtasks and adjust block durations."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The plan schedules a 3-hour work block ending at 22:00 on Sunday, which is late and could encroach on wind-down time before sleep.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation"
+              ],
+              "affected_days": [
+                "2026-06-07"
+              ],
+              "suggested_fix": "Shorten the final Sunday block by 1 hour, ending at 21:00, or start it earlier to finish by 21:00."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The plan front-loads the algorithms problem set to finish by Sunday, which successfully avoids a high-stress, late-night session on Tuesday. This addresses my earlier concern about a cognitively heavy Tuesday."
+          ],
+          "overall_comment": "The overall workload distribution is sustainable and avoids overfilled days. The main wellbeing concern is the late work block on Sunday. The plan is otherwise humane, with work ending at reasonable hours on other days and no signs of excessive daily stacking."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 2,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The plan lacks any contingency buffer for the high-risk group project. All critical integration and rehearsal is compressed into the Wednesday evening meeting and Thursday morning, with zero time for unexpected delays, technical issues, or substantive revisions after the rehearsal.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation"
+              ],
+              "affected_days": [
+                "2026-06-10",
+                "2026-06-11"
+              ],
+              "suggested_fix": "Schedule at least a 3-hour contingency block on Tuesday afternoon or Wednesday morning, before the final rehearsal, to handle integration issues, slide revisions, or coordination delays."
+            },
+            {
+              "issue": "The algorithms problem set is scheduled to finish on Sunday, but there is no early discovery block to gauge the difficulty of the remaining 3 unsolved problems. If the problems are harder than estimated, the work will spill into Monday, directly conflicting with the critical presentation preparation.",
+              "severity": "major",
+              "affected_tasks": [
+                "Algorithms problem set"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-06"
+              ],
+              "suggested_fix": "Start the next unsolved problem immediately (today) and schedule a dedicated block on Friday to assess the difficulty of at least one more problem, allowing for a realistic re-estimation of the total effort needed."
+            },
+            {
+              "issue": "The plan assumes all individual presentation work will be completed before the Monday group meeting, but there is no explicit time allocated for the discovery and drafting of the student's personal sections (fault tolerance, demo explanation) from rough notes. This hidden work could expand.",
+              "severity": "major",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation"
+              ],
+              "affected_days": [
+                "2026-06-06",
+                "2026-06-07"
+              ],
+              "suggested_fix": "Replace one of the generic 'Continue presentation slides' blocks on Saturday or Sunday with a specific block for 'Draft fault tolerance slides and demo explanation outline from rough notes' to force early scope discovery."
+            },
+            {
+              "issue": "The final group rehearsal is scheduled for Wednesday evening, leaving no time for the group to make corrections or practice again if major issues are found. This creates a single point of failure.",
+              "severity": "major",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation"
+              ],
+              "affected_days": [
+                "2026-06-10"
+              ],
+              "suggested_fix": "Advocate for the group to aim for a draft rehearsal earlier (e.g., Tuesday) or schedule a final individual rehearsal block on Thursday morning before the presentation to at least solidify the student's own delivery."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner front-loaded the algorithms work to finish by Sunday, which partially addresses the deadline conflict."
+          ],
+          "overall_comment": "The calendar now has concrete work blocks, but it fails to address the core risk of hidden work and missing buffers. The group project's success hinges on flawless execution in a narrow 36-hour window with no room for error, discovery, or recovery. The algorithms plan lacks early difficulty assessment. I must reject due to the critical lack of contingency time before the final presentation."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-11 is outside the planning window 2026-06-04 → 2026-06-11.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 3,
+      "hasCritical": true
+    },
+    {
+      "calendar": {
+        "calendar_version": 3,
+        "planning_window": {
+          "end_date": "2026-06-11",
+          "reason": "Covers work up to the final presentation deadline.",
+          "start_date": "2026-06-06"
+        },
+        "overall_strategy": [
+          "Finish algorithms problem solving by Sunday to free weekdays for presentation.",
+          "Break presentation into concrete subtasks: outline, draft, refine, integrate, rehearse.",
+          "Use Thursday morning as implicit contingency for last-minute fixes."
+        ],
+        "days": [
+          {
+            "date": "2026-06-06",
+            "day_name": "Saturday",
+            "assumed_available_hours": 7,
+            "day_reasoning": "Start algorithms discovery and first problem; begin presentation outline.",
+            "blocks": [
+              {
+                "description": "Assess difficulty of the three unsolved algorithms problems.",
+                "duration_hours": 1.5,
+                "end": "2026-06-06T11:00:00.000Z",
+                "id": "B1",
+                "reasoning": "Early discovery to gauge effort and adjust weekend plan.",
+                "start": "2026-06-06T09:30:00.000Z",
+                "task_id": "T2",
+                "task_name": "Algorithms problem set",
+                "type": "work"
+              },
+              {
+                "description": "Solve the first unsolved algorithms problem.",
+                "duration_hours": 2.5,
+                "end": "2026-06-06T14:30:00.000Z",
+                "id": "B2",
+                "reasoning": "Deep work on first problem after understanding scope.",
+                "start": "2026-06-06T12:00:00.000Z",
+                "task_id": "T2",
+                "task_name": "Algorithms problem set",
+                "type": "work"
+              },
+              {
+                "description": "Create detailed outline for the distributed systems presentation.",
+                "duration_hours": 2,
+                "end": "2026-06-06T17:30:00.000Z",
+                "id": "B3",
+                "reasoning": "Foundation for slide drafting; ensures alignment with group structure.",
+                "start": "2026-06-06T15:30:00.000Z",
+                "task_id": "T1",
+                "task_name": "Distributed systems group project: final presentation preparation",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Sunday",
+            "assumed_available_hours": 8,
+            "day_reasoning": "Finish algorithms problem solving; draft personal presentation slides.",
+            "blocks": [
+              {
+                "description": "Solve the second unsolved algorithms problem.",
+                "duration_hours": 3,
+                "end": "2026-06-07T13:00:00.000Z",
+                "id": "B4",
+                "reasoning": "Continue algorithms work while momentum is high.",
+                "start": "2026-06-07T10:00:00.000Z",
+                "task_id": "T2",
+                "task_name": "Algorithms problem set",
+                "type": "work"
+              },
+              {
+                "description": "Solve the third unsolved algorithms problem.",
+                "duration_hours": 3,
+                "end": "2026-06-07T17:00:00.000Z",
+                "id": "B5",
+                "reasoning": "Complete all problem solving to meet Tuesday deadline early.",
+                "start": "2026-06-07T14:00:00.000Z",
+                "task_id": "T2",
+                "task_name": "Algorithms problem set",
+                "type": "work"
+              },
+              {
+                "description": "Draft slides for personal sections: fault tolerance and demo explanation.",
+                "duration_hours": 2,
+                "end": "2026-06-07T20:00:00.000Z",
+                "id": "B6",
+                "reasoning": "Explicit work on personal sections before Monday group meeting.",
+                "start": "2026-06-07T18:00:00.000Z",
+                "task_id": "T1",
+                "task_name": "Distributed systems group project: final presentation preparation",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-06-08",
+            "day_name": "Monday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "Finalize algorithms work; complete individual slides for group meeting.",
+            "blocks": [
+              {
+                "description": "Final review and polish of the algorithms problem set solutions.",
+                "duration_hours": 1.5,
+                "end": "2026-06-08T12:00:00.000Z",
+                "id": "B7",
+                "reasoning": "Ensure solutions are complete and ready for Tuesday deadline.",
+                "start": "2026-06-08T10:30:00.000Z",
+                "task_id": "T2",
+                "task_name": "Algorithms problem set",
+                "type": "work"
+              },
+              {
+                "description": "Refine and complete all individual slides for the presentation.",
+                "duration_hours": 2.5,
+                "end": "2026-06-08T15:30:00.000Z",
+                "id": "B8",
+                "reasoning": "Polish slides before evening group integration meeting.",
+                "start": "2026-06-08T13:00:00.000Z",
+                "task_id": "T1",
+                "task_name": "Distributed systems group project: final presentation preparation",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-06-09",
+            "day_name": "Tuesday",
+            "assumed_available_hours": 7,
+            "day_reasoning": "Integrate presentation, rehearse individually, and refine content.",
+            "blocks": [
+              {
+                "description": "Incorporate group feedback and integrate slides into master deck.",
+                "duration_hours": 2,
+                "end": "2026-06-09T13:00:00.000Z",
+                "id": "B9",
+                "reasoning": "Apply changes from Monday meeting for cohesive presentation.",
+                "start": "2026-06-09T11:00:00.000Z",
+                "task_id": "T1",
+                "task_name": "Distributed systems group project: final presentation preparation",
+                "type": "work"
+              },
+              {
+                "description": "Practice delivery and timing for the presentation.",
+                "duration_hours": 2,
+                "end": "2026-06-09T16:00:00.000Z",
+                "id": "B10",
+                "reasoning": "Individual rehearsal to smooth transitions and pacing.",
+                "start": "2026-06-09T14:00:00.000Z",
+                "task_id": "T1",
+                "task_name": "Distributed systems group project: final presentation preparation",
+                "type": "work"
+              },
+              {
+                "description": "Review notes and refine technical explanations.",
+                "duration_hours": 1.5,
+                "end": "2026-06-09T18:30:00.000Z",
+                "id": "B11",
+                "reasoning": "Deepen understanding of key concepts for Q&A.",
+                "start": "2026-06-09T17:00:00.000Z",
+                "task_id": "T1",
+                "task_name": "Distributed systems group project: final presentation preparation",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-06-10",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Evening group meeting for final rehearsal.",
+            "blocks": [
+              {
+                "description": "Final group rehearsal and integration check.",
+                "duration_hours": 2,
+                "end": "2026-06-10T22:00:00.000Z",
+                "id": "B12",
+                "reasoning": "Critical full run-through with group to sync and fix issues.",
+                "start": "2026-06-10T20:00:00.000Z",
+                "task_id": "T1",
+                "task_name": "Distributed systems group project: final presentation preparation",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-06-11",
+            "day_name": "Thursday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Morning kept unscheduled as contingency buffer before 14:00 presentation.",
+            "blocks": []
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Algorithms problem set deadline is Tuesday night, but group project work is critical Monday-Wednesday.",
+            "resolution": "Finish all algorithms solving by Sunday evening, leaving only final review for Monday, to protect presentation time."
+          },
+          {
+            "conflict": "Group project integration and rehearsal are compressed into Wednesday evening with no explicit contingency buffer.",
+            "resolution": "Use Thursday morning as implicit buffer by scheduling final review on Wednesday; unscheduled Thursday time is contingency."
+          },
+          {
+            "conflict": "Student preference to avoid late-night work conflicts with Wednesday group meeting ending at 22:00.",
+            "resolution": "Accepted late end for critical final rehearsal; other days end by 21:30."
+          }
+        ],
+        "known_weaknesses": [
+          "Wednesday rehearsal ends at 22:00, conflicting with preference to avoid late work.",
+          "No explicit buffer after Wednesday rehearsal; relies on Thursday morning contingency.",
+          "Algorithms difficulty assessment on Saturday may still underestimate effort for hard problems."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Split 'Distributed systems group project' into concrete subtask blocks: outline, draft slides, refine, integrate, rehearse.",
+            "reason": "Address Effort Agent critique: monolithic blocks are unrealistic."
+          },
+          {
+            "change": "Split 'Algorithms problem set' into subtask blocks: problem discovery, solve problem 1, solve problem 2, solve problem 3, final review.",
+            "reason": "Address Effort Agent critique: generic blocks hide effort and risk."
+          },
+          {
+            "change": "Varied block durations (1.5h, 2h, 2.5h, 3h) and avoided back-to-back long blocks.",
+            "reason": "Address Effort Agent critique: uniform 3-hour blocks are implausible."
+          },
+          {
+            "change": "Added early discovery block for algorithms on Saturday morning.",
+            "reason": "Address Risk Agent critique: gauge difficulty early to avoid spillover."
+          },
+          {
+            "change": "Added explicit block for drafting personal presentation sections before Monday meeting.",
+            "reason": "Address Risk Agent critique: hidden work for personal sections was missing."
+          },
+          {
+            "change": "Moved final presentation review to Wednesday evening, leaving Thursday morning as implicit contingency.",
+            "reason": "Address Risk Agent critique: no time for unexpected delays after rehearsal."
+          }
+        ],
+        "unresolved_critiques": [
+          {
+            "agent": "Risk Agent",
+            "issue": "Contingency is only implicit on Thursday morning; no explicit buffer for post-rehearsal fixes.",
+            "planner_response": "Accepted risk to keep schedule realistic; Thursday morning is available for urgent fixes.",
+            "severity": "major"
+          },
+          {
+            "agent": "Effort Agent",
+            "issue": "Block durations are still estimates; actual subtask effort may vary.",
+            "planner_response": "Used varied durations based on subtask complexity; adjustments can be made day-to-day.",
+            "severity": "minor"
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 3,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The calendar finishes all required work for the algorithms problem set before its Tuesday night deadline.",
+            "The calendar schedules all required presentation preparation work before the Thursday 14:00 presentation."
+          ],
+          "overall_comment": "This calendar successfully protects both deadlines. All work for the algorithms problem set is scheduled to end by Monday, well before the Tuesday 23:59 deadline. All work for the distributed systems presentation is scheduled to end on Wednesday evening, before the Thursday 14:00 presentation. The plan addresses urgency by front-loading the earlier deadline and sequencing tasks appropriately."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 3,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The final group rehearsal is scheduled very late on Wednesday (20:00-22:00), which may leave insufficient time for the student to process feedback, make final edits, or rest before the high-stakes presentation the next day.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation"
+              ],
+              "affected_days": [
+                "2026-06-10"
+              ],
+              "suggested_fix": "If possible, schedule the final group rehearsal earlier in the day on Wednesday to allow for a final individual review and a buffer for last-minute adjustments before the presentation."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has successfully prioritized the high-value presentation by finishing the algorithms problem set by Sunday, protecting Monday and Wednesday for group project work."
+          ],
+          "overall_comment": "The calendar effectively protects academic value. The highest-grade-weight task, the distributed systems final presentation, receives the majority of focused work time in the critical days leading up to the deadline. The algorithms problem set is scheduled for completion over the weekend, preventing it from crowding out presentation preparation. The plan allocates concrete blocks for key presentation subtasks, ensuring progress. The minor concern is the late timing of the final rehearsal, but the overall strategy correctly prioritizes the high-impact work."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 3,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The schedule allocates 3-hour blocks for solving individual algorithms problems, which may be overly optimistic for complex problems requiring deep thought, debugging, and writing. This risks underestimating the effort needed.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Algorithms problem set"
+              ],
+              "affected_days": [
+                "2026-06-07"
+              ],
+              "suggested_fix": "Consider breaking the 3-hour blocks into smaller, more focused sessions (e.g., 2-hour blocks with breaks) or explicitly note that these are maximum focused time estimates, with the understanding that work may spill into adjacent unscheduled time."
+            },
+            {
+              "issue": "The total scheduled work for the distributed systems presentation preparation is approximately 10 hours across multiple days. While the tasks are now broken down, the cumulative effort for creating slides from rough notes, integrating group feedback, and rehearsing might still be on the low side for a final presentation.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation"
+              ],
+              "affected_days": [
+                "2026-06-06",
+                "2026-06-07",
+                "2026-06-08",
+                "2026-06-09",
+                "2026-06-10"
+              ],
+              "suggested_fix": "Acknowledge in the plan that the scheduled blocks represent focused work time, and the student should be prepared to use some of the unscheduled time (e.g., early mornings or short evening slots) for minor refinements if needed."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has addressed the core critique by breaking monolithic tasks into concrete subtasks with varied durations, which improves realism. The acknowledged weakness about block duration estimates being variable is accepted."
+          ],
+          "overall_comment": "The calendar shows significant improvement. The large, vague tasks have been appropriately broken down into specific, actionable subtasks with reasonable block durations (1.5 to 3 hours). The effort distribution across days is plausible for a student, and the plan front-loads the algorithms work appropriately. My remaining concerns are minor regarding the precision of effort estimates for complex problem-solving and presentation polish, but the structure now allows for manageable adjustments. The plan is realistic enough to approve with minor concerns."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 3,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "issue": "The final group rehearsal on Wednesday is scheduled from 20:00 to 22:00, ending at 22:00. This is late-night work which can impact sleep quality and recovery, especially before a high-stakes presentation the next day.",
+              "severity": "major",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation"
+              ],
+              "affected_days": [
+                "2026-06-10"
+              ],
+              "suggested_fix": "Move the final group rehearsal to an earlier time on Wednesday, such as starting at 17:00 after the group meeting, or shorten it to 1.5 hours to end by 21:30. Alternatively, consider moving some rehearsal preparation to Tuesday evening to reduce the need for a long Wednesday session."
+            },
+            {
+              "issue": "The schedule for Sunday, June 7th, is overfilled with 8 hours of scheduled work, including two 3-hour blocks of cognitively demanding algorithms problem solving and a 2-hour block of presentation work in the evening. This creates a heavy, potentially fatiguing day with little unscheduled time for rest.",
+              "severity": "major",
+              "affected_tasks": [
+                "Algorithms problem set",
+                "Distributed systems group project: final presentation preparation"
+              ],
+              "affected_days": [
+                "2026-06-07"
+              ],
+              "suggested_fix": "Reduce the workload on Sunday. Consider moving one of the 3-hour algorithms problem-solving blocks to Saturday afternoon or Monday morning. Alternatively, shorten the presentation drafting block on Sunday evening to 1 hour, focusing only on the highest-priority slides."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has front-loaded the algorithms work to finish by Sunday, which reduces pressure on Tuesday and protects against late-night work on the deadline day."
+          ],
+          "overall_comment": "The plan makes good progress by front-loading the algorithms work. However, it introduces two significant wellbeing issues: a late-night work block ending at 22:00 on Wednesday and an overfilled, cognitively heavy Sunday. These patterns risk fatigue and poor sleep, which are detrimental to performance and stress levels, especially before a final presentation. The plan is not yet humane enough to follow sustainably."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 3,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "issue": "The plan lacks explicit contingency time for the group project after the final rehearsal. The only buffer is an implicit, unscheduled Thursday morning, which is insufficient for any substantive fixes discovered during the Wednesday night rehearsal. This creates a critical risk of delivering an unpolished or flawed presentation.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation"
+              ],
+              "affected_days": [
+                "2026-06-10",
+                "2026-06-11"
+              ],
+              "suggested_fix": "Schedule an explicit 2-3 hour contingency block on Wednesday afternoon (before the evening rehearsal) or Thursday morning (before the presentation) dedicated to addressing rehearsal feedback and making final corrections."
+            },
+            {
+              "issue": "The plan assumes all three unsolved algorithms problems will be completed by Sunday evening. If any problem is more difficult than estimated, the spillover will directly conflict with critical group project work scheduled for Monday and Tuesday, creating a high-risk dependency.",
+              "severity": "major",
+              "affected_tasks": [
+                "Algorithms problem set",
+                "Distributed systems group project: final presentation preparation"
+              ],
+              "affected_days": [
+                "2026-06-07",
+                "2026-06-08",
+                "2026-06-09"
+              ],
+              "suggested_fix": "Add an explicit contingency block on Monday afternoon or Tuesday morning specifically for algorithms problem set overflow, protecting the scheduled group project integration time."
+            },
+            {
+              "issue": "The group project integration and rehearsal are heavily dependent on two late-evening meetings (Monday and Wednesday). There is no scheduled time for asynchronous coordination, review of teammates' work, or integration of the full slide deck before these meetings, which risks the meetings being inefficient or uncovering major misalignments too late.",
+              "severity": "major",
+              "affected_tasks": [
+                "Distributed systems group project: final presentation preparation"
+              ],
+              "affected_days": [
+                "2026-06-08",
+                "2026-06-09",
+                "2026-06-10"
+              ],
+              "suggested_fix": "Schedule a short block on Monday morning to review any shared materials from teammates and prepare integration points for the evening meeting. Also, add a block on Tuesday for asynchronous review and consolidation of the master slide deck."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner added an early discovery block for the algorithms problem set.",
+            "The planner added explicit work on drafting personal presentation sections before the Monday group meeting."
+          ],
+          "overall_comment": "While the planner has addressed some earlier concerns by adding early discovery and breaking tasks into subtasks, the core risk remains: the plan has no explicit buffers for integration, coordination delays, or post-rehearsal fixes. The success of the presentation hinges on flawless execution in two late meetings with no room for error. The implicit Thursday morning contingency is inadequate for substantive work. I must reject this version due to the critical lack of scheduled contingency time for the group project."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-11 is outside the planning window 2026-06-06 → 2026-06-11.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 3,
+      "hasCritical": true
+    }
+  ],
+  "finalCalendar": {
+    "calendar_version": 3,
+    "planning_window": {
+      "end_date": "2026-06-11",
+      "reason": "Covers work up to the final presentation deadline.",
+      "start_date": "2026-06-06"
+    },
+    "overall_strategy": [
+      "Finish algorithms problem solving by Sunday to free weekdays for presentation.",
+      "Break presentation into concrete subtasks: outline, draft, refine, integrate, rehearse.",
+      "Use Thursday morning as implicit contingency for last-minute fixes."
+    ],
+    "days": [
+      {
+        "date": "2026-06-06",
+        "day_name": "Saturday",
+        "assumed_available_hours": 7,
+        "day_reasoning": "Start algorithms discovery and first problem; begin presentation outline.",
+        "blocks": [
+          {
+            "description": "Assess difficulty of the three unsolved algorithms problems.",
+            "duration_hours": 1.5,
+            "end": "2026-06-06T11:00:00.000Z",
+            "id": "B1",
+            "reasoning": "Early discovery to gauge effort and adjust weekend plan.",
+            "start": "2026-06-06T09:30:00.000Z",
+            "task_id": "T2",
+            "task_name": "Algorithms problem set",
+            "type": "work"
+          },
+          {
+            "description": "Solve the first unsolved algorithms problem.",
+            "duration_hours": 2.5,
+            "end": "2026-06-06T14:30:00.000Z",
+            "id": "B2",
+            "reasoning": "Deep work on first problem after understanding scope.",
+            "start": "2026-06-06T12:00:00.000Z",
+            "task_id": "T2",
+            "task_name": "Algorithms problem set",
+            "type": "work"
+          },
+          {
+            "description": "Create detailed outline for the distributed systems presentation.",
+            "duration_hours": 2,
+            "end": "2026-06-06T17:30:00.000Z",
+            "id": "B3",
+            "reasoning": "Foundation for slide drafting; ensures alignment with group structure.",
+            "start": "2026-06-06T15:30:00.000Z",
+            "task_id": "T1",
+            "task_name": "Distributed systems group project: final presentation preparation",
+            "type": "work"
+          }
+        ]
+      },
+      {
+        "date": "2026-06-07",
+        "day_name": "Sunday",
+        "assumed_available_hours": 8,
+        "day_reasoning": "Finish algorithms problem solving; draft personal presentation slides.",
+        "blocks": [
+          {
+            "description": "Solve the second unsolved algorithms problem.",
+            "duration_hours": 3,
+            "end": "2026-06-07T13:00:00.000Z",
+            "id": "B4",
+            "reasoning": "Continue algorithms work while momentum is high.",
+            "start": "2026-06-07T10:00:00.000Z",
+            "task_id": "T2",
+            "task_name": "Algorithms problem set",
+            "type": "work"
+          },
+          {
+            "description": "Solve the third unsolved algorithms problem.",
+            "duration_hours": 3,
+            "end": "2026-06-07T17:00:00.000Z",
+            "id": "B5",
+            "reasoning": "Complete all problem solving to meet Tuesday deadline early.",
+            "start": "2026-06-07T14:00:00.000Z",
+            "task_id": "T2",
+            "task_name": "Algorithms problem set",
+            "type": "work"
+          },
+          {
+            "description": "Draft slides for personal sections: fault tolerance and demo explanation.",
+            "duration_hours": 2,
+            "end": "2026-06-07T20:00:00.000Z",
+            "id": "B6",
+            "reasoning": "Explicit work on personal sections before Monday group meeting.",
+            "start": "2026-06-07T18:00:00.000Z",
+            "task_id": "T1",
+            "task_name": "Distributed systems group project: final presentation preparation",
+            "type": "work"
+          }
+        ]
+      },
+      {
+        "date": "2026-06-08",
+        "day_name": "Monday",
+        "assumed_available_hours": 6,
+        "day_reasoning": "Finalize algorithms work; complete individual slides for group meeting.",
+        "blocks": [
+          {
+            "description": "Final review and polish of the algorithms problem set solutions.",
+            "duration_hours": 1.5,
+            "end": "2026-06-08T12:00:00.000Z",
+            "id": "B7",
+            "reasoning": "Ensure solutions are complete and ready for Tuesday deadline.",
+            "start": "2026-06-08T10:30:00.000Z",
+            "task_id": "T2",
+            "task_name": "Algorithms problem set",
+            "type": "work"
+          },
+          {
+            "description": "Refine and complete all individual slides for the presentation.",
+            "duration_hours": 2.5,
+            "end": "2026-06-08T15:30:00.000Z",
+            "id": "B8",
+            "reasoning": "Polish slides before evening group integration meeting.",
+            "start": "2026-06-08T13:00:00.000Z",
+            "task_id": "T1",
+            "task_name": "Distributed systems group project: final presentation preparation",
+            "type": "work"
+          }
+        ]
+      },
+      {
+        "date": "2026-06-09",
+        "day_name": "Tuesday",
+        "assumed_available_hours": 7,
+        "day_reasoning": "Integrate presentation, rehearse individually, and refine content.",
+        "blocks": [
+          {
+            "description": "Incorporate group feedback and integrate slides into master deck.",
+            "duration_hours": 2,
+            "end": "2026-06-09T13:00:00.000Z",
+            "id": "B9",
+            "reasoning": "Apply changes from Monday meeting for cohesive presentation.",
+            "start": "2026-06-09T11:00:00.000Z",
+            "task_id": "T1",
+            "task_name": "Distributed systems group project: final presentation preparation",
+            "type": "work"
+          },
+          {
+            "description": "Practice delivery and timing for the presentation.",
+            "duration_hours": 2,
+            "end": "2026-06-09T16:00:00.000Z",
+            "id": "B10",
+            "reasoning": "Individual rehearsal to smooth transitions and pacing.",
+            "start": "2026-06-09T14:00:00.000Z",
+            "task_id": "T1",
+            "task_name": "Distributed systems group project: final presentation preparation",
+            "type": "work"
+          },
+          {
+            "description": "Review notes and refine technical explanations.",
+            "duration_hours": 1.5,
+            "end": "2026-06-09T18:30:00.000Z",
+            "id": "B11",
+            "reasoning": "Deepen understanding of key concepts for Q&A.",
+            "start": "2026-06-09T17:00:00.000Z",
+            "task_id": "T1",
+            "task_name": "Distributed systems group project: final presentation preparation",
+            "type": "work"
+          }
+        ]
+      },
+      {
+        "date": "2026-06-10",
+        "day_name": "Wednesday",
+        "assumed_available_hours": 5,
+        "day_reasoning": "Evening group meeting for final rehearsal.",
+        "blocks": [
+          {
+            "description": "Final group rehearsal and integration check.",
+            "duration_hours": 2,
+            "end": "2026-06-10T22:00:00.000Z",
+            "id": "B12",
+            "reasoning": "Critical full run-through with group to sync and fix issues.",
+            "start": "2026-06-10T20:00:00.000Z",
+            "task_id": "T1",
+            "task_name": "Distributed systems group project: final presentation preparation",
+            "type": "work"
+          }
+        ]
+      },
+      {
+        "date": "2026-06-11",
+        "day_name": "Thursday",
+        "assumed_available_hours": 3,
+        "day_reasoning": "Morning kept unscheduled as contingency buffer before 14:00 presentation.",
+        "blocks": []
+      }
+    ],
+    "compromises": [
+      {
+        "conflict": "Algorithms problem set deadline is Tuesday night, but group project work is critical Monday-Wednesday.",
+        "resolution": "Finish all algorithms solving by Sunday evening, leaving only final review for Monday, to protect presentation time."
+      },
+      {
+        "conflict": "Group project integration and rehearsal are compressed into Wednesday evening with no explicit contingency buffer.",
+        "resolution": "Use Thursday morning as implicit buffer by scheduling final review on Wednesday; unscheduled Thursday time is contingency."
+      },
+      {
+        "conflict": "Student preference to avoid late-night work conflicts with Wednesday group meeting ending at 22:00.",
+        "resolution": "Accepted late end for critical final rehearsal; other days end by 21:30."
+      }
+    ],
+    "known_weaknesses": [
+      "Wednesday rehearsal ends at 22:00, conflicting with preference to avoid late work.",
+      "No explicit buffer after Wednesday rehearsal; relies on Thursday morning contingency.",
+      "Algorithms difficulty assessment on Saturday may still underestimate effort for hard problems."
+    ],
+    "changes_from_previous": [
+      {
+        "change": "Split 'Distributed systems group project' into concrete subtask blocks: outline, draft slides, refine, integrate, rehearse.",
+        "reason": "Address Effort Agent critique: monolithic blocks are unrealistic."
+      },
+      {
+        "change": "Split 'Algorithms problem set' into subtask blocks: problem discovery, solve problem 1, solve problem 2, solve problem 3, final review.",
+        "reason": "Address Effort Agent critique: generic blocks hide effort and risk."
+      },
+      {
+        "change": "Varied block durations (1.5h, 2h, 2.5h, 3h) and avoided back-to-back long blocks.",
+        "reason": "Address Effort Agent critique: uniform 3-hour blocks are implausible."
+      },
+      {
+        "change": "Added early discovery block for algorithms on Saturday morning.",
+        "reason": "Address Risk Agent critique: gauge difficulty early to avoid spillover."
+      },
+      {
+        "change": "Added explicit block for drafting personal presentation sections before Monday meeting.",
+        "reason": "Address Risk Agent critique: hidden work for personal sections was missing."
+      },
+      {
+        "change": "Moved final presentation review to Wednesday evening, leaving Thursday morning as implicit contingency.",
+        "reason": "Address Risk Agent critique: no time for unexpected delays after rehearsal."
+      }
+    ],
+    "unresolved_critiques": [
+      {
+        "agent": "Risk Agent",
+        "issue": "Contingency is only implicit on Thursday morning; no explicit buffer for post-rehearsal fixes.",
+        "planner_response": "Accepted risk to keep schedule realistic; Thursday morning is available for urgent fixes.",
+        "severity": "major"
+      },
+      {
+        "agent": "Effort Agent",
+        "issue": "Block durations are still estimates; actual subtask effort may vary.",
+        "planner_response": "Used varied durations based on subtask complexity; adjustments can be made day-to-day.",
+        "severity": "minor"
+      }
+    ]
+  },
+  "critiques": [
+    {
+      "agent": "Deadline Agent",
+      "calendar_version": 3,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The calendar finishes all required work for the algorithms problem set before its Tuesday night deadline.",
+        "The calendar schedules all required presentation preparation work before the Thursday 14:00 presentation."
+      ],
+      "overall_comment": "This calendar successfully protects both deadlines. All work for the algorithms problem set is scheduled to end by Monday, well before the Tuesday 23:59 deadline. All work for the distributed systems presentation is scheduled to end on Wednesday evening, before the Thursday 14:00 presentation. The plan addresses urgency by front-loading the earlier deadline and sequencing tasks appropriately."
+    },
+    {
+      "agent": "Grade Agent",
+      "calendar_version": 3,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The final group rehearsal is scheduled very late on Wednesday (20:00-22:00), which may leave insufficient time for the student to process feedback, make final edits, or rest before the high-stakes presentation the next day.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Distributed systems group project: final presentation preparation"
+          ],
+          "affected_days": [
+            "2026-06-10"
+          ],
+          "suggested_fix": "If possible, schedule the final group rehearsal earlier in the day on Wednesday to allow for a final individual review and a buffer for last-minute adjustments before the presentation."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner has successfully prioritized the high-value presentation by finishing the algorithms problem set by Sunday, protecting Monday and Wednesday for group project work."
+      ],
+      "overall_comment": "The calendar effectively protects academic value. The highest-grade-weight task, the distributed systems final presentation, receives the majority of focused work time in the critical days leading up to the deadline. The algorithms problem set is scheduled for completion over the weekend, preventing it from crowding out presentation preparation. The plan allocates concrete blocks for key presentation subtasks, ensuring progress. The minor concern is the late timing of the final rehearsal, but the overall strategy correctly prioritizes the high-impact work."
+    },
+    {
+      "agent": "Effort Agent",
+      "calendar_version": 3,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The schedule allocates 3-hour blocks for solving individual algorithms problems, which may be overly optimistic for complex problems requiring deep thought, debugging, and writing. This risks underestimating the effort needed.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Algorithms problem set"
+          ],
+          "affected_days": [
+            "2026-06-07"
+          ],
+          "suggested_fix": "Consider breaking the 3-hour blocks into smaller, more focused sessions (e.g., 2-hour blocks with breaks) or explicitly note that these are maximum focused time estimates, with the understanding that work may spill into adjacent unscheduled time."
+        },
+        {
+          "issue": "The total scheduled work for the distributed systems presentation preparation is approximately 10 hours across multiple days. While the tasks are now broken down, the cumulative effort for creating slides from rough notes, integrating group feedback, and rehearsing might still be on the low side for a final presentation.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Distributed systems group project: final presentation preparation"
+          ],
+          "affected_days": [
+            "2026-06-06",
+            "2026-06-07",
+            "2026-06-08",
+            "2026-06-09",
+            "2026-06-10"
+          ],
+          "suggested_fix": "Acknowledge in the plan that the scheduled blocks represent focused work time, and the student should be prepared to use some of the unscheduled time (e.g., early mornings or short evening slots) for minor refinements if needed."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner has addressed the core critique by breaking monolithic tasks into concrete subtasks with varied durations, which improves realism. The acknowledged weakness about block duration estimates being variable is accepted."
+      ],
+      "overall_comment": "The calendar shows significant improvement. The large, vague tasks have been appropriately broken down into specific, actionable subtasks with reasonable block durations (1.5 to 3 hours). The effort distribution across days is plausible for a student, and the plan front-loads the algorithms work appropriately. My remaining concerns are minor regarding the precision of effort estimates for complex problem-solving and presentation polish, but the structure now allows for manageable adjustments. The plan is realistic enough to approve with minor concerns."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "calendar_version": 3,
+      "approval": "reject",
+      "severity": "major",
+      "critiques": [
+        {
+          "issue": "The final group rehearsal on Wednesday is scheduled from 20:00 to 22:00, ending at 22:00. This is late-night work which can impact sleep quality and recovery, especially before a high-stakes presentation the next day.",
+          "severity": "major",
+          "affected_tasks": [
+            "Distributed systems group project: final presentation preparation"
+          ],
+          "affected_days": [
+            "2026-06-10"
+          ],
+          "suggested_fix": "Move the final group rehearsal to an earlier time on Wednesday, such as starting at 17:00 after the group meeting, or shorten it to 1.5 hours to end by 21:30. Alternatively, consider moving some rehearsal preparation to Tuesday evening to reduce the need for a long Wednesday session."
+        },
+        {
+          "issue": "The schedule for Sunday, June 7th, is overfilled with 8 hours of scheduled work, including two 3-hour blocks of cognitively demanding algorithms problem solving and a 2-hour block of presentation work in the evening. This creates a heavy, potentially fatiguing day with little unscheduled time for rest.",
+          "severity": "major",
+          "affected_tasks": [
+            "Algorithms problem set",
+            "Distributed systems group project: final presentation preparation"
+          ],
+          "affected_days": [
+            "2026-06-07"
+          ],
+          "suggested_fix": "Reduce the workload on Sunday. Consider moving one of the 3-hour algorithms problem-solving blocks to Saturday afternoon or Monday morning. Alternatively, shorten the presentation drafting block on Sunday evening to 1 hour, focusing only on the highest-priority slides."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner has front-loaded the algorithms work to finish by Sunday, which reduces pressure on Tuesday and protects against late-night work on the deadline day."
+      ],
+      "overall_comment": "The plan makes good progress by front-loading the algorithms work. However, it introduces two significant wellbeing issues: a late-night work block ending at 22:00 on Wednesday and an overfilled, cognitively heavy Sunday. These patterns risk fatigue and poor sleep, which are detrimental to performance and stress levels, especially before a final presentation. The plan is not yet humane enough to follow sustainably."
+    },
+    {
+      "agent": "Risk Agent",
+      "calendar_version": 3,
+      "approval": "reject",
+      "severity": "major",
+      "critiques": [
+        {
+          "issue": "The plan lacks explicit contingency time for the group project after the final rehearsal. The only buffer is an implicit, unscheduled Thursday morning, which is insufficient for any substantive fixes discovered during the Wednesday night rehearsal. This creates a critical risk of delivering an unpolished or flawed presentation.",
+          "severity": "critical",
+          "affected_tasks": [
+            "Distributed systems group project: final presentation preparation"
+          ],
+          "affected_days": [
+            "2026-06-10",
+            "2026-06-11"
+          ],
+          "suggested_fix": "Schedule an explicit 2-3 hour contingency block on Wednesday afternoon (before the evening rehearsal) or Thursday morning (before the presentation) dedicated to addressing rehearsal feedback and making final corrections."
+        },
+        {
+          "issue": "The plan assumes all three unsolved algorithms problems will be completed by Sunday evening. If any problem is more difficult than estimated, the spillover will directly conflict with critical group project work scheduled for Monday and Tuesday, creating a high-risk dependency.",
+          "severity": "major",
+          "affected_tasks": [
+            "Algorithms problem set",
+            "Distributed systems group project: final presentation preparation"
+          ],
+          "affected_days": [
+            "2026-06-07",
+            "2026-06-08",
+            "2026-06-09"
+          ],
+          "suggested_fix": "Add an explicit contingency block on Monday afternoon or Tuesday morning specifically for algorithms problem set overflow, protecting the scheduled group project integration time."
+        },
+        {
+          "issue": "The group project integration and rehearsal are heavily dependent on two late-evening meetings (Monday and Wednesday). There is no scheduled time for asynchronous coordination, review of teammates' work, or integration of the full slide deck before these meetings, which risks the meetings being inefficient or uncovering major misalignments too late.",
+          "severity": "major",
+          "affected_tasks": [
+            "Distributed systems group project: final presentation preparation"
+          ],
+          "affected_days": [
+            "2026-06-08",
+            "2026-06-09",
+            "2026-06-10"
+          ],
+          "suggested_fix": "Schedule a short block on Monday morning to review any shared materials from teammates and prepare integration points for the evening meeting. Also, add a block on Tuesday for asynchronous review and consolidation of the master slide deck."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner added an early discovery block for the algorithms problem set.",
+        "The planner added explicit work on drafting personal presentation sections before the Monday group meeting."
+      ],
+      "overall_comment": "While the planner has addressed some earlier concerns by adding early discovery and breaking tasks into subtasks, the core risk remains: the plan has no explicit buffers for integration, coordination delays, or post-rehearsal fixes. The success of the presentation hinges on flawless execution in two late meetings with no room for error. The implicit Thursday morning contingency is inadequate for substantive work. I must reject this version due to the critical lack of scheduled contingency time for the group project."
+    }
+  ],
+  "validation": {
+    "valid": false,
+    "violations": [
+      {
+        "code": "day_outside_window",
+        "message": "2026-06-11 is outside the planning window 2026-06-06 → 2026-06-11.",
+        "severity": "error"
+      }
+    ]
+  },
+  "evaluation": {
+    "evaluator": "Schedule Evaluator",
+    "calendar_version": 3,
+    "planner_model": "deepseek/deepseek-v3.2",
+    "evaluator_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "overall_score": 3,
+    "model_score": 2.5,
+    "hard_score": 3.4,
+    "hard_metrics": {
+      "score": 61,
+      "metrics": [
+        {
+          "name": "generation_time_seconds",
+          "value": 382,
+          "score": 0,
+          "explanation": "382s from run start to final schedule selection."
+        },
+        {
+          "name": "rejection_count",
+          "value": 2,
+          "score": 60,
+          "explanation": "2 specialist agent(s) rejected the final calendar."
+        },
+        {
+          "name": "critical_count",
+          "value": 1,
+          "score": 66.7,
+          "explanation": "1 critical issue(s) were raised in final critiques."
+        },
+        {
+          "name": "major_count",
+          "value": 6,
+          "score": 0,
+          "explanation": "6 major issue(s) were raised in final critiques."
+        },
+        {
+          "name": "deadline_violation_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 scheduled work block(s) end after their task deadline."
+        },
+        {
+          "name": "task_coverage_ratio",
+          "value": 1,
+          "score": 100,
+          "explanation": "2/2 inferred task(s) received at least one work block."
+        },
+        {
+          "name": "availability_overrun_hours",
+          "value": 0,
+          "score": 100,
+          "explanation": "0h scheduled above the planner's assumed available hours."
+        }
+      ]
+    },
+    "dimension_scores": [
+      {
+        "dimension": "requirement_match",
+        "score": 3,
+        "rationale": "Most explicit requirements (deadlines, task coverage) were met, but the wellbeing constraint (avoiding late-night work) was violated on Wednesday."
+      },
+      {
+        "dimension": "deadline_safety",
+        "score": 3.5,
+        "rationale": "Both deadlines are technically met, but the algorithms work is finished very early, while the presentation work is finished immediately before the deadline with no explicit buffer."
+      },
+      {
+        "dimension": "workload_realism",
+        "score": 3,
+        "rationale": "The breakdown of tasks into smaller blocks improved realism, but the heavy cognitive load on Sunday and the late finish on Wednesday suggest the workload distribution is still taxing."
+      },
+      {
+        "dimension": "academic_priority",
+        "score": 4,
+        "rationale": "The plan correctly prioritized the high-stakes final presentation over the earlier algorithms problem set by ensuring the latter was completed by Sunday."
+      },
+      {
+        "dimension": "wellbeing_balance",
+        "score": 1.5,
+        "rationale": "The schedule violates the preference to avoid late-night work by scheduling a critical rehearsal ending at 22:00 the night before the presentation. Sunday is also heavily scheduled."
+      },
+      {
+        "dimension": "risk_resilience",
+        "score": 1.5,
+        "rationale": "The schedule is brittle. It lacks explicit contingency time for group integration issues or unexpected difficulty in the algorithms problems, relying entirely on implicit free time on Thursday morning."
+      }
+    ],
+    "strengths": [
+      "Successfully front-loaded the algorithms problem set, completing all work by Monday to protect the Tuesday deadline.",
+      "Tasks were broken down into smaller, more actionable subtasks compared to previous iterations.",
+      "The highest academic priority (the final presentation) received dedicated time blocks leading up to the deadline."
+    ],
+    "weaknesses": [
+      "The final group rehearsal ends at 22:00 on Wednesday, violating the student's preference to avoid late-night work before a major event.",
+      "The schedule lacks explicit contingency time for fixing issues discovered during the final rehearsal.",
+      "Sunday is heavily loaded with 8 hours of demanding cognitive work, potentially leading to fatigue."
+    ],
+    "comparison_notes": [
+      "The planner attempted to address structural critiques by breaking down tasks, which improved realism.",
+      "However, the model failed to adequately resolve the wellbeing constraint (late work) and the risk constraint (lack of buffer time) simultaneously, leading to a schedule that is technically complete but stressful."
+    ],
+    "recommendation": "The planner must prioritize creating explicit contingency blocks for high-risk group work, especially after the final rehearsal. Furthermore, it must strictly adhere to wellbeing constraints, even if it means slightly reducing the scope of work scheduled for the day before the presentation."
+  },
+  "usage": {
+    "callCount": 25,
+    "promptTokens": 113106,
+    "completionTokens": 19076,
+    "totalTokens": 132182,
+    "estimatedCostUsd": 0.034672,
+    "calls": [
+      {
+        "id": "c7a28152-74aa-4f48-aecf-decc514b5b10",
+        "schemaName": "interpreter_output",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:06:45.864Z",
+        "completedAt": "2026-06-04T15:07:40.244Z",
+        "durationMs": 54380,
+        "promptChars": 4263,
+        "completionChars": 4271,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 989,
+        "completionTokens": 1186,
+        "totalTokens": 2175,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000708
+      },
+      {
+        "id": "20d98dbd-3a1d-496b-9a3c-a0f08e9cf862",
+        "schemaName": "specialist_agent_view",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:07:40.244Z",
+        "completedAt": "2026-06-04T15:08:09.155Z",
+        "durationMs": 28911,
+        "promptChars": 9158,
+        "completionChars": 3062,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2300,
+        "completionTokens": 621,
+        "totalTokens": 2921,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000834
+      },
+      {
+        "id": "dff001ae-54cb-44ad-9e28-c3010686749f",
+        "schemaName": "specialist_agent_view",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:07:40.244Z",
+        "completedAt": "2026-06-04T15:08:13.360Z",
+        "durationMs": 33116,
+        "promptChars": 8150,
+        "completionChars": 4678,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2428,
+        "completionTokens": 883,
+        "totalTokens": 3311,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000967
+      },
+      {
+        "id": "e656b229-d703-4241-a51d-5f8b96121a22",
+        "schemaName": "specialist_agent_view",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:07:40.244Z",
+        "completedAt": "2026-06-04T15:08:13.635Z",
+        "durationMs": 33391,
+        "promptChars": 8176,
+        "completionChars": 4660,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2430,
+        "completionTokens": 900,
+        "totalTokens": 3330,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000974
+      },
+      {
+        "id": "616a89b4-43ea-4e3f-949a-805b0cbd799c",
+        "schemaName": "specialist_agent_view",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:07:40.244Z",
+        "completedAt": "2026-06-04T15:08:14.757Z",
+        "durationMs": 34513,
+        "promptChars": 8222,
+        "completionChars": 4608,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2434,
+        "completionTokens": 903,
+        "totalTokens": 3337,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000976
+      },
+      {
+        "id": "a94a16c0-959b-46a1-8a18-8a17289f705b",
+        "schemaName": "specialist_agent_view",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:07:40.244Z",
+        "completedAt": "2026-06-04T15:08:26.721Z",
+        "durationMs": 46477,
+        "promptChars": 8646,
+        "completionChars": 3122,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2154,
+        "completionTokens": 659,
+        "totalTokens": 2813,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.00081
+      },
+      {
+        "id": "91657fce-7cdc-47a3-af52-e737a23c46c0",
+        "schemaName": "calendar_proposal",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:08:26.722Z",
+        "completedAt": "2026-06-04T15:08:48.749Z",
+        "durationMs": 22027,
+        "promptChars": 29644,
+        "completionChars": 3985,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 6335,
+        "completionTokens": 929,
+        "totalTokens": 7264,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.002
+      },
+      {
+        "id": "9b18001e-7726-4d65-a673-32951883e479",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:08:48.750Z",
+        "completedAt": "2026-06-04T15:09:02.040Z",
+        "durationMs": 13290,
+        "promptChars": 14310,
+        "completionChars": 1368,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 3914,
+        "completionTokens": 332,
+        "totalTokens": 4246,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001144
+      },
+      {
+        "id": "3bcd52e2-cee8-4e8e-9312-53cb04fb0c15",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:08:48.749Z",
+        "completedAt": "2026-06-04T15:09:02.179Z",
+        "durationMs": 13430,
+        "promptChars": 13858,
+        "completionChars": 1334,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 3805,
+        "completionTokens": 346,
+        "totalTokens": 4151,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001121
+      },
+      {
+        "id": "84e738fd-58d8-4c0a-ba3e-753197f48d37",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:08:48.749Z",
+        "completedAt": "2026-06-04T15:09:02.407Z",
+        "durationMs": 13658,
+        "promptChars": 14918,
+        "completionChars": 1436,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 3939,
+        "completionTokens": 339,
+        "totalTokens": 4278,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001153
+      },
+      {
+        "id": "ef33bb21-a94f-4af5-b77b-8ffd5aa619ed",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:08:48.750Z",
+        "completedAt": "2026-06-04T15:09:15.094Z",
+        "durationMs": 26344,
+        "promptChars": 14926,
+        "completionChars": 2420,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 3535,
+        "completionTokens": 558,
+        "totalTokens": 4093,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001131
+      },
+      {
+        "id": "27843f36-407a-409f-8148-0bf01d4ef978",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:08:48.750Z",
+        "completedAt": "2026-06-04T15:09:17.974Z",
+        "durationMs": 29224,
+        "promptChars": 14920,
+        "completionChars": 3752,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 3965,
+        "completionTokens": 831,
+        "totalTokens": 4796,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001347
+      },
+      {
+        "id": "bad937c6-1208-41a7-8895-9460ffbdaec8",
+        "schemaName": "calendar_proposal",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:09:17.974Z",
+        "completedAt": "2026-06-04T15:09:53.775Z",
+        "durationMs": 35801,
+        "promptChars": 12271,
+        "completionChars": 11647,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 2797,
+        "completionTokens": 2555,
+        "totalTokens": 5352,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001698
+      },
+      {
+        "id": "27ad56bf-cbf1-4d5e-bb0c-9cc6e7db2bda",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:09:53.776Z",
+        "completedAt": "2026-06-04T15:10:02.876Z",
+        "durationMs": 9100,
+        "promptChars": 20245,
+        "completionChars": 938,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5557,
+        "completionTokens": 214,
+        "totalTokens": 5771,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001526
+      },
+      {
+        "id": "3db1c97f-fc32-41a3-b8b9-3063774c9235",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:09:53.776Z",
+        "completedAt": "2026-06-04T15:10:05.991Z",
+        "durationMs": 12215,
+        "promptChars": 20697,
+        "completionChars": 1123,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5666,
+        "completionTokens": 277,
+        "totalTokens": 5943,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001578
+      },
+      {
+        "id": "4f686c57-18fa-441e-be85-41a944590579",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:09:53.776Z",
+        "completedAt": "2026-06-04T15:10:10.767Z",
+        "durationMs": 16991,
+        "promptChars": 21305,
+        "completionChars": 1984,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5691,
+        "completionTokens": 412,
+        "totalTokens": 6103,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001636
+      },
+      {
+        "id": "c777a3cb-473c-4fe5-b661-686719074781",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:09:53.776Z",
+        "completedAt": "2026-06-04T15:10:22.607Z",
+        "durationMs": 28831,
+        "promptChars": 21307,
+        "completionChars": 3489,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5717,
+        "completionTokens": 755,
+        "totalTokens": 6472,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001773
+      },
+      {
+        "id": "03566322-7098-4704-be67-92fd853af069",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:09:53.776Z",
+        "completedAt": "2026-06-04T15:10:36.235Z",
+        "durationMs": 42459,
+        "promptChars": 21313,
+        "completionChars": 3053,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5287,
+        "completionTokens": 732,
+        "totalTokens": 6019,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001653
+      },
+      {
+        "id": "9e1c2a8c-853d-4714-af92-c842b7891627",
+        "schemaName": "calendar_proposal",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:10:36.235Z",
+        "completedAt": "2026-06-04T15:12:43.348Z",
+        "durationMs": 127113,
+        "promptChars": 11434,
+        "completionChars": 10461,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 2702,
+        "completionTokens": 2653,
+        "totalTokens": 5355,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001711
+      },
+      {
+        "id": "12c45a97-d97a-433e-b51f-4e3f1b5387a9",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:12:43.348Z",
+        "completedAt": "2026-06-04T15:12:51.456Z",
+        "durationMs": 8108,
+        "promptChars": 21256,
+        "completionChars": 792,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5681,
+        "completionTokens": 169,
+        "totalTokens": 5850,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001541
+      },
+      {
+        "id": "fb4a01a7-2edb-43c3-ade2-2867b41509c2",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:12:43.348Z",
+        "completedAt": "2026-06-04T15:12:56.430Z",
+        "durationMs": 13082,
+        "promptChars": 22316,
+        "completionChars": 1566,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5815,
+        "completionTokens": 328,
+        "totalTokens": 6143,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001637
+      },
+      {
+        "id": "2815a9fa-d068-4410-9e44-5d4a69eaaec1",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:12:43.348Z",
+        "completedAt": "2026-06-04T15:13:03.026Z",
+        "durationMs": 19678,
+        "promptChars": 21708,
+        "completionChars": 2302,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5790,
+        "completionTokens": 518,
+        "totalTokens": 6308,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001702
+      },
+      {
+        "id": "e835d2f2-d27d-4086-8684-aec7a4f707b8",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:12:43.348Z",
+        "completedAt": "2026-06-04T15:13:05.168Z",
+        "durationMs": 21820,
+        "promptChars": 22324,
+        "completionChars": 2462,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5834,
+        "completionTokens": 534,
+        "totalTokens": 6368,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.00172
+      },
+      {
+        "id": "8318c090-8350-4411-8825-fb8afd0eda78",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:12:43.348Z",
+        "completedAt": "2026-06-04T15:13:07.903Z",
+        "durationMs": 24555,
+        "promptChars": 22318,
+        "completionChars": 3239,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5841,
+        "completionTokens": 673,
+        "totalTokens": 6514,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001774
+      },
+      {
+        "id": "378f9843-c05c-4d85-8bb2-424a5185b068",
+        "schemaName": "schedule_evaluation",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T15:13:07.903Z",
+        "completedAt": "2026-06-04T15:13:11.145Z",
+        "durationMs": 3242,
+        "promptChars": 50194,
+        "completionChars": 3259,
+        "maxCompletionTokens": 8000,
+        "promptTokens": 12500,
+        "completionTokens": 769,
+        "totalTokens": 13269,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001558
+      }
+    ]
+  }
+}

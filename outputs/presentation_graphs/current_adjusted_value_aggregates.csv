@@ -1,0 +1,4 @@
+model_label,runs,ok_runs,deterministic,llm_score,cost,tokens,adjusted_value,critical,mistakes
+Gemini 2.5 Flash Lite,8,8,97.325,4.462,0.015,101885.125,92.6,1,6
+Gemini 3.1 Flash Lite,8,8,97.475,4.588,0.027,70295.875,92.0,2,6
+DeepSeek V3.2,8,8,81.55,2.963,0.036,137479.875,69.0,13,31

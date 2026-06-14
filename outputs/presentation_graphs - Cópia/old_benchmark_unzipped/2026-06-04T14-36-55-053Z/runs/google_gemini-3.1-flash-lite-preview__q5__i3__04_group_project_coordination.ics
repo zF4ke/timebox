@@ -1,0 +1,62 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:b1@timebox.local
+DTSTAMP:20260604T144334Z
+DTSTART:20260606T090000Z
+DTEND:20260606T130000Z
+SUMMARY:Algorithms problem set
+DESCRIPTION:Solve two of the remaining three algorithms problems.\\n\\nReasoning: Early focus on the problem set reduces weekday pressure.
+END:VEVENT
+BEGIN:VEVENT
+UID:b2@timebox.local
+DTSTAMP:20260604T144334Z
+DTSTART:20260606T140000Z
+DTEND:20260606T170000Z
+SUMMARY:Fault tolerance section and demo explanation
+DESCRIPTION:Convert rough notes into presentation slides.\\n\\nReasoning: Completing slides early ensures readiness for the Monday group meeting.
+END:VEVENT
+BEGIN:VEVENT
+UID:b3@timebox.local
+DTSTAMP:20260604T144334Z
+DTSTART:20260607T090000Z
+DTEND:20260607T110000Z
+SUMMARY:Algorithms problem set
+DESCRIPTION:Solve the final algorithms problem.\\n\\nReasoning: Completing the problem set on Sunday avoids weekday conflicts.
+END:VEVENT
+BEGIN:VEVENT
+UID:b4@timebox.local
+DTSTAMP:20260604T144334Z
+DTSTART:20260607T110000Z
+DTEND:20260607T130000Z
+SUMMARY:Fault tolerance section and demo explanation
+DESCRIPTION:Refine demo explanation and rehearse independently.\\n\\nReasoning: Independent practice ensures the demo is ready for group review.
+END:VEVENT
+BEGIN:VEVENT
+UID:b5@timebox.local
+DTSTAMP:20260604T144334Z
+DTSTART:20260608T180000Z
+DTEND:20260608T210000Z
+SUMMARY:Distributed systems group project
+DESCRIPTION:Attend group meeting to integrate slides and assign parts.\\n\\nReasoning: Synchronous meeting is required for project coordination.
+END:VEVENT
+BEGIN:VEVENT
+UID:b6@timebox.local
+DTSTAMP:20260604T144334Z
+DTSTART:20260609T150000Z
+DTEND:20260609T170000Z
+SUMMARY:Algorithms problem set
+DESCRIPTION:Final review and submission of the problem set.\\n\\nReasoning: Ensures the assignment is submitted before the deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:b7@timebox.local
+DTSTAMP:20260604T144334Z
+DTSTART:20260610T170000Z
+DTEND:20260610T200000Z
+SUMMARY:Distributed systems group project
+DESCRIPTION:Attend group meeting for final rehearsal.\\n\\nReasoning: Final rehearsal is critical for presentation success.
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,18 @@
+{
+  "score": 90.1,
+  "expectedTaskCoverage": 100,
+  "deadlineDiscipline": 65,
+  "availabilityDiscipline": 100,
+  "fixedCommitmentRespect": 100,
+  "wellbeingRespect": 100,
+  "revisionEfficiency": 88,
+  "mistakeCount": 1,
+  "mistakes": [
+    {
+      "code": "block_after_deadline",
+      "severity": "critical",
+      "message": "Linear algebra homework has work scheduled after its deadline (2026-06-05T20:00:00.000Z).",
+      "evidence": "block_after_deadline"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "score": 69.1,
+  "expectedTaskCoverage": 100,
+  "deadlineDiscipline": 0,
+  "availabilityDiscipline": 100,
+  "fixedCommitmentRespect": 100,
+  "wellbeingRespect": 100,
+  "revisionEfficiency": 41,
+  "mistakeCount": 5,
+  "mistakes": [
+    {
+      "code": "block_after_deadline",
+      "severity": "critical",
+      "message": "Math exercise sheet has work scheduled after its deadline (2026-06-07T00:00:00.000Z).",
+      "evidence": "block_after_deadline"
+    },
+    {
+      "code": "block_after_deadline",
+      "severity": "critical",
+      "message": "Improve AASMA simulator has work scheduled after its deadline (2026-06-09T00:00:00.000Z).",
+      "evidence": "block_after_deadline"
+    },
+    {
+      "code": "block_after_deadline",
+      "severity": "critical",
+      "message": "Prepare for programming languages oral discussion has work scheduled after its deadline (2026-06-11T00:00:00.000Z).",
+      "evidence": "block_after_deadline"
+    },
+    {
+      "code": "max_iterations_fallback",
+      "severity": "minor",
+      "message": "No calendar reached the acceptance rule before the max-iteration fallback.",
+      "evidence": "Maximum iterations reached. Selected best available calendar."
+    },
+    {
+      "code": "quorum_not_reached",
+      "severity": "minor",
+      "message": "Selected calendar has 4 approval(s), below quorum 5.",
+      "evidence": "Maximum iterations reached. Selected best available calendar."
+    }
+  ]
+}

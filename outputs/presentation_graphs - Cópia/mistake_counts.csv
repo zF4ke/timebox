@@ -1,0 +1,20 @@
+experiment,code,count,critical,major,minor
+Old prompt,block_after_deadline,11,11,0,0
+Old prompt,availability_overrun,9,0,0,9
+Old prompt,max_iterations_fallback,9,0,0,9
+Old prompt,quorum_not_reached,9,0,3,6
+Old prompt,final_critical_critiques,8,8,0,0
+Old prompt,too_few_work_blocks,2,0,0,2
+Old prompt,late_work_when_avoided,1,0,1,0
+Old prompt,missing_expected_task,1,1,0,0
+Old prompt,wellbeing_agent_rejected,1,0,1,0
+Current combined,max_iterations_fallback,9,0,0,9
+Current combined,quorum_not_reached,9,0,3,6
+Current combined,final_critical_critiques,8,8,0,0
+Current combined,block_after_deadline,7,7,0,0
+Current combined,availability_overrun,4,0,0,4
+Current combined,rest_block_not_allowed,2,0,0,2
+Current combined,wellbeing_agent_rejected,1,0,1,0
+Current combined,missing_expected_task,1,1,0,0
+Current combined,fixed_commitments_not_explained,1,0,0,1
+Current combined,too_few_work_blocks,1,0,0,1

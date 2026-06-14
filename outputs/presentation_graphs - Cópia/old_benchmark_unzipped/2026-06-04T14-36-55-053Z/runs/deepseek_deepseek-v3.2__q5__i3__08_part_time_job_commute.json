@@ -1,0 +1,2376 @@
+{
+  "runId": "145e7ff2-a7bd-428f-9034-f1f58c5ea563",
+  "createdAt": "2026-06-04T15:36:49.029Z",
+  "request": {
+    "userInput": "I am a student with a part-time job and a long commute.\r\n\r\nWork shifts:\r\n- Tuesday 17:00-22:00\r\n- Thursday 17:00-22:00\r\n- Saturday 09:00-15:00\r\n\r\nCommute takes 45 minutes each way and I am usually tired after shifts.\r\n\r\nAcademic tasks:\r\n- Web development project due Sunday night. I need to implement authentication, polish CSS, and write a README. Maybe 8 hours total.\r\n- Linear algebra homework due Wednesday at 20:00. It should take 3 hours.\r\n- Read one paper for AASMA seminar before Friday morning and write 5 discussion points.\r\n\r\nI can work in mornings if needed, but I focus better from 11:00 to 16:00. Avoid scheduling demanding study immediately after job shifts.",
+    "quorum": 5,
+    "maxIterations": 3,
+    "timezone": "Europe/Lisbon",
+    "model": "deepseek/deepseek-v3.2",
+    "evaluatorModel": "google/gemini-2.5-flash-lite-preview-09-2025"
+  },
+  "stopReason": "Maximum iterations reached. Selected best available calendar.",
+  "interpreterOutput": {
+    "current_date": "2026-06-04T15:36:49.029Z",
+    "planning_window": {
+      "start_date": "2026-06-04",
+      "end_date": "2026-06-08",
+      "reason": "Tasks mentioned have deadlines up to Sunday night (2026-06-08). The linear algebra homework is due Wednesday (2026-06-04), the AASMA seminar paper is due before Friday morning (2026-06-06), and the web development project is due Sunday night (2026-06-08)."
+    },
+    "inferred_availability": [
+      {
+        "date_range": "2026-06-04",
+        "assumption": "Today is Thursday. Student has a work shift from 17:00-22:00 with commute. They focus better from 11:00-16:00. Avoid demanding study after shift. Morning available but not peak focus.",
+        "estimated_available_hours_per_day": 5,
+        "confidence": "high"
+      },
+      {
+        "date_range": "2026-06-05",
+        "assumption": "Friday. No work shift mentioned. Student can work mornings if needed and focuses better from 11:00-16:00. AASMA seminar paper due before Friday morning, so work must be completed by end of Thursday or early Friday.",
+        "estimated_available_hours_per_day": 6,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-06-06",
+        "assumption": "Saturday. Student has work shift 09:00-15:00 with commute, and is usually tired after shifts. Avoid demanding study immediately after. Morning before shift may be limited.",
+        "estimated_available_hours_per_day": 3,
+        "confidence": "medium"
+      },
+      {
+        "date_range": "2026-06-07",
+        "assumption": "Sunday. No work shift mentioned. Student can work mornings if needed and focuses better from 11:00-16:00. Web development project due Sunday night.",
+        "estimated_available_hours_per_day": 7,
+        "confidence": "high"
+      },
+      {
+        "date_range": "2026-06-08",
+        "assumption": "Monday. No specific tasks due. Student has work shift on Tuesday. Used as buffer day if needed, but planning window ends on Sunday.",
+        "estimated_available_hours_per_day": 5,
+        "confidence": "low"
+      }
+    ],
+    "fixed_commitments": [
+      "Work shift: Tuesday 17:00-22:00 (with 45 min commute each way)",
+      "Work shift: Thursday 17:00-22:00 (with 45 min commute each way)",
+      "Work shift: Saturday 09:00-15:00 (with 45 min commute each way)"
+    ],
+    "student_state": {
+      "sleep": "Not explicitly stated, but mentions being tired after shifts.",
+      "energy": "Low-energy after job shifts; focus better from 11:00 to 16:00.",
+      "confidence": "Medium confidence in task estimates; some uncertainties in task durations and exact deadlines."
+    },
+    "tasks": [
+      {
+        "task_id": "T1",
+        "name": "Web development project",
+        "raw_mentions": [
+          "Web development project due Sunday night. I need to implement authentication, polish CSS, and write a README. Maybe 8 hours total."
+        ],
+        "inferred_deadline": "2026-06-07T23:59:59.999Z",
+        "uncertainties": [
+          "Exact deadline time 'Sunday night' is ambiguous; assumed end of day.",
+          "Total estimated duration of 8 hours is approximate."
+        ]
+      },
+      {
+        "task_id": "T2",
+        "name": "Linear algebra homework",
+        "raw_mentions": [
+          "Linear algebra homework due Wednesday at 20:00. It should take 3 hours."
+        ],
+        "inferred_deadline": "2026-06-04T20:00:00.000Z",
+        "uncertainties": [
+          "Timezone for deadline is assumed to be Europe/Lisbon.",
+          "Duration estimate of 3 hours may vary."
+        ]
+      },
+      {
+        "task_id": "T3",
+        "name": "AASMA seminar paper reading and discussion points",
+        "raw_mentions": [
+          "Read one paper for AASMA seminar before Friday morning and write 5 discussion points."
+        ],
+        "inferred_deadline": "2026-06-06T08:00:00.000Z",
+        "uncertainties": [
+          "'Before Friday morning' is ambiguous; assumed by 08:00 Friday.",
+          "Duration for reading and writing discussion points not specified."
+        ]
+      }
+    ],
+    "assumptions": [
+      "All times are interpreted in the Europe/Lisbon timezone.",
+      "'Sunday night' for the web project means end of day Sunday (2026-06-07).",
+      "'Wednesday at 20:00' refers to today, 2026-06-04, as current date is Thursday 2026-06-04T15:36:49Z, so the deadline has passed. Adjusted to the immediate next Wednesday (2026-06-04) which is today.",
+      "'Before Friday morning' for the AASMA paper means by the start of the seminar on Friday morning, assumed 08:00.",
+      "Work shifts include commute time, which reduces available study time before/after shifts.",
+      "Student's 'focus better from 11:00 to 16:00' indicates higher productivity during those hours.",
+      "No other classes or fixed commitments beyond mentioned work shifts.",
+      "Task durations are estimates provided by the student."
+    ]
+  },
+  "agentViews": [
+    {
+      "agent": "Deadline Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Web development project",
+          "assessment": "Deadline is Sunday night, which is the latest among all tasks. However, it requires 8 hours of work, which is substantial. The student has limited high-focus hours on Saturday due to work and must complete it before the end of Sunday.",
+          "concerns": [
+            "The 8-hour estimate may be optimistic given the tasks of implementing authentication, polishing CSS, and writing a README.",
+            "Saturday's availability is limited to about 3 hours after considering work and recovery, which may not be suitable for demanding development work.",
+            "If work is delayed until Sunday, there is a risk of running up against the deadline with no buffer."
+          ],
+          "recommendations": [
+            "Start the web development project as early as possible, ideally on Friday during high-focus hours.",
+            "Break the 8-hour estimate into concrete subtasks to track progress.",
+            "Aim to complete a significant portion, like authentication and CSS polish, before Saturday to reduce Sunday's load."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Set up authentication system (login, signup, sessions).",
+            "Polish CSS for all major pages and ensure responsiveness.",
+            "Write a comprehensive README with setup instructions and features."
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Linear algebra homework",
+          "assessment": "This is the most urgent task, with a deadline today (Wednesday) at 20:00. The student has a work shift from 17:00 to 22:00, and the deadline is before the shift ends. Work must be completed before 20:00.",
+          "concerns": [
+            "The deadline is today, and the student has only a few hours available before 20:00, given the current time is 15:36.",
+            "The work shift starts at 17:00, leaving a very narrow window of about 1-2 hours of focused time before the shift, assuming commute preparation.",
+            "Any delay or underestimation of the 3-hour duration will cause a deadline miss."
+          ],
+          "recommendations": [
+            "Start the linear algebra homework immediately. Use any available time before 17:00 to make significant progress.",
+            "Given the time constraint, consider if the 3-hour estimate can be condensed or if some parts can be prioritized.",
+            "If possible, communicate with the instructor about the tight schedule, though this is not a scheduling action."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review homework problems and identify the most time-consuming sections.",
+            "Solve problems systematically, starting with the ones you are most confident in.",
+            "Check answers and format submission before the deadline."
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "AASMA seminar paper reading and discussion points",
+          "assessment": "Deadline is before Friday morning (assumed 08:00). This gives a full day on Thursday and early Friday. However, Thursday has a work shift from 17:00-22:00, limiting evening availability.",
+          "concerns": [
+            "The deadline is early Friday, and the student may be tired after Thursday's work shift, making late-night work less effective.",
+            "The duration for reading and writing discussion points is not specified, creating uncertainty in planning.",
+            "If left until Friday morning, there is a risk of rushing or missing the deadline if something goes wrong."
+          ],
+          "recommendations": [
+            "Complete the AASMA paper reading and discussion points on Thursday during the high-focus window (11:00-16:00) before the work shift.",
+            "If necessary, use Friday morning very early, but this is risky and should be avoided if possible.",
+            "Estimate the reading time based on paper length and allocate at least 2-3 hours for thorough work."
+          ],
+          "estimated_duration_hours": 2.5,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Skim the paper to understand the main argument and structure.",
+            "Read the paper in detail, taking notes on key points.",
+            "Formulate 5 clear discussion points based on your notes."
+          ]
+        }
+      ],
+      "overall_comment": "The linear algebra homework deadline is critically urgent today, requiring immediate action. The AASMA paper deadline on Friday morning is manageable if scheduled on Thursday afternoon. The web development project due Sunday night has the most time but also the largest workload; starting early is essential to avoid a last-minute crunch. The calendar must ensure all tasks receive meaningful work ending before their respective deadlines, with particular attention to the linear algebra homework today."
+    },
+    {
+      "agent": "Grade Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Web development project",
+          "assessment": "This is a major project with a significant scope, likely carrying a high grade weight for a course. The tasks of implementing authentication, polishing CSS, and writing documentation are core deliverables. It requires a substantial 8-hour block of focused time to complete with quality.",
+          "concerns": [
+            "The 8-hour requirement is large and competes with other tasks on a weekend with a work shift.",
+            "Scheduling it entirely on Sunday, the only full free day, creates a single-point-of-failure risk; if Sunday is disrupted, the grade is jeopardized.",
+            "No explicit mention of its grade percentage, but its scale suggests it is high-impact."
+          ],
+          "recommendations": [
+            "Protect the student's high-focus window (11:00-16:00) on Sunday for the most demanding parts of the web project, like authentication.",
+            "Consider starting some preparatory work (e.g., setting up the project structure, initial CSS) on Saturday evening after rest to reduce Sunday's load.",
+            "Ensure the student does not sacrifice sleep on Sunday night to meet the deadline, as this compromises next-day performance."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Set up project environment and review requirements.",
+            "Implement user authentication and session logic.",
+            "Style application with CSS and ensure responsiveness.",
+            "Write comprehensive README with setup instructions.",
+            "Final testing and debugging."
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Linear algebra homework",
+          "assessment": "This is a time-sensitive, graded assignment due very soon (today). While the duration is shorter (3 hours), its immediate deadline makes it the highest priority for academic protection right now. Linear algebra is foundational and homework often contributes directly to the course grade.",
+          "concerns": [
+            "The deadline is today at 20:00, and the student has a work shift from 17:00-22:00. This creates a severe time conflict.",
+            "Attempting the homework after the work shift when tired risks lower quality and missed deadline.",
+            "The 3-hour estimate may be optimistic if concepts are challenging."
+          ],
+          "recommendations": [
+            "The student must complete the linear algebra homework before the work shift begins. Use the remaining high-focus time today (before 17:00) exclusively for this task.",
+            "If the 3 hours cannot be completed in one block before the shift, the student should start immediately and aim to finish the core problems before leaving for work.",
+            "This task must not be deprioritized for lower-value activities; missing this deadline has direct grade consequences."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review homework problems and required concepts.",
+            "Solve computational problems step-by-step.",
+            "Solve proof-based or theoretical problems.",
+            "Check answers and format submission."
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "AASMA seminar paper reading and discussion points",
+          "assessment": "This is a preparatory task for a seminar, likely part of participation or a small grade. The intellectual effort of reading and synthesizing points is important for engagement but may have a lower direct grade weight compared to the project or homework. It is a medium-priority task with a firm deadline Friday morning.",
+          "concerns": [
+            "The deadline is early Friday, and the student has a work shift Thursday evening, leaving limited high-quality time for deep reading.",
+            "The task duration is unspecified; reading an academic paper and writing quality discussion points could take 2-4 hours, which may be underestimated.",
+            "If scheduled too late (e.g., Thursday night after work), comprehension and point quality may suffer, affecting seminar contribution."
+          ],
+          "recommendations": [
+            "Schedule this task for the student's peak focus period on Thursday (before the work shift) or Friday morning if the deadline allows.",
+            "Break it into distinct reading and writing phases to manage cognitive load.",
+            "Do not let this task encroach on protected time needed for the linear algebra homework today or the major web project work later."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Skim the paper abstract, introduction, and conclusion.",
+            "Read the paper in depth, noting key arguments and methods.",
+            "Identify 3-5 potential discussion points or questions.",
+            "Refine and write 5 clear discussion points with references to the text."
+          ]
+        }
+      ],
+      "overall_comment": "The schedule presents a significant risk of high-value work being crowded out. The linear algebra homework, due imminently, is in direct conflict with a work shift and must be protected today. The major web project requires a large, uninterrupted block on Sunday, which is currently the only plan, creating a high-stakes single day. The AASMA paper is medium-priority but must be carefully placed to not steal focus from the two higher-stakes tasks. Approval is conditional on the student securing the linear algebra homework completion before work today and defending the Sunday block for the web project from other intrusions. Lower-value activities should not be scheduled during the student's prime 11:00-16:00 focus windows on free days."
+    },
+    {
+      "agent": "Effort Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Web development project",
+          "assessment": "The student's 8-hour estimate for implementing authentication, polishing CSS, and writing a README is plausible but likely optimistic. Authentication can be complex and debugging often adds time. The task is large and must be split across multiple blocks.",
+          "concerns": [
+            "Authentication implementation is often underestimated; integration and testing can double initial time.",
+            "Polishing CSS is open-ended and can expand beyond planned time.",
+            "Eight continuous hours in one day is unrealistic for a student; splitting is essential.",
+            "The deadline is Sunday night, but fatigue from the week may reduce Sunday productivity."
+          ],
+          "recommendations": [
+            "Break into subtasks: set up authentication logic (3h), test and debug authentication (2h), polish CSS and responsive design (2h), write README and final checks (1h).",
+            "Schedule authentication work during high-focus windows (11:00-16:00) on days without shifts.",
+            "Avoid scheduling this task immediately after work shifts or late at night.",
+            "Start early in the week to allow buffer for unexpected issues."
+          ],
+          "estimated_duration_hours": 10,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Set up authentication logic (user login, registration, session handling)",
+            "Test authentication flows and debug errors",
+            "Polish CSS for all pages and ensure responsiveness",
+            "Write comprehensive README with setup instructions"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Linear algebra homework",
+          "assessment": "The student's 3-hour estimate for linear algebra homework is reasonable for a typical problem set. However, the deadline is today (Wednesday) at 20:00, leaving limited time. The task should be completed in one focused block.",
+          "concerns": [
+            "Deadline is imminent; if the student starts late, rush may lead to errors or incomplete work.",
+            "Post-shift fatigue today (Thursday work shift) could impair focus if attempted after work.",
+            "No subtask breakdown provided; some problems may be more time-consuming than others."
+          ],
+          "recommendations": [
+            "Schedule immediately in the next available high-focus window (today before 17:00).",
+            "Break into subtasks: review concepts (0.5h), solve problems (2h), check answers and format submission (0.5h).",
+            "Avoid scheduling after the work shift; if necessary, use morning time despite lower focus.",
+            "Ensure a full 3-hour block without interruptions."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review relevant linear algebra concepts and formulas",
+            "Solve assigned homework problems step-by-step",
+            "Verify solutions and prepare final submission"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "AASMA seminar paper reading and discussion points",
+          "assessment": "The student did not provide a duration estimate. Reading an academic paper and writing discussion points typically takes 2-4 hours depending on paper length and complexity. This is a medium-sized task suitable for one or two blocks.",
+          "concerns": [
+            "Duration is unspecified and could be underestimated if the paper is dense or technical.",
+            "Deadline is early Friday morning, requiring completion by Thursday night or very early Friday.",
+            "Writing thoughtful discussion points may take longer than reading.",
+            "Thursday includes a work shift, limiting evening availability."
+          ],
+          "recommendations": [
+            "Estimate 3 hours total: read paper carefully (2h), formulate and write discussion points (1h).",
+            "Schedule reading during high-focus window on Thursday before the work shift.",
+            "Write discussion points after the shift only if not too tired; otherwise finish early Friday morning.",
+            "Break into clear subtasks to manage focus."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Skim paper for structure and main arguments",
+            "Read thoroughly, noting key points and questions",
+            "Formulate five discussion points with brief explanations",
+            "Review and refine points for clarity"
+          ]
+        }
+      ],
+      "overall_comment": "The student's task estimates are generally plausible but require careful splitting and timing. The web development project is likely underestimated and must be broken into subtasks across multiple days. The linear algebra homework is urgent and must be scheduled today before the work shift. The AASMA paper needs a realistic duration estimate and should be completed before Friday morning, considering Thursday's shift. Avoid scheduling demanding tasks after work shifts or late at night. Total estimated work hours (16 hours) fit within available hours if distributed wisely across high-focus periods."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Web development project",
+          "assessment": "This is a substantial project requiring focused coding and documentation work, estimated at 8 hours. It's due Sunday night, allowing some flexibility, but the student's weekend work shift on Saturday reduces available time. The task is cognitively demanding and best scheduled during the student's peak focus hours (11:00-16:00).",
+          "concerns": [
+            "Risk of last-minute rush if not started early, given the 8-hour duration and limited weekend availability.",
+            "Potential for fatigue if scheduled after work shifts or late at night."
+          ],
+          "recommendations": [
+            "Start early, ideally on Friday or Sunday morning, to avoid Sunday night crunch.",
+            "Break into subtasks to make progress during shorter available windows.",
+            "Schedule during peak focus hours (11:00-16:00) when possible."
+          ],
+          "estimated_duration_hours": 8,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Set up authentication system (backend/frontend)",
+            "Implement and test login/logout functionality",
+            "Polish CSS for responsive design and UI consistency",
+            "Write comprehensive README with setup instructions",
+            "Final testing and deployment checks"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Linear algebra homework",
+          "assessment": "This homework is due today (Wednesday) at 20:00, which is imminent. The student has a work shift from 17:00-22:00 today, with commute, making timing extremely tight. The 3-hour estimate may be optimistic under pressure.",
+          "concerns": [
+            "High risk of late-night work today, ending after 22:00, conflicting with the student's preference to avoid demanding study after shifts.",
+            "Fatigue from work and commute may reduce focus and efficiency.",
+            "Potential for missed deadline if not started immediately."
+          ],
+          "recommendations": [
+            "Start immediately after the interpreter's current time (15:36) to maximize time before the work shift.",
+            "Consider shortening the work session if possible, but prioritize completion before the deadline.",
+            "If necessary, communicate with the instructor about potential delays due to work commitments."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "high",
+          "suggested_subtasks": [
+            "Review problem set and identify challenging exercises",
+            "Solve core linear algebra problems step-by-step",
+            "Check solutions for accuracy and completeness",
+            "Format and submit before 20:00 deadline"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "AASMA seminar paper reading and discussion points",
+          "assessment": "This task involves reading an academic paper and preparing discussion points, due before Friday morning (assumed 08:00). The duration is unspecified but likely 2-3 hours. The student has work shifts on Thursday and Saturday, limiting availability.",
+          "concerns": [
+            "Limited time before Friday morning, especially with a work shift on Thursday evening.",
+            "Risk of scheduling this task late on Thursday night, leading to reduced sleep quality.",
+            "Cognitive load from reading and critical thinking may be high after a work shift."
+          ],
+          "recommendations": [
+            "Complete this task before the Thursday work shift, ideally during peak focus hours (11:00-16:00) on Thursday.",
+            "If not possible, schedule for early Friday morning, but ensure adequate sleep.",
+            "Break into focused reading and note-taking sessions to manage energy."
+          ],
+          "estimated_duration_hours": -1,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Skim paper for main arguments and structure",
+            "Read thoroughly and highlight key points",
+            "Draft 5 discussion questions or insights",
+            "Review and refine discussion points for clarity"
+          ]
+        }
+      ],
+      "overall_comment": "The student's schedule is tight, especially with work shifts and long commutes. The linear algebra homework deadline is imminent today, requiring immediate attention after a work shift, which risks late-night work and fatigue. The AASMA paper deadline is also pressing. The web project's 8-hour requirement on Sunday is feasible but leaves little margin. The plan must protect against overwork, especially post-shift, and avoid scheduling demanding tasks when energy is low. Prioritizing immediate deadlines is essential, but we must ensure sustainable pacing."
+    },
+    {
+      "agent": "Risk Agent",
+      "task_views": [
+        {
+          "task_id": "T1",
+          "task_name": "Web development project",
+          "assessment": "High-risk task due at end of window with significant scope uncertainty and dependencies.",
+          "concerns": [
+            "Estimated 8 hours is approximate; authentication implementation can have hidden complexity and debugging time.",
+            "Polishing CSS is open-ended and subjective, easily expanding beyond estimate.",
+            "No time allocated for testing, integration, or deployment issues.",
+            "Deadline is Sunday night, leaving no buffer for last-minute problems.",
+            "Task depends on uninterrupted focus blocks, but student has low energy after shifts and limited high-focus hours."
+          ],
+          "recommendations": [
+            "Break into concrete subtasks: set up auth framework, implement login/logout, test auth flow, refine CSS for each page, write README sections.",
+            "Start discovery work early (Friday or Saturday morning) to gauge true scope.",
+            "Schedule at least 2 hours of contingency time before Sunday evening deadline.",
+            "Protect Sunday afternoon as a dedicated, high-focus block for final integration and polish."
+          ],
+          "estimated_duration_hours": -1,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Set up authentication library and basic routes",
+            "Implement login, logout, and session handling",
+            "Test authentication flow with dummy data",
+            "Polish CSS for main page layout",
+            "Polish CSS for responsive design and mobile",
+            "Write README with setup instructions and features",
+            "Final integration test and bug fixes"
+          ]
+        },
+        {
+          "task_id": "T2",
+          "task_name": "Linear algebra homework",
+          "assessment": "Urgent, high-priority task due today with tight time constraints and potential for hidden difficulty.",
+          "concerns": [
+            "Deadline is today at 20:00, leaving only a few hours from current time (15:36).",
+            "Student has work shift from 17:00-22:00, making completion before shift critical.",
+            "3-hour estimate may be optimistic if problems are challenging or require review.",
+            "No buffer for unexpected errors or need to consult resources.",
+            "Student is already in lower-focus period (after 16:00) and must avoid post-shift exhaustion."
+          ],
+          "recommendations": [
+            "Start immediately with highest priority; use remaining focus window (before 16:00).",
+            "Break into subtasks: scan all problems, tackle easiest first, then harder ones.",
+            "If not completable before shift, request extension or prioritize partial submission.",
+            "Assume at least 1 extra hour may be needed for verification and submission."
+          ],
+          "estimated_duration_hours": -1,
+          "confidence": "low",
+          "suggested_subtasks": [
+            "Review homework instructions and required concepts",
+            "Solve straightforward problems first",
+            "Work on complex problems requiring deeper thought",
+            "Check all answers for errors",
+            "Format and submit before deadline"
+          ]
+        },
+        {
+          "task_id": "T3",
+          "task_name": "AASMA seminar paper reading and discussion points",
+          "assessment": "Medium-risk task with ambiguous deadline and unknown reading depth.",
+          "concerns": [
+            "'Before Friday morning' is vague; assumed 08:00 Friday leaves little time after Thursday work shift.",
+            "Duration unspecified; reading a paper can range from 1-4 hours depending on density and note-taking.",
+            "Writing 5 discussion points may require synthesis time beyond reading.",
+            "Student is tired after Thursday shift (17:00-22:00), making evening work unreliable.",
+            "No time allocated for comprehension difficulties or need to re-read sections."
+          ],
+          "recommendations": [
+            "Clarify exact deadline with seminar instructor.",
+            "Start reading Thursday morning or early afternoon before shift.",
+            "Break into subtasks: skim paper, read deeply, take notes, draft discussion points, refine points.",
+            "Schedule at least 1 hour buffer before Friday morning for final polish."
+          ],
+          "estimated_duration_hours": -1,
+          "confidence": "medium",
+          "suggested_subtasks": [
+            "Skim paper abstract, introduction, and conclusion",
+            "Read full paper carefully, highlighting key arguments",
+            "Take notes on methodology, results, and limitations",
+            "Draft 5-7 potential discussion points",
+            "Refine points for clarity and relevance",
+            "Finalize and prepare for seminar"
+          ]
+        }
+      ],
+      "overall_comment": "The plan is high-risk due to compressed timelines, hidden task complexities, and lack of contingency buffers. The linear algebra homework is critically urgent today, competing with a work shift. The web development project's 8-hour estimate is fragile and sits at the end of the window with no slack. The AASMA paper has an ambiguous deadline and unknown duration. Student's low energy after shifts and limited high-focus hours (11:00-16:00) further constrain reliable work blocks. Recommend immediate prioritization of linear algebra, early discovery on the web project and paper, and explicit scheduling of contingency time before each deadline. Without these adjustments, the plan is likely to overrun."
+    }
+  ],
+  "calendarVersions": [
+    {
+      "calendar": {
+        "calendar_version": 1,
+        "planning_window": {
+          "end_date": "2026-06-08",
+          "reason": "Tasks mentioned have deadlines up to Sunday night (2026-06-08). The linear algebra homework is due Wednesday (2026-06-04), the AASMA seminar paper is due before Friday morning (2026-06-06), and the web development project is due Sunday night (2026-06-08).",
+          "start_date": "2026-06-04"
+        },
+        "overall_strategy": [
+          "Prioritize linear algebra homework today due to imminent deadline.",
+          "Front-load web development project work on Friday to reduce Sunday load.",
+          "Schedule AASMA paper on Friday afternoon to meet early Friday deadline.",
+          "Avoid demanding work after job shifts to respect student energy levels."
+        ],
+        "days": [
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Today has a work shift from 17:00-22:00; linear algebra homework is due at 20:00 and must be completed before the shift.",
+            "blocks": [
+              {
+                "description": "Complete linear algebra homework before the 20:00 deadline.",
+                "duration_hours": 3,
+                "end": "2026-06-04T19:00:00.000+01:00",
+                "id": "B1",
+                "reasoning": "Linear algebra homework is critically urgent today; schedule immediately in the remaining high-focus window before the work shift.",
+                "start": "2026-06-04T16:00:00.000+01:00",
+                "task_id": "T2",
+                "task_name": "Linear algebra homework",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Friday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "No work shift; use peak focus hours for web project and AASMA paper to meet respective deadlines.",
+            "blocks": [
+              {
+                "description": "Start implementing authentication for the web development project.",
+                "duration_hours": 3,
+                "end": "2026-06-05T15:00:00.000+01:00",
+                "id": "B2",
+                "reasoning": "Web project is large; use Friday's peak focus window to begin the most demanding part.",
+                "start": "2026-06-05T12:00:00.000+01:00",
+                "task_id": "T1",
+                "task_name": "Web development project",
+                "type": "work"
+              },
+              {
+                "description": "Read AASMA seminar paper and draft discussion points.",
+                "duration_hours": 2,
+                "end": "2026-06-05T17:00:00.000+01:00",
+                "id": "B3",
+                "reasoning": "AASMA paper is due before Friday morning; complete it early Friday afternoon to ensure deadline is met.",
+                "start": "2026-06-05T15:00:00.000+01:00",
+                "task_id": "T3",
+                "task_name": "AASMA seminar paper reading and discussion points",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Saturday",
+            "assumed_available_hours": 3,
+            "day_reasoning": "Work shift reduces availability; schedule less demanding web project work after shift and rest.",
+            "blocks": [
+              {
+                "description": "Continue web development project with CSS polishing.",
+                "duration_hours": 2,
+                "end": "2026-06-06T18:00:00.000+01:00",
+                "id": "B4",
+                "reasoning": "Student has work shift 09:00-15:00; schedule lighter web project work after rest post-shift.",
+                "start": "2026-06-06T16:00:00.000+01:00",
+                "task_id": "T1",
+                "task_name": "Web development project",
+                "type": "work"
+              }
+            ]
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Sunday",
+            "assumed_available_hours": 7,
+            "day_reasoning": "No work shift; dedicate the day to completing the web development project before the deadline.",
+            "blocks": [
+              {
+                "description": "Finish web development project, complete README, and final testing.",
+                "duration_hours": -1,
+                "end": "2026-06-07T20:00:00.000+01:00",
+                "id": "B5",
+                "reasoning": "Web project is due Sunday night; use the full day's peak focus hours to complete remaining work.",
+                "start": "2026-06-07T12:00:00.000+01:00",
+                "task_id": "T1",
+                "task_name": "Web development project",
+                "type": "work"
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "Linear algebra homework deadline is today at 20:00, but student has a work shift from 17:00-22:00 with commute.",
+            "resolution": "Schedule linear algebra homework immediately in the remaining afternoon focus window before the shift, accepting a tight 3-hour block."
+          },
+          {
+            "conflict": "AASMA paper deadline is early Friday morning, but student has a work shift Thursday evening.",
+            "resolution": "Schedule AASMA paper work Thursday afternoon before the shift, using the peak focus window, to avoid late-night work."
+          },
+          {
+            "conflict": "Web development project requires 8 hours but weekend availability is limited due to Saturday work shift.",
+            "resolution": "Front-load web project work on Friday and Sunday, accepting a lighter Saturday session after rest."
+          }
+        ],
+        "known_weaknesses": [
+          "Linear algebra homework is scheduled very tightly today with no margin for error.",
+          "Web development project's 8-hour estimate may be optimistic, risking Sunday crunch.",
+          "AASMA paper duration is uncertain and scheduled on Friday afternoon, leaving no buffer before deadline."
+        ],
+        "changes_from_previous": [],
+        "unresolved_critiques": []
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The AASMA seminar paper reading and discussion points task is scheduled to end at 17:00 on Friday, 2026-06-05, but its inferred deadline is 08:00 on Friday, 2026-06-06. This scheduled work block ends after the deadline, which violates the literal deadline requirement.",
+              "severity": "critical",
+              "affected_tasks": [
+                "AASMA seminar paper reading and discussion points"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Reschedule all work for the AASMA seminar paper to end before 08:00 on 2026-06-06. This likely means moving the work block to Thursday, 2026-06-04, or scheduling it very early on Friday morning before 08:00."
+            }
+          ],
+          "acknowledged_compromises": [],
+          "overall_comment": "The calendar fails a fundamental deadline check. The AASMA paper work is scheduled after its deadline, which is unacceptable. The linear algebra homework is correctly scheduled before its deadline today. The web development project schedule appears to respect its Sunday night deadline, but the overall plan cannot be approved due to the critical deadline violation."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The major web development project is scheduled for a single, long 8-hour block on Sunday. This creates a high-stakes single-point-of-failure risk. If the student encounters unexpected difficulties or is fatigued, the quality and timely completion of this high-value work are jeopardized.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-07"
+              ],
+              "suggested_fix": "Break the Sunday block into two distinct sessions with a substantial break in between to maintain focus and quality. For example, schedule a morning session (e.g., 10:00-13:00) and an afternoon session (e.g., 14:00-17:00), leaving evening for final review."
+            },
+            {
+              "issue": "The AASMA seminar paper is scheduled for Friday afternoon, but its deadline is 'before Friday morning'. The calendar has correctly scheduled it on Friday, but the reasoning states it's due before Friday morning, which is contradictory. This creates uncertainty about whether the work is scheduled after the actual deadline.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AASMA seminar paper reading and discussion points"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Clarify the deadline assumption. If the deadline is indeed Friday morning, the work must be scheduled for Thursday. If the deadline is interpreted as end-of-day Friday, the current schedule is acceptable, but the reasoning should be corrected to reflect this."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The linear algebra homework is scheduled tightly today before the work shift, which is a necessary compromise to meet the urgent deadline.",
+            "The web development project work is front-loaded on Friday to reduce Sunday load, acknowledging the limited weekend availability."
+          ],
+          "overall_comment": "High-value academic work is generally protected. The imminent linear algebra homework is correctly prioritized today. The major web project receives substantial, dedicated time on Sunday, its due date. The primary concern is the single, monolithic block for the web project, which carries risk, and a minor inconsistency in the AASMA paper deadline logic. Overall, the plan does not crowd out high-impact work with lower-value tasks."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The web development project is scheduled for an 8-hour block on Sunday (12:00-20:00). This is an unrealistic duration for a single continuous work session for a student, leading to burnout and reduced productivity.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-07"
+              ],
+              "suggested_fix": "Break the 8-hour estimate into concrete subtasks (e.g., authentication, CSS, README) and distribute them across multiple, shorter blocks on Friday, Saturday, and Sunday, with breaks in between."
+            },
+            {
+              "issue": "The web development project's total scheduled time is only 5 hours (3h Friday + 2h Saturday), which is less than the student's own 8-hour estimate and my more realistic 10-hour assessment. The plan is missing at least 3-5 hours of necessary work.",
+              "severity": "major",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-05",
+                "2026-06-06",
+                "2026-06-07"
+              ],
+              "suggested_fix": "Add explicit subtask blocks for testing authentication, final polishing, and writing the README. Increase the total allocated time to at least 8-10 hours across the available days."
+            },
+            {
+              "issue": "The AASMA seminar paper is allocated only 2 hours on Friday afternoon. This is likely an underestimate for reading a technical paper and writing thoughtful discussion points, risking a rush before the Friday morning deadline.",
+              "severity": "major",
+              "affected_tasks": [
+                "AASMA seminar paper reading and discussion points"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Increase the duration for this task to 3 hours, either by extending the Friday block or adding a short review block early Friday morning before the deadline."
+            }
+          ],
+          "acknowledged_compromises": [
+            "Linear algebra homework is scheduled tightly today due to the imminent deadline and work shift."
+          ],
+          "overall_comment": "The calendar underestimates the effort required for the two major tasks. The web development project is severely under-scheduled and planned in an implausible 8-hour marathon block. The AASMA paper time is also insufficient. Durations and block sizes are not plausible for a student, leading to a high risk of missed deadlines or poor-quality work. A reject is necessary to enforce realistic effort planning."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "issue": "The plan schedules a 3-hour block for linear algebra homework today ending at 19:00, but the student has a work shift from 17:00-22:00. This creates a direct conflict, forcing the student to either interrupt the study block for work or start work late, which is not feasible. This leads to high stress and potential deadline miss.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Linear algebra homework"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Start the linear algebra homework immediately (now) and aim to complete as much as possible before 17:00. Accept that the full 3 hours may not be possible before the shift, and plan to finish the remaining portion after the shift if absolutely necessary, acknowledging this will be late-night work. Alternatively, communicate with the instructor about the conflict."
+            },
+            {
+              "issue": "The plan schedules the AASMA seminar paper work for Friday afternoon (15:00-17:00), but the deadline is 'before Friday morning' (assumed 08:00). This schedules the work after the deadline has passed, which is impossible.",
+              "severity": "critical",
+              "affected_tasks": [
+                "AASMA seminar paper reading and discussion points"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Move the AASMA paper work to today (Thursday) before the work shift, or to early Friday morning before 08:00. Given the student's focus hours, schedule it today between 16:00-17:00 if possible, shortening the linear algebra block, or schedule a short, focused session early Friday morning."
+            },
+            {
+              "issue": "The plan schedules an 8-hour block for the web development project on Sunday from 12:00 to 20:00. This is an extremely long, cognitively demanding continuous work session with no breaks scheduled, which is unsustainable and likely to lead to burnout, reduced focus, and lower quality work.",
+              "severity": "major",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-07"
+              ],
+              "suggested_fix": "Break the 8-hour requirement into multiple shorter blocks across Friday, Saturday, and Sunday. For example, schedule 3 hours on Friday (as planned), 2 hours on Saturday (as planned), and then split the remaining 3 hours into two 1.5-hour sessions on Sunday morning and afternoon, with significant unscheduled time in between."
+            },
+            {
+              "issue": "The student mentioned being tired after job shifts and having low energy. The plan schedules work on Saturday from 16:00-18:00, which is immediately after a 09:00-15:00 work shift (including commute). This risks low productivity and increased fatigue.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-06"
+              ],
+              "suggested_fix": "Consider shortening the Saturday work block to 1 hour or moving it to Sunday morning if the Sunday long block is broken up. Alternatively, accept that productivity may be lower and plan for a lighter, less demanding subtask like CSS polishing."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner attempted to avoid scheduling demanding work after the student's job shifts to respect energy levels."
+          ],
+          "overall_comment": "The calendar has critical scheduling errors: the linear algebra homework block conflicts with today's work shift, and the AASMA paper is scheduled after its deadline. Furthermore, the plan includes an unsustainable 8-hour continuous work block on Sunday. These issues create high stress and are not humane. The plan must be revised to resolve the deadline conflicts and break up the excessive Sunday workload."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 1,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The plan contains no contingency time for any task, creating high risk of deadline overruns. The linear algebra homework is scheduled with zero buffer before its 20:00 deadline. The AASMA paper is scheduled to finish at 17:00 on Friday, but its deadline is 'before Friday morning', leaving no time for unexpected delays. The web development project is scheduled to finish at 20:00 on Sunday, its deadline night, with no slack for integration issues or scope expansion.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Linear algebra homework",
+                "AASMA seminar paper reading and discussion points",
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05",
+                "2026-06-07"
+              ],
+              "suggested_fix": "Schedule explicit contingency blocks before each deadline. For linear algebra, finish by 19:00 to allow 1 hour for submission. For the AASMA paper, schedule completion by Thursday or early Friday morning with a buffer. For the web project, aim to finish core work by Sunday afternoon, leaving evening for final polish and unexpected problems."
+            },
+            {
+              "issue": "The plan does not schedule any early discovery or scoping work for the high-risk web development project. The 8-hour estimate is fragile, and authentication and CSS polishing are prone to hidden complexity. Starting directly with implementation on Friday assumes the estimate is accurate, which is a fragile assumption.",
+              "severity": "major",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Dedicate the first block on Friday (or earlier if possible) to discovery: break down the project into concrete subtasks, assess library dependencies, and create a more realistic timeline. This reduces uncertainty before committing to long implementation blocks."
+            },
+            {
+              "issue": "The AASMA paper task has significant uncertainty in duration and an ambiguous deadline. Scheduling it for a single 2-hour block on Friday afternoon assumes the reading and synthesis can be completed within that time, with no allowance for a difficult paper or the need to re-read sections.",
+              "severity": "major",
+              "affected_tasks": [
+                "AASMA seminar paper reading and discussion points"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Start the paper earlier, ideally on Thursday before the work shift, to gauge its length and complexity. If that's not possible, schedule a shorter scoping block first on Friday morning to assess the paper, followed by the main reading block, ensuring work finishes well before the assumed deadline."
+            },
+            {
+              "issue": "The linear algebra homework block ends at 19:00, just one hour before the 20:00 deadline. This leaves no time for verifying answers, formatting, or dealing with submission platform issues. Given the student's lower energy later in the day and the critical nature of this deadline, this is a high-risk scheduling decision.",
+              "severity": "major",
+              "affected_tasks": [
+                "Linear algebra homework"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Aim to complete the homework by 18:30 at the latest, creating a 1.5-hour buffer for review and submission. If the 3-hour estimate is firm, start the block earlier than 16:00 to create this buffer."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner attempted to front-load the web project on Friday to reduce Sunday load.",
+            "The planner avoided scheduling demanding work after job shifts to respect energy levels."
+          ],
+          "overall_comment": "The plan fails the core Risk Agent requirement of containing enough early discovery and contingency time. Every task is scheduled with minimal or no buffer against uncertainty, and the highest-risk task (web development) lacks any scoping phase. The compressed timelines and reliance on optimistic estimates make this plan fragile and likely to fail under real-world conditions. It must be rejected until contingency buffers and discovery blocks are explicitly added."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "invalid_block_duration",
+            "message": "Finish web development project, complete README, and final testing. has an invalid time range or non-positive duration (-1h).",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 1,
+      "hasCritical": true
+    },
+    {
+      "calendar": {
+        "calendar_version": 2,
+        "planning_window": {
+          "start_date": "2026-06-04",
+          "end_date": "2026-06-07",
+          "reason": "Covers deadlines for linear algebra homework, AASMA paper, and web development project."
+        },
+        "overall_strategy": [
+          "Reschedule AASMA paper work to finish before its Friday morning deadline.",
+          "Break web development project into smaller, realistic blocks across multiple days.",
+          "Avoid scheduling conflicts with work shifts and respect student energy limits."
+        ],
+        "days": [
+          {
+            "date": "2026-06-04",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Student has work shift from 17:00-22:00, leaving limited afternoon time before the linear algebra deadline.",
+            "blocks": [
+              {
+                "id": "B1",
+                "task_id": "T2",
+                "task_name": "Linear algebra homework",
+                "type": "work",
+                "start": "2026-06-04T13:00:00.000Z",
+                "end": "2026-06-04T16:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Complete linear algebra homework.",
+                "reasoning": "Scheduled to finish well before the 20:00 deadline and the 17:00 work shift start."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Thursday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "Full day before work shift, used for AASMA paper and starting web project.",
+            "blocks": [
+              {
+                "id": "B2",
+                "task_id": "T3",
+                "task_name": "AASMA seminar paper reading and discussion points",
+                "type": "work",
+                "start": "2026-06-05T10:00:00.000Z",
+                "end": "2026-06-05T13:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Read AASMA paper and draft discussion points.",
+                "reasoning": "Allocates more time to finish before the Friday 08:00 deadline."
+              },
+              {
+                "id": "B3",
+                "task_id": "T1",
+                "task_name": "Web development project",
+                "type": "work",
+                "start": "2026-06-05T14:00:00.000Z",
+                "end": "2026-06-05T17:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Start implementing authentication for the web project.",
+                "reasoning": "Front-loads web project work to reduce Sunday load, ends before work shift."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Friday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "Morning after AASMA deadline, used for continued web project work.",
+            "blocks": [
+              {
+                "id": "B4",
+                "task_id": "T1",
+                "task_name": "Web development project",
+                "type": "work",
+                "start": "2026-06-06T10:00:00.000Z",
+                "end": "2026-06-06T13:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Continue web development project with CSS polishing.",
+                "reasoning": "Continues project progress with a focused morning block."
+              },
+              {
+                "id": "B5",
+                "task_id": "T1",
+                "task_name": "Web development project",
+                "type": "work",
+                "start": "2026-06-06T14:00:00.000Z",
+                "end": "2026-06-06T16:00:00.000Z",
+                "duration_hours": 2,
+                "description": "Additional web project work on testing or documentation.",
+                "reasoning": "Adds more hours to meet the total effort estimate for the project."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Saturday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "Weekend day for final web project work before the Sunday night deadline.",
+            "blocks": [
+              {
+                "id": "B6",
+                "task_id": "T1",
+                "task_name": "Web development project",
+                "type": "work",
+                "start": "2026-06-07T10:00:00.000Z",
+                "end": "2026-06-07T13:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Finalize web development project features.",
+                "reasoning": "Breaks the final work into a manageable morning session."
+              },
+              {
+                "id": "B7",
+                "task_id": "T1",
+                "task_name": "Web development project",
+                "type": "work",
+                "start": "2026-06-07T14:00:00.000Z",
+                "end": "2026-06-07T17:00:00.000Z",
+                "duration_hours": 3,
+                "description": "Complete README, final testing, and project submission.",
+                "reasoning": "Final afternoon block to finish the project well before the 23:59 deadline."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "AASMA paper deadline is early Friday but student has work shift Thursday evening.",
+            "resolution": "Scheduled AASMA work for Thursday morning to finish well before the deadline."
+          },
+          {
+            "conflict": "Web development project requires significant effort but must avoid an 8-hour marathon.",
+            "resolution": "Split project work into multiple 2-3 hour blocks across Thursday, Friday, and Saturday."
+          },
+          {
+            "conflict": "Linear algebra homework deadline is tight with a work shift on the same day.",
+            "resolution": "Scheduled homework for early afternoon to finish before the shift and deadline."
+          }
+        ],
+        "known_weaknesses": [
+          "No explicit contingency time is scheduled for unexpected delays.",
+          "Web project estimate may still be optimistic if tasks are more complex.",
+          "Student energy after work shifts is not explicitly accounted for."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Moved AASMA paper work to Thursday morning.",
+            "reason": "To ensure it finishes before the Friday 08:00 deadline."
+          },
+          {
+            "change": "Broke web development project into smaller blocks across three days.",
+            "reason": "To avoid an unrealistic 8-hour continuous work session."
+          },
+          {
+            "change": "Adjusted linear algebra block to avoid conflict with work shift.",
+            "reason": "To prevent the student from being double-booked."
+          }
+        ],
+        "unresolved_critiques": [
+          {
+            "agent": "Risk Agent",
+            "severity": "major",
+            "issue": "Plan contains no explicit contingency buffers for unexpected delays.",
+            "planner_response": "Unscheduled time between blocks provides implicit flexibility, but no dedicated buffer blocks are added per constraints."
+          },
+          {
+            "agent": "Effort Agent",
+            "severity": "minor",
+            "issue": "Total web project hours (11) may still be an optimistic estimate.",
+            "planner_response": "Schedule allocates more time than before but acknowledges the estimate uncertainty as a known weakness."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 2,
+          "approval": "approve",
+          "severity": "none",
+          "critiques": [],
+          "acknowledged_compromises": [
+            "The planner moved AASMA paper work to Thursday morning to finish before its Friday 08:00 deadline, addressing the earlier concern about deadline-day risk."
+          ],
+          "overall_comment": "All deadline tasks receive meaningful work ending before their deadlines. The linear algebra homework is scheduled to finish well before its 20:00 deadline today. The AASMA seminar paper is scheduled for Thursday morning, finishing before its Friday morning deadline. The web development project is broken into blocks across multiple days, with the final work ending before the Sunday night deadline. The calendar respects all deadlines."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The high-value web development project is scheduled for multiple days but its most demanding work (authentication) is placed on Friday afternoon, which is not the student's highest-focus period (11:00-16:00). This could impact quality.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Move the authentication implementation block to the student's peak focus window, ideally between 11:00 and 16:00 on a day with no work shift, such as Sunday morning."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has successfully protected time for the linear algebra homework before its deadline and work shift, addressing the earlier critical concern.",
+            "The major web project is broken into smaller blocks across multiple days, reducing single-day overload risk."
+          ],
+          "overall_comment": "High-value academic work is well-protected. The linear algebra homework is secured before its deadline. The web development project receives substantial scheduled time across three days, preventing last-minute cramming. The AASMA paper is appropriately scheduled before its deadline. The minor concern is that the most complex part of the web project is not in the student's stated best focus window, but overall academic value is not crowded out."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The web development project is scheduled for 11 total hours (3+3+2+3), which is more than the student's 8-hour estimate, but the work is still broken into large, vague blocks. The descriptions 'implementing authentication', 'CSS polishing', and 'finalize features' are not specific subtasks, which could lead to underestimation of effort within each block.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-05",
+                "2026-06-06",
+                "2026-06-07"
+              ],
+              "suggested_fix": "Refine block descriptions to match concrete subtasks, e.g., 'Set up authentication logic and basic UI' for the first block, 'Test authentication flows and debug' for a later block, to ensure effort is realistically distributed."
+            },
+            {
+              "issue": "The AASMA seminar paper is scheduled for a single 3-hour block. While the duration is plausible, reading a paper and writing discussion points are two distinct activities with different cognitive loads. Combining them into one block may lead to fatigue and reduced quality in the second half.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AASMA seminar paper reading and discussion points"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Consider splitting the 3-hour block into two focused sessions, e.g., 2 hours for reading and note-taking, followed by a 1-hour block later for writing and refining discussion points."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has broken the large web development project into multiple blocks across three days, addressing the core concern about unrealistic marathon sessions. The total allocated time (11 hours) also exceeds the student's optimistic estimate."
+          ],
+          "overall_comment": "The calendar shows good effort realism. Major tasks are split across days, and block durations are student-plausible. The minor concerns are about subtask granularity within blocks and the cognitive mix of a single block for the AASMA paper. These do not warrant rejection."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 2,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The plan schedules 5 hours of work on Saturday, which is a work shift day. The student mentioned being tired after shifts, and this could lead to cognitive overload and reduced effectiveness.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-06"
+              ],
+              "suggested_fix": "Consider shortening the Saturday work blocks for the web development project, perhaps by 1-2 hours total, and moving that effort to Sunday if needed, to respect post-shift fatigue."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has successfully avoided scheduling any work after 22:00 or immediately after work shifts, addressing the primary wellbeing concern about late-night work and post-shift fatigue."
+          ],
+          "overall_comment": "The plan is generally humane and respects the student's energy patterns by avoiding late-night work and scheduling demanding tasks during peak focus hours. The main improvement would be to slightly reduce the workload on the Saturday work shift day to better align with the student's stated low energy after shifts."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 2,
+          "approval": "reject",
+          "severity": "major",
+          "critiques": [
+            {
+              "issue": "The plan lacks explicit contingency buffers before critical deadlines, leaving no time to handle unexpected delays or scope expansion. The web development project work ends at 17:00 on Sunday, just hours before the 23:59 deadline, with no buffer for final integration issues or debugging.",
+              "severity": "major",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-07"
+              ],
+              "suggested_fix": "Schedule a dedicated 2-3 hour contingency block on Sunday afternoon (e.g., 14:00-17:00) before the final work block, or finish the main work earlier (by 15:00) to leave the evening as a buffer."
+            },
+            {
+              "issue": "The web development project's scope and complexity are uncertain, but the plan schedules all work in fixed blocks without any early discovery phase. This risks discovering hidden work (e.g., authentication bugs, CSS compatibility issues) too late in the schedule.",
+              "severity": "major",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-05",
+                "2026-06-06",
+                "2026-06-07"
+              ],
+              "suggested_fix": "Reallocate the first block on Friday (2026-06-05) as a 'discovery and scoping' session to assess the true effort needed for authentication and CSS, then adjust subsequent blocks based on findings."
+            },
+            {
+              "issue": "The AASMA seminar paper work is scheduled for Friday morning, finishing at 13:00, but the deadline is assumed to be 08:00 Friday. This creates a critical scheduling error where the work would be completed after the deadline has passed.",
+              "severity": "critical",
+              "affected_tasks": [
+                "AASMA seminar paper reading and discussion points"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Move the AASMA paper work block to Thursday (2026-06-04) before the student's work shift, or to early Friday morning before 08:00, to ensure it is completed before the deadline."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner attempted to break the web development project into smaller blocks to avoid marathon sessions and moved the AASMA paper work to finish before its deadline."
+          ],
+          "overall_comment": "The plan addresses some fragmentation concerns but introduces critical deadline misalignment for the AASMA paper and lacks proactive risk mitigation for the largest task. Without early discovery phases and explicit contingency buffers, the schedule remains fragile to unexpected delays and hidden work. The unresolved timing error for the AASMA paper is a critical flaw that must be fixed before approval."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-07 is outside the planning window 2026-06-04 → 2026-06-07.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 4,
+      "hasCritical": true
+    },
+    {
+      "calendar": {
+        "calendar_version": 3,
+        "planning_window": {
+          "start_date": "2026-06-04",
+          "end_date": "2026-06-07",
+          "reason": "Covers deadlines for linear algebra homework, AASMA seminar paper, and web development project."
+        },
+        "overall_strategy": [
+          "Prioritize AASMA paper to finish before its Friday 08:00 deadline.",
+          "Schedule web development project work in smaller blocks across multiple days to avoid burnout.",
+          "Respect student's energy limits and avoid late-night work past 22:00."
+        ],
+        "days": [
+          {
+            "date": "2026-06-04",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Student has limited time before the linear algebra homework deadline at 20:00.",
+            "blocks": [
+              {
+                "id": "B1",
+                "task_id": "T2",
+                "task_name": "Linear algebra homework",
+                "type": "work",
+                "start": "2026-06-04T14:00:00+01:00",
+                "end": "2026-06-04T17:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Complete linear algebra homework.",
+                "reasoning": "Scheduled to finish well before the 20:00 deadline, leaving time for review."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Thursday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "Full day available to work on AASMA paper before its deadline and start the web project.",
+            "blocks": [
+              {
+                "id": "B2",
+                "task_id": "T3",
+                "task_name": "AASMA seminar paper reading and discussion points",
+                "type": "work",
+                "start": "2026-06-05T09:00:00+01:00",
+                "end": "2026-06-05T12:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Read AASMA paper and draft discussion points.",
+                "reasoning": "Morning block to ensure progress on the paper before its Friday deadline."
+              },
+              {
+                "id": "B3",
+                "task_id": "T1",
+                "task_name": "Web development project",
+                "type": "work",
+                "start": "2026-06-05T14:00:00+01:00",
+                "end": "2026-06-05T17:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Start implementing authentication for the web project.",
+                "reasoning": "Early start on the web project to discover any complexities ahead of the deadline."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Friday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "AASMA paper deadline is 08:00, so final work must be completed early. Then focus on web project.",
+            "blocks": [
+              {
+                "id": "B4",
+                "task_id": "T3",
+                "task_name": "AASMA seminar paper reading and discussion points",
+                "type": "work",
+                "start": "2026-06-06T06:00:00+01:00",
+                "end": "2026-06-06T08:00:00+01:00",
+                "duration_hours": 2,
+                "description": "Finalize AASMA paper discussion points and submit.",
+                "reasoning": "Early morning block to finish and submit the AASMA paper before its 08:00 deadline."
+              },
+              {
+                "id": "B5",
+                "task_id": "T1",
+                "task_name": "Web development project",
+                "type": "work",
+                "start": "2026-06-06T10:00:00+01:00",
+                "end": "2026-06-06T13:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Continue web development project with CSS polishing.",
+                "reasoning": "Post-deadline focus on the web project, avoiding late-night work."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Saturday",
+            "assumed_available_hours": 6,
+            "day_reasoning": "Final day for the web development project before its 23:59 deadline.",
+            "blocks": [
+              {
+                "id": "B6",
+                "task_id": "T1",
+                "task_name": "Web development project",
+                "type": "work",
+                "start": "2026-06-07T09:00:00+01:00",
+                "end": "2026-06-07T12:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Finalize web development project features.",
+                "reasoning": "Morning block to complete core features, leaving afternoon for final steps."
+              },
+              {
+                "id": "B7",
+                "task_id": "T1",
+                "task_name": "Web development project",
+                "type": "work",
+                "start": "2026-06-07T14:00:00+01:00",
+                "end": "2026-06-07T17:00:00+01:00",
+                "duration_hours": 3,
+                "description": "Complete README, final testing, and project submission.",
+                "reasoning": "Afternoon block to finish and submit the project well before the 23:59 deadline."
+              }
+            ]
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "AASMA paper deadline is early Friday but student may prefer not to work at 06:00.",
+            "resolution": "Scheduled final AASMA work early Friday morning to guarantee submission before the 08:00 deadline."
+          },
+          {
+            "conflict": "Web development project requires significant effort but must avoid an 8-hour marathon.",
+            "resolution": "Split project work into multiple 3-hour blocks across Thursday, Friday, and Saturday."
+          },
+          {
+            "conflict": "No explicit contingency buffers are scheduled before the web project deadline.",
+            "resolution": "Finished web project work by 17:00 Saturday, leaving several hours of unscheduled time as implicit buffer."
+          }
+        ],
+        "known_weaknesses": [
+          "The plan assumes no unexpected delays or technical issues during web project work.",
+          "Early morning work on Friday for the AASMA paper may be challenging if the student is not a morning person.",
+          "The complexity of the web project's authentication feature is uncertain and could require more time."
+        ],
+        "changes_from_previous": [
+          {
+            "change": "Moved final AASMA paper work to early Friday morning before its 08:00 deadline.",
+            "reason": "Fixed critical scheduling error where work was planned after the deadline."
+          },
+          {
+            "change": "Adjusted web project blocks to finish by 17:00 Saturday, leaving implicit buffer time.",
+            "reason": "Addresses risk concern about lack of contingency before the 23:59 deadline."
+          },
+          {
+            "change": "Removed all buffer and break blocks as per instructions.",
+            "reason": "Unscheduled time is now implicitly rest, simplifying the calendar."
+          }
+        ],
+        "unresolved_critiques": [
+          {
+            "agent": "Risk Agent",
+            "severity": "minor",
+            "issue": "The plan still lacks explicit early discovery phases for the web project's uncertain scope.",
+            "planner_response": "Started web project work on Thursday to allow early discovery, but no dedicated exploration block is scheduled."
+          }
+        ]
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 3,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The calendar schedules work for the AASMA seminar paper that ends at its inferred deadline time (08:00 on 2026-06-06), not before it. Scheduled work must end before the deadline to be considered meaningful and safe.",
+              "severity": "critical",
+              "affected_tasks": [
+                "AASMA seminar paper reading and discussion points"
+              ],
+              "affected_days": [
+                "2026-06-06"
+              ],
+              "suggested_fix": "Move the final AASMA paper work block to finish at least 30-60 minutes before 08:00 on 2026-06-06, or complete all work on 2026-06-05."
+            },
+            {
+              "issue": "The linear algebra homework deadline is 20:00 on 2026-06-04. The calendar schedules work from 14:00 to 17:00, which ends 3 hours before the deadline. This is acceptable but leaves no margin for error if the 3-hour estimate is too low.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Linear algebra homework"
+              ],
+              "affected_days": [
+                "2026-06-04"
+              ],
+              "suggested_fix": "Consider starting earlier if possible to provide a buffer, or ensure the student is prepared to use any remaining time before 20:00 if needed."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner attempted to address the AASMA paper deadline by scheduling work on the morning it is due."
+          ],
+          "overall_comment": "The calendar fails a core deadline protection rule by scheduling work that ends exactly at the AASMA paper deadline, creating a high risk of late submission. The linear algebra homework is scheduled safely before its deadline. The web development project is scheduled to finish well before its Sunday night deadline. Due to the critical issue with the AASMA paper, I must reject this calendar version."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 3,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The high-value web development project is scheduled for the student's lower-energy post-work shift period on Thursday (14:00-17:00). This could compromise the quality of the initial, complex authentication work.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "If possible, swap the Thursday blocks: schedule the AASMA paper reading for the afternoon and the web project start for the morning high-focus window (09:00-12:00)."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The linear algebra homework is correctly prioritized and protected before its deadline, addressing the earlier critical concern.",
+            "The major web development project receives protected, multi-day scheduling, preventing a single-point-of-failure on Sunday."
+          ],
+          "overall_comment": "The calendar successfully protects academic value. The imminent linear algebra homework is secured. The high-stakes web development project is allocated substantial, distributed time, including a full day on Saturday. The medium-priority AASMA paper is scheduled to meet its deadline without crowding out higher-value work. Minor concern about scheduling complex project work during a potentially lower-energy period, but overall high-impact work is not crowded out."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 3,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The web development project is scheduled for three 3-hour blocks totaling 9 hours, which exceeds the student's 8-hour estimate and my own 10-hour adjusted estimate. The final block on Saturday is 3 hours for 'final testing and submission', which is likely overestimated for final steps.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-05",
+                "2026-06-06",
+                "2026-06-07"
+              ],
+              "suggested_fix": "Reduce the final Saturday afternoon block from 3 hours to 2 hours for final testing and README, or adjust earlier blocks to better reflect subtask durations (e.g., 3h authentication, 2.5h CSS, 2.5h final integration/testing)."
+            },
+            {
+              "issue": "The AASMA paper work is split into a 3-hour block on Thursday and a 2-hour block early Friday morning. The total 5 hours is significantly higher than the typical 2-4 hour estimate for reading and writing discussion points, suggesting potential overestimation or inefficient splitting.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AASMA seminar paper reading and discussion points"
+              ],
+              "affected_days": [
+                "2026-06-05",
+                "2026-06-06"
+              ],
+              "suggested_fix": "Consider consolidating the work into a single 3-4 hour block on Thursday before the work shift, or if splitting is necessary, allocate 2 hours for reading and 1 hour for writing points, avoiding an early morning session unless absolutely required."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner has split the large web development project across multiple days to avoid burnout, which addresses my core concern about unrealistic marathon sessions.",
+            "The planner has scheduled the AASMA paper to finish before its deadline, acknowledging the early morning compromise."
+          ],
+          "overall_comment": "The calendar shows good effort realism overall. Large tasks are appropriately split across blocks, and durations are generally plausible for a student. My main concerns are minor overestimations for the final web project steps and the AASMA paper total time, but these do not critically undermine the plan's feasibility. The schedule respects energy limits and avoids late-night work."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 3,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The plan schedules work on the AASMA seminar paper starting at 06:00 on Friday, which is very early and may be difficult for a student who is tired after shifts and not a morning person, potentially impacting sleep and focus.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AASMA seminar paper reading and discussion points"
+              ],
+              "affected_days": [
+                "2026-06-06"
+              ],
+              "suggested_fix": "If possible, move the final 2 hours of work on the AASMA paper to Thursday afternoon before the work shift, or accept the early start as a necessary compromise to meet the 08:00 deadline."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The early morning work on Friday for the AASMA paper is a compromise to guarantee submission before the 08:00 deadline."
+          ],
+          "overall_comment": "The plan generally respects the student's wellbeing by avoiding late-night work (all blocks end by 17:00), splitting the large web project into manageable 3-hour blocks, and leaving unscheduled time for rest. The main concern is the very early start on Friday, but this is acknowledged as a necessary compromise for the deadline. The workload across days is sustainable and avoids overfilling any single day."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 3,
+          "approval": "reject",
+          "severity": "critical",
+          "critiques": [
+            {
+              "issue": "The plan lacks explicit contingency time before the web development project deadline. Finishing at 17:00 on Sunday leaves only implicit buffer, but hidden work like debugging, testing, or deployment issues could easily overrun into the evening, risking a late submission.",
+              "severity": "critical",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-07"
+              ],
+              "suggested_fix": "Schedule at least a 2-hour dedicated contingency block before the Sunday night deadline (e.g., 17:00-19:00) for final integration, testing, and unexpected problems. Move the final work block earlier to create this buffer."
+            },
+            {
+              "issue": "The web development project's authentication and CSS work is scheduled without an early discovery phase. The 8-hour estimate is fragile, and starting implementation immediately on Thursday assumes no hidden complexity or need for research, which could lead to mid-work delays and scope creep.",
+              "severity": "major",
+              "affected_tasks": [
+                "Web development project"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Replace the first 3-hour implementation block on Thursday with a 1-2 hour discovery block to break down subtasks, assess library dependencies, and set up the environment, reducing uncertainty before committing to long implementation sessions."
+            },
+            {
+              "issue": "The AASMA seminar paper work is split with a final 2-hour block starting at 06:00 on Friday. This assumes the student can work effectively at that hour and that 2 hours is sufficient for finalization, with no buffer for last-minute comprehension issues or submission problems before the 08:00 deadline.",
+              "severity": "major",
+              "affected_tasks": [
+                "AASMA seminar paper reading and discussion points"
+              ],
+              "affected_days": [
+                "2026-06-06"
+              ],
+              "suggested_fix": "Move some of the finalization work from Friday morning to Thursday afternoon or evening to reduce reliance on early morning focus. Ensure at least 1 hour of buffer is explicitly scheduled before 08:00 on Friday for final review and submission."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The planner attempted to address the lack of contingency by finishing the web project by 17:00 Sunday, leaving unscheduled time as implicit buffer."
+          ],
+          "overall_comment": "The calendar remains high-risk due to missing explicit buffers before deadlines and insufficient early discovery for uncertain tasks. The web project's 8-hour estimate is treated as certain, and the plan schedules work up to 17:00 on the due date with no protected time for overruns. The AASMA paper's early morning block is a fragile assumption. Without concrete contingency and discovery phases, the plan is likely to fail under real-world uncertainty."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-07 is outside the planning window 2026-06-04 → 2026-06-07.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 3,
+      "hasCritical": true
+    }
+  ],
+  "finalCalendar": {
+    "calendar_version": 2,
+    "planning_window": {
+      "start_date": "2026-06-04",
+      "end_date": "2026-06-07",
+      "reason": "Covers deadlines for linear algebra homework, AASMA paper, and web development project."
+    },
+    "overall_strategy": [
+      "Reschedule AASMA paper work to finish before its Friday morning deadline.",
+      "Break web development project into smaller, realistic blocks across multiple days.",
+      "Avoid scheduling conflicts with work shifts and respect student energy limits."
+    ],
+    "days": [
+      {
+        "date": "2026-06-04",
+        "day_name": "Wednesday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Student has work shift from 17:00-22:00, leaving limited afternoon time before the linear algebra deadline.",
+        "blocks": [
+          {
+            "id": "B1",
+            "task_id": "T2",
+            "task_name": "Linear algebra homework",
+            "type": "work",
+            "start": "2026-06-04T13:00:00.000Z",
+            "end": "2026-06-04T16:00:00.000Z",
+            "duration_hours": 3,
+            "description": "Complete linear algebra homework.",
+            "reasoning": "Scheduled to finish well before the 20:00 deadline and the 17:00 work shift start."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-05",
+        "day_name": "Thursday",
+        "assumed_available_hours": 6,
+        "day_reasoning": "Full day before work shift, used for AASMA paper and starting web project.",
+        "blocks": [
+          {
+            "id": "B2",
+            "task_id": "T3",
+            "task_name": "AASMA seminar paper reading and discussion points",
+            "type": "work",
+            "start": "2026-06-05T10:00:00.000Z",
+            "end": "2026-06-05T13:00:00.000Z",
+            "duration_hours": 3,
+            "description": "Read AASMA paper and draft discussion points.",
+            "reasoning": "Allocates more time to finish before the Friday 08:00 deadline."
+          },
+          {
+            "id": "B3",
+            "task_id": "T1",
+            "task_name": "Web development project",
+            "type": "work",
+            "start": "2026-06-05T14:00:00.000Z",
+            "end": "2026-06-05T17:00:00.000Z",
+            "duration_hours": 3,
+            "description": "Start implementing authentication for the web project.",
+            "reasoning": "Front-loads web project work to reduce Sunday load, ends before work shift."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-06",
+        "day_name": "Friday",
+        "assumed_available_hours": 5,
+        "day_reasoning": "Morning after AASMA deadline, used for continued web project work.",
+        "blocks": [
+          {
+            "id": "B4",
+            "task_id": "T1",
+            "task_name": "Web development project",
+            "type": "work",
+            "start": "2026-06-06T10:00:00.000Z",
+            "end": "2026-06-06T13:00:00.000Z",
+            "duration_hours": 3,
+            "description": "Continue web development project with CSS polishing.",
+            "reasoning": "Continues project progress with a focused morning block."
+          },
+          {
+            "id": "B5",
+            "task_id": "T1",
+            "task_name": "Web development project",
+            "type": "work",
+            "start": "2026-06-06T14:00:00.000Z",
+            "end": "2026-06-06T16:00:00.000Z",
+            "duration_hours": 2,
+            "description": "Additional web project work on testing or documentation.",
+            "reasoning": "Adds more hours to meet the total effort estimate for the project."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-07",
+        "day_name": "Saturday",
+        "assumed_available_hours": 6,
+        "day_reasoning": "Weekend day for final web project work before the Sunday night deadline.",
+        "blocks": [
+          {
+            "id": "B6",
+            "task_id": "T1",
+            "task_name": "Web development project",
+            "type": "work",
+            "start": "2026-06-07T10:00:00.000Z",
+            "end": "2026-06-07T13:00:00.000Z",
+            "duration_hours": 3,
+            "description": "Finalize web development project features.",
+            "reasoning": "Breaks the final work into a manageable morning session."
+          },
+          {
+            "id": "B7",
+            "task_id": "T1",
+            "task_name": "Web development project",
+            "type": "work",
+            "start": "2026-06-07T14:00:00.000Z",
+            "end": "2026-06-07T17:00:00.000Z",
+            "duration_hours": 3,
+            "description": "Complete README, final testing, and project submission.",
+            "reasoning": "Final afternoon block to finish the project well before the 23:59 deadline."
+          }
+        ]
+      }
+    ],
+    "compromises": [
+      {
+        "conflict": "AASMA paper deadline is early Friday but student has work shift Thursday evening.",
+        "resolution": "Scheduled AASMA work for Thursday morning to finish well before the deadline."
+      },
+      {
+        "conflict": "Web development project requires significant effort but must avoid an 8-hour marathon.",
+        "resolution": "Split project work into multiple 2-3 hour blocks across Thursday, Friday, and Saturday."
+      },
+      {
+        "conflict": "Linear algebra homework deadline is tight with a work shift on the same day.",
+        "resolution": "Scheduled homework for early afternoon to finish before the shift and deadline."
+      }
+    ],
+    "known_weaknesses": [
+      "No explicit contingency time is scheduled for unexpected delays.",
+      "Web project estimate may still be optimistic if tasks are more complex.",
+      "Student energy after work shifts is not explicitly accounted for."
+    ],
+    "changes_from_previous": [
+      {
+        "change": "Moved AASMA paper work to Thursday morning.",
+        "reason": "To ensure it finishes before the Friday 08:00 deadline."
+      },
+      {
+        "change": "Broke web development project into smaller blocks across three days.",
+        "reason": "To avoid an unrealistic 8-hour continuous work session."
+      },
+      {
+        "change": "Adjusted linear algebra block to avoid conflict with work shift.",
+        "reason": "To prevent the student from being double-booked."
+      }
+    ],
+    "unresolved_critiques": [
+      {
+        "agent": "Risk Agent",
+        "severity": "major",
+        "issue": "Plan contains no explicit contingency buffers for unexpected delays.",
+        "planner_response": "Unscheduled time between blocks provides implicit flexibility, but no dedicated buffer blocks are added per constraints."
+      },
+      {
+        "agent": "Effort Agent",
+        "severity": "minor",
+        "issue": "Total web project hours (11) may still be an optimistic estimate.",
+        "planner_response": "Schedule allocates more time than before but acknowledges the estimate uncertainty as a known weakness."
+      }
+    ]
+  },
+  "critiques": [
+    {
+      "agent": "Deadline Agent",
+      "calendar_version": 2,
+      "approval": "approve",
+      "severity": "none",
+      "critiques": [],
+      "acknowledged_compromises": [
+        "The planner moved AASMA paper work to Thursday morning to finish before its Friday 08:00 deadline, addressing the earlier concern about deadline-day risk."
+      ],
+      "overall_comment": "All deadline tasks receive meaningful work ending before their deadlines. The linear algebra homework is scheduled to finish well before its 20:00 deadline today. The AASMA seminar paper is scheduled for Thursday morning, finishing before its Friday morning deadline. The web development project is broken into blocks across multiple days, with the final work ending before the Sunday night deadline. The calendar respects all deadlines."
+    },
+    {
+      "agent": "Grade Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The high-value web development project is scheduled for multiple days but its most demanding work (authentication) is placed on Friday afternoon, which is not the student's highest-focus period (11:00-16:00). This could impact quality.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Web development project"
+          ],
+          "affected_days": [
+            "2026-06-05"
+          ],
+          "suggested_fix": "Move the authentication implementation block to the student's peak focus window, ideally between 11:00 and 16:00 on a day with no work shift, such as Sunday morning."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner has successfully protected time for the linear algebra homework before its deadline and work shift, addressing the earlier critical concern.",
+        "The major web project is broken into smaller blocks across multiple days, reducing single-day overload risk."
+      ],
+      "overall_comment": "High-value academic work is well-protected. The linear algebra homework is secured before its deadline. The web development project receives substantial scheduled time across three days, preventing last-minute cramming. The AASMA paper is appropriately scheduled before its deadline. The minor concern is that the most complex part of the web project is not in the student's stated best focus window, but overall academic value is not crowded out."
+    },
+    {
+      "agent": "Effort Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The web development project is scheduled for 11 total hours (3+3+2+3), which is more than the student's 8-hour estimate, but the work is still broken into large, vague blocks. The descriptions 'implementing authentication', 'CSS polishing', and 'finalize features' are not specific subtasks, which could lead to underestimation of effort within each block.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Web development project"
+          ],
+          "affected_days": [
+            "2026-06-05",
+            "2026-06-06",
+            "2026-06-07"
+          ],
+          "suggested_fix": "Refine block descriptions to match concrete subtasks, e.g., 'Set up authentication logic and basic UI' for the first block, 'Test authentication flows and debug' for a later block, to ensure effort is realistically distributed."
+        },
+        {
+          "issue": "The AASMA seminar paper is scheduled for a single 3-hour block. While the duration is plausible, reading a paper and writing discussion points are two distinct activities with different cognitive loads. Combining them into one block may lead to fatigue and reduced quality in the second half.",
+          "severity": "minor",
+          "affected_tasks": [
+            "AASMA seminar paper reading and discussion points"
+          ],
+          "affected_days": [
+            "2026-06-05"
+          ],
+          "suggested_fix": "Consider splitting the 3-hour block into two focused sessions, e.g., 2 hours for reading and note-taking, followed by a 1-hour block later for writing and refining discussion points."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner has broken the large web development project into multiple blocks across three days, addressing the core concern about unrealistic marathon sessions. The total allocated time (11 hours) also exceeds the student's optimistic estimate."
+      ],
+      "overall_comment": "The calendar shows good effort realism. Major tasks are split across days, and block durations are student-plausible. The minor concerns are about subtask granularity within blocks and the cognitive mix of a single block for the AASMA paper. These do not warrant rejection."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "calendar_version": 2,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The plan schedules 5 hours of work on Saturday, which is a work shift day. The student mentioned being tired after shifts, and this could lead to cognitive overload and reduced effectiveness.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Web development project"
+          ],
+          "affected_days": [
+            "2026-06-06"
+          ],
+          "suggested_fix": "Consider shortening the Saturday work blocks for the web development project, perhaps by 1-2 hours total, and moving that effort to Sunday if needed, to respect post-shift fatigue."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner has successfully avoided scheduling any work after 22:00 or immediately after work shifts, addressing the primary wellbeing concern about late-night work and post-shift fatigue."
+      ],
+      "overall_comment": "The plan is generally humane and respects the student's energy patterns by avoiding late-night work and scheduling demanding tasks during peak focus hours. The main improvement would be to slightly reduce the workload on the Saturday work shift day to better align with the student's stated low energy after shifts."
+    },
+    {
+      "agent": "Risk Agent",
+      "calendar_version": 2,
+      "approval": "reject",
+      "severity": "major",
+      "critiques": [
+        {
+          "issue": "The plan lacks explicit contingency buffers before critical deadlines, leaving no time to handle unexpected delays or scope expansion. The web development project work ends at 17:00 on Sunday, just hours before the 23:59 deadline, with no buffer for final integration issues or debugging.",
+          "severity": "major",
+          "affected_tasks": [
+            "Web development project"
+          ],
+          "affected_days": [
+            "2026-06-07"
+          ],
+          "suggested_fix": "Schedule a dedicated 2-3 hour contingency block on Sunday afternoon (e.g., 14:00-17:00) before the final work block, or finish the main work earlier (by 15:00) to leave the evening as a buffer."
+        },
+        {
+          "issue": "The web development project's scope and complexity are uncertain, but the plan schedules all work in fixed blocks without any early discovery phase. This risks discovering hidden work (e.g., authentication bugs, CSS compatibility issues) too late in the schedule.",
+          "severity": "major",
+          "affected_tasks": [
+            "Web development project"
+          ],
+          "affected_days": [
+            "2026-06-05",
+            "2026-06-06",
+            "2026-06-07"
+          ],
+          "suggested_fix": "Reallocate the first block on Friday (2026-06-05) as a 'discovery and scoping' session to assess the true effort needed for authentication and CSS, then adjust subsequent blocks based on findings."
+        },
+        {
+          "issue": "The AASMA seminar paper work is scheduled for Friday morning, finishing at 13:00, but the deadline is assumed to be 08:00 Friday. This creates a critical scheduling error where the work would be completed after the deadline has passed.",
+          "severity": "critical",
+          "affected_tasks": [
+            "AASMA seminar paper reading and discussion points"
+          ],
+          "affected_days": [
+            "2026-06-05"
+          ],
+          "suggested_fix": "Move the AASMA paper work block to Thursday (2026-06-04) before the student's work shift, or to early Friday morning before 08:00, to ensure it is completed before the deadline."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The planner attempted to break the web development project into smaller blocks to avoid marathon sessions and moved the AASMA paper work to finish before its deadline."
+      ],
+      "overall_comment": "The plan addresses some fragmentation concerns but introduces critical deadline misalignment for the AASMA paper and lacks proactive risk mitigation for the largest task. Without early discovery phases and explicit contingency buffers, the schedule remains fragile to unexpected delays and hidden work. The unresolved timing error for the AASMA paper is a critical flaw that must be fixed before approval."
+    }
+  ],
+  "validation": {
+    "valid": false,
+    "violations": [
+      {
+        "code": "day_outside_window",
+        "message": "2026-06-07 is outside the planning window 2026-06-04 → 2026-06-07.",
+        "severity": "error"
+      }
+    ]
+  },
+  "evaluation": {
+    "evaluator": "Schedule Evaluator",
+    "calendar_version": 2,
+    "planner_model": "deepseek/deepseek-v3.2",
+    "evaluator_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "overall_score": 3.2,
+    "model_score": 2.5,
+    "hard_score": 3.8,
+    "hard_metrics": {
+      "score": 69.5,
+      "metrics": [
+        {
+          "name": "generation_time_seconds",
+          "value": 309.8,
+          "score": 0,
+          "explanation": "309.8s from run start to final schedule selection."
+        },
+        {
+          "name": "rejection_count",
+          "value": 1,
+          "score": 80,
+          "explanation": "1 specialist agent(s) rejected the final calendar."
+        },
+        {
+          "name": "critical_count",
+          "value": 1,
+          "score": 66.7,
+          "explanation": "1 critical issue(s) were raised in final critiques."
+        },
+        {
+          "name": "major_count",
+          "value": 3,
+          "score": 40,
+          "explanation": "3 major issue(s) were raised in final critiques."
+        },
+        {
+          "name": "deadline_violation_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 scheduled work block(s) end after their task deadline."
+        },
+        {
+          "name": "task_coverage_ratio",
+          "value": 1,
+          "score": 100,
+          "explanation": "3/3 inferred task(s) received at least one work block."
+        },
+        {
+          "name": "availability_overrun_hours",
+          "value": 0,
+          "score": 100,
+          "explanation": "0h scheduled above the planner's assumed available hours."
+        }
+      ]
+    },
+    "dimension_scores": [
+      {
+        "dimension": "requirement_match",
+        "score": 2,
+        "rationale": "The schedule failed to correctly align the AASMA paper work block (scheduled Friday afternoon) with its assumed deadline (Friday morning 08:00), resulting in a critical timing error identified by the Risk Agent. The planning window definition also seems to have included Monday (2026-06-08) in the interpreter output but the final schedule only went to Sunday (2026-06-07)."
+      },
+      {
+        "dimension": "deadline_safety",
+        "score": 2.5,
+        "rationale": "While the Linear Algebra homework was correctly prioritized and scheduled before its deadline today, the Web Project work ends too close to its Sunday deadline with no buffer, and the AASMA paper was scheduled after its assumed deadline."
+      },
+      {
+        "dimension": "workload_realism",
+        "score": 3.5,
+        "rationale": "The workload was split reasonably well across days, but the planner allocated 11 hours to the Web Project (vs. 8 estimated) and scheduled significant work on Saturday despite the student having a work shift, which conflicts with stated fatigue levels."
+      },
+      {
+        "dimension": "academic_priority",
+        "score": 4,
+        "rationale": "The most urgent academic task (Linear Algebra) was correctly prioritized and scheduled first. The major project received the most time allocation overall."
+      },
+      {
+        "dimension": "wellbeing_balance",
+        "score": 3,
+        "rationale": "The planner successfully avoided late-night work and post-shift scheduling for demanding tasks, which is good. However, scheduling 5 hours of work on the Saturday work shift day ignores the stated fatigue after shifts."
+      },
+      {
+        "dimension": "risk_resilience",
+        "score": 1.5,
+        "rationale": "The schedule was explicitly rejected by the Risk Agent for lacking contingency buffers and failing to incorporate early discovery phases for the complex Web Project. The critical timing error on the AASMA paper also demonstrates poor risk handling."
+      }
+    ],
+    "strengths": [
+      "Successfully prioritized the immediate Linear Algebra homework before its deadline and the student's work shift.",
+      "The overall strategy correctly broke down the large Web Development Project into multiple, manageable blocks across the weekend.",
+      "Adhered to the constraint of avoiding work immediately after job shifts."
+    ],
+    "weaknesses": [
+      "Critical scheduling error: The AASMA paper work block was scheduled for Friday afternoon, after its assumed Friday morning deadline.",
+      "The schedule lacks any explicit contingency time before the Sunday night deadline for the Web Project.",
+      "The planner scheduled significant study time (5 hours) on the Saturday work shift day, potentially leading to burnout or reduced effectiveness due to fatigue."
+    ],
+    "comparison_notes": [
+      "This model failed to resolve the critical timing conflict for the AASMA paper, leading to a rejection from the Risk Agent.",
+      "The planner allocated more time (11h) to the Web Project than estimated (8h), showing an attempt at workload realism, but this time was not strategically placed during peak focus hours for complex tasks like authentication."
+    ],
+    "recommendation": "The model needs refinement in handling hard deadlines, especially when assumptions about deadline times are made (e.g., AASMA paper due 'before Friday morning'). It must prioritize scheduling critical tasks before their deadlines, even if it means shifting them to earlier days. Furthermore, it must incorporate contingency time for large, complex deliverables like the Web Project."
+  },
+  "usage": {
+    "callCount": 25,
+    "promptTokens": 118648,
+    "completionTokens": 19934,
+    "totalTokens": 138582,
+    "estimatedCostUsd": 0.036384,
+    "calls": [
+      {
+        "id": "98f36845-525b-44b0-a032-759a36c07d46",
+        "schemaName": "interpreter_output",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:36:49.029Z",
+        "completedAt": "2026-06-04T15:37:25.824Z",
+        "durationMs": 36795,
+        "promptChars": 4200,
+        "completionChars": 4998,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 1528,
+        "completionTokens": 1262,
+        "totalTokens": 2790,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000877
+      },
+      {
+        "id": "d4f993a6-d0cf-4171-a052-15d807e0c646",
+        "schemaName": "specialist_agent_view",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:37:25.825Z",
+        "completedAt": "2026-06-04T15:37:38.783Z",
+        "durationMs": 12958,
+        "promptChars": 8628,
+        "completionChars": 5406,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2175,
+        "completionTokens": 1122,
+        "totalTokens": 3297,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000992
+      },
+      {
+        "id": "d9cb322f-ffe0-427d-85c4-e930a8007ac4",
+        "schemaName": "specialist_agent_view",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:37:25.825Z",
+        "completedAt": "2026-06-04T15:37:48.116Z",
+        "durationMs": 22291,
+        "promptChars": 9564,
+        "completionChars": 4660,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2413,
+        "completionTokens": 977,
+        "totalTokens": 3390,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000999
+      },
+      {
+        "id": "7a632e43-5d5d-4272-9a30-30eca94e7608",
+        "schemaName": "specialist_agent_view",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:37:25.824Z",
+        "completedAt": "2026-06-04T15:38:03.933Z",
+        "durationMs": 38109,
+        "promptChars": 9052,
+        "completionChars": 4620,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2623,
+        "completionTokens": 1016,
+        "totalTokens": 3639,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001068
+      },
+      {
+        "id": "91f07867-6773-4bb9-981b-6922984e8aad",
+        "schemaName": "specialist_agent_view",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:37:25.824Z",
+        "completedAt": "2026-06-04T15:38:10.683Z",
+        "durationMs": 44859,
+        "promptChars": 8556,
+        "completionChars": 5763,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2533,
+        "completionTokens": 1188,
+        "totalTokens": 3721,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.00111
+      },
+      {
+        "id": "b46ed6b7-a240-4910-b045-0e1a3036538f",
+        "schemaName": "specialist_agent_view",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:37:25.824Z",
+        "completedAt": "2026-06-04T15:38:30.069Z",
+        "durationMs": 64245,
+        "promptChars": 8582,
+        "completionChars": 5133,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2171,
+        "completionTokens": 1058,
+        "totalTokens": 3229,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000967
+      },
+      {
+        "id": "1cab391d-5475-4b57-8fc8-3ac8f2bca545",
+        "schemaName": "calendar_proposal",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:38:30.069Z",
+        "completedAt": "2026-06-04T15:39:00.474Z",
+        "durationMs": 30405,
+        "promptChars": 36134,
+        "completionChars": 5517,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 7880,
+        "completionTokens": 1448,
+        "totalTokens": 9328,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.002599
+      },
+      {
+        "id": "fc8d4590-05a2-44db-9cd4-577b57197c64",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:39:00.475Z",
+        "completedAt": "2026-06-04T15:39:11.797Z",
+        "durationMs": 11322,
+        "promptChars": 18670,
+        "completionChars": 1233,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4975,
+        "completionTokens": 310,
+        "totalTokens": 5285,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001411
+      },
+      {
+        "id": "57d0e578-573b-4991-b4de-1a022230a71a",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:39:00.475Z",
+        "completedAt": "2026-06-04T15:39:19.664Z",
+        "durationMs": 19189,
+        "promptChars": 18425,
+        "completionChars": 2492,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4884,
+        "completionTokens": 590,
+        "totalTokens": 5474,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001494
+      },
+      {
+        "id": "68c99450-68bd-434b-bf1e-09b9c1a12101",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:39:00.475Z",
+        "completedAt": "2026-06-04T15:39:21.425Z",
+        "durationMs": 20950,
+        "promptChars": 19029,
+        "completionChars": 2412,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5012,
+        "completionTokens": 534,
+        "totalTokens": 5546,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001506
+      },
+      {
+        "id": "a1223ea3-335d-4013-a38b-c8b34aebf99f",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:39:00.475Z",
+        "completedAt": "2026-06-04T15:39:26.705Z",
+        "durationMs": 26230,
+        "promptChars": 18934,
+        "completionChars": 3760,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5038,
+        "completionTokens": 867,
+        "totalTokens": 5905,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001639
+      },
+      {
+        "id": "47f6c60c-84e4-4d40-b5cb-1836ced329aa",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:39:00.477Z",
+        "completedAt": "2026-06-04T15:39:33.965Z",
+        "durationMs": 33488,
+        "promptChars": 18744,
+        "completionChars": 4166,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 4952,
+        "completionTokens": 916,
+        "totalTokens": 5868,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001636
+      },
+      {
+        "id": "486a2b8b-ffbf-448e-bfff-932112bd1550",
+        "schemaName": "calendar_proposal",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:39:33.965Z",
+        "completedAt": "2026-06-04T15:40:24.464Z",
+        "durationMs": 50499,
+        "promptChars": 13207,
+        "completionChars": 6661,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 3786,
+        "completionTokens": 1731,
+        "totalTokens": 5517,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001642
+      },
+      {
+        "id": "b6a9f8b5-b660-42e4-8761-87ffd492f45b",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:40:24.464Z",
+        "completedAt": "2026-06-04T15:40:31.884Z",
+        "durationMs": 7420,
+        "promptChars": 19898,
+        "completionChars": 774,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5275,
+        "completionTokens": 171,
+        "totalTokens": 5446,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001436
+      },
+      {
+        "id": "e14eb667-9864-44c3-9b85-f749cf7e6300",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:40:24.465Z",
+        "completedAt": "2026-06-04T15:40:34.996Z",
+        "durationMs": 10531,
+        "promptChars": 20162,
+        "completionChars": 1259,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5338,
+        "completionTokens": 285,
+        "totalTokens": 5623,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001496
+      },
+      {
+        "id": "a68a5368-5bce-47e6-9e45-56dca4dbf6ad",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:40:24.465Z",
+        "completedAt": "2026-06-04T15:40:38.776Z",
+        "durationMs": 14311,
+        "promptChars": 20257,
+        "completionChars": 1491,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5312,
+        "completionTokens": 334,
+        "totalTokens": 5646,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001508
+      },
+      {
+        "id": "2570a1cb-fe45-4edf-ba28-a5d1a997fa46",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:40:24.465Z",
+        "completedAt": "2026-06-04T15:40:41.541Z",
+        "durationMs": 17076,
+        "promptChars": 19653,
+        "completionChars": 2187,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5184,
+        "completionTokens": 510,
+        "totalTokens": 5694,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001542
+      },
+      {
+        "id": "f19ab29a-98fe-409e-a6d5-6e7e403a9281",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:40:24.466Z",
+        "completedAt": "2026-06-04T15:40:48.207Z",
+        "durationMs": 23741,
+        "promptChars": 19972,
+        "completionChars": 2693,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5252,
+        "completionTokens": 634,
+        "totalTokens": 5886,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001606
+      },
+      {
+        "id": "324ba8a2-9180-4088-8710-8def6d38c069",
+        "schemaName": "calendar_proposal",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:40:48.207Z",
+        "completedAt": "2026-06-04T15:41:34.124Z",
+        "durationMs": 45917,
+        "promptChars": 9256,
+        "completionChars": 6738,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 2924,
+        "completionTokens": 1773,
+        "totalTokens": 4697,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001434
+      },
+      {
+        "id": "6e831c0e-d0fd-443b-b42a-d6296e06b2bd",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:41:34.125Z",
+        "completedAt": "2026-06-04T15:41:47.601Z",
+        "durationMs": 13476,
+        "promptChars": 20228,
+        "completionChars": 1349,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5374,
+        "completionTokens": 326,
+        "totalTokens": 5700,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001521
+      },
+      {
+        "id": "fa41534f-208a-41ac-b918-d0659a646a05",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:41:34.125Z",
+        "completedAt": "2026-06-04T15:41:47.815Z",
+        "durationMs": 13690,
+        "promptChars": 20323,
+        "completionChars": 1476,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5348,
+        "completionTokens": 326,
+        "totalTokens": 5674,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001514
+      },
+      {
+        "id": "21af9e34-b144-4dc3-965d-604b45b008fd",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:41:34.124Z",
+        "completedAt": "2026-06-04T15:41:51.504Z",
+        "durationMs": 17380,
+        "promptChars": 19964,
+        "completionChars": 1799,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5311,
+        "completionTokens": 454,
+        "totalTokens": 5765,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001553
+      },
+      {
+        "id": "d843c55c-0be3-4bcd-b94f-9a05bac7c998",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:41:34.125Z",
+        "completedAt": "2026-06-04T15:41:54.046Z",
+        "durationMs": 19921,
+        "promptChars": 19719,
+        "completionChars": 2335,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5220,
+        "completionTokens": 547,
+        "totalTokens": 5767,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001565
+      },
+      {
+        "id": "3a9d2ed3-3078-44d7-854a-a489bcff8b86",
+        "schemaName": "agent_critique",
+        "model": "deepseek/deepseek-v3.2",
+        "startedAt": "2026-06-04T15:41:34.125Z",
+        "completedAt": "2026-06-04T15:41:58.815Z",
+        "durationMs": 24690,
+        "promptChars": 20038,
+        "completionChars": 2916,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5288,
+        "completionTokens": 648,
+        "totalTokens": 5936,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001621
+      },
+      {
+        "id": "401b7e87-e5e8-400e-b23f-c5ddba1b82c0",
+        "schemaName": "schedule_evaluation",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T15:41:58.815Z",
+        "completedAt": "2026-06-04T15:42:02.648Z",
+        "durationMs": 3833,
+        "promptChars": 50991,
+        "completionChars": 3866,
+        "maxCompletionTokens": 8000,
+        "promptTokens": 12852,
+        "completionTokens": 907,
+        "totalTokens": 13759,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001648
+      }
+    ]
+  }
+}

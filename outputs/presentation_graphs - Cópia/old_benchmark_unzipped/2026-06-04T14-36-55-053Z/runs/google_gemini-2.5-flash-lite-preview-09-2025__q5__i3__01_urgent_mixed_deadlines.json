@@ -1,0 +1,1584 @@
+{
+  "runId": "9a5fbe74-4d4b-460f-8e74-157d384c3b0c",
+  "createdAt": "2026-06-04T14:36:55.062Z",
+  "request": {
+    "userInput": "I need a plan starting today.\r\n\r\nI have an operating systems lab due tomorrow at 23:59. I have read the statement but have not written any code yet. I think the coding part might take 4 or 5 hours, and I also need time to write a short report.\r\n\r\nI have a statistics quiz in three days covering hypothesis tests and confidence intervals. It is worth 10% of the grade and I feel weak on the formulas.\r\n\r\nI also have to submit a one-page project idea for my AASMA class by next Friday. It is not hard, but I need to pick a topic and write it clearly.\r\n\r\nToday I am free after 15:00. Tomorrow I have classes from 09:00 to 13:00. The next few days I can usually work around 4 hours per day.\r\n\r\nPlease avoid late-night work unless it is really necessary.",
+    "quorum": 5,
+    "maxIterations": 3,
+    "timezone": "Europe/Lisbon",
+    "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "evaluatorModel": "google/gemini-2.5-flash-lite-preview-09-2025"
+  },
+  "stopReason": "Accepted by 5/5 agents with no critical critiques.",
+  "interpreterOutput": {
+    "current_date": "2026-06-04T14:36:55.062Z",
+    "planning_window": {
+      "start_date": "2026-06-04",
+      "end_date": "2026-06-11",
+      "reason": "Planning starts today and extends to the deadline for the AASMA project idea submission next Friday."
+    },
+    "inferred_availability": [
+      {
+        "date_range": "2026-06-04",
+        "assumption": "Free after 15:00 today.",
+        "estimated_available_hours_per_day": 7,
+        "confidence": "High"
+      },
+      {
+        "date_range": "2026-06-05",
+        "assumption": "Classes from 09:00 to 13:00. Available for the rest of the day, avoiding late-night work.",
+        "estimated_available_hours_per_day": 9,
+        "confidence": "High"
+      },
+      {
+        "date_range": "2026-06-06/2026-06-11",
+        "assumption": "General availability of around 4 hours per day, avoiding late-night work.",
+        "estimated_available_hours_per_day": 4,
+        "confidence": "Medium"
+      }
+    ],
+    "fixed_commitments": [
+      "Classes on 2026-06-05 from 09:00 to 13:00"
+    ],
+    "student_state": {
+      "sleep": "Not specified, but general request to avoid late-night work suggests prioritizing rest.",
+      "energy": "Neutral, but low confidence on Statistics suggests mental energy might be better spent on focused study.",
+      "confidence": "Low regarding Statistics formulas."
+    },
+    "tasks": [
+      {
+        "task_id": "OS_LAB_CODING",
+        "name": "Operating Systems Lab Coding",
+        "raw_mentions": [
+          "operating systems lab due tomorrow at 23:59",
+          "coding part might take 4 or 5 hours",
+          "have not written any code yet"
+        ],
+        "inferred_deadline": "2026-06-05T23:59:00",
+        "uncertainties": [
+          "Exact time needed for coding (4 or 5 hours)",
+          "Need to allocate time for report writing after coding."
+        ]
+      },
+      {
+        "task_id": "OS_LAB_REPORT",
+        "name": "Operating Systems Lab Report Writing",
+        "raw_mentions": [
+          "need time to write a short report"
+        ],
+        "inferred_deadline": "2026-06-05T23:59:00",
+        "uncertainties": [
+          "Duration of report writing is unknown."
+        ]
+      },
+      {
+        "task_id": "STAT_QUIZ_STUDY",
+        "name": "Statistics Quiz Study (Formulas)",
+        "raw_mentions": [
+          "statistics quiz in three days covering hypothesis tests and confidence intervals",
+          "worth 10% of the grade",
+          "feel weak on the formulas"
+        ],
+        "inferred_deadline": "2026-06-07T23:59:59",
+        "uncertainties": [
+          "Total study time required to feel comfortable with formulas."
+        ]
+      },
+      {
+        "task_id": "AASMA_PROPOSAL",
+        "name": "AASMA Project Idea Submission",
+        "raw_mentions": [
+          "submit a one-page project idea for my AASMA class by next Friday",
+          "not hard, but I need to pick a topic and write it clearly"
+        ],
+        "inferred_deadline": "2026-06-11T23:59:59",
+        "uncertainties": [
+          "Time needed for topic selection and writing (assumed to be relatively short)."
+        ]
+      }
+    ],
+    "assumptions": [
+      "The planning window extends until the AASMA deadline (next Friday, 2026-06-11).",
+      "The Operating Systems Lab deadline (tomorrow) is the highest priority.",
+      "The OS Lab coding and report must be completed before 23:59 on 2026-06-05.",
+      "The Statistics Quiz is on 2026-06-07 (three days from today, 2026-06-04).",
+      "Late-night work avoidance means scheduling should generally conclude by 22:00 unless absolutely necessary for a hard deadline.",
+      "The 4-5 hours for OS coding should be scheduled first, followed by the report writing."
+    ]
+  },
+  "agentViews": [
+    {
+      "agent": "Deadline Agent",
+      "task_views": [
+        {
+          "task_id": "OS_LAB_CODING",
+          "task_name": "Operating Systems Lab Coding",
+          "assessment": "This task has the most immediate and hard deadline (tomorrow, 23:59). It must be prioritized today or early tomorrow morning to ensure completion before the deadline. Since no code is written, this is high risk if delayed.",
+          "concerns": [
+            "The deadline is tomorrow, 2026-06-05, at 23:59.",
+            "The student has zero progress and estimates 4-5 hours of coding time."
+          ],
+          "recommendations": [
+            "Schedule the coding session immediately today (2026-06-04) after 15:00.",
+            "Allocate the maximum estimated time (5 hours) to ensure completion."
+          ],
+          "estimated_duration_hours": 5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Start OS Lab Coding today, 2026-06-04, immediately after 15:00."
+          ]
+        },
+        {
+          "task_id": "OS_LAB_REPORT",
+          "task_name": "Operating Systems Lab Report Writing",
+          "assessment": "This task shares the same hard deadline as the coding component. It must be completed before 23:59 tomorrow (2026-06-05). It should be scheduled immediately following the coding session.",
+          "concerns": [
+            "The duration for the short report is unspecified.",
+            "Must be completed by the same deadline as the coding."
+          ],
+          "recommendations": [
+            "Schedule report writing immediately after the coding is finished tomorrow, 2026-06-05, before classes end or immediately after.",
+            "Estimate 1 hour for the report, but be prepared to adjust based on actual time needed."
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Write the OS Lab report immediately after completing the coding component on 2026-06-05."
+          ]
+        },
+        {
+          "task_id": "STAT_QUIZ_STUDY",
+          "task_name": "Statistics Quiz Study (Formulas)",
+          "assessment": "The deadline is in three days (2026-06-07). This is the next most urgent item after the OS Lab. Since the student feels weak on formulas, dedicated time should be scheduled on 2026-06-06.",
+          "concerns": [
+            "The student explicitly stated weakness in formulas, requiring focused study time.",
+            "The deadline is approaching quickly (end of day 2026-06-07)."
+          ],
+          "recommendations": [
+            "Schedule a significant block of study time on 2026-06-06, utilizing the available 4 hours.",
+            "Ensure study concludes well before 22:00 to respect the general request to avoid late nights."
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Dedicate 4 hours on 2026-06-06 to reviewing and practicing Statistics formulas."
+          ]
+        },
+        {
+          "task_id": "AASMA_PROPOSAL",
+          "task_name": "AASMA Project Idea Submission",
+          "assessment": "This task has the most distant deadline (next Friday, 2026-06-11). It is low urgency but requires topic selection. It can be scheduled later in the planning window, utilizing the 4-hour slots available from 2026-06-07 onwards.",
+          "concerns": [
+            "If topic selection is difficult, this could expand beyond the assumed short duration.",
+            "It is currently being overshadowed by the immediate OS Lab deadline."
+          ],
+          "recommendations": [
+            "Schedule time for topic selection and drafting on 2026-06-07 or 2026-06-08.",
+            "Ensure the final submission is scheduled to finish well before the 2026-06-11 deadline."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Allocate 2 hours on 2026-06-07 to finalize the AASMA project topic and draft the one-page idea."
+          ]
+        }
+      ],
+      "overall_comment": "The primary focus must be completing the Operating Systems Lab (Coding and Report) by the end of tomorrow (2026-06-05). I recommend using the available time today (2026-06-04) for the bulk of the coding (5 hours). The remaining coding/report writing should be scheduled immediately after classes tomorrow (2026-06-05). The Statistics Quiz study is the next priority and should consume the full 4 hours available on 2026-06-06. The AASMA proposal is low urgency and can be slotted in later in the week (starting 2026-06-07). All hard deadlines are protected, and late-night work is avoided."
+    },
+    {
+      "agent": "Grade Agent",
+      "task_views": [
+        {
+          "task_id": "OS_LAB_CODING",
+          "task_name": "Operating Systems Lab Coding",
+          "assessment": "This task has the highest academic priority as it is due tomorrow (2026-06-05) and is currently unstarted. It must be completed today or early tomorrow morning to allow time for reporting and submission.",
+          "concerns": [
+            "Imminent deadline (tomorrow).",
+            "The coding component is the largest unknown time sink (4-5 hours)."
+          ],
+          "recommendations": [
+            "Allocate the maximum estimated time (5 hours) today to ensure completion before the end of the day.",
+            "Prioritize coding over all other tasks until complete."
+          ],
+          "estimated_duration_hours": 5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Set up development environment",
+            "Implement core functionality (Phase 1)",
+            "Implement secondary functionality (Phase 2)",
+            "Testing and debugging"
+          ]
+        },
+        {
+          "task_id": "OS_LAB_REPORT",
+          "task_name": "Operating Systems Lab Report Writing",
+          "assessment": "This is intrinsically linked to the coding task and shares the same critical deadline. It must be completed immediately after coding.",
+          "concerns": [
+            "The duration for the report is unspecified, but it must be done before the 23:59 deadline tomorrow."
+          ],
+          "recommendations": [
+            "Schedule a dedicated block immediately following the coding session.",
+            "Keep the report concise as requested ('short report')."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Document results and analysis",
+            "Format and proofread the final report"
+          ]
+        },
+        {
+          "task_id": "STAT_QUIZ_STUDY",
+          "task_name": "Statistics Quiz Study (Formulas)",
+          "assessment": "This quiz is worth 10% and the student feels weak on formulas. This indicates a knowledge gap that requires focused study time, but its deadline is three days away (2026-06-07), making it secondary to the OS Lab.",
+          "concerns": [
+            "Weakness in core material (formulas) suggests a high risk of poor performance if ignored.",
+            "The student only has 4 hours/day available later in the window."
+          ],
+          "recommendations": [
+            "Schedule dedicated formula review time on 2026-06-06 (the day after the OS lab is due) to solidify knowledge early.",
+            "Focus study time specifically on deriving/memorizing formulas rather than general problem solving."
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Review hypothesis test formulas",
+            "Review confidence interval formulas",
+            "Practice applying formulas to sample problems"
+          ]
+        },
+        {
+          "task_id": "AASMA_PROPOSAL",
+          "task_name": "AASMA Project Idea Submission",
+          "assessment": "This task is low-stakes ('not hard') but has the longest deadline (next Friday, 2026-06-11). It should be addressed only after the immediate deadlines and the high-impact statistics study are secured.",
+          "concerns": [
+            "If scheduled too early, it might consume time needed for the OS lab or Statistics study."
+          ],
+          "recommendations": [
+            "Schedule this work for the latter half of the planning window (e.g., 2026-06-09 or later) once immediate academic pressures are resolved.",
+            "Allocate a small block for topic brainstorming today if energy allows, but defer writing."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Brainstorm 3 potential topics",
+            "Select final topic and outline one-pager",
+            "Draft and finalize submission"
+          ]
+        }
+      ],
+      "overall_comment": "The immediate academic priority is the Operating Systems Lab due tomorrow (2026-06-05). Given the student is free after 15:00 today, the maximum estimated time (5 hours for coding + 1.5 hours for the report) should be allocated today to ensure this critical deliverable is met without impacting tomorrow's classes. The Statistics Quiz (10% grade weight) requires focused attention due to formula weakness, so dedicated study time should be scheduled for 2026-06-06. The AASMA project idea is low priority due to its distant deadline and can be scheduled later in the week, respecting the 4-hour daily work limit."
+    },
+    {
+      "agent": "Effort Agent",
+      "task_views": [
+        {
+          "task_id": "OS_LAB_CODING",
+          "task_name": "Operating Systems Lab Coding",
+          "assessment": "This task is high priority due to the immediate deadline (tomorrow). The estimated duration is 4-5 hours. Since the student has not started, this needs immediate attention today.",
+          "concerns": [
+            "The task is completely unstarted, creating high time pressure for completion today or early tomorrow.",
+            "The upper estimate of 5 hours is plausible for a complex lab."
+          ],
+          "recommendations": [
+            "Schedule 5 hours for coding today (2026-06-04) to ensure completion before the evening ends.",
+            "If 5 hours are not completed today, schedule the remaining time first thing tomorrow morning before classes."
+          ],
+          "estimated_duration_hours": 5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Review OS Lab requirements and setup environment (0.5 hours)",
+            "Implement core functionality A (2.0 hours)",
+            "Implement core functionality B (2.0 hours)",
+            "Initial testing and debugging (0.5 hours)"
+          ]
+        },
+        {
+          "task_id": "OS_LAB_REPORT",
+          "task_name": "Operating Systems Lab Report Writing",
+          "assessment": "The report is short but requires completion after the coding is done. I estimate 1.5 hours for writing and proofreading a short report.",
+          "concerns": [
+            "If coding runs long, report writing might be rushed or pushed past the deadline."
+          ],
+          "recommendations": [
+            "Schedule 1.5 hours immediately following the coding session tomorrow (2026-06-05) to ensure submission before the 23:59 deadline.",
+            "If coding finishes early today, use the remaining time for the report."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Outline report sections (0.25 hours)",
+            "Draft findings and analysis (1.0 hours)",
+            "Review and finalize (0.25 hours)"
+          ]
+        },
+        {
+          "task_id": "STAT_QUIZ_STUDY",
+          "task_name": "Statistics Quiz Study (Formulas)",
+          "assessment": "The student feels weak on formulas for a quiz due in three days (2026-06-07). This requires focused effort, perhaps 3-4 hours total, broken up.",
+          "concerns": [
+            "The student's low confidence suggests that simply reviewing might not be enough; active practice is needed.",
+            "This task competes with the high-priority OS Lab today."
+          ],
+          "recommendations": [
+            "Schedule 2 hours for focused formula review and practice problems on 2026-06-06.",
+            "Schedule an additional 1.5 hours on 2026-06-07 for a final review session."
+          ],
+          "estimated_duration_hours": 3.5,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Review Hypothesis Test formulas and work 2 example problems (1.5 hours)",
+            "Review Confidence Interval formulas and work 2 example problems (1.5 hours)",
+            "Quick formula sheet creation/review (0.5 hours)"
+          ]
+        },
+        {
+          "task_id": "AASMA_PROPOSAL",
+          "task_name": "AASMA Project Idea Submission",
+          "assessment": "This is due next Friday (2026-06-11) and is described as 'not hard.' I estimate 2.5 hours total for topic selection, drafting, and polishing the one-page document.",
+          "concerns": [
+            "Since it is low priority and has a distant deadline, it might be neglected until the last minute."
+          ],
+          "recommendations": [
+            "Schedule 1.5 hours on 2026-06-08 to select the topic and draft the main points.",
+            "Schedule 1.0 hour on 2026-06-10 for final writing and review, ensuring it is done well before the Friday deadline."
+          ],
+          "estimated_duration_hours": 2.5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Brainstorm and select final project topic (0.5 hours)",
+            "Draft the one-page idea clearly outlining scope and goals (1.5 hours)",
+            "Proofread and format submission (0.5 hours)"
+          ]
+        }
+      ],
+      "overall_comment": "The immediate priority is the Operating Systems Lab due tomorrow. I have allocated 5 hours today (2026-06-04) for the coding component, respecting the student's 15:00 start time and avoiding late-night work. The remaining tasks are distributed across the subsequent days, prioritizing the Statistics Quiz study before its deadline on 2026-06-07, and scheduling the AASMA proposal submission mid-week to avoid a last-minute rush. The total estimated workload (12.5 hours) is manageable given the student's stated availability of ~4 hours per day for the next few days, plus today's session."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "task_views": [
+        {
+          "task_id": "OS_LAB_CODING",
+          "task_name": "Operating Systems Lab Coding",
+          "assessment": "This task has the most immediate deadline (tomorrow) and requires significant focused time (4-5 hours). It must be prioritized today or early tomorrow morning.",
+          "concerns": [
+            "If scheduled late today, it might push the start of the report writing too close to the deadline or require late-night work."
+          ],
+          "recommendations": [
+            "Schedule the full 5 hours today, starting immediately after 15:00, to maximize completion before the evening.",
+            "If 5 hours is not feasible today, schedule the remaining time first thing tomorrow morning before classes."
+          ],
+          "estimated_duration_hours": 5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Start coding immediately at 15:00 today.",
+            "If coding finishes early, transition immediately to report writing."
+          ]
+        },
+        {
+          "task_id": "OS_LAB_REPORT",
+          "task_name": "Operating Systems Lab Report Writing",
+          "assessment": "This is coupled with the coding task and must be finished by tomorrow night. Since it is a 'short report,' I will estimate 1 hour, but this must be flexible based on coding completion.",
+          "concerns": [
+            "If the coding runs long (5 hours), the report writing might be rushed or end too late tomorrow evening."
+          ],
+          "recommendations": [
+            "Schedule 1 hour for the report immediately following the coding session today, if possible.",
+            "If coding runs late today, schedule the report writing for the morning of the deadline (2026-06-05) before 09:00, or immediately after classes end at 13:00."
+          ],
+          "estimated_duration_hours": 1,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Write report draft.",
+            "Review and finalize report."
+          ]
+        },
+        {
+          "task_id": "STAT_QUIZ_STUDY",
+          "task_name": "Statistics Quiz Study (Formulas)",
+          "assessment": "The quiz is in three days (2026-06-07). The student feels weak on formulas, indicating a need for focused study time, but the deadline is not immediate.",
+          "concerns": [
+            "If too much time is spent on the OS lab today, study time for statistics might be squeezed into the limited 4 hours available on the weekend/later days."
+          ],
+          "recommendations": [
+            "Allocate 2 hours for formula review tomorrow evening (2026-06-05) after classes and the OS lab submission is complete.",
+            "Schedule another 2 hours on 2026-06-06 to solidify understanding before the weekend."
+          ],
+          "estimated_duration_hours": 4,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Review and memorize hypothesis test formulas.",
+            "Review and memorize confidence interval formulas.",
+            "Work through practice problems focusing only on formula application."
+          ]
+        },
+        {
+          "task_id": "AASMA_PROPOSAL",
+          "task_name": "AASMA Project Idea Submission",
+          "assessment": "Deadline is next Friday (2026-06-11). This is low priority for the immediate schedule but needs to be spaced out to avoid a last-minute rush.",
+          "concerns": [
+            "If the student uses all available time on the OS lab and Statistics study, this task might be neglected until the final days, potentially leading to stress."
+          ],
+          "recommendations": [
+            "Schedule 2 hours on 2026-06-08 to select a topic and draft the outline.",
+            "Schedule 1 hour on 2026-06-10 for final writing and submission preparation."
+          ],
+          "estimated_duration_hours": 3,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Brainstorm and select project topic.",
+            "Write one-page draft.",
+            "Final review."
+          ]
+        }
+      ],
+      "overall_comment": "The immediate priority is the Operating Systems Lab due tomorrow. I recommend front-loading the 5 hours of coding today (starting at 15:00) to ensure it is done well before the late-night cutoff. If the coding finishes today, the report should follow immediately. If the OS lab is completed today, tomorrow evening (2026-06-05) can be used for initial Statistics study, respecting the request to avoid late nights. The subsequent days (2026-06-06 onwards) have limited capacity (4 hours/day), which is sufficient to cover the remaining Statistics study and start the AASMA proposal without overloading any single day."
+    },
+    {
+      "agent": "Risk Agent",
+      "task_views": [
+        {
+          "task_id": "OS_LAB_CODING",
+          "task_name": "Operating Systems Lab Coding",
+          "assessment": "This task has an immediate, hard deadline tomorrow (2026-06-05). Since no code has been written, this is a high-risk item requiring immediate attention. The estimated duration is uncertain (4-5 hours).",
+          "concerns": [
+            "Zero progress made on a task due in less than 36 hours.",
+            "The estimated duration is a range (4-5 hours), which introduces uncertainty right before a hard deadline.",
+            "No buffer time is explicitly planned between coding completion and the report writing/submission."
+          ],
+          "recommendations": [
+            "Schedule the maximum estimated time (5 hours) for coding today to maximize buffer before tomorrow's classes.",
+            "Treat the coding phase as the highest priority.",
+            "If coding runs over 5 hours, the report writing must be extremely brief or deferred slightly, risking the deadline."
+          ],
+          "estimated_duration_hours": 5,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Start OS Lab Coding immediately after 15:00 today.",
+            "Allocate 5 hours for coding."
+          ]
+        },
+        {
+          "task_id": "OS_LAB_REPORT",
+          "task_name": "Operating Systems Lab Report Writing",
+          "assessment": "This task is dependent on the coding completion and shares the same immediate deadline. The scope (duration) is completely unknown, which is a significant risk.",
+          "concerns": [
+            "Unknown scope/duration for the report writing.",
+            "If coding takes the full 5 hours today, the report must be done tomorrow, potentially conflicting with classes or requiring late work.",
+            "No contingency time exists if the report is more complex than anticipated."
+          ],
+          "recommendations": [
+            "If coding finishes early today, allocate that time immediately to the report.",
+            "If coding finishes late today, schedule the report for the morning of 2026-06-05 before classes, or immediately after classes, ensuring completion well before 23:59.",
+            "Keep the report scope minimal given the time constraint."
+          ],
+          "estimated_duration_hours": 1.5,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Write the OS Lab Report immediately following coding completion.",
+            "If coding finishes today, aim to complete the report tonight."
+          ]
+        },
+        {
+          "task_id": "STAT_QUIZ_STUDY",
+          "task_name": "Statistics Quiz Study (Formulas)",
+          "assessment": "The quiz is in three days (2026-06-07). The student feels weak on formulas, indicating a knowledge gap that requires dedicated study time. The low grade weight (10%) suggests lower priority than the OS Lab, but the weakness warrants early attention.",
+          "concerns": [
+            "The student explicitly states weakness in formulas; this requires focused, high-quality study time, not rushed cramming.",
+            "The general 4 hours/day availability might be insufficient if the formula weakness is severe.",
+            "No buffer time is scheduled for practice problems or review before the quiz."
+          ],
+          "recommendations": [
+            "Schedule study sessions on 2026-06-06 and 2026-06-07.",
+            "Dedicate the first study block to formula memorization/understanding, followed by practice problems.",
+            "If the OS Lab finishes early today, use that time for initial formula review to reduce pressure tomorrow."
+          ],
+          "estimated_duration_hours": 6,
+          "confidence": "Medium",
+          "suggested_subtasks": [
+            "Review and internalize all required statistics formulas.",
+            "Work through several practice problems applying the formulas."
+          ]
+        },
+        {
+          "task_id": "AASMA_PROPOSAL",
+          "task_name": "AASMA Project Idea Submission",
+          "assessment": "This task has the longest lead time (due next Friday, 2026-06-11) and is described as 'not hard.' This makes it susceptible to procrastination and last-minute rushing, which increases the risk of poor quality or scope creep.",
+          "concerns": [
+            "The deadline is far enough away that it might be ignored until the final days, leading to rushed topic selection and writing.",
+            "The scope involves 'picking a topic,' which can take longer than expected if the student struggles with ideation."
+          ],
+          "recommendations": [
+            "Schedule a dedicated block of time (e.g., 2 hours) on 2026-06-08 or 2026-06-09 to finalize the topic and draft the idea.",
+            "Do not wait until 2026-06-10 or 2026-06-11 to start, as this consumes valuable contingency time needed for other tasks."
+          ],
+          "estimated_duration_hours": 2,
+          "confidence": "High",
+          "suggested_subtasks": [
+            "Brainstorm 2-3 potential project topics.",
+            "Select the best topic and write the one-page proposal."
+          ]
+        }
+      ],
+      "overall_comment": "The immediate risk is dominated by the Operating Systems Lab due tomorrow. The plan must prioritize allocating 5 hours for coding today (2026-06-04) to ensure the deadline is met without requiring late-night work or sacrificing tomorrow morning. The unknown duration of the report writing is a secondary, but critical, dependency risk for the OS Lab. I recommend front-loading the OS work today. The Statistics Quiz study needs to be scheduled early (2026-06-06) to address the stated weakness in formulas before the quiz day. The AASMA proposal should be scheduled mid-week (2026-06-08/09) to utilize the standard 4-hour workdays while maintaining a safe buffer before its Friday deadline. The current schedule appears tight for the OS Lab, but completing it today mitigates the largest immediate threat."
+    }
+  ],
+  "calendarVersions": [
+    {
+      "calendar": {
+        "calendar_version": 1,
+        "planning_window": {
+          "start_date": "2026-06-04",
+          "end_date": "2026-06-11",
+          "reason": "Planning starts today and extends to the deadline for the AASMA project idea submission next Friday."
+        },
+        "overall_strategy": [
+          "Prioritize and complete the Operating Systems Lab today and tomorrow morning to meet the immediate deadline.",
+          "Schedule focused study time for the Statistics Quiz formulas on 2026-06-06.",
+          "Space out the AASMA Project Idea Submission across the middle of the week to avoid last-minute stress.",
+          "Ensure all work blocks conclude before 22:00 to respect the request to avoid late-night work."
+        ],
+        "days": [
+          {
+            "date": "2026-06-04",
+            "day_name": "Thursday",
+            "assumed_available_hours": 5,
+            "day_reasoning": "The student is free starting at 15:00. We allocate the maximum estimated time (5 hours) to the high-priority Operating Systems Lab coding today to maximize progress before the deadline tomorrow.",
+            "blocks": [
+              {
+                "id": "B1_T1_01",
+                "task_id": "OS_LAB_CODING",
+                "task_name": "Operating Systems Lab Coding",
+                "type": "work",
+                "start": "2026-06-04T15:00:00",
+                "end": "2026-06-04T20:00:00",
+                "duration_hours": 5,
+                "description": "Complete the coding portion of the Operating Systems Lab.",
+                "reasoning": "This task is unstarted and due tomorrow, requiring immediate focus using the afternoon availability."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-05",
+            "day_name": "Friday",
+            "assumed_available_hours": 8,
+            "day_reasoning": "Classes run until 13:00. The remaining time is dedicated to finishing the Operating Systems Lab (report writing) and starting the Statistics Quiz study, ensuring completion before the 23:59 deadline.",
+            "blocks": [
+              {
+                "id": "B2_T1_02",
+                "task_id": "OS_LAB_REPORT",
+                "task_name": "Operating Systems Lab Report Writing",
+                "type": "work",
+                "start": "2026-06-05T13:00:00",
+                "end": "2026-06-05T14:30:00",
+                "duration_hours": 1.5,
+                "description": "Write and finalize the short report for the Operating Systems Lab.",
+                "reasoning": "This must be completed immediately after coding (which is assumed finished or nearly finished today) to meet the 23:59 deadline."
+              },
+              {
+                "id": "B2_T3_01",
+                "task_id": "STAT_QUIZ_STUDY",
+                "task_name": "Statistics Quiz Study (Formulas)",
+                "type": "work",
+                "start": "2026-06-05T14:30:00",
+                "end": "2026-06-05T16:30:00",
+                "duration_hours": 2,
+                "description": "Initial focused study on Statistics formulas, starting immediately after submitting the OS Lab.",
+                "reasoning": "Starting the Statistics study today leverages available time after the critical OS Lab submission, addressing the student's weakness early."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-06",
+            "day_name": "Saturday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "This day is dedicated to continuing the Statistics Quiz preparation, utilizing the full 4 hours of general availability to solidify formula knowledge before the quiz deadline.",
+            "blocks": [
+              {
+                "id": "B3_T3_02",
+                "task_id": "STAT_QUIZ_STUDY",
+                "task_name": "Statistics Quiz Study (Formulas)",
+                "type": "work",
+                "start": "2026-06-06T10:00:00",
+                "end": "2026-06-06T14:00:00",
+                "duration_hours": 4,
+                "description": "Dedicated session to practice Statistics formulas and work through related problems.",
+                "reasoning": "This block utilizes the full available time slot to address the stated weakness in formulas for the quiz due tomorrow."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-07",
+            "day_name": "Sunday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "The Statistics Quiz is due today, so a final review session is scheduled. The remaining time is used to start the lower-priority AASMA proposal topic selection.",
+            "blocks": [
+              {
+                "id": "B4_T3_03",
+                "task_id": "STAT_QUIZ_STUDY",
+                "task_name": "Statistics Quiz Study (Formulas)",
+                "type": "work",
+                "start": "2026-06-07T10:00:00",
+                "end": "2026-06-07T11:00:00",
+                "duration_hours": 1,
+                "description": "Final quick review of Statistics formulas before the quiz deadline.",
+                "reasoning": "A short session to ensure confidence before the quiz deadline at 23:59."
+              },
+              {
+                "id": "B4_T4_01",
+                "task_id": "AASMA_PROPOSAL",
+                "task_name": "AASMA Project Idea Submission",
+                "type": "work",
+                "start": "2026-06-07T11:00:00",
+                "end": "2026-06-07T13:00:00",
+                "duration_hours": 2,
+                "description": "Brainstorm potential topics and select the final project idea for the AASMA class.",
+                "reasoning": "Starting the low-priority AASMA proposal now utilizes available time after the Statistics study, ensuring topic selection is done early."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-08",
+            "day_name": "Monday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "Dedicated time to draft the AASMA project idea, as the topic selection was completed yesterday.",
+            "blocks": [
+              {
+                "id": "B5_T4_02",
+                "task_id": "AASMA_PROPOSAL",
+                "task_name": "AASMA Project Idea Submission",
+                "type": "work",
+                "start": "2026-06-08T10:00:00",
+                "end": "2026-06-08T12:00:00",
+                "duration_hours": 2,
+                "description": "Draft the main content of the one-page AASMA project idea.",
+                "reasoning": "Allocating 2 hours to drafting ensures the bulk of the writing is done mid-week, leaving buffer time before the Friday deadline."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-09",
+            "day_name": "Tuesday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "This day is kept open as a general contingency day, as all immediate deadlines are met and the AASMA proposal is progressing well. No work blocks are scheduled to allow for flexibility or rest.",
+            "blocks": []
+          },
+          {
+            "date": "2026-06-10",
+            "day_name": "Wednesday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "A final block is scheduled to finalize and polish the AASMA proposal, ensuring it is ready the day before the deadline.",
+            "blocks": [
+              {
+                "id": "B7_T4_03",
+                "task_id": "AASMA_PROPOSAL",
+                "task_name": "AASMA Project Idea Submission",
+                "type": "work",
+                "start": "2026-06-10T10:00:00",
+                "end": "2026-06-10T11:00:00",
+                "duration_hours": 1,
+                "description": "Final review, formatting, and submission preparation for the AASMA project idea.",
+                "reasoning": "This finalizes the AASMA proposal one day before the deadline, respecting the 4-hour daily limit."
+              }
+            ]
+          },
+          {
+            "date": "2026-06-11",
+            "day_name": "Thursday",
+            "assumed_available_hours": 4,
+            "day_reasoning": "This day is kept open as a contingency day, as the AASMA proposal deadline is today, and all other tasks are complete.",
+            "blocks": []
+          }
+        ],
+        "compromises": [
+          {
+            "conflict": "The Operating Systems Lab coding (5 hours) and report writing (1.5 hours) must both be completed by 23:59 tomorrow (2026-06-05).",
+            "resolution": "The coding is heavily front-loaded today (5 hours) to maximize the chance of completing the report writing tomorrow immediately after classes, ensuring submission well before the hard deadline."
+          },
+          {
+            "conflict": "The student feels weak on Statistics formulas, requiring focused study time, but the general availability later in the week is only 4 hours/day.",
+            "resolution": "The Statistics study is scheduled immediately after the OS Lab submission tomorrow (2 hours) and uses the full 4 hours available on Saturday, prioritizing this knowledge gap early in the schedule."
+          }
+        ],
+        "known_weaknesses": [
+          "The exact time required for the Operating Systems Lab report writing is unknown.",
+          "The student explicitly stated weakness regarding Statistics formulas, suggesting a higher cognitive load for that study time.",
+          "The general availability of only 4 hours per day after tomorrow limits the ability to absorb unexpected delays."
+        ],
+        "changes_from_previous": [],
+        "unresolved_critiques": []
+      },
+      "critiques": [
+        {
+          "agent": "Deadline Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Operating Systems Lab Coding task requires 4 or 5 hours, and the student has not started. Scheduling 5 hours today (2026-06-04) is excellent for meeting the deadline. However, the report writing (OS_LAB_REPORT) is scheduled for 1.5 hours immediately after classes tomorrow (2026-06-05, 13:00-14:30). If the coding took the full 5 hours today, the report writing starts immediately after classes tomorrow. This leaves no buffer time between the coding completion (if it spills over today or tomorrow morning) and the report writing, which must be done before the 23:59 deadline.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Operating Systems Lab Coding",
+                "Operating Systems Lab Report Writing"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Ensure the OS Lab Coding is fully completed by the end of 2026-06-04, or allocate a small buffer (e.g., 30 minutes) on 2026-06-05 before 13:00 for final coding checks, allowing the report writing to start slightly later or be shorter."
+            },
+            {
+              "issue": "The Statistics Quiz Study (Formulas) is scheduled for 2 hours on 2026-06-05, immediately following the OS Lab Report writing. Since the student feels weak on formulas, this block might be mentally taxing immediately after completing a high-priority, high-stress task (OS Lab). While this addresses the urgency of starting the study early, it risks burnout on the second priority task.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Statistics Quiz Study (Formulas)"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "If possible, shift the 2 hours of Statistics study on 2026-06-05 to the end of the day (e.g., 18:00-20:00) or move it entirely to the dedicated 4-hour block on 2026-06-06, provided the OS Lab submission is confirmed early."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The immediate completion of the Operating Systems Lab Coding today (2026-06-04) successfully addresses the highest urgency requirement.",
+            "The Statistics Quiz study is correctly prioritized to start immediately after the OS Lab submission tomorrow (2026-06-05) and continues on Saturday (2026-06-06), ensuring the 2026-06-07 deadline is met with significant preparation time."
+          ],
+          "overall_comment": "The calendar successfully prioritizes the immediate, hard deadline for the Operating Systems Lab by allocating 5 hours today. All critical deadlines (OS Lab 2026-06-05, Statistics Quiz 2026-06-07) receive meaningful work before they are due. I have minor concerns regarding the tight transition between the OS Lab report writing and the start of Statistics study tomorrow, which could lead to rushed work if the OS Lab runs slightly long. However, since the OS Lab is fully scheduled for completion by 14:30 tomorrow, the risk is manageable, leading to an approval with minor concerns."
+        },
+        {
+          "agent": "Grade Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The Statistics Quiz Study (Formulas) is worth 10% of the grade and the student feels weak on formulas. While the study is scheduled early (starting today and continuing Saturday), scheduling 2 hours on Friday, 2026-06-05, immediately after the OS Lab submission might lead to burnout or reduced focus before the main study block on Saturday, especially since Friday afternoon follows a morning of classes.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Statistics Quiz Study (Formulas)"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Move the 2 hours of Statistics study from Friday afternoon (2026-06-05) to Saturday morning, allowing Friday evening to be purely dedicated to submission finalization and recovery after the high-intensity OS Lab work."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The Operating Systems Lab coding (5 hours) and report writing (1.5 hours) must both be completed by 23:59 tomorrow (2026-06-05). The coding is heavily front-loaded today (5 hours) to maximize the chance of completing the report writing tomorrow immediately after classes, ensuring submission well before the hard deadline.",
+            "The student feels weak on Statistics formulas, requiring focused study time, but the general availability later in the week is only 4 hours/day. The Statistics study is scheduled immediately after the OS Lab submission tomorrow (2 hours) and uses the full 4 hours available on Saturday, prioritizing this knowledge gap early in the schedule."
+          ],
+          "overall_comment": "The schedule successfully prioritizes the immediate, high-stakes Operating Systems Lab by allocating 5 hours today for coding and 1.5 hours tomorrow for reporting, meeting the critical deadline. The high-value Statistics Quiz study is also addressed early (starting tomorrow and continuing Saturday). I am approving with minor concerns because scheduling Statistics study immediately after the OS Lab submission on Friday risks cognitive overload; shifting that block to Saturday would better protect the quality of the study session, given the student's stated weakness in the material."
+        },
+        {
+          "agent": "Effort Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The estimated duration for Statistics Quiz Study on 2026-06-06 is 4 hours, which exceeds the general availability assumption of 4 hours per day for that period, but the block ends exactly at the assumed limit. More critically, the previous estimate suggested 3.5 hours total, but the schedule allocates 2 hours on 2026-06-05, 4 hours on 2026-06-06, and 1 hour on 2026-06-07, totaling 7 hours. This significantly overruns the initial 3.5-hour estimate, suggesting the task is underestimated or the schedule is too dense for this low-energy subject.",
+              "severity": "major",
+              "affected_tasks": [
+                "Statistics Quiz Study (Formulas)"
+              ],
+              "affected_days": [
+                "2026-06-06"
+              ],
+              "suggested_fix": "Review the total allocated time (7 hours) against the initial estimate (3.5 hours). If 7 hours is truly necessary due to low confidence, this must be acknowledged as an underestimated task, and the 4-hour block on 2026-06-06 should be reduced to 3 hours to respect the general availability constraint and avoid over-committing on a single day."
+            },
+            {
+              "issue": "The Operating Systems Lab Coding task was estimated at 4-5 hours. The schedule allocates exactly 5 hours today (2026-06-04). If debugging takes longer than expected, the report writing scheduled for tomorrow morning (2026-06-05) might be delayed, potentially pushing the submission close to the deadline or requiring late-night work, which was explicitly requested to be avoided.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Operating Systems Lab Coding",
+                "Operating Systems Lab Report Writing"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "While the current split is aggressive but plausible, ensure the 5 hours allocated today for coding are highly productive. If the coding is not fully complete by 20:00 today, the remaining time should be scheduled first thing tomorrow morning (e.g., 08:00-09:00) before classes, rather than relying on the report writing slot tomorrow to absorb overflow."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The Operating Systems Lab coding is heavily front-loaded today (2026-06-04) to maximize the chance of completing the report writing tomorrow immediately after classes, ensuring submission well before the 23:59 deadline.",
+            "The Statistics study is scheduled immediately after the OS Lab submission tomorrow (2 hours) and uses the full 4 hours available on Saturday, prioritizing this knowledge gap early in the schedule."
+          ],
+          "overall_comment": "The schedule aggressively tackles the immediate Operating Systems Lab deadline by allocating the full 5 hours today. The subsequent scheduling of the Statistics study is dense, allocating 7 hours total when only 3.5 were initially estimated, suggesting an underestimation of the effort required to overcome the student's low confidence in formulas. I approve with minor concerns because the schedule is very tight, especially regarding the Statistics study load, but it respects the end-of-day constraints."
+        },
+        {
+          "agent": "Wellbeing Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The schedule for 2026-06-05 is very dense immediately following fixed commitments, potentially leading to cognitive overload.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Operating Systems Lab Report Writing",
+                "Statistics Quiz Study (Formulas)"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "While the OS Lab submission is critical, starting the Statistics study immediately at 14:30 after classes (ending at 13:00) and the OS Lab report (ending at 14:30) might be too much cognitive stacking. If the OS Lab report takes longer than 1.5 hours, the Statistics study should be pushed to the evening or the next day to ensure a slight decompression period after the deadline rush."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The immediate priority of the Operating Systems Lab coding was successfully front-loaded today (2026-06-04) from 15:00 to 20:00, respecting the late-night avoidance request.",
+            "The Statistics study is scheduled early (tomorrow, 2026-06-05) to address the stated weakness, even though the deadline is later."
+          ],
+          "overall_comment": "The plan effectively prioritizes the immediate Operating Systems Lab deadline by scheduling the bulk of the coding today. All work blocks conclude well before 22:00, respecting the request to avoid late-night work. The only minor concern is the tight transition on 2026-06-05, where the student moves directly from fixed commitments (ending 13:00) into report writing (1.5h) and then immediately into focused study (2h). This stacking is acceptable given the high priority of meeting the OS deadline, but the student should be mindful of potential fatigue on that day."
+        },
+        {
+          "agent": "Risk Agent",
+          "calendar_version": 1,
+          "approval": "approve_with_minor_concerns",
+          "severity": "minor",
+          "critiques": [
+            {
+              "issue": "The plan relies on the Operating Systems Lab coding finishing exactly on time today (5 hours) and the report writing being exactly 1.5 hours tomorrow immediately after classes. If the coding takes 5.5 hours today, or if the report writing takes 2 hours tomorrow, the entire OS Lab submission is at risk of being late or requiring work after 14:30 on 2026-06-05, which is too close to the 23:59 deadline given the uncertainty.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Operating Systems Lab Coding",
+                "Operating Systems Lab Report Writing"
+              ],
+              "affected_days": [
+                "2026-06-04",
+                "2026-06-05"
+              ],
+              "suggested_fix": "Schedule a small contingency buffer (e.g., 30 minutes) on 2026-06-05 before the report writing block, or allocate an extra 30 minutes for coding today, ending at 20:30, to absorb minor slippage."
+            },
+            {
+              "issue": "The Statistics Quiz Study (Formulas) is scheduled for 2 hours on 2026-06-05 immediately following the OS Lab submission block. While this addresses the weakness early, it creates a dependency chain where any delay in the OS Lab submission pushes the Statistics study into the evening, potentially conflicting with the 'avoid late-night work' constraint, or forcing it to be cut short.",
+              "severity": "minor",
+              "affected_tasks": [
+                "Statistics Quiz Study (Formulas)"
+              ],
+              "affected_days": [
+                "2026-06-05"
+              ],
+              "suggested_fix": "Move the 2-hour Statistics study block on 2026-06-05 to start later (e.g., 16:00) or shift it entirely to the morning of 2026-06-06, relying on the dedicated 4-hour block then. This decouples the Statistics study from the immediate OS Lab deadline pressure."
+            },
+            {
+              "issue": "The AASMA Project Idea Submission is scheduled for 2026-06-07 and 2026-06-10. While this spreads the work, the 2026-06-07 block (2 hours) is immediately after the Statistics review. If the Statistics review runs long, this AASMA work will be skipped, pushing the entire proposal completion to 2026-06-10, which is too close to the 2026-06-11 deadline, eliminating contingency time.",
+              "severity": "minor",
+              "affected_tasks": [
+                "AASMA Project Idea Submission"
+              ],
+              "affected_days": [
+                "2026-06-07",
+                "2026-06-10"
+              ],
+              "suggested_fix": "Schedule the initial AASMA work (topic selection/drafting) for 2026-06-08 instead of 2026-06-07, ensuring the 2026-06-07 slot is reserved as a contingency buffer for Statistics or OS Lab overruns."
+            }
+          ],
+          "acknowledged_compromises": [
+            "The Operating Systems Lab coding is heavily front-loaded today (2026-06-04) to maximize the chance of completing the report writing tomorrow immediately after classes, ensuring submission well before the hard deadline.",
+            "The Statistics study is scheduled immediately after the OS Lab submission tomorrow (2 hours) and uses the full 4 hours available on Saturday, prioritizing this knowledge gap early in the schedule."
+          ],
+          "overall_comment": "The plan successfully addresses the highest immediate risk (OS Lab) by front-loading the coding today. However, the schedule is extremely tight for the OS Lab completion, leaving no room for error in the 5-hour coding estimate or the 1.5-hour report estimate. Furthermore, the immediate scheduling of Statistics study on 2026-06-05 creates a fragile dependency chain. I am approving with minor concerns because the core tasks are scheduled, but the lack of buffers around the critical OS Lab submission and the immediate follow-up study session introduces fragility. The suggested fixes aim to introduce necessary contingency time."
+        }
+      ],
+      "validation": {
+        "valid": false,
+        "violations": [
+          {
+            "code": "day_outside_window",
+            "message": "2026-06-11 is outside the planning window 2026-06-04 → 2026-06-11.",
+            "severity": "error"
+          }
+        ]
+      },
+      "approvals": 5,
+      "hasCritical": false
+    }
+  ],
+  "finalCalendar": {
+    "calendar_version": 1,
+    "planning_window": {
+      "start_date": "2026-06-04",
+      "end_date": "2026-06-11",
+      "reason": "Planning starts today and extends to the deadline for the AASMA project idea submission next Friday."
+    },
+    "overall_strategy": [
+      "Prioritize and complete the Operating Systems Lab today and tomorrow morning to meet the immediate deadline.",
+      "Schedule focused study time for the Statistics Quiz formulas on 2026-06-06.",
+      "Space out the AASMA Project Idea Submission across the middle of the week to avoid last-minute stress.",
+      "Ensure all work blocks conclude before 22:00 to respect the request to avoid late-night work."
+    ],
+    "days": [
+      {
+        "date": "2026-06-04",
+        "day_name": "Thursday",
+        "assumed_available_hours": 5,
+        "day_reasoning": "The student is free starting at 15:00. We allocate the maximum estimated time (5 hours) to the high-priority Operating Systems Lab coding today to maximize progress before the deadline tomorrow.",
+        "blocks": [
+          {
+            "id": "B1_T1_01",
+            "task_id": "OS_LAB_CODING",
+            "task_name": "Operating Systems Lab Coding",
+            "type": "work",
+            "start": "2026-06-04T15:00:00",
+            "end": "2026-06-04T20:00:00",
+            "duration_hours": 5,
+            "description": "Complete the coding portion of the Operating Systems Lab.",
+            "reasoning": "This task is unstarted and due tomorrow, requiring immediate focus using the afternoon availability."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-05",
+        "day_name": "Friday",
+        "assumed_available_hours": 8,
+        "day_reasoning": "Classes run until 13:00. The remaining time is dedicated to finishing the Operating Systems Lab (report writing) and starting the Statistics Quiz study, ensuring completion before the 23:59 deadline.",
+        "blocks": [
+          {
+            "id": "B2_T1_02",
+            "task_id": "OS_LAB_REPORT",
+            "task_name": "Operating Systems Lab Report Writing",
+            "type": "work",
+            "start": "2026-06-05T13:00:00",
+            "end": "2026-06-05T14:30:00",
+            "duration_hours": 1.5,
+            "description": "Write and finalize the short report for the Operating Systems Lab.",
+            "reasoning": "This must be completed immediately after coding (which is assumed finished or nearly finished today) to meet the 23:59 deadline."
+          },
+          {
+            "id": "B2_T3_01",
+            "task_id": "STAT_QUIZ_STUDY",
+            "task_name": "Statistics Quiz Study (Formulas)",
+            "type": "work",
+            "start": "2026-06-05T14:30:00",
+            "end": "2026-06-05T16:30:00",
+            "duration_hours": 2,
+            "description": "Initial focused study on Statistics formulas, starting immediately after submitting the OS Lab.",
+            "reasoning": "Starting the Statistics study today leverages available time after the critical OS Lab submission, addressing the student's weakness early."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-06",
+        "day_name": "Saturday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "This day is dedicated to continuing the Statistics Quiz preparation, utilizing the full 4 hours of general availability to solidify formula knowledge before the quiz deadline.",
+        "blocks": [
+          {
+            "id": "B3_T3_02",
+            "task_id": "STAT_QUIZ_STUDY",
+            "task_name": "Statistics Quiz Study (Formulas)",
+            "type": "work",
+            "start": "2026-06-06T10:00:00",
+            "end": "2026-06-06T14:00:00",
+            "duration_hours": 4,
+            "description": "Dedicated session to practice Statistics formulas and work through related problems.",
+            "reasoning": "This block utilizes the full available time slot to address the stated weakness in formulas for the quiz due tomorrow."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-07",
+        "day_name": "Sunday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "The Statistics Quiz is due today, so a final review session is scheduled. The remaining time is used to start the lower-priority AASMA proposal topic selection.",
+        "blocks": [
+          {
+            "id": "B4_T3_03",
+            "task_id": "STAT_QUIZ_STUDY",
+            "task_name": "Statistics Quiz Study (Formulas)",
+            "type": "work",
+            "start": "2026-06-07T10:00:00",
+            "end": "2026-06-07T11:00:00",
+            "duration_hours": 1,
+            "description": "Final quick review of Statistics formulas before the quiz deadline.",
+            "reasoning": "A short session to ensure confidence before the quiz deadline at 23:59."
+          },
+          {
+            "id": "B4_T4_01",
+            "task_id": "AASMA_PROPOSAL",
+            "task_name": "AASMA Project Idea Submission",
+            "type": "work",
+            "start": "2026-06-07T11:00:00",
+            "end": "2026-06-07T13:00:00",
+            "duration_hours": 2,
+            "description": "Brainstorm potential topics and select the final project idea for the AASMA class.",
+            "reasoning": "Starting the low-priority AASMA proposal now utilizes available time after the Statistics study, ensuring topic selection is done early."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-08",
+        "day_name": "Monday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "Dedicated time to draft the AASMA project idea, as the topic selection was completed yesterday.",
+        "blocks": [
+          {
+            "id": "B5_T4_02",
+            "task_id": "AASMA_PROPOSAL",
+            "task_name": "AASMA Project Idea Submission",
+            "type": "work",
+            "start": "2026-06-08T10:00:00",
+            "end": "2026-06-08T12:00:00",
+            "duration_hours": 2,
+            "description": "Draft the main content of the one-page AASMA project idea.",
+            "reasoning": "Allocating 2 hours to drafting ensures the bulk of the writing is done mid-week, leaving buffer time before the Friday deadline."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-09",
+        "day_name": "Tuesday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "This day is kept open as a general contingency day, as all immediate deadlines are met and the AASMA proposal is progressing well. No work blocks are scheduled to allow for flexibility or rest.",
+        "blocks": []
+      },
+      {
+        "date": "2026-06-10",
+        "day_name": "Wednesday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "A final block is scheduled to finalize and polish the AASMA proposal, ensuring it is ready the day before the deadline.",
+        "blocks": [
+          {
+            "id": "B7_T4_03",
+            "task_id": "AASMA_PROPOSAL",
+            "task_name": "AASMA Project Idea Submission",
+            "type": "work",
+            "start": "2026-06-10T10:00:00",
+            "end": "2026-06-10T11:00:00",
+            "duration_hours": 1,
+            "description": "Final review, formatting, and submission preparation for the AASMA project idea.",
+            "reasoning": "This finalizes the AASMA proposal one day before the deadline, respecting the 4-hour daily limit."
+          }
+        ]
+      },
+      {
+        "date": "2026-06-11",
+        "day_name": "Thursday",
+        "assumed_available_hours": 4,
+        "day_reasoning": "This day is kept open as a contingency day, as the AASMA proposal deadline is today, and all other tasks are complete.",
+        "blocks": []
+      }
+    ],
+    "compromises": [
+      {
+        "conflict": "The Operating Systems Lab coding (5 hours) and report writing (1.5 hours) must both be completed by 23:59 tomorrow (2026-06-05).",
+        "resolution": "The coding is heavily front-loaded today (5 hours) to maximize the chance of completing the report writing tomorrow immediately after classes, ensuring submission well before the hard deadline."
+      },
+      {
+        "conflict": "The student feels weak on Statistics formulas, requiring focused study time, but the general availability later in the week is only 4 hours/day.",
+        "resolution": "The Statistics study is scheduled immediately after the OS Lab submission tomorrow (2 hours) and uses the full 4 hours available on Saturday, prioritizing this knowledge gap early in the schedule."
+      }
+    ],
+    "known_weaknesses": [
+      "The exact time required for the Operating Systems Lab report writing is unknown.",
+      "The student explicitly stated weakness regarding Statistics formulas, suggesting a higher cognitive load for that study time.",
+      "The general availability of only 4 hours per day after tomorrow limits the ability to absorb unexpected delays."
+    ],
+    "changes_from_previous": [],
+    "unresolved_critiques": []
+  },
+  "critiques": [
+    {
+      "agent": "Deadline Agent",
+      "calendar_version": 1,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The Operating Systems Lab Coding task requires 4 or 5 hours, and the student has not started. Scheduling 5 hours today (2026-06-04) is excellent for meeting the deadline. However, the report writing (OS_LAB_REPORT) is scheduled for 1.5 hours immediately after classes tomorrow (2026-06-05, 13:00-14:30). If the coding took the full 5 hours today, the report writing starts immediately after classes tomorrow. This leaves no buffer time between the coding completion (if it spills over today or tomorrow morning) and the report writing, which must be done before the 23:59 deadline.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Operating Systems Lab Coding",
+            "Operating Systems Lab Report Writing"
+          ],
+          "affected_days": [
+            "2026-06-05"
+          ],
+          "suggested_fix": "Ensure the OS Lab Coding is fully completed by the end of 2026-06-04, or allocate a small buffer (e.g., 30 minutes) on 2026-06-05 before 13:00 for final coding checks, allowing the report writing to start slightly later or be shorter."
+        },
+        {
+          "issue": "The Statistics Quiz Study (Formulas) is scheduled for 2 hours on 2026-06-05, immediately following the OS Lab Report writing. Since the student feels weak on formulas, this block might be mentally taxing immediately after completing a high-priority, high-stress task (OS Lab). While this addresses the urgency of starting the study early, it risks burnout on the second priority task.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Statistics Quiz Study (Formulas)"
+          ],
+          "affected_days": [
+            "2026-06-05"
+          ],
+          "suggested_fix": "If possible, shift the 2 hours of Statistics study on 2026-06-05 to the end of the day (e.g., 18:00-20:00) or move it entirely to the dedicated 4-hour block on 2026-06-06, provided the OS Lab submission is confirmed early."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The immediate completion of the Operating Systems Lab Coding today (2026-06-04) successfully addresses the highest urgency requirement.",
+        "The Statistics Quiz study is correctly prioritized to start immediately after the OS Lab submission tomorrow (2026-06-05) and continues on Saturday (2026-06-06), ensuring the 2026-06-07 deadline is met with significant preparation time."
+      ],
+      "overall_comment": "The calendar successfully prioritizes the immediate, hard deadline for the Operating Systems Lab by allocating 5 hours today. All critical deadlines (OS Lab 2026-06-05, Statistics Quiz 2026-06-07) receive meaningful work before they are due. I have minor concerns regarding the tight transition between the OS Lab report writing and the start of Statistics study tomorrow, which could lead to rushed work if the OS Lab runs slightly long. However, since the OS Lab is fully scheduled for completion by 14:30 tomorrow, the risk is manageable, leading to an approval with minor concerns."
+    },
+    {
+      "agent": "Grade Agent",
+      "calendar_version": 1,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The Statistics Quiz Study (Formulas) is worth 10% of the grade and the student feels weak on formulas. While the study is scheduled early (starting today and continuing Saturday), scheduling 2 hours on Friday, 2026-06-05, immediately after the OS Lab submission might lead to burnout or reduced focus before the main study block on Saturday, especially since Friday afternoon follows a morning of classes.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Statistics Quiz Study (Formulas)"
+          ],
+          "affected_days": [
+            "2026-06-05"
+          ],
+          "suggested_fix": "Move the 2 hours of Statistics study from Friday afternoon (2026-06-05) to Saturday morning, allowing Friday evening to be purely dedicated to submission finalization and recovery after the high-intensity OS Lab work."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The Operating Systems Lab coding (5 hours) and report writing (1.5 hours) must both be completed by 23:59 tomorrow (2026-06-05). The coding is heavily front-loaded today (5 hours) to maximize the chance of completing the report writing tomorrow immediately after classes, ensuring submission well before the hard deadline.",
+        "The student feels weak on Statistics formulas, requiring focused study time, but the general availability later in the week is only 4 hours/day. The Statistics study is scheduled immediately after the OS Lab submission tomorrow (2 hours) and uses the full 4 hours available on Saturday, prioritizing this knowledge gap early in the schedule."
+      ],
+      "overall_comment": "The schedule successfully prioritizes the immediate, high-stakes Operating Systems Lab by allocating 5 hours today for coding and 1.5 hours tomorrow for reporting, meeting the critical deadline. The high-value Statistics Quiz study is also addressed early (starting tomorrow and continuing Saturday). I am approving with minor concerns because scheduling Statistics study immediately after the OS Lab submission on Friday risks cognitive overload; shifting that block to Saturday would better protect the quality of the study session, given the student's stated weakness in the material."
+    },
+    {
+      "agent": "Effort Agent",
+      "calendar_version": 1,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The estimated duration for Statistics Quiz Study on 2026-06-06 is 4 hours, which exceeds the general availability assumption of 4 hours per day for that period, but the block ends exactly at the assumed limit. More critically, the previous estimate suggested 3.5 hours total, but the schedule allocates 2 hours on 2026-06-05, 4 hours on 2026-06-06, and 1 hour on 2026-06-07, totaling 7 hours. This significantly overruns the initial 3.5-hour estimate, suggesting the task is underestimated or the schedule is too dense for this low-energy subject.",
+          "severity": "major",
+          "affected_tasks": [
+            "Statistics Quiz Study (Formulas)"
+          ],
+          "affected_days": [
+            "2026-06-06"
+          ],
+          "suggested_fix": "Review the total allocated time (7 hours) against the initial estimate (3.5 hours). If 7 hours is truly necessary due to low confidence, this must be acknowledged as an underestimated task, and the 4-hour block on 2026-06-06 should be reduced to 3 hours to respect the general availability constraint and avoid over-committing on a single day."
+        },
+        {
+          "issue": "The Operating Systems Lab Coding task was estimated at 4-5 hours. The schedule allocates exactly 5 hours today (2026-06-04). If debugging takes longer than expected, the report writing scheduled for tomorrow morning (2026-06-05) might be delayed, potentially pushing the submission close to the deadline or requiring late-night work, which was explicitly requested to be avoided.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Operating Systems Lab Coding",
+            "Operating Systems Lab Report Writing"
+          ],
+          "affected_days": [
+            "2026-06-04",
+            "2026-06-05"
+          ],
+          "suggested_fix": "While the current split is aggressive but plausible, ensure the 5 hours allocated today for coding are highly productive. If the coding is not fully complete by 20:00 today, the remaining time should be scheduled first thing tomorrow morning (e.g., 08:00-09:00) before classes, rather than relying on the report writing slot tomorrow to absorb overflow."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The Operating Systems Lab coding is heavily front-loaded today (2026-06-04) to maximize the chance of completing the report writing tomorrow immediately after classes, ensuring submission well before the 23:59 deadline.",
+        "The Statistics study is scheduled immediately after the OS Lab submission tomorrow (2 hours) and uses the full 4 hours available on Saturday, prioritizing this knowledge gap early in the schedule."
+      ],
+      "overall_comment": "The schedule aggressively tackles the immediate Operating Systems Lab deadline by allocating the full 5 hours today. The subsequent scheduling of the Statistics study is dense, allocating 7 hours total when only 3.5 were initially estimated, suggesting an underestimation of the effort required to overcome the student's low confidence in formulas. I approve with minor concerns because the schedule is very tight, especially regarding the Statistics study load, but it respects the end-of-day constraints."
+    },
+    {
+      "agent": "Wellbeing Agent",
+      "calendar_version": 1,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The schedule for 2026-06-05 is very dense immediately following fixed commitments, potentially leading to cognitive overload.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Operating Systems Lab Report Writing",
+            "Statistics Quiz Study (Formulas)"
+          ],
+          "affected_days": [
+            "2026-06-05"
+          ],
+          "suggested_fix": "While the OS Lab submission is critical, starting the Statistics study immediately at 14:30 after classes (ending at 13:00) and the OS Lab report (ending at 14:30) might be too much cognitive stacking. If the OS Lab report takes longer than 1.5 hours, the Statistics study should be pushed to the evening or the next day to ensure a slight decompression period after the deadline rush."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The immediate priority of the Operating Systems Lab coding was successfully front-loaded today (2026-06-04) from 15:00 to 20:00, respecting the late-night avoidance request.",
+        "The Statistics study is scheduled early (tomorrow, 2026-06-05) to address the stated weakness, even though the deadline is later."
+      ],
+      "overall_comment": "The plan effectively prioritizes the immediate Operating Systems Lab deadline by scheduling the bulk of the coding today. All work blocks conclude well before 22:00, respecting the request to avoid late-night work. The only minor concern is the tight transition on 2026-06-05, where the student moves directly from fixed commitments (ending 13:00) into report writing (1.5h) and then immediately into focused study (2h). This stacking is acceptable given the high priority of meeting the OS deadline, but the student should be mindful of potential fatigue on that day."
+    },
+    {
+      "agent": "Risk Agent",
+      "calendar_version": 1,
+      "approval": "approve_with_minor_concerns",
+      "severity": "minor",
+      "critiques": [
+        {
+          "issue": "The plan relies on the Operating Systems Lab coding finishing exactly on time today (5 hours) and the report writing being exactly 1.5 hours tomorrow immediately after classes. If the coding takes 5.5 hours today, or if the report writing takes 2 hours tomorrow, the entire OS Lab submission is at risk of being late or requiring work after 14:30 on 2026-06-05, which is too close to the 23:59 deadline given the uncertainty.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Operating Systems Lab Coding",
+            "Operating Systems Lab Report Writing"
+          ],
+          "affected_days": [
+            "2026-06-04",
+            "2026-06-05"
+          ],
+          "suggested_fix": "Schedule a small contingency buffer (e.g., 30 minutes) on 2026-06-05 before the report writing block, or allocate an extra 30 minutes for coding today, ending at 20:30, to absorb minor slippage."
+        },
+        {
+          "issue": "The Statistics Quiz Study (Formulas) is scheduled for 2 hours on 2026-06-05 immediately following the OS Lab submission block. While this addresses the weakness early, it creates a dependency chain where any delay in the OS Lab submission pushes the Statistics study into the evening, potentially conflicting with the 'avoid late-night work' constraint, or forcing it to be cut short.",
+          "severity": "minor",
+          "affected_tasks": [
+            "Statistics Quiz Study (Formulas)"
+          ],
+          "affected_days": [
+            "2026-06-05"
+          ],
+          "suggested_fix": "Move the 2-hour Statistics study block on 2026-06-05 to start later (e.g., 16:00) or shift it entirely to the morning of 2026-06-06, relying on the dedicated 4-hour block then. This decouples the Statistics study from the immediate OS Lab deadline pressure."
+        },
+        {
+          "issue": "The AASMA Project Idea Submission is scheduled for 2026-06-07 and 2026-06-10. While this spreads the work, the 2026-06-07 block (2 hours) is immediately after the Statistics review. If the Statistics review runs long, this AASMA work will be skipped, pushing the entire proposal completion to 2026-06-10, which is too close to the 2026-06-11 deadline, eliminating contingency time.",
+          "severity": "minor",
+          "affected_tasks": [
+            "AASMA Project Idea Submission"
+          ],
+          "affected_days": [
+            "2026-06-07",
+            "2026-06-10"
+          ],
+          "suggested_fix": "Schedule the initial AASMA work (topic selection/drafting) for 2026-06-08 instead of 2026-06-07, ensuring the 2026-06-07 slot is reserved as a contingency buffer for Statistics or OS Lab overruns."
+        }
+      ],
+      "acknowledged_compromises": [
+        "The Operating Systems Lab coding is heavily front-loaded today (2026-06-04) to maximize the chance of completing the report writing tomorrow immediately after classes, ensuring submission well before the hard deadline.",
+        "The Statistics study is scheduled immediately after the OS Lab submission tomorrow (2 hours) and uses the full 4 hours available on Saturday, prioritizing this knowledge gap early in the schedule."
+      ],
+      "overall_comment": "The plan successfully addresses the highest immediate risk (OS Lab) by front-loading the coding today. However, the schedule is extremely tight for the OS Lab completion, leaving no room for error in the 5-hour coding estimate or the 1.5-hour report estimate. Furthermore, the immediate scheduling of Statistics study on 2026-06-05 creates a fragile dependency chain. I am approving with minor concerns because the core tasks are scheduled, but the lack of buffers around the critical OS Lab submission and the immediate follow-up study session introduces fragility. The suggested fixes aim to introduce necessary contingency time."
+    }
+  ],
+  "validation": {
+    "valid": false,
+    "violations": [
+      {
+        "code": "day_outside_window",
+        "message": "2026-06-11 is outside the planning window 2026-06-04 → 2026-06-11.",
+        "severity": "error"
+      }
+    ]
+  },
+  "evaluation": {
+    "evaluator": "Schedule Evaluator",
+    "calendar_version": 1,
+    "planner_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "evaluator_model": "google/gemini-2.5-flash-lite-preview-09-2025",
+    "overall_score": 4.5,
+    "model_score": 4,
+    "hard_score": 4.9,
+    "hard_metrics": {
+      "score": 97.1,
+      "metrics": [
+        {
+          "name": "generation_time_seconds",
+          "value": 21.6,
+          "score": 100,
+          "explanation": "21.6s from run start to final schedule selection."
+        },
+        {
+          "name": "rejection_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 specialist agent(s) rejected the final calendar."
+        },
+        {
+          "name": "critical_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 critical issue(s) were raised in final critiques."
+        },
+        {
+          "name": "major_count",
+          "value": 1,
+          "score": 80,
+          "explanation": "1 major issue(s) were raised in final critiques."
+        },
+        {
+          "name": "deadline_violation_count",
+          "value": 0,
+          "score": 100,
+          "explanation": "0 scheduled work block(s) end after their task deadline."
+        },
+        {
+          "name": "task_coverage_ratio",
+          "value": 1,
+          "score": 100,
+          "explanation": "4/4 inferred task(s) received at least one work block."
+        },
+        {
+          "name": "availability_overrun_hours",
+          "value": 0,
+          "score": 100,
+          "explanation": "0h scheduled above the planner's assumed available hours."
+        }
+      ]
+    },
+    "dimension_scores": [
+      {
+        "dimension": "requirement_match",
+        "score": 4,
+        "rationale": "All tasks were scheduled, and the primary constraint (avoiding late-night work) was met. The schedule is slightly over-committed on the Statistics task relative to initial estimates, but this addresses the student's stated weakness."
+      },
+      {
+        "dimension": "deadline_safety",
+        "score": 4.5,
+        "rationale": "The critical OS Lab deadline (2026-06-05) is aggressively scheduled for completion by 14:30 tomorrow, providing a large safety margin before 23:59. Other deadlines are also met with sufficient lead time."
+      },
+      {
+        "dimension": "workload_realism",
+        "score": 3.5,
+        "rationale": "The schedule is very tight around the OS Lab completion and the immediate follow-up study session on 2026-06-05. The total allocated time for Statistics study (7 hours) significantly exceeds the initial estimate (3.5 hours), suggesting the workload for that specific area might be underestimated in the final plan."
+      },
+      {
+        "dimension": "academic_priority",
+        "score": 5,
+        "rationale": "The highest priority task (OS Lab, due tomorrow) was scheduled first, consuming all available time today. The next priority (Statistics study, due in 3 days, student weakness) was scheduled immediately after."
+      },
+      {
+        "dimension": "wellbeing_balance",
+        "score": 3.5,
+        "rationale": "The plan successfully avoids late-night work (all blocks end before 20:00 except for the 20:30 end on 2026-06-04, which is acceptable). However, the transition on 2026-06-05 from fixed classes to high-priority work and then immediately into focused study is cognitively demanding."
+      },
+      {
+        "dimension": "risk_resilience",
+        "score": 3.5,
+        "rationale": "The plan is fragile due to the aggressive scheduling of the OS Lab coding (5 hours exactly) and the lack of explicit contingency time for minor overruns. The suggested fixes highlight this fragility, particularly regarding the dependency chain on 2026-06-05."
+      }
+    ],
+    "strengths": [
+      "Excellent prioritization of the immediate Operating Systems Lab deadline, front-loading the 5 hours of coding today.",
+      "All work blocks conclude before 22:00, respecting the student's request to avoid late-night work.",
+      "The Statistics Quiz study is scheduled early (starting tomorrow) to address the student's stated weakness in formulas."
+    ],
+    "weaknesses": [
+      "The schedule is very tight around the OS Lab submission tomorrow (2026-06-05), with no buffer time between report completion and the 23:59 deadline.",
+      "The total allocated time for Statistics study (7 hours) significantly exceeds the initial estimate (3.5 hours), suggesting potential workload underestimation for that task.",
+      "The schedule for 2026-06-05 is heavily stacked immediately after classes, risking cognitive overload."
+    ],
+    "comparison_notes": [
+      "The model correctly identified the immediate deadline as the primary driver, leading to an aggressive but effective schedule for the OS Lab.",
+      "The model allocated more time to the Statistics study than initially estimated, which is a positive qualitative adjustment given the student's low confidence, even if it strains the daily capacity later in the week."
+    ],
+    "recommendation": "The schedule is highly actionable and meets all hard deadlines. For future runs, introduce a small, explicit buffer (e.g., 30 minutes) around the critical OS Lab submission window tomorrow to absorb minor estimation errors without jeopardizing the deadline or forcing late-night work."
+  },
+  "usage": {
+    "callCount": 13,
+    "promptTokens": 63214,
+    "completionTokens": 14883,
+    "totalTokens": 78097,
+    "estimatedCostUsd": 0.012275,
+    "calls": [
+      {
+        "id": "e16e2db7-9137-4238-955b-6d7b10e647ca",
+        "schemaName": "interpreter_output",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:36:55.062Z",
+        "completedAt": "2026-06-04T14:36:59.084Z",
+        "durationMs": 4022,
+        "promptChars": 4276,
+        "completionChars": 3577,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 1040,
+        "completionTokens": 1183,
+        "totalTokens": 2223,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000577
+      },
+      {
+        "id": "e8bc0b56-d8ca-408c-a5dc-cc3e3c9319f9",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:36:59.084Z",
+        "completedAt": "2026-06-04T14:37:03.130Z",
+        "durationMs": 4046,
+        "promptChars": 7463,
+        "completionChars": 4478,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2104,
+        "completionTokens": 1136,
+        "totalTokens": 3240,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000665
+      },
+      {
+        "id": "0c46e33b-635a-4cd3-9e95-9b6eff147128",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:36:59.085Z",
+        "completedAt": "2026-06-04T14:37:03.315Z",
+        "durationMs": 4230,
+        "promptChars": 8471,
+        "completionChars": 4502,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2338,
+        "completionTokens": 1169,
+        "totalTokens": 3507,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000701
+      },
+      {
+        "id": "adac8901-4f05-4193-9d35-05147387087e",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:36:59.084Z",
+        "completedAt": "2026-06-04T14:37:03.668Z",
+        "durationMs": 4584,
+        "promptChars": 7959,
+        "completionChars": 4437,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2186,
+        "completionTokens": 1268,
+        "totalTokens": 3454,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000726
+      },
+      {
+        "id": "438f3ff2-002b-4151-a6f3-d9281def5fd6",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:36:59.085Z",
+        "completedAt": "2026-06-04T14:37:03.940Z",
+        "durationMs": 4855,
+        "promptChars": 7489,
+        "completionChars": 4681,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2098,
+        "completionTokens": 1259,
+        "totalTokens": 3357,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000713
+      },
+      {
+        "id": "9d05cdb2-bd7e-429a-97aa-9863c09deb22",
+        "schemaName": "specialist_agent_view",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:36:59.085Z",
+        "completedAt": "2026-06-04T14:37:04.004Z",
+        "durationMs": 4919,
+        "promptChars": 7535,
+        "completionChars": 5766,
+        "maxCompletionTokens": 16000,
+        "promptTokens": 2104,
+        "completionTokens": 1440,
+        "totalTokens": 3544,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000786
+      },
+      {
+        "id": "b4c7634f-d4e3-4b70-9bd1-0b13557c4280",
+        "schemaName": "calendar_proposal",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:04.004Z",
+        "completedAt": "2026-06-04T14:37:12.233Z",
+        "durationMs": 8229,
+        "promptChars": 34284,
+        "completionChars": 8682,
+        "maxCompletionTokens": 24000,
+        "promptTokens": 8856,
+        "completionTokens": 2624,
+        "totalTokens": 11480,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001935
+      },
+      {
+        "id": "03b45578-9e38-49f7-bfc6-5868549d5e75",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:12.233Z",
+        "completedAt": "2026-06-04T14:37:14.776Z",
+        "durationMs": 2543,
+        "promptChars": 18631,
+        "completionChars": 2309,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5325,
+        "completionTokens": 538,
+        "totalTokens": 5863,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000748
+      },
+      {
+        "id": "e26f75fb-9889-4b4a-8a6e-038153868d22",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:12.233Z",
+        "completedAt": "2026-06-04T14:37:15.448Z",
+        "durationMs": 3215,
+        "promptChars": 18864,
+        "completionChars": 3265,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5446,
+        "completionTokens": 840,
+        "totalTokens": 6286,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000881
+      },
+      {
+        "id": "83399009-7873-456e-ac35-7e1b7d7def07",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:12.234Z",
+        "completedAt": "2026-06-04T14:37:15.473Z",
+        "durationMs": 3239,
+        "promptChars": 19661,
+        "completionChars": 1869,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5590,
+        "completionTokens": 498,
+        "totalTokens": 6088,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000758
+      },
+      {
+        "id": "1189f00e-559b-4d08-b386-4660a2cb75bc",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:12.233Z",
+        "completedAt": "2026-06-04T14:37:15.763Z",
+        "durationMs": 3530,
+        "promptChars": 19084,
+        "completionChars": 3079,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5537,
+        "completionTokens": 857,
+        "totalTokens": 6394,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.000897
+      },
+      {
+        "id": "bc3b3597-9c7a-4f3b-961a-7c6a9262bdd1",
+        "schemaName": "agent_critique",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:12.234Z",
+        "completedAt": "2026-06-04T14:37:16.643Z",
+        "durationMs": 4409,
+        "promptChars": 19991,
+        "completionChars": 3839,
+        "maxCompletionTokens": 12000,
+        "promptTokens": 5629,
+        "completionTokens": 1067,
+        "totalTokens": 6696,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.00099
+      },
+      {
+        "id": "539ff79d-580f-4d5a-9220-ca50844e79f9",
+        "schemaName": "schedule_evaluation",
+        "model": "google/gemini-2.5-flash-lite-preview-09-2025",
+        "startedAt": "2026-06-04T14:37:16.643Z",
+        "completedAt": "2026-06-04T14:37:20.430Z",
+        "durationMs": 3787,
+        "promptChars": 55703,
+        "completionChars": 3862,
+        "maxCompletionTokens": 8000,
+        "promptTokens": 14961,
+        "completionTokens": 1004,
+        "totalTokens": 15965,
+        "usageSource": "provider",
+        "estimatedCostUsd": 0.001898
+      }
+    ]
+  }
+}

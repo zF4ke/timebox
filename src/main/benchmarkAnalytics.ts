@@ -40,7 +40,7 @@ export function listBenchmarkExperiments(rootDir = defaultProjectRoot()): Benchm
   const experiments: BenchmarkExperiment[] = [];
   const dataRoot = getDataRoot();
   experiments.push(...readLegacyResultExperiments(dataRoot, scenarios));
-  experiments.push(...readStoredBenchmarkExperiments(dataRoot));
+  experiments.push(...readStoredBenchmarkExperiments(dataRoot, scenarios));
   return experiments.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 }
 
@@ -94,7 +94,7 @@ export function defaultProjectRoot(): string {
 export function aggregateBenchmarkRuns(runs: BenchmarkRunSummary[]): BenchmarkAggregate[] {
   const groups = new Map<string, BenchmarkRunSummary[]>();
   for (const run of runs) {
-    const key = `${run.model}__${run.quorum}__${run.maxIterations}`;
+    const key = `${run.model}__${run.evaluatorModel ?? ""}__${run.quorum}__${run.maxIterations}`;
     groups.set(key, [...(groups.get(key) ?? []), run]);
   }
 
@@ -103,15 +103,18 @@ export function aggregateBenchmarkRuns(runs: BenchmarkRunSummary[]): BenchmarkAg
       const first = group[0];
       const ok = group.filter((run) => run.status === "ok");
       const averageOverallScore = average(ok.map((run) => run.overallScore));
+      const averageModelScore = average(ok.map((run) => run.modelScore));
       const averageDeterministicScore = average(ok.map((run) => run.deterministicScore));
       const averageCostUsd = average(ok.map((run) => run.estimatedCostUsd));
       const averageTokens = average(ok.map((run) => run.totalTokens));
       const averageIterations = average(ok.map((run) => run.iterations));
+      const averageGenerationTimeSeconds = average(ok.map((run) => run.generationTimeSeconds));
       const criticalMistakes = group.reduce((sum, run) => sum + run.criticalMistakeCount, 0);
       const totalMistakes = group.reduce((sum, run) => sum + run.mistakeCount, 0);
 
       return {
         model: first.model,
+        evaluatorModel: first.evaluatorModel ?? null,
         quorum: first.quorum,
         maxIterations: first.maxIterations,
         runCount: group.length,
@@ -121,9 +124,10 @@ export function aggregateBenchmarkRuns(runs: BenchmarkRunSummary[]): BenchmarkAg
         averageCostUsd,
         averageTokens,
         averageIterations,
+        averageGenerationTimeSeconds,
         costBenefitScore: costBenefit({
           averageDeterministicScore,
-          averageOverallScore,
+          averageModelScore,
           averageCostUsd,
           okCount: ok.length,
           runCount: group.length,
@@ -165,7 +169,7 @@ function readLegacyResultExperiments(rootDir: string, scenarios: BenchmarkScenar
     .filter((experiment): experiment is BenchmarkExperiment => Boolean(experiment));
 }
 
-function readStoredBenchmarkExperiments(rootDir: string): BenchmarkExperiment[] {
+function readStoredBenchmarkExperiments(rootDir: string, scenarios: BenchmarkScenario[]): BenchmarkExperiment[] {
   const benchmarkDir = path.join(rootDir, "benchmark-results");
   if (!fs.existsSync(benchmarkDir)) {
     return [];
@@ -174,15 +178,73 @@ function readStoredBenchmarkExperiments(rootDir: string): BenchmarkExperiment[] 
   const experiments: BenchmarkExperiment[] = [];
   for (const entry of fs.readdirSync(benchmarkDir, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
-    const experimentPath = path.join(benchmarkDir, entry.name, "experiment.json");
+    const experimentDir = path.join(benchmarkDir, entry.name);
+    const experimentPath = path.join(experimentDir, "experiment.json");
     if (!fs.existsSync(experimentPath)) continue;
     try {
-      experiments.push(JSON.parse(fs.readFileSync(experimentPath, "utf-8")) as BenchmarkExperiment);
+      const experiment = JSON.parse(fs.readFileSync(experimentPath, "utf-8")) as BenchmarkExperiment;
+      experiments.push(normalizeStoredExperiment(experiment, experimentDir, scenarios));
     } catch {
       // Ignore incomplete experiments; the CLI writes summaries incrementally.
     }
   }
   return experiments;
+}
+
+function normalizeStoredExperiment(
+  experiment: BenchmarkExperiment,
+  experimentDir: string,
+  scenarios: BenchmarkScenario[]
+): BenchmarkExperiment {
+  const runsDir = path.join(experimentDir, "runs");
+  const runs = experiment.runs.map((run) => {
+    const jsonPath = resolveStoredRunArtifact(run.jsonPath, runsDir);
+    const icsPath = resolveStoredRunArtifact(run.icsPath, runsDir);
+    // Rescore from the saved planner result so the current scoring formula applies
+    // retroactively (no rerun). Falls back to the stored score if the run artifact
+    // or its scenario is missing. Cost / judge fields are left untouched.
+    const rescored = rescoreStoredRun({ ...run, jsonPath, icsPath }, scenarios);
+    return rescored;
+  });
+  return {
+    ...experiment,
+    resultsDir: experimentDir,
+    runs,
+    aggregates: aggregateBenchmarkRuns(runs)
+  };
+}
+
+function rescoreStoredRun(run: BenchmarkRunSummary, scenarios: BenchmarkScenario[]): BenchmarkRunSummary {
+  if (run.status !== "ok" || !run.jsonPath) {
+    return run;
+  }
+  const scenario = scenarios.find((candidate) => candidate.id === run.scenarioId);
+  const result = readPlanningResult(run.jsonPath);
+  if (!scenario || !result) {
+    return run;
+  }
+  const scored = scoreBenchmarkResult(result, scenario);
+  return {
+    ...run,
+    deterministicScore: scored.score,
+    mistakeCount: scored.mistakeCount,
+    criticalMistakeCount: scored.mistakes.filter((mistake) => mistake.severity === "critical").length,
+    mistakes: scored.mistakes
+  };
+}
+
+function resolveStoredRunArtifact(storedPath: string, runsDir: string): string {
+  if (!storedPath) {
+    return "";
+  }
+  if (fs.existsSync(storedPath)) {
+    return storedPath;
+  }
+  const candidate = path.join(runsDir, path.basename(storedPath));
+  if (fs.existsSync(candidate)) {
+    return candidate;
+  }
+  return storedPath;
 }
 
 function legacyRowToRun(row: LegacySummaryRow, resultDir: string, scenarios: BenchmarkScenario[]): BenchmarkRunSummary {
@@ -315,7 +377,7 @@ function average(values: Array<number | null>): number | null {
 
 function costBenefit(input: {
   averageDeterministicScore: number | null;
-  averageOverallScore: number | null;
+  averageModelScore: number | null;
   averageCostUsd: number | null;
   okCount: number;
   runCount: number;
@@ -326,12 +388,31 @@ function costBenefit(input: {
     return null;
   }
 
-  const deterministic = input.averageDeterministicScore;
-  const llm = input.averageOverallScore === null ? deterministic : input.averageOverallScore * 20;
-  const reliability = input.runCount > 0 ? (input.okCount / input.runCount) * 100 : 0;
+  const deterministic = input.averageDeterministicScore; // 0-100
+
+  // Use the INDEPENDENT judge only (modelScore). We deliberately avoid
+  // overallScore here: overallScore already folds in hardScore (a deterministic
+  // metric), so blending it would double-count deterministic evidence and dilute
+  // the judge's nominal weight to ~7.5%. modelScore (1-5) rescaled to 0-100 keeps
+  // the judge a genuine, independent cross-check.
+  const judge = input.averageModelScore === null ? deterministic : input.averageModelScore * 20;
+
+  // Deterministic-first, but the judge is a real 30% secondary signal. Both terms
+  // are on a 0-100 scale with comparable spread (sd ~ 8), so these weights reflect
+  // actual contribution to the ranking, not an artifact of differing units.
+  const quality = deterministic * 0.7 + judge * 0.3;
+
+  // Reliability is handled as an explicit penalty rather than blended into quality:
+  // it is near-constant (almost every config passes all runs), so including it in a
+  // variance-driven weighted sum consumed weight while adding no discriminating
+  // signal. A config that crashes runs is now docked directly.
+  const failureRate = input.runCount > 0 ? 1 - input.okCount / input.runCount : 0;
+  const failurePenalty = failureRate * 40;
+
   const criticalPerRun = input.criticalMistakes / Math.max(input.runCount, 1);
   const totalPerRun = input.totalMistakes / Math.max(input.runCount, 1);
   const nonCriticalPerRun = Math.max(0, totalPerRun - criticalPerRun);
+  const mistakePenalty = criticalPerRun * 4 + nonCriticalPerRun * 0.7;
 
   // Keep cost in the ranking, but do not let cent-level differences overwhelm
   // quality. log10 makes $0.015 vs $0.018 a small tie-breaker instead of a huge
@@ -340,12 +421,9 @@ function costBenefit(input: {
     ? 0
     : Math.min(12, Math.log10(1 + input.averageCostUsd * 1000) * 2.5);
 
-  const quality =
-    deterministic * 0.7 +
-    llm * 0.15 +
-    reliability * 0.15;
-  const mistakePenalty = criticalPerRun * 4 + nonCriticalPerRun * 0.7;
-  return Math.round(Math.max(0, Math.min(100, quality - mistakePenalty - costPenalty)) * 10) / 10;
+  return Math.round(
+    Math.max(0, Math.min(100, quality - failurePenalty - mistakePenalty - costPenalty)) * 10
+  ) / 10;
 }
 
 function compareAggregate(a: BenchmarkAggregate, b: BenchmarkAggregate): number {

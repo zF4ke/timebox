@@ -1,0 +1,150 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AASMA//Timebox//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:DS_FT_01@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260604T150000Z
+DTEND:20260604T180000Z
+SUMMARY:Distributed Systems: Work on fault tolerance section
+DESCRIPTION:Structure the narrative and key points for the fault tolerance section based on rough notes.\\n\\nReasoning: Starting individual content creation early leverages immediate availability outside of classes.
+END:VEVENT
+BEGIN:VEVENT
+UID:DS_DEMO_01@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260604T180000Z
+DTEND:20260604T200000Z
+SUMMARY:Distributed Systems: Prepare demo explanation
+DESCRIPTION:Outline the steps and key talking points for the demo explanation based on rough notes.\\n\\nReasoning: Continuing focused individual content drafting while energy is available.
+END:VEVENT
+BEGIN:VEVENT
+UID:DS_FT_02@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260605T150000Z
+DTEND:20260605T170000Z
+SUMMARY:Distributed Systems: Work on fault tolerance section
+DESCRIPTION:Refine the structure and supporting details for the fault tolerance section.\\n\\nReasoning: Continuing the high-priority individual content creation before the weekend focus shifts to the Algorithms Problem Set.
+END:VEVENT
+BEGIN:VEVENT
+UID:ALG_PS_01@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260605T170000Z
+DTEND:20260605T200000Z
+SUMMARY:Algorithms Problem Set (2 problems remaining)
+DESCRIPTION:Begin work on the remaining 3 problems for the Algorithms Problem Set.\\n\\nReasoning: Front-loading the Algorithms Problem Set to ensure completion before the Tuesday deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:ALG_PS_02@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260606T090000Z
+DTEND:20260606T120000Z
+SUMMARY:Algorithms Problem Set (2 problems remaining)
+DESCRIPTION:Continue solving the remaining problems for the Algorithms Problem Set.\\n\\nReasoning: Maximizing weekend time to clear the Tuesday deadline.
+END:VEVENT
+BEGIN:VEVENT
+UID:ALG_PS_03@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260606T130000Z
+DTEND:20260606T150000Z
+SUMMARY:Algorithms Problem Set (2 problems remaining)
+DESCRIPTION:Final push on the Algorithms Problem Set\, aiming to complete all remaining problems.\\n\\nReasoning: Completing this today removes deadline pressure for Monday/Tuesday.
+END:VEVENT
+BEGIN:VEVENT
+UID:DS_SLIDES_01@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260606T150000Z
+DTEND:20260606T180000Z
+SUMMARY:Distributed Systems: Prepare slides
+DESCRIPTION:Start creating slides for the Fault Tolerance section based on the structured content drafted earlier.\\n\\nReasoning: Leveraging free time to convert personal content into presentation format before group coordination.
+END:VEVENT
+BEGIN:VEVENT
+UID:ALG_PS_04@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260607T090000Z
+DTEND:20260607T103000Z
+SUMMARY:Algorithms Problem Set (2 problems remaining)
+DESCRIPTION:Final review and formatting of the Algorithms Problem Set submission.\\n\\nReasoning: Ensuring the assignment due Tuesday night is fully complete and ready for submission early.
+END:VEVENT
+BEGIN:VEVENT
+UID:DS_SLIDES_02@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260607T103000Z
+DTEND:20260607T133000Z
+SUMMARY:Distributed Systems: Prepare slides
+DESCRIPTION:Create slides for the Demo Explanation section.\\n\\nReasoning: Completing both personal content slides over the weekend ensures Tuesday/Wednesday can focus on group integration.
+END:VEVENT
+BEGIN:VEVENT
+UID:DS_ARCH_DRAFT@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260607T143000Z
+DTEND:20260607T163000Z
+SUMMARY:Distributed Systems: Finish architecture diagram
+DESCRIPTION:Draft an initial version of the architecture diagram based on current understanding\, to speed up Monday's group meeting.\\n\\nReasoning: Proactive work to make the limited group coordination window on Monday more efficient.
+END:VEVENT
+BEGIN:VEVENT
+UID:DS_PARTS_01@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260608T180000Z
+DTEND:20260608T183000Z
+SUMMARY:Distributed Systems: Divide speaking parts
+DESCRIPTION:Group meeting to finalize speaking parts assignment.\\n\\nReasoning: Addressing the coordination task first during the earliest available group slot.
+END:VEVENT
+BEGIN:VEVENT
+UID:DS_ARCH_01@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260608T183000Z
+DTEND:20260608T203000Z
+SUMMARY:Distributed Systems: Finish architecture diagram
+DESCRIPTION:Group meeting to finalize and agree upon the architecture diagram.\\n\\nReasoning: Completing foundational group work on Monday allows Tuesday to focus on slide integration.
+END:VEVENT
+BEGIN:VEVENT
+UID:DS_SLIDES_03@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260608T203000Z
+DTEND:20260608T220000Z
+SUMMARY:Distributed Systems: Prepare slides
+DESCRIPTION:Begin integrating the finalized Fault Tolerance and Demo Explanation slides into the master presentation deck.\\n\\nReasoning: Using remaining evening time to start assembly now that personal content is ready and group structure is confirmed.
+END:VEVENT
+BEGIN:VEVENT
+UID:ALG_PS_05@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260609T150000Z
+DTEND:20260609T170000Z
+SUMMARY:Algorithms Problem Set (2 problems remaining)
+DESCRIPTION:Final review and submission preparation for the Algorithms Problem Set.\\n\\nReasoning: Ensuring the Tuesday night deadline is met by completing the work early in the afternoon.
+END:VEVENT
+BEGIN:VEVENT
+UID:DS_SLIDES_04@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260609T170000Z
+DTEND:20260609T210000Z
+SUMMARY:Distributed Systems: Prepare slides
+DESCRIPTION:Continue integrating all sections and focusing on visual consistency across the presentation slides.\\n\\nReasoning: Utilizing the afternoon/evening to finalize the slide deck structure before the Wednesday coordination meeting.
+END:VEVENT
+BEGIN:VEVENT
+UID:DS_SLIDES_05@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260610T150000Z
+DTEND:20260610T170000Z
+SUMMARY:Distributed Systems: Prepare slides
+DESCRIPTION:Final individual review and polish of all slides\, ensuring smooth transitions between sections.\\n\\nReasoning: Finalizing content before the group rehearsal slot.
+END:VEVENT
+BEGIN:VEVENT
+UID:DS_REHEARSAL_01@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260610T170000Z
+DTEND:20260610T193000Z
+SUMMARY:Distributed Systems: Rehearse presentation
+DESCRIPTION:Full group rehearsal of the presentation\, focusing on timing and transitions.\\n\\nReasoning: Scheduling the rehearsal during the second available group slot ensures maximum preparation time and allows for contingency if Monday's meeting was delayed.
+END:VEVENT
+BEGIN:VEVENT
+UID:DS_REHEARSAL_02@timebox.local
+DTSTAMP:20260604T143915Z
+DTSTART:20260611T090000Z
+DTEND:20260611T103000Z
+SUMMARY:Distributed Systems: Rehearse presentation
+DESCRIPTION:Optional quick final run-through or individual review of speaking notes.\\n\\nReasoning: Using the morning buffer time for a final check before the 14:00 presentation.
+END:VEVENT
+END:VCALENDAR
