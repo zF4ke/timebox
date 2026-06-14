@@ -9,3 +9,18 @@ release-*/
 debug/
 data/
 research/
+results/
+
+# Local env files (config is managed in-app; these are not used by the app)
+.env
+.env.local
+.env.example
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.tsbuildinfo
+
+# Group presentation deck contains a co-author's name + student number — untracked
+# for the public release. Local copy is kept; restore tracking only with consent.
+Project-AAMAS2026-Group45.pdf

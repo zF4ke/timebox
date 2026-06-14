@@ -1,8 +1,6 @@
-commit b13b6b6d31dad2ca1c0d55d4169a8c7c1461f46c
-Author: Pedro Silva <pedrohsilva955@gmail.com>
-Date:   Thu Jun 4 15:03:32 2026 +0100
-
-    Tune benchmark prompts and delivery polish
+# Prompt tuning applied after the baseline benchmark.
+# Apply with: git apply docs/patches/prompt_tuning_after_baseline.patch
+# See docs/final_delivery_log.md ("Park prompt tuning for baseline benchmark") for rationale.
 
 diff --git a/src/main/planner.ts b/src/main/planner.ts
 index 580fbac..e27bb03 100644
