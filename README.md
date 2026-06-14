@@ -27,10 +27,9 @@ It is an Electron + React + TypeScript app. It is **bring-your-own-key**: you su
 
 <div align="center">
 
-A polished product overview lives in [`landing/index.html`](landing/index.html) (open it in a browser).
+<img src="docs/preview.png" alt="Timebox landing page" width="860" />
 
-<!-- Add a planner + analytics screenshot at docs/preview.png and uncomment: -->
-<!-- <img src="docs/preview.png" alt="Timebox planner" width="860" /> -->
+<br/><sub>Describe your week in plain language, five agents negotiate a schedule, export to your calendar. Full overview in <a href="landing/index.html"><code>landing/index.html</code></a>.</sub>
 
 </div>
 
