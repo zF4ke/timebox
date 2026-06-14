@@ -11,7 +11,7 @@
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)
 
-**[Landing page](landing/index.html)** · **[Download](https://github.com/zF4ke/timebox/releases)** · **[Architecture](docs/architecture.md)**
+**[Live site](https://zf4ke.github.io/timebox/)** · **[Download](https://github.com/zF4ke/timebox/releases)** · **[Architecture](docs/architecture.md)**
 
 </div>
 
@@ -27,9 +27,9 @@ It is an Electron + React + TypeScript app. It is **bring-your-own-key**: you su
 
 <div align="center">
 
-<img src="docs/preview.png" alt="Timebox landing page" width="860" />
+<a href="https://zf4ke.github.io/timebox/"><img src="docs/preview.png" alt="Timebox landing page" width="860" /></a>
 
-<br/><sub>Describe your week in plain language, five agents negotiate a schedule, export to your calendar. Full overview in <a href="landing/index.html"><code>landing/index.html</code></a>.</sub>
+<br/><sub>Describe your week in plain language, five agents negotiate a schedule, export to your calendar. <a href="https://zf4ke.github.io/timebox/"><b>View the live site →</b></a></sub>
 
 </div>
 
