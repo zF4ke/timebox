@@ -13,30 +13,27 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            ink: {
-              950: '#070a0f',
-              900: '#0b0f16',
-              850: '#0f141d',
-              800: '#141a24',
-              700: '#1c2431',
-              600: '#2a3344',
-            },
-            accent: {
-              DEFAULT: '#5eead4',
-              soft: '#2dd4bf',
-              deep: '#14b8a6',
-            },
+            paper: '#fafafa',
+            card: '#ffffff',
+            line: '#e5e5e5',
+            line2: '#d4d4d4',
+            ink: '#0a0a0a',
+            ink2: '#171717',
+            body: '#525252',
+            muted: '#737373',
           },
           fontFamily: {
-            display: ['Sora', 'system-ui', 'sans-serif'],
-            sans: ['Inter', 'system-ui', 'sans-serif'],
+            sans: ['Inter', 'Segoe UI Variable', 'system-ui', 'sans-serif'],
+          },
+          borderRadius: {
+            DEFAULT: '6px',
           },
         },
       },
@@ -44,59 +41,50 @@
   </script>
 
   <style>
-    :root { color-scheme: dark; }
-    html, body { background-color: #070a0f; }
+    :root { color-scheme: light; }
+    html, body { background-color: #fafafa; }
     body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
-    .font-display { font-family: 'Sora', system-ui, sans-serif; }
 
-    .glow {
-      background:
-        radial-gradient(60% 50% at 50% 0%, rgba(45, 212, 191, 0.16) 0%, rgba(45, 212, 191, 0) 70%),
-        radial-gradient(40% 40% at 85% 20%, rgba(94, 234, 212, 0.10) 0%, rgba(94, 234, 212, 0) 70%);
-    }
-    .card-border { border: 1px solid rgba(255, 255, 255, 0.07); }
-    .hairline { border-color: rgba(255, 255, 255, 0.07); }
-
-    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.7s cubic-bezier(.2,.6,.2,1), transform 0.7s cubic-bezier(.2,.6,.2,1); }
     .reveal.in { opacity: 1; transform: none; }
-
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1; transform: none; transition: none; }
       html { scroll-behavior: auto; }
     }
 
-    .grid-faint {
-      background-image:
-        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-      background-size: 32px 32px;
-    }
     details > summary { list-style: none; cursor: pointer; }
     details > summary::-webkit-details-marker { display: none; }
     details[open] .faq-chevron { transform: rotate(45deg); }
+
+    /* calendar mock event blocks — match the app's grayscale events */
+    .ev { border-radius: 4px; padding: 5px 7px; line-height: 1.25; overflow: hidden; }
+    .ev-work  { background: #171717; color: #fff; }
+    .ev-fixed { background: #525252; color: #fff; }
+    .ev-buf   { background: #a3a3a3; color: #fff; }
+    .ev-due   { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
   </style>
 </head>
 
-<body class="text-slate-300 selection:bg-accent/30 selection:text-white">
+<body class="bg-paper text-body antialiased selection:bg-ink/10">
 
   <!-- Nav -->
-  <header class="sticky top-0 z-40 backdrop-blur-md bg-ink-950/70 border-b hairline">
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-paper/80 border-b border-line">
     <div class="mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
-      <a href="#top" class="flex items-center gap-2.5 group">
-        <span class="inline-flex h-7 w-7 items-center justify-center rounded-md bg-accent/15 ring-1 ring-accent/30">
-          <svg viewBox="0 0 24 24" class="h-4 w-4 text-accent" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+      <a href="#top" class="flex items-center gap-2.5">
+        <span class="inline-flex h-7 w-7 items-center justify-center rounded bg-ink text-white">
+          <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
         </span>
-        <span class="font-display font-600 text-white tracking-tight">Timebox</span>
+        <span class="font-600 text-ink tracking-tight">Timebox</span>
       </a>
-      <nav class="hidden md:flex items-center gap-8 text-sm text-slate-400">
-        <a href="#how" class="hover:text-white transition-colors">How it works</a>
-        <a href="#features" class="hover:text-white transition-colors">Features</a>
-        <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
-        <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+      <nav class="hidden md:flex items-center gap-8 text-sm text-muted">
+        <a href="#how" class="hover:text-ink transition-colors">How it works</a>
+        <a href="#features" class="hover:text-ink transition-colors">Features</a>
+        <a href="#pricing" class="hover:text-ink transition-colors">Pricing</a>
+        <a href="#faq" class="hover:text-ink transition-colors">FAQ</a>
       </nav>
       <div class="flex items-center gap-3">
-        <a href="https://github.com/zF4ke/timebox" class="hidden sm:inline text-sm text-slate-400 hover:text-white transition-colors">GitHub</a>
-        <a href="https://github.com/zF4ke/timebox/releases" class="inline-flex items-center rounded-lg bg-accent px-3.5 py-2 text-sm font-600 text-ink-950 hover:bg-accent-soft transition-colors">Download</a>
+        <a href="https://github.com/zF4ke/timebox" class="hidden sm:inline text-sm text-muted hover:text-ink transition-colors">GitHub</a>
+        <a href="https://github.com/zF4ke/timebox/releases" class="inline-flex items-center rounded bg-ink px-3.5 py-2 text-sm font-500 text-white hover:opacity-90 transition-opacity">Download</a>
       </div>
     </div>
   </header>
@@ -104,145 +92,161 @@
   <main id="top">
 
     <!-- Hero -->
-    <section class="relative overflow-hidden glow">
-      <div class="absolute inset-0 grid-faint [mask-image:radial-gradient(60%_50%_at_50%_0%,black,transparent)]"></div>
-      <div class="relative mx-auto max-w-6xl px-6 pt-20 pb-24 md:pt-28 md:pb-32">
-        <p class="reveal text-xs font-600 tracking-[0.18em] uppercase text-accent">Free · Open Source · Desktop</p>
-        <h1 class="reveal mt-5 font-display font-700 text-white tracking-tight text-4xl sm:text-5xl md:text-6xl leading-[1.05] max-w-3xl">
+    <section class="relative overflow-hidden">
+      <div class="relative mx-auto max-w-6xl px-6 pt-20 pb-24 md:pt-24 md:pb-28">
+        <h1 class="reveal font-700 text-ink tracking-tight text-4xl sm:text-5xl md:text-[3.4rem] leading-[1.06] max-w-3xl">
           Five AI agents argue over your week so you don't have to.
         </h1>
-        <p class="reveal mt-6 text-lg text-slate-400 max-w-2xl leading-relaxed">
+        <p class="reveal mt-6 text-lg text-body max-w-2xl leading-relaxed">
           Timebox turns "I have four deadlines and no idea where to start" into a realistic weekly schedule. A team of specialist AI agents drafts it, critiques it, and votes on it, then you export it to your calendar in one click.
         </p>
         <div class="reveal mt-9 flex flex-col sm:flex-row gap-3 sm:items-center">
-          <a href="https://github.com/zF4ke/timebox/releases" class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 font-600 text-ink-950 hover:bg-accent-soft transition-colors">
+          <a href="https://github.com/zF4ke/timebox/releases" class="inline-flex items-center justify-center gap-2 rounded bg-ink px-5 py-3 font-500 text-white hover:opacity-90 transition-opacity">
             <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
             Download for Windows, macOS &amp; Linux
           </a>
-          <a href="https://github.com/zF4ke/timebox" class="inline-flex items-center justify-center gap-2 rounded-xl border hairline px-5 py-3 font-500 text-slate-200 hover:bg-ink-800 transition-colors">
+          <a href="https://github.com/zF4ke/timebox" class="inline-flex items-center justify-center gap-2 rounded border border-line bg-card px-5 py-3 font-500 text-ink hover:border-line2 hover:bg-[#f5f5f5] transition-colors">
             View on GitHub
             <span aria-hidden="true">→</span>
           </a>
         </div>
-        <p class="reveal mt-5 text-sm text-slate-500">
+        <p class="reveal mt-5 text-sm text-muted">
           No account. No subscription. Bring your own OpenRouter key, there's a free model built in.
         </p>
 
-        <!-- Hero visual: schematic week grid + agent vote panel (no fake screenshot) -->
+        <!-- Hero visual: app result view (week calendar + agent vote), in the app's own light theme -->
         <div class="reveal mt-14 md:mt-16">
-          <div class="rounded-2xl card-border bg-ink-900/80 shadow-2xl shadow-black/40 overflow-hidden">
-            <div class="flex items-center gap-1.5 px-4 h-9 border-b hairline bg-ink-850">
-              <span class="h-2.5 w-2.5 rounded-full bg-ink-600"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-ink-600"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-ink-600"></span>
-              <span class="ml-3 text-xs text-slate-500 font-sans">Timebox · week of June 15</span>
+          <div class="rounded-lg border border-line bg-card shadow-xl shadow-black/[0.04] overflow-hidden">
+            <!-- window chrome -->
+            <div class="flex items-center gap-1.5 px-4 h-9 border-b border-line bg-[#fafafa]">
+              <span class="h-2.5 w-2.5 rounded-full bg-line2"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-line2"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-line2"></span>
+              <span class="ml-3 text-xs text-muted">Timebox</span>
             </div>
-            <div class="grid md:grid-cols-[1fr_280px]">
-              <!-- week grid -->
-              <div class="p-4 sm:p-5">
-                <div class="grid grid-cols-5 gap-2 text-[10px] sm:text-xs">
-                  <div class="text-slate-500 font-500">Mon</div>
-                  <div class="text-slate-500 font-500">Tue</div>
-                  <div class="text-slate-500 font-500">Wed</div>
-                  <div class="text-slate-500 font-500">Thu</div>
-                  <div class="text-slate-500 font-500">Fri</div>
 
-                  <div class="rounded-md bg-accent/15 ring-1 ring-accent/30 px-2 py-3 text-accent">Essay A draft</div>
-                  <div class="rounded-md bg-sky-400/10 ring-1 ring-sky-400/25 px-2 py-3 text-sky-300">Exam revision</div>
-                  <div class="rounded-md bg-ink-700/60 ring-1 ring-white/5 px-2 py-3 text-slate-500">free</div>
-                  <div class="rounded-md bg-accent/15 ring-1 ring-accent/30 px-2 py-3 text-accent">Essay B draft</div>
-                  <div class="rounded-md bg-rose-400/10 ring-1 ring-rose-400/25 px-2 py-3 text-rose-300">Both essays due</div>
-
-                  <div class="rounded-md bg-ink-700/60 ring-1 ring-white/5 px-2 py-3 text-slate-500">free</div>
-                  <div class="rounded-md bg-sky-400/10 ring-1 ring-sky-400/25 px-2 py-3 text-sky-300">Exam revision</div>
-                  <div class="rounded-md bg-violet-400/10 ring-1 ring-violet-400/25 px-2 py-3 text-violet-300">Group sync</div>
-                  <div class="rounded-md bg-accent/15 ring-1 ring-accent/30 px-2 py-3 text-accent">Essay polish</div>
-                  <div class="rounded-md bg-ink-700/60 ring-1 ring-white/5 px-2 py-3 text-slate-500">free</div>
-                </div>
+            <!-- result header -->
+            <div class="flex items-end justify-between gap-4 px-5 pt-5 pb-3 border-b border-line">
+              <div>
+                <h2 class="text-ink font-600 text-[17px] tracking-tight">Your week</h2>
+                <p class="mt-0.5 text-xs text-muted">Quorum met · 5/5 agents · revised over 3 rounds · <span class="text-[#15803d] font-600">$0.004</span></p>
               </div>
-              <!-- agent vote panel -->
-              <div class="border-t md:border-t-0 md:border-l hairline p-4 sm:p-5 bg-ink-850/60">
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-600 uppercase tracking-wider text-slate-400">Agent vote</span>
-                  <span class="inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-2.5 py-1 text-[11px] font-600 text-accent ring-1 ring-accent/30">Quorum met · 5/5</span>
+              <div class="hidden sm:flex items-center gap-2 text-xs">
+                <span class="inline-flex items-center gap-1.5 rounded border border-line px-2.5 py-1.5 text-ink">
+                  <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l4-4m-4 4l-4-4M5 21h14"/></svg>
+                  Export .ics
+                </span>
+                <span class="inline-flex items-center gap-1.5 rounded bg-ink px-2.5 py-1.5 text-white">Save</span>
+              </div>
+            </div>
+
+            <!-- calendar grid -->
+            <div class="p-4 sm:p-5">
+              <div class="grid grid-cols-[34px_repeat(5,1fr)] gap-x-2">
+                <!-- header row -->
+                <div></div>
+                <div class="text-[11px] font-500 text-muted pb-2">Mon</div>
+                <div class="text-[11px] font-500 text-muted pb-2">Tue</div>
+                <div class="text-[11px] font-500 text-muted pb-2">Wed</div>
+                <div class="text-[11px] font-500 text-muted pb-2">Thu</div>
+                <div class="text-[11px] font-500 text-muted pb-2">Fri</div>
+
+                <!-- time gutter -->
+                <div class="flex flex-col justify-between pr-1 text-[10px] text-muted/80 text-right tabular-nums" style="height:240px">
+                  <span>09</span><span>11</span><span>13</span><span>15</span><span>17</span>
                 </div>
-                <ul class="mt-4 space-y-2.5 text-sm">
-                  <li class="flex items-center gap-2.5 text-slate-300"><span class="text-accent">✓</span> Deadline</li>
-                  <li class="flex items-center gap-2.5 text-slate-300"><span class="text-accent">✓</span> Grade</li>
-                  <li class="flex items-center gap-2.5 text-slate-300"><span class="text-accent">✓</span> Effort</li>
-                  <li class="flex items-center gap-2.5 text-slate-300"><span class="text-accent">✓</span> Wellbeing</li>
-                  <li class="flex items-center gap-2.5 text-slate-300"><span class="text-accent">✓</span> Risk</li>
-                </ul>
-                <p class="mt-4 pt-4 border-t hairline text-xs text-slate-500 leading-relaxed">Revised over 3 rounds. No late-night blocks. All work ends before Friday.</p>
+
+                <!-- Mon -->
+                <div class="relative border-l border-line" style="height:240px">
+                  <div class="ev ev-work absolute left-1 right-1" style="top:6px;height:62px"><strong class="block text-[11px] font-600">Essay A draft</strong><span class="text-[10px] opacity-80">2h focus</span></div>
+                  <div class="ev ev-buf absolute left-1 right-1" style="top:74px;height:24px"><span class="text-[10px]">break</span></div>
+                  <div class="ev ev-fixed absolute left-1 right-1" style="top:150px;height:40px"><strong class="block text-[11px] font-600">Lecture</strong></div>
+                </div>
+                <!-- Tue -->
+                <div class="relative border-l border-line" style="height:240px">
+                  <div class="ev ev-fixed absolute left-1 right-1" style="top:20px;height:40px"><strong class="block text-[11px] font-600">Lab</strong></div>
+                  <div class="ev ev-work absolute left-1 right-1" style="top:96px;height:78px"><strong class="block text-[11px] font-600">Exam revision</strong><span class="text-[10px] opacity-80">spaced</span></div>
+                </div>
+                <!-- Wed -->
+                <div class="relative border-l border-line" style="height:240px">
+                  <div class="ev ev-work absolute left-1 right-1" style="top:40px;height:64px"><strong class="block text-[11px] font-600">Essay A draft</strong></div>
+                  <div class="ev ev-buf absolute left-1 right-1" style="top:150px;height:22px"><span class="text-[10px]">buffer</span></div>
+                </div>
+                <!-- Thu -->
+                <div class="relative border-l border-line" style="height:240px">
+                  <div class="ev ev-work absolute left-1 right-1" style="top:14px;height:58px"><strong class="block text-[11px] font-600">Essay B draft</strong></div>
+                  <div class="ev ev-fixed absolute left-1 right-1" style="top:110px;height:40px"><strong class="block text-[11px] font-600">Group sync</strong></div>
+                </div>
+                <!-- Fri -->
+                <div class="relative border-l border-line" style="height:240px">
+                  <div class="ev ev-work absolute left-1 right-1" style="top:8px;height:50px"><strong class="block text-[11px] font-600">Essay polish</strong></div>
+                  <div class="ev ev-due absolute left-1 right-1" style="top:150px;height:40px"><strong class="block text-[11px] font-600">Both essays due</strong></div>
+                </div>
               </div>
             </div>
           </div>
-          <p class="mt-3 text-center text-xs text-slate-600">Illustrative view. The app renders a full FullCalendar week grid.</p>
         </div>
       </div>
     </section>
 
     <!-- What it does -->
-    <section class="border-t hairline">
+    <section class="border-t border-line">
       <div class="mx-auto max-w-3xl px-6 py-20 md:py-24">
-        <h2 class="reveal font-display font-600 text-white text-2xl md:text-3xl tracking-tight">What is Timebox?</h2>
-        <p class="reveal mt-5 text-lg leading-relaxed text-slate-400">
+        <h2 class="reveal font-600 text-ink text-2xl md:text-3xl tracking-tight">What is Timebox?</h2>
+        <p class="reveal mt-5 text-lg leading-relaxed text-body">
           You describe your week in plain language: tasks, deadlines, when you're free, how you're feeling. Timebox's Interpreter agent extracts the structure, five specialist agents each weigh in from their own angle, and a Planner-Arbiter builds a calendar they can all live with. You get a week grid you can inspect block by block, plus a one-click export to Google or Apple Calendar. Everything runs on your own machine.
         </p>
       </div>
     </section>
 
     <!-- How it works -->
-    <section id="how" class="border-t hairline">
+    <section id="how" class="border-t border-line">
       <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <h2 class="reveal font-display font-600 text-white text-2xl md:text-3xl tracking-tight">How it works</h2>
-        <div class="mt-12 grid md:grid-cols-3 gap-6">
-          <div class="reveal rounded-2xl card-border bg-ink-900/60 p-7">
-            <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-accent/15 text-accent font-display font-600 ring-1 ring-accent/25">1</span>
-            <h3 class="mt-5 font-display font-600 text-white text-lg">Describe your week</h3>
-            <p class="mt-3 text-slate-400 leading-relaxed">Type it like you'd tell a friend: "Two essays due Friday, exam Monday, free after 6pm most days, please don't schedule me past midnight." No forms, no rigid fields.</p>
+        <h2 class="reveal font-600 text-ink text-2xl md:text-3xl tracking-tight">How it works</h2>
+        <div class="mt-12 grid md:grid-cols-3 gap-5">
+          <div class="reveal rounded-lg border border-line bg-card p-7">
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded bg-ink text-white font-600 text-sm">1</span>
+            <h3 class="mt-5 font-600 text-ink text-lg">Describe your week</h3>
+            <p class="mt-3 text-body leading-relaxed">Type it like you'd tell a friend: "Two essays due Friday, exam Monday, free after 6pm most days, please don't schedule me past midnight." No forms, no rigid fields.</p>
           </div>
-          <div class="reveal rounded-2xl card-border bg-ink-900/60 p-7">
-            <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-accent/15 text-accent font-display font-600 ring-1 ring-accent/25">2</span>
-            <h3 class="mt-5 font-display font-600 text-white text-lg">The agents negotiate</h3>
-            <p class="mt-3 text-slate-400 leading-relaxed">An Interpreter pulls out your tasks and constraints. Five specialists, Deadline, Grade, Effort, Wellbeing, Risk, critique each draft. The Planner revises until they reach quorum or hit your iteration limit. You watch it happen live.</p>
+          <div class="reveal rounded-lg border border-line bg-card p-7">
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded bg-ink text-white font-600 text-sm">2</span>
+            <h3 class="mt-5 font-600 text-ink text-lg">The agents negotiate</h3>
+            <p class="mt-3 text-body leading-relaxed">An Interpreter pulls out your tasks and constraints. Five specialists, Deadline, Grade, Effort, Wellbeing, Risk, critique each draft. The Planner revises until they reach quorum or hit your iteration limit. You watch it happen live.</p>
           </div>
-          <div class="reveal rounded-2xl card-border bg-ink-900/60 p-7">
-            <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-accent/15 text-accent font-display font-600 ring-1 ring-accent/25">3</span>
-            <h3 class="mt-5 font-display font-600 text-white text-lg">Get your calendar</h3>
-            <p class="mt-3 text-slate-400 leading-relaxed">Review the week grid, click any block to see why it's there, then export to <code class="text-accent/90 text-sm">.ics</code> for Google or Apple Calendar. Plans auto-save locally so you can reload or tweak later.</p>
+          <div class="reveal rounded-lg border border-line bg-card p-7">
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded bg-ink text-white font-600 text-sm">3</span>
+            <h3 class="mt-5 font-600 text-ink text-lg">Get your calendar</h3>
+            <p class="mt-3 text-body leading-relaxed">Review the week grid, click any block to see why it's there, then export to <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">.ics</code> for Google or Apple Calendar. Plans auto-save locally so you can reload or tweak later.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Features -->
-    <section id="features" class="border-t hairline">
+    <section id="features" class="border-t border-line">
       <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <h2 class="reveal font-display font-600 text-white text-2xl md:text-3xl tracking-tight max-w-2xl">Built around disagreement, not a black box</h2>
-        <div class="mt-12 grid md:grid-cols-2 gap-6">
+        <h2 class="reveal font-600 text-ink text-2xl md:text-3xl tracking-tight max-w-2xl">Built around disagreement, not a black box</h2>
+        <div class="mt-12 grid md:grid-cols-2 gap-5">
 
-          <div class="reveal rounded-2xl card-border bg-ink-900/60 p-8">
-            <h3 class="font-display font-600 text-white text-lg">A team of agents, not one opinion</h3>
-            <p class="mt-3 text-slate-400 leading-relaxed">Five specialist agents each protect one thing: deadlines, grades, realistic effort, your wellbeing, and hidden risk. They draft, critique, and vote in parallel, and their views are kept separate, so you see the actual trade-offs instead of one averaged guess. Any agent can block a plan it considers unsafe.</p>
+          <div class="reveal rounded-lg border border-line bg-card p-8">
+            <h3 class="font-600 text-ink text-lg">A team of agents, not one opinion</h3>
+            <p class="mt-3 text-body leading-relaxed">Five specialist agents each protect one thing: deadlines, grades, realistic effort, your wellbeing, and hidden risk. They draft, critique, and vote in parallel, and their views are kept separate, so you see the actual trade-offs instead of one averaged guess. Any agent can block a plan it considers unsafe.</p>
           </div>
 
-          <div class="reveal rounded-2xl card-border bg-ink-900/60 p-8">
-            <h3 class="font-display font-600 text-white text-lg">You set the rules of the debate</h3>
-            <p class="mt-3 text-slate-400 leading-relaxed">Control how strict the consensus is. Set the <span class="text-slate-200 font-500">quorum</span> (how many of the five must approve, 1 to 5) and the <span class="text-slate-200 font-500">max iterations</span> (how many revision rounds before it settles). Want a fast rough draft? Lower both. Want a plan all five agents defend? Crank it up.</p>
+          <div class="reveal rounded-lg border border-line bg-card p-8">
+            <h3 class="font-600 text-ink text-lg">You set the rules of the debate</h3>
+            <p class="mt-3 text-body leading-relaxed">Control how strict the consensus is. Set the <span class="text-ink font-500">quorum</span> (how many of the five must approve, 1 to 5) and the <span class="text-ink font-500">max iterations</span> (how many revision rounds before it settles). Want a fast rough draft? Lower both. Want a plan all five agents defend? Crank it up.</p>
           </div>
 
-          <div class="reveal rounded-2xl card-border bg-ink-900/60 p-8">
-            <h3 class="font-display font-600 text-white text-lg">Straight into your calendar</h3>
-            <p class="mt-3 text-slate-400 leading-relaxed">Export any plan to a standard <code class="text-accent/90 text-sm">.ics</code> file that imports cleanly into Google Calendar, Apple Calendar, or Outlook. Or export the full JSON audit trail, every agent view, critique, and revision, if you want to see the reasoning. Drag-and-drop import brings plans back in.</p>
+          <div class="reveal rounded-lg border border-line bg-card p-8">
+            <h3 class="font-600 text-ink text-lg">Straight into your calendar</h3>
+            <p class="mt-3 text-body leading-relaxed">Export any plan to a standard <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">.ics</code> file that imports cleanly into Google Calendar, Apple Calendar, or Outlook. Or export the full JSON audit trail, every agent view, critique, and revision, if you want to see the reasoning. Drag-and-drop import brings plans back in.</p>
           </div>
 
-          <div class="reveal rounded-2xl card-border bg-ink-900/60 p-8">
-            <div class="flex items-center justify-between gap-3">
-              <h3 class="font-display font-600 text-white text-lg">A real benchmark harness</h3>
-              <span class="shrink-0 rounded-full border hairline px-2.5 py-1 text-[11px] font-600 uppercase tracking-wider text-slate-400">For tinkerers</span>
-            </div>
-            <p class="mt-3 text-slate-400 leading-relaxed">Timebox ships with the evaluation rig it was built on. Run a model × quorum × iteration matrix, get a pre-flight cost estimate, set a hard budget cap in dollars, and compare models on a cost-vs-quality chart. An LLM judge plus a deterministic mistake scorer (deadline violations, availability overruns, late-night work) tells you which model actually plans best, not just which sounds best.</p>
+          <div class="reveal rounded-lg border border-line bg-card p-8">
+            <h3 class="font-600 text-ink text-lg">A real benchmark harness <span class="font-400 text-muted text-sm">· for developers</span></h3>
+            <p class="mt-3 text-body leading-relaxed">Timebox ships with the evaluation rig it was built on. Run a model × quorum × iteration matrix, get a pre-flight cost estimate, set a hard budget cap in dollars, and compare models on a cost-vs-quality chart. An LLM judge plus a deterministic mistake scorer (deadline violations, availability overruns, late-night work) tells you which model actually plans best, not just which sounds best.</p>
           </div>
 
         </div>
@@ -250,132 +254,131 @@
     </section>
 
     <!-- Pricing -->
-    <section id="pricing" class="border-t hairline">
+    <section id="pricing" class="border-t border-line">
       <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-        <h2 class="reveal font-display font-600 text-white text-2xl md:text-3xl tracking-tight">Free and open source. The way it should be.</h2>
-        <p class="reveal mt-5 text-lg text-slate-400 max-w-3xl leading-relaxed">
+        <h2 class="reveal font-600 text-ink text-2xl md:text-3xl tracking-tight">Free and open source. The way it should be.</h2>
+        <p class="reveal mt-5 text-lg text-body max-w-3xl leading-relaxed">
           The Timebox desktop app is MIT licensed and free forever. You bring your own OpenRouter API key, so you only ever pay the model provider directly, never us. There's a free model built in if you just want to try it.
         </p>
 
-        <div class="mt-12 grid lg:grid-cols-3 gap-6 items-start">
+        <div class="mt-12 grid lg:grid-cols-3 gap-5 items-start">
 
           <!-- Desktop (featured) -->
-          <div class="reveal relative rounded-2xl bg-ink-900 p-8 ring-1 ring-accent/40 shadow-2xl shadow-accent/5">
-            <span class="absolute -top-3 left-8 rounded-full bg-accent px-3 py-1 text-[11px] font-700 uppercase tracking-wider text-ink-950">Available now</span>
-            <h3 class="font-display font-600 text-white text-lg">Desktop (Open Source)</h3>
+          <div class="reveal rounded-lg bg-card p-8 border-2 border-ink">
+            <h3 class="font-600 text-ink text-lg">Desktop</h3>
             <div class="mt-4 flex items-baseline gap-2">
-              <span class="font-display font-700 text-white text-4xl">€0</span>
-              <span class="text-slate-500 text-sm">free forever</span>
+              <span class="font-700 text-ink text-4xl tracking-tight">€0</span>
+              <span class="text-muted text-sm">free forever</span>
             </div>
-            <ul class="mt-6 space-y-3 text-sm text-slate-300">
-              <li class="flex gap-2.5"><span class="text-accent">✓</span> All five agents</li>
-              <li class="flex gap-2.5"><span class="text-accent">✓</span> Quorum &amp; iteration controls</li>
-              <li class="flex gap-2.5"><span class="text-accent">✓</span> <code class="text-accent/90">.ics</code> + JSON export</li>
-              <li class="flex gap-2.5"><span class="text-accent">✓</span> Benchmark harness</li>
-              <li class="flex gap-2.5"><span class="text-accent">✓</span> Plans stored locally, fully private</li>
-              <li class="flex gap-2.5"><span class="text-accent">✓</span> MIT licensed, fork it, change it, ship it</li>
+            <ul class="mt-6 space-y-3 text-sm text-ink2">
+              <li class="flex gap-2.5"><span class="text-ink">✓</span> All five agents</li>
+              <li class="flex gap-2.5"><span class="text-ink">✓</span> Quorum &amp; iteration controls</li>
+              <li class="flex gap-2.5"><span class="text-ink">✓</span> <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-[13px]">.ics</code> + JSON export</li>
+              <li class="flex gap-2.5"><span class="text-ink">✓</span> Benchmark harness</li>
+              <li class="flex gap-2.5"><span class="text-ink">✓</span> Plans stored locally, fully private</li>
+              <li class="flex gap-2.5"><span class="text-ink">✓</span> MIT licensed, fork it, change it, ship it</li>
             </ul>
-            <p class="mt-5 text-xs text-slate-500">Requires your own OpenRouter key (free model included).</p>
-            <a href="https://github.com/zF4ke/timebox/releases" class="mt-7 inline-flex w-full items-center justify-center rounded-xl bg-accent px-5 py-3 font-600 text-ink-950 hover:bg-accent-soft transition-colors">Download</a>
+            <p class="mt-5 text-xs text-muted">Requires your own OpenRouter key (free model included).</p>
+            <a href="https://github.com/zF4ke/timebox/releases" class="mt-7 inline-flex w-full items-center justify-center rounded bg-ink px-5 py-3 font-500 text-white hover:opacity-90 transition-opacity">Download</a>
           </div>
 
           <!-- Web Free -->
-          <div class="reveal rounded-2xl card-border bg-ink-900/50 p-8">
+          <div class="reveal rounded-lg border border-line bg-card p-8">
             <div class="flex items-center justify-between">
-              <h3 class="font-display font-600 text-white text-lg">Web Free</h3>
-              <span class="rounded-full border hairline px-2.5 py-1 text-[11px] font-600 uppercase tracking-wider text-slate-400">Coming soon</span>
+              <h3 class="font-600 text-ink text-lg">Web Free</h3>
+              <span class="text-xs text-muted">Coming soon</span>
             </div>
             <div class="mt-4 flex items-baseline gap-2">
-              <span class="font-display font-700 text-slate-200 text-4xl">€0</span>
-              <span class="text-slate-500 text-sm">/mo</span>
+              <span class="font-700 text-ink text-4xl tracking-tight">€0</span>
+              <span class="text-muted text-sm">/mo</span>
             </div>
-            <ul class="mt-6 space-y-3 text-sm text-slate-400">
-              <li class="flex gap-2.5"><span class="text-slate-600">•</span> No install, no API key</li>
-              <li class="flex gap-2.5"><span class="text-slate-600">•</span> <span class="text-slate-200 font-500">3 plans / month</span></li>
-              <li class="flex gap-2.5"><span class="text-slate-600">•</span> Runs in your browser</li>
+            <ul class="mt-6 space-y-3 text-sm text-body">
+              <li>No install, no API key</li>
+              <li><span class="text-ink font-500">3 plans / month</span></li>
+              <li>Runs in your browser</li>
             </ul>
-            <a href="#waitlist" class="mt-7 inline-flex w-full items-center justify-center rounded-xl border hairline px-5 py-3 font-500 text-slate-200 hover:bg-ink-800 transition-colors">Join the waitlist</a>
+            <a href="#waitlist" class="mt-7 inline-flex w-full items-center justify-center rounded border border-line bg-card px-5 py-3 font-500 text-ink hover:border-line2 hover:bg-[#f5f5f5] transition-colors">Join the waitlist</a>
           </div>
 
           <!-- Web Pro -->
-          <div class="reveal rounded-2xl card-border bg-ink-900/50 p-8">
+          <div class="reveal rounded-lg border border-line bg-card p-8">
             <div class="flex items-center justify-between">
-              <h3 class="font-display font-600 text-white text-lg">Web Pro</h3>
-              <span class="rounded-full border hairline px-2.5 py-1 text-[11px] font-600 uppercase tracking-wider text-slate-400">Planned</span>
+              <h3 class="font-600 text-ink text-lg">Web Pro</h3>
+              <span class="text-xs text-muted">Planned</span>
             </div>
             <div class="mt-4 flex items-baseline gap-2">
-              <span class="font-display font-700 text-slate-200 text-4xl">€5</span>
-              <span class="text-slate-500 text-sm">/mo · or €48/yr</span>
+              <span class="font-700 text-ink text-4xl tracking-tight">€5</span>
+              <span class="text-muted text-sm">/mo · or €48/yr</span>
             </div>
-            <ul class="mt-6 space-y-3 text-sm text-slate-400">
-              <li class="text-slate-500">Everything in Web Free, plus:</li>
-              <li class="flex gap-2.5"><span class="text-slate-600">•</span> Unlimited plans</li>
-              <li class="flex gap-2.5"><span class="text-slate-600">•</span> Google Calendar two-way sync</li>
-              <li class="flex gap-2.5"><span class="text-slate-600">•</span> Plan history across devices</li>
-              <li class="flex gap-2.5"><span class="text-slate-600">•</span> Priority models</li>
+            <ul class="mt-6 space-y-3 text-sm text-body">
+              <li class="text-muted">Everything in Web Free, plus:</li>
+              <li>Unlimited plans</li>
+              <li>Google Calendar two-way sync</li>
+              <li>Plan history across devices</li>
+              <li>Priority models</li>
             </ul>
-            <a href="#waitlist" class="mt-7 inline-flex w-full items-center justify-center rounded-xl border hairline px-5 py-3 font-500 text-slate-200 hover:bg-ink-800 transition-colors">Join the waitlist</a>
+            <a href="#waitlist" class="mt-7 inline-flex w-full items-center justify-center rounded border border-line bg-card px-5 py-3 font-500 text-ink hover:border-line2 hover:bg-[#f5f5f5] transition-colors">Join the waitlist</a>
           </div>
         </div>
 
-        <p class="reveal mt-8 text-sm text-slate-500 max-w-3xl leading-relaxed">
+        <p class="reveal mt-8 text-sm text-muted max-w-3xl leading-relaxed">
           The hosted Web tiers don't exist yet. They're on the roadmap if there's demand. The desktop app is the real product today, it's free, and it always will be.
         </p>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="border-t hairline">
+    <section id="faq" class="border-t border-line">
       <div class="mx-auto max-w-3xl px-6 py-20 md:py-28">
-        <h2 class="reveal font-display font-600 text-white text-2xl md:text-3xl tracking-tight">Questions</h2>
-        <div class="mt-10 divide-y hairline border-y hairline">
+        <h2 class="reveal font-600 text-ink text-2xl md:text-3xl tracking-tight">Questions</h2>
+        <div class="mt-10 divide-y divide-line border-y border-line">
 
           <details class="reveal group py-5">
-            <summary class="flex items-center justify-between gap-4 text-white font-500">
+            <summary class="flex items-center justify-between gap-4 text-ink font-500">
               Do I need an API key?
-              <span class="faq-chevron text-accent text-xl leading-none transition-transform">+</span>
+              <span class="faq-chevron text-muted text-xl leading-none transition-transform">+</span>
             </summary>
-            <p class="mt-3 text-slate-400 leading-relaxed">For the desktop app, yes, an OpenRouter key. It takes a minute to create, and Timebox includes a free default model so you can plan at zero cost. You enter the key once in Settings; it stays on your machine. The planned hosted version won't need a key.</p>
+            <p class="mt-3 text-body leading-relaxed">For the desktop app, yes, an OpenRouter key. It takes a minute to create, and Timebox includes a free default model so you can plan at zero cost. You enter the key once in Settings; it stays on your machine. The planned hosted version won't need a key.</p>
           </details>
 
           <details class="reveal group py-5">
-            <summary class="flex items-center justify-between gap-4 text-white font-500">
+            <summary class="flex items-center justify-between gap-4 text-ink font-500">
               Which models can I use?
-              <span class="faq-chevron text-accent text-xl leading-none transition-transform">+</span>
+              <span class="faq-chevron text-muted text-xl leading-none transition-transform">+</span>
             </summary>
-            <p class="mt-3 text-slate-400 leading-relaxed">Any chat model on OpenRouter. Out of the box you can pick from a free Nemotron model plus paid options like Gemini Flash Lite, DeepSeek, GPT-5 Nano, and MiniMax, each shown with its per-token price so you know the cost before you run. In our own benchmarks, Gemini 2.5 Flash Lite gave the best quality-per-cent.</p>
+            <p class="mt-3 text-body leading-relaxed">Any chat model on OpenRouter. Out of the box you can pick from a free Nemotron model plus paid options like Gemini Flash Lite, DeepSeek, GPT-5 Nano, and MiniMax, each shown with its per-token price so you know the cost before you run. In our own benchmarks, Gemini 2.5 Flash Lite gave the best quality-per-cent.</p>
           </details>
 
           <details class="reveal group py-5">
-            <summary class="flex items-center justify-between gap-4 text-white font-500">
+            <summary class="flex items-center justify-between gap-4 text-ink font-500">
               Is my data private?
-              <span class="faq-chevron text-accent text-xl leading-none transition-transform">+</span>
+              <span class="faq-chevron text-muted text-xl leading-none transition-transform">+</span>
             </summary>
-            <p class="mt-3 text-slate-400 leading-relaxed">Yes. The desktop app keeps everything, your plans, settings, and key, in your own OS user folder. Nothing is sent anywhere except the model calls you trigger, straight to OpenRouter. There's no Timebox server, no telemetry, no account.</p>
+            <p class="mt-3 text-body leading-relaxed">Yes. The desktop app keeps everything, your plans, settings, and key, in your own OS user folder. Nothing is sent anywhere except the model calls you trigger, straight to OpenRouter. There's no Timebox server, no telemetry, no account.</p>
           </details>
 
           <details class="reveal group py-5">
-            <summary class="flex items-center justify-between gap-4 text-white font-500">
+            <summary class="flex items-center justify-between gap-4 text-ink font-500">
               Is it really free?
-              <span class="faq-chevron text-accent text-xl leading-none transition-transform">+</span>
+              <span class="faq-chevron text-muted text-xl leading-none transition-transform">+</span>
             </summary>
-            <p class="mt-3 text-slate-400 leading-relaxed">The app is free and MIT licensed. The only thing you might pay for is the model usage itself, billed by OpenRouter at their rates, and even that can be €0 with the built-in free model. We don't take a cut.</p>
+            <p class="mt-3 text-body leading-relaxed">The app is free and MIT licensed. The only thing you might pay for is the model usage itself, billed by OpenRouter at their rates, and even that can be €0 with the built-in free model. We don't take a cut.</p>
           </details>
 
           <details class="reveal group py-5">
-            <summary class="flex items-center justify-between gap-4 text-white font-500">
+            <summary class="flex items-center justify-between gap-4 text-ink font-500">
               Why multiple agents instead of just asking ChatGPT?
-              <span class="faq-chevron text-accent text-xl leading-none transition-transform">+</span>
+              <span class="faq-chevron text-muted text-xl leading-none transition-transform">+</span>
             </summary>
-            <p class="mt-3 text-slate-400 leading-relaxed">Because one model asked to "make a schedule" hides its trade-offs. Timebox forces five agents to defend deadlines, grades, effort, wellbeing, and risk separately, then reach consensus. You see why a block is where it is, and any agent can veto an unrealistic plan.</p>
+            <p class="mt-3 text-body leading-relaxed">Because one model asked to "make a schedule" hides its trade-offs. Timebox forces five agents to defend deadlines, grades, effort, wellbeing, and risk separately, then reach consensus. You see why a block is where it is, and any agent can veto an unrealistic plan.</p>
           </details>
 
           <details class="reveal group py-5">
-            <summary class="flex items-center justify-between gap-4 text-white font-500">
+            <summary class="flex items-center justify-between gap-4 text-ink font-500">
               What do I need to run it?
-              <span class="faq-chevron text-accent text-xl leading-none transition-transform">+</span>
+              <span class="faq-chevron text-muted text-xl leading-none transition-transform">+</span>
             </summary>
-            <p class="mt-3 text-slate-400 leading-relaxed">A Windows, macOS, or Linux machine. Download the build for your OS from GitHub Releases, portable <code class="text-accent/90 text-sm">.exe</code> on Windows, <code class="text-accent/90 text-sm">.dmg</code> on macOS, <code class="text-accent/90 text-sm">AppImage</code> on Linux. No installer ceremony.</p>
+            <p class="mt-3 text-body leading-relaxed">A Windows, macOS, or Linux machine. Download the build for your OS from GitHub Releases, portable <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">.exe</code> on Windows, <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">.dmg</code> on macOS, <code class="rounded bg-[#f5f5f5] px-1.5 py-0.5 text-ink text-sm">AppImage</code> on Linux. No installer ceremony.</p>
           </details>
 
         </div>
@@ -383,13 +386,13 @@
     </section>
 
     <!-- Final CTA -->
-    <section class="border-t hairline relative overflow-hidden glow">
+    <section class="border-t border-line">
       <div class="relative mx-auto max-w-3xl px-6 py-24 md:py-32 text-center">
-        <h2 class="reveal font-display font-700 text-white text-3xl md:text-4xl tracking-tight leading-tight">Plan your week in the time it takes to describe it.</h2>
-        <p class="reveal mt-5 text-lg text-slate-400">Free, open source, runs on your machine. See what five agents come up with.</p>
+        <h2 class="reveal font-700 text-ink text-3xl md:text-4xl tracking-tight leading-tight">Plan your week in the time it takes to describe it.</h2>
+        <p class="reveal mt-5 text-lg text-body">Free, open source, runs on your machine. See what five agents come up with.</p>
         <div class="reveal mt-9 flex flex-col sm:flex-row gap-3 justify-center">
-          <a href="https://github.com/zF4ke/timebox/releases" class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3 font-600 text-ink-950 hover:bg-accent-soft transition-colors">Download Timebox</a>
-          <a href="https://github.com/zF4ke/timebox" class="inline-flex items-center justify-center gap-2 rounded-xl border hairline px-6 py-3 font-500 text-slate-200 hover:bg-ink-800 transition-colors">Star it on GitHub <span aria-hidden="true">→</span></a>
+          <a href="https://github.com/zF4ke/timebox/releases" class="inline-flex items-center justify-center gap-2 rounded bg-ink px-6 py-3 font-500 text-white hover:opacity-90 transition-opacity">Download Timebox</a>
+          <a href="https://github.com/zF4ke/timebox" class="inline-flex items-center justify-center gap-2 rounded border border-line bg-card px-6 py-3 font-500 text-ink hover:border-line2 hover:bg-[#f5f5f5] transition-colors">Star it on GitHub <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
@@ -397,39 +400,35 @@
   </main>
 
   <!-- Footer -->
-  <footer id="waitlist" class="border-t hairline">
+  <footer id="waitlist" class="border-t border-line">
     <div class="mx-auto max-w-6xl px-6 py-14">
-      <div class="rounded-2xl card-border bg-ink-900/50 p-7 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div class="rounded-lg border border-line bg-card p-7 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <p class="font-display font-600 text-white">Want the no-install web version?</p>
-          <p class="text-sm text-slate-500 mt-1">Join the waitlist and we'll let you know if we ship it.</p>
+          <p class="font-600 text-ink">Want the no-install web version?</p>
+          <p class="text-sm text-muted mt-1">Join the waitlist and we'll let you know if we ship it.</p>
         </div>
-        <a href="https://github.com/zF4ke/timebox" class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-3 font-600 text-ink-950 hover:bg-accent-soft transition-colors whitespace-nowrap">Join the waitlist <span aria-hidden="true">→</span></a>
+        <a href="https://github.com/zF4ke/timebox" class="inline-flex items-center justify-center gap-2 rounded bg-ink px-5 py-3 font-500 text-white hover:opacity-90 transition-opacity whitespace-nowrap">Join the waitlist <span aria-hidden="true">→</span></a>
       </div>
 
       <div class="mt-10 flex flex-col md:flex-row gap-6 md:items-center md:justify-between text-sm">
-        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-slate-500">
-          <span class="font-display font-600 text-slate-300">Timebox</span>
-          <span class="text-slate-700">·</span>
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-muted">
+          <span class="font-600 text-ink">Timebox</span>
+          <span class="text-line2">·</span>
           <span>MIT Licensed</span>
-          <span class="text-slate-700">·</span>
+          <span class="text-line2">·</span>
           <span>© 2026</span>
         </div>
-        <nav class="flex flex-wrap items-center gap-x-5 gap-y-1 text-slate-400">
-          <a href="https://github.com/zF4ke/timebox" class="hover:text-white transition-colors">GitHub</a>
-          <a href="https://github.com/zF4ke/timebox/releases" class="hover:text-white transition-colors">Releases</a>
-          <a href="https://github.com/zF4ke/timebox/tree/master/docs" class="hover:text-white transition-colors">Docs</a>
-          <a href="https://github.com/zF4ke/timebox/issues" class="hover:text-white transition-colors">Report an issue</a>
+        <nav class="flex flex-wrap items-center gap-x-5 gap-y-1 text-muted">
+          <a href="https://github.com/zF4ke/timebox" class="hover:text-ink transition-colors">GitHub</a>
+          <a href="https://github.com/zF4ke/timebox/releases" class="hover:text-ink transition-colors">Releases</a>
+          <a href="https://github.com/zF4ke/timebox/tree/master/docs" class="hover:text-ink transition-colors">Docs</a>
+          <a href="https://github.com/zF4ke/timebox/issues" class="hover:text-ink transition-colors">Report an issue</a>
         </nav>
       </div>
-      <p class="mt-6 text-xs text-slate-600 max-w-2xl leading-relaxed">
-        Born as an AASMA multi-agent systems research project.
-      </p>
     </div>
   </footer>
 
   <script>
-    // Subtle scroll-reveal. Honors prefers-reduced-motion via CSS fallback.
     (function () {
       var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var els = document.querySelectorAll('.reveal');
